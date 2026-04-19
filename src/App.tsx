@@ -1,51 +1,52 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { invoke } from "@tauri-apps/api/core";
+import { useEffect, useState } from "react";
 import "./App.css";
 
-function App() {
-  const [greetMsg, setGreetMsg] = useState("");
-  const [name, setName] = useState("");
+import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
+import { Pipette, X } from "lucide-react";
+import { getCurrentWindow } from '@tauri-apps/api/window';
 
-  async function greet() {
-    // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
-    setGreetMsg(await invoke("greet", { name }));
-  }
+const CloseBar = () => {
+  return (
+    <>
+      <div className="flex  w-full justify-end ">
+        <div className="cursor-pointer hover:bg-red-900 p-1 rounded-md" onClick={() => {
+          getCurrentWindow().close();
+        }}>
+          <X />
+        </div>
+      </div>
+    </>
+  );
+};
+
+const ColorPicker = () => {
+  return (
+    <>
+      <div className="flex p-3 justify-end bg-amber-50">
+        <div className="outline-2 p-2 rounded-2xl bg-white">
+          <Pipette />
+        </div>
+        <div>
+          <input/>
+        </div>
+      </div>
+    </>
+  )
+}
+ 
+function HexHopApp() {
+  useEffect(() => {
+    moveWindow(Position.BottomRight);
+  }, []);
 
   return (
-    <main className="container">
-      <h1>Welcome to Tauri + React</h1>
-
-      <div className="row">
-        <a href="https://vite.dev" target="_blank">
-          <img src="/vite.svg" className="logo vite" alt="Vite logo" />
-        </a>
-        <a href="https://tauri.app" target="_blank">
-          <img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <>
+      <div className="w-screen h-screen flex flex-col">
+        <CloseBar /> 
+        <ColorPicker/>
       </div>
-      <p>Click on the Tauri, Vite, and React logos to learn more.</p>
-
-      <form
-        className="row"
-        onSubmit={(e) => {
-          e.preventDefault();
-          greet();
-        }}
-      >
-        <input
-          id="greet-input"
-          onChange={(e) => setName(e.currentTarget.value)}
-          placeholder="Enter a name..."
-        />
-        <button type="submit">Greet</button>
-      </form>
-      <p>{greetMsg}</p>
-    </main>
+    </>
   );
 }
 
-export default App;
+export default HexHopApp;
