@@ -1,2 +1,4 @@
 html, body { background: transparent }
 @import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
