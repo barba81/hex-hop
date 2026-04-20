@@ -8,11 +8,19 @@ import { useTheme } from "./hooks/useTheme";
 import { Button } from "./components/ui/button";
 import { Input } from "./components/ui/input";
 
+declare global {
+  interface Window {
+    EyeDropper?: new () => {
+      open: () => Promise<{ sRGBHex: string }>;
+    };
+  }
+}
+
 const CloseBar = () => {
   return (
     <>
     <div data-tauri-drag-region className="fixed left-1/2 -translate-x-1/2 h-5 w-40 bg-stone-600 dark:bg-stone-100 rounded-b-2xl cursor-pointer " />
-      <div data-tauri-drag-region  className="flex  w-full justify-end gap-2 pt-1 pr-1">
+      <div data-tauri-drag-region  className="flex border-b-2 bg-black/20 w-full justify-end gap-2 p-1">
         <div
           className="text-gray-900 dark:text-white cursor-pointer hover:bg-gray-400/50 dark:hover:bg-gray-800/50 p-1 rounded-md"
           onClick={() => {
@@ -40,22 +48,14 @@ const ColorList = () => {
        2. flex-1: tells this div to take up all remaining space between top/bottom bars
     */
     <div className="flex-1 overflow-y-auto px-2 flex flex-col gap-2">
-      <div className="h-12 shrink-0 rounded-md w-full bg-rose-500" />
-      <div className="h-12 shrink-0 rounded-md w-full bg-sky-400" />
-      <div className="h-12 shrink-0 rounded-md w-full bg-emerald-500" />
-      <div className="h-12 shrink-0 rounded-md w-full bg-indigo-500" />
-      <div className="h-12 shrink-0 rounded-md w-full bg-indigo-500" />
-      <div className="h-12 shrink-0 rounded-md w-full bg-orange-500" />
-      <div className="h-12 shrink-0 rounded-md w-full bg-purple-500" />
-      <div className="h-12 shrink-0 rounded-md w-full bg-purple-500" />
-      <div className="h-12 shrink-0 rounded-md w-full bg-purple-500" />
+    
     </div>
   );
 };
 
 
 const ColorPicker = () => {
-  const [selectedColor, setSelectedColor] = useState('#ffffff');
+  const [, setSelectedColor] = useState('#ffffff');
 
   const handlePickColor = async () => {
     // 1. Check if the browser supports the EyeDropper API
@@ -77,7 +77,7 @@ const ColorPicker = () => {
   };
 
   return (
-    <div className="flex items-center p-3 gap-4 border-t-2">
+    <div className="flex items-center p-2 gap-2 border-t-2 bg-black/20">
       <Button  onClick={handlePickColor} >  <Pipette size={24} /></Button>
       <Input placeholder="Enter text" />
     </div>
@@ -93,7 +93,7 @@ function HexHopApp() {
 
   return (
     <>
-      <div className="w-screen h-screen flex flex-col overflow-hidden">
+      <div className="w-screen h-screen flex flex-col overflow-hidden gap-1">
         <CloseBar />
         <ColorList/>
         <ColorPicker />
