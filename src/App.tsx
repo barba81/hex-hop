@@ -5,6 +5,8 @@ import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import { Minus, Pipette, X } from "lucide-react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { useTheme } from "./hooks/useTheme";
+import { Button } from "./components/ui/button";
+import { Input } from "./components/ui/input";
 
 const CloseBar = () => {
   return (
@@ -71,23 +73,9 @@ const ColorPicker = () => {
   };
 
   return (
-    <div className="flex items-center p-3 gap-4">
-      <button 
-        onClick={handlePickColor}
-        className="p-2 rounded-2xl bg-gray-100 hover:bg-gray-200 transition-colors"
-        title="Pick a color"
-      >
-        <Pipette size={24} color={selectedColor} />
-      </button>
-
-      {/* Visual indicator of the selected color */}
-      <div className="flex items-center gap-2">
-        <div 
-          className="w-8 h-8 rounded-full border border-gray-300" 
-          style={{ backgroundColor: selectedColor }}
-        />
-        <span className="font-mono uppercase">{selectedColor}</span>
-      </div>
+    <div className="flex items-center p-3 gap-4 border-t-2">
+      <Button  onClick={handlePickColor} >  <Pipette size={24} /></Button>
+      <Input placeholder="Enter text" />
     </div>
   );
 };
