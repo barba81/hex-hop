@@ -36,16 +36,20 @@ const CloseBar = () => {
 
 const ColorList = () => {
   return (
-    <>
-      <div className="flex flex-1 px-2 flex-col gap-2">
-        <div className="h-12 rounded-md w-full bg-rose-500" />
-        <div className="h-12 rounded-md w-full bg-sky-400" />
-        <div className="h-12 rounded-md w-full bg-emerald-500" />
-        <div className="h-12 rounded-md w-full bg-indigo-500" />
-        <div className="h-12 rounded-md w-full bg-indigo-500" />
-        <div className="h-12 rounded-md w-full bg-indigo-500" />
-      </div>
-    </>
+    /* 1. overflow-y-auto: adds scrollbar if needed
+       2. flex-1: tells this div to take up all remaining space between top/bottom bars
+    */
+    <div className="flex-1 overflow-y-auto px-2 flex flex-col gap-2">
+      <div className="h-12 shrink-0 rounded-md w-full bg-rose-500" />
+      <div className="h-12 shrink-0 rounded-md w-full bg-sky-400" />
+      <div className="h-12 shrink-0 rounded-md w-full bg-emerald-500" />
+      <div className="h-12 shrink-0 rounded-md w-full bg-indigo-500" />
+      <div className="h-12 shrink-0 rounded-md w-full bg-indigo-500" />
+      <div className="h-12 shrink-0 rounded-md w-full bg-orange-500" />
+      <div className="h-12 shrink-0 rounded-md w-full bg-purple-500" />
+      <div className="h-12 shrink-0 rounded-md w-full bg-purple-500" />
+      <div className="h-12 shrink-0 rounded-md w-full bg-purple-500" />
+    </div>
   );
 };
 
@@ -89,7 +93,7 @@ function HexHopApp() {
 
   return (
     <>
-      <div className="w-screen h-screen flex flex-col  gap-2">
+      <div className="w-screen h-screen flex flex-col overflow-hidden">
         <CloseBar />
         <ColorList/>
         <ColorPicker />

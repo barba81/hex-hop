@@ -19,3 +19,20 @@ html, body { background: transparent }
     @apply bg-background text-foreground; }
   html {
     @apply font-sans; } }
+
+
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #e2e8f0; /* Change to match your theme */
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #cbd5e1;
+}
