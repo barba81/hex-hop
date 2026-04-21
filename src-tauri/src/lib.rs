@@ -2,14 +2,38 @@
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
-
+use tauri_plugin_sql::{Builder, Migration, MigrationKind};
 use tauri::Manager;
 use window_vibrancy::*;
 
+
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
+
+    
+ let migrations = vec![
+        // Define your migrations here
+        Migration {
+            version: 1,
+            description: "create_initial_tables",
+            sql: "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT);",
+            kind: MigrationKind::Up,
+        },
+         Migration {
+            version: 1,
+            description: "create_initial_tables",
+            sql: "CREATE TABLE colors (id INTEGER PRIMARY KEY, name TEXT);",
+            kind: MigrationKind::Up,
+        }
+    ];
+
     tauri::Builder::default()
-        .plugin(tauri_plugin_sql::Builder::new().build())
+        .plugin(
+            tauri_plugin_sql::Builder::default()
+                .add_migrations("sqlite:colorClipboard.db", migrations)
+                .build(),
+        )
         .plugin(tauri_plugin_single_instance::init(|_app, _args, _cwd| {}))
         .setup(|app| {
             let window = app.get_webview_window("main").unwrap();

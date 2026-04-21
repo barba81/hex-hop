@@ -4,6 +4,7 @@ import { Check, Pipette } from "lucide-react";
 import { HexColorPicker } from "react-colorful";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useColorStore } from "@/store/useColorStore";
+import { ColorRepository } from "@/lib/colorRepository";
 
 declare global {
   interface Window {
@@ -67,6 +68,7 @@ const ColorPicker = () => {
 
   const addColor = async () => {
     // add to state
+    ColorRepository.addColor(currentColor);
     addColorToState(currentColor);
     // add to db
     // add small mouse soter that is saved
