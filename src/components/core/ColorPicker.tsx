@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { Check, Pipette } from "lucide-react";
 import { HexColorPicker } from "react-colorful";
@@ -24,6 +23,8 @@ const SelectNewColor = () => {
           <div
             className="
             rounded-md 
+          shrink-0
+
             w-10 h-10 p-0 
             cursor-pointer 
             outline-2 overflow-hidden"
@@ -43,9 +44,11 @@ const SelectNewColor = () => {
     </div>
   );
 };
+
 const ColorPicker = () => {
   const currentColor = useColorStore().currentColor;
   const setColor = useColorStore().setColor;
+  const addColorToState = useColorStore().addColor;
 
   const handlePickColor = async () => {
     if (!window.EyeDropper) {
@@ -64,12 +67,14 @@ const ColorPicker = () => {
 
   const addColor = async () => {
     // add to state
+    addColorToState(currentColor);
     // add to db
     // add small mouse soter that is saved
   };
 
   return (
-    <div className="flex items-center p-2 gap-2 border-t-2 bg-black/20">
+    <div className="flex items-center p-2 gap-2 bg-black/20">
+      <SelectNewColor />
       <div
         className="
           flex  
@@ -77,7 +82,9 @@ const ColorPicker = () => {
           items-center 
           justify-center
           rounded-md
-          w-18 h-10 p-0 cursor-pointer  overflow-hidden
+          shrink-0
+
+          w-10 h-10 p-0 cursor-pointer  overflow-hidden
         bg-foreground/20
         hover:bg-foreground/25
           text-gray-900 dark:text-white "
@@ -87,12 +94,16 @@ const ColorPicker = () => {
       >
         <Pipette strokeWidth={2} />
       </div>
-      <SelectNewColor />
 
       <Input
-        className="h-11 border-2"
+        className="h-11 border-3"
         placeholder="Enter color"
         value={currentColor}
+        onChange={(e) => setColor(e.target.value)}
+        style={{
+          borderColor: currentColor,
+          outlineColor: currentColor,
+        }}
       />
       <div
         className="
@@ -101,7 +112,8 @@ const ColorPicker = () => {
           outline-2
           justify-center
           rounded-md
-          w-19 h-10 p-0 cursor-pointer  overflow-hidden bg-green-400/30 hover:bg-green-400/40 text-gray-900 dark:text-white "
+          shrink-0
+          w-10 h-10 p-0 cursor-pointer  overflow-hidden bg-green-400/30 hover:bg-green-400/40 text-gray-900 dark:text-white "
         onClick={() => addColor()}
       >
         <Check strokeWidth={2.5} />
