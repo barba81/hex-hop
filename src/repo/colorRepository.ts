@@ -31,8 +31,37 @@ export class ColorRepository {
         }
     }
 
-    static async updateColor() {
+    static async updateColor(color: ColorEntity) {
+        try {
+            await db.execute(
+                'UPDATE  colors  SET pinned = $2 WHERE id = $1',
+                [color.id, color.pinned]
+            );
+            debugger;
+        } catch (error) {
+            console.error("Failed to update colors:", error);
+        }
+    }
 
+    static async deleteById(color: ColorEntity) {
+        try {
+            await db.execute(
+                'DELETE FROM  colors WHERE id = $1  ',
+                [color.id]
+            );
+        } catch (error) {
+            console.error("Failed to delete color:", error);
+        }
+    }
+
+    static async deleteAll() {
+        try {
+            await db.execute(
+                'DELETE FROM  colors',
+            );
+        } catch (error) {
+            console.error("Failed to delete colors:", error);
+        }
     }
 }
 

@@ -1,6 +1,6 @@
-import { ColorRepository } from "@/repo/colorRepository";
+import { ColorPallet } from "@/service/colorPallet";
 import { useColorStore } from "@/store/useColorStore";
-import { Pin } from "lucide-react";
+import { Grab, Pin } from "lucide-react";
 
 const ColorList = () => {
   const colors = useColorStore().colors;
@@ -13,12 +13,18 @@ const ColorList = () => {
             <div
               key={ix}
               className="h-12 rounded-md w-full shrink-0 relative"
-              style={{ background: color }}
+              style={{ background: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a})` }}
             >
+              <div onClick={() => {
+                  ColorPallet.DeleteById(color);
+                }}>
+                    <Grab/>
+              </div>
+
               {true && (
                 <div
                 onClick={() => {
-                  ColorRepository.updateColor();
+                  ColorPallet.PinFlipColor(color);
                 }}
                   className="absolute bottom-1 right-1 hover:cursor-pointer
                 transition 

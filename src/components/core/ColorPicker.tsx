@@ -72,13 +72,12 @@ function hexToRgba(hex: string) {
     const r = parseInt(cleanHex.substring(0, 2), 16);
     const g = parseInt(cleanHex.substring(2, 4), 16);
     const b = parseInt(cleanHex.substring(4, 6), 16);
-    const a = parseInt(cleanHex.substring(6, 8), 16) ?? 255;
   debugger;
     return {
         r,
         g,
         b,
-        a 
+        a:255
     };
 }
 
@@ -95,8 +94,7 @@ function hexToRgba(hex: string) {
     const id = await ColorRepository.addColor(colorEntity);
     colorEntity.id = id;
     addColorToState(colorEntity);
-    // add to db
-    // add small mouse soter that is saved
+
   };
 
   return (

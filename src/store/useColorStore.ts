@@ -1,5 +1,4 @@
 import { ColorEntity } from '@/model/color';
-import { Color } from '@tauri-apps/api/webview';
 import { create } from 'zustand';
 
 interface ColorState {
@@ -7,6 +6,8 @@ interface ColorState {
   currentlyInsertedColor: string;
   setColor: (color: string) => void;
   addColor: (color: ColorEntity) => void;
+  deleteAll: () => void;
+  deleteById: (id: number) => void;
   addAllColor: (color: ColorEntity[]) => void;
 }
 
@@ -16,9 +17,10 @@ export const useColorStore = create<ColorState>((set) => ({
   
   setColor: (newColor) => set({ currentlyInsertedColor: newColor }),
   addAllColor: (newColor) => set({ colors: newColor  }),
-
+  deleteAll: () => set({colors: []}),
+  deleteById: (id) =>set((state)=>({colors: state.colors.filter(x=>x.id!==id)})),
   addColor: (newColor) => 
     set((state) => ({ 
-      colors : [...state.colors, newColor] 
+      colors : [newColor, ...state.colors] 
     })),
 }));
