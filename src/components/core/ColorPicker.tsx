@@ -4,7 +4,8 @@ import { Check, Pipette } from "lucide-react";
 import { HexColorPicker } from "react-colorful";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useColorStore } from "@/store/useColorStore";
-import { ColorRepository } from "@/lib/colorRepository";
+import { ColorRepository } from "@/repo/colorRepository";
+import { ColorEntity } from "@/model/color";
 
 declare global {
   interface Window {
@@ -47,7 +48,7 @@ const SelectNewColor = () => {
 };
 
 const ColorPicker = () => {
-  const currentColor = useColorStore().currentColor;
+  const currentColor = useColorStore().currentlyInsertedColor;
   const setColor = useColorStore().setColor;
   const addColorToState = useColorStore().addColor;
 
@@ -66,10 +67,34 @@ const ColorPicker = () => {
     }
   };
 
+function hexToRgba(hex: string) {
+    const cleanHex = hex.replace('#', '');
+    const r = parseInt(cleanHex.substring(0, 2), 16);
+    const g = parseInt(cleanHex.substring(2, 4), 16);
+    const b = parseInt(cleanHex.substring(4, 6), 16);
+    const a = parseInt(cleanHex.substring(6, 8), 16) ?? 255;
+  debugger;
+    return {
+        r,
+        g,
+        b,
+        a 
+    };
+}
+
   const addColor = async () => {
     // add to state
-    ColorRepository.addColor(currentColor);
-    addColorToState(currentColor);
+    const color = hexToRgba(currentColor);
+
+    const colorEntity: ColorEntity = {
+      id: 0,
+      pinned: 0,
+      ...color,
+    };
+
+    const id = await ColorRepository.addColor(colorEntity);
+    colorEntity.id = id;
+    addColorToState(colorEntity);
     // add to db
     // add small mouse soter that is saved
   };

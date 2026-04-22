@@ -2,7 +2,7 @@
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
-use tauri_plugin_sql::{Builder, Migration, MigrationKind};
+use tauri_plugin_sql::{ Migration, MigrationKind};
 use tauri::Manager;
 use window_vibrancy::*;
 
@@ -14,17 +14,21 @@ pub fn run() {
     
  let migrations = vec![
         // Define your migrations here
-        Migration {
-            version: 1,
-            description: "create_initial_tables",
-            sql: "CREATE TABLE users (id INTEGER PRIMARY KEY, name TEXT);",
-            kind: MigrationKind::Up,
-        },
          Migration {
             version: 1,
-            description: "create_initial_tables",
-            sql: "CREATE TABLE colors (id INTEGER PRIMARY KEY, name TEXT);",
-            kind: MigrationKind::Up,
+            description: "create_color_tables",
+            sql: "
+            CREATE TABLE colors (
+                id          INTEGER PRIMARY KEY AUTOINCREMENT,
+                r           INTEGER NOT NULL CHECK(r BETWEEN 0 AND 255),
+                g           INTEGER NOT NULL CHECK(g BETWEEN 0 AND 255),
+                b           INTEGER NOT NULL CHECK(b BETWEEN 0 AND 255),
+                a           INTEGER NOT NULL DEFAULT 255 CHECK(a BETWEEN 0 AND 255),
+                pinned      INTEGER NOT NULL DEFAULT 0 CHECK(pinned BETWEEN 0 AND 1),
+                created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
+            );
+            ",
+          kind:MigrationKind::Up,
         }
     ];
 
