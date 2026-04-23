@@ -9,7 +9,7 @@ export class ColorRepository {
     static async getAllColors() {
         try {
             return await db.select<ColorEntity[]>(
-                'SELECT * FROM colors',
+                'SELECT * FROM colors ORDER BY  created_at DESC',
             );
         } catch (error) {
             console.error("Failed to fetch colors:", error);
@@ -37,7 +37,6 @@ export class ColorRepository {
                 'UPDATE  colors  SET pinned = $2 WHERE id = $1',
                 [color.id, color.pinned]
             );
-            debugger;
         } catch (error) {
             console.error("Failed to update colors:", error);
         }

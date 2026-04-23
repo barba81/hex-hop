@@ -1,5 +1,4 @@
 import { ColorEntity } from "@/model/color";
-import { ColorFormat } from "@/model/colorFormat";
 import { ColorRepository } from "@/repo/colorRepository";
 import { useColorStore } from "@/store/useColorStore";
 
@@ -24,7 +23,7 @@ export class ColorPallet {
         useColorStore.getState().deleteAll();
     }
 
-    static async CopyToClipboard(colorId: number, colorFormat: ColorFormat){
+    // static async CopyToClipboard(colorId: number, colorFormat: ColorFormat){
 
-    }
+    // }
 }

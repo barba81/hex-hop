@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Input } from "../ui/input";
 import { Check, Pipette } from "lucide-react";
-import { HexColorPicker } from "react-colorful";
+import { HexAlphaColorPicker } from "react-colorful";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useColorStore } from "@/store/useColorStore";
 import { ColorRepository } from "@/repo/colorRepository";
@@ -34,7 +34,8 @@ const SelectNewColor = () => {
           ></div>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-3">
-          <HexColorPicker
+          <HexAlphaColorPicker 
+            
             color={color}
             onChange={(color) => {
               setColor(color);
@@ -62,6 +63,7 @@ const ColorPicker = () => {
     try {
       const result = await eyeDropper.open();
       setColor(result.sRGBHex);
+      await addColor(result.sRGBHex);
     } catch (e) {
       console.log("Color selection cancelled or failed");
     }
@@ -81,9 +83,9 @@ function hexToRgba(hex: string) {
     };
 }
 
-  const addColor = async () => {
+  const addColor = async (colorString: string) => {
     // add to state
-    const color = hexToRgba(currentColor);
+    const color = hexToRgba(colorString);
 
     const colorEntity: ColorEntity = {
       id: 0,
