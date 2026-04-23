@@ -1,1 +1,1 @@
-export type ColorFormat = 'RBG';
+export type ColorFormat = 'RBG' | 'Tailwind';

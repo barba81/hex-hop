@@ -25,7 +25,7 @@ function HexHopApp() {
   }, []);
   return (
     <>
-      <div className="w-screen h-screen flex flex-col gap-1">
+      <div className="w-screen h-screen flex flex-col gap-0.5 bg-stone-800/80">
         <HeaderBar />
         <ColorList />
         <ColorPicker />

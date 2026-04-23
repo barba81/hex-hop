@@ -22,7 +22,7 @@ html, body { background: transparent }
 
 
 ::-webkit-scrollbar {
-  width: 2px;
+  width: 3px;
 }
 
 ::-webkit-scrollbar-track {
@@ -30,9 +30,6 @@ html, body { background: transparent }
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #e2e8f0; /* Change to match your theme */
+  background: #656570; /* Change to match your theme */
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #cbd5e1;
-}
