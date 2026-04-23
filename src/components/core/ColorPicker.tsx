@@ -141,7 +141,7 @@ function hexToRgba(hex: string) {
           rounded-md
           shrink-0
           w-10 h-10 p-0 cursor-pointer  overflow-hidden bg-green-400/30 hover:bg-green-400/40 text-gray-900 dark:text-white "
-        onClick={() => addColor()}
+        onClick={() => addColor(currentColor)}
       >
         <Check strokeWidth={2.5} />
       </div>

@@ -2,19 +2,15 @@
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
-use tauri_plugin_sql::{ Migration, MigrationKind};
 use tauri::Manager;
+use tauri_plugin_sql::{Migration, MigrationKind};
 use window_vibrancy::*;
-
-
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-
-    
- let migrations = vec![
+    let migrations = vec![
         // Define your migrations here
-         Migration {
+        Migration {
             version: 1,
             description: "create_color_tables",
             sql: "
@@ -28,11 +24,12 @@ pub fn run() {
                 created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
             );
             ",
-          kind:MigrationKind::Up,
-        }
+            kind: MigrationKind::Up,
+        },
     ];
 
     tauri::Builder::default()
+        .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(
             tauri_plugin_sql::Builder::default()
                 .add_migrations("sqlite:colorClipboard.db", migrations)
