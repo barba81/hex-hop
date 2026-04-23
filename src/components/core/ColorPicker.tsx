@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Input } from "../ui/input";
 import { Check, Pipette } from "lucide-react";
 import { HexAlphaColorPicker } from "react-colorful";
@@ -19,8 +18,8 @@ const buttonStyle =
   "w-7 h-7 p-0 cursor-pointer shrink-0  outline-2 rounded-md ";
 
 const SelectNewColor = () => {
-  const [color, setColor] = useState("#3b82f6");
   const setCurrentColor = useColorStore().setColor;
+  const currentColor = useColorStore().currentlyInsertedColor;
 
   return (
     <div className="flex items-center gap-3">
@@ -28,14 +27,13 @@ const SelectNewColor = () => {
         <PopoverTrigger asChild>
           <div
             className={`${buttonStyle}`}
-            style={{ backgroundColor: color }}
+            style={{ backgroundColor: currentColor }}
           ></div>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-3">
           <HexAlphaColorPicker
-            color={color}
+            color={currentColor}
             onChange={(color) => {
-              setColor(color);
               setCurrentColor(color);
             }}
           />
@@ -88,7 +86,6 @@ const ColorPicker = () => {
 
     const colorEntity: ColorEntity = {
       id: 0,
-      pinned: 0,
       ...color,
     };
 

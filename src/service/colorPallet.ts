@@ -9,16 +9,7 @@ export class ColorPallet {
         const colors = await ColorRepository.getAllColors();
         useColorStore.getState().addAllColor(colors);
     }
-
-    static async PinFlipColor(color: ColorEntity) {
-        const updatedColor = {
-            ...color,
-            pinned: 1.0 - color.pinned
-        };
-        await ColorRepository.updateColor(updatedColor);
-        useColorStore.getState().updateColorInState(updatedColor);
-    }
-
+    
     static async DeleteById(color: ColorEntity) {
         await ColorRepository.deleteById(color);
         useColorStore.getState().deleteById(color.id);

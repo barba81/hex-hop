@@ -1,6 +1,6 @@
 import { ColorPallet } from "@/service/colorPallet";
 import { useColorStore } from "@/store/useColorStore";
-import { Pin, Trash2, Clipboard, X } from "lucide-react";
+import { Clipboard, X } from "lucide-react";
 
 const EmptyDisplay = () => {
   return (
@@ -18,7 +18,7 @@ const EmptyDisplay = () => {
 
 
 const ColorList = () => {
-  const colors = useColorStore().colors.sort((a, b) => b.pinned - a.pinned);
+  const colors = useColorStore().colors;
 
   return (
     <>
@@ -36,7 +36,6 @@ const ColorList = () => {
               >
                 <div
                   onClick={() => {
-                    ColorPallet.PinFlipColor(color);
                   }}
                   className="absolute bottom-1 left-1 hover:cursor-pointer
                 text-sm

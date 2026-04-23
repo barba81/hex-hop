@@ -4,5 +4,4 @@ export type ColorEntity = {
     g: number;
     b: number;
     a: number;
-    pinned: number;
 }

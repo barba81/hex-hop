@@ -34,8 +34,8 @@ export class ColorRepository {
     static async updateColor(color: ColorEntity) {
         try {
             await db.execute(
-                'UPDATE  colors  SET pinned = $2 WHERE id = $1',
-                [color.id, color.pinned]
+                'UPDATE  colors  SET r = $1, g = $2, b = $3, a=$4 WHERE id = $4',
+                [ color.r, color.g, color.b, color.a]
             );
         } catch (error) {
             console.error("Failed to update colors:", error);
