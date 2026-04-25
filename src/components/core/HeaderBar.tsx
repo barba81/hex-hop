@@ -36,7 +36,7 @@ const HoldToClear = () => {
     >
       {/* The Visual Fill Layer */}
       <div
-        className="absolute left-0 bottom-0 top-0 bg-orange-300/20 transition-all ease-linear"
+        className="absolute left-0 bottom-0 top-0 bg-red-500/60 transition-all ease-linear"
         style={{
           width: isHolding ? "100%" : "0%",
           transitionDuration: isHolding ? `${HOLD_DURATION}ms` : "150ms",

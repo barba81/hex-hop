@@ -2,37 +2,43 @@ import { ColorEntity } from "@/model/color";
 import { ColorPallet } from "@/service/colorPallet";
 import { Hash, X } from "lucide-react";
 
+type ColorBlockComponentParams = {
+  color: ColorEntity;
+  fontClass: string;
+};
+
 type ColorBlockParams = {
   color: ColorEntity;
 };
 
-const CopyLogo = ({ color }: ColorBlockParams) => {
+const CopyLogo = ({ color, fontClass }: ColorBlockComponentParams) => {
   return (
-    <>
-      <div className="flex absolute top-1 left-1 items-center gap-1">
-        <Hash
-          size={18}
-          onClick={() => ColorPallet.CopyToClipboard(color, "RBG")}
-        />
-        <div
-          onClick={() => ColorPallet.CopyToClipboard(color, "Tailwind")}
-          className="w-[20px] h-[20px] bg-black dark:bg-white hover:cursor-pointer"
-          style={{
-            maskImage: 'url("/tailwind-icon.svg")',
-            maskRepeat: "no-repeat",
-            maskSize: "contain",
-            maskPosition: "center",
-            WebkitMaskImage: 'url("/tailwind-icon.svg")',
-            WebkitMaskRepeat: "no-repeat",
-            WebkitMaskSize: "contain",
-            WebkitMaskPosition: "center",
-          }}
-        />
-      </div>
-    </>
+    <div
+      className={`flex absolute top-1 left-1 items-center gap-1 ${fontClass}`}
+    >
+      <Hash
+        size={18}
+        className="hover:cursor-pointer"
+        onClick={() => ColorPallet.CopyToClipboard(color, "RBG")}
+      />
+      <div
+        onClick={() => ColorPallet.CopyToClipboard(color, "Tailwind")}
+        // Change: Removed bg-black, added bg-current
+        className="w-[18px] h-[18px] bg-current hover:cursor-pointer opacity-80 hover:opacity-100"
+        style={{
+          maskImage: 'url("/tailwind-icon.svg")',
+          WebkitMaskImage: 'url("/tailwind-icon.svg")',
+          maskSize: "contain",
+          WebkitMaskSize: "contain",
+          maskRepeat: "no-repeat",
+          WebkitMaskRepeat: "no-repeat",
+          maskPosition: "center",
+          WebkitMaskPosition: "center",
+        }}
+      />
+    </div>
   );
 };
-
 const CloseButton = ({ color }: ColorBlockParams) => {
   return (
     <>
@@ -50,58 +56,47 @@ const CloseButton = ({ color }: ColorBlockParams) => {
 
 const ColorText = ({ color }: ColorBlockParams) => {
   return (
-    <>
-      <div
-        onClick={() => {}}
-        className="absolute bottom-1 left-1 hover:cursor-pointer
-                text-sm
-              "
-      >
-        {color.r}, {color.g}, {color.b}, {color.a}
+    <div
+      className="absolute bottom-1.5 left-2 select-none cursor-default font-mono antialiased"
+    >
+      <div className="flex gap-2 opacity-80 text-[13px] uppercase tracking-wider font-bold">
+        <span><span className="opacity-50 mr-1">R</span>{color.r}</span>
+        <span><span className="opacity-50 mr-1">G</span>{color.g}</span>
+        <span><span className="opacity-50 mr-1">B</span>{color.b}</span>
+        {color.a < 1 && (
+           <span><span className="opacity-50 mr-1">A</span>{color.a.toFixed(2)}</span>
+        )}
       </div>
-    </>
+    </div>
   );
 };
 
-const ColorBlock = ({ color }: ColorBlockParams) => {
-  // Define grid colors based on theme (or just use neutral grays that work for both)
-  const gridLight = "#ffffff";
-  const gridDark = "#e5e7eb"; // Tailwind gray-200
+const ColorBlock = ({ color }: { color: ColorEntity }) => {
+  const isLight = 0.299 * color.r + 0.587 * color.g + 0.114 * color.b > 150;
+  const fontColor = isLight ? "text-gray-900" : "text-gray-100";
 
   return (
     <div
-      className="group h-12 rounded-md w-full shrink-0 relative flex items-center justify-between px-4 overflow-hidden border border-gray-200 dark:border-gray-800"
-      style={{
-        // 1. The Checkerboard Pattern
-        backgroundImage: `
-          linear-gradient(45deg, ${gridDark} 25%, transparent 25%), 
-          linear-gradient(-45deg, ${gridDark} 25%, transparent 25%), 
-          linear-gradient(45deg, transparent 75%, ${gridDark} 75%), 
-          linear-gradient(-45deg, transparent 75%, ${gridDark} 75%)
-        `,
-        backgroundSize: '12px 12px',
-        backgroundPosition: '0 0, 0 6px, 6px -6px, -6px 0px',
-        backgroundColor: gridLight, // The "white" part of the grid
-      }}
+      className={`group h-13 rounded-md w-full shrink-0 relative flex items-center justify-between px-1 overflow-hidden ${fontColor} outline-2`}
     >
-      {/* 2. The Color Overlay */}
-      <div 
+      {/* The Color Overlay */}
+      <div
         className="absolute inset-0 z-0"
         style={{
-          background: `rgba(${color.r}, ${color.g}, ${color.b}, ${0.8})`,
+          backgroundColor: `rgb(${color.r}, ${color.g}, ${color.b})`,
         }}
       />
 
-      {/* 3. Content (needs z-10 to stay above the color) */}
-      <div className="z-10 w-full flex items-center justify-between">
+      <div className="z-10 w-full h-full relative">
         <ColorText color={color} />
 
-        <div className="flex gap-2 opacity-30 group-hover:opacity-80 transition-opacity">
-          <CopyLogo color={color} />
-          <CloseButton color={color} />
+        <div className="opacity-20 group-hover:opacity-100 transition-opacity">
+          <CopyLogo color={color} fontClass={fontColor} />
+          <CloseButton color={color}  />
         </div>
       </div>
     </div>
   );
 };
+
 export default ColorBlock;
