@@ -4,7 +4,8 @@ import { HexAlphaColorPicker } from "react-colorful";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useColorStore } from "@/store/useColorStore";
 import { ColorRepository } from "@/repo/colorRepository";
-import { ColorEntity } from "@/model/color";
+import { useState } from "react";
+import { ColorValidator } from "@/service/colorFormatValidator";
 
 declare global {
   interface Window {
@@ -48,6 +49,7 @@ const ColorPicker = () => {
   const setColor = useColorStore().setColor;
   const addColorToState = useColorStore().addColor;
   const setCurrentColor = useColorStore().setColor;
+  const [isValidColor, setIsValidColor] = useState<boolean>(true);
 
   const handlePickColor = async () => {
     if (!window.EyeDropper) {
@@ -66,31 +68,23 @@ const ColorPicker = () => {
     }
   };
 
-  function hexToRgba(hex: string) {
-    const cleanHex = hex.replace("#", "");
-    const r = parseInt(cleanHex.substring(0, 2), 16);
-    const g = parseInt(cleanHex.substring(2, 4), 16);
-    const b = parseInt(cleanHex.substring(4, 6), 16);
-    debugger;
-    return {
-      r,
-      g,
-      b,
-    };
-  }
-
   const addColor = async (colorString: string) => {
     // add to state
-    const color = hexToRgba(colorString);
+    if (!isValidColor) return;
+    const result = ColorValidator.validateAndConvert(colorString);
+    if (!result.isValid) return;
+    const colorEntity = result.entity;
 
-    const colorEntity: ColorEntity = {
-      id: 0,
-      ...color,
-    };
+    await ColorRepository.addColor(colorEntity);
 
-    const id = await ColorRepository.addColor(colorEntity);
-    colorEntity.id = id;
     addColorToState(colorEntity);
+  };
+
+  const handleInputColor = (color: string) => {
+    const result = ColorValidator.validateAndConvert(color);
+    console.log(result);
+    if (result.isValid === true) setColor(color);
+    setIsValidColor(result.isValid);
   };
 
   return (
@@ -118,15 +112,14 @@ const ColorPicker = () => {
         className="h-8 border-2 p-2"
         placeholder="Enter color"
         value={currentColor}
-        onChange={(e) => setColor(e.target.value)}
+        onChange={(e) => handleInputColor(e.target.value)}
       />
-
       <div
         className={`${buttonStyle}       
           flex  
           items-center 
           justify-center
-       bg-green-400/60 hover:bg-green-400/40 text-gray-900 dark:text-white `}
+      ${isValidColor && "bg-green-400/60 hover:bg-green-400/40"} text-gray-900 dark:text-white `}
         onClick={() => addColor(currentColor)}
       >
         <Check strokeWidth={3} size={16} />

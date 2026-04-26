@@ -11,11 +11,8 @@ type ColorBlockParams = {
   color: ColorEntity;
 };
 
-const CopyLogo = ({
-  color,
-  fontClass,
-}: ColorBlockComponentParams) => {
-  const colorBlock = "opacity-60 hover:opacity-100";
+const CopyLogo = ({ color, fontClass }: ColorBlockComponentParams) => {
+  const colorBlock = "opacity-60 hover:opacity-100 select-none";
   return (
     <div
       className={`flex absolute top-1.5 left-0 items-center gap-2 ${fontClass}`}
@@ -50,22 +47,6 @@ const CopyLogo = ({
       >
         VEC
       </div>
-
-      <div
-        onClick={() => ColorPallet.CopyToClipboard(color, "Tailwind")}
-        // Change: Removed bg-black, added bg-current
-        className={`w-[18px] h-[18px] bg-current hover:cursor-pointer ${`hover:cursor-pointer ${colorBlock}`}`}
-        style={{
-          maskImage: 'url("/tailwind-icon.svg")',
-          WebkitMaskImage: 'url("/tailwind-icon.svg")',
-          maskSize: "contain",
-          WebkitMaskSize: "contain",
-          maskRepeat: "no-repeat",
-          WebkitMaskRepeat: "no-repeat",
-          maskPosition: "center",
-          WebkitMaskPosition: "center",
-        }}
-      />
     </div>
   );
 };
@@ -100,7 +81,6 @@ const ColorText = ({ color }: ColorBlockParams) => {
           <span className="opacity-50 mr-1">B</span>
           {color.b}
         </span>
-     
       </div>
     </div>
   );
@@ -114,7 +94,6 @@ const ColorBlock = ({ color }: { color: ColorEntity }) => {
     <div
       className={`group h-14 rounded-md w-full shrink-0 relative flex items-center justify-between px-1 overflow-hidden ${fontColor} outline-1`}
     >
-      {/* The Color Overlay */}
       <div
         className="absolute inset-0 z-0"
         style={{
@@ -124,7 +103,7 @@ const ColorBlock = ({ color }: { color: ColorEntity }) => {
 
       <div className="z-10 w-full h-full relative">
         <ColorText color={color} />
-        <CopyLogo color={color} fontClass={fontColor}  />
+        <CopyLogo color={color} fontClass={fontColor} />
         <CloseButton color={color} />
       </div>
     </div>

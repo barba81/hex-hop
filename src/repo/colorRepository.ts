@@ -23,8 +23,9 @@ export class ColorRepository {
                 'INSERT INTO colors (r, g, b, a) VALUES ($1, $2, $3, $4) RETURNING id',
                 [color.r, color.g, color.b, color.a]
             );
-
-            return result[0]?.id ?? 0;
+            const id =  result[0]?.id ?? 0;
+            color.id = id;
+            return id;
         } catch (error) {
             console.error("Failed to insert color", error);
             return 0;
