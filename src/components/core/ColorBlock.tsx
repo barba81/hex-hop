@@ -100,12 +100,7 @@ const ColorText = ({ color }: ColorBlockParams) => {
           <span className="opacity-50 mr-1">B</span>
           {color.b}
         </span>
-        {color.a < 1 && (
-          <span>
-            <span className="opacity-50 mr-1">A</span>
-            {color.a.toFixed(2)}
-          </span>
-        )}
+     
       </div>
     </div>
   );

@@ -76,7 +76,6 @@ const ColorPicker = () => {
       r,
       g,
       b,
-      a: 1,
     };
   }
 
