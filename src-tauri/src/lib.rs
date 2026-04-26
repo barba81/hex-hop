@@ -19,7 +19,7 @@ pub fn run() {
                 r           INTEGER NOT NULL CHECK(r BETWEEN 0 AND 255),
                 g           INTEGER NOT NULL CHECK(g BETWEEN 0 AND 255),
                 b           INTEGER NOT NULL CHECK(b BETWEEN 0 AND 255),
-                a           INTEGER NOT NULL DEFAULT 255 CHECK(a BETWEEN 0 AND 255),
+                a           REAL  DEFAULT 1 CHECK(a BETWEEN 0 AND 1),
                 created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
             );
             ",

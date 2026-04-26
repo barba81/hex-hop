@@ -1,1 +1,1 @@
-export type ColorFormat = 'RBG' | 'Tailwind';
+export type ColorFormat = 'RBG' | 'Tailwind' |  "#" | "HSL" | "OK" | "VEC";

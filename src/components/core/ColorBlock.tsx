@@ -11,20 +11,50 @@ type ColorBlockParams = {
   color: ColorEntity;
 };
 
-const CopyLogo = ({ color, fontClass }: ColorBlockComponentParams) => {
+const CopyLogo = ({
+  color,
+  fontClass,
+}: ColorBlockComponentParams) => {
+  const colorBlock = "opacity-60 hover:opacity-100";
   return (
     <div
-      className={`flex absolute top-1 left-1 items-center gap-1 ${fontClass}`}
+      className={`flex absolute top-1.5 left-0 items-center gap-2 ${fontClass}`}
     >
       <Hash
         size={18}
-        className="hover:cursor-pointer"
-        onClick={() => ColorPallet.CopyToClipboard(color, "RBG")}
+        strokeWidth={2.5}
+        className={`hover:cursor-pointer ${colorBlock}`}
+        onClick={() => ColorPallet.CopyToClipboard(color, "#")}
       />
+      <div
+        className={`font-mono font-semibold hover:cursor-pointer ${colorBlock}`}
+        onClick={() => ColorPallet.CopyToClipboard(color, "RBG")}
+      >
+        RGB
+      </div>
+      <div
+        className={`font-mono font-semibold hover:cursor-pointer ${colorBlock}`}
+        onClick={() => ColorPallet.CopyToClipboard(color, "HSL")}
+      >
+        HSL
+      </div>
+      <div
+        className={`font-mono font-semibold hover:cursor-pointer ${colorBlock}`}
+        onClick={() => ColorPallet.CopyToClipboard(color, "OK")}
+      >
+        OK
+      </div>
+      <div
+        className={`font-mono font-semibold hover:cursor-pointer ${colorBlock}`}
+        onClick={() => ColorPallet.CopyToClipboard(color, "VEC")}
+      >
+        VEC
+      </div>
+
       <div
         onClick={() => ColorPallet.CopyToClipboard(color, "Tailwind")}
         // Change: Removed bg-black, added bg-current
-        className="w-[18px] h-[18px] bg-current hover:cursor-pointer opacity-80 hover:opacity-100"
+        className={`w-[18px] h-[18px] bg-current hover:cursor-pointer ${`hover:cursor-pointer ${colorBlock}`}`}
         style={{
           maskImage: 'url("/tailwind-icon.svg")',
           WebkitMaskImage: 'url("/tailwind-icon.svg")',
@@ -46,7 +76,7 @@ const CloseButton = ({ color }: ColorBlockParams) => {
         onClick={() => {
           ColorPallet.DeleteById(color);
         }}
-        className="absolute top-1 right-1 hover:cursor-pointer hover:bg-amber-50/20 p-0.5 rounded-full"
+        className="absolute top-0.5 right-0 hover:cursor-pointer hover:bg-amber-50/20 p-0.5 rounded-full"
       >
         <X size={15} />
       </div>
@@ -56,15 +86,25 @@ const CloseButton = ({ color }: ColorBlockParams) => {
 
 const ColorText = ({ color }: ColorBlockParams) => {
   return (
-    <div
-      className="absolute bottom-1.5 left-2 select-none cursor-default font-mono antialiased"
-    >
-      <div className="flex gap-2 opacity-80 text-[13px] uppercase tracking-wider font-bold">
-        <span><span className="opacity-50 mr-1">R</span>{color.r}</span>
-        <span><span className="opacity-50 mr-1">G</span>{color.g}</span>
-        <span><span className="opacity-50 mr-1">B</span>{color.b}</span>
+    <div className="absolute bottom-1.5 left-1 select-none cursor-default  antialiased">
+      <div className="flex gap-2 opacity-80 text-[13px] uppercase tracking-wider font-semibold">
+        <span>
+          <span className="opacity-50 mr-1">R</span>
+          {color.r}
+        </span>
+        <span>
+          <span className="opacity-50 mr-1">G</span>
+          {color.g}
+        </span>
+        <span>
+          <span className="opacity-50 mr-1">B</span>
+          {color.b}
+        </span>
         {color.a < 1 && (
-           <span><span className="opacity-50 mr-1">A</span>{color.a.toFixed(2)}</span>
+          <span>
+            <span className="opacity-50 mr-1">A</span>
+            {color.a.toFixed(2)}
+          </span>
         )}
       </div>
     </div>
@@ -77,7 +117,7 @@ const ColorBlock = ({ color }: { color: ColorEntity }) => {
 
   return (
     <div
-      className={`group h-13 rounded-md w-full shrink-0 relative flex items-center justify-between px-1 overflow-hidden ${fontColor} outline-2`}
+      className={`group h-14 rounded-md w-full shrink-0 relative flex items-center justify-between px-1 overflow-hidden ${fontColor} outline-1`}
     >
       {/* The Color Overlay */}
       <div
@@ -89,11 +129,8 @@ const ColorBlock = ({ color }: { color: ColorEntity }) => {
 
       <div className="z-10 w-full h-full relative">
         <ColorText color={color} />
-
-        <div className="opacity-20 group-hover:opacity-100 transition-opacity">
-          <CopyLogo color={color} fontClass={fontColor} />
-          <CloseButton color={color}  />
-        </div>
+        <CopyLogo color={color} fontClass={fontColor}  />
+        <CloseButton color={color} />
       </div>
     </div>
   );

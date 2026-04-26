@@ -69,13 +69,13 @@ const HeaderBar = () => {
     <>
       <ClipboardPalletDecorator />
 
-      <div className="flex bg-black/50 w-full justify-between gap-2 p-1">
+      <div className="flex bg-black/50 w-full justify-between gap-2 px-2 py-1">
         <div className="flex items-center justify-center ">
           <HoldToClear />
         </div>
         <div className="flex gap-2">
           <div
-            className="text-gray-900 dark:text-white cursor-pointer hover:bg-gray-400/50 dark:hover:bg-gray-700/50 p-1 rounded-md"
+            className="text-gray-900 dark:text-white cursor-pointer hover:bg-gray-400/50 dark:hover:bg-gray-500/50 p-1 rounded-md"
             onClick={() => {
               getCurrentWindow().minimize();
             }}

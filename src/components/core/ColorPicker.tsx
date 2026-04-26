@@ -22,12 +22,12 @@ const SelectNewColor = () => {
   const currentColor = useColorStore().currentlyInsertedColor;
 
   return (
-    <div className="flex items-center gap-3">
+    <div className="flex items-center gap-3 ">
       <Popover>
         <PopoverTrigger asChild>
           <div
-            className={`${buttonStyle}`}
             style={{ backgroundColor: currentColor }}
+            className={`${buttonStyle}   hover:bg-white/90`}
           ></div>
         </PopoverTrigger>
         <PopoverContent className="w-auto p-3">
@@ -76,7 +76,7 @@ const ColorPicker = () => {
       r,
       g,
       b,
-      a: 255,
+      a: 1,
     };
   }
 
@@ -104,7 +104,7 @@ const ColorPicker = () => {
           flex  
           items-center 
           justify-center
-        bg-foreground/20
+        bg-foreground/10
         hover:bg-foreground/25
           text-gray-900 dark:text-white `}
         onClick={() => {
