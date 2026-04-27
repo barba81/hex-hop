@@ -6,6 +6,7 @@ import { useColorStore } from "@/store/useColorStore";
 import { ColorRepository } from "@/repo/colorRepository";
 import { useState } from "react";
 import { ColorValidator } from "@/service/colorFormatValidator";
+import { ColorFormatTranslation } from "@/service/colorFormatTranslation";
 
 declare global {
   interface Window {
@@ -18,38 +19,13 @@ declare global {
 const buttonStyle =
   "w-7 h-7 p-0 cursor-pointer shrink-0  outline-2 rounded-md ";
 
-const SelectNewColor = () => {
-  const setCurrentColor = useColorStore().setColor;
-  const currentColor = useColorStore().currentlyInsertedColor;
-
-  return (
-    <div className="flex items-center gap-3 ">
-      <Popover>
-        <PopoverTrigger asChild>
-          <div
-            style={{ backgroundColor: currentColor }}
-            className={`${buttonStyle}   hover:bg-white/90`}
-          ></div>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-3">
-          <HexAlphaColorPicker
-            color={currentColor}
-            onChange={(color) => {
-              setCurrentColor(color);
-            }}
-          />
-        </PopoverContent>
-      </Popover>
-    </div>
-  );
-};
-
 const ColorPicker = () => {
   const currentColor = useColorStore().currentlyInsertedColor;
   const setColor = useColorStore().setColor;
   const addColorToState = useColorStore().addColor;
-  const setCurrentColor = useColorStore().setColor;
   const [isValidColor, setIsValidColor] = useState<boolean>(true);
+  const [format, setValidFormat] = useState<string>("hex");
+  const [inputColor, setInputColor] = useState<string>(currentColor);
 
   const handlePickColor = async () => {
     if (!window.EyeDropper) {
@@ -61,7 +37,6 @@ const ColorPicker = () => {
     try {
       const result = await eyeDropper.open();
       setColor(result.sRGBHex);
-      setCurrentColor(result.sRGBHex);
       await addColor(result.sRGBHex);
     } catch (e) {
       console.log("Color selection cancelled or failed");
@@ -69,27 +44,46 @@ const ColorPicker = () => {
   };
 
   const addColor = async (colorString: string) => {
-    // add to state
     if (!isValidColor) return;
     const result = ColorValidator.validateAndConvert(colorString);
     if (!result.isValid) return;
     const colorEntity = result.entity;
-
+    if (colorEntity.a === 1) colorEntity.a = null;
     await ColorRepository.addColor(colorEntity);
-
     addColorToState(colorEntity);
   };
 
   const handleInputColor = (color: string) => {
+    setInputColor(color);
     const result = ColorValidator.validateAndConvert(color);
-    console.log(result);
-    if (result.isValid === true) setColor(color);
+    if (result.isValid === true) {
+      setColor(ColorFormatTranslation.toHex(result.entity));
+      setValidFormat(result.format);
+    }
     setIsValidColor(result.isValid);
   };
 
   return (
     <div className="flex items-center p-2 gap-2 bg-black/50">
-      <SelectNewColor />
+       <div className="flex items-center gap-3 ">
+      <Popover>
+        <PopoverTrigger asChild>
+          <div
+            style={{ backgroundColor: currentColor }}
+            className={`${buttonStyle}hover:bg-white/90`}
+          ></div>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-3">
+          <HexAlphaColorPicker
+            color={currentColor}
+            onChange={(color) => {
+              setColor(color);
+               setInputColor(color);
+            }}
+          />
+        </PopoverContent>
+      </Popover>
+    </div>
 
       {/* Pipet button */}
       <div
@@ -107,13 +101,22 @@ const ColorPicker = () => {
         <Pipette strokeWidth={2} size={15} />
       </div>
 
-      {/* Input button */}
-      <Input
-        className="h-8 border-2 p-2"
-        placeholder="Enter color"
-        value={currentColor}
-        onChange={(e) => handleInputColor(e.target.value)}
-      />
+      <div className="flex h-8 items-center overflow-hidden rounded-md border-2 focus-within:ring-2 focus-within:ring-ring focus-within:border-input transition-colors">
+        <input 
+          className="h-full w-full px-2 outline-none text-sm placeholder:text-muted-foreground"
+          placeholder="Enter color"
+          value={inputColor}
+          onChange={(e) => handleInputColor(e.target.value)}
+        />
+
+        <div
+          className={`${
+            !isValidColor ? "hidden" : "flex"
+          } h-full items-center border-l-2 bg-muted/50 px-2 font-mono text-xs font-semibold uppercase text-muted-foreground`}
+        >
+          {format}
+        </div>
+      </div>
       <div
         className={`${buttonStyle}       
           flex  

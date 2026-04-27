@@ -13,7 +13,7 @@ type ColorBlockParams = {
 
 const CopyLogo = ({ color, fontClass }: ColorBlockComponentParams) => {
   const colorBlock = "opacity-60 hover:opacity-100 select-none";
-  return (
+  return ( 
     <div
       className={`flex absolute top-1.5 left-0 items-center gap-2 ${fontClass}`}
     >
@@ -81,6 +81,14 @@ const ColorText = ({ color }: ColorBlockParams) => {
           <span className="opacity-50 mr-1">B</span>
           {color.b}
         </span>
+
+        {
+          color.a &&
+          <span>
+          <span className="opacity-50 mr-1">A</span>
+          {color.a.toFixed(2)}
+        </span>
+        }
       </div>
     </div>
   );
