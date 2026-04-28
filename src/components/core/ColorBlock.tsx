@@ -1,55 +1,54 @@
 import { ColorEntity } from "@/model/color";
 import { ColorPallet } from "@/service/colorPallet";
 import { Hash, X } from "lucide-react";
+import CopyItem from "./CopyItem";
+import { ColorFormat } from "@/model/colorFormat";
 
 type ColorBlockComponentParams = {
   color: ColorEntity;
   fontClass: string;
 };
 
+
+
 type ColorBlockParams = {
   color: ColorEntity;
 };
 
+
+
 const CopyLogo = ({ color, fontClass }: ColorBlockComponentParams) => {
-  const colorBlock = "opacity-60 hover:opacity-100 select-none";
-  return ( 
-    <div
-      className={`flex absolute top-1.5 left-0 items-center gap-2 ${fontClass}`}
-    >
+  const commonStyles = "opacity-60 hover:opacity-100 select-none hover:cursor-pointer";
+  const textStyles = `${commonStyles} font-mono font-semibold`;
+
+  const formats: {label: string, type: ColorFormat}[] = [
+    { label: "RGB", type: "RBG" },
+    { label: "HSL", type: "HSL" },
+    { label: "OK",  type: "OK"  },
+    { label: "VEC", type: "VEC" }
+  ];
+
+  return (
+    <div className={`flex absolute top-1.5 left-0 items-center gap-2 ${fontClass}`}>
+      {/* Hash Icon */}
       <Hash
         size={18}
         strokeWidth={2.5}
-        className={`hover:cursor-pointer ${colorBlock}`}
+        className={commonStyles}
         onClick={() => ColorPallet.CopyToClipboard(color, "#")}
       />
-      <div
-        className={`font-mono font-semibold hover:cursor-pointer ${colorBlock}`}
-        onClick={() => ColorPallet.CopyToClipboard(color, "RBG")}
-      >
-        RGB
-      </div>
-      <div
-        className={`font-mono font-semibold hover:cursor-pointer ${colorBlock}`}
-        onClick={() => ColorPallet.CopyToClipboard(color, "HSL")}
-      >
-        HSL
-      </div>
-      <div
-        className={`font-mono font-semibold hover:cursor-pointer ${colorBlock}`}
-        onClick={() => ColorPallet.CopyToClipboard(color, "OK")}
-      >
-        OK
-      </div>
-      <div
-        className={`font-mono font-semibold hover:cursor-pointer ${colorBlock}`}
-        onClick={() => ColorPallet.CopyToClipboard(color, "VEC")}
-      >
-        VEC
-      </div>
+
+      {/* Format Links */}
+      {formats.map(({ label, type }) => (
+        <CopyItem
+         onClick={() =>ColorPallet.CopyToClipboard(color, type)} 
+         label={label}/>
+      ))}
     </div>
   );
 };
+
+
 const CloseButton = ({ color }: ColorBlockParams) => {
   return (
     <>
