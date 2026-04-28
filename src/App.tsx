@@ -7,6 +7,7 @@ import HeaderBar from "./components/core/HeaderBar";
 import ColorList from "./components/core/ColorList";
 import ColorPicker from "./components/core/ColorPicker";
 import { ColorPallet } from "./service/colorPallet";
+import { Toaster } from "sonner";
 
 function HexHopApp() {
   const {} = useTheme();
@@ -26,6 +27,13 @@ function HexHopApp() {
   return (
     <>
       <div className="w-screen h-screen flex flex-col gap-0.5 bg-stone-800/80">
+      <Toaster 
+          theme="dark" 
+          position="bottom-center"
+          toastOptions={{
+            className: " text-xs py-2 px-3 flex justify-center",
+          }}
+        />
         <HeaderBar />
         <ColorList />
         <ColorPicker />

@@ -1,48 +1,55 @@
 import { ColorEntity } from "@/model/color";
+import { ColorFormat } from "@/model/colorFormat";
 import { ColorPallet } from "@/service/colorPallet";
 import { Hash, X } from "lucide-react";
-import CopyItem from "./CopyItem";
-import { ColorFormat } from "@/model/colorFormat";
+import { toast } from "sonner";
 
 type ColorBlockComponentParams = {
   color: ColorEntity;
   fontClass: string;
 };
 
-
-
 type ColorBlockParams = {
   color: ColorEntity;
 };
 
-
-
 const CopyLogo = ({ color, fontClass }: ColorBlockComponentParams) => {
-  const commonStyles = "opacity-60 hover:opacity-100 select-none hover:cursor-pointer";
-  const textStyles = `${commonStyles} font-mono font-semibold`;
+  const commonStyles = "opacity-60 hover:opacity-100 select-none hover:cursor-pointer transition-opacity";
+  
+  const handleCopy = (type: ColorFormat) => {
+    ColorPallet.CopyToClipboard(color, type);
+    toast(`Copied color to clipboard!`, {
+      duration: 750,
+      position:"top-center",
+      style: {
+        background: "#171812",
+        color: "#fff",        
+        border: "1px solid #333",
+        fontSize: "11px",
+        borderRadius: "8px",
+        padding: "8px 12px",
+      },
+    });
+  };
 
-  const formats: {label: string, type: ColorFormat}[] = [
+  const formats: {type: ColorFormat, label: string, isIcon?:boolean}[] = [
+    { label: "#", type: "#", isIcon: true },
     { label: "RGB", type: "RBG" },
     { label: "HSL", type: "HSL" },
-    { label: "OK",  type: "OK"  },
-    { label: "VEC", type: "VEC" }
+    { label: "OK", type: "OK" },
+    { label: "VEC", type: "VEC" },
   ];
 
   return (
     <div className={`flex absolute top-1.5 left-0 items-center gap-2 ${fontClass}`}>
-      {/* Hash Icon */}
-      <Hash
-        size={18}
-        strokeWidth={2.5}
-        className={commonStyles}
-        onClick={() => ColorPallet.CopyToClipboard(color, "#")}
-      />
-
-      {/* Format Links */}
-      {formats.map(({ label, type }) => (
-        <CopyItem
-         onClick={() =>ColorPallet.CopyToClipboard(color, type)} 
-         label={label}/>
+      {formats.map((f) => (
+        <div
+          key={f.type}
+          className={`${commonStyles} ${!f.isIcon ? "font-mono font-semibold" : ""}`}
+          onClick={() => handleCopy(f.type)}
+        >
+          {f.isIcon ? <Hash size={18} strokeWidth={2.5} /> : f.label}
+        </div>
       ))}
     </div>
   );
@@ -102,13 +109,13 @@ const ColorBlock = ({ color }: { color: ColorEntity }) => {
       className={`group h-14 rounded-md w-full shrink-0 relative flex items-center justify-between px-1 overflow-hidden ${fontColor} outline-1`}
     >
       <div
-        className="absolute inset-0 z-0"
+        className="absolute inset-0 "
         style={{
           backgroundColor: `rgb(${color.r}, ${color.g}, ${color.b})`,
         }}
       />
 
-      <div className="z-10 w-full h-full relative">
+      <div className=" w-full h-full relative">
         <ColorText color={color} />
         <CopyLogo color={color} fontClass={fontColor} />
         <CloseButton color={color} />
