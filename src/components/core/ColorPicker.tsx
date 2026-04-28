@@ -1,4 +1,3 @@
-import { Input } from "../ui/input";
 import { Check, Pipette } from "lucide-react";
 import { HexAlphaColorPicker } from "react-colorful";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
@@ -64,26 +63,26 @@ const ColorPicker = () => {
   };
 
   return (
-    <div className="flex items-center p-2 gap-2 bg-black/50">
-       <div className="flex items-center gap-3 ">
-      <Popover>
-        <PopoverTrigger asChild>
-          <div
-            style={{ backgroundColor: currentColor }}
-            className={`${buttonStyle}hover:bg-white/90`}
-          ></div>
-        </PopoverTrigger>
-        <PopoverContent className="w-auto p-3">
-          <HexAlphaColorPicker
-            color={currentColor}
-            onChange={(color) => {
-              setColor(color);
-               setInputColor(color);
-            }}
-          />
-        </PopoverContent>
-      </Popover>
-    </div>
+    <div className="flex items-center p-2 gap-2 bg-stone-50/50 dark:bg-black/50">
+      <div className="flex items-center gap-3 ">
+        <Popover>
+          <PopoverTrigger asChild>
+            <div
+              style={{ backgroundColor: currentColor }}
+              className={`${buttonStyle}hover:bg-white/90`}
+            ></div>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-3">
+            <HexAlphaColorPicker
+              color={currentColor}
+              onChange={(color) => {
+                setColor(color);
+                setInputColor(color);
+              }}
+            />
+          </PopoverContent>
+        </Popover>
+      </div>
 
       {/* Pipet button */}
       <div
@@ -91,7 +90,8 @@ const ColorPicker = () => {
           flex  
           items-center 
           justify-center
-        bg-foreground/10
+        dark:bg-foreground/10
+        bg-stone-200
         hover:bg-foreground/25
           text-gray-900 dark:text-white `}
         onClick={() => {
@@ -102,8 +102,8 @@ const ColorPicker = () => {
       </div>
 
       <div className="flex h-8 items-center overflow-hidden rounded-md border-2 focus-within:ring-2 focus-within:ring-ring focus-within:border-input transition-colors">
-        <input 
-          className="h-full w-full px-2 outline-none text-sm placeholder:text-muted-foreground"
+        <input
+          className="h-full w-full px-2 outline-none bg-stone-200  text-sm placeholder:text-muted-foreground"
           placeholder="Enter color"
           value={inputColor}
           onChange={(e) => handleInputColor(e.target.value)}

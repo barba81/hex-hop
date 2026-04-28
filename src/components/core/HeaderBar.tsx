@@ -18,7 +18,7 @@ const HoldToClear = () => {
   };
 
   const stopHold = () => {
-    if (timerRef.current){
+    if (timerRef.current) {
       clearTimeout(timerRef.current);
       setIsHolding(false);
     }
@@ -58,7 +58,8 @@ const ClipboardPalletDecorator = () => {
       data-tauri-drag-region
       className="fixed left-1/2 -translate-x-1/2 
         h-3.5 w-35 
-        bg-stone-600 
+       dark:bg-stone-600 
+       bg-stone-400 
         rounded-b-2xl cursor-pointer "
     />
   );
@@ -69,7 +70,7 @@ const HeaderBar = () => {
     <>
       <ClipboardPalletDecorator />
 
-      <div className="flex bg-black/50 w-full justify-between gap-2 px-2 py-1">
+      <div className="flex bg-stone-50 dark:bg-black/50  w-full justify-between gap-2 px-2 py-1">
         <div className="flex items-center justify-center ">
           <HoldToClear />
         </div>

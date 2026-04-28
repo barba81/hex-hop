@@ -26,7 +26,7 @@ function HexHopApp() {
   }, []);
   return (
     <>
-      <div className="w-screen h-screen flex flex-col gap-0.5 bg-stone-800/80">
+      <div className="w-screen h-screen flex flex-col gap-0.5 dark:bg-stone-800/80 bg-stone-200/80">
       <Toaster 
           theme="dark" 
           position="bottom-center"
