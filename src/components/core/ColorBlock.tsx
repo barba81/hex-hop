@@ -3,6 +3,7 @@ import { ColorFormat } from "@/model/colorFormat";
 import { ColorPallet } from "@/service/colorPallet";
 import { Hash, X } from "lucide-react";
 import { toast } from "sonner";
+import "./ColorBlock.css";
 
 type ColorBlockComponentParams = {
   color: ColorEntity;
@@ -14,16 +15,17 @@ type ColorBlockParams = {
 };
 
 const CopyLogo = ({ color, fontClass }: ColorBlockComponentParams) => {
-  const commonStyles = "opacity-60 hover:opacity-100 select-none hover:cursor-pointer transition-opacity";
-  
+  const commonStyles =
+    "opacity-60 hover:opacity-100 select-none hover:cursor-pointer transition-opacity";
+
   const handleCopy = (type: ColorFormat) => {
     ColorPallet.CopyToClipboard(color, type);
     toast(`Copied color to clipboard!`, {
       duration: 750,
-      position:"top-center",
+      position: "top-center",
       style: {
         background: "#171812",
-        color: "#fff",        
+        color: "#fff",
         border: "1px solid #333",
         fontSize: "11px",
         borderRadius: "8px",
@@ -32,7 +34,7 @@ const CopyLogo = ({ color, fontClass }: ColorBlockComponentParams) => {
     });
   };
 
-  const formats: {type: ColorFormat, label: string, isIcon?:boolean}[] = [
+  const formats: { type: ColorFormat; label: string; isIcon?: boolean }[] = [
     { label: "#", type: "#", isIcon: true },
     { label: "RGB", type: "RBG" },
     { label: "HSL", type: "HSL" },
@@ -41,7 +43,9 @@ const CopyLogo = ({ color, fontClass }: ColorBlockComponentParams) => {
   ];
 
   return (
-    <div className={`flex absolute top-1.5 left-0 items-center gap-2 ${fontClass}`}>
+    <div
+      className={`flex absolute top-1.5 left-0 items-center gap-2 ${fontClass}`}
+    >
       {formats.map((f) => (
         <div
           key={f.type}
@@ -54,7 +58,6 @@ const CopyLogo = ({ color, fontClass }: ColorBlockComponentParams) => {
     </div>
   );
 };
-
 
 const CloseButton = ({ color }: ColorBlockParams) => {
   return (
@@ -88,13 +91,12 @@ const ColorText = ({ color }: ColorBlockParams) => {
           {color.b}
         </span>
 
-        {
-          color.a &&
+        {color.a && (
           <span>
-          <span className="opacity-50 mr-1">A</span>
-          {color.a.toFixed(2)}
-        </span>
-        }
+            <span className="opacity-50 mr-1">A</span>
+            {color.a.toFixed(2)}
+          </span>
+        )}
       </div>
     </div>
   );
@@ -108,12 +110,14 @@ const ColorBlock = ({ color }: { color: ColorEntity }) => {
     <div
       className={`group h-14 rounded-md w-full shrink-0 relative flex items-center justify-between px-1 overflow-hidden ${fontColor} outline-1`}
     >
-      <div
-        className="absolute inset-0 "
-        style={{
-          backgroundColor: `rgb(${color.r}, ${color.g}, ${color.b})`,
-        }}
-      />
+      <div className="absolute inset-0 bg-checkerboard overflow-hidden rounded-md">
+        <div
+          className="w-full h-full"
+          style={{
+            backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a ?? 1.0})`,
+          }}
+        />
+      </div>
 
       <div className=" w-full h-full relative">
         <ColorText color={color} />

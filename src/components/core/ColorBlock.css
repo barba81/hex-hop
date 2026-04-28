@@ -1,0 +1,20 @@
+.bg-checkerboard {
+  background-image: 
+    linear-gradient(45deg, #ccc 25%, transparent 25%), 
+    linear-gradient(-45deg, #ccc 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, #ccc 75%), 
+    linear-gradient(-45deg, transparent 75%, #ccc 75%);
+  background-size: 10px 10px;
+  background-position: 0 0, 0 5px, 5px -5px, -5px 0px;
+  background-color: white; /* The "light" part of the grid */
+}
+
+/* Dark mode version */
+.dark .bg-checkerboard {
+  background-image: 
+    linear-gradient(45deg, #222 25%, transparent 25%), 
+    linear-gradient(-45deg, #222 25%, transparent 25%), 
+    linear-gradient(45deg, transparent 75%, #222 75%), 
+    linear-gradient(-45deg, transparent 75%, #222 75%);
+  background-color: #111; /* The "dark" part of the grid */
+}
