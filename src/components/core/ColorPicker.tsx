@@ -103,7 +103,7 @@ const ColorPicker = () => {
 
       <div className="flex h-8 items-center overflow-hidden rounded-md border-2 focus-within:ring-2 focus-within:ring-ring focus-within:border-input transition-colors">
         <input
-          className="h-full w-full px-2 outline-none bg-stone-200  text-sm placeholder:text-muted-foreground"
+          className="h-full w-full px-2 outline-none bg-stone-200 dark:bg-stone-900  text-sm placeholder:text-muted-foreground"
           placeholder="Enter color"
           value={inputColor}
           onChange={(e) => handleInputColor(e.target.value)}

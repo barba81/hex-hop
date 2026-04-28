@@ -4,6 +4,8 @@ import { ColorPallet } from "@/service/colorPallet";
 import { Hash, X } from "lucide-react";
 import { toast } from "sonner";
 import "./ColorBlock.css";
+import { useTheme } from "@/hooks/useTheme";
+import { useMemo } from "react";
 
 type ColorBlockComponentParams = {
   color: ColorEntity;
@@ -103,7 +105,23 @@ const ColorText = ({ color }: ColorBlockParams) => {
 };
 
 const ColorBlock = ({ color }: { color: ColorEntity }) => {
-  const isLight = 0.299 * color.r + 0.587 * color.g + 0.114 * color.b > 150;
+  const { isDark: isAppDarkMode } = useTheme();
+  const isLight = useMemo(() => {
+    const { r, g, b, a = 1.0 } = color;
+
+    const bgLuma = isAppDarkMode ? 30 : 255;
+
+    // 2. Calculate the color's raw luminance
+    const colorLuma = 0.299 * r + 0.587 * g + 0.114 * b;
+
+    // 3. Blend them based on Alpha
+    // Formula: (Color * Alpha) + (Background * (1 - Alpha))
+    var A = a ?? 1;
+    const apparentLuma = colorLuma * A + bgLuma * (1 - A);
+
+    // 4. Return true if we should use dark text
+    return apparentLuma > 150;
+  }, [color, isAppDarkMode]); // <--- CRITICAL: Depends on isDark
   const fontColor = isLight ? "text-gray-900" : "text-gray-100";
 
   return (
