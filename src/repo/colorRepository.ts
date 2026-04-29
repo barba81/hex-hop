@@ -1,6 +1,5 @@
-import { ColorEntity } from '@/model/color';
+import { ColorData, type ColorEntity } from '@/model/color';
 import Database from '@tauri-apps/plugin-sql';
-
 
 const db = await Database.load('sqlite:hexHop.db');
 
@@ -17,18 +16,17 @@ export class ColorRepository {
         }
     }
 
-    static async addColor(color: ColorEntity) {
+    static async addColor(colorData: ColorData) {
         try {
             const result = await db.select<any[]>(
                 'INSERT INTO colors (r, g, b, a) VALUES ($1, $2, $3, $4) RETURNING id',
-                [color.r, color.g, color.b, color.a]
+                [colorData.r, colorData.g, colorData.b, colorData.a]
             );
             const id =  result[0]?.id ?? 0;
-            color.id = id;
-            return id;
+            const colorEntity: ColorEntity = {...colorData, id}
+            return colorEntity;
         } catch (error) {
             console.error("Failed to insert color", error);
-            return 0;
         }
     }
 

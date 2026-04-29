@@ -1,5 +1,4 @@
-import { ColorEntity } from "@/model/color";
-import { ColorFormat } from "@/model/colorFormat";
+import { ColorEntity, ColorFormat } from "@/model/color";
 import { ColorRepository } from "@/repo/colorRepository";
 import { useColorStore } from "@/store/useColorStore";
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
@@ -33,6 +32,4 @@ export class ColorPallet {
 
         await writeText(formatMap[colorFormat](color));
     }
-
-
 }

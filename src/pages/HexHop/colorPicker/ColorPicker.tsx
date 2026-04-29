@@ -1,11 +1,11 @@
 import { Check, Pipette } from "lucide-react";
 import { HexAlphaColorPicker } from "react-colorful";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { useColorStore } from "@/store/useColorStore";
 import { ColorRepository } from "@/repo/colorRepository";
 import { useState } from "react";
 import { ColorValidator } from "@/service/colorFormatValidator";
 import { ColorFormatTranslation } from "@/service/colorFormatTranslation";
+import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 
 declare global {
   interface Window {
@@ -46,10 +46,12 @@ const ColorPicker = () => {
     if (!isValidColor) return;
     const result = ColorValidator.validateAndConvert(colorString);
     if (!result.isValid) return;
-    const colorEntity = result.entity;
-    if (colorEntity.a === 1) colorEntity.a = null;
-    await ColorRepository.addColor(colorEntity);
-    addColorToState(colorEntity);
+    const colorData = result.entity;
+    if (colorData.a === 1) colorData.a = null;
+    const colorEntity = await ColorRepository.addColor(colorData);
+    if (colorEntity){
+      addColorToState(colorEntity);
+    }
   };
 
   const handleInputColor = (color: string) => {

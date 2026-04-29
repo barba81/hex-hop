@@ -1,3 +1,4 @@
+export type ColorFormat = 'RBG' | 'Tailwind' |  "#" | "HSL" | "OK" | "VEC";
 
 export type ColorData = {
     r: number;

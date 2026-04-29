@@ -1,13 +1,12 @@
 import { useEffect } from "react";
 import "./App.css";
-
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import { useTheme } from "./hooks/useTheme";
-import HeaderBar from "./components/core/HeaderBar";
-import ColorList from "./components/core/ColorList";
-import ColorPicker from "./components/core/ColorPicker";
 import { ColorPallet } from "./service/colorPallet";
 import { Toaster } from "sonner";
+import HeaderBar from "./pages/HexHop/header/HeaderBar";
+import ColorList from "./pages/HexHop/colorList/ColorList";
+import ColorPicker from "./pages/HexHop/colorPicker/ColorPicker";
 
 function HexHopApp() {
   const {} = useTheme();
