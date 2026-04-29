@@ -2,7 +2,7 @@ import { ColorEntity } from '@/model/color';
 import Database from '@tauri-apps/plugin-sql';
 
 
-const db = await Database.load('sqlite:colorClipboard.db');
+const db = await Database.load('sqlite:hexHop.db');
 
 export class ColorRepository {
 

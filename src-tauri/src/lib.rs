@@ -31,7 +31,7 @@ pub fn run() {
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(
             tauri_plugin_sql::Builder::default()
-                .add_migrations("sqlite:colorClipboard.db", migrations)
+                .add_migrations("sqlite:hexHop.db", migrations)
                 .build(),
         )
         .plugin(tauri_plugin_single_instance::init(|_app, _args, _cwd| {}))

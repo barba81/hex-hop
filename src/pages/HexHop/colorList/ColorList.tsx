@@ -1,6 +1,6 @@
 import { useColorStore } from "@/store/useColorStore";
 import EmptyDisplay from "./EmptyDisplay";
-import ColorBlock from "./ColorBlock";
+import ColorBlock from "../colorPicker/ColorBlock";
 
 const ColorList = () => {
   const colors = useColorStore().colors;
