@@ -1,9 +1,13 @@
-import { ColorEntity } from '@/model/color';
+import { ColorEntity, ColorFormat } from '@/model/color';
 import { create } from 'zustand';
+
+const defaultInputColor = "#3b82f6";
 
 interface ColorState {
   colors: ColorEntity[];
-  currentlyInsertedColor: string;
+  inputFormat: ColorFormat;
+  inputColor: string;
+  isColorValid: boolean;
   setColor: (color: string) => void;
   addColor: (color: ColorEntity) => void;
   deleteAll: () => void;
@@ -14,9 +18,10 @@ interface ColorState {
 
 export const useColorStore = create<ColorState>((set) => ({
   colors: [],
-  currentlyInsertedColor: "#3b82f6",
-
-  setColor: (newColor) => set({ currentlyInsertedColor: newColor }),
+  inputFormat: "#",
+  inputColor: defaultInputColor,
+  isColorValid: true,
+  setColor: (newColor) => set({ inputColor: newColor }),
   addAllColor: (newColor) => set({ colors: newColor }),
   deleteAll: () => set({ colors: [] }),
   deleteById: (id) => set((state) => ({ colors: state.colors.filter(x => x.id !== id) })),

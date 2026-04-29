@@ -1,11 +1,19 @@
 import { HexAlphaColorPicker } from "react-colorful";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
-import { buttonStyle } from "./ColorPicker";
-
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import { buttonStyle } from "./DefaultStyle";
+import { useColorStore } from "@/store/useColorStore";
 
 const ColorBox = () => {
-    return <>
-     <div className="flex items-center gap-3 ">
+  const currentColor = useColorStore().inputColor;
+  const setColor = useColorStore().setColor;
+
+  return (
+    <>
+      <div className="flex items-center gap-3 ">
         <Popover>
           <PopoverTrigger asChild>
             <div
@@ -18,13 +26,13 @@ const ColorBox = () => {
               color={currentColor}
               onChange={(color) => {
                 setColor(color);
-                setInputColor(color);
               }}
             />
           </PopoverContent>
         </Popover>
       </div>
     </>
-}
+  );
+};
 
 export default ColorBox;
