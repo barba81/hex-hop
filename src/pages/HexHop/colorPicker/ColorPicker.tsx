@@ -5,7 +5,15 @@ import { ColorRepository } from "@/repo/colorRepository";
 import { useState } from "react";
 import { ColorValidator } from "@/service/colorFormatValidator";
 import { ColorFormatTranslation } from "@/service/colorFormatTranslation";
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+import ColorBox from "./ColorBox";
+import PipetButton from "./PipetButton";
+import ColorInput from "./ColorInput";
+import AddColorButton from "./AddColorButton";
 
 declare global {
   interface Window {
@@ -15,7 +23,7 @@ declare global {
   }
 }
 
-const buttonStyle =
+export const buttonStyle =
   "w-7 h-7 p-0 cursor-pointer shrink-0  outline-2 rounded-md ";
 
 const ColorPicker = () => {
@@ -49,7 +57,7 @@ const ColorPicker = () => {
     const colorData = result.entity;
     if (colorData.a === 1) colorData.a = null;
     const colorEntity = await ColorRepository.addColor(colorData);
-    if (colorEntity){
+    if (colorEntity) {
       addColorToState(colorEntity);
     }
   };
@@ -66,69 +74,10 @@ const ColorPicker = () => {
 
   return (
     <div className="flex items-center p-2 gap-2 bg-stone-50/50 dark:bg-black/50">
-      <div className="flex items-center gap-3 ">
-        <Popover>
-          <PopoverTrigger asChild>
-            <div
-              style={{ backgroundColor: currentColor }}
-              className={`${buttonStyle}hover:bg-white/90`}
-            ></div>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-3">
-            <HexAlphaColorPicker
-              color={currentColor}
-              onChange={(color) => {
-                setColor(color);
-                setInputColor(color);
-              }}
-            />
-          </PopoverContent>
-        </Popover>
-      </div>
-
-      {/* Pipet button */}
-      <div
-        className={`${buttonStyle}       
-          flex  
-          items-center 
-          justify-center
-        dark:bg-foreground/10
-        bg-stone-200
-        hover:bg-foreground/25
-          text-gray-900 dark:text-white `}
-        onClick={() => {
-          handlePickColor();
-        }}
-      >
-        <Pipette strokeWidth={2} size={15} />
-      </div>
-
-      <div className="flex h-8 items-center overflow-hidden rounded-md border-2 focus-within:ring-2 focus-within:ring-ring focus-within:border-input transition-colors">
-        <input
-          className="h-full w-full px-2 outline-none bg-stone-200 dark:bg-stone-900  text-sm placeholder:text-muted-foreground"
-          placeholder="Enter color"
-          value={inputColor}
-          onChange={(e) => handleInputColor(e.target.value)}
-        />
-
-        <div
-          className={`${
-            !isValidColor ? "hidden" : "flex"
-          } h-full items-center border-l-2 bg-muted/50 px-2 font-mono text-xs font-semibold uppercase text-muted-foreground`}
-        >
-          {format}
-        </div>
-      </div>
-      <div
-        className={`${buttonStyle}       
-          flex  
-          items-center 
-          justify-center
-      ${isValidColor && "bg-green-400/60 hover:bg-green-400/40"} text-gray-900 dark:text-white `}
-        onClick={() => addColor(currentColor)}
-      >
-        <Check strokeWidth={3} size={16} />
-      </div>
+      <ColorBox />
+      <PipetButton />
+      <ColorInput />
+      <AddColorButton/>
     </div>
   );
 };

@@ -1,0 +1,56 @@
+import { ColorEntity, ColorFormat } from "@/model/color";
+import { ColorPallet } from "@/service/colorPallet";
+import { Hash } from "lucide-react";
+import { toast } from "sonner";
+export type CopyLogoParam = {
+      color: ColorEntity;
+      fontClass: string;
+}
+
+const CopyLogo = ({ color, fontClass }: CopyLogoParam) => {
+  const commonStyles =
+    "opacity-60 hover:opacity-100 select-none hover:cursor-pointer transition-opacity";
+
+  const handleCopy = (type: ColorFormat) => {
+    ColorPallet.CopyToClipboard(color, type);
+    toast(`Copied color to clipboard!`, {
+      duration: 750,
+      position: "top-center",
+      style: {
+        background: "#171812",
+        color: "#fff",
+        border: "1px solid #333",
+        fontSize: "11px",
+        borderRadius: "8px",
+        padding: "8px 12px",
+      },
+    });
+  };
+
+  const formats: { type: ColorFormat; label: string; isIcon?: boolean }[] = [
+    { label: "#", type: "#", isIcon: true },
+    { label: "RGB", type: "RBG" },
+    { label: "HSL", type: "HSL" },
+    { label: "OK", type: "OK" },
+    { label: "VEC", type: "VEC" },
+  ];
+
+  return (
+    <div
+      className={`flex absolute top-1.5 left-0 items-center gap-2 ${fontClass}`}
+    >
+      {formats.map((f) => (
+        <div
+          key={f.type}
+          className={`${commonStyles} ${!f.isIcon ? "font-mono font-semibold" : ""}`}
+          onClick={() => handleCopy(f.type)}
+        >
+          {f.isIcon ? <Hash size={18} strokeWidth={2.5} /> : f.label}
+        </div>
+      ))}
+    </div>
+  );
+};
+
+
+export default CopyLogo;

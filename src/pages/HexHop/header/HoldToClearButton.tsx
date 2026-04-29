@@ -27,13 +27,11 @@ const HoldToClear = () => {
     <Button
       variant="outline"
       size="sm"
-      // Use Pointer events to support both Mouse and Touch
       onPointerDown={startHold}
       onPointerUp={stopHold}
       onPointerLeave={stopHold}
       className="relative overflow-hidden transition-all active:scale-95 select-none hover:cursor-pointer"
     >
-      {/* The Visual Fill Layer */}
       <div
         className="absolute left-0 bottom-0 top-0 bg-red-500/60 transition-all ease-linear"
         style={{
@@ -42,7 +40,6 @@ const HoldToClear = () => {
         }}
       />
 
-      {/* The Content */}
       <div className={`relative flex items-center justify-center gap-1  }`}>
         <Trash2 className={isHolding ? "animate-pulse" : ""} />
         {isHolding ? "Hold..." : "Clear all"}
