@@ -33,7 +33,7 @@ const HoldToClear = () => {
       onPointerDown={startHold}
       onPointerUp={stopHold}
       onPointerLeave={stopHold}
-      className="relative overflow-hidden transition-all active:scale-95 select-none hover:cursor-pointer"
+      className="relative  transition-all active:scale-95 select-none hover:cursor-pointer"
     >
       <div
         className="absolute left-0 bottom-0 top-0 bg-red-500/60 transition-all ease-linear"

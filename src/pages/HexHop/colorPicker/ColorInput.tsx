@@ -14,7 +14,6 @@ const ColorInput = () => {
           flex 
           h-8 
           items-center 
-          overflow-hidden 
           rounded-md 
           border-2 
           w-57

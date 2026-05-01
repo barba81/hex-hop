@@ -21,7 +21,7 @@ const ColorBox = () => {
           <PopoverTrigger asChild>
             <div className="bg-checkerboard ">
               <div
-                className={`${buttonStyle}hover:bg-white/90  overflow-hidden rounded-md`}
+                className={`${buttonStyle}hover:bg-white/90  rounded-md`}
                 style={{
                   backgroundColor: currentColor,
                 }}

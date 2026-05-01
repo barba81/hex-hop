@@ -18,14 +18,14 @@ const ColorBlock = ({ color }: { color: ColorEntity }) => {
     const apparentLuma = colorLuma * A + bgLuma * (1 - A);
     return apparentLuma > 150;
   }, [color, isAppDarkMode]);
-  
+
   const fontColor = isLight ? "text-gray-900" : "text-gray-100";
 
   return (
     <div
-      className={`group h-14 rounded-md w-full shrink-0 relative flex items-center justify-between px-1 overflow-hidden ${fontColor} outline-1`}
+      className={`group h-14 rounded-md w-full shrink-0 relative flex items-center justify-between px-1  ${fontColor} outline-1`}
     >
-      <div className="absolute inset-0 bg-checkerboard overflow-hidden rounded-md">
+      <div className="absolute inset-0 bg-checkerboard  rounded-md overflow-hidden">
         <div
           className="w-full h-full"
           style={{
