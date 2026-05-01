@@ -1,25 +1,26 @@
-import { ColorEntity } from "@/model/color";
-import { useTheme } from "@/hooks/useTheme";
-import { useMemo } from "react";
+import { ColorData, ColorEntity } from "@/model/color";
 import CloseButton from "./CloseButton";
 import CopyLogo from "./CopyButton";
 import ColorText from "./ColorText";
 
 import "@/style/EmptyCheckerBoard.css";
+import { useThemeStore } from "@/store/useThemeStore";
 
 const ColorBlock = ({ color }: { color: ColorEntity }) => {
-  const { isDark: isAppDarkMode } = useTheme();
-  const isLight = useMemo(() => {
-    const { r, g, b, a = 1.0 } = color;
+// 1. Subscribe to the store
+  const isDark = useThemeStore((state) => state.isDark);
 
-    const bgLuma = isAppDarkMode ? 30 : 255;
+  const getFontColor = (isDark: boolean, color: ColorData) => {
+    const { r, g, b, } = color;
+    const a = color.a ?? 1;
+    const bgLuma = isDark ? 30 : 255;
     const colorLuma = 0.299 * r + 0.587 * g + 0.114 * b;
-    var A = a ?? 1;
-    const apparentLuma = colorLuma * A + bgLuma * (1 - A);
-    return apparentLuma > 150;
-  }, [color, isAppDarkMode]);
+    const apparentLuma = colorLuma * a + bgLuma * (1 - a);
+    
+    return apparentLuma > 150 ? "text-gray-900" : "text-gray-100";
+  };
 
-  const fontColor = isLight ? "text-gray-900" : "text-gray-100";
+  const fontColor = getFontColor(isDark, color);
 
   return (
     <div

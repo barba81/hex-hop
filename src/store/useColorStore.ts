@@ -4,11 +4,13 @@ import { create } from 'zustand';
 const defaultInputColor = "#3b82f6";
 
 interface ColorState {
+  isDark: boolean;
   colors: ColorEntity[];
   validColor: string;
   inputFormat: ColorFormat;
   inputColor: string;
   isColorValid: boolean;
+  setIsDark: (isDark: boolean) => void;
   setFormat: (colorFormat: ColorFormat) => void;
   setIsColorValid: (colorFormat: boolean) => void;
   setLastValidColor: (color: string) => void;
@@ -21,11 +23,13 @@ interface ColorState {
 }
 
 export const useColorStore = create<ColorState>((set) => ({
+  isDark: false,
   colors: [],
   inputFormat: "#",
   validColor: defaultInputColor,
   inputColor: defaultInputColor,
   isColorValid: true,
+  setIsDark:(isDark) => set({ isDark: isDark }),
   setFormat: (format) => set({ inputFormat: format }),
   setLastValidColor: (newColor) => set({ validColor: newColor }),
   setIsColorValid: (isColorValid) => set({ isColorValid }),

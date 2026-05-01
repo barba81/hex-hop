@@ -1,17 +1,16 @@
 import { useEffect } from "react";
 import "./App.css";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
-import { useTheme } from "./hooks/useTheme";
 import { ColorPallet } from "./service/colorPallet";
 import HeaderBar from "./pages/HexHop/header/HeaderBar";
 import ColorList from "./pages/HexHop/colorList/ColorList";
 import ColorPicker from "./pages/HexHop/colorPicker/ColorPicker";
+import { initThemeListener } from "./hooks/useTheme";
 
 function HexHopApp() {
-  const {} = useTheme();
   useEffect(() => {
+    initThemeListener();
     moveWindow(Position.TopRight);
-
     const fetchColors = async () => {
       try {
         await ColorPallet.LoadAllColor();
@@ -22,6 +21,7 @@ function HexHopApp() {
 
     fetchColors();
   }, []);
+  
   return (
     <>
       <div className="w-screen h-screen flex flex-col gap-0.5 bg-stone-50/80 dark:bg-stone-800/80 ">
