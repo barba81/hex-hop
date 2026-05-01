@@ -3,7 +3,7 @@ import "./ColorBlock.css";
 import { useTheme } from "@/hooks/useTheme";
 import { useMemo } from "react";
 import CloseButton from "./CloseButton";
-import CopyLogo from "./CompyButton";
+import CopyLogo from "./CopyButton";
 import ColorText from "./ColorText";
 
 const ColorBlock = ({ color }: { color: ColorEntity }) => {

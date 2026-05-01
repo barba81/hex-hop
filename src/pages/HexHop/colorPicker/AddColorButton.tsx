@@ -5,17 +5,23 @@ import { ColorPallet } from "@/service/colorPallet";
 
 const AddColorButton = () => {
   const isColorValid = useColorStore().isColorValid;
-  const currentColor = useColorStore().inputColor;
+  const inputColor = useColorStore().inputColor;
 
   return (
     <>
       <div
-        className={`${buttonStyle}       
+        className={`
+          ${buttonStyle}       
           flex  
           items-center 
           justify-center
-      ${isColorValid && "bg-green-400/60 hover:bg-green-400/40"} text-gray-900 dark:text-white `}
-        onClick={() => ColorPallet.AddColor(currentColor)}
+          text-gray-900 
+          dark:text-white 
+            ${isColorValid && 
+            "bg-green-400/60 hover:bg-green-400/40"
+            } 
+          `}
+        onClick={() => ColorPallet.AddColor(inputColor)}
       >
         <Check strokeWidth={3} size={16} />
       </div>

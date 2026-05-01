@@ -9,9 +9,29 @@ const ColorInput = () => {
 
   return (
     <>
-      <div className="flex h-8 shrink-0 items-center overflow-hidden rounded-md border-2 focus-within:ring-2 focus-within:ring-ring focus-within:border-input ">
+      <div
+        className="
+          flex 
+          h-8 
+          items-center 
+          overflow-hidden 
+          rounded-md 
+          border-2 
+          w-57
+          focus-within:ring-2 
+          focus-within:ring-ring 
+          focus-within:border-input "
+      >
         <input
-          className="h-full w-full px-2 outline-none bg-stone-200 dark:bg-stone-900  text-sm placeholder:text-muted-foreground"
+          className="
+            h-full 
+            w-full 
+            px-2 
+            outline-none 
+            bg-stone-200 
+            dark:bg-stone-900  
+            text-sm 
+            placeholder:text-muted-foreground"
           placeholder="Enter color"
           value={inputColor}
           onChange={(e) => {
@@ -23,7 +43,17 @@ const ColorInput = () => {
         <div
           className={`${
             !isColorValid ? "hidden" : "flex"
-          } h-full items-center border-l-2 bg-muted/50 px-2 font-mono text-xs font-semibold uppercase text-muted-foreground`}
+          }
+          h-full 
+          items-center 
+          border-l-2 
+          bg-muted/50 
+          px-2 
+          font-mono 
+          text-xs 
+          font-semibold 
+          uppercase 
+          text-muted-foreground`}
         >
           {inputFormat}
         </div>

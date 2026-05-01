@@ -58,11 +58,11 @@ export class ColorFormatTranslation {
             throw new Error("Invalid color string");
         }
 
-
-        return {
+        return {    
             r: Math.round(rbg.r * 255),
             g: Math.round(rbg.g * 255),
-            b: Math.round(rbg.b * 255)
+            b: Math.round(rbg.b * 255),
+            a: rbg.alpha
         } as ColorData;
     }
 }

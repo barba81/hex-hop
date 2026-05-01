@@ -1,7 +1,6 @@
 import { Pipette } from "lucide-react";
 import { useColorStore } from "@/store/useColorStore";
 import { buttonStyle } from "./DefaultStyle";
-import { ColorFormatTranslation } from "@/service/colorFormatTranslation";
 import { ColorPallet } from "@/service/colorPallet";
 
 declare global {
@@ -13,7 +12,7 @@ declare global {
 }
 
 const PipetButton = () => {
-    const setInputColor = useColorStore().setInputColor;
+  const setInputColor = useColorStore().setInputColor;
 
   const handlePickColor = async () => {
     if (!window.EyeDropper) {
@@ -34,14 +33,16 @@ const PipetButton = () => {
   return (
     <>
       <div
-        className={`${buttonStyle}       
+        className={`
+          ${buttonStyle}       
           flex  
           items-center 
           justify-center
-        dark:bg-foreground/10
+          dark:bg-foreground/10
+          hover:bg-foreground/25
         bg-stone-200
-        hover:bg-foreground/25
-          text-gray-900 dark:text-white `}
+        text-gray-900 
+        dark:text-white `}
         onClick={() => {
           handlePickColor();
         }}
