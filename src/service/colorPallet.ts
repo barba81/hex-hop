@@ -49,6 +49,7 @@ export class ColorPallet {
 
         state.setIsColorValid(result.isValid)
         if (result.isValid) {
+            state.setLastValidColor(color);
             state.setFormat(result.format as ColorFormat);
         }
     }

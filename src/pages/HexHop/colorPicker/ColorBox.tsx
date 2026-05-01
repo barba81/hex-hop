@@ -6,9 +6,10 @@ import {
 } from "@/components/ui/popover";
 import { buttonStyle } from "./DefaultStyle";
 import { useColorStore } from "@/store/useColorStore";
+import { ColorPallet } from "@/service/colorPallet";
 
 const ColorBox = () => {
-  const currentColor = useColorStore().inputColor;
+  const currentColor = useColorStore().validColor;
   const setColor = useColorStore().setInputColor;
 
   return (
@@ -17,7 +18,9 @@ const ColorBox = () => {
         <Popover>
           <PopoverTrigger asChild>
             <div
-              style={{ backgroundColor: currentColor }}
+              style={{
+                backgroundColor: currentColor,
+              }}
               className={`${buttonStyle}hover:bg-white/90`}
             ></div>
           </PopoverTrigger>
@@ -26,6 +29,7 @@ const ColorBox = () => {
               color={currentColor}
               onChange={(color) => {
                 setColor(color);
+                ColorPallet.ValidateColor(color);
               }}
             />
           </PopoverContent>

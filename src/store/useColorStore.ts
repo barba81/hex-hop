@@ -1,15 +1,17 @@
-import { ColorEntity, ColorFormat } from '@/model/color';
+import { ColorData, ColorEntity, ColorFormat } from '@/model/color';
 import { create } from 'zustand';
 
 const defaultInputColor = "#3b82f6";
 
 interface ColorState {
   colors: ColorEntity[];
+  validColor: string;
   inputFormat: ColorFormat;
   inputColor: string;
   isColorValid: boolean;
   setFormat: (colorFormat: ColorFormat) => void;
-  setIsColorValid:(colorFormat: boolean) => void;
+  setIsColorValid: (colorFormat: boolean) => void;
+  setLastValidColor: (color: string) => void;
   setInputColor: (color: string) => void;
   addColor: (color: ColorEntity) => void;
   deleteAll: () => void;
@@ -21,10 +23,12 @@ interface ColorState {
 export const useColorStore = create<ColorState>((set) => ({
   colors: [],
   inputFormat: "#",
+  validColor: defaultInputColor,
   inputColor: defaultInputColor,
   isColorValid: true,
-  setFormat: (format) =>  set({ inputFormat: format }),
-  setIsColorValid: (isColorValid) =>  set({ isColorValid }),
+  setFormat: (format) => set({ inputFormat: format }),
+  setLastValidColor: (newColor) => set({ validColor: newColor }),
+  setIsColorValid: (isColorValid) => set({ isColorValid }),
   setInputColor: (newColor) => set({ inputColor: newColor }),
   addAllColor: (newColor) => set({ colors: newColor }),
   deleteAll: () => set({ colors: [] }),
