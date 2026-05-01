@@ -8,7 +8,9 @@ interface ColorState {
   inputFormat: ColorFormat;
   inputColor: string;
   isColorValid: boolean;
-  setColor: (color: string) => void;
+  setFormat: (colorFormat: ColorFormat) => void;
+  setIsColorValid:(colorFormat: boolean) => void;
+  setInputColor: (color: string) => void;
   addColor: (color: ColorEntity) => void;
   deleteAll: () => void;
   deleteById: (id: number) => void;
@@ -21,7 +23,9 @@ export const useColorStore = create<ColorState>((set) => ({
   inputFormat: "#",
   inputColor: defaultInputColor,
   isColorValid: true,
-  setColor: (newColor) => set({ inputColor: newColor }),
+  setFormat: (format) =>  set({ inputFormat: format }),
+  setIsColorValid: (isColorValid) =>  set({ isColorValid }),
+  setInputColor: (newColor) => set({ inputColor: newColor }),
   addAllColor: (newColor) => set({ colors: newColor }),
   deleteAll: () => set({ colors: [] }),
   deleteById: (id) => set((state) => ({ colors: state.colors.filter(x => x.id !== id) })),

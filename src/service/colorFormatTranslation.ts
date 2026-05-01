@@ -5,7 +5,8 @@ import {
     formatHsl,
     formatCss,
     modeOklab,
-    useMode
+    useMode,
+    rgb
 } from "culori";
 import { ColorData, ColorEntity } from "@/model/color";
 
@@ -49,5 +50,19 @@ export class ColorFormatTranslation {
     public static toTailwind(color: ColorEntity): string {
         const hex = formatHex(ColorFormatTranslation.toNormalForm(color));
         return `bg-[${hex}]`;
+    }
+
+    public static stringToHex(color: string): ColorData {
+        const rbg = rgb(color);
+        if (!rbg) {
+            throw new Error("Invalid color string");
+        }
+
+
+        return {
+            r: Math.round(rbg.r * 255),
+            g: Math.round(rbg.g * 255),
+            b: Math.round(rbg.b * 255)
+        } as ColorData;
     }
 }

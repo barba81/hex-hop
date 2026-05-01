@@ -18,13 +18,11 @@ export class ColorRepository {
 
     static async addColor(colorData: ColorData) {
         try {
-            const result = await db.select<any[]>(
+            const result = await db.select<ColorEntity[]>(
                 'INSERT INTO colors (r, g, b, a) VALUES ($1, $2, $3, $4) RETURNING id',
                 [colorData.r, colorData.g, colorData.b, colorData.a]
             );
-            const id =  result[0]?.id ?? 0;
-            const colorEntity: ColorEntity = {...colorData, id}
-            return colorEntity;
+            return  {...colorData, id:result[0]?.id ?? 0};
         } catch (error) {
             console.error("Failed to insert color", error);
         }

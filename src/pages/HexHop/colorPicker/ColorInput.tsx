@@ -1,18 +1,23 @@
+import { ColorPallet } from "@/service/colorPallet";
 import { useColorStore } from "@/store/useColorStore";
-import { useState } from "react";
 
 const ColorInput = () => {
-    const setColor = useColorStore().setColor;
-    const inputFormat = useColorStore().inputFormat;
-    const isColorValid = useColorStore().isColorValid;
-   
-   return <>
-       <div className="flex h-8 items-center overflow-hidden rounded-md border-2 focus-within:ring-2 focus-within:ring-ring focus-within:border-input transition-colors">
+  const setColor = useColorStore().setInputColor;
+  const inputFormat = useColorStore().inputFormat;
+  const isColorValid = useColorStore().isColorValid;
+  const inputColor = useColorStore().inputColor;
+
+  return (
+    <>
+      <div className="flex h-8 shrink-0 items-center overflow-hidden rounded-md border-2 focus-within:ring-2 focus-within:ring-ring focus-within:border-input ">
         <input
           className="h-full w-full px-2 outline-none bg-stone-200 dark:bg-stone-900  text-sm placeholder:text-muted-foreground"
           placeholder="Enter color"
           value={inputColor}
-          onChange={(e) => handleInputColor(e.target.value)}
+          onChange={(e) => {
+            ColorPallet.ValidateColor(e.target.value);
+            setColor(e.target.value);
+          }}
         />
 
         <div
@@ -24,6 +29,7 @@ const ColorInput = () => {
         </div>
       </div>
     </>
-}
+  );
+};
 
 export default ColorInput;

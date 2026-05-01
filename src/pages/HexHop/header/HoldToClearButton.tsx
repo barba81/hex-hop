@@ -3,6 +3,9 @@ import { ColorPallet } from "@/service/colorPallet";
 import {  Trash2 } from "lucide-react";
 import { useRef, useState } from "react";
 
+// TODO update this to create hold -> 
+
+
 const HoldToClear = () => {
   const [isHolding, setIsHolding] = useState(false);
   const timerRef = useRef<number>(null);

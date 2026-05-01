@@ -3,8 +3,18 @@ import { ColorRepository } from "@/repo/colorRepository";
 import { useColorStore } from "@/store/useColorStore";
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { ColorFormatTranslation } from "./colorFormatTranslation";
+import { ColorValidator } from "./colorFormatValidator";
 
 export class ColorPallet {
+
+    static async AddColor(color: string) {
+        const colorData = ColorFormatTranslation.stringToHex(color);
+        const colorEntity = await ColorRepository.addColor(colorData);
+        if (colorEntity !== undefined) {
+            useColorStore.getState().addColor(colorEntity);
+        }
+    }
+
     static async LoadAllColor() {
         const colors = await ColorRepository.getAllColors();
         useColorStore.getState().addAllColor(colors);
@@ -27,9 +37,19 @@ export class ColorPallet {
             "HSL": ColorFormatTranslation.toHsl,
             "OK": ColorFormatTranslation.toOkla,
             "VEC": ColorFormatTranslation.toVector,
-            "Tailwind": ColorFormatTranslation.toTailwind, 
+            "Tailwind": ColorFormatTranslation.toTailwind,
         };
 
         await writeText(formatMap[colorFormat](color));
+    }
+
+   static  async ValidateColor(color: string) {
+        const state = useColorStore.getState();
+        const result = ColorValidator.validateAndConvert(color);
+
+        state.setIsColorValid(result.isValid)
+        if (result.isValid) {
+            state.setFormat(result.format as ColorFormat);
+        }
     }
 }

@@ -1,6 +1,8 @@
 import { Pipette } from "lucide-react";
 import { useColorStore } from "@/store/useColorStore";
 import { buttonStyle } from "./DefaultStyle";
+import { ColorFormatTranslation } from "@/service/colorFormatTranslation";
+import { ColorPallet } from "@/service/colorPallet";
 
 declare global {
   interface Window {
@@ -11,8 +13,7 @@ declare global {
 }
 
 const PipetButton = () => {
-    const setColor = useColorStore().setColor;
-    const addColor = useColorStore().addColor;
+    const setInputColor = useColorStore().setInputColor;
 
   const handlePickColor = async () => {
     if (!window.EyeDropper) {
@@ -23,10 +24,10 @@ const PipetButton = () => {
 
     try {
       const result = await eyeDropper.open();
-      setColor(result.sRGBHex);
-      await addColor(result.sRGBHex);
+      setInputColor(result.sRGBHex);
+      ColorPallet.AddColor(result.sRGBHex);
     } catch (e) {
-      console.log("Color selection cancelled or failed");
+      console.error("Color selection cancelled or failed");
     }
   };
 

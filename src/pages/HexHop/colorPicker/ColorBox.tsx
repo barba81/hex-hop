@@ -9,7 +9,7 @@ import { useColorStore } from "@/store/useColorStore";
 
 const ColorBox = () => {
   const currentColor = useColorStore().inputColor;
-  const setColor = useColorStore().setColor;
+  const setColor = useColorStore().setInputColor;
 
   return (
     <>
