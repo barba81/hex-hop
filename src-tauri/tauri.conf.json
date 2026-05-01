@@ -1,8 +1,8 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "hex-hop",
+  "productName": "Hex Hop",
   "version": "0.1.1",
-  "identifier": "com.filip.hex-hop",
+  "identifier": "com.barba.hex-hop",
   "build": {
     "beforeDevCommand": "pnpm dev",
     "devUrl": "http://localhost:1420",
@@ -14,7 +14,7 @@
       {
         "transparent": true,
         "decorations": false,
-        "title": "hex-hop",
+        "title": "Hex Hop",
         "width": 350,
         "height": 550,
         "resizable": false
