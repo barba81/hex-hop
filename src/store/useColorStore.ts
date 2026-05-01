@@ -1,4 +1,4 @@
-import { ColorData, ColorEntity, ColorFormat } from '@/model/color';
+import { ColorEntity, ColorFormat } from '@/model/color';
 import { create } from 'zustand';
 
 const defaultInputColor = "#3b82f6";

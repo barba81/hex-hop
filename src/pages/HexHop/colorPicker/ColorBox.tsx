@@ -19,9 +19,9 @@ const ColorBox = () => {
       <div className="flex items-center gap-3 ">
         <Popover>
           <PopoverTrigger asChild>
-            <div className="bg-checkerboard ">
+            <div className="bg-checkerboard rounded-md ">
               <div
-                className={`${buttonStyle}hover:bg-white/90  rounded-md`}
+                className={`${buttonStyle}hover:bg-white/90   overflow-hidden`}
                 style={{
                   backgroundColor: currentColor,
                 }}

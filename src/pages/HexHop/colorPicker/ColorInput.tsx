@@ -12,10 +12,10 @@ const ColorInput = () => {
       <div
         className="
           flex 
-          h-8 
+          h-7 
           items-center 
           rounded-md 
-          border-2 
+          outline-2
           w-57
           focus-within:ring-2 
           focus-within:ring-ring 
@@ -27,7 +27,9 @@ const ColorInput = () => {
             w-full 
             px-2 
             outline-none 
-            bg-stone-200 
+            rounded-md 
+            overflow-hidden
+            bg-stone-100 
             dark:bg-stone-900  
             text-sm 
             placeholder:text-muted-foreground"

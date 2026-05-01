@@ -24,6 +24,7 @@ const PipetButton = () => {
     try {
       const result = await eyeDropper.open();
       setInputColor(result.sRGBHex);
+      ColorPallet.ValidateColor(result.sRGBHex);
       ColorPallet.AddColor(result.sRGBHex);
     } catch (e) {
       console.error("Color selection cancelled or failed");
@@ -40,7 +41,7 @@ const PipetButton = () => {
           justify-center
           dark:bg-foreground/10
           hover:bg-foreground/25
-        bg-stone-200
+        bg-stone-100
         text-gray-900 
         dark:text-white `}
         onClick={() => {
