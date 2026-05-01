@@ -1,7 +1,7 @@
 import { ColorEntity, ColorFormat } from "@/model/color";
 import { ColorPallet } from "@/service/colorPallet";
 import { Hash } from "lucide-react";
-import { toast } from "sonner";
+
 export type CopyLogoParam = {
       color: ColorEntity;
       fontClass: string;
@@ -13,18 +13,6 @@ const CopyLogo = ({ color, fontClass }: CopyLogoParam) => {
 
   const handleCopy = (type: ColorFormat) => {
     ColorPallet.CopyToClipboard(color, type);
-    toast(`Copied color to clipboard!`, {
-      duration: 750,
-      position: "top-center",
-      style: {
-        background: "#171812",
-        color: "#fff",
-        border: "1px solid #333",
-        fontSize: "11px",
-        borderRadius: "8px",
-        padding: "8px 12px",
-      },
-    });
   };
 
   const formats: { type: ColorFormat; label: string; isIcon?: boolean }[] = [
