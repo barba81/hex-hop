@@ -1,10 +1,11 @@
 import { ColorEntity } from "@/model/color";
-import "./ColorBlock.css";
 import { useTheme } from "@/hooks/useTheme";
 import { useMemo } from "react";
 import CloseButton from "./CloseButton";
 import CopyLogo from "./CopyButton";
 import ColorText from "./ColorText";
+
+import "@/style/EmptyCheckerBoard.css";
 
 const ColorBlock = ({ color }: { color: ColorEntity }) => {
   const { isDark: isAppDarkMode } = useTheme();

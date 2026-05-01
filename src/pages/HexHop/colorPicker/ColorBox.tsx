@@ -8,6 +8,8 @@ import { buttonStyle } from "./DefaultStyle";
 import { useColorStore } from "@/store/useColorStore";
 import { ColorPallet } from "@/service/colorPallet";
 
+import "@/style/EmptyCheckerBoard.css";
+
 const ColorBox = () => {
   const currentColor = useColorStore().validColor;
   const setColor = useColorStore().setInputColor;
@@ -17,12 +19,14 @@ const ColorBox = () => {
       <div className="flex items-center gap-3 ">
         <Popover>
           <PopoverTrigger asChild>
-            <div
-              style={{
-                backgroundColor: currentColor,
-              }}
-              className={`${buttonStyle}hover:bg-white/90`}
-            ></div>
+            <div className="bg-checkerboard ">
+              <div
+                className={`${buttonStyle}hover:bg-white/90  overflow-hidden rounded-md`}
+                style={{
+                  backgroundColor: currentColor,
+                }}
+              />
+            </div>
           </PopoverTrigger>
           <PopoverContent className="w-auto p-3">
             <HexAlphaColorPicker
