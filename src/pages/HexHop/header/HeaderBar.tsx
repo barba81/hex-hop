@@ -1,17 +1,37 @@
-import HoldToClear from "./HoldToClearButton";
-import ClipboardPalletDecorator from "./ClipboardPalletDecorator";
+import { useState, useEffect } from "react";
+import { platform as getPlatform} from '@tauri-apps/plugin-os';
+import MacHeaderButton from "./MacHeaderButton";
 import WindowsHeaderButton from "./WindowsHeaderButton";
+import ClipboardPalletDecorator from "./ClipboardPalletDecorator";
+import HoldToClear from "./HoldToClearButton";
 
 const HeaderBar = () => {
+  const [platform, setPlatform] = useState<string>("");
+
+  useEffect(() => {
+    const currentPlatform = getPlatform();
+    setPlatform(currentPlatform);
+  }, []);
+
   return (
     <>
       <ClipboardPalletDecorator />
 
-      <div className="flex bg-stone-50 dark:bg-black/50  w-full justify-between gap-2 px-2 py-1">
-        <div className="flex items-center justify-center ">
+      <div 
+        data-tauri-drag-region 
+        className="flex bg-stone-50 dark:bg-black/50 w-full justify-between items-center gap-2 px-2 py-1 select-none"
+      >
+        {platform === "macos" && (
+          <MacHeaderButton />
+        )}
+
+        <div className="flex items-center justify-center">
           <HoldToClear />
         </div>
-        <WindowsHeaderButton />
+
+        {platform !== "macos"  && (
+          <WindowsHeaderButton />
+        ) }
       </div>
     </>
   );
