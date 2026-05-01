@@ -23,7 +23,7 @@ const ColorBox = () => {
               <div
                 className={`${buttonStyle}hover:bg-white/90   overflow-hidden`}
                 style={{
-                  backgroundColor: currentColor,
+                  backgroundColor:`rbg{}`,
                 }}
               />
             </div>
