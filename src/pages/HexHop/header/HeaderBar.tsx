@@ -1,9 +1,12 @@
 import { useState, useEffect } from "react";
-import { platform as getPlatform} from '@tauri-apps/plugin-os';
+import { platform as getPlatform } from "@tauri-apps/plugin-os";
 import MacHeaderButton from "./MacHeaderButton";
 import WindowsHeaderButton from "./WindowsHeaderButton";
 import ClipboardPalletDecorator from "./ClipboardPalletDecorator";
 import HoldToClear from "./HoldToClearButton";
+import HoldToButton from "@/components/custom/HoldToButton";
+import { Trash2 } from "lucide-react";
+import { ColorPallet } from "@/service/colorPallet";
 
 const HeaderBar = () => {
   const [platform, setPlatform] = useState<string>("");
@@ -17,21 +20,17 @@ const HeaderBar = () => {
     <>
       <ClipboardPalletDecorator />
 
-      <div 
-        data-tauri-drag-region 
+      <div
+        data-tauri-drag-region
         className="flex bg-stone-50 dark:bg-black/50 w-full justify-between items-center gap-2 px-2 py-1 select-none"
       >
-        {platform === "macos" && (
-          <MacHeaderButton />
-        )}
+        {platform === "macos" && <MacHeaderButton />}
 
         <div className="flex items-center justify-center">
           <HoldToClear />
         </div>
 
-        {platform !== "macos"  && (
-          <WindowsHeaderButton />
-        ) }
+        {platform !== "macos" && <WindowsHeaderButton />}
       </div>
     </>
   );
