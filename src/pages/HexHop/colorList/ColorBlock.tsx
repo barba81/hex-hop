@@ -7,7 +7,6 @@ import "@/style/EmptyCheckerBoard.css";
 import { useThemeStore } from "@/store/useThemeStore";
 
 const ColorBlock = ({ color }: { color: ColorEntity }) => {
-// 1. Subscribe to the store
   const isDark = useThemeStore((state) => state.isDark);
 
   const getFontColor = (isDark: boolean, color: ColorData) => {
