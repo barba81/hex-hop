@@ -212,7 +212,7 @@
       // ─── Config ──────────────────────────────────────────────────────────────
       const REPO = "barba81/hex-hop";
       const RELEASES_URL = `https://github.com/${REPO}/releases`;
-      const API_URL = `https://api.github.com/repos/${REPO}/releases/latest`;
+      const API_URL = `https://api.github.com/repos/${REPO}/releases`; // works with pre-releases too
  
       // Define the platforms you want to show.
       // matcher: function(asset) → true if this asset matches the platform
@@ -259,7 +259,8 @@
             headers: { Accept: "application/vnd.github+json" },
           });
           if (!res.ok) throw new Error("non-200");
-          const json = await res.json();
+          const list = await res.json();
+          const json = Array.isArray(list) ? list[0] : list; // handles both /releases and /releases/latest
  
           const assets = PLATFORMS.map((p) => {
             const found = (json.assets || []).find(p.matcher);
