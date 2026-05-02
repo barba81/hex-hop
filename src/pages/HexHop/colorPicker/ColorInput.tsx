@@ -54,6 +54,7 @@ const ColorInput = () => {
           text-xs 
           font-semibold 
           uppercase 
+          select-none
           text-muted-foreground`}
         >
           {inputFormat}
