@@ -5,11 +5,22 @@ import WindowsHeaderButton from "./WindowsHeaderButton";
 import ClipboardPalletDecorator from "./ClipboardPalletDecorator";
 import HoldToClear from "./HoldToClearButton";
 import HoldToButton from "@/components/common/HoldToButton";
-import { Settings, Trash2 } from "lucide-react";
 import { ColorPallet } from "@/service/colorPallet";
+import HexHopNavigator from "../navigator/HexHopNavigator";
+import { Clipboard, Eye, Import, Settings, SwatchBook } from "lucide-react";
+import { useAppStore } from "@/store/useThemeStore";
 
+const navItems = [
+    { id: "color-list", icon: <Clipboard /> },
+    { id: "palette-generator", icon: <SwatchBook /> },
+    { id: "import-export", icon: <Import /> },
+    { id:  "color-contrast", icon: <Eye /> },
+    { id: "settings", icon: <Settings /> },
+    { id: "settings", icon: <Settings /> },
+  ];
 const HeaderBar = () => {
   const [platform, setPlatform] = useState<string>("");
+  const setActivePage = useAppStore().setActivePage;
 
   useEffect(() => {
     const currentPlatform = getPlatform();
@@ -18,7 +29,6 @@ const HeaderBar = () => {
 
   return (
     <>
-      <ClipboardPalletDecorator />
 
       <div
         data-tauri-drag-region
@@ -27,7 +37,17 @@ const HeaderBar = () => {
         {platform === "macos" && <MacHeaderButton />}
 
         <div className="flex items-center justify-center  ">
-          {/* <Settings /> */}
+         <div className="flex w-full gap-4 p-1 justify-center items-center">
+                {navItems.map((element, index) => (
+                  <div
+                    key={index}
+                    onClick={()=>setActivePage(element.id as PagesTypes)}
+                    className="cursor-pointer text-stone-400  hover:text-white hover:brightness-150 "
+                  >
+                    {element.icon}
+                  </div>
+                ))}
+              </div>
         </div>
 
         {platform !== "macos" && <WindowsHeaderButton />}

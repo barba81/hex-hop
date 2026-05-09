@@ -14,6 +14,7 @@ const navItems = [
     { id: "import-export", icon: <Import /> },
     { id:  "color-contrast", icon: <Eye /> },
     { id: "settings", icon: <Settings /> },
+    { id: "settings", icon: <Settings /> },
   ];
 
 const HexHopNavigator = () => {
@@ -21,18 +22,7 @@ const HexHopNavigator = () => {
   const setActivePage = useAppStore().setActivePage;
   return (
     <>
-      <div className="flex w-full gap-10 bg-stone-800 p-1 justify-center items-center">
-        {navItems.map((element, index) => (
-          <div
-            key={index}
-            onClick={()=>setActivePage(element.id as PagesTypes)}
-            className="cursor-pointer text-stone-400  hover:text-white hover:brightness-150 "
-          >
-            {element.icon}
-          </div>
-        ))}
-      </div>
-
+ 
       {activePage === "color-list" && <ColorListPage />}
       {activePage === "palette-generator" && <PaletteGenerator />}
       {activePage === "import-export" && <ImportExportPage />}
