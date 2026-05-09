@@ -4,7 +4,7 @@ const PaletteGenerator = () => {
   return (
     <>
       <div>
-        Gradient generator
+        Palette generator
       </div>
     </>
   );

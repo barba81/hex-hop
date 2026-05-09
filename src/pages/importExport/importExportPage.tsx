@@ -4,7 +4,7 @@ const ImportExportPage = () => {
   return (
     <>
       <div>
-        Gradient generator
+        Import export page
       </div>
     </>
   );
