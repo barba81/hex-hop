@@ -1,14 +1,13 @@
 import { useEffect } from "react";
-import "./App.css";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import { ColorPallet } from "./service/colorPallet";
-import HeaderBar from "./pages/colorList/header/HeaderBar";
-import ColorList from "./pages/colorList/colorList/ColorList";
-import ColorPicker from "./pages/colorList/colorPicker/ColorPicker";
+import HeaderBar from "./components/header/HeaderBar";
 import { initThemeListener } from "./hooks/useTheme";
-import { Amphora } from "lucide-react";
+import HexHopNavigator from "./components/navigator/HexHopNavigator";
+import "./App.css";
 
 function HexHopApp() {
+
   useEffect(() => {
     initThemeListener();
     moveWindow(Position.TopRight);
@@ -27,9 +26,7 @@ function HexHopApp() {
     <>
       <div className="w-screen h-screen flex flex-col gap-0.5 bg-stone-50/80 dark:bg-stone-800/80 ">
         <HeaderBar />
-        <div><Amphora /></div>
-        <ColorList />
-        <ColorPicker />
+        <HexHopNavigator />
       </div>
     </>
   );

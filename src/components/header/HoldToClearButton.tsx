@@ -1,4 +1,4 @@
-import HoldToButton from "@/components/custom/HoldToButton";
+import HoldToButton from "@/components/common/HoldToButton";
 import { ColorPallet } from "@/service/colorPallet";
 import { Trash2 } from "lucide-react";
 

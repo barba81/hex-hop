@@ -4,7 +4,7 @@ import MacHeaderButton from "./MacHeaderButton";
 import WindowsHeaderButton from "./WindowsHeaderButton";
 import ClipboardPalletDecorator from "./ClipboardPalletDecorator";
 import HoldToClear from "./HoldToClearButton";
-import HoldToButton from "@/components/custom/HoldToButton";
+import HoldToButton from "@/components/common/HoldToButton";
 import { Trash2 } from "lucide-react";
 import { ColorPallet } from "@/service/colorPallet";
 
