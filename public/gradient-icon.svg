@@ -7,9 +7,32 @@
    viewBox="0 0 100 100.00001"
    version="1.1"
    id="svg1"
+   sodipodi:docname="gradient-icon.svg"
+   inkscape:version="1.4.2 (f4327f4, 2025-05-13)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:xlink="http://www.w3.org/1999/xlink"
    xmlns="http://www.w3.org/2000/svg"
    xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:document-units="mm"
+     inkscape:zoom="2.1351873"
+     inkscape:cx="106.07968"
+     inkscape:cy="38.169953"
+     inkscape:window-width="1920"
+     inkscape:window-height="1009"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
   <defs
      id="defs1">
     <linearGradient
@@ -63,7 +86,7 @@
   </defs>
   <g
      id="layer1"
-     transform="translate(-54.152409,-46.371746)">
+     transform="matrix(0.24340855,0,0,0.32795635,-13.145887,-15.248851)">
     <rect
        style="fill:url(#linearGradient3);stroke:#000000;stroke-width:1.80283;stroke-linejoin:round;stroke-dasharray:none;stroke-opacity:1"
        id="rect2"
