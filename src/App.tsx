@@ -24,7 +24,7 @@ function HexHopApp() {
   
   return (
     <>
-      <div className="w-screen h-screen rounded-2xl  flex flex-col  bg-stone-50/80 dark:bg-stone-800/80 ">
+      <div className="w-screen h-screen flex flex-col  bg-stone-50/80 dark:bg-stone-800/80 ">
         <HeaderBar />
         <HexHopNavigator />
       </div>

@@ -25,13 +25,13 @@ const DropDownHeader = () => {
 return <>
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
-      <div className="rounded-md hover:cursor-pointer flex items-center justify-center gap-1 dark:text-white cursor-pointer hover:bg-gray-400/50 dark:hover:bg-gray-500/50 p-1">
+      <div className="rounded-md  hover:cursor-pointer hover:bg-secondary dark:text-white  flex items-center justify-center gap-1  cursor-pointer p-1 ">
         {ICON_MAP[activePage]?.icon || <Clipboard />}
-        <ChevronDown size={21}/>
+        <ChevronDown size={15}/>
       </div>
     </DropdownMenuTrigger>
 
-    <DropdownMenuContent className="min-w-[160px] bg-stone-800 text-stone-200 border-stone-700">
+    <DropdownMenuContent className="min-w-[160px]  text-stone-200 border-stone-700">
       <DropdownMenuGroup>
         {Object.entries(ICON_MAP).map(([key, { icon, label }]) => (
           <DropdownMenuItem
