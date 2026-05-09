@@ -4,10 +4,10 @@ import CopyLogo from "./CopyButton";
 import ColorText from "./ColorText";
 
 import "@/style/EmptyCheckerBoard.css";
-import { useThemeStore } from "@/store/useThemeStore";
+import { useAppStore } from "@/store/useThemeStore";
 
 const ColorBlock = ({ color }: { color: ColorEntity }) => {
-  const isDark = useThemeStore((state) => state.isDark);
+  const isDark = useAppStore((state) => state.isDark);
 
   const getFontColor = (isDark: boolean, color: ColorData) => {
     const { r, g, b, } = color;

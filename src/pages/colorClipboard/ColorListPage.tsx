@@ -5,10 +5,8 @@ import ColorList from "./colorList/ColorList";
 const ColorListPage = () => {
   return (
     <>
-      <div>
         <ColorList />
         <ColorPicker />
-      </div>
     </>
   );
 };
