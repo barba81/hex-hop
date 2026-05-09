@@ -9,6 +9,7 @@ import { ColorPallet } from "@/service/colorPallet";
 import HexHopNavigator from "../navigator/HexHopNavigator";
 import { Clipboard, Eye, Import, Settings, SwatchBook } from "lucide-react";
 import { useAppStore } from "@/store/useThemeStore";
+import MyCustomIcon from "../icons/MyIcon";
 
 const navItems = [
     { id: "color-list", icon: <Clipboard /> },
@@ -16,7 +17,7 @@ const navItems = [
     { id: "import-export", icon: <Import /> },
     { id:  "color-contrast", icon: <Eye /> },
     { id: "settings", icon: <Settings /> },
-    { id: "settings", icon: <Settings /> },
+    { id: "settings", icon: <MyCustomIcon /> },
   ];
 const HeaderBar = () => {
   const [platform, setPlatform] = useState<string>("");
