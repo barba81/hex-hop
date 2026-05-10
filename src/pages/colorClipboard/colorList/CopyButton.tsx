@@ -51,7 +51,6 @@ const CopyLogo = ({ color, fontClass }: CopyLogoParam) => {
             {f.isIcon ? <Hash size={18} strokeWidth={2.5} /> : f.label}
           </div>
 
-          {/* Only render if we have coordinates */}
           {f.type === selectedType && coords && <CopyUx anchorRect={coords} />}
         </div>
       ))}

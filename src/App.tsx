@@ -5,6 +5,7 @@ import HeaderBar from "./components/header/HeaderBar";
 import { initThemeListener } from "./hooks/useTheme";
 import "./App.css";
 import HexHopNavigator from "./components/navigator/HexHopNavigator";
+import { ColorLookupName } from "./service/colorLookup";
 
 function HexHopApp() {
 
@@ -17,6 +18,7 @@ function HexHopApp() {
       } catch (error) {
         console.error("Failed to fetch colors:", error);
       }
+      await ColorLookupName.addColorNameLookup();
     };
 
     fetchColors();
@@ -33,3 +35,5 @@ function HexHopApp() {
 }
 
 export default HexHopApp;
+
+
