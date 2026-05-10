@@ -9,13 +9,15 @@ import { ChevronDown, Clipboard, Eye, Import, Settings, SwatchBook } from "lucid
 import MyCustomIcon from "../icons/MyIcon";
 import { PagesTypes, useAppStore } from "@/store/useThemeStore";
 
+const size = 17;
+
 const ICON_MAP = {
-  'color-list': { icon: <Clipboard  />, label: 'Color List' },
-  'gradient-creator': { icon: <MyCustomIcon  />, label: 'Gradient Creator' },
-  'palette-generator': { icon: <SwatchBook  />, label: 'Palette' },
-  'color-contrast': { icon: <Eye  />, label: 'Contrast' },
-  'import-export': { icon: <Import  />, label: 'Import/Export' },
-  'settings': { icon: <Settings  />, label: 'Settings' },
+  'color-list': { icon: <Clipboard size={size} strokeWidth={2.5}  className="text-gray-300"/>, label: 'Color List' },
+  'gradient-creator': { icon: <MyCustomIcon size={size} strokeWidth={2.5} className="text-gray-300" />, label: 'Gradient Creator' },
+  'palette-generator': { icon: <SwatchBook size={size} strokeWidth={2.5}  className="text-gray-300" />, label: 'Palette' },
+  'color-contrast': { icon: <Eye size={size} strokeWidth={2.5} className="text-gray-300" />, label: 'Contrast' },
+  'import-export': { icon: <Import size={size} strokeWidth={2.5}  className="text-gray-300"/>, label: 'Import/Export' },
+  'settings': { icon: <Settings size={size} strokeWidth={2.5} className="text-gray-300"/>, label: 'Settings' },
 };
 
 const DropDownHeader = () => {
@@ -25,9 +27,15 @@ const DropDownHeader = () => {
 return <>
   <DropdownMenu>
     <DropdownMenuTrigger asChild>
-      <div className="rounded-md  hover:cursor-pointer hover:bg-secondary dark:text-white  flex items-center justify-center gap-1  cursor-pointer p-1 ">
+      <div className="rounded-sm hover:cursor-pointer
+           dark:bg-foreground/10
+          hover:bg-foreground/25
+          outline-2
+        text-gray-900 
+        dark:text-white 
+      flex items-center justify-center gap-1  cursor-pointer p-1.25 ">
         {ICON_MAP[activePage]?.icon || <Clipboard />}
-        <ChevronDown size={15}/>
+        <ChevronDown className="text-gray-300" size={12}  strokeWidth={4}/>
       </div>
     </DropdownMenuTrigger>
 

@@ -5,7 +5,7 @@ import AddColorButton from "./AddColorButton";
 
 const ColorPicker = () => {
   return (
-    <div className="flex rounded-2xl items-center justify-between p-2 gap-1 bg-stone-50/50 dark:bg-black/50">
+    <div className="flex  items-center justify-between p-2 gap-1 bg-stone-50/50 dark:bg-black/50">
       <ColorBox />
       <PipetButton />
       <ColorInput />
