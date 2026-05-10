@@ -4,10 +4,13 @@ import { useColorStore } from "@/store/useColorStore";
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { ColorFormatTranslation } from "./colorFormatTranslation";
 import { ColorValidator } from "./colorFormatValidator";
+import { colornames } from 'color-name-list';
 
 export class ColorPallet {
 
     static async AddColor(color: string) {
+
+        console.log( colornames);
         const colorData = ColorFormatTranslation.stringToHex(color);
         const colorEntity = await ColorRepository.addColor(colorData);
         if (colorEntity !== undefined) {

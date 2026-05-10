@@ -23,7 +23,7 @@ const HeaderBar = () => {
       >
         
         {platform === "macos" && <MacHeaderButton />}
-        <div className=" flex justify-center w-20" >
+        <div className=" flex justify-center" >
           <DropDownHeader />
         </div>
         {platform !== "macos" && <WindowsHeaderButton />}
