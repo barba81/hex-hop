@@ -6,6 +6,7 @@ import ColorText from "./ColorText";
 import "@/style/EmptyCheckerBoard.css";
 import { useAppStore } from "@/store/useThemeStore";
 import { EllipsisVertical } from "lucide-react";
+import ColorName from "./ColorName";
 
 const ColorBlock = ({ color }: { color: ColorEntity }) => {
   const isDark = useAppStore((state) => state.isDark);
@@ -44,6 +45,7 @@ const ColorBlock = ({ color }: { color: ColorEntity }) => {
         <ColorText color={color} />
         <CopyLogo color={color} fontClass={fontColor} />
         <CloseButton color={color} />
+        <ColorName name="Ambient bashe " />
       </div>
     </div>
   );

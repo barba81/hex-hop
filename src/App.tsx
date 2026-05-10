@@ -3,8 +3,8 @@ import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import { ColorPallet } from "./service/colorPallet";
 import HeaderBar from "./components/header/HeaderBar";
 import { initThemeListener } from "./hooks/useTheme";
-import HexHopNavigator from "./components/navigator/HexHopNavigator";
 import "./App.css";
+import HexHopNavigator from "./components/navigator/HexHopNavigator";
 
 function HexHopApp() {
 
