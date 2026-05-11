@@ -1,9 +1,9 @@
-import { ColorEntity } from "@/model/color";
+import { ColorModel } from "@/model/color";
 import { ColorPallet } from "@/service/colorPallet";
 import { X } from "lucide-react";
 
 type CloseButtonParams = {
-  color: ColorEntity;
+  color: ColorModel;
 };
 
 const CloseButton = ({ color }: CloseButtonParams) => {

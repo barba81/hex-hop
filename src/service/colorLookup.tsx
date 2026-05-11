@@ -1,11 +1,12 @@
 import { oklab } from "culori";
 
 export class ColorLookupName {
-  private static colorData: any;
+  private static colorData: [number, number, number, string][];
 
   public static async addColorNameLookup() {
     const response = await fetch("/data/colorsOptimized.json");
     ColorLookupName.colorData = await response.json();
+    debugger;
   }
 
   public static async nearestColor(color: string) {
@@ -17,10 +18,10 @@ export class ColorLookupName {
       const d = Math.hypot(p[0] - query.l, p[1] - query.a, p[2] - query.b);
       if (d < minDist) {
         minDist = d;
-        nearest = p;
+        nearest = p[3];
       }
     }
-    console.log(minDist);
-    console.log(nearest);
+
+    return  nearest;
   }
 }

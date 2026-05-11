@@ -5,8 +5,9 @@ export type ColorData = {
     g: number;
     b: number;
     a?: number | null;
+    name: string;
 }
 
-export type ColorEntity = ColorData & {
+export type ColorModel = ColorData & {
     id: number;
 }

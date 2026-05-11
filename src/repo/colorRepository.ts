@@ -1,4 +1,4 @@
-import { ColorData, type ColorEntity } from '@/model/color';
+import { ColorData, type ColorModel } from '@/model/color';
 import Database from '@tauri-apps/plugin-sql';
 
 const db = await Database.load('sqlite:hexHop.db');
@@ -7,7 +7,7 @@ export class ColorRepository {
 
     static async getAllColors() {
         try {
-            return await db.select<ColorEntity[]>(
+            return await db.select<ColorModel[]>(
                 'SELECT * FROM colors ORDER BY  created_at DESC',
             );
         } catch (error) {
@@ -18,9 +18,9 @@ export class ColorRepository {
 
     static async addColor(colorData: ColorData) {
         try {
-            const result = await db.select<ColorEntity[]>(
-                'INSERT INTO colors (r, g, b, a) VALUES ($1, $2, $3, $4) RETURNING id',
-                [colorData.r, colorData.g, colorData.b, colorData.a]
+            const result = await db.select<ColorModel[]>(
+                'INSERT INTO colors (r, g, b, a, name) VALUES ($1, $2, $3, $4, $5) RETURNING id',
+                [colorData.r, colorData.g, colorData.b, colorData.a, colorData.name]
             );
             return  {...colorData, id:result[0]?.id ?? 0};
         } catch (error) {
@@ -28,18 +28,18 @@ export class ColorRepository {
         }
     }
 
-    static async updateColor(color: ColorEntity) {
+    static async updateColor(color: ColorModel) {
         try {
             await db.execute(
-                'UPDATE  colors  SET r = $1, g = $2, b = $3, a=$4 WHERE id = $4',
-                [ color.r, color.g, color.b, color.a]
+                'UPDATE  colors  SET r = $1, g = $2, b = $3, a=$4, name = $5 WHERE id = $6',
+                [ color.r, color.g, color.b, color.a, color.name, color.id]
             );
         } catch (error) {
             console.error("Failed to update colors:", error);
         }
     }
 
-    static async deleteById(color: ColorEntity) {
+    static async deleteById(color: ColorModel) {
         try {
             await db.execute(
                 'DELETE FROM  colors WHERE id = $1  ',

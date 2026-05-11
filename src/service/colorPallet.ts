@@ -1,4 +1,4 @@
-import { ColorEntity, ColorFormat } from "@/model/color";
+import { ColorModel, ColorFormat } from "@/model/color";
 import { ColorRepository } from "@/repo/colorRepository";
 import { useColorStore } from "@/store/useColorStore";
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
@@ -9,13 +9,12 @@ import { ColorLookupName } from "./colorLookup";
 export class ColorPallet {
 
     static async AddColor(color: string) {
-        const name = ColorLookupName.nearestColor(color);
-        
 
         const colorData = ColorFormatTranslation.stringToHex(color);
-        const colorEntity = await ColorRepository.addColor(colorData);
-        if (colorEntity !== undefined) {
-            useColorStore.getState().addColor(colorEntity);
+        colorData.name = await ColorLookupName.nearestColor(color);;
+        const data = await ColorRepository.addColor(colorData);
+        if (data !== undefined) {
+            useColorStore.getState().addColor(data);
         }
     }
 
@@ -24,7 +23,7 @@ export class ColorPallet {
         useColorStore.getState().addAllColor(colors);
     }
 
-    static async DeleteById(color: ColorEntity) {
+    static async DeleteById(color: ColorModel) {
         await ColorRepository.deleteById(color);
         useColorStore.getState().deleteById(color.id);
     }
@@ -34,8 +33,8 @@ export class ColorPallet {
         useColorStore.getState().deleteAll();
     }
 
-    static async CopyToClipboard(color: ColorEntity, colorFormat: ColorFormat) {
-        const formatMap: Record<ColorFormat, (c: ColorEntity) => string> = {
+    static async CopyToClipboard(color: ColorModel, colorFormat: ColorFormat) {
+        const formatMap: Record<ColorFormat, (c: ColorModel) => string> = {
             "#": ColorFormatTranslation.toHex,
             "RBG": ColorFormatTranslation.toRgb,
             "HSL": ColorFormatTranslation.toHsl,

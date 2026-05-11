@@ -8,7 +8,7 @@ import {
     useMode,
     rgb
 } from "culori";
-import { ColorData, ColorEntity } from "@/model/color";
+import { ColorData, ColorModel } from "@/model/color";
 
 const oklab = useMode(modeOklab);
 
@@ -29,25 +29,25 @@ export class ColorFormatTranslation {
         return color.a !== undefined && color.a !== null && color.a < 1 ? formatHex8(c) : formatHex(c);
     }
 
-    public static toRgb(color: ColorEntity): string {
+    public static toRgb(color: ColorModel): string {
         return formatRgb(ColorFormatTranslation.toNormalForm(color));
     }
 
-    public static toHsl(color: ColorEntity): string {
+    public static toHsl(color: ColorModel): string {
         return formatHsl(ColorFormatTranslation.toNormalForm(color));
     }
 
-    public static toOkla(color: ColorEntity): string {
+    public static toOkla(color: ColorModel): string {
         const colorObj = oklab(ColorFormatTranslation.toNormalForm(color));
         return formatCss(colorObj);
     }
 
-    public static toVector(color: ColorEntity): string {
+    public static toVector(color: ColorModel): string {
         const { r, g, b, alpha } = ColorFormatTranslation.toNormalForm(color);
         return `vec4(${r.toFixed(3)}, ${g.toFixed(3)}, ${b.toFixed(3)}, ${alpha.toFixed(3)})`;
     }
 
-    public static toTailwind(color: ColorEntity): string {
+    public static toTailwind(color: ColorModel): string {
         const hex = formatHex(ColorFormatTranslation.toNormalForm(color));
         return `bg-[${hex}]`;
     }

@@ -25,6 +25,14 @@ pub fn run() {
             ",
             kind: MigrationKind::Up,
         },
+          Migration {
+            version: 2,
+            description: "add_names_to_color",
+            sql: "
+            ALTER TABLE colors ADD COLUMN name TEXT;
+            ",
+            kind: MigrationKind::Up,
+        },
     ];
 
     tauri::Builder::default()

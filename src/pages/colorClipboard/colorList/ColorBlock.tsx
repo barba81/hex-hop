@@ -1,4 +1,4 @@
-import { ColorData, ColorEntity } from "@/model/color";
+import { ColorData, ColorModel } from "@/model/color";
 import CloseButton from "./CloseButton";
 import CopyLogo from "./CopyButton";
 import ColorText from "./ColorText";
@@ -8,7 +8,7 @@ import { useAppStore } from "@/store/useThemeStore";
 import { EllipsisVertical } from "lucide-react";
 import ColorName from "./ColorName";
 
-const ColorBlock = ({ color }: { color: ColorEntity }) => {
+const ColorBlock = ({ color }: { color: ColorModel }) => {
   const isDark = useAppStore((state) => state.isDark);
 
   const getFontColor = (isDark: boolean, color: ColorData) => {
@@ -45,7 +45,7 @@ const ColorBlock = ({ color }: { color: ColorEntity }) => {
         <ColorText color={color} />
         <CopyLogo color={color} fontClass={fontColor} />
         <CloseButton color={color} />
-        <ColorName name="Ambient bashe " />
+        <ColorName name={color.name} />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
-import { ColorEntity } from "@/model/color";
+import { ColorModel } from "@/model/color";
 
 type ColorBlockParams = {
-  color: ColorEntity;
+  color: ColorModel;
 };
 
 

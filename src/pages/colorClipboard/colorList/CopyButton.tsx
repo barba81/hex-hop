@@ -1,11 +1,11 @@
-import { ColorEntity, ColorFormat } from "@/model/color";
+import { ColorModel, ColorFormat } from "@/model/color";
 import { ColorPallet } from "@/service/colorPallet";
 import { Hash } from "lucide-react";
 import { useState } from "react";
 import CopyUx from "./CopyUx";
 
 export type CopyLogoParam = {
-  color: ColorEntity;
+  color: ColorModel;
   fontClass: string;
 };
 

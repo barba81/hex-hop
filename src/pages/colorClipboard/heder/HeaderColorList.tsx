@@ -2,7 +2,7 @@ import HoldToClear from "./HoldToClearButton";
 
 const HeaderColorList = () => {
   return (
-    <div className="w-full p-2 bg-stone-800 flex gap-2 items-center justify-end ">
+    <div className="w-full px-2 p-1 bg-stone-800 flex gap-2 items-center justify-end ">
       <div
         className="
                flex 
@@ -10,7 +10,7 @@ const HeaderColorList = () => {
                items-center 
                rounded-md 
                outline-2
-               w-30
+               w-full 
                focus-within:ring-2 
                focus-within:ring-ring 
                focus-within:border-input "
