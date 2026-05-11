@@ -2,6 +2,7 @@ import { Pipette } from "lucide-react";
 import { useColorStore } from "@/store/useColorStore";
 import { buttonStyle } from "./DefaultStyle";
 import { ColorPallet } from "@/service/colorPallet";
+import { invoke } from '@tauri-apps/api/core';
 
 declare global {
   interface Window {
@@ -15,6 +16,9 @@ const PipetButton = () => {
   const setInputColor = useColorStore().setInputColor;
 
   const handlePickColor = async () => {
+
+    const hexColor = await invoke<string | null>('pick_color');
+    console.log(hexColor);
     if (!window.EyeDropper) {
       return;
     }
