@@ -5,7 +5,6 @@ import ColorText from "./ColorText";
 
 import "@/style/EmptyCheckerBoard.css";
 import { useAppStore } from "@/store/useThemeStore";
-import { EllipsisVertical } from "lucide-react";
 import ColorName from "./ColorName";
 
 const ColorBlock = ({ color }: { color: ColorModel }) => {
@@ -31,7 +30,7 @@ const ColorBlock = ({ color }: { color: ColorModel }) => {
         <div
           className="w-full h-full"
           style={{
-            backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a ?? 1.0})`,
+           backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a ?? 1.0})`
           }}
         />
       </div>
@@ -40,7 +39,9 @@ const ColorBlock = ({ color }: { color: ColorModel }) => {
         <span className="h-0.75 w-0.75 rounded-full bg-current"></span>
         <span className="h-0.75 w-0.75 rounded-full bg-current"></span>
         <span className="h-0.75 w-0.75 rounded-full bg-current"></span>
+        
       </div>
+      
       <div className=" w-full h-full relative ">
         <ColorText color={color} />
         <CopyLogo color={color} fontClass={fontColor} />

@@ -8,7 +8,7 @@ const HeaderColorList = () => {
                flex 
                h-5 
                items-center 
-               rounded-md 
+               rounded-sm 
                outline-2
                w-full 
                focus-within:ring-2 
@@ -21,7 +21,7 @@ const HeaderColorList = () => {
                  w-full 
                  px-2 
                  outline-none 
-                 rounded-md 
+                 rounded-2xl 
                  overflow-hidden
                  bg-stone-100 
                  dark:bg-stone-900  

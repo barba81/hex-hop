@@ -80,7 +80,7 @@ const DropDownHeader = () => {
           <Button
             size="sm"
             variant="outline"
-            className="relative  active:scale-95 select-none hover:cursor-pointer  text-xs rounded-md h-7"
+            className="relative  select-none hover:cursor-pointer  text-xs rounded-md h-6"
           >
             {ICON_MAP[activePage]?.icon || <Clipboard />}
             {ICON_MAP[activePage]?.shortLabel }
