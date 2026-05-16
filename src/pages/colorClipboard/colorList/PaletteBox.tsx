@@ -1,58 +1,72 @@
-import ColorBlock from "../colorBoxes/ColorBlock";
+import { ChevronDown, ChevronUp } from "lucide-react";
 import { DragDots } from "./DragDots";
+import ColorBlock from "../colorBoxes/ColorBlock";
+import { useState } from "react";
 
 export const PaletteBox = () => {
+  const [expandPalette, setExpandPalette] = useState<boolean>(false);
+
   return (
     <>
-      <div className="flex flex-col ">
+      <div className="flex flex-col outline-3 rounded-md ">
         <div
-          className={`h-7 rounded-md w-full shrink-0 relative flex items-center justify-between outline-2`}
+          className={`h-7  ${!expandPalette && 'rounded-md'}  ${expandPalette && 'rounded-t-md'} w-full shrink-0 relative flex items-center justify-between overflow-hidden `}
         >
-          <div className="absolute inset-0 bg-checkerboard  rounded-md overflow-hidden flex">
-            <div
+          <div className="absolute inset-0 bg-checkerboard    flex">
+             <div
               className="w-full h-full"
               style={{
-                background: `
-              repeating-linear-gradient(
-                45deg,
-                transparent 0px 68px,
-                #6dcae4 68px 70px,
-                transparent 70px 78px,
-                #6dcae4 78px 80px,
-                transparent 80px 150px
-                ),
-                repeating-linear-gradient(
-                  315deg,
-                  transparent 0px 68px,
-                  #6dcae4 68px 70px,
-                  transparent 70px 78px,
-                  #6dcae4 78px 80px,
-                  transparent 80px 150px
-                  ),
-                  repeating-linear-gradient(45deg, #3ec1edbb 0px 60px, transparent 60px 150px),
-                  repeating-linear-gradient(315deg, #91dff5 0px 60px, #fefefb 60px 150px)
-                  `,
+                background: `#B24C63`,
               }}
             />
-            <div
+           {/* <div
               className="w-full h-full"
               style={{
-                background: `red`,
+                background: `#5438DC`,
               }}
             />
-            <div
+              <div
               className="w-full h-full"
               style={{
-                background: `blue`,
+                background: `#357DED`,
               }}
             />
+              <div
+              className="w-full h-full"
+              style={{
+                background: `#56eef4`,
+              }}
+            /> */}
+            {/* <div
+              className="w-full h-full"
+              style={{
+                background: `#32e875`,
+              }}
+            /> */}
           </div>
 
-          <DragDots />
+          <div className={` h-full flex items-center justify-start overflow-hidden ${!expandPalette && 'rounded-md'} `}>
+            <DragDots />
+            <div
+              className="relative rounded-md bg-foreground/20 p-0.5 cursor-pointer   flex flex-col items-center justify-center "
+              onClick={() => setExpandPalette(!expandPalette)}
+            >
+              {!expandPalette && <ChevronDown size={14} />}
+              {expandPalette && <ChevronUp size={14} />}
+            </div>
+          </div>
+          {/* <div className="relative h-full   flex items-center justify-start overflow-hidden text-sm  text-red-50 bg-foreground/20 px-3 rounded-l-md font-mono">
+            Test palette name
+          </div> */}
         </div>
-        <div className="flex flex-col p-2 gap-2 bg-gray-100/10 rounded-b-2xl ">
-          <ColorBlock color={""} />
-        </div>
+        {expandPalette && (
+          <div className="flex flex-col p-2 gap-2 bg-gray-100/10 rounded-b-md ">
+            <ColorBlock color={{r: 32, b: 23, g: 32, id: 1, name:"123"}} />
+            <ColorBlock color={{r: 32, b: 23, g: 32, id: 1, name:"123"}} />
+            <ColorBlock color={{r: 32, b: 23, g: 32, id: 1, name:"123"}} />
+            <ColorBlock color={{r: 32, b: 23, g: 32, id: 1, name:"123"}} />
+          </div>
+        )}
       </div>
     </>
   );
