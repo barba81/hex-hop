@@ -3,6 +3,8 @@ import { DragDots } from "./DragDots";
 import ColorBlock from "../colorBoxes/ColorBlock";
 import { useState } from "react";
 
+
+
 export const PaletteBox = () => {
   const [expandPalette, setExpandPalette] = useState<boolean>(false);
 
@@ -17,6 +19,18 @@ export const PaletteBox = () => {
               className="w-full h-full"
               style={{
                 background: `#B24C63`,
+              }}
+            />
+                <div
+              className="w-full h-full"
+              style={{
+                background: `#B21C63`,
+              }}
+            />
+                <div
+              className="w-full h-full"
+              style={{
+                background: `#B24C12`,
               }}
             />
            {/* <div
@@ -60,9 +74,7 @@ export const PaletteBox = () => {
           </div> */}
         </div>
         {expandPalette && (
-          <div className="flex flex-col p-2 gap-2 bg-gray-100/10 rounded-b-md ">
-            <ColorBlock color={{r: 32, b: 23, g: 32, id: 1, name:"123"}} />
-            <ColorBlock color={{r: 32, b: 23, g: 32, id: 1, name:"123"}} />
+          <div className="flex flex-col p-2 gap-2 bg-foreground/2 rounded-b-md ">
             <ColorBlock color={{r: 32, b: 23, g: 32, id: 1, name:"123"}} />
             <ColorBlock color={{r: 32, b: 23, g: 32, id: 1, name:"123"}} />
           </div>

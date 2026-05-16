@@ -26,7 +26,7 @@ const ColorBlock = ({ color }: { color: ColorModel }) => {
 
   return (
     <div
-      className={`h-14 rounded-md w-full shrink-0 relative flex items-center justify-between  ${fontColor} outline-1`}
+      className={`h-14 rounded-md w-full shrink-0 relative flex items-center justify-between  ${fontColor} outline-1 overflow-hidden`}
     >
       <div className="absolute inset-0 bg-checkerboard  rounded-md overflow-hidden">
         <div
