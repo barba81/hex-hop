@@ -12,7 +12,7 @@ import {
   Settings,
   SwatchBook,
 } from "lucide-react";
-import MyCustomIcon from "../icons/MyIcon";
+import GradientIcon from "../icons/MyIcon";
 import { PagesTypes, useAppStore } from "@/store/useThemeStore";
 import { Button } from "../ui/button";
 
@@ -28,7 +28,7 @@ const ICON_MAP = {
   },
   "gradient-creator": {
     icon: (
-      <MyCustomIcon
+      <GradientIcon
         size={size}
         strokeWidth={2.5}
         className="dark:text-gray-300"

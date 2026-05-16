@@ -4,7 +4,7 @@ import ColorContrastPage from "@/pages/colorContrast/ColorContrastPage";
 import {  useAppStore } from "@/store/useThemeStore";
 import PaletteGenerator from "@/pages/paletteGenerator/PaletteGeneratorPage";
 import ImportExportPage from "@/pages/importExport/ImportExportPage";
-import SettingsPage from "@/pages/settings/SettingsPage";
+import SettingsPage from "@/pages/formatSettings/SettingsPage";
 import GradientGeneratorPage from "@/pages/gradientGenerator/GradientGeneratorPage";
 
 

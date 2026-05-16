@@ -1,6 +1,4 @@
-import React from 'react';
-
-const MyCustomIcon = ({ 
+const GradientIcon = ({ 
   color = "currentColor", 
   size = 24, 
   strokeWidth = 2, 
@@ -22,4 +20,4 @@ const MyCustomIcon = ({
     );
 };
 
-export default MyCustomIcon;
+export default GradientIcon;

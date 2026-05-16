@@ -1,11 +1,13 @@
 import { ColorData, ColorModel } from "@/model/color";
-import CloseButton from "./CloseButton";
-import CopyLogo from "./CopyButton";
-import ColorText from "./ColorText";
+
 
 import "@/style/EmptyCheckerBoard.css";
 import { useAppStore } from "@/store/useThemeStore";
-import ColorName from "./ColorName";
+import ColorText from "./ColorText";
+import CopyLogo from "../colorList/CopyButton";
+import CloseButton from "../colorList/CloseButton";
+import ColorName from "../colorList/ColorName";
+import { DragDots } from "../colorList/DragDots";
 
 const ColorBlock = ({ color }: { color: ColorModel }) => {
   const isDark = useAppStore((state) => state.isDark);
@@ -24,7 +26,7 @@ const ColorBlock = ({ color }: { color: ColorModel }) => {
 
   return (
     <div
-      className={`group h-14 rounded-md w-full shrink-0 relative flex items-center justify-between  ${fontColor} outline-1`}
+      className={`h-14 rounded-md w-full shrink-0 relative flex items-center justify-between  ${fontColor} outline-1`}
     >
       <div className="absolute inset-0 bg-checkerboard  rounded-md overflow-hidden">
         <div
@@ -35,12 +37,7 @@ const ColorBlock = ({ color }: { color: ColorModel }) => {
         />
       </div>
 
-      <div className="relative cursor-pointer h-full w-3 flex flex-col items-center justify-center gap-1 bg-foreground/20 mr-1 rounded-l-md">
-        <span className="h-0.75 w-0.75 rounded-full bg-current"></span>
-        <span className="h-0.75 w-0.75 rounded-full bg-current"></span>
-        <span className="h-0.75 w-0.75 rounded-full bg-current"></span>
-        
-      </div>
+      <DragDots/>
       
       <div className=" w-full h-full relative ">
         <ColorText color={color} />
