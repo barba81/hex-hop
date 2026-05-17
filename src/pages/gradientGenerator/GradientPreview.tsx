@@ -8,7 +8,7 @@ const GradientPreview = () => {
           className="  h-full w-full "
           style={{
             background: `
-            radial-gradient(red 0 8%, yellow 8% 16%, blue 16% 100%)
+            linear-gradient(4deg,rgba(63, 94, 251, 1) 0%, rgba(152, 83, 183, 1) 31%, rgba(252, 70, 107, 1) 100%)
                 `,
           }}
         ></div>

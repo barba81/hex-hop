@@ -34,7 +34,7 @@ const ICON_MAP = {
         className="dark:text-gray-300"
       />
     ),
-    label: "Gradient Creator",
+    label: "Gradient",
     shortLabel: "Gradient",
   },
   "palette-generator": {
@@ -50,8 +50,8 @@ const ICON_MAP = {
   },
   "color-contrast": {
     icon: <Eye size={size} strokeWidth={2.5} className="dark:text-gray-300" />,
-    label: "Contrast",
-    shortLabel: "Contrast",
+    label: "Accessibility",
+    shortLabel: "Accessibility",
   },
   "import-export": {
     icon: (

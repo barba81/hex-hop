@@ -2,17 +2,17 @@
     all(not(debug_assertions), target_os = "windows"),
     windows_subsystem = "windows"
 )]
-use tauri_plugin_sql::{Migration, MigrationKind};
 use window_vibrancy::*;
 
 use tauri::{AppHandle, Manager};
-use tokio::sync::oneshot;
-use std::sync::{Arc, Mutex};
 
 #[cfg(target_os = "macos")]
 use objc::{class, msg_send, sel, sel_impl, runtime::Object};
 #[cfg(target_os = "macos")]
 use block::ConcreteBlock;
+
+pub mod migrations;
+
 
 #[tauri::command]
 async fn pick_color(app_handle: AppHandle) -> Result<Option<String>, String> {
@@ -98,32 +98,6 @@ async fn pick_color(app_handle: AppHandle) -> Result<Option<String>, String> {
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    let migrations = vec![
-        // Define your migrations here
-        Migration {
-            version: 1,
-            description: "create_color_tables",
-            sql: "
-            CREATE TABLE colors (
-                id          INTEGER PRIMARY KEY AUTOINCREMENT,
-                r           INTEGER NOT NULL CHECK(r BETWEEN 0 AND 255),
-                g           INTEGER NOT NULL CHECK(g BETWEEN 0 AND 255),
-                b           INTEGER NOT NULL CHECK(b BETWEEN 0 AND 255),
-                a           REAL  DEFAULT 1 CHECK(a BETWEEN 0 AND 1),
-                created_at  DATETIME DEFAULT CURRENT_TIMESTAMP
-            );
-            ",
-            kind: MigrationKind::Up,
-        },
-          Migration {
-            version: 2,
-            description: "add_names_to_color",
-            sql: "
-            ALTER TABLE colors ADD COLUMN name TEXT;
-            ",
-            kind: MigrationKind::Up,
-        },
-    ];
 
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![pick_color])
@@ -131,7 +105,7 @@ pub fn run() {
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(
             tauri_plugin_sql::Builder::default()
-                .add_migrations("sqlite:hexHop.db", migrations)
+                .add_migrations("sqlite:hexHop.db", migrations::get_migrations())
                 .build(),
         )
         .plugin(tauri_plugin_single_instance::init(|_app, _args, _cwd| {}))
