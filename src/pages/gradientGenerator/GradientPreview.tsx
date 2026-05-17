@@ -3,17 +3,12 @@ import "@/style/EmptyCheckerBoard.css";
 const GradientPreview = () => {
   return (
     <>
-      <div className="bg-checkerboard   h-30 rounded-md w-full bg-amber-100 outline-3">
+      <div className="bg-checkerboard   h-30 rounded-md w-full  overflow-hidden outline-3">
         <div
           className="  h-full w-full "
           style={{
             background: `
-            repeating-linear-gradient(
-                transparent,
-                transparent 50%,
-                #9198e5 50%,
-                #9198e5 100%
-                )
+            radial-gradient(red 0 8%, yellow 8% 16%, blue 16% 100%)
                 `,
           }}
         ></div>
