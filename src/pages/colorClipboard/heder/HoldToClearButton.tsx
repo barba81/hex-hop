@@ -1,5 +1,5 @@
 import HoldToButton from "@/components/common/HoldToButton";
-import { ColorPallet } from "@/service/colorPallet";
+import { ColorPallet } from "@/features/colors/service/colorPallet";
 import { Trash2 } from "lucide-react";
 
 const HoldToClear = () => {

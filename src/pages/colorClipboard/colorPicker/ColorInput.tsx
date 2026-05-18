@@ -1,4 +1,4 @@
-import { ColorPallet } from "@/service/colorPallet";
+import { ColorPallet } from "@/features/colors/service/colorPallet";
 import { useColorStore } from "@/store/useColorStore";
 
 const ColorInput = () => {

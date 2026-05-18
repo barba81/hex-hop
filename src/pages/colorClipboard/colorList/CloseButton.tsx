@@ -1,5 +1,5 @@
-import { ColorModel } from "@/model/color";
-import { ColorPallet } from "@/service/colorPallet";
+import { ColorModel } from "@/features/colors/color.types";
+import { ColorPallet } from "@/features/colors/service/colorPallet";
 import { X } from "lucide-react";
 
 type CloseButtonParams = {

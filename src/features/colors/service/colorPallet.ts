@@ -1,5 +1,5 @@
-import { ColorModel, ColorFormat } from "@/model/color";
-import { ColorRepository } from "@/repo/colorRepository";
+import { ColorModel, ColorFormat } from "@/features/colors/color.types";
+import { ColorRepository } from "@/features/colors/repo/colorRepository";
 import { useColorStore } from "@/store/useColorStore";
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { ColorFormatTranslation } from "./colorFormatTranslation";

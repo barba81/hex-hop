@@ -1,4 +1,4 @@
-import { ColorModel } from "@/model/color";
+import { ColorModel } from "@/features/colors/color.types";
 
 type ColorBlockParams = {
   color: ColorModel;

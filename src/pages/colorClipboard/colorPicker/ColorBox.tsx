@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/popover";
 import { buttonStyle } from "./DefaultStyle";
 import { useColorStore } from "@/store/useColorStore";
-import { ColorPallet } from "@/service/colorPallet";
+import { ColorPallet } from "@/features/colors/service/colorPallet";
 
 import "@/style/EmptyCheckerBoard.css";
 
