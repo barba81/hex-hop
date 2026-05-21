@@ -1,11 +1,12 @@
 import { useEffect } from "react";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
-import { ColorPallet } from "./features/colors/service/colorPallet";
+import { ColorPallet } from "./features/Colors/colorPallet";
 import HeaderBar from "./components/header/HeaderBar";
 import { initThemeListener } from "./hooks/useTheme";
 import "./App.css";
 import HexHopNavigator from "./components/navigator/HexHopNavigator";
-import { ColorLookupName } from "./features/colors/service/colorLookup";
+import { ColorLookupName } from "./features/Colors/colorLookup";
+import { LoadAllColor } from "./features/GetAllData/GetAllData";
 
 function HexHopApp() {
 
@@ -14,7 +15,7 @@ function HexHopApp() {
     moveWindow(Position.TopRight);
     const fetchColors = async () => {
       try {
-        await ColorPallet.LoadAllColor();
+        await LoadAllColor();
       } catch (error) {
         console.error("Failed to fetch colors:", error);
       }
@@ -35,5 +36,6 @@ function HexHopApp() {
 }
 
 export default HexHopApp;
+
 
 

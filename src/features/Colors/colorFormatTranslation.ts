@@ -8,7 +8,7 @@ import {
     useMode,
     rgb
 } from "culori";
-import { ColorData, ColorModel } from "@/features/colors/color.types";
+import { ColorData, ColorModel } from "@/features/GetAllData/GetAllData.types";
 
 const oklab = useMode(modeOklab);
 

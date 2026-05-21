@@ -1,5 +1,5 @@
 import { parse, rgb } from "culori";
-import { ColorData } from "@/features/colors/color.types";
+import { ColorData } from "@/features/GetAllData/GetAllData.types";
 
 type ValidationResult = 
     | { isValid: true; format: string; entity: ColorData } 

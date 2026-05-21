@@ -1,4 +1,4 @@
-import { ColorModel, ColorFormat } from '@/features/colors/color.types';
+import { ColorModel, ColorFormat } from '@/features/GetAllData/GetAllData.types';
 import { create } from 'zustand';
 
 const defaultInputColor = "#3b82f6";

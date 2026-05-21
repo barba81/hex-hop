@@ -1,10 +1,11 @@
-import { ColorModel, ColorFormat } from "@/features/colors/color.types";
-import { ColorRepository } from "@/features/colors/repo/colorRepository";
+import { ColorModel, ColorFormat } from "@/features/GetAllData/GetAllData.types";
+import { ColorRepository } from "@/features/Colors/colorRepository";
 import { useColorStore } from "@/store/useColorStore";
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { ColorFormatTranslation } from "./colorFormatTranslation";
-import { ColorValidator } from "./colorFormatValidator";
 import { ColorLookupName } from "./colorLookup";
+import { ColorValidator } from "./colorFormatValidator";
+
 
 export class ColorPallet {
 
