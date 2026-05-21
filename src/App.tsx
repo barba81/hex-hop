@@ -6,7 +6,7 @@ import { initThemeListener } from "./hooks/useTheme";
 import "./App.css";
 import HexHopNavigator from "./components/navigator/HexHopNavigator";
 import { ColorLookupName } from "./features/Colors/colorLookup";
-import { LoadAllColor } from "./features/GetAllData/GetAllData";
+import { GetAllData } from "./features/GetAllData/GetAllData";
 
 function HexHopApp() {
 
@@ -14,11 +14,7 @@ function HexHopApp() {
     initThemeListener();
     moveWindow(Position.TopRight);
     const fetchColors = async () => {
-      try {
-        await LoadAllColor();
-      } catch (error) {
-        console.error("Failed to fetch colors:", error);
-      }
+      await GetAllData();
       await ColorLookupName.addColorNameLookup();
     };
 

@@ -41,7 +41,7 @@ export type GradientLayerDto = {
 }
 
 
-export type GradientStops = {
+export type GradientStopsDto = {
     id: number;
     order: number;
     layerId: number;
