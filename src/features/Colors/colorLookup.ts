@@ -6,7 +6,6 @@ export class ColorLookupName {
   public static async addColorNameLookup() {
     const response = await fetch("/data/colorsOptimized.json");
     ColorLookupName.colorData = await response.json();
-    debugger;
   }
 
   public static async nearestColor(color: string) {

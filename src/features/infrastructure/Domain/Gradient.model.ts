@@ -1,12 +1,6 @@
-export type GradientTypes = "linear" | "radial" | "conic";
-export type ColorSpace = 
-"oklab" | 
-"oklch" | 
-"srgb" | 
-"shorter hue"| 
-"longer hue"| 
-"srgb-linear" | 
-"longer hue";
+import { type ColorSpace } from "./ColorSpace.enum";
+import { type GradientTypes } from "./GradientTypes.enum";
+
 
 export type Gradient =  {
     id: number;
@@ -22,7 +16,7 @@ export type GradientLayer =  {
     gradientType: GradientTypes;
     rotationDegree: number;
     patternRepeatNumber: number;
-    colorSpace: number;
+    colorSpace: ColorSpace;
     easingFunction: number;
 
     stops: GradientStops[];
