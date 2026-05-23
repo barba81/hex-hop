@@ -3,7 +3,7 @@ import { ColorRepository } from "@/features/Colors/colorRepository";
 import { useColorStore } from "@/store/useColorStore";
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { ColorFormatTranslation } from "./colorFormatTranslation";
-import { ColorLookupName } from "./colorLookup";
+import { ColorLookupName } from "./colorNameSuggestion";
 import { ColorValidator } from "./colorFormatValidator";
 
 

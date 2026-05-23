@@ -5,7 +5,7 @@ import HeaderBar from "./components/header/HeaderBar";
 import { initThemeListener } from "./hooks/useTheme";
 import "./App.css";
 import HexHopNavigator from "./components/navigator/HexHopNavigator";
-import { ColorLookupName } from "./features/Colors/colorLookup";
+import { ColorLookupName } from "./features/Colors/colorNameSuggestion";
 import { GetAllData } from "./features/GetAllData/GetAllData";
 
 function HexHopApp() {

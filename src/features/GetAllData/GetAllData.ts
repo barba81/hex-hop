@@ -23,19 +23,19 @@ export async function GetAllData() {
 
 
 
-    //     const palletsModel: Palette[] = palettes.map(x => {
-    //         return {
-    //             id: x.id,
-    //             order: x.order,
-    //             name: x.name,
-    //             children: []
-    //         };
-    //     });
+        const palletsModel: Palette[] = palettes.map(x => {
+            return {
+                id: x.id,
+                order: x.order,
+                name: x.name,
+                children: []
+            };
+        });
 
-    //     const colorBlocks: ColorBlock[] = [];
+         const colorBlocks: ColorBlock[] = [...palletsModel];
 
 
-    //     useHexHopStore().actions.setColorBlock(colorBlocks);
+        useHexHopStore.getState().actions.setColorBlock(colorBlocks);
 
 
     } catch (error) {
