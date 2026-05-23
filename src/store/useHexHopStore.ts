@@ -2,25 +2,40 @@ import { type Palette } from "@/features/Infrastructure/Domain/Palette.model";
 import { type Color } from "@/features/Infrastructure/Domain/Color.model";
 import { type Gradient } from "@/features/Infrastructure/Domain/Gradient.model";
 import { create } from "zustand";
+import ColorBlock from "@/pages/colorClipboard/colorBoxes/ColorBlock";
+
+export type ColorBlock = (Palette | Color | Gradient);
 
 interface HexHopStore {
-    palettes: Palette[];
-    colors: Color[];
-    gradients: Gradient[];
+    colorBlocks: ColorBlock[]
     actions: HexHopAction;
 }
 
 interface HexHopAction {
-    setColors: (color: Color) => void;
+    setColorBlock: (blocks: ColorBlock[]) => void;
+    addColorBlock: (block: ColorBlock) => void;
+    removeColorBlock: (id: number) => void;
+    updateColorBlock: (block: ColorBlock) => void;
 }
 
-const useHexHopStore = create<HexHopStore>((set) => ({
-    palettes: [],
-    colors: [],
-    gradients: [],
-    actions : {
-        setColors: function (color: Color): void {
-            set({colors: []})
-        }
+export const useHexHopStore = create<HexHopStore>((set) => ({
+    colorBlocks: [],
+    actions: {
+       setColorBlock: (blocks: ColorBlock[]): void => {
+            set(() => ({ colorBlocks: [...blocks] }));
+        },
+        addColorBlock: (newBlock: ColorBlock): void => {
+            set((state) => ({ colorBlocks: [...state.colorBlocks, newBlock] }));
+        },
+        removeColorBlock: (id: number): void => {
+            set((state) => ({
+                colorBlocks: state.colorBlocks.filter((x) => x.id !== id),
+            }));
+        },
+        updateColorBlock: (block: ColorBlock): void => {
+            set((state) => ({
+                colorBlocks: state.colorBlocks.map((x) => (x.id === block.id ? block : x)),
+            }));
+        },
     }
 }));

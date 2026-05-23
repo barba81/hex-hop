@@ -1,8 +1,14 @@
+import { Plus } from "lucide-react";
 import HoldToClear from "./HoldToClearButton";
+import { Button } from "@/components/ui/button";
+import { AddNewPalette } from "@/features/AddNewPalette/AddNewPalette";
 
 const HeaderColorList = () => {
   return (
     <div className="w-full px-2 p-1 bg-stone-800 flex gap-2 items-center justify-end ">
+      <Button className="p-1 cursor-pointer" variant="outline" size="sm" onClick={() => AddNewPalette()}>
+        <Plus />
+      </Button>
       <div
         className="
                flex 
