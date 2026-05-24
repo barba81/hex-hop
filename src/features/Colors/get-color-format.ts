@@ -1,10 +1,13 @@
+import { parse } from "culori";
 
 export const getColorFormat = async (color: string) => {
-    // const parsed = parse(input);
+    const parsed = parse(color);
 
-    // if (!parsed) {
-    //     return { isValid: false, format: null, entity: null };
-    // }
+    if (!parsed) {
+        return { isValid: false, format: null };
+    }
+
+    return  { isValid: true, format:  parsed.mode };
 
     // if (input.startsWith('#') && ![4, 5, 7, 9].includes(input.length)) {
     //     return { isValid: false, format: null, entity: null };

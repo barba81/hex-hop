@@ -20,6 +20,7 @@ export const addNewPalette = async () => {
     if (!result.lastInsertId) throw new Error("Failed to insert palette");
 
     const model: PaletteEntity = {
+      kind:'palette',
       children: [],
       id: result.lastInsertId,
       name: paletteName,

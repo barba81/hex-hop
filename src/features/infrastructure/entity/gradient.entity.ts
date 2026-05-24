@@ -1,9 +1,8 @@
 import { ColorSpace } from "../enum/color-space.enum";
 import { GradientTypes } from "../enum/gradient-types.enum";
 
-
-
 export type GradientEntity =  {
+    kind: "gradient",
     id: number;
     order: number;
     name: string;

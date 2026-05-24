@@ -12,7 +12,7 @@ import {
   Settings,
   SwatchBook,
 } from "lucide-react";
-import GradientIcon from "../icons/my-icon";
+import GradientIcon from "../icons/gradient-icon";
 import { PagesTypes, useAppStore } from "@/store/use-theme-store";
 import { Button } from "../ui/button";
 

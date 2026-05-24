@@ -12,7 +12,8 @@ const HoldToClear = () => {
         </>
       }
       holdText={<>  <Trash2 />{"Hold..."}</>}
-      action={() => ColorPallet.ClearAll()}
+      // action={() => ColorPallet.ClearAll()}
+      action={() => {}}
     />
   );
 };

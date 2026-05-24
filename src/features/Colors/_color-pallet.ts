@@ -1,4 +1,4 @@
-import { ColorRepository } from "@/features/colors/color-repository";
+import { ColorRepository } from "@/features/colors/_color-repository";
 import { useColorStore } from "@/store/use-color-store";
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
 import { ColorFormatTranslation } from "./_color-format-translation";

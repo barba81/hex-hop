@@ -1,4 +1,4 @@
-import GradientIcon from "@/components/icons/my-icon";
+import GradientIcon from "@/components/icons/gradient-icon";
 import { ChevronDownIcon } from "lucide-react";
 import GradientColorSpaceBadgeText from "./gradient-color-badge-text";
 import "@/style/empty-checker-board.css";
