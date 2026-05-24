@@ -1,4 +1,4 @@
-import { ColorModel } from "@/features/GetAllData/GetAllData.types";
+import { ColorModel } from "@/features/common/getAllData.types";
 
 type ColorBlockParams = {
   color: ColorModel;

@@ -2,7 +2,8 @@ import { type ColorSpace } from "./ColorSpace.enum";
 import { type GradientTypes } from "./GradientTypes.enum";
 
 
-export type Gradient =  {
+
+export type GradientModel =  {
     id: number;
     order: number;
     name: string;

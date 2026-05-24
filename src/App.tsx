@@ -1,26 +1,25 @@
 import { useEffect } from "react";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
-import { ColorPallet } from "./features/Colors/colorPallet";
 import HeaderBar from "./components/header/HeaderBar";
 import { initThemeListener } from "./hooks/useTheme";
-import "./App.css";
 import HexHopNavigator from "./components/navigator/HexHopNavigator";
-import { ColorLookupName } from "./features/Colors/colorNameSuggestion";
-import { GetAllData } from "./features/GetAllData/GetAllData";
+import { getAllData } from "./features/common/getAllData";
+import { initColorNameLookup } from "./features/colors/colorNameSuggestion";
+
+import "./App.css";
 
 function HexHopApp() {
-
   useEffect(() => {
     initThemeListener();
     moveWindow(Position.TopRight);
     const fetchColors = async () => {
-      await GetAllData();
-      await ColorLookupName.addColorNameLookup();
+      await getAllData();
+      await initColorNameLookup();
     };
 
     fetchColors();
   }, []);
-  
+
   return (
     <>
       <div className="w-screen h-screen flex flex-col  bg-stone-50/80 dark:bg-stone-800/80 ">
@@ -32,6 +31,3 @@ function HexHopApp() {
 }
 
 export default HexHopApp;
-
-
-

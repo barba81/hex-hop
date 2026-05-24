@@ -1,1 +1,4 @@
-export type GradientTypes = "linear" | "radial" | "conic";
+export type GradientTypes =
+      "linear"
+    | "radial"
+    | "conic";

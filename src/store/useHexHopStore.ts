@@ -1,10 +1,10 @@
-import { type Palette } from "@/features/Infrastructure/Domain/Palette.model";
-import { type Color } from "@/features/Infrastructure/Domain/Color.model";
-import { type Gradient } from "@/features/Infrastructure/Domain/Gradient.model";
+import { type Palette } from "@/features/infrastructure/domain/Palette.model";
+import { type ColorModel } from "@/features/infrastructure/domain/Color.model";
+import { type GradientModel } from "@/features/infrastructure/domain/Gradient.model";
 import { create } from "zustand";
 import ColorBlock from "@/pages/colorClipboard/colorBoxes/ColorBlock";
 
-export type ColorBlock = (Palette | Color | Gradient);
+export type ColorBlock = (Palette | ColorModel | GradientModel);
 
 interface HexHopStore {
     colorBlocks: ColorBlock[]

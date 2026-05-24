@@ -1,7 +1,7 @@
 import { useColorStore } from "@/store/useColorStore";
 import { buttonStyle } from "./DefaultStyle";
 import { Check } from "lucide-react";
-import { ColorPallet } from "@/features/Colors/colorPallet";
+import { ColorPallet } from "@/features/colors/colorPallet";
 import AcceptedUx from "./AcceptedUx";
 import { useState } from "react";
 

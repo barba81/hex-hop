@@ -1,7 +1,7 @@
 import { Plus } from "lucide-react";
 import HoldToClear from "./HoldToClearButton";
 import { Button } from "@/components/ui/button";
-import { addNewColor } from "@/features/AddNewPalette/AddNewPalette";
+import { addNewColor } from "@/features/palettes/add-new-palette";
 
 const HeaderColorList = () => {
   return (

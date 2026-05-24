@@ -5,7 +5,7 @@ import { colorDataToHex } from "./colorFormatValidator";
 let colorData: [number, number, number, string][] | null = null;
 
 
-export async function initColorLookup(): Promise<void> {
+export async function initColorNameLookup(): Promise<void> {
   if (colorData) return;
 
   const response = await fetch("/data/colorsOptimized.json");

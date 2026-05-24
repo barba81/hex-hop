@@ -1,4 +1,4 @@
-import { ColorData, ColorModel } from "@/features/GetAllData/GetAllData.types";
+import { ColorData, ColorModel } from "@/features/common/getAllData.types";
 
 
 import "@/style/EmptyCheckerBoard.css";

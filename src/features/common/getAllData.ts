@@ -1,10 +1,10 @@
 import { ColorBlock, useHexHopStore } from "@/store/useHexHopStore";
-import { getContext } from "../Infrastructure/client";
-import { ColorDto, GradientDto, GradientLayerDto, GradientStopsDto, type PaletteDto } from "./GetAllData.types";
-import { Palette } from "../Infrastructure/Domain/Palette.model";
+import { getContext } from "../infrastructure/client";
+import { ColorDto, GradientDto, GradientLayerDto, GradientStopsDto, type PaletteDto } from "./getAllData.types";
+import { Palette } from "../infrastructure/domain/Palette.model";
 import _ from 'lodash';
 
-export async function GetAllData() {
+export async function getAllData() {
     try {
         const db = getContext();
         const palettes = await db.select<PaletteDto[]>('SELECT * FROM palette');

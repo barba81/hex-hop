@@ -1,4 +1,4 @@
-export type Color =  {
+export type ColorModel =  {
     id: number;
     order: number;
     name: string;

@@ -1,5 +1,5 @@
-import { ColorModel, ColorFormat } from "@/features/GetAllData/GetAllData.types";
-import { ColorPallet } from "@/features/Colors/colorPallet";
+import { ColorModel, ColorFormat } from "@/features/common/getAllData.types";
+import { ColorPallet } from "@/features/colors/colorPallet";
 import { Hash } from "lucide-react";
 import { useState } from "react";
 import CopyUx from "./CopyUx";

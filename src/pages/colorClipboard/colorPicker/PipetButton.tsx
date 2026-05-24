@@ -1,7 +1,7 @@
 import { Pipette } from "lucide-react";
 import { useColorStore } from "@/store/useColorStore";
 import { buttonStyle } from "./DefaultStyle";
-import { ColorPallet } from "@/features/Colors/colorPallet";
+import { ColorPallet } from "@/features/colors/colorPallet";
 import { invoke } from '@tauri-apps/api/core';
 
 declare global {
