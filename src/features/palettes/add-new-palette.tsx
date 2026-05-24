@@ -1,6 +1,6 @@
 import { getContext } from "../infrastructure/client";
 import { useHexHopStore } from "@/store/use-hex-hop-store";
-import { PaletteEntity } from "../infrastructure/domain/palette.entity";
+import { PaletteEntity } from "../infrastructure/entity/palette.entity";
 
 const getNextOrderNumber = () => {
   return useHexHopStore.getState().colorBlocks.length;

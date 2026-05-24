@@ -1,8 +1,8 @@
 import { ColorRepository } from "@/features/colors/color-repository";
 import { useColorStore } from "@/store/use-color-store";
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
-import { ColorFormatTranslation } from "./color-format-translation";
-import { ColorValidator } from "./color-format-validator";
+import { ColorFormatTranslation } from "./_color-format-translation";
+import { ColorValidator } from "./color-format-changer";
 import { getNearestColorName } from "./color-name-suggestion";
 
 
@@ -46,14 +46,4 @@ export class ColorPallet {
 //         await writeText(formatMap[colorFormat](color));
 //     }
 
-//    static  async ValidateColor(color: string) {
-//         const state = useColorStore.getState();
-//         const result = ColorValidator.validateAndConvert(color);
-
-//         state.setIsColorValid(result.isValid)
-//         if (result.isValid) {
-//             state.setLastValidColor(ColorFormatTranslation.toHex(result.entity));
-//             state.setFormat(result.format as ColorFormat);
-//         }
-//     }
 }

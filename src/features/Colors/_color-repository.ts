@@ -1,4 +1,3 @@
-import { ColorData, type ColorModel } from '@/features/common/get-all-data.types';
 import Database from '@tauri-apps/plugin-sql';
 
 const db = await Database.load('sqlite:hexHop.db');

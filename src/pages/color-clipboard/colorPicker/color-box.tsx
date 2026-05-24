@@ -32,7 +32,7 @@ const ColorBox = () => {
               color={currentColor}
               onChange={(color) => {
                 setColor(color);
-                // ColorPallet.ValidateColor(color);
+                ColorPallet.ValidateColor(color);
               }}
             />
           </PopoverContent>

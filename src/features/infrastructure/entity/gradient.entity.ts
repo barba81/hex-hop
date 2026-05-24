@@ -1,5 +1,5 @@
-import { type ColorSpace } from "./color-space.enum";
-import { type GradientTypes } from "./gradient-types.enum";
+import { ColorSpace } from "../enum/color-space.enum";
+import { GradientTypes } from "../enum/gradient-types.enum";
 
 
 

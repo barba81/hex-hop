@@ -1,9 +1,8 @@
 import { oklab } from "culori";
 import { ColorData } from "./types";
-import { colorDataToHex } from "./color-format-validator";
+import { colorDataToHex } from "./color-format-changer";
 
 let colorData: [number, number, number, string][] | null = null;
-
 
 export async function initColorNameLookup(): Promise<void> {
   if (colorData) return;
