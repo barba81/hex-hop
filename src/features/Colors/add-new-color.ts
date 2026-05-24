@@ -2,7 +2,7 @@ import { useHexHopStore } from "@/store/use-hex-hop-store";
 import { getContext } from "../infrastructure/client";
 import { ColorData } from "./types";
 import { getNearestColorName } from "./color-name-suggestion";
-import { ColorModel } from "../infrastructure/domain/color.model";
+import { ColorEntity } from "../infrastructure/domain/color.entity";
 
 const getNextOrderNumber = () => {
   return useHexHopStore.getState().colorBlocks.length;
@@ -23,7 +23,7 @@ export const addNewColor = async (color: ColorData, paletteId?: number) => {
     );
     if (!result.lastInsertId) throw new Error("Failed to insert palette");
 
-    const model: ColorModel = {
+    const model: ColorEntity = {
       id: result.lastInsertId,
       order: order,
       r: color.r,

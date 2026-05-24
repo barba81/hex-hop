@@ -7,10 +7,10 @@ import CopyLogo from "../color-list/copy-button";
 import CloseButton from "../color-list/close-button";
 import ColorName from "../color-list/color-name";
 import { DragDots } from "../color-list/drag-dots";
-import { ColorModel } from "@/features/infrastructure/domain/color.model";
+import { ColorEntity } from "@/features/infrastructure/domain/color.entity";
 import { ColorData } from "@/features/colors/types";
 
-const ColorBlock = ({ color }: { color: ColorModel }) => {
+const ColorBlock = ({ color }: { color: ColorEntity }) => {
   const isDark = useAppStore((state) => state.isDark);
 
   const getFontColor = (isDark: boolean, color: ColorData) => {

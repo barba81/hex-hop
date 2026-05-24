@@ -3,7 +3,7 @@ import { type GradientTypes } from "./gradient-types.enum";
 
 
 
-export type GradientModel =  {
+export type GradientEntity =  {
     id: number;
     order: number;
     name: string;

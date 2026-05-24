@@ -1,8 +1,9 @@
 import { ColorBlock, useHexHopStore } from "@/store/use-hex-hop-store";
 import { getContext } from "../infrastructure/client";
 import { ColorDto, GradientDto, GradientLayerDto, GradientStopsDto, type PaletteDto } from "./get-all-data.types";
-import { Palette } from "../infrastructure/domain/palette.model";
+import { PaletteEntity } from "../infrastructure/domain/palette.entity";
 import _ from 'lodash';
+import { ColorEntity } from "../infrastructure/domain/color.entity";
 
 export async function getAllData() {
     try {
@@ -20,10 +21,20 @@ export async function getAllData() {
     //    const gradient2 = _.groupBy(gradientLayer, 'id');
     //    const gradient3 = _.groupBy(gradientId, 'id');
 
+        const colorModels: ColorEntity[] = colors.map(x => {
+             return {
+                id: x.id,
+                r: x.r,
+                g: x.g,
+                b: x.b,
+                a: x.a,
+                name: x.name,
+                order: x.order,
+            };
+        });
 
 
-
-        const palletsModel: Palette[] = palettes.map(x => {
+        const palletsModel: PaletteEntity[] = palettes.map(x => {
             return {
                 id: x.id,
                 order: x.order,
@@ -32,7 +43,7 @@ export async function getAllData() {
             };
         });
 
-         const colorBlocks: ColorBlock[] = [...palletsModel];
+         const colorBlocks: ColorBlock[] = [...palletsModel, ...colorModels];
 
 
         useHexHopStore.getState().actions.setColorBlock(colorBlocks);

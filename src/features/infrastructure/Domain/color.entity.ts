@@ -1,4 +1,4 @@
-export type ColorModel =  {
+export type ColorEntity =  {
     id: number;
     order: number;
     name: string;

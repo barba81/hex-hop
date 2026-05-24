@@ -1,6 +1,6 @@
 import { getContext } from "../infrastructure/client";
 import { useHexHopStore } from "@/store/use-hex-hop-store";
-import { Palette } from "../infrastructure/domain/palette.model";
+import { PaletteEntity } from "../infrastructure/domain/palette.entity";
 
 const getNextOrderNumber = () => {
   return useHexHopStore.getState().colorBlocks.length;
@@ -19,7 +19,7 @@ export const addNewPalette = async () => {
 
     if (!result.lastInsertId) throw new Error("Failed to insert palette");
 
-    const model: Palette = {
+    const model: PaletteEntity = {
       children: [],
       id: result.lastInsertId,
       name: paletteName,
