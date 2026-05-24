@@ -36,7 +36,6 @@ const ColorInput = () => {
           placeholder="Enter color"
           value={inputColor}
           onChange={(e) => {
-            ColorPallet.ValidateColor(e.target.value);
             setColor(e.target.value);
           }}
         />

@@ -1,7 +1,7 @@
 import { Plus } from "lucide-react";
 import GradientList from "./gradient-list";
 import GradientPreview from "./gradient-preview";
-import ColorPicker from "../color-clipboard/colorPicker/color-picker";
+import ColorPicker from "../color-clipboard/color-picker/color-picker";
 
 const GradientGeneratorPage = () => {
   return (

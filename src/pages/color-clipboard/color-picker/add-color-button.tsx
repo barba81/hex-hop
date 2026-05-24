@@ -1,9 +1,10 @@
 import { useColorStore } from "@/store/use-color-store";
 import { buttonStyle } from "./default-style";
 import { Check } from "lucide-react";
-import { ColorPallet } from "@/features/colors/_color-pallet";
 import AcceptedUx from "./accepted-ux";
 import { useState } from "react";
+import { addNewColor } from "@/features/colors/add-new-color";
+import { colorStringToData } from "@/features/colors/color-format-changer";
 
 const AddColorButton = () => {
   const isColorValid = useColorStore().isColorValid;
@@ -28,7 +29,8 @@ const AddColorButton = () => {
           setTimeout(() => {
             setCoords(null);
           }, 600);
-          ColorPallet.AddColor(inputColor);
+          debugger;
+          addNewColor(colorStringToData(inputColor));
         }}
       >
         <Check strokeWidth={3} size={16} />

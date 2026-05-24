@@ -17,7 +17,7 @@ export async function getNearestColorName(color: ColorData): Promise<string> {
     throw new Error("Color lookup has not been initialized. Call initColorLookup() first.");
   }
   const hexValue = colorDataToHex(color);
-
+  debugger
   const query = oklab(hexValue);
   if (!query) return "Color Name";
 

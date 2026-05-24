@@ -1,7 +1,8 @@
+import { rgb } from "culori";
 import { ColorData } from "./types";
 
 
-export function colorDataToHex(color: ColorData): string {
+export function colorDataToHex(color: ColorData) {
     const toHex = (value: number): string => {
         const clamped = Math.max(0, Math.min(1, value));
         return Math.round(clamped * 255)
@@ -16,4 +17,17 @@ export function colorDataToHex(color: ColorData): string {
     const aHex = color.a !== undefined ? toHex(color.a) : '';
 
     return `#${rHex}${gHex}${bHex}${aHex}`;
+}
+
+export function colorStringToData(color: string){
+ const rbg = rgb(color);
+  if (!rbg) {
+    throw new Error("Invalid color string");
+  }
+  return {
+    r: rbg.r,
+    g: rbg.g,
+    b: rbg.b,
+    a: rbg.alpha
+  } as ColorData;
 }
