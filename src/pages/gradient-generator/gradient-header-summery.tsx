@@ -1,7 +1,7 @@
 import GradientIcon from "@/components/icons/my-icon";
-import "@/style/EmptyCheckerBoard.css";
 import { ChevronDownIcon } from "lucide-react";
 import GradientColorSpaceBadgeText from "./gradient-color-badge-text";
+import "@/style/empty-checker-board.css";
 
 const GradientHeaderSummery = () => {
   return (

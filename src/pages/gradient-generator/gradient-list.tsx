@@ -1,7 +1,4 @@
-import GradientIcon from "@/components/icons/my-icon";
-import "@/style/EmptyCheckerBoard.css";
-import { DragDots } from "../color-clipboard/color-list/drag-dots";
-import { ChevronDownIcon, Plus } from "lucide-react";
+import "@/style/empty-checker-board.css";
 import GradientHeaderSummery from "./gradient-header-summery";
 
 const GradientList = () => {

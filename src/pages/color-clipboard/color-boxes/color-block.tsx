@@ -1,13 +1,14 @@
-import { ColorData, ColorModel } from "@/features/common/get-all-data.types";
 
 
-import "@/style/EmptyCheckerBoard.css";
+import "@/style/empty-checker-board.css";
 import { useAppStore } from "@/store/use-theme-store";
 import ColorText from "./color-text";
 import CopyLogo from "../color-list/copy-button";
 import CloseButton from "../color-list/close-button";
 import ColorName from "../color-list/color-name";
 import { DragDots } from "../color-list/drag-dots";
+import { ColorModel } from "@/features/infrastructure/domain/color.model";
+import { ColorData } from "@/features/colors/types";
 
 const ColorBlock = ({ color }: { color: ColorModel }) => {
   const isDark = useAppStore((state) => state.isDark);

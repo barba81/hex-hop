@@ -1,4 +1,4 @@
-import "@/style/EmptyCheckerBoard.css";
+import "@/style/empty-checker-board.css";
 
 const GradientPreview = () => {
   return (
