@@ -1,10 +1,10 @@
 import { useEffect } from "react";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
-import HeaderBar from "./components/header/HeaderBar";
-import { initThemeListener } from "./hooks/useTheme";
-import HexHopNavigator from "./components/navigator/HexHopNavigator";
-import { getAllData } from "./features/common/getAllData";
-import { initColorNameLookup } from "./features/colors/colorNameSuggestion";
+import HeaderBar from "./components/header/header-bar";
+import { initThemeListener } from "./hooks/use-theme";
+import HexHopNavigator from "./components/navigator/hex-hop-navigator";
+import { getAllData } from "./features/common/get-all-data";
+import { initColorNameLookup } from "./features/colors/color-name-suggestion";
 
 import "./App.css";
 

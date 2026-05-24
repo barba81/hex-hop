@@ -1,5 +1,5 @@
-import { ColorModel } from "./Color.model";
-import { GradientModel } from "./Gradient.model";
+import { ColorModel } from "./color.model";
+import { GradientModel } from "./gradient.model";
 
 
 export type Palette =  {
