@@ -1,5 +1,6 @@
 import { oklab } from "culori";
 import { ColorData } from "./types";
+import { colorDataToHex } from "./colorFormatValidator";
 
 let colorData: [number, number, number, string][] | null = null;
 
@@ -12,13 +13,14 @@ export async function initColorLookup(): Promise<void> {
 }
 
 
-export async function getNearestColor(color: ColorData): Promise<string> {
+export async function getNearestColorName(color: ColorData): Promise<string> {
   if (!colorData) {
     throw new Error("Color lookup has not been initialized. Call initColorLookup() first.");
   }
+  const hexValue = colorDataToHex(color);
 
-  const query = oklab(color);
-  if (!query) return "";
+  const query = oklab(hexValue);
+  if (!query) return "Color Name";
 
   let minDist = Infinity;
   let nearest = "";
