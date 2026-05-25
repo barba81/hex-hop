@@ -8,8 +8,10 @@ import CloseButton from "../color-list/close-button";
 import ColorName from "../color-list/color-name";
 import { DragDots } from "../color-list/drag-dots";
 import { ColorData } from "@/features/colors/types";
+import { ColorEntity } from "@/features/infrastructure/entity/color.entity";
+import { colorDataToRoundData } from "@/features/colors/color-format-changer";
 
-const ColorBlock = ({ color }: { color: ColorEntity }) => {
+const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
   const isDark = useAppStore((state) => state.isDark);
 
   const getFontColor = (isDark: boolean, color: ColorData) => {
@@ -22,7 +24,8 @@ const ColorBlock = ({ color }: { color: ColorEntity }) => {
     return apparentLuma > 150 ? "text-gray-900" : "text-gray-100";
   };
 
-  const fontColor = getFontColor(isDark, color);
+  const fontColor = getFontColor(isDark, colorEntity);
+  const colorHexData = colorDataToRoundData(colorEntity);
 
   return (
     <div
@@ -32,7 +35,7 @@ const ColorBlock = ({ color }: { color: ColorEntity }) => {
         <div
           className="w-full h-full"
           style={{
-           backgroundColor: `rgba(${color.r}, ${color.g}, ${color.b}, ${color.a ?? 1.0})`
+           backgroundColor: `rgba(${colorHexData.r}, ${colorHexData.g}, ${colorHexData.b}, ${colorHexData.a ?? 1.0})`
           }}
         />
       </div>
@@ -40,10 +43,10 @@ const ColorBlock = ({ color }: { color: ColorEntity }) => {
       <DragDots/>
       
       <div className=" w-full h-full relative ">
-        <ColorText color={color} />
-        <CopyLogo color={color} fontClass={fontColor} />
-        <CloseButton color={color} />
-        <ColorName name={color.name} />
+        <ColorText color={colorHexData} />
+        <CopyLogo color={colorHexData} fontClass={fontColor} />
+        <CloseButton color={colorEntity} />
+        <ColorName name={colorEntity.name} />
       </div>
     </div>
   );

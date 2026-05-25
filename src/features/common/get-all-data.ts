@@ -16,13 +16,9 @@ export async function getAllData() {
 
 
 
-    //    const colorsId = _.groupBy(colors, 'id');
-    //    const gradient1 = _.groupBy(gradient, 'id');
-    //    const gradient2 = _.groupBy(gradientLayer, 'id');
-    //    const gradient3 = _.groupBy(gradientId, 'id');
 
         const colorModels: ColorEntity[] = colors.map(x => {
-             return {
+            return {
                 kind: "color",
                 id: x.id,
                 r: x.r,
@@ -31,9 +27,15 @@ export async function getAllData() {
                 a: x.a,
                 name: x.name,
                 order: x.order,
+                paletteId: x.paletteId
             };
         });
 
+
+            const colorsId = _.groupBy(colorModels, 'paletteId');
+            //    const gradient1 = _.groupBy(gradient, 'id');
+            //    const gradient2 = _.groupBy(gradientLayer, 'id');
+            //    const gradient3 = _.groupBy(gradientId, 'id');
 
         const palletsModel: PaletteEntity[] = palettes.map(x => {
             return {
@@ -41,7 +43,7 @@ export async function getAllData() {
                 id: x.id,
                 order: x.order,
                 name: x.name,
-                children: []
+                children:  colorsId[x.id] ??[]
             };
         });
 

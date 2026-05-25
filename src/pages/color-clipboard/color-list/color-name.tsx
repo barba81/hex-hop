@@ -1,4 +1,3 @@
-
 type ColorNameParams = {
   name: string;
 };

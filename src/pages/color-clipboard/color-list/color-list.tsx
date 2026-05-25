@@ -1,7 +1,7 @@
 import EmptyDisplay from "./empty-display";
 import ColorBlock from "../color-boxes/color-block";
 import { useHexHopStore } from "@/store/use-hex-hop-store";
-import { PaletteBox } from "./palette-box";
+import { PaletteBox } from "./palette-box/palette-box";
 
 const ColorList = () => {
   const colorBlocks = useHexHopStore().colorBlocks;
@@ -14,7 +14,7 @@ const ColorList = () => {
         <PaletteBox/> */}
        {colorBlocks.map((block, ix) => (
         block.kind === 'color'   ? <ColorBlock  key={ix} color={block} /> :
-        block.kind === 'palette' ? <PaletteBox  key={ix} /> :
+        block.kind === 'palette' ? <PaletteBox  key={ix} palette={block} /> :
         
         // block.kind === 'gradient'? <GradientBlock key={ix} gradient={block} /> :
         null

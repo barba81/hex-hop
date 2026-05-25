@@ -13,8 +13,8 @@ export function colorDataToHex(color: ColorData) {
     const rHex = toHex(color.r);
     const gHex = toHex(color.g);
     const bHex = toHex(color.b);
-
-    const aHex = color.a !== undefined ? toHex(color.a) : '';
+    debugger
+    const aHex = (color.a !== undefined && color.a !== null) ? toHex(color.a) : '';
 
     return `#${rHex}${gHex}${bHex}${aHex}`;
 }
@@ -30,4 +30,14 @@ export function colorStringToData(color: string){
     b: rbg.b,
     a: rbg.alpha
   } as ColorData;
+}
+
+export function colorDataToRoundData(color: ColorData){
+  return {
+    r: Math.round(color.r*255),
+    g: Math.round(color.g*255),
+    b: Math.round(color.b*255),
+    a: color.a
+  } as ColorData;
+
 }

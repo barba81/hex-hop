@@ -1,9 +1,9 @@
-import { ColorModel } from "@/features/common/get-all-data.types";
-import { ColorPallet } from "@/features/colors/_color-pallet";
+import { removeColor } from "@/features/colors/remove-color";
+import { ColorEntity } from "@/features/infrastructure/entity/color.entity";
 import { X } from "lucide-react";
 
 type CloseButtonParams = {
-  color: ColorModel;
+  color: ColorEntity;
 };
 
 const CloseButton = ({ color }: CloseButtonParams) => {
@@ -11,7 +11,7 @@ const CloseButton = ({ color }: CloseButtonParams) => {
     <>
       <div
         onClick={() => {
-          ColorPallet.DeleteById(color);
+            removeColor(color);
         }}
         className="absolute top-1 right-1 hover:cursor-pointer hover:bg-amber-50/20 p-0.5 rounded-full"
       >
