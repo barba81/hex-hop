@@ -1,7 +1,7 @@
-import { ColorModel } from "@/features/common/get-all-data.types";
+import { ColorData } from "@/features/colors/types";
 
 type ColorBlockParams = {
-  color: ColorModel;
+  color: ColorData;
 };
 
 

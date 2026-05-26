@@ -1,5 +1,5 @@
 import HoldToButton from "@/components/common/hold-to-button";
-import { ColorPallet } from "@/features/colors/_color-pallet";
+import { removeAllData } from "@/features/common/remove-all";
 import { Trash2 } from "lucide-react";
 
 const HoldToClear = () => {
@@ -12,8 +12,7 @@ const HoldToClear = () => {
         </>
       }
       holdText={<>  <Trash2 />{"Hold..."}</>}
-      // action={() => ColorPallet.ClearAll()}
-      action={() => {}}
+      action={() => {removeAllData()}}
     />
   );
 };

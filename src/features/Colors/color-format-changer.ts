@@ -13,7 +13,6 @@ export function colorDataToHex(color: ColorData) {
     const rHex = toHex(color.r);
     const gHex = toHex(color.g);
     const bHex = toHex(color.b);
-    debugger
     const aHex = (color.a !== undefined && color.a !== null) ? toHex(color.a) : '';
 
     return `#${rHex}${gHex}${bHex}${aHex}`;

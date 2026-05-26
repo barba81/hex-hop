@@ -3,7 +3,7 @@ import { JSX, useRef, useState } from "react";
 
 
 type CloseButtonParams = {
-  action: () => {};
+  action: () => void;
   holdDuration?: number;
   text: JSX.Element;
   holdText: JSX.Element;

@@ -29,7 +29,6 @@ const AddColorButton = () => {
           setTimeout(() => {
             setCoords(null);
           }, 600);
-          debugger;
           addNewColor(colorStringToData(inputColor));
         }}
       >

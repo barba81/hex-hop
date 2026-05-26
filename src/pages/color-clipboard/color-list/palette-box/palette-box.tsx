@@ -28,16 +28,15 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
             >
               {/* Background  */}
               <div className="absolute inset-0 bg-checkerboard    flex">
-                {palette.children.map((block) =>
+                {palette.children.map((block,ix) =>
                   block.kind === "color" ? (
                     <div
+                      key={ix}
                       className="w-full h-full"
                       style={{
                         background: colorDataToHex(block),
                       }}
-                    >{
-                    }
-                    </div>
+                    />
                   ) : 
                   null,
                 )}
@@ -61,8 +60,12 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
             </div>
             {expandPalette && (
               <div className="flex flex-col p-2 gap-2 bg-foreground/2 rounded-b-md ">
-                {/* <ColorBlock color={{r: 32, b: 23, g: 32, id: 1, name:"123"}} />
-            <ColorBlock color={{r: 32, b: 23, g: 32, id: 1, name:"123"}} /> */}
+                 {palette.children.map((block,  ix) =>
+                  block.kind === "color" ? (
+                  <ColorBlock color={block} key={ix}/>
+                  ) : 
+                  null,
+                )}
               </div>
             )}
           </>

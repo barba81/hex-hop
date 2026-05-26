@@ -33,6 +33,7 @@ export async function getAllData() {
 
 
             const colorsId = _.groupBy(colorModels, 'paletteId');
+            console.log(colorsId);
             //    const gradient1 = _.groupBy(gradient, 'id');
             //    const gradient2 = _.groupBy(gradientLayer, 'id');
             //    const gradient3 = _.groupBy(gradientId, 'id');
@@ -47,7 +48,7 @@ export async function getAllData() {
             };
         });
 
-         const colorBlocks: ColorBlock[] = [...palletsModel, ...colorModels];
+         const colorBlocks: ColorBlock[] = [...palletsModel, ...colorsId['null'] ?? []];
 
 
         useHexHopStore.getState().actions.setColorBlock(colorBlocks);

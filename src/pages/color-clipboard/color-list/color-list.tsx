@@ -10,12 +10,11 @@ const ColorList = () => {
     <>
       <div className="flex-1 overflow-y-auto px-2 flex flex-col gap-3 p-2">
         {colorBlocks.length === 0 && <EmptyDisplay />}
-        {/* <PaletteBox/>
-        <PaletteBox/> */}
-       {colorBlocks.map((block, ix) => (
+       {colorBlocks
+       .sort((a, b) => a.order - b.order)
+       .map((block, ix) => (
         block.kind === 'color'   ? <ColorBlock  key={ix} color={block} /> :
         block.kind === 'palette' ? <PaletteBox  key={ix} palette={block} /> :
-        
         // block.kind === 'gradient'? <GradientBlock key={ix} gradient={block} /> :
         null
       ))}
