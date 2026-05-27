@@ -1,6 +1,7 @@
 import { ColorBlock, useHexHopStore } from "@/store/use-hex-hop-store";
 import { getContext } from "../infrastructure/client";
-import { ColorDto, GradientDto, GradientLayerDto, GradientStopsDto, type PaletteDto } from "./get-all-data.types";
+// import { ColorDto, GradientDto, GradientLayerDto, GradientStopsDto, type PaletteDto } from "./get-all-data.types";
+import { ColorDto,  type PaletteDto } from "./get-all-data.types";
 import { PaletteEntity } from "../infrastructure/entity/palette.entity";
 import { ColorEntity } from "../infrastructure/entity/color.entity";
 import _ from 'lodash';
@@ -10,9 +11,9 @@ export async function getAllData() {
         const db = getContext();
         const palettes = await db.select<PaletteDto[]>('SELECT * FROM palette');
         const colors = await db.select<ColorDto[]>('SELECT * FROM colors');
-        const gradient = await db.select<GradientDto[]>('SELECT * FROM gradient');
-        const gradientLayer = await db.select<GradientLayerDto[]>('SELECT * FROM gradient_layer');
-        const gradientStop = await db.select<GradientStopsDto[]>('SELECT * FROM gradient_stop');
+        // const gradient = await db.select<GradientDto[]>('SELECT * FROM gradient');
+        // const gradientLayer = await db.select<GradientLayerDto[]>('SELECT * FROM gradient_layer');
+        // const gradientStop = await db.select<GradientStopsDto[]>('SELECT * FROM gradient_stop');
 
         const colorModels: ColorEntity[] = colors.map(x => {
             return {

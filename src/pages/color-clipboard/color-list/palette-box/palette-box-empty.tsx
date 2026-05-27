@@ -4,7 +4,7 @@ type PaletteBoxParams = {
   name: string;
 };
 
-export const PaletteBoxEmpty = ({ name }: PaletteBoxParams) => {
+export const PaletteBoxEmpty = ({  }: PaletteBoxParams) => {
 
   return (
     <>

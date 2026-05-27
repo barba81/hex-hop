@@ -1,6 +1,7 @@
 import { useColorStore } from "@/store/use-color-store";
 import { colorStringToData } from "./color-format-changer";
 import { addNewColor } from "./add-new-color";
+import { validateColor } from "./color-validate";
 
 
 export const colorPicker = async () => {
@@ -21,8 +22,7 @@ export const colorPicker = async () => {
         setInputColor(result.sRGBHex);
         const coloBox = colorStringToData(result.sRGBHex);
         addNewColor(coloBox);
-
-        // ColorPallet.ValidateColor(result.sRGBHex);
+        validateColor(result.sRGBHex);
     } catch (e) {
         console.error("Color selection cancelled or failed");
     }

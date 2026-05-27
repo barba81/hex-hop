@@ -1,6 +1,5 @@
 import { useColorStore } from "@/store/use-color-store";
-import { formatHex, parse, rgb } from "culori";
-import { ColorData } from "./types";
+import { formatHex, parse } from "culori";
 
 export const validateColor = async (color: string) => {
     const parsed = parse(color);
@@ -14,5 +13,4 @@ export const validateColor = async (color: string) => {
     state.setIsColorValid(true);
     state.setFormat( parsed.mode);
     state.setLastValidColor(formatHex(parsed));
-
 }

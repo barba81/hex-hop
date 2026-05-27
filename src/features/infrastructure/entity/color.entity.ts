@@ -7,6 +7,6 @@ export type ColorEntity =  {
     g: number;
     b: number;
     a?: number;
-    paletteId: number;
+    paletteId?: number;
 }
 

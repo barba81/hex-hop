@@ -5,6 +5,7 @@ import { useState } from "react";
 import { PaletteEntity } from "@/features/infrastructure/entity/palette.entity";
 import { PaletteBoxEmpty } from "./palette-box-empty";
 import { colorDataToHex } from "@/features/colors/color-format-changer";
+import {useSortable} from '@dnd-kit/react/sortable';
 
 type PaletteBoxParams = {
   palette: PaletteEntity;
@@ -12,10 +13,13 @@ type PaletteBoxParams = {
 
 export const PaletteBox = ({ palette }: PaletteBoxParams) => {
   const [expandPalette, setExpandPalette] = useState<boolean>(false);
+  const {ref} = useSortable({id: palette.order, index: palette.order});
 
   return (
     <>
-      <div className="flex flex-col outline-3 rounded-md ">
+      <div
+      ref={ref} 
+      className="flex flex-col outline-3 rounded-md ">
         {palette.children.length === 0 && (
           <>
             <PaletteBoxEmpty name="Empty Palette" />

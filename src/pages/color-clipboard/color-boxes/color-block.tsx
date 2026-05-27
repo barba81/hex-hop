@@ -10,8 +10,11 @@ import { DragDots } from "../color-list/drag-dots";
 import { ColorData } from "@/features/colors/types";
 import { ColorEntity } from "@/features/infrastructure/entity/color.entity";
 import { colorDataToRoundData } from "@/features/colors/color-format-changer";
+import {useSortable} from '@dnd-kit/react/sortable';
 
 const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
+  const {ref} = useSortable({id: colorEntity.id, index: colorEntity.order});
+  
   const isDark = useAppStore((state) => state.isDark);
 
   const getFontColor = (isDark: boolean, color: ColorData) => {
@@ -29,6 +32,7 @@ const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
 
   return (
     <div
+    ref={ref} 
       className={`h-14 rounded-md w-full shrink-0 relative flex items-center justify-between  ${fontColor} outline-1 overflow-hidden`}
     >
       <div className="absolute inset-0 bg-checkerboard  rounded-md overflow-hidden">

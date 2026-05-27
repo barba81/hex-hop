@@ -3,7 +3,6 @@ import { getContext } from "../infrastructure/client";
 import { ColorData } from "./types";
 import { getNearestColorName } from "./color-name-suggestion";
 import { ColorEntity } from "../infrastructure/entity/color.entity";
-import { rgb } from "culori";
 
 const getNextOrderNumber = () => {
   return useHexHopStore.getState().colorBlocks.length;
@@ -25,8 +24,9 @@ export const addNewColor = async (color: ColorData, paletteId?: number) => {
     if (!result.lastInsertId) throw new Error("Failed to insert palette");
 
     const model: ColorEntity = {
-      kind: 'color',
       id: result.lastInsertId,
+      paletteId: paletteId,
+      kind: 'color',
       order: order,
       r: color.r,
       g: color.g,

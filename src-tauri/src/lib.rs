@@ -15,7 +15,7 @@ pub mod migrations;
 
 
 #[tauri::command]
-async fn pick_color(app_handle: AppHandle) -> Result<Option<String>, String> {
+async fn pick_color(_app_handle: AppHandle) -> Result<Option<String>, String> {
     #[cfg(target_os = "macos")]
     {
         // Channel to send the color back from the Objective-C block to our async Rust task
@@ -23,7 +23,7 @@ async fn pick_color(app_handle: AppHandle) -> Result<Option<String>, String> {
         let tx = Arc::new(Mutex::new(Some(tx)));
 
         // NSColorSampler interacts with UI and MUST run on the main thread
-        app_handle.run_on_main_thread(move || {
+        _app_handle.run_on_main_thread(move || {
             unsafe {
                 let sampler_class = class!(NSColorSampler);
                 // if sampler_class.is_null() {
