@@ -3,7 +3,7 @@ import { useColorStore } from "@/store/use-color-store";
 
 const ColorInput = () => {
   const setColor = useColorStore().setInputColor;
-  const inputFormat = useColorStore().inputFormat;
+  // const inputFormat = useColorStore().inputFormat;
   const isColorValid = useColorStore().isColorValid;
   const inputColor = useColorStore().inputColor;
 
@@ -56,7 +56,7 @@ const ColorInput = () => {
           select-none
           text-muted-foreground`}
         >
-          {inputFormat}
+          {/* {inputFormat} */}
         </div>
       </div>
     </>

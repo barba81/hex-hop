@@ -40,3 +40,13 @@ export function colorDataToRoundData(color: ColorData){
   } as ColorData;
 
 }
+
+export const toNormalForm  = (color: ColorData) => {
+        return {
+            mode: 'rgb' as const,
+            r: color.r / 255,
+            g: color.g / 255,
+            b: color.b / 255,
+            alpha: color.a ?? 1
+        };
+    }

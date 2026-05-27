@@ -14,9 +14,6 @@ export async function getAllData() {
         const gradientLayer = await db.select<GradientLayerDto[]>('SELECT * FROM gradient_layer');
         const gradientStop = await db.select<GradientStopsDto[]>('SELECT * FROM gradient_stop');
 
-
-
-
         const colorModels: ColorEntity[] = colors.map(x => {
             return {
                 kind: "color",

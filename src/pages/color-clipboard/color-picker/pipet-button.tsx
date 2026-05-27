@@ -1,40 +1,8 @@
 import { Pipette } from "lucide-react";
-import { useColorStore } from "@/store/use-color-store";
 import { buttonStyle } from "./default-style";
-import { ColorPallet } from "@/features/colors/_color-pallet";
-import { invoke } from '@tauri-apps/api/core';
-
-declare global {
-  interface Window {
-    EyeDropper?: new () => {
-      open: () => Promise<{ sRGBHex: string }>;
-    };
-  }
-}
+import { colorPicker } from "@/features/colors/color-picker";
 
 const PipetButton = () => {
-  const setInputColor = useColorStore().setInputColor;
-
-  const handlePickColor = async () => {
-
-    const hexColor = await invoke<string | null>('pick_color');
-    console.log(hexColor);
-    if (!window.EyeDropper) {
-      return;
-    }
-
-    const eyeDropper = new window.EyeDropper();
-
-    try {
-      const result = await eyeDropper.open();
-      setInputColor(result.sRGBHex);
-      ColorPallet.ValidateColor(result.sRGBHex);
-      ColorPallet.AddColor(result.sRGBHex);
-    } catch (e) {
-      console.error("Color selection cancelled or failed");
-    }
-  };
-
   return (
     <>
       <div
@@ -49,7 +17,7 @@ const PipetButton = () => {
         text-gray-900 
         dark:text-white `}
         onClick={() => {
-          handlePickColor();
+          colorPicker();
         }}
       >
         <Pipette strokeWidth={2} size={15} />

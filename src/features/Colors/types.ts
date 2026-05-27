@@ -4,3 +4,12 @@ export type ColorData =  {
     b: number;
     a?: number;
 }
+
+
+declare global {
+  interface Window {
+    EyeDropper?: new () => {
+      open: () => Promise<{ sRGBHex: string }>;
+    };
+  }
+}

@@ -1,11 +1,12 @@
-import { ColorModel, ColorFormat } from "@/features/common/get-all-data.types";
-import { ColorPallet } from "@/features/colors/_color-pallet";
 import { Hash } from "lucide-react";
 import { useState } from "react";
 import CopyUx from "./copy-ux";
+import { ColorSpace } from "@/features/infrastructure/enum/color-space.enum";
+import { ColorEntity } from "@/features/infrastructure/entity/color.entity";
+import { copyToClipboard } from "@/features/colors/copy-to-clipboard";
 
 export type CopyLogoParam = {
-  color: ColorModel;
+  color: ColorEntity;
   fontClass: string;
 };
 
@@ -14,10 +15,11 @@ const commonStyles =
 
 const CopyLogo = ({ color, fontClass }: CopyLogoParam) => {
   const [coords, setCoords] = useState<DOMRect | null>(null);
-  const [selectedType, setSelectedType] = useState<ColorFormat | null>(null);
+  const [selectedType, setSelectedType] = useState<ColorSpace | null>(null);
+ 
   const handleCopy = (
     e: React.MouseEvent<HTMLDivElement>,
-    type: ColorFormat,
+    type: ColorSpace,
   ) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setCoords(rect);
@@ -28,14 +30,14 @@ const CopyLogo = ({ color, fontClass }: CopyLogoParam) => {
       setCoords(null);
     }, 600);
 
-    ColorPallet.CopyToClipboard(color, type);
+    copyToClipboard(color, type);
   };
-  const formats: { type: ColorFormat; label: string; isIcon?: boolean }[] = [
-    { label: "#", type: "#", isIcon: true },
-    { label: "RGB", type: "RBG" },
-    { label: "HSL", type: "HSL" },
-    { label: "OK", type: "OK" },
-    { label: "VEC", type: "VEC" },
+  const formats: { type: ColorSpace; label: string; isIcon?: boolean }[] = [
+    { label: "#", type: "oklab", isIcon: true },
+    { label: "RGB", type: "oklab" },
+    { label: "HSL", type: "oklab" },
+    { label: "OK", type: "oklab" },
+    { label: "VEC", type: "oklab" },
   ];
 
   return (
