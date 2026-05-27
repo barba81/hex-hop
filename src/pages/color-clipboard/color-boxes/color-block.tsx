@@ -44,7 +44,7 @@ const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
       
       <div className=" w-full h-full relative ">
         <ColorText color={colorHexData} />
-        <CopyLogo color={colorHexData} fontClass={fontColor} />
+        <CopyLogo color={colorEntity} fontClass={fontColor} />
         <CloseButton color={colorEntity} />
         <ColorName name={colorEntity.name} />
       </div>

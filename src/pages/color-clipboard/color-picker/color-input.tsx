@@ -1,9 +1,9 @@
-import { ColorPallet } from "@/features/colors/_color-pallet";
+import { validateColor } from "@/features/colors/color-validate";
 import { useColorStore } from "@/store/use-color-store";
 
 const ColorInput = () => {
   const setColor = useColorStore().setInputColor;
-  // const inputFormat = useColorStore().inputFormat;
+  const colorFormat = useColorStore().colorFormat;
   const isColorValid = useColorStore().isColorValid;
   const inputColor = useColorStore().inputColor;
 
@@ -37,6 +37,7 @@ const ColorInput = () => {
           value={inputColor}
           onChange={(e) => {
             setColor(e.target.value);
+            validateColor(e.target.value);
           }}
         />
 
@@ -56,7 +57,7 @@ const ColorInput = () => {
           select-none
           text-muted-foreground`}
         >
-          {/* {inputFormat} */}
+          {colorFormat}
         </div>
       </div>
     </>

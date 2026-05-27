@@ -1,12 +1,18 @@
 import { useColorStore } from "@/store/use-color-store";
+import { formatHex, parse, rgb } from "culori";
+import { ColorData } from "./types";
 
 export const validateColor = async (color: string) => {
-    // const state = useColorStore.getState();
-    // const result = ColorValidator.validateAndConvert(color);
+    const parsed = parse(color);
 
-    // state.setIsColorValid(result.isValid)
-    // if (result.isValid) {
-    //     state.setLastValidColor(ColorFormatTranslation.toHex(result.entity));
-    //     state.setFormat(result.format as ColorFormat);
-    // }
+    const state = useColorStore.getState();
+    if (!parsed) {
+        state.setIsColorValid(false);
+        return ;
+    }
+
+    state.setIsColorValid(true);
+    state.setFormat( parsed.mode);
+    state.setLastValidColor(formatHex(parsed));
+
 }

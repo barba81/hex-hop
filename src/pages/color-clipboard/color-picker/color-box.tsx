@@ -8,6 +8,7 @@ import { buttonStyle } from "./default-style";
 import { useColorStore } from "@/store/use-color-store";
 
 import "@/style/empty-checker-board.css";
+import { validateColor } from "@/features/colors/color-validate";
 
 const ColorBox = () => {
   const currentColor = useColorStore().validColor;
@@ -32,7 +33,7 @@ const ColorBox = () => {
               color={currentColor}
               onChange={(color) => {
                 setColor(color);
-                // ColorPallet.ValidateColor(color);
+                validateColor(color);
               }}
             />
           </PopoverContent>
