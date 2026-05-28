@@ -1,12 +1,10 @@
-
-
 import "@/style/empty-checker-board.css";
 import { useAppStore } from "@/store/use-theme-store";
 import ColorText from "./color-text";
-import CopyLogo from "../color-list/copy-button";
-import CloseButton from "../color-list/close-button";
-import ColorName from "../color-list/color-name";
-import { DragDots } from "../color-list/drag-dots";
+import CopyLogo from "./copy-button";
+import CloseButton from "./close-button";
+import ColorName from "./color-name";
+import { DragDots } from "../drag-dots";
 import { ColorData } from "@/features/colors/types";
 import { ColorEntity } from "@/features/infrastructure/entity/color.entity";
 import { colorDataToRoundData } from "@/features/colors/color-format-changer";
@@ -49,8 +47,8 @@ const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
       <div className=" w-full h-full relative ">
         <ColorText color={colorHexData} />
         <CopyLogo color={colorEntity} fontClass={fontColor} />
-        <CloseButton color={colorEntity} />
-        <ColorName name={colorEntity.name} />
+        <CloseButton colorEntity={colorEntity} />
+        <ColorName colorEntity={colorEntity} />
       </div>
     </div>
   );

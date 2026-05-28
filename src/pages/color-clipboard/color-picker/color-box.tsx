@@ -4,7 +4,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { buttonStyle } from "./default-style";
+import { buttonStyle } from "../../../style/default-style";
 import { useColorStore } from "@/store/use-color-store";
 
 import "@/style/empty-checker-board.css";
@@ -13,6 +13,11 @@ import { validateColor } from "@/features/colors/color-validate";
 const ColorBox = () => {
   const currentColor = useColorStore().validColor;
   const setColor = useColorStore().setInputColor;
+
+  const handleOnChange = (color: string) => {
+    setColor(color);
+    validateColor(color);
+  };
 
   return (
     <>
@@ -31,10 +36,7 @@ const ColorBox = () => {
           <PopoverContent className="w-auto p-3">
             <HexAlphaColorPicker
               color={currentColor}
-              onChange={(color) => {
-                setColor(color);
-                validateColor(color);
-              }}
+              onChange={handleOnChange}
             />
           </PopoverContent>
         </Popover>

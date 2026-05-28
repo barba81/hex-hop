@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { DragDots } from "../drag-dots";
-import ColorBlock from "../../color-boxes/color-block";
+import ColorBlock from "../color-box/color-block";
 import { useState } from "react";
 import { PaletteEntity } from "@/features/infrastructure/entity/palette.entity";
 import { PaletteBoxEmpty } from "./palette-box-empty";

@@ -1,6 +1,6 @@
 
 import { create } from "zustand";
-import ColorBlock from "@/pages/color-clipboard/color-boxes/color-block";
+import ColorBlock from "@/pages/color-clipboard/color-list/color-box/color-block";
 import { type PaletteEntity } from "@/features/infrastructure/entity/palette.entity";
 import { type GradientEntity } from "@/features/infrastructure/entity/gradient.entity";
 import { type ColorEntity } from "@/features/infrastructure/entity/color.entity";

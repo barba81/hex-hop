@@ -1,5 +1,5 @@
 import { useColorStore } from "@/store/use-color-store";
-import { buttonStyle } from "./default-style";
+import { buttonStyle } from "../../../style/default-style";
 import { Check } from "lucide-react";
 import AcceptedUx from "./accepted-ux";
 import { useState } from "react";
@@ -33,7 +33,6 @@ const AddColorButton = () => {
         }}
       >
         <Check strokeWidth={3} size={16} />
-        {coords && <AcceptedUx anchorRect={coords} />}
       </div>
     </>
   );

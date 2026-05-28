@@ -5,7 +5,6 @@ export type ColorData =  {
     a?: number;
 }
 
-
 declare global {
   interface Window {
     EyeDropper?: new () => {

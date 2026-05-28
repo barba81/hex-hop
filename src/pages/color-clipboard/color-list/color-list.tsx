@@ -1,5 +1,5 @@
 import EmptyDisplay from "./empty-display";
-import ColorBlock from "../color-boxes/color-block";
+import ColorBlock from "./color-box/color-block";
 import { useHexHopStore } from "@/store/use-hex-hop-store";
 import { PaletteBox } from "./palette-box/palette-box";
 
