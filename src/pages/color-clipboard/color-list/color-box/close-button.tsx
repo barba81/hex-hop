@@ -1,4 +1,4 @@
-import { removeColor } from "@/features/colors/remove-color";
+import { removeColor } from "@/features/color/remove-color";
 import { ColorEntity } from "@/features/infrastructure/entity/color.entity";
 import { X } from "lucide-react";
 

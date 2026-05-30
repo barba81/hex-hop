@@ -5,9 +5,9 @@ import CopyLogo from "./copy-button";
 import CloseButton from "./close-button";
 import ColorName from "./color-name";
 import { DragDots } from "../drag-dots";
-import { ColorData } from "@/features/colors/types";
+import { ColorData } from "@/features/color/types";
 import { ColorEntity } from "@/features/infrastructure/entity/color.entity";
-import { colorDataToRoundData } from "@/features/colors/color-format-changer";
+import { colorDataToRoundData } from "@/features/color/color-format-changer";
 import {useSortable} from '@dnd-kit/react/sortable';
 
 const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {

@@ -1,6 +1,6 @@
 import { Pipette } from "lucide-react";
 import { buttonStyle } from "../../../style/default-style";
-import { colorPicker } from "@/features/colors/color-picker";
+import { colorPicker } from "@/features/color/color-picker";
 
 const PipetButton = () => {
   return (

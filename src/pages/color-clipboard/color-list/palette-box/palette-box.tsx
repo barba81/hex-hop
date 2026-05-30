@@ -4,8 +4,9 @@ import ColorBlock from "../color-box/color-block";
 import { useState } from "react";
 import { PaletteEntity } from "@/features/infrastructure/entity/palette.entity";
 import { PaletteBoxEmpty } from "./palette-box-empty";
-import { colorDataToHex } from "@/features/colors/color-format-changer";
+import { colorDataToHex } from "@/features/color/color-format-changer";
 import {useSortable} from '@dnd-kit/react/sortable';
+import {useDroppable} from '@dnd-kit/react';
 
 type PaletteBoxParams = {
   palette: PaletteEntity;
@@ -13,17 +14,18 @@ type PaletteBoxParams = {
 
 export const PaletteBox = ({ palette }: PaletteBoxParams) => {
   const [expandPalette, setExpandPalette] = useState<boolean>(false);
-  const {ref} = useSortable({id: palette.order, index: palette.order});
+  const {ref: refDraggable} = useSortable({id: palette.blockId, index: palette.order});
+  const {ref: refDroppable} = useDroppable({id: palette.blockId + "-drop"});
 
   return (
     <>
       <div
-      ref={ref} 
+      ref={refDraggable} 
       className="flex flex-col outline-3 rounded-md ">
         {palette.children.length === 0 && (
-          <>
+          <div ref={refDroppable}>
             <PaletteBoxEmpty name="Empty Palette" />
-          </>
+          </div>
         )}
         {palette.children.length !== 0 && (
           <>

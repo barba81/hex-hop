@@ -1,6 +1,6 @@
 import { Plus, SwatchBook } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { addNewPalette } from "@/features/palettes/add-new-palette";
+import { addNewPalette } from "@/features/palette/add-new-palette";
 
 export const AddNewPalette = () => {
   return <>

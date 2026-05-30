@@ -1,5 +1,5 @@
 import { Input } from "@/components/ui/input";
-import { updateColor } from "@/features/colors/update-color";
+import { updateColor } from "@/features/color/update-color";
 import { ColorEntity } from "@/features/infrastructure/entity/color.entity";
 import { useHexHopStore } from "@/store/use-hex-hop-store";
 import { useState } from "react";
