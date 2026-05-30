@@ -1,4 +1,4 @@
-import { validateColor } from "@/features/colors/color-validate";
+import { setColorValidityAndMode, validateColor } from "@/features/colors/color-validator";
 import { useColorStore } from "@/store/use-color-store";
 
 const ColorInput = () => {
@@ -37,7 +37,7 @@ const ColorInput = () => {
           value={inputColor}
           onChange={(e) => {
             setColor(e.target.value);
-            validateColor(e.target.value);
+            setColorValidityAndMode(e.target.value);
           }}
         />
 

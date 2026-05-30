@@ -8,7 +8,7 @@ import { buttonStyle } from "../../../style/default-style";
 import { useColorStore } from "@/store/use-color-store";
 
 import "@/style/empty-checker-board.css";
-import { validateColor } from "@/features/colors/color-validate";
+import { setColorValidityAndMode } from "@/features/colors/color-validator";
 
 const ColorBox = () => {
   const currentColor = useColorStore().validColor;
@@ -16,7 +16,7 @@ const ColorBox = () => {
 
   const handleOnChange = (color: string) => {
     setColor(color);
-    validateColor(color);
+    setColorValidityAndMode(color);
   };
 
   return (

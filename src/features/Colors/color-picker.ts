@@ -1,7 +1,7 @@
 import { useColorStore } from "@/store/use-color-store";
 import { colorStringToData } from "./color-format-changer";
 import { addNewColor } from "./add-new-color";
-import { validateColor } from "./color-validate";
+import { setColorValidityAndMode } from "./color-validator";
 
 
 export const colorPicker = async () => {
@@ -9,6 +9,8 @@ export const colorPicker = async () => {
     // mack implementation 
     // const hexColor = await invoke<string | null>('pick_color');
     // console.log(hexColor);
+
+    
     if (!window.EyeDropper) {
         return;
     }
@@ -22,7 +24,7 @@ export const colorPicker = async () => {
         setInputColor(result.sRGBHex);
         const coloBox = colorStringToData(result.sRGBHex);
         addNewColor(coloBox);
-        validateColor(result.sRGBHex);
+        setColorValidityAndMode(result.sRGBHex);
     } catch (e) {
         console.error("Color selection cancelled or failed");
     }
