@@ -13,18 +13,27 @@ export const addNewColor = async (color: ColorData, paletteId?: number) => {
     const db = getContext();
     const order = getNextOrderNumber();
     const colorName = await getNearestColorName(color);
+  
+   const blockResult = await db.execute(
+      `INSERT INTO block ([order]) VALUES (?)`,
+      [order],
+    );
+  
+      if (!blockResult.lastInsertId) throw new Error("Failed to insert block");
+    const blockId = blockResult.lastInsertId;
 
     const result = await db.execute(
       `
       INSERT INTO 
-      colors ([order], paletteId, r,g,b,a, name) 
+      color (blockId, paletteId, r,g,b,a, name) 
       VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [order, paletteId, color.r, color.g, color.b, color.a, colorName],
+      [blockId, paletteId, color.r, color.g, color.b, color.a, colorName],
     );
     if (!result.lastInsertId) throw new Error("Failed to insert palette");
 
     const model: ColorEntity = {
       id: result.lastInsertId,
+      blockId: blockId,
       paletteId: paletteId,
       kind: 'color',
       order: order,

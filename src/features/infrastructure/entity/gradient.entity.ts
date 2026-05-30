@@ -4,6 +4,7 @@ import { GradientTypes } from "../enum/gradient-types.enum";
 export type GradientEntity =  {
     kind: "gradient",
     id: number;
+    blockId:number;
     order: number;
     name: string;
     

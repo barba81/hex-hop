@@ -7,9 +7,10 @@ type CloseButtonParams = {
   holdDuration?: number;
   text: JSX.Element;
   holdText: JSX.Element;
+  className: string;
 };
 
-const HoldToButton = ({action, holdDuration, text, holdText}: CloseButtonParams) => {
+const HoldToButton = ({action, holdDuration, text, holdText, className}: CloseButtonParams) => {
   const [isHolding, setIsHolding] = useState(false);
   const timerRef = useRef<number>(null);
   const HOLD_DURATION = holdDuration ?? 750;
@@ -36,10 +37,10 @@ const HoldToButton = ({action, holdDuration, text, holdText}: CloseButtonParams)
       onPointerDown={startHold}
       onPointerUp={stopHold}
       onPointerLeave={stopHold}
-      className="relative  transition-all active:scale-95 w-25 select-none hover:cursor-pointer h-6"
+      className="relative   w-25 select-none hover:cursor-pointer h-6"
     >
       <div
-        className="absolute left-0 bottom-0 top-0 bg-red-500/60 transition-all ease-linear rounded-md"
+        className="absolute left-0 bottom-0 top-0 bg-red-500/60  rounded-md"
         style={{
           width: isHolding ? "100%" : "0%",
           transitionDuration: isHolding ? `${HOLD_DURATION}ms` : "150ms",

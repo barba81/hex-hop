@@ -12,7 +12,7 @@ pub fn get_migrations() -> Vec<Migration> {
                 name        TEXT
             );
 
-            CREATE TABLE colors (
+            CREATE TABLE color (
                 id          INTEGER PRIMARY KEY AUTOINCREMENT,
                 [order]     INTEGER, 
                 paletteId   INTEGER,
@@ -65,6 +65,27 @@ pub fn get_migrations() -> Vec<Migration> {
 
                 FOREIGN KEY (layerId) REFERENCES gradient_layer(id) ON DELETE CASCADE
             ); 
+            ",
+            kind: MigrationKind::Up,
+        },
+         Migration {
+            version: 3,
+            description: "block",
+            sql: "
+        CREATE TABLE block (
+            id    INTEGER PRIMARY KEY AUTOINCREMENT,
+            [order] INTEGER
+        );
+
+        ALTER TABLE color DROP COLUMN [order];
+        ALTER TABLE color ADD COLUMN blockId INTEGER REFERENCES block(id);
+
+        ALTER TABLE gradient DROP COLUMN [order];
+        ALTER TABLE gradient ADD COLUMN blockId INTEGER REFERENCES block(id);
+
+        ALTER TABLE palette DROP COLUMN [order];
+        ALTER TABLE palette ADD COLUMN blockId INTEGER REFERENCES block(id);
+
             ",
             kind: MigrationKind::Up,
         },

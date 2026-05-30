@@ -3,7 +3,7 @@ import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import HeaderBar from "./components/header/header-bar";
 import { initThemeListener } from "./hooks/use-theme";
 import HexHopNavigator from "./components/navigator/hex-hop-navigator";
-import { getAllData } from "./features/common/get-all-data";
+import { getAllData } from "./features/common/get-all-data/get-all-data";
 import { initColorNameLookup } from "./features/colors/color-name-suggestion";
 
 import "./App.css";

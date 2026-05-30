@@ -4,6 +4,7 @@ export type PaletteDto = {
     id: number;
     order: number;
     name: string;
+    blockId:number;
 }
 
 // Color
@@ -12,6 +13,7 @@ export type ColorDto = {
     id: number;
     order: number;
     paletteId: number;
+    blockId:number;
     r: number;
     g: number;
     b: number;
@@ -24,6 +26,7 @@ export type ColorDto = {
 
 export type GradientDto = {
     id: number;
+    blockId:number;
     order: number;
     paletteId: number;
     name: number;

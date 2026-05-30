@@ -5,30 +5,39 @@ import { PaletteEntity } from "../infrastructure/entity/palette.entity";
 const getNextOrderNumber = () => {
   return useHexHopStore.getState().colorBlocks.length;
 };
-
 export const addNewPalette = async () => {
   try {
     const db = getContext();
     const order = getNextOrderNumber();
     const paletteName = "New Palette";
 
-    const result = await db.execute(
-      `INSERT INTO palette ([order], name) VALUES (?, ?)`,
-      [order, paletteName],
+    const blockResult = await db.execute(
+      `INSERT INTO block ([order]) VALUES (?)`,
+      [order],
     );
 
-    if (!result.lastInsertId) throw new Error("Failed to insert palette");
+    if (!blockResult.lastInsertId) throw new Error("Failed to insert block");
+    const blockId = blockResult.lastInsertId;
+
+    const paletteResult = await db.execute(
+      `INSERT INTO palette (name, blockId) VALUES (?, ?)`,
+      [paletteName, blockId],
+    );
+
+    if (!paletteResult.lastInsertId)
+      throw new Error("Failed to insert palette");
 
     const model: PaletteEntity = {
-      kind:'palette',
+      kind: "palette",
       children: [],
-      id: result.lastInsertId,
+      id: paletteResult.lastInsertId,
       name: paletteName,
+      blockId,
       order,
     };
 
     useHexHopStore.getState().actions.addColorBlock(model);
   } catch (error) {
-    console.error("Failed to fetch all data:", error);
+    console.error("Failed to add new palette:", error);
   }
 };

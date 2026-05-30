@@ -34,10 +34,6 @@ const CopyLogo = ({ color, fontClass }: CopyLogoParam) => {
   };
   const formats: { type: ColorSpace; label: string; isIcon?: boolean }[] = [
     { label: "#", type: "oklab", isIcon: true },
-    { label: "RGB", type: "oklab" },
-    { label: "HSL", type: "oklab" },
-    { label: "OK", type: "oklab" },
-    { label: "VEC", type: "oklab" },
   ];
 
   return (

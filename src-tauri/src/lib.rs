@@ -17,10 +17,6 @@ pub mod migrations;
 #[path = "feat/color_picker.rs"]
 pub mod color_picker;
 
-#[path = "feat/mack_background.rs"]
-pub mod mack_background;
-
-
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
 
