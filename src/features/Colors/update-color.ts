@@ -5,10 +5,9 @@ import { getContext } from "../infrastructure/client";
 export const updateColor = async (colorEntity: ColorEntity) => {
     const db = getContext();
     await db.execute(
-        'UPDATE colors SET  [order] = $2, name = $3, r = $4, g = $5, b = $6, a= $7, paletteId = $8  WHERE id = $1   ',
+        'UPDATE color SET name = $2, r = $3, g = $4, b = $5, a= $6, paletteId = $7  WHERE id = $1   ',
         [
             colorEntity.id, 
-            colorEntity.order, 
             colorEntity.name, 
             colorEntity.r, 
             colorEntity.g, 

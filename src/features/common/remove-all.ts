@@ -12,6 +12,7 @@ export async function removeAllData() {
             DELETE FROM gradient;
             DELETE FROM gradient_layer;
             DELETE FROM gradient_stop;
+            DELETE FROM block;
             COMMIT;
   `);
 

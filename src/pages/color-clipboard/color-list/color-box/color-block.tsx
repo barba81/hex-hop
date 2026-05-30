@@ -11,7 +11,7 @@ import { colorDataToRoundData } from "@/features/colors/color-format-changer";
 import {useSortable} from '@dnd-kit/react/sortable';
 
 const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
-  const {ref} = useSortable({id: colorEntity.id, index: colorEntity.order});
+  const {ref} = useSortable({id: colorEntity.blockId, index: colorEntity.order});
   
   const isDark = useAppStore((state) => state.isDark);
 

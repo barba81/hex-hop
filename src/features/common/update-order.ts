@@ -1,32 +1,42 @@
 import { useHexHopStore } from "@/store/use-hex-hop-store";
 import { getContext } from "../infrastructure/client";
 
-export const updatePaletteOrder = (paletteId?: number) => {
+export const updatePaletteOrder = async (paletteId?: number) => {
     const colorBlocks = useHexHopStore.getState().colorBlocks;
 
     let newOrder = 0;
-    const listOfIds = [];
-    if (paletteId === undefined) {
-        colorBlocks.forEach(x => { x.order = newOrder++; listOfIds.push({ id: x.id, order: x.order }) });
+    const listOfIds: { id: number; order: number }[] = [];
+    if (!paletteId) {
+        colorBlocks.forEach(x => {
+            if (x.order !== newOrder) {
+                x.order = newOrder;
+                listOfIds.push({ id: x.blockId, order: x.order });
+            }
+            newOrder++;
+        });
     } else {
         const colorBlock = colorBlocks.find(x => x.id === paletteId);
         if (colorBlock && colorBlock.kind === 'palette') {
-            colorBlock.children.forEach(x => { x.order = newOrder++; listOfIds.push({ id: x.id, order: x.order }) });
+            colorBlock.children.forEach(x => {
+                if (x.order !== newOrder) {
+                    x.order = newOrder;
+                    listOfIds.push({ id: x.blockId, order: x.order })
+                }
+                newOrder++;
+            });
         }
     }
+    if (listOfIds.length === 0) return;
 
     try {
         const db = getContext();
-        db.execute(`
-            UPDATE my_table AS t
-            SET order_column = v.new_order
-            FROM (VALUES 
-                (1, 10),  -- (id, new_order) from item 1
-                (2, 20),  -- (id, new_order) from item 2
-                (3, 30)   -- (id, new_order) from item 3
-            ) AS v(id, new_order)
-            WHERE t.id = v.id;
-            `, []);
+
+        for (const item of listOfIds) {
+            db.execute(
+                `UPDATE block SET [order] = ? WHERE id = ?`,
+                [item.order, item.id]
+            );
+        }
     } catch (error) {
         console.error("Failed to update palette order:", error);
     }
