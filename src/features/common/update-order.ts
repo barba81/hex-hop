@@ -41,3 +41,21 @@ export const updatePaletteOrder = async (paletteId?: number) => {
         console.error("Failed to update palette order:", error);
     }
 }
+
+
+export const updateInsertToNewPosition = (blockId: number, targetParentId: number, orderId: number) =>{
+const { colorBlocks, actions } = useHexHopStore.getState();
+
+    const colorBlock = colorBlocks.find((x) => x.blockId === blockId);
+    if (colorBlock === undefined) return;
+
+    const updated = colorBlocks.map((x) =>
+        x.blockId === blockId ? { ...x, order: orderId - 0.5 } : { ...x }
+    );
+
+    const reindexed = updated
+        .sort((a, b) => a.order - b.order)
+        .map((x, i) => ({ ...x, order: i }));
+
+    actions.setColorBlock(reindexed);
+}

@@ -65,8 +65,7 @@ export async function getAllData() {
                 children: colorsId[x.id] ?? []
             };
         });
-
-        const colorBlocks: ColorBlock[] = [...palletsModel, ...colorsId['null'] ?? []];
+        const colorBlocks: ColorBlock[] = [...palletsModel, ...colorsId['null'] ?? [], ];
 
 
         useHexHopStore.getState().actions.setColorBlock(colorBlocks);

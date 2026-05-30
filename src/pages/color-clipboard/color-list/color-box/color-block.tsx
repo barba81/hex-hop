@@ -8,10 +8,10 @@ import { DragDots } from "../drag-dots";
 import { ColorData } from "@/features/color/types";
 import { ColorEntity } from "@/features/infrastructure/entity/color.entity";
 import { colorDataToRoundData } from "@/features/color/color-format-changer";
-import {useSortable} from '@dnd-kit/react/sortable';
+import { useDraggable } from "@dnd-kit/react";
 
 const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
-  const {ref} = useSortable({id: colorEntity.blockId, index: colorEntity.order});
+  const {ref, isDragging} = useDraggable({id: colorEntity.blockId, data:{parent: colorEntity.paletteId, isContainer: false}});
   
   const isDark = useAppStore((state) => state.isDark);
 

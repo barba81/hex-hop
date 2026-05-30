@@ -5,20 +5,20 @@ import { useState } from "react";
 import { PaletteEntity } from "@/features/infrastructure/entity/palette.entity";
 import { PaletteBoxEmpty } from "./palette-box-empty";
 import { colorDataToHex } from "@/features/color/color-format-changer";
-import {useSortable} from '@dnd-kit/react/sortable';
-import {useDroppable} from '@dnd-kit/react';
+import {useDraggable, useDroppable} from '@dnd-kit/react';
 
 type PaletteBoxParams = {
   palette: PaletteEntity;
 };
 
 export const PaletteBox = ({ palette }: PaletteBoxParams) => {
-  const [expandPalette, setExpandPalette] = useState<boolean>(false);
-  const {ref: refDraggable} = useSortable({id: palette.blockId, index: palette.order});
-  const {ref: refDroppable} = useDroppable({id: palette.blockId + "-drop"});
+  const [expandPalette, setExpandPalette] = useState<boolean>(true);
+  const {ref: refDraggable} = useDraggable({id: palette.blockId , data:{parent: palette.id, isContainer: true,}});
+  const {ref: refDroppable, isDropTarget} = useDroppable({id: palette.blockId + "-drop"});
 
   return (
     <>
+    {isDropTarget ? "notDop":"drop"}
       <div
       ref={refDraggable} 
       className="flex flex-col outline-3 rounded-md ">
