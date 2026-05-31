@@ -43,8 +43,9 @@ export const updatePaletteOrder = async (paletteId?: number) => {
 }
 
 
-export const updateInsertToNewPosition = (blockId: number, targetParentId: number, orderId: number) =>{
-const { colorBlocks, actions } = useHexHopStore.getState();
+export const updateInsertToNewPosition = (blockId: number, targetParentId: number, orderId: number) => {
+    console.log(blockId, orderId);
+    const { colorBlocks, actions } = useHexHopStore.getState();
 
     const colorBlock = colorBlocks.find((x) => x.blockId === blockId);
     if (colorBlock === undefined) return;
@@ -58,4 +59,20 @@ const { colorBlocks, actions } = useHexHopStore.getState();
         .map((x, i) => ({ ...x, order: i }));
 
     actions.setColorBlock(reindexed);
+
+    // need to update DB
+
+       try {
+        const db = getContext();
+
+        for (const item of reindexed) {
+            db.execute(
+                `UPDATE block SET [order] = ? WHERE id = ?`,
+                [item.order, item.blockId]
+            );
+        }
+        debugger;
+    } catch (error) {
+        console.error("Failed to update palette order:", error);
+    }
 }

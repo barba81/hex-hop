@@ -9,20 +9,15 @@ import { updateInsertToNewPosition } from "@/features/common/update-order";
 
 const ColorList = () => {
   const colorBlocks = useHexHopStore().colorBlocks;
-  const actions = useHexHopStore().actions;
-
-  // need some way to update odrder
   //
   const handleDragEnd = ({ operation, canceled }: DragEndEvent) => {
-    if (canceled || !operation.target) return;
+    if (canceled || !operation.target || !operation.source?.id) return;
 
-    if(!operation.source?.id) return;
-    
-    updateInsertToNewPosition(
-      operation.source?.id as number ,
-      operation.target.data?.parentId,
-      operation.target.id  as number)
-    
+    const sourceNum =operation.source.id as number; 
+    const targetOrder: number = operation.target.data?.order;
+    const targetParentId = operation.target.data?.parentId;
+
+    updateInsertToNewPosition(sourceNum, targetParentId, targetOrder);
   };
 
   return (
@@ -35,20 +30,27 @@ const ColorList = () => {
           .map((block, ix) => {
             const renderBlock = () => {
               if (block.kind === "color") {
-                return <ColorBlock key={block.id || ix} color={block} />;
+                return <ColorBlock key={block.id} color={block} />;
               } else if (block.kind === "palette") {
-                return <PaletteBox key={block.id || ix} palette={block} />;
+                return <PaletteBox key={block.id} palette={block} />;
               }
               return null;
             };
 
             return (
-              <React.Fragment key={block.id || ix}>
-                <DropLine id={ix} parentId={undefined} />
-                {block.order}
+              <React.Fragment key={block.id}>
+                <DropLine
+                  id={`before-${block.id}`}
+                  order={ix}
+                  parentId={undefined}
+                />
                 {renderBlock()}
                 {ix === colorBlocks.length - 1 && (
-                  <DropLine id={ix + 1} parentId={undefined} />
+                  <DropLine
+                    id={`after-${block.id}`}
+                    order={ix + 1}
+                    parentId={undefined}
+                  />
                 )}
               </React.Fragment>
             );
