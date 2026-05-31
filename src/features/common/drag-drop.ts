@@ -1,17 +1,18 @@
 import { ColorBlock, useHexHopStore } from "@/store/use-hex-hop-store";
 import { PaletteEntity } from "../infrastructure/entity/palette.entity";
 import { GradientEntity } from "../infrastructure/entity/gradient.entity";
+import { updateAllBlocks } from "./update-all-blocks";
 
-export const updateInsertToNewPosition = async (blockId: number, targetParentId: number | null, orderId?: number) => {
+export const dropNewPosition = async (blockId: number, targetParentId: number | null, orderId?: number) => {
     const { colorBlocks, actions } = useHexHopStore.getState();
     const blockToMove =
         colorBlocks.find(x => x.blockId === blockId);
-    
+
     if (!blockToMove) return;
 
-    const insertAt = (orderId  ?? colorBlocks.length )-0.5;
-    
-     const updatedBlock = blockToMove.kind !== 'palette'
+    const insertAt = (orderId ?? colorBlocks.length) - 0.5;
+
+    const updatedBlock = blockToMove.kind !== 'palette'
         ? { ...blockToMove, paletteId: targetParentId, order: insertAt } as ColorBlock | GradientEntity
         : { ...blockToMove, order: insertAt } as PaletteEntity;
 
@@ -27,9 +28,10 @@ export const updateInsertToNewPosition = async (blockId: number, targetParentId:
             const paletteId = x.kind !== 'palette' ? x.paletteId : null;
             const next = mapOrder.get(paletteId) ?? 0;
             mapOrder.set(paletteId, next + 1);
-            return { ...x, order: next };  
+            return { ...x, order: next };
         });
 
     actions.setColorBlock(reindexed);
-    // ok now need to call db reorder and parentId
+    await updateAllBlocks(reindexed, colorBlocks);
 }
+

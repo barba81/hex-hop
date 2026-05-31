@@ -1,6 +1,6 @@
 import {  useHexHopStore } from "@/store/use-hex-hop-store";
 import { DragDropProvider, DragEndEvent } from "@dnd-kit/react";
-import { updateInsertToNewPosition } from "@/features/common/update-order";
+import { dropNewPosition } from "@/features/common/drag-drop";
 import EmptyDisplay from "./empty-display";
 import ColorBlock from "./color-box/color-block";
 import { PaletteBox } from "./palette-box/palette-box";
@@ -17,7 +17,7 @@ const ColorList = () => {
     const targetParentId = operation.target.data.parentId ?? null;
     const targetOrder: number = operation.target.data.order ?? null;
 
-    updateInsertToNewPosition(sourceNum, targetParentId, targetOrder);
+    dropNewPosition(sourceNum, targetParentId, targetOrder);
   };
 
   return (
