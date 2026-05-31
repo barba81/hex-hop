@@ -29,7 +29,6 @@ export const addNewPalette = async () => {
 
     const model: PaletteEntity = {
       kind: "palette",
-      children: [],
       id: paletteResult.lastInsertId,
       name: paletteName,
       blockId,

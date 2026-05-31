@@ -1,7 +1,6 @@
 import { useColorStore } from "@/store/use-color-store";
 import { buttonStyle } from "../../../style/default-style";
 import { Check } from "lucide-react";
-import AcceptedUx from "./accepted-ux";
 import { useState } from "react";
 import { addNewColor } from "@/features/color/add-new-color";
 import { colorStringToData } from "@/features/color/color-format-changer";
@@ -9,7 +8,7 @@ import { colorStringToData } from "@/features/color/color-format-changer";
 const AddColorButton = () => {
   const isColorValid = useColorStore().isColorValid;
   const inputColor = useColorStore().inputColor;
-  const [coords, setCoords] = useState<DOMRect | null>(null);
+  const [, setCoords] = useState<DOMRect | null>(null);
 
   return (
     <>

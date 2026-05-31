@@ -1,4 +1,4 @@
-import { setColorValidityAndMode, validateColor } from "@/features/color/color-validator";
+import { setColorValidityAndMode } from "@/features/color/color-validator";
 import { useColorStore } from "@/store/use-color-store";
 
 const ColorInput = () => {

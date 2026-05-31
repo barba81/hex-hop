@@ -9,7 +9,7 @@ export const removeColor = async (colorEntity: ColorEntity) => {
         const colorBlocks = state.colorBlocks;
         const newColoBlocks = state.colorBlocks.filter(x => x.id !== colorEntity.id);
         await updateAllBlocks(newColoBlocks, colorBlocks);
-        
+
         const db = getContext();
         await db.execute(
             'DELETE FROM  color WHERE id = $1',
@@ -20,8 +20,8 @@ export const removeColor = async (colorEntity: ColorEntity) => {
             [colorEntity.blockId]
         );
 
-        useHexHopStore.getState().actions.removeColorBlock(colorEntity.id);
-
+        state.actions.removeColorBlock(colorEntity.id);
+ 
     } catch (error) {
         console.error("Failed to remove color:", error);
     }

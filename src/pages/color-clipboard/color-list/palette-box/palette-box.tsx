@@ -9,6 +9,9 @@ import { useDraggable, useDroppable } from "@dnd-kit/react";
 import React from "react";
 import DropLine from "../drop-line";
 import { useHexHopStore } from "@/store/use-hex-hop-store";
+import { Button } from "@/components/ui/button";
+import { removeAllBlocks } from "@/features/palette/remove-all-blocks";
+import { blend } from "culori";
 
 type PaletteBoxParams = {
   palette: PaletteEntity;
@@ -84,6 +87,16 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
             </div>
             {expandPalette && (
               <div className="flex flex-col px-1.5 gap-1 bg-foreground/2 rounded-b-md ">
+                <div>
+
+          <Button
+            size="sm"
+            variant="outline"
+            className="relative  select-none hover:cursor-pointer  text-xs rounded-md h-6"
+            onClick={()=>removeAllBlocks(palette.id)}
+            > Remove all from palette </Button>
+            </div>
+
                 {colorBlocks.map((block, ix) => {
                   const renderBlock = () => {
                     if (block.kind === "color") {

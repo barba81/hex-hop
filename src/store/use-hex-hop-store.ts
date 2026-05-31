@@ -17,6 +17,7 @@ interface HexHopAction {
     addColorBlock: (block: ColorBlock) => void;
     removeColorBlock: (id: number) => void;
     updateColorBlock: (block: ColorBlock) => void;
+    removeAllPalette: (paletteId: number) => void;
 }
 
 export const useHexHopStore = create<HexHopStore>((set) => ({
@@ -36,6 +37,11 @@ export const useHexHopStore = create<HexHopStore>((set) => ({
         updateColorBlock: (block: ColorBlock): void => {
             set((state) => ({
                 colorBlocks: state.colorBlocks.map((x) => (x.id === block.id ? block : x)),
+            }));
+        },
+      removeAllPalette: (paletteId: number): void => {
+            set((state) => ({
+                colorBlocks: state.colorBlocks.filter((x) => ( x.kind === 'palette' || x.paletteId !== paletteId)),
             }));
         },
     }

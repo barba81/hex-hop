@@ -10,7 +10,7 @@ type CloseButtonParams = {
   className: string;
 };
 
-const HoldToButton = ({action, holdDuration, text, holdText, className}: CloseButtonParams) => {
+const HoldToButton = ({action, holdDuration, text, holdText}: CloseButtonParams) => {
   const [isHolding, setIsHolding] = useState(false);
   const timerRef = useRef<number>(null);
   const HOLD_DURATION = holdDuration ?? 750;

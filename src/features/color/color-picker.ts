@@ -8,7 +8,6 @@ export const colorPicker = async () => {
 
     // mack implementation 
     // const hexColor = await invoke<string | null>('pick_color');
-    // console.log(hexColor);
 
     
     if (!window.EyeDropper) {
