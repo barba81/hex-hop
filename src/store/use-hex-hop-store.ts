@@ -17,12 +17,13 @@ interface HexHopAction {
     addColorBlock: (block: ColorBlock) => void;
     removeColorBlock: (id: number) => void;
     updateColorBlock: (block: ColorBlock) => void;
+    updatePaletteChildren:  (paletteId:  number| undefined, children: (ColorEntity | GradientEntity)[]) => void;
 }
 
 export const useHexHopStore = create<HexHopStore>((set) => ({
     colorBlocks: [],
     actions: {
-       setColorBlock: (blocks: ColorBlock[]): void => {
+        setColorBlock: (blocks: ColorBlock[]): void => {
             set(() => ({ colorBlocks: [...blocks] }));
         },
         addColorBlock: (newBlock: ColorBlock): void => {
@@ -38,5 +39,13 @@ export const useHexHopStore = create<HexHopStore>((set) => ({
                 colorBlocks: state.colorBlocks.map((x) => (x.id === block.id ? block : x)),
             }));
         },
+        updatePaletteChildren: (paletteId:  number| undefined, children: (ColorEntity | GradientEntity)[]) =>
+            set(state => ({
+                colorBlocks: state.colorBlocks.map(b =>
+                    b.kind === 'palette' && b.blockId === paletteId
+                        ? { ...b, children }
+                        : b
+                )
+            })),
     }
 }));

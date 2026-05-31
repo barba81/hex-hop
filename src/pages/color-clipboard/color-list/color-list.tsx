@@ -9,13 +9,13 @@ import { updateInsertToNewPosition } from "@/features/common/update-order";
 
 const ColorList = () => {
   const colorBlocks = useHexHopStore().colorBlocks;
-  //
+
   const handleDragEnd = ({ operation, canceled }: DragEndEvent) => {
     if (canceled || !operation.target || !operation.source?.id) return;
 
-    const sourceNum =operation.source.id as number; 
-    const targetOrder: number = operation.target.data?.order;
+    const sourceNum = operation.source.id as number; 
     const targetParentId = operation.target.data?.parentId;
+    const targetOrder: number = operation.target.data?.order;
 
     updateInsertToNewPosition(sourceNum, targetParentId, targetOrder);
   };

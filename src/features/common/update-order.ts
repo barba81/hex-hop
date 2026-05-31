@@ -1,6 +1,7 @@
 import { useHexHopStore } from "@/store/use-hex-hop-store";
 import { getContext } from "../infrastructure/client";
 
+
 export const updatePaletteOrder = async (paletteId?: number) => {
     const colorBlocks = useHexHopStore.getState().colorBlocks;
 
@@ -43,26 +44,57 @@ export const updatePaletteOrder = async (paletteId?: number) => {
 }
 
 
-export const updateInsertToNewPosition = (blockId: number, targetParentId: number, orderId: number) => {
-    console.log(blockId, orderId);
+export const updateInsertToNewPosition = (blockId: number, targetParentId?: number, orderId?: number) => {
     const { colorBlocks, actions } = useHexHopStore.getState();
 
-    const colorBlock = colorBlocks.find((x) => x.blockId === blockId);
-    if (colorBlock === undefined) return;
+    const blockToMove =
+        colorBlocks.find(x => x.blockId === blockId) ??
+        colorBlocks
+            .filter(x => x.kind === 'palette')
+            .flatMap(x => x.children)
+            .find(x => x.blockId === blockId);
 
-    const updated = colorBlocks.map((x) =>
-        x.blockId === blockId ? { ...x, order: orderId - 0.5 } : { ...x }
-    );
+    if (!blockToMove) return;
 
-    const reindexed = updated
-        .sort((a, b) => a.order - b.order)
-        .map((x, i) => ({ ...x, order: i }));
+    const colorBlocksWithoutTarget = colorBlocks
+        .filter(x => x.blockId !== blockId)
+        .map(x =>
+            x.kind === 'palette'
+                ? { ...x, children: x.children.filter(c => c.blockId !== blockId) }
+                : x
+        );
 
-    actions.setColorBlock(reindexed);
+    if (!targetParentId) {
+        // add to root
+        const insertAt = orderId ?? colorBlocksWithoutTarget.length;
+
+        const reindexed = [...colorBlocksWithoutTarget, { ...blockToMove, order: insertAt - 0.5 }]
+            .sort((a, b) => a.order - b.order)
+            .map((x, i) => ({ ...x, order: i }));
+
+        actions.setColorBlock(reindexed);
+    } else {
+        if (blockToMove.kind === 'palette') return;
+
+        const updated = colorBlocksWithoutTarget.map(x => {
+            if (x.kind !== 'palette' || x.id !== targetParentId) return x;
+
+            const insertAt = orderId ?? x.children.length;
+
+            const reindexedChildren = [...x.children, { ...blockToMove, order: insertAt - 0.5 }]
+                .sort((a, b) => a.order - b.order)
+                .map((c, i) => ({ ...c, order: i }));
+
+            return { ...x, children: reindexedChildren };
+        });
+
+        actions.setColorBlock(updated);
+    }
+
 
     // need to update DB
 
-       try {
+    try {
         const db = getContext();
 
         for (const item of reindexed) {
@@ -71,7 +103,6 @@ export const updateInsertToNewPosition = (blockId: number, targetParentId: numbe
                 [item.order, item.blockId]
             );
         }
-        debugger;
     } catch (error) {
         console.error("Failed to update palette order:", error);
     }

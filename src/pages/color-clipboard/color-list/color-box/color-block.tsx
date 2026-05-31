@@ -11,7 +11,7 @@ import { colorDataToRoundData } from "@/features/color/color-format-changer";
 import { useDraggable } from "@dnd-kit/react";
 
 const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
-  const {ref, isDragging} = useDraggable({id: colorEntity.blockId, data:{parent: colorEntity.paletteId, isContainer: false}});
+  const {ref, isDragging} = useDraggable({id: colorEntity.blockId, data:{parent: colorEntity.paletteId}});
   
   const isDark = useAppStore((state) => state.isDark);
 

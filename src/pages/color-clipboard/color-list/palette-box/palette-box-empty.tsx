@@ -2,14 +2,15 @@ import { DragDots } from "../drag-dots";
 
 type PaletteBoxParams = {
   name: string;
+  className: string;
 };
 
-export const PaletteBoxEmpty = ({  }: PaletteBoxParams) => {
+export const PaletteBoxEmpty = ({className  }: PaletteBoxParams) => {
 
   return (
     <>
       <div
-        className={`h-7  ${ "rounded-md"}  w-full shrink-0 relative flex items-center justify-between overflow-hidden `}
+        className={`${className} h-7  ${ "rounded-md"}  w-full shrink-0 relative flex items-center justify-between overflow-hidden `}
       >
         <div className="absolute inset-0 bg-checkerboard flex"></div>
 

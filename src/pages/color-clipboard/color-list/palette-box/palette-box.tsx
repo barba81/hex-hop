@@ -5,7 +5,9 @@ import { useState } from "react";
 import { PaletteEntity } from "@/features/infrastructure/entity/palette.entity";
 import { PaletteBoxEmpty } from "./palette-box-empty";
 import { colorDataToHex } from "@/features/color/color-format-changer";
-import {useDraggable, useDroppable} from '@dnd-kit/react';
+import { useDraggable, useDroppable } from "@dnd-kit/react";
+import React from "react";
+import DropLine from "../drop-line";
 
 type PaletteBoxParams = {
   palette: PaletteEntity;
@@ -13,28 +15,38 @@ type PaletteBoxParams = {
 
 export const PaletteBox = ({ palette }: PaletteBoxParams) => {
   const [expandPalette, setExpandPalette] = useState<boolean>(true);
-  const {ref: refDraggable} = useDraggable({id: palette.blockId , data:{parent: palette.id, isContainer: true,}});
-  const {ref: refDroppable, isDropTarget} = useDroppable({id: palette.blockId + "-drop"});
+  const { ref: refDraggable } = useDraggable({
+    id: palette.blockId,
+    data: { parent: palette.id },
+  });
+  const { ref: refDroppable, isDropTarget } = useDroppable({
+    id: palette.blockId,
+    data: { parentId: palette.id },
+  });
 
   return (
     <>
-    {isDropTarget ? "notDop":"drop"}
-      <div
-      ref={refDraggable} 
-      className="flex flex-col outline-3 rounded-md ">
+      <div ref={refDraggable} className="flex flex-col outline-3 rounded-md ">
         {palette.children.length === 0 && (
           <div ref={refDroppable}>
-            <PaletteBoxEmpty name="Empty Palette" />
+            {isDropTarget ? (
+              <div>
+                <PaletteBoxEmpty className="opacity-15" name="Empty Palette" />
+              </div>
+            ) : (
+              <PaletteBoxEmpty className="" name="Empty Palette" />
+            )}
           </div>
         )}
         {palette.children.length !== 0 && (
           <>
             <div
+              ref={refDroppable}
               className={`h-7  ${!expandPalette && "rounded-md"}  ${expandPalette && "rounded-t-md"} w-full shrink-0 relative flex items-center justify-between overflow-hidden `}
             >
               {/* Background  */}
               <div className="absolute inset-0 bg-checkerboard    flex">
-                {palette.children.map((block,ix) =>
+                {palette.children.map((block, ix) =>
                   block.kind === "color" ? (
                     <div
                       key={ix}
@@ -43,8 +55,7 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
                         background: colorDataToHex(block),
                       }}
                     />
-                  ) : 
-                  null,
+                  ) : null,
                 )}
               </div>
 
@@ -65,13 +76,33 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
           </div> */}
             </div>
             {expandPalette && (
-              <div className="flex flex-col p-2 gap-2 bg-foreground/2 rounded-b-md ">
-                 {palette.children.map((block,  ix) =>
-                  block.kind === "color" ? (
-                  <ColorBlock color={block} key={ix}/>
-                  ) : 
-                  null,
-                )}
+              <div className="flex flex-col px-1.5 gap-1 bg-foreground/2 rounded-b-md ">
+                {palette.children.map((block, ix) => {
+                  const renderBlock = () => {
+                    if (block.kind === "color") {
+                      return <ColorBlock key={block.id} color={block} />;
+                    }
+                    return null;
+                  };
+
+                  return (
+                    <React.Fragment key={block.id}>
+                      <DropLine
+                        id={`before-${block.id}`}
+                        order={ix}
+                        parentId={palette.id}
+                      />
+                      {renderBlock()}
+                      {ix === palette.children.length - 1 && (
+                        <DropLine
+                          id={`after-${block.id}`}
+                          order={ix + 1}
+                          parentId={palette.id}
+                        />
+                      )}
+                    </React.Fragment>
+                  );
+                })}
               </div>
             )}
           </>
