@@ -11,14 +11,19 @@ import DropLine from "../drop-line";
 import { useHexHopStore } from "@/store/use-hex-hop-store";
 import { Button } from "@/components/ui/button";
 import { removeAllBlocks } from "@/features/palette/remove-all-blocks";
-import { blend } from "culori";
+import {
+  useIsPaletteExtended,
+  usePaletteStore,
+} from "@/store/use-palette-store";
 
 type PaletteBoxParams = {
   palette: PaletteEntity;
 };
 
 export const PaletteBox = ({ palette }: PaletteBoxParams) => {
-  const [expandPalette, setExpandPalette] = useState<boolean>(true);
+  const expandPalette = useIsPaletteExtended(palette.id);
+  const actions = usePaletteStore().actions;
+
   const colorBlocks = useHexHopStore()
     .colorBlocks.filter(
       (x) => x.kind !== "palette" && x.paletteId === palette.id,
@@ -75,7 +80,11 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
                 <DragDots />
                 <div
                   className="relative rounded-md bg-foreground/20 p-0.5 cursor-pointer   flex flex-col items-center justify-center "
-                  onClick={() => setExpandPalette(!expandPalette)}
+                  onClick={() =>
+                    !expandPalette
+                      ? actions.addExtendedPalletId(palette.id)
+                      : actions.removeExtendedPalletId(palette.id)
+                  }
                 >
                   {!expandPalette && <ChevronDown size={14} />}
                   {expandPalette && <ChevronUp size={14} />}
@@ -88,14 +97,16 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
             {expandPalette && (
               <div className="flex flex-col px-1.5 gap-1 bg-foreground/2 rounded-b-md ">
                 <div>
-
-          <Button
-            size="sm"
-            variant="outline"
-            className="relative  select-none hover:cursor-pointer  text-xs rounded-md h-6"
-            onClick={()=>removeAllBlocks(palette.id)}
-            > Remove all from palette </Button>
-            </div>
+                  <Button
+                    size="sm"
+                    variant="outline"
+                    className="relative  select-none hover:cursor-pointer  text-xs rounded-md h-6"
+                    onClick={() => removeAllBlocks(palette.id)}
+                  >
+                    {" "}
+                    Remove all from palette{" "}
+                  </Button>
+                </div>
 
                 {colorBlocks.map((block, ix) => {
                   const renderBlock = () => {
