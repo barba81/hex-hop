@@ -28,6 +28,7 @@ export const updatePaletteOrder = async (paletteId?: number) => {
             });
         }
     }
+    debugger;
     if (listOfIds.length === 0) return;
 
     try {
@@ -47,6 +48,7 @@ export const updatePaletteOrder = async (paletteId?: number) => {
 
 export const updateInsertToNewPosition = async (blockId: number, targetParentId?: number, orderId?: number) => {
     const { colorBlocks, actions } = useHexHopStore.getState();
+    const colorBlockById = groupColorBlocks(colorBlocks);
 
     const blockToMove =
         colorBlocks.find(x => x.blockId === blockId) ??
@@ -54,14 +56,12 @@ export const updateInsertToNewPosition = async (blockId: number, targetParentId?
             .filter(x => x.kind === 'palette')
             .flatMap(x => x.children)
             .find(x => x.blockId === blockId);
-    
-
 
     if (!blockToMove) return;
 
-    if(blockToMove.kind === 'color'){
-        blockToMove.paletteId = targetParentId;
-    }
+    const updatedBlock = blockToMove.kind === 'color'
+        ? { ...blockToMove, paletteId: targetParentId }
+        : { ...blockToMove };
 
     const colorBlocksWithoutTarget = colorBlocks
         .filter(x => x.blockId !== blockId)
@@ -75,20 +75,20 @@ export const updateInsertToNewPosition = async (blockId: number, targetParentId?
         // add to root
         const insertAt = orderId ?? colorBlocksWithoutTarget.length;
 
-        const updated = [...colorBlocksWithoutTarget, { ...blockToMove, order: insertAt - 0.5 }]
+        const updated = [...colorBlocksWithoutTarget, { ...updatedBlock, order: insertAt - 0.5 }]
             .sort((a, b) => a.order - b.order)
             .map((x, i) => ({ ...x, order: i }));
 
         actions.setColorBlock(updated);
     } else {
-        if (blockToMove.kind === 'palette') return;
+        if (updatedBlock.kind === 'palette') return;
 
         const updated = colorBlocksWithoutTarget.map(x => {
             if (x.kind !== 'palette' || x.id !== targetParentId) return x;
 
             const insertAt = orderId ?? x.children.length;
 
-            const reindexedChildren = [...x.children, { ...blockToMove, order: insertAt - 0.5 }]
+            const reindexedChildren = [...x.children, { ...updatedBlock, order: insertAt - 0.5 }]
                 .sort((a, b) => a.order - b.order)
                 .map((c, i) => ({ ...c, order: i }));
 
@@ -99,14 +99,13 @@ export const updateInsertToNewPosition = async (blockId: number, targetParentId?
     }
     const newColorBlocks = useHexHopStore.getState().colorBlocks;
 
-    const colorBlockById = groupColorBlocks(colorBlocks);
     const newColorBlockById = groupColorBlocks(newColorBlocks);
 
     const changedBlocks = Object.values(newColorBlockById).filter(newBlock => {
         const oldBlock = colorBlockById[newBlock.blockId];
         if (!oldBlock) return true;
-        console.log(oldBlock.order, newBlock.order);
         if (oldBlock.kind === 'color' && newBlock.kind === 'color') {
+            console.log(oldBlock.order, newBlock.order)
             return (
                 oldBlock.order !== newBlock.order ||
                 oldBlock.paletteId !== newBlock.paletteId
@@ -125,7 +124,6 @@ export const updateInsertToNewPosition = async (blockId: number, targetParentId?
                     [block.paletteId, block.id]
                 );
             }
-            
             await db.execute(
                 `UPDATE block SET [order] = ? WHERE id = ?`,
                 [block.order, block.blockId]
@@ -140,7 +138,7 @@ export const updateInsertToNewPosition = async (blockId: number, targetParentId?
 export const groupColorBlocks = (colorBlocks: ColorBlock[]) => {
     const colorBlocksById = _.keyBy(colorBlocks, "blockId");
     colorBlocks.forEach(x => {
-        if (x.kind === 'palette') {
+        if (x.kind === 'palette' && x.children)  {
             Object.assign(colorBlocksById, _.keyBy(x.children, "blockId"));
         }
     })
