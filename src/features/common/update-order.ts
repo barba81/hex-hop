@@ -1,5 +1,6 @@
-import { useHexHopStore } from "@/store/use-hex-hop-store";
+import { ColorBlock, useHexHopStore } from "@/store/use-hex-hop-store";
 import { getContext } from "../infrastructure/client";
+import _ from "lodash";
 
 
 export const updatePaletteOrder = async (paletteId?: number) => {
@@ -44,7 +45,7 @@ export const updatePaletteOrder = async (paletteId?: number) => {
 }
 
 
-export const updateInsertToNewPosition = (blockId: number, targetParentId?: number, orderId?: number) => {
+export const updateInsertToNewPosition = async (blockId: number, targetParentId?: number, orderId?: number) => {
     const { colorBlocks, actions } = useHexHopStore.getState();
 
     const blockToMove =
@@ -53,8 +54,14 @@ export const updateInsertToNewPosition = (blockId: number, targetParentId?: numb
             .filter(x => x.kind === 'palette')
             .flatMap(x => x.children)
             .find(x => x.blockId === blockId);
+    
+
 
     if (!blockToMove) return;
+
+    if(blockToMove.kind === 'color'){
+        blockToMove.paletteId = targetParentId;
+    }
 
     const colorBlocksWithoutTarget = colorBlocks
         .filter(x => x.blockId !== blockId)
@@ -68,11 +75,11 @@ export const updateInsertToNewPosition = (blockId: number, targetParentId?: numb
         // add to root
         const insertAt = orderId ?? colorBlocksWithoutTarget.length;
 
-        const reindexed = [...colorBlocksWithoutTarget, { ...blockToMove, order: insertAt - 0.5 }]
+        const updated = [...colorBlocksWithoutTarget, { ...blockToMove, order: insertAt - 0.5 }]
             .sort((a, b) => a.order - b.order)
             .map((x, i) => ({ ...x, order: i }));
 
-        actions.setColorBlock(reindexed);
+        actions.setColorBlock(updated);
     } else {
         if (blockToMove.kind === 'palette') return;
 
@@ -90,20 +97,53 @@ export const updateInsertToNewPosition = (blockId: number, targetParentId?: numb
 
         actions.setColorBlock(updated);
     }
+    const newColorBlocks = useHexHopStore.getState().colorBlocks;
 
+    const colorBlockById = groupColorBlocks(colorBlocks);
+    const newColorBlockById = groupColorBlocks(newColorBlocks);
 
-    // need to update DB
+    const changedBlocks = Object.values(newColorBlockById).filter(newBlock => {
+        const oldBlock = colorBlockById[newBlock.blockId];
+        if (!oldBlock) return true;
+        console.log(oldBlock.order, newBlock.order);
+        if (oldBlock.kind === 'color' && newBlock.kind === 'color') {
+            return (
+                oldBlock.order !== newBlock.order ||
+                oldBlock.paletteId !== newBlock.paletteId
+            );
+        }
 
+        return oldBlock.order !== newBlock.order;
+    });
     try {
         const db = getContext();
 
-        for (const item of reindexed) {
-            db.execute(
+        for (const block of changedBlocks) {
+            if (block.kind === 'color') {
+                await db.execute(
+                    `UPDATE color SET paletteId = ? WHERE id = ?`,
+                    [block.paletteId, block.id]
+                );
+            }
+            
+            await db.execute(
                 `UPDATE block SET [order] = ? WHERE id = ?`,
-                [item.order, item.blockId]
+                [block.order, block.blockId]
             );
         }
     } catch (error) {
         console.error("Failed to update palette order:", error);
     }
+}
+
+
+export const groupColorBlocks = (colorBlocks: ColorBlock[]) => {
+    const colorBlocksById = _.keyBy(colorBlocks, "blockId");
+    colorBlocks.forEach(x => {
+        if (x.kind === 'palette') {
+            Object.assign(colorBlocksById, _.keyBy(x.children, "blockId"));
+        }
+    })
+
+    return colorBlocksById;
 }
