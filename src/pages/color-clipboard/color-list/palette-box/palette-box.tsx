@@ -8,7 +8,7 @@ import { colorDataToHex } from "@/features/color/color-format-changer";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import React from "react";
 import DropLine from "../drop-line";
-import {  useHexHopStore } from "@/store/use-hex-hop-store";
+import { useHexHopStore } from "@/store/use-hex-hop-store";
 
 type PaletteBoxParams = {
   palette: PaletteEntity;
@@ -16,7 +16,11 @@ type PaletteBoxParams = {
 
 export const PaletteBox = ({ palette }: PaletteBoxParams) => {
   const [expandPalette, setExpandPalette] = useState<boolean>(true);
-  const colorBlocks = useHexHopStore().colorBlocks.filter(x=>x.kind!== 'palette' && x.paletteId === palette.id);
+  const colorBlocks = useHexHopStore()
+    .colorBlocks.filter(
+      (x) => x.kind !== "palette" && x.paletteId === palette.id,
+    )
+    .sort((a, b) => a.order - b.order);
 
   const { ref: refDraggable } = useDraggable({
     id: palette.blockId,

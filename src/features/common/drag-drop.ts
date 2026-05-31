@@ -28,6 +28,7 @@ export const dropNewPosition = async (blockId: number, targetParentId: number | 
             const paletteId = x.kind !== 'palette' ? x.paletteId : null;
             const next = mapOrder.get(paletteId) ?? 0;
             mapOrder.set(paletteId, next + 1);
+            console.log(next);
             return { ...x, order: next };
         });
 
