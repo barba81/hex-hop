@@ -8,6 +8,7 @@ import { colorDataToHex } from "@/features/color/color-format-changer";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import React from "react";
 import DropLine from "../drop-line";
+import {  useHexHopStore } from "@/store/use-hex-hop-store";
 
 type PaletteBoxParams = {
   palette: PaletteEntity;
@@ -15,6 +16,8 @@ type PaletteBoxParams = {
 
 export const PaletteBox = ({ palette }: PaletteBoxParams) => {
   const [expandPalette, setExpandPalette] = useState<boolean>(true);
+  const colorBlocks = useHexHopStore().colorBlocks.filter(x=>x.kind!== 'palette' && x.paletteId === palette.id);
+
   const { ref: refDraggable } = useDraggable({
     id: palette.blockId,
     data: { parent: palette.id },
@@ -27,7 +30,7 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
   return (
     <>
       <div ref={refDraggable} className="flex flex-col outline-3 rounded-md ">
-        {palette.children.length === 0 && (
+        {colorBlocks.length === 0 && (
           <div ref={refDroppable}>
             {isDropTarget ? (
               <div>
@@ -38,7 +41,7 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
             )}
           </div>
         )}
-        {palette.children.length !== 0 && (
+        {colorBlocks.length !== 0 && (
           <>
             <div
               ref={refDroppable}
@@ -46,7 +49,7 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
             >
               {/* Background  */}
               <div className="absolute inset-0 bg-checkerboard    flex">
-                {palette.children.map((block, ix) =>
+                {colorBlocks.map((block, ix) =>
                   block.kind === "color" ? (
                     <div
                       key={ix}
@@ -77,7 +80,7 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
             </div>
             {expandPalette && (
               <div className="flex flex-col px-1.5 gap-1 bg-foreground/2 rounded-b-md ">
-                {palette.children.map((block, ix) => {
+                {colorBlocks.map((block, ix) => {
                   const renderBlock = () => {
                     if (block.kind === "color") {
                       return <ColorBlock key={block.id} color={block} />;
@@ -93,7 +96,7 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
                         parentId={palette.id}
                       />
                       {renderBlock()}
-                      {ix === palette.children.length - 1 && (
+                      {ix === colorBlocks.length - 1 && (
                         <DropLine
                           id={`after-${block.id}`}
                           order={ix + 1}

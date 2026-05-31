@@ -7,6 +7,7 @@ export type GradientEntity =  {
     blockId:number;
     order: number;
     name: string;
+    paletteId: number;
     
     layers: GradientLayer[];
 }

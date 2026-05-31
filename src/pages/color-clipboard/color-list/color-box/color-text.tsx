@@ -4,7 +4,6 @@ type ColorBlockParams = {
   color: ColorData;
 };
 
-
 const ColorText = ({ color }: ColorBlockParams) => {
   return (
     <div className="absolute bottom-1.5 left-1 select-none cursor-default  antialiased">

@@ -8,7 +8,6 @@ export type PaletteEntity =  {
     blockId:number;
     order: number;
     name: string;
-    children: (ColorEntity | GradientEntity)[];
 }
 
 

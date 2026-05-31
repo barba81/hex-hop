@@ -1,21 +1,21 @@
+import {  useHexHopStore } from "@/store/use-hex-hop-store";
+import { DragDropProvider, DragEndEvent } from "@dnd-kit/react";
+import { updateInsertToNewPosition } from "@/features/common/update-order";
 import EmptyDisplay from "./empty-display";
 import ColorBlock from "./color-box/color-block";
-import { useHexHopStore } from "@/store/use-hex-hop-store";
 import { PaletteBox } from "./palette-box/palette-box";
-import { DragDropProvider, DragEndEvent } from "@dnd-kit/react";
 import React from "react";
 import DropLine from "./drop-line";
-import { updateInsertToNewPosition } from "@/features/common/update-order";
 
 const ColorList = () => {
-  const colorBlocks = useHexHopStore().colorBlocks;
+  const colorBlocks = useHexHopStore().colorBlocks.filter(x => x.kind === 'palette' || !x.paletteId);
 
   const handleDragEnd = ({ operation, canceled }: DragEndEvent) => {
     if (canceled || !operation.target || !operation.source?.id) return;
 
     const sourceNum = operation.source.id as number; 
-    const targetParentId = operation.target.data?.parentId;
-    const targetOrder: number = operation.target.data?.order;
+    const targetParentId = operation.target.data.parentId ?? null;
+    const targetOrder: number = operation.target.data.order ?? null;
 
     updateInsertToNewPosition(sourceNum, targetParentId, targetOrder);
   };

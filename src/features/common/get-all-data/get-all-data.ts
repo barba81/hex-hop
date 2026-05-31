@@ -50,7 +50,6 @@ export async function getAllData() {
             };
         });
 
-        const colorsId = _.groupBy(colorModels, 'paletteId');
         //    const gradient1 = _.groupBy(gradient, 'id');
         //    const gradient2 = _.groupBy(gradientLayer, 'id');
         //    const gradient3 = _.groupBy(gradientId, 'id');
@@ -62,15 +61,11 @@ export async function getAllData() {
                 blockId: x.blockId,
                 order: x.order,
                 name: x.name,
-                children: colorsId[x.id] ?? []
             };
         });
-        const colorBlocks: ColorBlock[] = [...palletsModel, ...colorsId['null'] ?? [], ];
-
+        const colorBlocks: ColorBlock[] = [...palletsModel, ...colorModels, ];
 
         useHexHopStore.getState().actions.setColorBlock(colorBlocks);
-
-
     } catch (error) {
         console.error("Failed to fetch all data:", error);
         return [];

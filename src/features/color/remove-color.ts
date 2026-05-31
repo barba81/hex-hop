@@ -1,7 +1,6 @@
 import { getContext } from "../infrastructure/client";
 import { ColorEntity } from "../infrastructure/entity/color.entity";
 import { useHexHopStore } from "@/store/use-hex-hop-store";
-import { updatePaletteOrder as reorderPaletteBlocks } from "../common/update-order";
 
 export const removeColor = async (colorEntity: ColorEntity) => {
     try {
@@ -18,7 +17,7 @@ export const removeColor = async (colorEntity: ColorEntity) => {
 
         useHexHopStore.getState().actions.removeColorBlock(colorEntity.id);
 
-        reorderPaletteBlocks(colorEntity.paletteId);
+        // reorderPaletteBlocks(colorEntity.paletteId);
     } catch (error) {
         console.error("Failed to remove color:", error);
     }
