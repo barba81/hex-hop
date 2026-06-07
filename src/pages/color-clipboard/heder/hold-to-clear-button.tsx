@@ -5,12 +5,21 @@ import { Trash2 } from "lucide-react";
 const HoldToClear = () => {
   return (
     <HoldToButton
-      text={<>
-        <Trash2 />
-        {"Clear all"}
-      </>}
-      holdText={<>  <Trash2 />{"Hold..."}</>}
-      action={() => { removeAllData(); } } className={""}    />
+      text={
+        <>
+          <Trash2 />
+        </>
+      }
+      holdText={
+        <>
+          <Trash2 />
+        </>
+      }
+      action={() => {
+        removeAllData();
+      }}
+      className={"h-6 "}
+    />
   );
 };
 

@@ -1,8 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { JSX, useRef, useState } from "react";
 
-
-type CloseButtonParams = {
+type HoldToButtonParams = {
   action: () => void;
   holdDuration?: number;
   text: JSX.Element;
@@ -10,7 +9,13 @@ type CloseButtonParams = {
   className: string;
 };
 
-const HoldToButton = ({action, holdDuration, text, holdText}: CloseButtonParams) => {
+const HoldToButton = ({
+  action,
+  holdDuration,
+  text,
+  holdText,
+  className,
+}: HoldToButtonParams) => {
   const [isHolding, setIsHolding] = useState(false);
   const timerRef = useRef<number>(null);
   const HOLD_DURATION = holdDuration ?? 750;
@@ -32,12 +37,10 @@ const HoldToButton = ({action, holdDuration, text, holdText}: CloseButtonParams)
 
   return (
     <Button
-      variant="outline"
-      size="sm"
       onPointerDown={startHold}
       onPointerUp={stopHold}
       onPointerLeave={stopHold}
-      className="relative   w-25 select-none hover:cursor-pointer h-6"
+      className={`relative    select-none hover:cursor-pointer  ${className}`}
     >
       <div
         className="absolute left-0 bottom-0 top-0 bg-red-500/60  rounded-md"
@@ -53,6 +56,5 @@ const HoldToButton = ({action, holdDuration, text, holdText}: CloseButtonParams)
     </Button>
   );
 };
-
 
 export default HoldToButton;

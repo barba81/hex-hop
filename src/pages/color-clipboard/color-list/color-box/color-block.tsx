@@ -49,6 +49,7 @@ const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
         <CopyLogo color={colorEntity} fontClass={fontColor} />
         <CloseButton colorEntity={colorEntity} />
         <ColorName colorEntity={colorEntity} />
+        <ColorName colorEntity={colorEntity} />
       </div>
     </div>
   );

@@ -38,6 +38,7 @@ const GradientHeaderSummery = () => {
             <GradientIcon size={18} />{" "}
           </div>
         </div>
+        
       </div>
     </>
   );
