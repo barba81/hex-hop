@@ -20,14 +20,14 @@ const ColorName = ({ colorEntity }: ColorNameParams) => {
       {!inputVisible && (
         <div
           onDoubleClick={() => setInputVisible(true)}
-          className="cursor-pointer text-sm font-mono absolute bottom-1 right-1  p-0.5 rounded-full"
+          className="cursor-pointer text-sm font-mono  rounded-full"
         >
           {colorEntity.name}
         </div>
       )}
       {inputVisible && (
         <input
-          className="bg-stone-600 rounded-sm w-30 h-6 p-1  text-sm font-mono absolute bottom-1 right-1  "
+          className="bg-stone-600 rounded-sm w-30 h-6   text-sm font-mono   "
           placeholder={colorEntity.name}
           onChange={(e) => setNewName(e.target.value)}
           onBlur={handleSave}

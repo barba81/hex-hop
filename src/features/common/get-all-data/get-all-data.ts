@@ -1,4 +1,4 @@
-import { ColorBlock, useHexHopStore } from "@/store/use-hex-hop-store";
+import { ColorBlockEntity, useHexHopStore } from "@/store/use-hex-hop-store";
 import { getContext } from "../../infrastructure/client";
 // import { ColorDto, GradientDto, GradientLayerDto, GradientStopsDto, type PaletteDto } from "./get-all-data.types";
 import { ColorDto, type PaletteDto } from "./get-all-data.types";
@@ -63,7 +63,7 @@ export async function getAllData() {
                 name: x.name,
             };
         });
-        const colorBlocks: ColorBlock[] = [...palletsModel, ...colorModels, ];
+        const colorBlocks: ColorBlockEntity[] = [...palletsModel, ...colorModels, ];
 
         useHexHopStore.getState().actions.setColorBlock(colorBlocks);
     } catch (error) {

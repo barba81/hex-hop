@@ -38,7 +38,7 @@ const CopyLogo = ({ color, fontClass }: CopyLogoParam) => {
 
   return (
     <div
-      className={`flex absolute top-1.5 left-0 items-center gap-2 ${fontClass}`}
+      className={`flex items-center gap-2 ${fontClass} `}
     >
       {formats.map((f) => (
         <div key={f.type} className="relative">

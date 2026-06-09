@@ -1,7 +1,7 @@
-import { ColorBlock } from "@/store/use-hex-hop-store";
+import { ColorBlockEntity } from "@/store/use-hex-hop-store";
 import { getContext } from "../infrastructure/client";
 
-export const updateAllBlocks = async (newLIst: ColorBlock[], _: ColorBlock[]) => {
+export const updateAllBlocks = async (newLIst: ColorBlockEntity[], _: ColorBlockEntity[]) => {
 
     try {
         const db = getContext();

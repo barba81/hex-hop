@@ -6,7 +6,6 @@ type ColorBlockParams = {
 
 const ColorText = ({ color }: ColorBlockParams) => {
   return (
-    <div className="absolute bottom-1.5 left-1 select-none cursor-default  antialiased">
       <div className="flex gap-2 opacity-80 text-[13px] uppercase tracking-wider font-semibold">
         <span>
           <span className="opacity-50 mr-1">R</span>
@@ -28,7 +27,6 @@ const ColorText = ({ color }: ColorBlockParams) => {
           </span>
         )}
       </div>
-    </div>
   );
 };
 

@@ -1,4 +1,4 @@
-import { ColorBlock, useHexHopStore } from "@/store/use-hex-hop-store";
+import { ColorBlockEntity, useHexHopStore } from "@/store/use-hex-hop-store";
 import { PaletteEntity } from "../infrastructure/entity/palette.entity";
 import { GradientEntity } from "../infrastructure/entity/gradient.entity";
 import { updateAllBlocks } from "./update-all-blocks";
@@ -13,7 +13,7 @@ export const dropNewPosition = async (blockId: number, targetParentId: number | 
     const insertAt = (orderId ?? colorBlocks.length) - 0.5;
 
     const updatedBlock = blockToMove.kind !== 'palette'
-        ? { ...blockToMove, paletteId: targetParentId, order: insertAt } as ColorBlock | GradientEntity
+        ? { ...blockToMove, paletteId: targetParentId, order: insertAt } as ColorBlockEntity | GradientEntity
         : { ...blockToMove, order: insertAt } as PaletteEntity;
 
     const withUpdated = colorBlocks
