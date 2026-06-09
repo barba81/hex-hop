@@ -1,4 +1,4 @@
-import { DragDots } from "../drag-dots";
+import { DragDots } from "../../../../components/common/drag-dots";
 
 type PaletteBoxParams = {
   name: string;

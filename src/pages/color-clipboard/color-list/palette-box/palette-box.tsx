@@ -1,5 +1,5 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
-import { DragDots } from "../drag-dots";
+import { DragDots } from "../../../../components/common/drag-dots";
 import ColorBlock from "../color-box/color-block";
 import { PaletteEntity } from "@/features/infrastructure/entity/palette.entity";
 import { PaletteBoxEmpty } from "./palette-box-empty";
