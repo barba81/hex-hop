@@ -1,9 +1,11 @@
+import { addNewGradient } from "@/features/gradient/addNewGradient";
 import { Plus } from "lucide-react";
 
 export const AllGradientsList = () => {
   const AddNewGradient = () => {
     return (
-      <div className="h-10 w-20 rounded-md bg-stone-600/20 flex items-center justify-center hover:bg-stone-600 hover:cursor-pointer shrink-0">
+      <div className="h-10 w-20 rounded-md bg-stone-600/20 flex items-center justify-center hover:bg-stone-600 hover:cursor-pointer shrink-0"
+      onClick={() => addNewGradient()}>
         <Plus size={20} />
       </div>
     );

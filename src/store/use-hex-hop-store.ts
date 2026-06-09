@@ -7,7 +7,7 @@ import { type ColorEntity } from "@/features/infrastructure/entity/color.entity"
 export type ColorBlockEntity = (PaletteEntity | ColorEntity | GradientEntity);
 
 interface HexHopStore {
-    colorBlocks: ColorBlockEntity[]
+    colorBlocks: ColorBlockEntity[];
     actions: HexHopAction;
 }
 
@@ -38,9 +38,9 @@ export const useHexHopStore = create<HexHopStore>((set) => ({
                 colorBlocks: state.colorBlocks.map((x) => (x.id === block.id ? block : x)),
             }));
         },
-      removeAllPaletteBlocks: (paletteId: number): void => {
+        removeAllPaletteBlocks: (paletteId: number): void => {
             set((state) => ({
-                colorBlocks: state.colorBlocks.filter((x) => ( x.kind === 'palette' || x.paletteId !== paletteId)),
+                colorBlocks: state.colorBlocks.filter((x) => (x.kind === 'palette' || x.paletteId !== paletteId)),
             }));
         },
     }
