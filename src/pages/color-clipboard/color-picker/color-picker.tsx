@@ -6,7 +6,7 @@ import { AddNewPalette } from "./add-new-palette";
 
 const ColorPicker = () => {
   return (
-    <div className="flex  items-center justify-between p-2 gap-2 bg-stone-50/50 dark:bg-black/50">
+    <div className="flex  items-center justify-between p-2 gap-2 bg-stone-50/50 dark:bg-stone-800">
       <AddNewPalette/>
       <PipetButton />
       <ColorBox />

@@ -8,6 +8,7 @@ import { ColorEntity } from "@/features/infrastructure/entity/color.entity";
 import { colorDataToRoundData } from "@/features/color/color-format-changer";
 import { useDraggable } from "@dnd-kit/react";
 import EditButton from "./edit-button";
+import { Pin } from "lucide-react";
 
 const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
   const { ref } = useDraggable({
@@ -45,6 +46,7 @@ const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
           className="absolute top-2 right-2  flex flex-row gap-2 "
         >
           <EditButton colorEntity={colorEntity} />
+          <Pin size={14}/>
           <CloseButton colorEntity={colorEntity} />
         </div>
       </>

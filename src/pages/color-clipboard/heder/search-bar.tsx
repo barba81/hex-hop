@@ -25,7 +25,7 @@ const SearchBar = () => {
                 dark:bg-stone-900  
                 text-sm 
                 placeholder:text-muted-foreground"
-          placeholder="Enter color"
+          placeholder="Search color"
         />
       </div>
     </>

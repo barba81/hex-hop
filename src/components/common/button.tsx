@@ -3,9 +3,10 @@ import { ReactNode } from "react";
 
 interface ButtonProps {
   children: ReactNode;
+  className: string;
 }
 
-const Button = ({ children }: ButtonProps) => {
+const Button = ({ children, className }: ButtonProps) => {
   return (
     <div
       className={`
@@ -18,6 +19,8 @@ const Button = ({ children }: ButtonProps) => {
         bg-stone-100
         text-gray-900 
         dark:text-white 
+
+        ${className}
       `}
     >
       {children}

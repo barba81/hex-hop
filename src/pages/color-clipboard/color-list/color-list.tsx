@@ -11,17 +11,18 @@ const ColorList = () => {
   const colorBlocks = useHexHopStore().colorBlocks.filter(x => x.kind === 'palette' || !x.paletteId);
 
   const handleDragEnd = ({ operation, canceled }: DragEndEvent) => {
-    if (canceled || !operation.target || !operation.source?.id) return;
+    // if (canceled || !operation.target || !operation.source?.id) return;
 
-    const sourceNum = operation.source.id as number; 
-    const targetParentId = operation.target.data.parentId ?? null;
-    const targetOrder: number = operation.target.data.order ?? null;
+    // const sourceNum = operation.source.id as number; 
+    // const targetParentId = operation.target.data.parentId ?? null;
+    // const targetOrder: number = operation.target.data.order ?? null;
 
-    dropNewPosition(sourceNum, targetParentId, targetOrder);
+    // dropNewPosition(sourceNum, targetParentId, targetOrder);
   };
 
   return (
-    <DragDropProvider onDragEnd={handleDragEnd}>
+    <DragDropProvider onDragEnd={handleDragEnd} 
+    >
       <div className="flex-1 overflow-y-auto px-2 flex flex-col gap-1 p-2">
         {colorBlocks.length === 0 && <EmptyDisplay />}
 

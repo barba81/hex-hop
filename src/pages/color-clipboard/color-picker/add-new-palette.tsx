@@ -1,4 +1,4 @@
-import { SwatchBook } from "lucide-react";
+import { Palette, SwatchBook } from "lucide-react";
 import { addNewPalette } from "@/features/palette/add-new-palette";
 import { buttonStyle } from "@/style/default-style";
 
@@ -18,7 +18,7 @@ export const AddNewPalette = () => {
              dark:text-white `}
         onClick={() => addNewPalette()}
       >
-        <SwatchBook strokeWidth={2} size={17} />
+        <Palette strokeWidth={2} size={17} />
       </div>
     </>
   );

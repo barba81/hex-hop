@@ -107,10 +107,10 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
                   </Button>
                 </div>
 
-                {colorBlocks.map((block, ix) => {
+                {/* {colorBlocks.map((block, ix) => {
                   const renderBlock = () => {
                     if (block.kind === "color") {
-                      return <ColorBlock key={block.id} color={block} />;
+                      return <ColorBlock key={block.id} colorEntity={block} />;
                     }
                     return null;
                   };
@@ -132,7 +132,7 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
                       )}
                     </React.Fragment>
                   );
-                })}
+                })} */}
               </div>
             )}
           </>

@@ -9,6 +9,7 @@ import {
   Clipboard,
   Eye,
   Import,
+  Palette,
   Settings,
   SwatchBook,
 } from "lucide-react";
@@ -39,7 +40,7 @@ const ICON_MAP = {
   },
   "palette-generator": {
     icon: (
-      <SwatchBook
+      <Palette 
         size={size}
         strokeWidth={2.5}
         className="dark:text-gray-300"
