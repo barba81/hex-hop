@@ -26,8 +26,6 @@ export const addNewGradient = async () => {
 
         if (!result.lastInsertId) throw new Error("Failed to insert palette");
 
-
-
         const entity: GradientEntity = {
             id: result.lastInsertId,
             blockId: blockId,

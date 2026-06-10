@@ -29,7 +29,7 @@ export type GradientDto = {
     blockId:number;
     order: number;
     paletteId: number;
-    name: number;
+    name: string;
 }
 
 

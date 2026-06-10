@@ -9,6 +9,7 @@ interface GradientStore {
 
 interface GradientAction {
   addGradient: (block: GradientEntity) => void;
+  setGradient: (blocks: GradientEntity[]) => void;
 
 }
 
@@ -16,6 +17,9 @@ export const useGradientStore = create<GradientStore>((set) => ({
   gradients: [],
   selectedGradientId: null,
   actions: {
+    setGradient: (blocks: GradientEntity[]) => {
+      set(() => ({ gradients: [...blocks] }));
+    },
     addGradient: (entity: GradientEntity): void => {
       set((state) => ({ gradients: [...state.gradients, entity] }));
     },
