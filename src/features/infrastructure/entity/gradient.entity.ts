@@ -7,7 +7,7 @@ export type GradientEntity =  {
     blockId:number;
     order: number;
     name: string;
-    paletteId: number;
+    paletteId: number | null;
     
     layers: GradientLayer[];
 }
