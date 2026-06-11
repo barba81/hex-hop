@@ -1,16 +1,15 @@
 import { ColorBlockEntity, useHexHopStore } from "@/store/use-hex-hop-store";
 import { getContext } from "../../infrastructure/client";
-// import { ColorDto, GradientDto, GradientLayerDto, GradientStopsDto, type PaletteDto } from "./get-all-data.types";
-import { ColorDto, GradientDto, type PaletteDto } from "./get-all-data.types";
+import { ColorDto, GradientDto, GradientLayerDto, GradientStopsDto, type PaletteDto } from "./get-all-data.types";
 import { PaletteEntity } from "../../infrastructure/entity/palette.entity";
 import { ColorEntity } from "../../infrastructure/entity/color.entity";
-import _ from 'lodash';
 import { GradientEntity } from "@/features/infrastructure/entity/gradient.entity";
 import { useGradientStore } from "@/store/use-gradient-store";
+import _ from 'lodash';
 
 export async function getAllData() {
     try {
-        const db = getContext();
+        const db = await getContext();
         const palettes = await db.select<PaletteDto[]>(`
             SELECT
                 palette.id,
@@ -35,8 +34,8 @@ export async function getAllData() {
          INNER JOIN block b ON c.blockId = b.id`);
         const gradient = await db.select<GradientDto[]>('SELECT * FROM gradient');
 
-        // const gradientLayer = await db.select<GradientLayerDto[]>('SELECT * FROM gradient_layer');
-        // const gradientStop = await db.select<GradientStopsDto[]>('SELECT * FROM gradient_stop');
+        const gradientLayer = await db.select<GradientLayerDto[]>('SELECT * FROM gradient_layer');
+        const gradientStop = await db.select<GradientStopsDto[]>('SELECT * FROM gradient_stop');
 
         const colorModels: ColorEntity[] = colors.map(x => {
             return {
@@ -83,6 +82,7 @@ export async function getAllData() {
         const colorBlocks: ColorBlockEntity[] = [...palletsModel, ...colorModels, ...gradientModels ];
         useHexHopStore.getState().actions.setColorBlock(colorBlocks);
         useGradientStore.getState().actions.setGradient(gradientModels);
+        useGradientStore.getState().actions.setNewActiveGradient();
     } catch (error) {
         console.error("Failed to fetch all data:", error);
         return [];

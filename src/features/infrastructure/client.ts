@@ -1,7 +1,11 @@
 import Database from "@tauri-apps/plugin-sql";
 
-const db = await Database.load('sqlite:hexHop.db');
+let dbInstance: Database | null = null;
 
-export function getContext(){
-    return db;
-}
+export const getContext = async (): Promise<Database> => {
+    if (!dbInstance) {
+        // Replace with your actual connection string
+        dbInstance = await Database.load('sqlite:hexHop.db');
+    }
+    return dbInstance;
+};

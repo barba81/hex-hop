@@ -3,7 +3,7 @@ import { getContext } from "../infrastructure/client";
 
 export async function removeAllData() {
     try {
-        const db = getContext();
+        const db = await getContext();
 
         await db.execute(`
             BEGIN TRANSACTION;

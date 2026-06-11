@@ -10,7 +10,7 @@ export const removeColor = async (colorEntity: ColorEntity) => {
         const newColoBlocks = state.colorBlocks.filter(x => x.id !== colorEntity.id);
         await updateAllBlocks(newColoBlocks, colorBlocks);
 
-        const db = getContext();
+        const db = await getContext();
         await db.execute(
             'DELETE FROM  color WHERE id = $1',
             [colorEntity.id]

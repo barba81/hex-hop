@@ -10,7 +10,7 @@ const getNextOrderNumber = () => {
 
 export const addNewColor = async (color: ColorData, paletteId?: number) => {
   try {
-    const db = getContext();
+    const db = await getContext();
     const order = getNextOrderNumber();
     const colorName = await getNearestColorName(color);
   

@@ -1,15 +1,36 @@
 import GradientList from "./gradient-layer-list";
-import GradientPreview from "./gradient-preview";
+import GradientPreviewBox from "./gradient-preview";
 import { AllGradientsList } from "./all-gradients-list/all-gradient-list";
+import GradientInfo from "./gradient-info";
+import {
+  useGradientActions,
+  useGradientStore,
+  useGradientStoreHasElements,
+} from "@/store/use-gradient-store";
 
 const GradientGeneratorPage = () => {
+  const hasElements = useGradientStoreHasElements();
+
+  const GradientPreview = () => {
+    return (
+      <>
+        <GradientInfo />
+        <GradientPreviewBox gradientBackground=" linear-gradient(4deg,rgba(63, 94, 251, 1) 0%, rgba(152, 83, 183, 1) 31%, rgba(252, 70, 107, 1) 100%)" />
+        <GradientList />
+      </>
+    );
+  };
+
+  const EmptyGradientList = () => {
+    return <><div>Add new gradietns</div></>
+  }
+
+
   return (
     <>
-      <div className="flex flex-col w-full flex-1 p-1">
+      <div className="flex flex-col w-full flex-1 p-1 gap-2">
         <AllGradientsList />
-        <div>Gradient name</div>
-        <GradientPreview gradientBackground=" linear-gradient(4deg,rgba(63, 94, 251, 1) 0%, rgba(152, 83, 183, 1) 31%, rgba(252, 70, 107, 1) 100%)" />
-        <GradientList />
+        {hasElements ? <GradientPreview /> : <EmptyGradientList />}
       </div>
     </>
   );

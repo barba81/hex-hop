@@ -8,20 +8,28 @@ interface GradientStore {
 }
 
 interface GradientAction {
+  setNewActiveGradient: () => void;
   addGradient: (block: GradientEntity) => void;
   setGradient: (blocks: GradientEntity[]) => void;
-
+  removeGradient: (id: number) => void;
 }
 
 export const useGradientStore = create<GradientStore>((set) => ({
   gradients: [],
   selectedGradientId: null,
   actions: {
+    setNewActiveGradient: () => {
+      set((state) => ({  selectedGradientId: state?.gradients[0]?.id ?? null }));
+    },
     setGradient: (blocks: GradientEntity[]) => {
       set(() => ({ gradients: [...blocks] }));
     },
     addGradient: (entity: GradientEntity): void => {
       set((state) => ({ gradients: [...state.gradients, entity] }));
+    },
+
+    removeGradient: (id: number) : void => {
+      set((state) => ({ gradients: state.gradients.filter(x=>x.id !== id) }));
     },
   }
 }));
@@ -35,3 +43,4 @@ export const useSelectedGradient = () => {
 };
 export const useGradientActions = () => useGradientStore((state) => state.actions);
 export const useGradients = () => useGradientStore((state) => state.gradients);
+export const useGradientStoreHasElements = () => useGradientStore((state) => state.gradients.length > 0);

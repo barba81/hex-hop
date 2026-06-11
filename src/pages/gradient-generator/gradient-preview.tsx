@@ -1,6 +1,6 @@
 import "@/style/empty-checker-board.css";
 
-const GradientPreview = ({gradientBackground} : {gradientBackground: string}) => {
+const GradientPreviewBox = ({gradientBackground} : {gradientBackground: string}) => {
   return (
     <>
       <div className="bg-checkerboard   h-30 rounded-md w-full  overflow-hidden outline-1">
@@ -15,4 +15,4 @@ const GradientPreview = ({gradientBackground} : {gradientBackground: string}) =>
   );
 };
 
-export default GradientPreview;
+export default GradientPreviewBox;

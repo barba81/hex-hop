@@ -4,7 +4,7 @@ import { getContext } from "../infrastructure/client";
 export const updateAllBlocks = async (newLIst: ColorBlockEntity[], _: ColorBlockEntity[]) => {
 
     try {
-        const db = getContext();
+        const db = await getContext();
         newLIst.forEach(async (colorEntity) => {
             if (colorEntity.kind === 'color') {
                 await db.execute(
