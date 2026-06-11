@@ -89,5 +89,18 @@ pub fn get_migrations() -> Vec<Migration> {
             ",
             kind: MigrationKind::Up,
         },
+           Migration {
+            version: 4,
+            description: "deleted",
+            sql: "
+            ALTER TABLE palette ADD COLUMN deleted INTEGER DEFAULT 0 CHECK(deleted BETWEEN 0 AND 1);
+            ALTER TABLE color ADD COLUMN deleted INTEGER DEFAULT 0 CHECK(deleted BETWEEN 0 AND 1);
+            ALTER TABLE gradient ADD COLUMN deleted INTEGER DEFAULT 0 CHECK(deleted BETWEEN 0 AND 1);
+            ALTER TABLE gradient_layer ADD COLUMN deleted INTEGER DEFAULT 0 CHECK(deleted BETWEEN 0 AND 1);
+            ALTER TABLE gradient_stop ADD COLUMN deleted INTEGER DEFAULT 0 CHECK(deleted BETWEEN 0 AND 1);
+
+            ",
+            kind: MigrationKind::Up,
+        },
     ]
 }

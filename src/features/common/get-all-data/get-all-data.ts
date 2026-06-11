@@ -1,11 +1,12 @@
 import { ColorBlockEntity, useHexHopStore } from "@/store/use-hex-hop-store";
 import { getContext } from "../../infrastructure/client";
-import { ColorDto, GradientDto, GradientLayerDto, GradientStopsDto, type PaletteDto } from "./get-all-data.types";
 import { PaletteEntity } from "../../infrastructure/entity/palette.entity";
 import { ColorEntity } from "../../infrastructure/entity/color.entity";
 import { GradientEntity } from "@/features/infrastructure/entity/gradient.entity";
 import { useGradientStore } from "@/store/use-gradient-store";
 import _ from 'lodash';
+import { ColorDto, PaletteDto } from "./get-all-data.types";
+import { getAllGradientsAsync } from "@/repo/gradient/gradient-repo";
 
 export async function getAllData() {
     try {
@@ -32,10 +33,7 @@ export async function getAllData() {
                     b.[order]
                 FROM color c
          INNER JOIN block b ON c.blockId = b.id`);
-        const gradient = await db.select<GradientDto[]>('SELECT * FROM gradient');
 
-        const gradientLayer = await db.select<GradientLayerDto[]>('SELECT * FROM gradient_layer');
-        const gradientStop = await db.select<GradientStopsDto[]>('SELECT * FROM gradient_stop');
 
         const colorModels: ColorEntity[] = colors.map(x => {
             return {
@@ -52,6 +50,7 @@ export async function getAllData() {
             };
         });
 
+        const gradient = await getAllGradientsAsync();
         //    const gradient1 = _.groupBy(gradient, 'id');
         //    const gradient2 = _.groupBy(gradientLayer, 'id');
         //    const gradient3 = _.groupBy(gradientId, 'id');
