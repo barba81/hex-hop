@@ -21,10 +21,10 @@ export type GradientLayer =  {
     colorSpace: ColorSpace;
     easingFunction: number;
 
-    stops: GradientStops[];
+    stops: GradientStop[];
 }
 
-export type GradientStops = {
+export type GradientStop = {
     id: number;
     order: number;
     layerId: number;
