@@ -20,8 +20,5 @@ export const addNewGradientLayer = (gradientId: number | null) => {
         patternRepeatNumber: 0,
         stops: []
     };
-        const state = useGradientStore.getState();
-    
-    const gradient = state.gradients.find((g) => g.id === gradientId) || null;
-    gradient?.layers.push()
+     useGradientStore.getState().actions.addLayerToSelected(gradientLayer);
 }
