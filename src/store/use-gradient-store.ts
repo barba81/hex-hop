@@ -2,12 +2,15 @@ import { GradientEntity, GradientLayer } from "@/features/infrastructure/entity/
 import { create } from "zustand";
 
 interface GradientStore {
+  expandedLayers: Record<string, boolean>;
   gradients: GradientEntity[];
   selectedGradientId: number | null;
   actions: GradientAction;
 }
 
 interface GradientAction {
+  toggleLayerExpanded: (layerId: number) => void;
+
   addGradient: (block: GradientEntity) => void;
   setGradient: (blocks: GradientEntity[]) => void;
   removeGradient: (id: number) => void;
@@ -17,9 +20,16 @@ interface GradientAction {
 }
 
 export const useGradientStore = create<GradientStore>((set) => ({
+  expandedLayers: {},
   gradients: [],
   selectedGradientId: null,
   actions: {
+   toggleLayerExpanded: (layerId) => set((state) => ({
+      expandedLayers: {
+        ...state.expandedLayers,
+        [layerId]: !state.expandedLayers[layerId]
+      }
+    })),
     setActiveGradient: (id: number) => {
       set(() => ({ selectedGradientId: id }));
     },

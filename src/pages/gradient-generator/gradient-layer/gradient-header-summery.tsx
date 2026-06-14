@@ -2,19 +2,20 @@ import GradientIcon from "@/components/icons/gradient-icon";
 import { ChevronDownIcon } from "lucide-react";
 import GradientColorSpaceBadgeText from "./gradient-color-badge-text";
 import "@/style/empty-checker-board.css";
+import { DragDots } from "@/components/common/drag-dots";
+import { useGradientActions, useGradientStore } from "@/store/use-gradient-store";
 
-const GradientHeaderSummery = () => {
+const GradientHeaderSummery = ({layerId}:{layerId: number}) => {
+  
+  const { toggleLayerExpanded } = useGradientActions();
+  
   return (
     <>
-      <div className=" flex h-7  justify-between items-center gap-1  outline-2 rounded-md ">
+      <div className=" flex   justify-between items-center gap-1  ">
         {/* drag and drop */}
         <div className=" flex items-center h-7 gap-1">
-          <div className="flex flex-col justify-center h-7 gap-1 p-1 py-1 bg-foreground/20 rounded-l-md">
-            <span className="h-0.75 w-0.75 rounded-full bg-current"></span>
-            <span className="h-0.75 w-0.75 rounded-full bg-current"></span>
-            <span className="h-0.75 w-0.75 rounded-full bg-current"></span>
-          </div>
-          <div className="rounded-md p-0.5  bg-foreground/20">
+          <DragDots/>
+          <div className="rounded-md p-0.5  bg-foreground/20" onClick={()=>toggleLayerExpanded(layerId)}>
             <ChevronDownIcon size={14} />
           </div>
         </div>
@@ -38,7 +39,6 @@ const GradientHeaderSummery = () => {
             <GradientIcon size={18} />{" "}
           </div>
         </div>
-        
       </div>
     </>
   );

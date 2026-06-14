@@ -7,7 +7,6 @@ export const addNewGradientLayer = (gradientId: number | null) => {
     // insert into repo
     
     
-    
     // insert into store
 
     const gradientLayer: GradientLayer = {

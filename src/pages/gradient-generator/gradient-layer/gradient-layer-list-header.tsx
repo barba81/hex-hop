@@ -3,7 +3,7 @@ import { useGradientStore, useSelectedGradientId } from "@/store/use-gradient-st
 import "@/style/empty-checker-board.css";
 import { Plus } from "lucide-react";
 
-const GradientLayerHeader = () => {
+const GradientLayerListHeader = () => {
   const selectGradientId = useSelectedGradientId();
 
   return (
@@ -14,4 +14,4 @@ const GradientLayerHeader = () => {
   );
 };
 
-export default GradientLayerHeader;
+export default GradientLayerListHeader;

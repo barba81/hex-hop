@@ -3,7 +3,7 @@ import GradientPreviewBox from "./gradient-preview";
 import { AllGradientsList } from "./all-gradients-list/all-gradient-list";
 import GradientInfo from "./gradient-info";
 import {useGradientStoreHasElements} from "@/store/use-gradient-store";
-import GradientLayerHeader from "./gradient-layer/gradient-layer-header";
+import GradientLayerListHeader from "./gradient-layer/gradient-layer-list-header";
 
 const GradientGeneratorPage = () => {
   const hasElements = useGradientStoreHasElements();
@@ -13,7 +13,7 @@ const GradientGeneratorPage = () => {
       <>
         <GradientInfo />
         <GradientPreviewBox gradientBackground=" linear-gradient(4deg,rgba(63, 94, 251, 1) 0%, rgba(152, 83, 183, 1) 31%, rgba(252, 70, 107, 1) 100%)" />
-        <GradientLayerHeader/>
+        <GradientLayerListHeader/>
         <GradientLayerList />
       </>
     );
