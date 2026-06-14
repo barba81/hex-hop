@@ -1,12 +1,9 @@
-import GradientList from "./gradient-layer-list";
+import GradientLayerList from "./gradient-layer/gradient-layer-list";
 import GradientPreviewBox from "./gradient-preview";
 import { AllGradientsList } from "./all-gradients-list/all-gradient-list";
 import GradientInfo from "./gradient-info";
-import {
-  useGradientActions,
-  useGradientStore,
-  useGradientStoreHasElements,
-} from "@/store/use-gradient-store";
+import {useGradientStoreHasElements} from "@/store/use-gradient-store";
+import GradientLayerHeader from "./gradient-layer/gradient-layer-header";
 
 const GradientGeneratorPage = () => {
   const hasElements = useGradientStoreHasElements();
@@ -16,7 +13,8 @@ const GradientGeneratorPage = () => {
       <>
         <GradientInfo />
         <GradientPreviewBox gradientBackground=" linear-gradient(4deg,rgba(63, 94, 251, 1) 0%, rgba(152, 83, 183, 1) 31%, rgba(252, 70, 107, 1) 100%)" />
-        <GradientList />
+        <GradientLayerHeader/>
+        <GradientLayerList />
       </>
     );
   };
@@ -24,7 +22,6 @@ const GradientGeneratorPage = () => {
   const EmptyGradientList = () => {
     return <><div>Add new gradietns</div></>
   }
-
 
   return (
     <>

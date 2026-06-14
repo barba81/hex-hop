@@ -1,9 +1,12 @@
 import { addNewGradient } from "@/features/gradient/add-new-gradient/add-new-gradient";
-import { useGradientActions, useGradients } from "@/store/use-gradient-store";
+import { selectGradient } from "@/features/gradient/select-gradient/selectGradient";
+import { GradientEntity } from "@/features/infrastructure/entity/gradient.entity";
+import { useGradients, useSelectedGradientId } from "@/store/use-gradient-store";
 import { Plus } from "lucide-react";
 
 export const AllGradientsList = () => {
   const gradients = useGradients();
+  const activeId = useSelectedGradientId();
 
   const AddNewGradient = () => {
     return (
@@ -24,13 +27,14 @@ export const AllGradientsList = () => {
     );
   };
 
-  const GradientPreview = () => {
+  const GradientPreview = ({gradient}:{gradient:GradientEntity} ) => {
     return (
       <div
-        className=" h-10 w-20 rounded-md  hover:outline-5 shrink-0 "
+        onClick={() => selectGradient(gradient.id)}
+        className={` h-10 w-20 rounded-md  hover:outline-5 shrink-0 ${activeId === gradient.id && 'outline-2 outline-amber-500'}`}
         style={{
           background:
-            "linear-gradient(4deg,rgba(63, 94, 251, 1) 0%, rgba(152, 83, 183, 1) 31%, rgba(252, 70, 107, 1) 100%)",
+            "linear-gradient(4deg,rgba(63, 94, 251, 1) 0%, rgba(15, 83, 183, 1) 31%, rgba(252, 70, 107, 1) 100%)",
         }}
       />
     );
@@ -40,8 +44,8 @@ export const AllGradientsList = () => {
     <>
       <div className="flex flex-row gap-2  p-2 w-full overflow-auto whitespace-nowrap shrink-0">
         <AddNewGradient />
-        {gradients.map((_,ix) => (
-          <GradientPreview key={ix} />
+        {gradients.map((gradient,ix) => (
+          <GradientPreview key={ix} gradient={gradient}/>
         ))}
       </div>
     </>
