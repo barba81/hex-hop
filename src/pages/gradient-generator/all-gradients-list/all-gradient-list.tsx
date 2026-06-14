@@ -1,5 +1,5 @@
 import { addNewGradient } from "@/features/gradient/add-new-gradient/add-new-gradient";
-import { selectGradient } from "@/features/gradient/select-gradient/selectGradient";
+import { selectGradient } from "@/features/gradient/select-gradient/select-gradient";
 import { GradientEntity } from "@/features/infrastructure/entity/gradient.entity";
 import { useGradients, useSelectedGradientId } from "@/store/use-gradient-store";
 import { Plus } from "lucide-react";

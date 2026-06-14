@@ -1,8 +1,8 @@
-import { useGradientLayerStore } from "@/store/use-gradient-layer";
 import { GradientLayer } from "@/features/infrastructure/entity/gradient.entity";
+import { useGradientStore } from "@/store/use-gradient-store";
 
-export const addNewGradientLayer = (selectGradientId: number | null) => {
-    if (selectGradientId === null) return;
+export const addNewGradientLayer = (gradientId: number | null) => {
+    if (gradientId === null) return;
 
     // insert into repo
     
@@ -20,7 +20,8 @@ export const addNewGradientLayer = (selectGradientId: number | null) => {
         patternRepeatNumber: 0,
         stops: []
     };
-    useGradientLayerStore.getState().actions.addGradientLayer(
-        gradientLayer
-    );
+        const state = useGradientStore.getState();
+    
+    const gradient = state.gradients.find((g) => g.id === gradientId) || null;
+    gradient?.layers.push()
 }

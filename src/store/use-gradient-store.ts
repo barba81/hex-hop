@@ -1,4 +1,4 @@
-import { GradientEntity } from "@/features/infrastructure/entity/gradient.entity";
+import { GradientEntity, GradientLayer } from "@/features/infrastructure/entity/gradient.entity";
 import { create } from "zustand";
 
 interface GradientStore {
@@ -8,22 +8,20 @@ interface GradientStore {
 }
 
 interface GradientAction {
-  setActiveGradient: (id: number) => void;
-  setNewActiveGradient: () => void;
   addGradient: (block: GradientEntity) => void;
   setGradient: (blocks: GradientEntity[]) => void;
   removeGradient: (id: number) => void;
+  setActiveGradient: (id: number) => void;
+
+  addLayerToSelected: ( layer: GradientLayer) => void;
 }
- 
+
 export const useGradientStore = create<GradientStore>((set) => ({
   gradients: [],
   selectedGradientId: null,
   actions: {
     setActiveGradient: (id: number) => {
-      set(() => ({  selectedGradientId: id }));
-    },
-    setNewActiveGradient: () => {
-      set((state) => ({  selectedGradientId: state?.gradients[0]?.id ?? null }));
+      set(() => ({ selectedGradientId: id }));
     },
     setGradient: (blocks: GradientEntity[]) => {
       set(() => ({ gradients: [...blocks] }));
@@ -32,9 +30,20 @@ export const useGradientStore = create<GradientStore>((set) => ({
       set((state) => ({ gradients: [...state.gradients, entity] }));
     },
 
-    removeGradient: (id: number) : void => {
-      set((state) => ({ gradients: state.gradients.filter(x=>x.id !== id) }));
+    removeGradient: (id: number): void => {
+      set((state) => ({ gradients: state.gradients.filter(x => x.id !== id) }));
     },
+    addLayerToSelected: (layer: GradientLayer) => set((state) => {
+      if (!state.selectedGradientId) return {};
+
+      return {
+        gradients: state.gradients.map((g) => 
+          g.id === state.selectedGradientId 
+            ? { ...g, layers: [...g.layers, layer] } 
+            : g
+        )
+      };
+    }),
   }
 }));
 
@@ -45,7 +54,13 @@ export const useSelectedGradient = () => {
       : null
   );
 };
+
+export const useGradientStoreHasElements = () => useGradientStore((state) => state.gradients.length > 0);
 export const useSelectedGradientId = () => useGradientStore((state) => state.selectedGradientId);
 export const useGradientActions = () => useGradientStore((state) => state.actions);
 export const useGradients = () => useGradientStore((state) => state.gradients);
-export const useGradientStoreHasElements = () => useGradientStore((state) => state.gradients.length > 0);
+
+export const useSelectedLayers = () => useGradientStore((state) => {
+  const currentGradient = state.gradients.find((g) => g.id === state.selectedGradientId);
+  return currentGradient ? currentGradient.layers : [];
+});
