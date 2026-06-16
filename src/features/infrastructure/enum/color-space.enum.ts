@@ -3,6 +3,4 @@ export type ColorSpace =
     | "oklch"
     | "srgb"
     | "shorter hue"
-    | "longer hue"
-    | "srgb-linear"
     | "longer hue";

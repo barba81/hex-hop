@@ -2,14 +2,22 @@ import { useHexHopStore } from "@/store/use-hex-hop-store";
 import { useGradientStore } from "@/store/use-gradient-store";
 import { GradientEntity } from "@/features/infrastructure/entity/gradient.entity";
 import { getContext } from "@/features/infrastructure/client";
+import { insertGradientEntity } from "@/repo/gradient/gradient-repo";
+import { getGradientById } from "../get-gradinet-by-id/getGradinetById";
 
 
-export const addNewGradient = async (gradientEntity: GradientEntity) => {
-//    const db = await getContext();
+export const addNewGradient = async () => {
+    
+    await insertGradientEntity();
+const gradinet = await getGradientById(1);
+    //    const db = await getContext();
+
     
 //     try {
-//         // Start the transaction
-//         await db.execute("BEGIN TRANSACTION;");
+//         await db.execute(`BEGIN TRANSACTION;
+            
+            
+//             `);
 
 //         const order = getNextOrderNumber();
 
