@@ -1,8 +1,8 @@
-import { GradientStop } from "@/features/infrastructure/entity/gradient.entity";
+import { GradientStopEntity } from "@/features/infrastructure/entity/gradient.entity";
 import { useGradientStore } from "@/store/use-gradient-store";
 
 export const addNewColorToLayer = (layerId: number) => {
-    const newColorStop: GradientStop = {
+    const newColorStop: GradientStopEntity = {
         a: 1, b: 0.5, g: 0.5, r: 0.5,
         id: 0,
         order: 0,

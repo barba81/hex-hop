@@ -9,10 +9,10 @@ export type GradientEntity =  {
     name: string;
     paletteId: number | null;
     
-    layers: GradientLayer[];
+    layers: GradientLayerEntity[];
 }
 
-export type GradientLayer =  {
+export type GradientLayerEntity =  {
     id: number;
     order: number;
     gradientType: GradientTypes;
@@ -21,10 +21,10 @@ export type GradientLayer =  {
     colorSpace: ColorSpace;
     easingFunction: number;
 
-    stops: GradientStop[];
+    stops: GradientStopEntity[];
 }
 
-export type GradientStop = {
+export type GradientStopEntity = {
     id: number;
     order: number;
     layerId: number;

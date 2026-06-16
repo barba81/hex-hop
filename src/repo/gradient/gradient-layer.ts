@@ -1,6 +1,6 @@
 import { getContext } from "@/features/infrastructure/client";
 import { GradientLayerDto } from "./gradient-dto";
-import { GradientLayer } from "@/features/infrastructure/entity/gradient.entity";
+import { GradientLayerEntity } from "@/features/infrastructure/entity/gradient.entity";
 
 export const getGradientLayersByGradientIdAsync = async (gradientId: number) => {
     const db = await getContext();
@@ -24,7 +24,7 @@ export const getAllGradientLayersAsync = async () => {
 }
 
 
-export const insertGradientLayerAsync = async (gradientLayer: GradientLayer , gradientId: number) => {
+export const insertGradientLayerAsync = async (gradientLayer: GradientLayerEntity , gradientId: number) => {
     const db = await getContext();
 
     try {

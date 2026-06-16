@@ -1,4 +1,4 @@
-import { GradientLayer } from "@/features/infrastructure/entity/gradient.entity";
+import { GradientLayerEntity } from "@/features/infrastructure/entity/gradient.entity";
 import { insertGradientLayerAsync } from "@/repo/gradient/gradient-layer";
 import { useGradientStore } from "@/store/use-gradient-store";
 
@@ -12,7 +12,7 @@ export const addNewGradientLayer = (gradientId: number | null) => {
     const order =
     gradient.layers.length;
 
-    const gradientLayer: GradientLayer = {
+    const gradientLayer: GradientLayerEntity = {
         id: 0,
         colorSpace: 'longer hue',
         easingFunction: 0,

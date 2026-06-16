@@ -1,4 +1,4 @@
-import { GradientEntity, GradientLayer, GradientStop } from "@/features/infrastructure/entity/gradient.entity";
+import { GradientEntity, GradientLayerEntity, GradientStopEntity } from "@/features/infrastructure/entity/gradient.entity";
 import { create } from "zustand";
 
 interface GradientStore {
@@ -16,8 +16,8 @@ interface GradientAction {
   removeGradient: (id: number) => void;
   setActiveGradient: (id: number) => void;
 
-  addLayerToSelected: ( layer: GradientLayer) => void;
-  addGradientStop: ( layerId: number, gradientStop: GradientStop) => void;
+  addLayerToSelected: ( layer: GradientLayerEntity) => void;
+  addGradientStop: ( layerId: number, gradientStop: GradientStopEntity) => void;
 }
 
 export const useGradientStore = create<GradientStore>((set) => ({
@@ -44,7 +44,7 @@ export const useGradientStore = create<GradientStore>((set) => ({
     removeGradient: (id: number): void => {
       set((state) => ({ gradients: state.gradients.filter(x => x.id !== id) }));
     },
-    addLayerToSelected: (layer: GradientLayer) => set((state) => {
+    addLayerToSelected: (layer: GradientLayerEntity) => set((state) => {
       if (!state.selectedGradientId) return {};
 
       return {
@@ -55,7 +55,7 @@ export const useGradientStore = create<GradientStore>((set) => ({
       };
     }),
 
-    addGradientStop: (layerId: number, stop: GradientStop) => set((state) => {
+    addGradientStop: (layerId: number, stop: GradientStopEntity) => set((state) => {
       return {
         gradients: state.gradients.map((gradient)=>{
           if (gradient.id !== state.selectedGradientId) return gradient;
