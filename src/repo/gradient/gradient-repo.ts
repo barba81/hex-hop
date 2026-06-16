@@ -31,11 +31,11 @@ export const getAllGradientsAsync = async () => {
 
 
 export const insertGradientEntity = async () => {
-    return new Promise<number>((resolve) => {
-        resolve(6);
-    });
+    // return new Promise<number>((resolve) => {
+    //     resolve(6);
+    // });
 
-    //    const db = await getContext();
+       const db = await getContext();
 
 
     //     try {

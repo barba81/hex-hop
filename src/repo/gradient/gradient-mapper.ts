@@ -31,9 +31,6 @@ const getGradientTypeToDto = (value: GradientTypes): number => GRADIENT_TYPE_MAP
 const getColorSpaceFromDto = (value: number): ColorSpace => REVERSE_COLOR_SPACE_MAP[value] ?? "srgb";
 const getColorSpaceToDto = (value: ColorSpace): number => COLOR_SPACE_MAP[value] ?? 2;
 
-// ==========================================
-// 1. STOPS MAPPER
-// ==========================================
 export const GradientStopMapper = {
     toDto: (entity: GradientStopEntity): GradientStopsDto => ({
         id: entity.id,
@@ -58,9 +55,6 @@ export const GradientStopMapper = {
     })
 };
 
-// ==========================================
-// 2. LAYER MAPPER
-// ==========================================
 export const GradientLayerMapper = {
     toDto: (entity: GradientLayerEntity, gradientId: number): GradientLayerDto => ({
         id: entity.id,
@@ -87,9 +81,7 @@ export const GradientLayerMapper = {
     })
 };
 
-// ==========================================
-// 3. GRADIENT MAPPER
-// ==========================================
+
 export const GradientMapper = {
     toDto: (entity: GradientEntity): GradientDto => ({
         id: entity.id,

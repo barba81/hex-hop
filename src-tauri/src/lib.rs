@@ -4,7 +4,7 @@
 )]
 use window_vibrancy::*;
 
-use tauri::{AppHandle, Manager};
+use tauri::{ Manager};
 
 #[cfg(target_os = "macos")]
 use objc::{class, msg_send, sel, sel_impl, runtime::Object};
@@ -19,7 +19,6 @@ pub mod color_picker;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![ color_picker::pick_color_mack])
         .plugin(tauri_plugin_os::init())
