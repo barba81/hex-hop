@@ -31,16 +31,15 @@ export const getAllGradientsAsync = async () => {
 
 
 export const insertGradientEntity = async () => {
+
+    
     // return new Promise<number>((resolve) => {
     //     resolve(6);
     // });
 
-       const db = await getContext();
-
 
     //     try {
     //         await db.execute(`BEGIN TRANSACTION;
-
 
     //             `);
 

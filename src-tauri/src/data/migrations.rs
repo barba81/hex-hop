@@ -74,7 +74,8 @@ pub fn get_migrations() -> Vec<Migration> {
             sql: "
         CREATE TABLE block (
             id    INTEGER PRIMARY KEY AUTOINCREMENT,
-            [order] INTEGER
+            [order] INTEGER,
+            CHECK (typeof([order]) = 'integer')
         );
 
         ALTER TABLE color DROP COLUMN [order];

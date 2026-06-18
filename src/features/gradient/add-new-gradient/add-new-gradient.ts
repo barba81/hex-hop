@@ -1,11 +1,13 @@
 import { useHexHopStore } from "@/store/use-hex-hop-store";
-import { insertGradientEntity } from "@/repo/gradient/gradient-repo";
-import { getGradientById } from "../get-gradient-by-id/getGradientById";
+import { invoke } from "@tauri-apps/api/core";
 
 
 export const addNewGradient = async () => {
-    const id = await insertGradientEntity();
-    const gradinet = await getGradientById(id);
+    invoke('add_gradient', { invokeMessage: 'Hello!' })
+        .then((message) => console.log(message))
+        .catch((error) => console.error(error));
+
+    // const id = await insertGradientEntity();
 
 }
 

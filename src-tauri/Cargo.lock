@@ -1801,6 +1801,7 @@ dependencies = [
  "objc",
  "serde",
  "serde_json",
+ "sqlx",
  "tauri",
  "tauri-build",
  "tauri-plugin-clipboard-manager",
