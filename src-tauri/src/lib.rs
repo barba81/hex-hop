@@ -17,17 +17,20 @@ pub mod migrations;
 #[path = "feat/color_picker.rs"]
 pub mod color_picker;
 
-// type Db = Pool<Sqlite>;
+#[path = "feat/gradient-service.rs"]
+pub mod gradient_service;
+
+type Db = Pool<Sqlite>;
 
 // Make this public so your command functions can see it
-// pub struct AppState {
-//     pub db: Db,
-// }
+pub struct AppState {
+    pub db: Db,
+}
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![color_picker::pick_color_mack])
+        .invoke_handler(tauri::generate_handler![color_picker::pick_color_mack, gradient_service::save_gradient])
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(
@@ -38,11 +41,11 @@ pub fn run() {
         .plugin(tauri_plugin_single_instance::init(|_app, _args, _cwd| {}))
         .setup(|app| {
             // Fix: Capture the database instance correctly inside the async runtime loop
-            // let handle = app.handle().clone();
-            // tauri::async_runtime::block_on(async move {
-            //     let db = setup_db(&handle).await;
-            //     handle.manage(AppState { db }); 
-            // });
+            let handle = app.handle().clone();
+            tauri::async_runtime::block_on(async move {
+                let db = setup_db(&handle).await;
+                handle.manage(AppState { db }); 
+            });
 
             let window = app.get_webview_window("main").unwrap();
 
@@ -67,71 +70,26 @@ pub fn run() {
         .expect("error while running tauri application");
 }
 
-// async fn setup_db(app: &tauri::AppHandle) -> Db {
-//     let mut path = app.path().app_data_dir().expect("failed to get data_dir");
+async fn setup_db(app: &tauri::AppHandle) -> Db {
+    let mut path = app.path().app_data_dir().expect("failed to get data_dir");
 
-//     std::fs::create_dir_all(&path).expect("failed to create directory");
+    std::fs::create_dir_all(&path).expect("failed to create directory");
 
-//     path.push("hexHop.db");
+    path.push("hexHop.db");
     
-//     let db_url = format!("sqlite:{}", path.to_str().expect("invalid path"));
+    let db_url = format!("sqlite:{}", path.to_str().expect("invalid path"));
 
-//     if !Sqlite::database_exists(&db_url).await.unwrap_or(false) {
-//         Sqlite::create_database(&db_url)
-//             .await
-//             .expect("failed to create database");
-//     }
+    if !Sqlite::database_exists(&db_url).await.unwrap_or(false) {
+        Sqlite::create_database(&db_url)
+            .await
+            .expect("failed to create database");
+    }
 
-//     let db = SqlitePoolOptions::new()
-//         .connect(&db_url)
-//         .await
-//         .unwrap();
+    let db = SqlitePoolOptions::new()
+        .connect(&db_url)
+        .await
+        .unwrap();
 
-//     db
-// }
+    db
+}
 
-
-//////////////
-
-
-
-
-// #[tauri::command]
-// async fn add_gradient(state: tauri::State<'_, AppState>, gradient: ) -> Result<(), String> {
-//     let db = &state.db;
-
-//     // 1. Begin the global transaction
-//     let mut tx = db.begin()
-//         .await
-//         .map_err(|e| format!("Failed to start transaction: {}", e))?;
-
-//     // 2. First separate function call (Succeeds)
-//     insert_block(&mut tx, 1)
-//         .await
-//         .map_err(|e| format!("Error saving block 1: {}", e))?;
-
-//     // 3. Second separate function call (Succeeds)
-//     insert_block(&mut tx, 2)
-//         .await
-//         .map_err(|e| format!("Error saving block 2: {}", e))?;
-
-
-//     // 4. If nothing returned an Error up to this point, commit everything!
-//     tx.commit()
-//         .await
-//         .map_err(|e| format!("Failed to commit transaction: {}", e))?;
-
-//     Ok(())
-// }
-
-// async fn insert_block(
-//     tx: &mut sqlx::Transaction<'_, sqlx::Sqlite>, 
-//     order_val: i32
-// ) -> Result<(), sqlx::Error> {
-//     sqlx::query("INSERT INTO block (`order`) VALUES (?1)")
-//         .bind(order_val)
-//         .execute(&mut **tx) 
-//         .await?;
-        
-//     Ok(())
-// }

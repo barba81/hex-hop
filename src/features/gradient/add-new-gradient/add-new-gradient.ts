@@ -9,7 +9,7 @@ const defaultGradient: GradientEntity = {
     id: 0,
     blockId: 0,
     order: 0,
-    name: "New gradient",
+    name: "hello ",
     paletteId: 0,
 
     layers: [],
@@ -17,7 +17,7 @@ const defaultGradient: GradientEntity = {
 
 
 export const addNewGradient = async () => {
-    insertGradient(GradientMapper.toDto(defaultGradient));
+    insertGradient(defaultGradient);
 }
 
 const getNextOrderNumber = () => {
