@@ -3,17 +3,11 @@ use sqlx::Sqlite;
 
 use crate::AppState;
 
-
-// #[tauri::command]
-// async fn save_gradient_layer(entity: GradientEntity) -> Result<i64, String> {
-    
-// }
-
 #[tauri::command]
 pub async fn save_gradient(
     state: tauri::State<'_, AppState>,
     gradient: GradientInput,
-) -> Result<(), String> {
+) -> Result<i64, String> {
     let db = &state.db;
 
        let mut tx = db.begin()
@@ -48,7 +42,7 @@ pub async fn save_gradient(
      tx.commit()
                 .await
                 .map_err(|e| format!("Failed to commit: {}", e))?;
-    Ok(())
+    Ok(gradient_id)
 
 }
 

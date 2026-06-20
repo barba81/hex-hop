@@ -3,6 +3,7 @@ import { GradientMapper } from "@/repo/gradient/gradient-mapper";
 import { insertGradient } from "@/repo/gradient/gradient-repo";
 import { useHexHopStore } from "@/store/use-hex-hop-store";
 import { invoke } from "@tauri-apps/api/core";
+import { getGradientById } from "../get-gradient-by-id/get-gradient-by-id";
 
 const defaultGradient: GradientEntity = {
     kind: "gradient",
@@ -17,7 +18,9 @@ const defaultGradient: GradientEntity = {
 
 
 export const addNewGradient = async () => {
-    insertGradient(defaultGradient);
+    const id = await insertGradient(defaultGradient);
+    const gradient = await getGradientById(id);
+    console.log(gradient);
 }
 
 const getNextOrderNumber = () => {

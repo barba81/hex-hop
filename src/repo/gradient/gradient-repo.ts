@@ -53,7 +53,7 @@ export const removeGradientAsync = async (selectedGradientId: number) => {
 
 export const insertGradient = async (gradientEntity: GradientEntity) => {
     try {
-        await invoke("save_gradient", {
+       return await invoke<number>("save_gradient", {
             gradient: {
                 order: gradientEntity.order,
                 name: gradientEntity.name,
