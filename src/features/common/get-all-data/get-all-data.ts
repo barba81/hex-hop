@@ -81,7 +81,7 @@ export async function getAllData() {
         const colorBlocks: ColorBlockEntity[] = [...palletsModel, ...colorModels, ...gradientModels ];
         useHexHopStore.getState().actions.setColorBlock(colorBlocks);
         useGradientStore.getState().actions.setGradient(gradientModels);
-        useGradientStore.getState().actions.setActiveGradient(gradientModels[0].id);
+        useGradientStore.getState().actions.setActiveGradient(gradientModels[0]?.id ?? null);
     } catch (error) {
         console.error("Failed to fetch all data:", error);
         return [];
