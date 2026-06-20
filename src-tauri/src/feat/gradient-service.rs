@@ -15,31 +15,36 @@ pub async fn save_gradient(
     gradient: GradientInput,
 ) -> Result<(), String> {
     let db = &state.db;
-    println!("{:#?}", db);
 
        let mut tx = db.begin()
          .await
          .map_err(|e| format!("Failed to start transaction: {}", e))?;
 
-        let block_id = insert_block(&mut tx, gradient.order)
+
+         let block_id = insert_block(&mut tx, gradient.order)
             .await
             .map_err(|e| format!("Error inserting block: {}", e))?;
+   
+          dbg!(&gradient.palette_id);
 
-        // let gradient_id = insert_gradient(&mut tx, block_id, &gradient)
-        //     .await
-        //     .map_err(|e| format!("Error inserting gradient: {}", e))?;
 
-        // for layer in &gradient.layers {
-        //     let layer_id = insert_gradient_layer(&mut tx, gradient_id, layer)
-        //         .await
-        //         .map_err(|e| format!("Error inserting layer: {}", e))?;
+        let gradient_id = insert_gradient(&mut tx, block_id, &gradient)
+            .await
+            .map_err(|e| format!("Error inserting gradient: {}", e))?;
+        println!("{}", gradient_id);
 
-        //     for stop in &layer.stops {
-        //         insert_gradient_stop(&mut tx, layer_id, stop)
-        //             .await
-        //             .map_err(|e| format!("Error inserting stop: {}", e))?;
-        //     }
-        // }
+        for layer in &gradient.layers {
+            let layer_id = insert_gradient_layer(&mut tx, gradient_id, layer)
+                .await
+                .map_err(|e| format!("Error inserting layer: {}", e))?;
+        println!("{}", layer_id);
+
+            for stop in &layer.stops {
+                insert_gradient_stop(&mut tx, layer_id, stop)
+                    .await
+                    .map_err(|e| format!("Error inserting stop: {}", e))?;
+            }
+        }
      tx.commit()
                 .await
                 .map_err(|e| format!("Failed to commit: {}", e))?;
@@ -52,13 +57,12 @@ async fn insert_block(
     order_val: i64,
 ) -> Result<i64, sqlx::Error> {
     println!( "{}",order_val);
-    let id = sqlx::query("INSERT INTO block (`order`) VALUES (?1)")
+    let block_id = sqlx::query("INSERT INTO block (`order`) VALUES (?1)")
         .bind(order_val)
         .execute(&mut **tx) 
         .await?
-        .last_insert_rowid();
-        
-    Ok(id)
+         .last_insert_rowid();
+    Ok(block_id)
 }
 
 async fn insert_gradient(

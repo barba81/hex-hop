@@ -57,7 +57,7 @@ export const insertGradient = async (gradientEntity: GradientEntity) => {
             gradient: {
                 order: gradientEntity.order,
                 name: gradientEntity.name,
-                palette_id: gradientEntity.paletteId,
+                palette_id: null,
                 layers: gradientEntity.layers.map(layer => ({
                     order: layer.order,
                     gradient_type: layer.gradientType,

@@ -4,7 +4,7 @@
 )]
 use window_vibrancy::*;
 use sqlx::{migrate::MigrateDatabase, sqlite::SqlitePoolOptions, Pool, Sqlite};
-use tauri::{App, Manager};
+use tauri::{Manager};
 
 #[cfg(target_os = "macos")]
 use objc::{class, msg_send, sel, sel_impl, runtime::Object};
