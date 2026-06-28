@@ -1,3 +1,4 @@
+-- Add migration script here
 CREATE TABLE palette (
     id          INTEGER PRIMARY KEY AUTOINCREMENT,
     [order]     INTEGER, 
@@ -16,8 +17,6 @@ CREATE TABLE color (
     
     FOREIGN KEY (paletteId) REFERENCES palette(id) ON DELETE CASCADE
 );
-
-
 
 
 CREATE TABLE gradient (
