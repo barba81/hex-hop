@@ -1,6 +1,5 @@
 import {  useHexHopStore } from "@/store/use-hex-hop-store";
 import { DragDropProvider, DragEndEvent } from "@dnd-kit/react";
-import { dropNewPosition } from "@/features/common/drag-drop";
 import EmptyDisplay from "./empty-display";
 import ColorBlock from "./color-box/color-block";
 import { PaletteBox } from "./palette-box/palette-box";
@@ -10,7 +9,7 @@ import DropLine from "./drop-line";
 const ColorList = () => {
   const colorBlocks = useHexHopStore().colorBlocks.filter(x => x.kind === 'palette' || !x.paletteId);
 
-  const handleDragEnd = ({ operation, canceled }: DragEndEvent) => {
+  const handleDragEnd = ({}: DragEndEvent) => {
     // if (canceled || !operation.target || !operation.source?.id) return;
 
     // const sourceNum = operation.source.id as number; 

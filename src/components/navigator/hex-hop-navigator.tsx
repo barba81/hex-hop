@@ -1,4 +1,3 @@
-import ColorListPage from "@/pages/color-clipboard/color-list-page";
 import ColorContrastPage from "@/pages/color-contrast/color-contrast-page";
 
 import {  useAppStore } from "@/store/use-theme-store";

@@ -3,7 +3,7 @@ import { ChevronDownIcon } from "lucide-react";
 import GradientColorSpaceBadgeText from "./gradient-color-badge-text";
 import "@/style/empty-checker-board.css";
 import { DragDots } from "@/components/common/drag-dots";
-import { useGradientActions, useGradientStore } from "@/store/use-gradient-store";
+import { useGradientActions } from "@/store/use-gradient-store";
 
 const GradientHeaderSummery = ({layerId}:{layerId: number}) => {
   

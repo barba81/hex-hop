@@ -4,13 +4,9 @@
 )]
 use tauri::{Manager};
 
-#[cfg(target_os = "macos")]
-use objc::{class, msg_send, sel, sel_impl, runtime::Object};
-#[cfg(target_os = "macos")]
-use block::ConcreteBlock;
-
 pub mod feat;
 pub mod infra;
+pub mod state;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
@@ -22,6 +18,13 @@ pub fn run() {
         .plugin(tauri_plugin_positioner::init())
         .plugin(tauri_plugin_opener::init())
         .setup(|app| {
+
+            tauri::async_runtime::block_on(async {
+                infra::db::init_database(app)
+                    .await
+                    .expect("Failed to initialize database and migrations");
+            });
+
             let window = app.get_webview_window("main").unwrap();
 
             infra::mac_background::mack_background(window).unwrap();

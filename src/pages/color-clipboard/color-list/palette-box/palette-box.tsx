@@ -1,12 +1,9 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { DragDots } from "../../../../components/common/drag-dots";
-import ColorBlock from "../color-box/color-block";
 import { PaletteEntity } from "@/features/infrastructure/entity/palette.entity";
 import { PaletteBoxEmpty } from "./palette-box-empty";
 import { colorDataToHex } from "@/features/color/color-format-changer";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
-import React from "react";
-import DropLine from "../drop-line";
 import { useHexHopStore } from "@/store/use-hex-hop-store";
 import { Button } from "@/components/ui/button";
 import { removeAllBlocks } from "@/features/palette/remove-all-blocks";

@@ -1,5 +1,4 @@
 import { useHexHopStore } from "@/store/use-hex-hop-store";
-import { getContext } from "../infrastructure/client";
 import { ColorData } from "./types";
 import { getNearestColorName } from "./color-name-suggestion";
 import { ColorEntity } from "../infrastructure/entity/color.entity";
@@ -10,30 +9,31 @@ const getNextOrderNumber = () => {
 
 export const addNewColor = async (color: ColorData, paletteId?: number) => {
   try {
-    const db = await getContext();
     const order = getNextOrderNumber();
     const colorName = await getNearestColorName(color);
   
-   const blockResult = await db.execute(
-      `INSERT INTO block ([order]) VALUES (?)`,
-      [order],
-    );
-  
-      if (!blockResult.lastInsertId) throw new Error("Failed to insert block");
-    const blockId = blockResult.lastInsertId;
 
-    const result = await db.execute(
-      `
-      INSERT INTO 
-      color (blockId, paletteId, r,g,b,a, name) 
-      VALUES (?, ?, ?, ?, ?, ?, ?)`,
-      [blockId, paletteId, color.r, color.g, color.b, color.a, colorName],
-    );
-    if (!result.lastInsertId) throw new Error("Failed to insert palette");
+    /// TODO a
+  //  const blockResult = await db.execute(
+  //     `INSERT INTO block ([order]) VALUES (?)`,
+  //     [order],
+  //   );
+  
+    //   if (!blockResult.lastInsertId) throw new Error("Failed to insert block");
+    // const blockId = blockResult.lastInsertId;
+
+    // const result = await db.execute(
+    //   `
+    //   INSERT INTO 
+    //   color (blockId, paletteId, r,g,b,a, name) 
+    //   VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    //   [blockId, paletteId, color.r, color.g, color.b, color.a, colorName],
+    // );
+    // if (!result.lastInsertId) throw new Error("Failed to insert palette");
 
     const model: ColorEntity = {
-      id: result.lastInsertId,
-      blockId: blockId,
+      id: 1,
+      blockId: 1,
       paletteId: paletteId,
       kind: 'color',
       order: order,

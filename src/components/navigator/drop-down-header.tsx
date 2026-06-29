@@ -11,7 +11,6 @@ import {
   Import,
   Palette,
   Settings,
-  SwatchBook,
 } from "lucide-react";
 import GradientIcon from "../icons/gradient-icon";
 import { PagesTypes, useAppStore } from "@/store/use-theme-store";

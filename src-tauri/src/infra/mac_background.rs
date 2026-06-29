@@ -1,4 +1,4 @@
-use tauri::{App, EventLoopMessage, WebviewWindow, Wry};
+use tauri::{ WebviewWindow};
 #[cfg(target_os = "windows")]
 use window_vibrancy::apply_acrylic;
 

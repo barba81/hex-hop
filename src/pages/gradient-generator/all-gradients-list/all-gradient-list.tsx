@@ -1,5 +1,3 @@
-import { addNewGradient } from "@/features/gradient/add-new-gradient/add-new-gradient";
-import { selectGradient } from "@/features/gradient/select-gradient/select-gradient";
 import { GradientEntity } from "@/features/infrastructure/entity/gradient.entity";
 import { useGradients, useSelectedGradientId } from "@/store/use-gradient-store";
 import { Plus } from "lucide-react";
@@ -12,7 +10,7 @@ export const AllGradientsList = () => {
     return (
       <div
         className="h-10 w-20 rounded-md bg-stone-600/20 flex items-center justify-center hover:bg-stone-600 hover:cursor-pointer shrink-0"
-        onClick={async () => await addNewGradient()}
+        onClick={async () => {}}
       >
         <Plus size={20} />
       </div>
@@ -22,7 +20,7 @@ export const AllGradientsList = () => {
   const GradientPreview = ({gradient}:{gradient:GradientEntity} ) => {
     return (
       <div
-        onClick={() => selectGradient(gradient.id)}
+        onClick={() => {}}
         className={` h-10 w-20 rounded-md  hover:outline-5 shrink-0 ${activeId === gradient.id && 'outline-2 outline-amber-500'}`}
         style={{
           background:

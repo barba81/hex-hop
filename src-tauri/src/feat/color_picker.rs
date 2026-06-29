@@ -1,5 +1,9 @@
 use tauri::{AppHandle};
 
+#[cfg(target_os = "macos")]
+use objc::{class, msg_send, sel, sel_impl, runtime::Object};
+#[cfg(target_os = "macos")]
+use block::ConcreteBlock;
 
 #[tauri::command]
 pub async fn pick_color_mack(_app_handle: AppHandle) -> Result<Option<String>, String> {

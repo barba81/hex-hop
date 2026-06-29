@@ -1,4 +1,3 @@
-import { removeColor } from "@/features/color/remove-color";
 import { ColorEntity } from "@/features/infrastructure/entity/color.entity";
 import { Pencil } from "lucide-react";
 
@@ -6,7 +5,7 @@ type EditButtonParams = {
   colorEntity: ColorEntity;
 };
 
-const EditButton = ({ colorEntity }: EditButtonParams) => {
+const EditButton = ({ }: EditButtonParams) => {
   return (
       <div
         onClick={async () => {}}

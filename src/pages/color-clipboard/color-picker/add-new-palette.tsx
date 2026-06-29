@@ -1,4 +1,4 @@
-import { Palette, SwatchBook } from "lucide-react";
+import { Palette } from "lucide-react";
 import { addNewPalette } from "@/features/palette/add-new-palette/add-new-palette";
 import { buttonStyle } from "@/style/default-style";
 
