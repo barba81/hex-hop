@@ -20,12 +20,16 @@ pub fn run() {
         .setup(|app| {
 
             tauri::async_runtime::block_on(async {
+                infra::data_seed::init()
+                    .await
+                    .expect("Error setting up seed");
                 infra::db::init_database(app)
                     .await
                     .expect("Failed to initialize database and migrations");
             });
 
             let window = app.get_webview_window("main").unwrap();
+
 
             infra::mac_background::mack_background(window).unwrap();
           
