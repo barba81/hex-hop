@@ -26,6 +26,9 @@
     }
   },
   "bundle": {
+    "resources": [
+      "./data/seed.db"
+    ],
     "active": true,
     "targets": "all",
     "icon": [
