@@ -1,11 +1,20 @@
 import GradientLayerList from "./gradient-layer/gradient-layer-list";
 import GradientPreviewBox from "./gradient-preview";
-import { AllGradientsList } from "./all-gradients-list/all-gradient-list";
 import GradientInfo from "./gradient-info";
 import { useGradientStoreHasElements } from "@/store/use-gradient-store";
 import GradientLayerListHeader from "./gradient-layer/gradient-layer-list-header";
 import { Plus } from "lucide-react";
 import { GradientStepIcon } from "@/components/icons/gradient-step-icon";
+import { addNewGradient } from "@/features/gradient/add-new-gradient";
+import {
+  Empty,
+  EmptyContent,
+  EmptyDescription,
+  EmptyHeader,
+  EmptyMedia,
+  EmptyTitle,
+} from "@/components/ui/empty";
+import { Button } from "@/components/ui/button";
 
 const GradientGeneratorPage = () => {
   const hasElements = useGradientStoreHasElements();
@@ -24,15 +33,18 @@ const GradientGeneratorPage = () => {
   const EmptyGradientList = () => {
     return (
       <>
-        <div className="h-full w-full flex flex-col items-center justify-center">
-          <div>
-            <GradientStepIcon size={150}  />
-          </div>
-          <div>ADD NEW GRADIENT</div>
-          <div>
-            <Plus />
-          </div>
-        </div>
+        <Empty>
+          <EmptyHeader>
+            <EmptyMedia >
+              <GradientStepIcon size={100} className="opacity-70" />
+            </EmptyMedia>
+            <EmptyTitle className="text-xl">No gradient created</EmptyTitle>
+            <EmptyDescription>No data found</EmptyDescription>
+          </EmptyHeader>
+          <EmptyContent>
+            <Button  onClick={() => addNewGradient()}>Add new gradient</Button>
+          </EmptyContent>
+        </Empty>
       </>
     );
   };

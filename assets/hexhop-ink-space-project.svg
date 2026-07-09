@@ -24,9 +24,9 @@
      inkscape:pagecheckerboard="0"
      inkscape:deskcolor="#d1d1d1"
      inkscape:document-units="mm"
-     inkscape:zoom="0.43304444"
-     inkscape:cx="617.71951"
-     inkscape:cy="377.5594"
+     inkscape:zoom="0.21652222"
+     inkscape:cx="736.64495"
+     inkscape:cy="699.69724"
      inkscape:window-width="1920"
      inkscape:window-height="1009"
      inkscape:window-x="-8"
@@ -96,6 +96,9 @@
        height="97.930016"
        x="11.03499"
        y="11.03499"
-       rx="10.755619" />
+       rx="10.755619"
+       inkscape:export-filename="step-gradient.svg"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
   </g>
 </svg>
