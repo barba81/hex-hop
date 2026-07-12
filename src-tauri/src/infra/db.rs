@@ -5,6 +5,7 @@ use std::str::FromStr;
 
 use crate::state::DbState;
 
+const DATA_BASE_NAME: &str = "hex-hop.db";
 
 pub async fn init_database(app: &App) -> Result<(), Box<dyn std::error::Error>> {
   let app_dir = app.path().app_data_dir()?;
@@ -12,7 +13,7 @@ pub async fn init_database(app: &App) -> Result<(), Box<dyn std::error::Error>> 
         std::fs::create_dir_all(&app_dir)?;
     }
     
-    let db_path = app_dir.join("test_database.db");
+    let db_path = app_dir.join(DATA_BASE_NAME);
     let database_url = format!("sqlite:{}", db_path.to_string_lossy());
 
   let connection_options = SqliteConnectOptions::from_str(&database_url)?

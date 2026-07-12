@@ -3,7 +3,6 @@ import GradientPreviewBox from "./gradient-preview";
 import GradientInfo from "./gradient-info";
 import { useGradientStoreHasElements } from "@/store/use-gradient-store";
 import GradientLayerListHeader from "./gradient-layer/gradient-layer-list-header";
-import { Plus } from "lucide-react";
 import { GradientStepIcon } from "@/components/icons/gradient-step-icon";
 import { addNewGradient } from "@/features/gradient/add-new-gradient";
 import {

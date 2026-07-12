@@ -23,6 +23,7 @@ pub fn run() {
                 infra::data_seed::init()
                     .await
                     .expect("Error setting up seed");
+
                 infra::db::init_database(app)
                     .await
                     .expect("Failed to initialize database and migrations");
@@ -31,7 +32,7 @@ pub fn run() {
             let window = app.get_webview_window("main").unwrap();
 
 
-            infra::mac_background::mack_background(window).unwrap();
+            infra::mac_background::transparent_background(window).unwrap();
           
             Ok(())
         })

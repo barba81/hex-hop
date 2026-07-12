@@ -1,8 +1,9 @@
 use tauri::{ WebviewWindow};
+
 #[cfg(target_os = "windows")]
 use window_vibrancy::apply_acrylic;
 
-pub fn mack_background(window:   WebviewWindow) -> Result<(), String> {
+pub fn transparent_background(window:   WebviewWindow) -> Result<(), String> {
 
     #[cfg(target_os = "macos")]
     {
