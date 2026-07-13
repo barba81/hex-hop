@@ -7,11 +7,12 @@ use tauri::{Manager};
 pub mod feat;
 pub mod infra;
 pub mod state;
+pub mod repo;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
-        .invoke_handler(tauri::generate_handler![feat::color_picker::pick_color_mack])
+        .invoke_handler(tauri::generate_handler![feat::color_picker::pick_color_mack, feat::gradient_service::save_gradient])
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_single_instance::init(|_app, _args, _cwd| {}))
@@ -30,8 +31,6 @@ pub fn run() {
             });
 
             let window = app.get_webview_window("main").unwrap();
-
-
             infra::mac_background::transparent_background(window).unwrap();
           
             Ok(())
