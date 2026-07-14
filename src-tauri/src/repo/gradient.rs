@@ -7,9 +7,8 @@ pub async fn create_gradient(
     tx: &mut  Transaction<'_, Sqlite> 
 ) -> Result<(), sqlx::Error> {
     
-    let id: i64 = sqlx::query_scalar("INSERT INTO gradient (name) VALUES ($1) RETURNING id")
-        .bind(gradient.name)
-        .fetch_one(tx.as_mut()) // <-
+    let id: i64 = sqlx::query_scalar!("INSERT INTO gradient (name) VALUES ($1) RETURNING id", gradient.name)
+        .fetch_one(tx.as_mut()) 
         .await?;
 
     Ok(())
