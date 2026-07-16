@@ -12,9 +12,22 @@ pub async fn save_gradient(
 
     let mut tx = state.pool.begin().await.map_err(|e| e.to_string())?;
 
-  repo::gradient::create_gradient(gradient, &mut tx)
+    let gradient_id = repo::gradient::create_gradient(&gradient, &mut tx)
         .await
         .map_err(|e| e.to_string())?;
+
+    for layer in gradient.layers{
+        let layer_id = repo::gradient::create_layer(&layer, gradient_id, &mut tx)
+        .await
+        .map_err(|e| e.to_string())?;
+        
+        for stop in layer.stops{
+            repo::gradient::create_stop(&stop, layer_id, &mut tx)
+            .await
+            .map_err(|e| e.to_string())?;
+        }
+    }
+
 
    tx.commit().await.map_err(|e| e.to_string())?;
 
