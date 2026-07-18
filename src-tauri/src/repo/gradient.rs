@@ -1,6 +1,17 @@
 use sqlx::{Sqlite, Transaction};
 
-use crate::feat::gradient_service::{GradientInput, GradientLayerInput, GradientStopInput};
+use crate::{feat::gradient_service::{GradientInput, GradientLayerInput, GradientStopInput, GradientInput2}, repo::gradient};
+
+pub async  fn get_gradient(
+    id: i64, 
+    tx: &mut  Transaction<'_, Sqlite> 
+) -> Result<GradientInput2, sqlx::Error> {
+  let gradient = sqlx::query_as!(GradientInput2, "SELECT g.name as \"name!\" FROM gradient g WHERE id = ?1", id)
+        .fetch_one(tx.as_mut()) 
+        .await?;
+
+    Ok(gradient)
+}
 
 pub async fn create_gradient(
     gradient: & GradientInput, 

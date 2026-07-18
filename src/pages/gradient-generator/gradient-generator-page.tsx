@@ -3,17 +3,7 @@ import GradientPreviewBox from "./gradient-preview";
 import GradientInfo from "./gradient-info";
 import { useGradientStoreHasElements } from "@/store/use-gradient-store";
 import GradientLayerListHeader from "./gradient-layer/gradient-layer-list-header";
-import { GradientStepIcon } from "@/components/icons/gradient-step-icon";
-import { addNewGradient } from "@/features/gradient/add-new-gradient";
-import {
-  Empty,
-  EmptyContent,
-  EmptyDescription,
-  EmptyHeader,
-  EmptyMedia,
-  EmptyTitle,
-} from "@/components/ui/empty";
-import { Button } from "@/components/ui/button";
+import GradientEmptyPage from "./gradient-empty-page";
 
 const GradientGeneratorPage = () => {
   const hasElements = useGradientStoreHasElements();
@@ -29,29 +19,11 @@ const GradientGeneratorPage = () => {
     );
   };
 
-  const EmptyGradientList = () => {
-    return (
-      <>
-        <Empty>
-          <EmptyHeader>
-            <EmptyMedia >
-              <GradientStepIcon size={100} className="opacity-70" />
-            </EmptyMedia>
-            <EmptyTitle className="text-xl">No gradient created</EmptyTitle>
-            <EmptyDescription>No data found</EmptyDescription>
-          </EmptyHeader>
-          <EmptyContent>
-            <Button  onClick={() => addNewGradient()}>Add new gradient</Button>
-          </EmptyContent>
-        </Empty>
-      </>
-    );
-  };
 
   return (
     <>
       <div className="flex flex-col w-full flex-1 p-1 gap-2">
-        {hasElements ? <GradientPreview /> : <EmptyGradientList />}
+        {hasElements ? <GradientPreview /> : <GradientEmptyPage />}
       </div>
     </>
   );

@@ -3,6 +3,22 @@ use crate::state::DbState;
 use crate::repo;
 
 #[tauri::command]
+pub async fn get_gradient(
+    state: tauri::State<'_, DbState>,
+    id: i64) -> Result<GradientInput2, String>{
+    let mut tx: sqlx::Transaction<'_, sqlx::Sqlite> = state.pool.begin().await.map_err(|e| e.to_string())?;
+
+    let gradient = repo::gradient::get_gradient(id, &mut tx).await.map_err(|e| e.to_string())?;
+    
+    tx.commit().await.map_err(|e| e.to_string())?;
+
+    Ok(gradient)
+} 
+
+
+
+
+#[tauri::command]
 pub async fn save_gradient(
     state: tauri::State<'_, DbState>,
     gradient: GradientInput,
@@ -61,5 +77,12 @@ pub struct GradientInput {
     pub name: String,
     pub palette_id: Option<i64>,
     pub layers: Vec<GradientLayerInput>,
+}
+
+
+#[derive(Debug, Clone, serde::Serialize, sqlx::FromRow)]
+#[serde(rename_all = "camelCase")]
+pub struct GradientInput2 {
+    pub name: String,
 }
 
