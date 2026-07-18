@@ -8,8 +8,6 @@ pub async fn save_gradient(
     gradient: GradientInput,
 ) -> Result<i64, String> {
 
-    println!("{:?}", gradient);
-
     let mut tx = state.pool.begin().await.map_err(|e| e.to_string())?;
 
     let gradient_id = repo::gradient::create_gradient(&gradient, &mut tx)
@@ -28,10 +26,9 @@ pub async fn save_gradient(
         }
     }
 
-
    tx.commit().await.map_err(|e| e.to_string())?;
 
-    Ok(0)
+    Ok(gradient_id)
 }
 
 #[derive(Debug, Deserialize)]

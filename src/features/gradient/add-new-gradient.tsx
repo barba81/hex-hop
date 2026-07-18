@@ -1,7 +1,7 @@
 import { invoke } from "@tauri-apps/api/core";
 import { GradientEntity } from "../infrastructure/entity/gradient.entity";
 
-export const addNewGradient = () => {
+export const addNewGradient = async () => {
 
     const newGradient: GradientEntity = {
         name: "New gradient",
@@ -46,5 +46,7 @@ export const addNewGradient = () => {
   
     };
 
-    invoke('save_gradient', { gradient: newGradient });
+   let gradientId = await invoke('save_gradient', { gradient: newGradient });
+   console.log(gradientId);
+   
 }

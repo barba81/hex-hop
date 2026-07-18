@@ -4,13 +4,6 @@ import { colorDataToHex } from "./color-format-changer";
 
 let colorData: [number, number, number, string][] | null = null;
 
-export async function initColorNameLookup(): Promise<void> {
-  if (colorData) return;
-  
-  const response = await fetch("/data/colorsOptimized.json");
-  colorData = await response.json();
-}
-
 
 export async function getNearestColorName(color: ColorData): Promise<string> {
   if (!colorData) {

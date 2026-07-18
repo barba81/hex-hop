@@ -18,9 +18,6 @@ fn load_color_names() -> Result<(), String> {
     let mut rdr = csv::Reader::from_reader(COLOR_NAMES_CSV.as_bytes());
 
     let records: Vec<ColorItem> = rdr.deserialize().filter_map(|r| r.ok()).collect();
-
-    let n = records.len().min(5);
-    println!("loaded {} colors: {:?}", records.len(), &records[..n]);
-
+    
     Ok(())
 }
