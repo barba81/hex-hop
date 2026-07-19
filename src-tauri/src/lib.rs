@@ -14,8 +14,8 @@ pub fn run() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             feat::color_picker::pick_color_mack, 
-            feat::gradient_service::save_gradient,
-            feat::gradient_service::get_gradient, 
+            feat::gradient_service::gradient_service::save_gradient,
+            feat::gradient_service::gradient_service::get_gradient, 
             ])
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_clipboard_manager::init())

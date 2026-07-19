@@ -25,7 +25,7 @@ pub async fn init_database(app: &App) -> Result<(), Box<dyn std::error::Error>> 
     sqlx::migrate!("./migrations")
         .run(&pool)
         .await?;
-
+println!("Migrations applied successfully!");
     app.manage(DbState { pool });
 
     Ok(())

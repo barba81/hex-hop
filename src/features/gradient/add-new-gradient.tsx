@@ -3,25 +3,17 @@ import { type GradientEntity } from "../infrastructure/entity/gradient.entity";
 
 const newGradient = Object.freeze({
   name: "New gradient",
-  kind: "gradient",
-  id: 0,
-  blockId: 0,
-  order: 0,
-  paletteId: null,
   layers: [
     {
       gradientType: "linear",
       colorSpace: "srgb",
       easingFunction: "linear",
       rotationDegree: 0,
-      id: 0,
-      order: 0,
+      gradientOrder: 1,
       patternRepeatNumber: 0,
       stops: [
         {
-          id: 0,
-          layerId: 0,
-          order: 0,
+          gradientOrder: 1,
           a: 1.0,
           b: 1.0,
           g: 1.0,
@@ -29,14 +21,12 @@ const newGradient = Object.freeze({
           position: 0,
         },
         {
-          id: 0,
-          layerId: 0,
-          order: 0,
+          gradientOrder: 2,
           a: 1.0,
           b: 1.0,
           g: 1.0,
           r: 1.0,
-          position: 1,
+          position: 0.5,
         },
       ],
     },

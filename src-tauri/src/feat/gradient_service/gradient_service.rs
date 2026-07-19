@@ -1,11 +1,12 @@
-use serde::Deserialize;
+use crate::feat::gradient_service::gradient_data_model::Gradient;
+use crate::feat::gradient_service::gradient_service_request::GradientRequest;
 use crate::state::DbState;
 use crate::repo;
 
 #[tauri::command]
 pub async fn get_gradient(
     state: tauri::State<'_, DbState>,
-    id: i64) -> Result<GradientInput2, String>{
+    id: i64) -> Result<Gradient, String>{
     let mut tx: sqlx::Transaction<'_, sqlx::Sqlite> = state.pool.begin().await.map_err(|e| e.to_string())?;
 
     let gradient = repo::gradient::get_gradient(id, &mut tx).await.map_err(|e| e.to_string())?;
@@ -15,13 +16,10 @@ pub async fn get_gradient(
     Ok(gradient)
 } 
 
-
-
-
 #[tauri::command]
 pub async fn save_gradient(
     state: tauri::State<'_, DbState>,
-    gradient: GradientInput,
+    gradient: GradientRequest,
 ) -> Result<i64, String> {
 
     let mut tx = state.pool.begin().await.map_err(|e| e.to_string())?;
@@ -46,43 +44,3 @@ pub async fn save_gradient(
 
     Ok(gradient_id)
 }
-
-#[derive(Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct GradientStopInput {
-    pub order: i64,
-    pub r: f64,
-    pub g: f64,
-    pub b: f64,
-    pub a: f64,
-    pub position: f64,
-}
-
-#[derive(Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct GradientLayerInput {
-    pub order: i64,
-    pub gradient_type: String,
-    pub rotation_degree: f64,
-    pub pattern_repeat_number: f64,
-    pub color_space: String,
-    pub easing_function: String,
-    pub stops: Vec<GradientStopInput>,
-}
-
-#[derive(Debug, Deserialize)]
-#[serde(rename_all = "camelCase")]
-pub struct GradientInput {
-    pub order: i64,
-    pub name: String,
-    pub palette_id: Option<i64>,
-    pub layers: Vec<GradientLayerInput>,
-}
-
-
-#[derive(Debug, Clone, serde::Serialize, sqlx::FromRow)]
-#[serde(rename_all = "camelCase")]
-pub struct GradientInput2 {
-    pub name: String,
-}
-
