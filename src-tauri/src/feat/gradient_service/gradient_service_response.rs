@@ -1,31 +1,33 @@
-use serde::{Deserialize, Serialize};
+use serde::{Deserialize,Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Gradient {
-    pub id: i64,
+#[serde(rename_all = "camelCase")]
+pub struct GradientResponse {
     pub name: String,
+    pub layers: Vec<GradientLayerResponse>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct GradientLayer {
-    pub id: i64,
+#[serde(rename_all = "camelCase")]
+pub struct GradientLayerResponse {
     pub gradient_order: i64,
-    pub gradient_id: i64,
     pub gradient_type: i64,
     pub rotation_degree: f64,
     pub pattern_repeat_number: i64,
     pub color_space: i64,
     pub easing_function: i64,
+    pub stops: Vec<GradientStopResponse>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct GradientStop {
-    pub id: i64,
+#[serde(rename_all = "camelCase")]
+pub struct GradientStopResponse {
     pub gradient_order: i64,
-    pub layer_id: i64,
     pub r: f64,
     pub g: f64,
     pub b: f64,
-    pub a: Option<f64>,
+    pub a: f64,
     pub position: f64,
 }
+
+

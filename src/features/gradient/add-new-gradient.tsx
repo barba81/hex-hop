@@ -35,7 +35,6 @@ const newGradient = Object.freeze({
 
 export const addNewGradient = async () => {
   let gradientId = await invoke("save_gradient", { gradient: newGradient });
-  console.log(gradientId);
-  let gradient = await invoke<GradientEntity>("get_gradient", { id: gradientId });
+  let gradient = await invoke<GradientEntity>("get_gradient", { gradientId: gradientId });
   console.log(gradient);
 };

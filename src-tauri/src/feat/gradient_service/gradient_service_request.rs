@@ -1,13 +1,14 @@
-use serde::Deserialize;
+use serde::{Serialize,Deserialize};
 
-#[derive(Debug, Deserialize)]
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GradientRequest {
     pub name: String,
     pub layers: Vec<GradientLayerRequest>,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GradientLayerRequest {
     pub gradient_order: i64,
@@ -19,7 +20,7 @@ pub struct GradientLayerRequest {
     pub stops: Vec<GradientStopRequest>,
 }
 
-#[derive(Debug, Deserialize)]
+#[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GradientStopRequest {
     pub gradient_order: i64,
