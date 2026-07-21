@@ -36,3 +36,4 @@ export const useGradientStore = create<GradientStore & GradientAction>()(immer((
 
 
 export const useGradientStoreHasElements = () => useGradientStore((state) => state.gradients.length > 0);
+export const useGradientStoreSelectedGradient = () => useGradientStore((state)=> state.gradients[0]);
