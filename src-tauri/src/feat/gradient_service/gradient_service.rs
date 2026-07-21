@@ -14,6 +14,7 @@ pub async fn get_gradient(
     let gradient_stops = repo::gradient::get_gradient_stops_by_gradient_id(gradient_id, &mut tx).await.map_err(|e| e.to_string())?;
     
     tx.commit().await.map_err(|e| e.to_string())?;
+   
     let layers_response: Vec<GradientLayerResponse> = gradient_layers
         .into_iter()
         .map(|layer| {
@@ -48,7 +49,6 @@ pub async fn get_gradient(
         layers: layers_response,
     };
 
-    println!("{:?}", response);
 
     Ok(response)
 } 

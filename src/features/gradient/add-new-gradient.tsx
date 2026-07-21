@@ -1,7 +1,8 @@
 import { invoke } from "@tauri-apps/api/core";
-import { type GradientEntity } from "../infrastructure/entity/gradient.entity";
+import { GradientEntity } from "../infrastructure/entity/gradient.entity";
+import { useGradientStore } from "@/store/use-gradient-store";
 
-const newGradient = Object.freeze({
+export const newGradient = Object.freeze({
   name: "New gradient",
   layers: [
     {
@@ -35,6 +36,8 @@ const newGradient = Object.freeze({
 
 export const addNewGradient = async () => {
   let gradientId = await invoke("save_gradient", { gradient: newGradient });
-  let gradient = await invoke<GradientEntity>("get_gradient", { gradientId: gradientId });
-  console.log(gradient);
+  let gradient = await invoke<GradientEntity>("get_gradient", {
+    gradientId: gradientId,
+  });
+  useGradientStore.getState().addGradient(gradient);
 };
