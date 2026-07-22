@@ -11,11 +11,11 @@ pub struct GradientResponse {
 #[serde(rename_all = "camelCase")]
 pub struct GradientLayerResponse {
     pub gradient_order: i64,
-    pub gradient_type: i64,
+    pub gradient_type: String,
     pub rotation_degree: f64,
     pub pattern_repeat_number: i64,
-    pub color_space: i64,
-    pub easing_function: i64,
+    pub color_space: String,
+    pub easing_function: String,
     pub stops: Vec<GradientStopResponse>,
 }
 

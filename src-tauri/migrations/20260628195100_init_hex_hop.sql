@@ -45,11 +45,11 @@ CREATE TABLE gradient_layer (
     id                  INTEGER PRIMARY KEY AUTOINCREMENT,
     gradient_order          INTEGER NOT NULL, 
     gradient_id          INTEGER NOT NULL,
-    gradient_type        INTEGER NOT NULL,  
+    gradient_type         TEXT  NOT NULL,  
     rotation_degree      REAL NOT NULL,
     pattern_repeat_number INTEGER NOT NULL,
-    color_space          INTEGER NOT NULL,
-    easing_function      INTEGER NOT NULL,
+    color_space          TEXT  NOT NULL,
+    easing_function      TEXT  NOT NULL,
     deleted         INTEGER DEFAULT 0 CHECK(deleted BETWEEN 0 AND 1),
     
     FOREIGN KEY (gradient_id) REFERENCES gradient(id) ON DELETE CASCADE 
