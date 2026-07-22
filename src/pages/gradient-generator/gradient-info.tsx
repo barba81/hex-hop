@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { addNewLayer } from "@/features/gradient/add-new-gradient";
 import { GradientEntity } from "@/features/infrastructure/entity/gradient.entity";
 import { Copy, Plus, Trash2 } from "lucide-react";
 
@@ -16,6 +17,7 @@ const GradientInfo = ({ gradient }: GradientInfoParm) => {
             size="sm"
             variant="outline"
             className="relative  select-none hover:cursor-pointer  text-xs rounded-md h-6"
+            onClick={() => addNewLayer(gradient.id)}
           >
             <Plus />
             Add layer

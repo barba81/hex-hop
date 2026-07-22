@@ -5,8 +5,6 @@ const GradientLayerBox = ({ layerId }: { layerId: number }) => {
   return (
     <>
       <GradientStopHeader layerId={layerId}/>
-     
-    
     </>
   );
 };

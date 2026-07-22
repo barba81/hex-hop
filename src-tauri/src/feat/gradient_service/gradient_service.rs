@@ -1,7 +1,47 @@
-use crate::feat::gradient_service::gradient_service_request::GradientRequest;
+use crate::feat::gradient_service::gradient_service_request::{GradientLayerRequest, GradientRequest};
 use crate::feat::gradient_service::gradient_service_response::{GradientLayerResponse, GradientResponse, GradientStopResponse};
 use crate::state::DbState;
 use crate::repo;
+
+#[tauri::command]
+pub async fn get_layer(
+    state: tauri::State<'_, DbState>,
+    layer_id: i64) -> Result<GradientLayerResponse, String>{
+    let mut tx: sqlx::Transaction<'_, sqlx::Sqlite> = state.pool.begin().await.map_err(|e| e.to_string())?;
+
+    let layer = repo::gradient::get_gradient_layers_by_layer_id(layer_id, &mut tx).await.map_err(|e| e.to_string())?;
+    let gradient_stops = repo::gradient::get_gradient_stops_by_layer_id(layer_id, &mut tx).await.map_err(|e| e.to_string())?;
+    
+    tx.commit().await.map_err(|e| e.to_string())?;
+
+    let layer_stops: Vec<GradientStopResponse> = gradient_stops
+        .iter()
+        .filter(|stop| stop.layer_id == layer.id)
+        .map(|stop| GradientStopResponse {
+            id: stop.id,
+            gradient_order: stop.gradient_order,
+            r: stop.r,
+            g: stop.g,
+            b: stop.b,
+            a: stop.a.unwrap_or(1.0),
+            position: stop.position,
+        })
+        .collect();
+
+    let response = GradientLayerResponse {
+        id: layer.id,
+        gradient_order: layer.gradient_order,
+        gradient_type: layer.gradient_type,
+        rotation_degree: layer.rotation_degree,
+        pattern_repeat_number: layer.pattern_repeat_number,
+        color_space: layer.color_space,
+        easing_function: layer.easing_function,
+        stops: layer_stops,
+    };
+
+    Ok(response)
+} 
+
 
 #[tauri::command]
 pub async fn get_gradient(
@@ -83,4 +123,29 @@ pub async fn save_gradient(
    tx.commit().await.map_err(|e| e.to_string())?;
 
     Ok(gradient_id)
+}
+
+
+#[tauri::command]
+pub async fn save_layer(
+    state: tauri::State<'_, DbState>,
+    layer: GradientLayerRequest,
+    gradient_id: i64 
+) -> Result<i64, String> {
+
+    let mut tx = state.pool.begin().await.map_err(|e| e.to_string())?;
+
+    let layer_id = repo::gradient::create_layer(&layer, gradient_id, &mut tx)
+    .await
+    .map_err(|e| e.to_string())?;
+    
+    for stop in layer.stops{
+        repo::gradient::create_stop(&stop, layer_id, &mut tx)
+        .await
+        .map_err(|e| e.to_string())?;
+    }
+
+   tx.commit().await.map_err(|e| e.to_string())?;
+
+    Ok(layer_id)
 }
