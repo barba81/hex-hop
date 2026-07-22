@@ -12,7 +12,7 @@ const GradientInfo = ({ gradient }: GradientInfoParm) => {
     <>
       <div className="flex w-full justify-between px-2 gap-2 ">
         <div className="">{gradient.name}</div>
-        <div className="flex gap-1">
+        <div className="flex  gap-1">
           <Button
             size="sm"
             variant="outline"

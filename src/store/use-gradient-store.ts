@@ -16,7 +16,7 @@ interface GradientAction {
   // setActiveGradient: (id: number) => void;
   
   addLayerToSelected: ( gradientId: number, layer: GradientLayerEntity) => void;
-  // addGradientStop: ( layerId: number, gradientStop: GradientStopEntity) => void;
+  addGradientStop: ( gradientId: number, layerId: number, gradientStop: GradientStopEntity) => void;
   toggleLayerExpanded: (layerId: number) => void;
 }
 
@@ -37,6 +37,14 @@ export const useGradientStore = create<GradientStore & GradientAction>()(immer((
         let gradient  = state.gradients.find(id => id.id=gradientId);
         if (!gradient) return;
         gradient?.layers.push(layer);
+      }),
+    addGradientStop: ( gradientId: number, layerId: number, stop: GradientStopEntity) =>
+      set((state) => {
+        let gradient  = state.gradients.find(id => id.id === gradientId);
+        if (!gradient) return;
+        let layer = gradient.layers.find(x => x.id === layerId);
+        if (!layer) return;
+        layer.stops.push(stop);
       }),
 })));
 

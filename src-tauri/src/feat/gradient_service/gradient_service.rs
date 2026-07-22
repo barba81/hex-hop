@@ -1,7 +1,31 @@
-use crate::feat::gradient_service::gradient_service_request::{GradientLayerRequest, GradientRequest};
+use crate::feat::gradient_service::gradient_service_request::{GradientLayerRequest, GradientRequest, GradientStopRequest};
 use crate::feat::gradient_service::gradient_service_response::{GradientLayerResponse, GradientResponse, GradientStopResponse};
 use crate::state::DbState;
 use crate::repo;
+
+#[tauri::command]
+pub async fn get_stop(
+    state: tauri::State<'_, DbState>,
+    stop_id: i64) -> Result<GradientStopResponse, String>{
+    let mut tx: sqlx::Transaction<'_, sqlx::Sqlite> = state.pool.begin().await.map_err(|e| e.to_string())?;
+
+    let stop = repo::gradient::get_gradient_stops_by_stop_id(stop_id, &mut tx).await.map_err(|e| e.to_string())?;
+    
+    tx.commit().await.map_err(|e| e.to_string())?;
+
+  let response = GradientStopResponse {
+            id: stop.id,
+            gradient_order: stop.gradient_order,
+            r: stop.r,
+            g: stop.g,
+            b: stop.b,
+            a: stop.a.unwrap_or(1.0),
+            position: stop.position,
+        };
+
+    Ok(response)
+}
+
 
 #[tauri::command]
 pub async fn get_layer(
@@ -149,3 +173,22 @@ pub async fn save_layer(
 
     Ok(layer_id)
 }
+
+#[tauri::command]
+pub async fn save_stop(
+    state: tauri::State<'_, DbState>,
+    stop: GradientStopRequest,
+    layer_id: i64 
+) -> Result<i64, String> {
+
+    let mut tx = state.pool.begin().await.map_err(|e| e.to_string())?;
+
+    let stop_id =repo::gradient::create_stop(&stop, layer_id, &mut tx)
+    .await
+    .map_err(|e| e.to_string())?;
+
+    tx.commit().await.map_err(|e| e.to_string())?;
+
+    Ok(stop_id)
+}
+

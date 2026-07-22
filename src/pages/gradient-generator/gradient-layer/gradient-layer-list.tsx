@@ -7,9 +7,9 @@ interface GradientLayerListParm {
 
 const GradientLayerList = ({ gradient }: GradientLayerListParm) => {
   return (
-    <div className="flex-1 overflow-y-auto  flex  gap-3 py-1 bg-stone-900/20">
+    <div className="flex-1 overflow-y-auto  flex flex-col  gap-3 py-1 bg-stone-900/20">
       {gradient.layers.map((layer, ix) => (
-        <div key={ix} className="flex w-full flex-col">
+        <div key={ix} className="flex w-full ">
           <div className="flex w-full justify-between">
             <div>{layer.id}</div>
             <div>{layer.patternRepeatNumber}</div>

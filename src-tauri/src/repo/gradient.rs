@@ -104,6 +104,32 @@ pub async fn get_gradient_stops_by_gradient_id(
     Ok(stops)
 }
 
+pub async fn get_gradient_stops_by_stop_id(
+    stop_id: i64, 
+    tx: &mut Transaction<'_, Sqlite> 
+) -> Result<GradientStop, sqlx::Error> {
+    let stops = sqlx::query_as!(
+            GradientStop, 
+            "
+            SELECT 
+                gs.id as \"id!\",
+                gs.gradient_order as \"gradient_order!\",
+                gs.layer_id as \"layer_id!\",
+                gs.r as \"r!\",
+                gs.g as \"g\",
+                gs.b as \"b\",
+                gs.a as \"a\",
+                gs.position as \"position\"
+            FROM gradient_stop gs
+            WHERE gs.id = ?1
+            ",
+            stop_id
+        )
+        .fetch_one(tx.as_mut()) 
+        .await?;
+
+    Ok(stops)
+}
 
 pub async fn get_gradient_stops_by_layer_id(
     layer_id: i64, 
