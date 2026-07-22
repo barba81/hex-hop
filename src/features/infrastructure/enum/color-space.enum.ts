@@ -1,4 +1,4 @@
-export type ColorSpace =
+export type ColorSpaceType =
       "oklab"
     | "oklch"
     | "srgb"

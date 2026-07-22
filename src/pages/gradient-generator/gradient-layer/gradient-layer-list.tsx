@@ -1,11 +1,13 @@
 import "@/style/empty-checker-board.css";
 import { GradientEntity } from "@/features/infrastructure/entity/gradient.entity";
+import GradientStopList from "./gradient-stop-list";
 interface GradientLayerListParm {
   gradient: GradientEntity;
 }
+
 const GradientLayerList = ({ gradient }: GradientLayerListParm) => {
   return (
-    <div className="flex-1 overflow-y-auto  flex  gap-3 py-1 ">
+    <div className="flex-1 overflow-y-auto  flex  gap-3 py-1 bg-stone-900/20">
       {gradient.layers.map((layer, ix) => (
         <div key={ix} className="flex w-full flex-col">
           <div className="flex w-full justify-between">
@@ -14,15 +16,9 @@ const GradientLayerList = ({ gradient }: GradientLayerListParm) => {
             <div>{layer.colorSpace}</div>
             <div>{layer.easingFunction}</div>
           </div>
+
           <div>
-            {layer.stops.map((stop, ix) => (
-              <div className="flex flex-row gap-5">
-                <div key={ix}>{stop.r}</div>
-                <div key={ix}>{stop.g}</div>
-                <div key={ix}>{stop.b}</div>
-                <div key={ix}>{stop.a}</div>
-              </div>
-            ))}
+            <GradientStopList gradientId={gradient.id} layer={layer} />
           </div>
         </div>
       ))}

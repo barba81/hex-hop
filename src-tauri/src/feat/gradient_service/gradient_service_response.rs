@@ -3,6 +3,7 @@ use serde::{Deserialize,Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GradientResponse {
+    pub id: i64,
     pub name: String,
     pub layers: Vec<GradientLayerResponse>,
 }
@@ -10,6 +11,7 @@ pub struct GradientResponse {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GradientLayerResponse {
+    pub id: i64,
     pub gradient_order: i64,
     pub gradient_type: String,
     pub rotation_degree: f64,
@@ -22,6 +24,7 @@ pub struct GradientLayerResponse {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GradientStopResponse {
+    pub id: i64,
     pub gradient_order: i64,
     pub r: f64,
     pub g: f64,

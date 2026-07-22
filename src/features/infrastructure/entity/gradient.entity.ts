@@ -1,5 +1,5 @@
-import { ColorSpace } from "../enum/color-space.enum";
-import { EasingFunction } from "../enum/easing-function";
+import { ColorSpaceType } from "../enum/color-space.enum";
+import { EasingFunctionType } from "../enum/easing-function";
 import { GradientTypes } from "../enum/gradient-types.enum";
 
 
@@ -21,15 +21,14 @@ export type GradientLayerEntity =  {
     gradientType: GradientTypes;
     rotationDegree: number;
     patternRepeatNumber: number;
-    colorSpace: ColorSpace;
-    easingFunction: EasingFunction;
+    colorSpace: ColorSpaceType;
+    easingFunction: EasingFunctionType;
     stops: GradientStopEntity[];
 }
 
 export type GradientStopEntity = {
     id: number;
     order: number;
-    layerId: number;
     r: number;
     g: number;
     b: number;

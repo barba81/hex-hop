@@ -23,6 +23,7 @@ pub async fn get_gradient(
                 .iter()
                 .filter(|stop| stop.layer_id == layer.id)
                 .map(|stop| GradientStopResponse {
+                    id: stop.id,
                     gradient_order: stop.gradient_order,
                     r: stop.r,
                     g: stop.g,
@@ -33,6 +34,7 @@ pub async fn get_gradient(
                 .collect();
 
             GradientLayerResponse {
+                id: layer.id,
                 gradient_order: layer.gradient_order,
                 gradient_type: layer.gradient_type,
                 rotation_degree: layer.rotation_degree,
@@ -45,6 +47,7 @@ pub async fn get_gradient(
         .collect();
 
     let response = GradientResponse {
+        id: gradient.id,
         name: gradient.name,
         layers: layers_response,
     };

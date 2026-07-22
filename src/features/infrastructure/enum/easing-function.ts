@@ -1,4 +1,4 @@
-export type EasingFunction =
+export type EasingFunctionType =
       "linear"
     | "ease-in-out"
     | "steps"

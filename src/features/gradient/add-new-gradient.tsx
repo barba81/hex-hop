@@ -15,10 +15,10 @@ export const newGradient = Object.freeze({
       stops: [
         {
           gradientOrder: 1,
-          a: 1.0,
-          b: 1.0,
-          g: 1.0,
-          r: 1.0,
+          a: 0.0,
+          b: 0.5,
+          g: 0.34,
+          r: 0.564,
           position: 0,
         },
         {

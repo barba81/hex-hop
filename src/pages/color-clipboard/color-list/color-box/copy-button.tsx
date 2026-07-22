@@ -1,7 +1,7 @@
 import { Hash } from "lucide-react";
 import { useState } from "react";
 import CopyUx from "./copy-ux";
-import { ColorSpace } from "@/features/infrastructure/enum/color-space.enum";
+import { ColorSpaceType } from "@/features/infrastructure/enum/color-space.enum";
 import { ColorEntity } from "@/features/infrastructure/entity/color.entity";
 import { copyToClipboard } from "@/features/color/copy-to-clipboard";
 
@@ -15,11 +15,11 @@ const commonStyles =
 
 const CopyLogo = ({ color, fontClass }: CopyLogoParam) => {
   const [coords, setCoords] = useState<DOMRect | null>(null);
-  const [selectedType, setSelectedType] = useState<ColorSpace | null>(null);
+  const [selectedType, setSelectedType] = useState<ColorSpaceType | null>(null);
  
   const handleCopy = (
     e: React.MouseEvent<HTMLDivElement>,
-    type: ColorSpace,
+    type: ColorSpaceType,
   ) => {
     const rect = e.currentTarget.getBoundingClientRect();
     setCoords(rect);
@@ -32,7 +32,7 @@ const CopyLogo = ({ color, fontClass }: CopyLogoParam) => {
 
     copyToClipboard(color, type);
   };
-  const formats: { type: ColorSpace; label: string; isIcon?: boolean }[] = [
+  const formats: { type: ColorSpaceType; label: string; isIcon?: boolean }[] = [
     { label: "#", type: "oklab", isIcon: true },
   ];
 
