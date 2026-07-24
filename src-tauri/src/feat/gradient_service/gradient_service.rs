@@ -9,7 +9,7 @@ pub async fn get_stop(
     stop_id: i64) -> Result<GradientStopResponse, String>{
     let mut tx: sqlx::Transaction<'_, sqlx::Sqlite> = state.pool.begin().await.map_err(|e| e.to_string())?;
 
-    let stop = repo::gradient::get_gradient_stops_by_stop_id(stop_id, &mut tx).await.map_err(|e| e.to_string())?;
+    let stop = repo::gradient::get_gradient_stops_by_stop_id(stop_id, &mut *tx).await.map_err(|e| e.to_string())?;
     
     tx.commit().await.map_err(|e| e.to_string())?;
 
@@ -33,8 +33,8 @@ pub async fn get_layer(
     layer_id: i64) -> Result<GradientLayerResponse, String>{
     let mut tx: sqlx::Transaction<'_, sqlx::Sqlite> = state.pool.begin().await.map_err(|e| e.to_string())?;
 
-    let layer = repo::gradient::get_gradient_layers_by_layer_id(layer_id, &mut tx).await.map_err(|e| e.to_string())?;
-    let gradient_stops = repo::gradient::get_gradient_stops_by_layer_id(layer_id, &mut tx).await.map_err(|e| e.to_string())?;
+    let layer = repo::gradient::get_gradient_layers_by_layer_id(layer_id, &mut *tx).await.map_err(|e| e.to_string())?;
+    let gradient_stops = repo::gradient::get_gradient_stops_by_layer_id(layer_id, &mut *tx).await.map_err(|e| e.to_string())?;
     
     tx.commit().await.map_err(|e| e.to_string())?;
 
@@ -73,9 +73,9 @@ pub async fn get_gradient(
     gradient_id: i64) -> Result<GradientResponse, String>{
     let mut tx: sqlx::Transaction<'_, sqlx::Sqlite> = state.pool.begin().await.map_err(|e| e.to_string())?;
 
-    let gradient = repo::gradient::get_gradient_by_id(gradient_id, &mut tx).await.map_err(|e| e.to_string())?;
-    let gradient_layers = repo::gradient::get_gradient_layers_by_gradient_id(gradient_id, &mut tx).await.map_err(|e| e.to_string())?;
-    let gradient_stops = repo::gradient::get_gradient_stops_by_gradient_id(gradient_id, &mut tx).await.map_err(|e| e.to_string())?;
+    let gradient = repo::gradient::get_gradient_by_id(gradient_id, &mut *tx).await.map_err(|e| e.to_string())?;
+    let gradient_layers = repo::gradient::get_gradient_layers_by_gradient_id(gradient_id, &mut *tx).await.map_err(|e| e.to_string())?;
+    let gradient_stops = repo::gradient::get_gradient_stops_by_gradient_id(gradient_id, &mut *tx).await.map_err(|e| e.to_string())?;
     
     tx.commit().await.map_err(|e| e.to_string())?;
    
@@ -128,17 +128,17 @@ pub async fn save_gradient(
 
     let mut tx = state.pool.begin().await.map_err(|e| e.to_string())?;
 
-    let gradient_id = repo::gradient::create_gradient(&gradient, &mut tx)
+    let gradient_id = repo::gradient::create_gradient(&gradient, &mut *tx)
         .await
         .map_err(|e| e.to_string())?;
 
     for layer in gradient.layers{
-        let layer_id = repo::gradient::create_layer(&layer, gradient_id, &mut tx)
+        let layer_id = repo::gradient::create_layer(&layer, gradient_id, &mut *tx)
         .await
         .map_err(|e| e.to_string())?;
         
         for stop in layer.stops{
-            repo::gradient::create_stop(&stop, layer_id, &mut tx)
+            repo::gradient::create_stop(&stop, layer_id, &mut *tx)
             .await
             .map_err(|e| e.to_string())?;
         }
@@ -159,12 +159,12 @@ pub async fn save_layer(
 
     let mut tx = state.pool.begin().await.map_err(|e| e.to_string())?;
 
-    let layer_id = repo::gradient::create_layer(&layer, gradient_id, &mut tx)
+    let layer_id = repo::gradient::create_layer(&layer, gradient_id, &mut *tx)
     .await
     .map_err(|e| e.to_string())?;
     
     for stop in layer.stops{
-        repo::gradient::create_stop(&stop, layer_id, &mut tx)
+        repo::gradient::create_stop(&stop, layer_id, &mut *tx)
         .await
         .map_err(|e| e.to_string())?;
     }
@@ -183,7 +183,7 @@ pub async fn save_stop(
 
     let mut tx = state.pool.begin().await.map_err(|e| e.to_string())?;
 
-    let stop_id =repo::gradient::create_stop(&stop, layer_id, &mut tx)
+    let stop_id =repo::gradient::create_stop(&stop, layer_id, &mut *tx)
     .await
     .map_err(|e| e.to_string())?;
 

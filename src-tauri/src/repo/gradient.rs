@@ -2,10 +2,13 @@ use sqlx::{Sqlite, Transaction};
 
 use crate::feat::gradient_service::{gradient_data_model::{Gradient, GradientLayer, GradientStop}, gradient_service_request::{GradientLayerRequest, GradientRequest, GradientStopRequest}};
 
-pub async  fn get_gradient_by_id(
+pub async  fn get_gradient_by_id<'a, E>(
     id: i64, 
-    tx: &mut  Transaction<'_, Sqlite> 
-) -> Result<Gradient, sqlx::Error> {
+    executor: E
+) -> Result<Gradient, sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
   let gradient = sqlx::query_as!(Gradient, "
            SELECT 
                 g.id as \"id!\",
@@ -14,16 +17,19 @@ pub async  fn get_gradient_by_id(
             WHERE g.id = ?1",
             id
         )
-        .fetch_one(tx.as_mut()) 
+        .fetch_one(executor) 
         .await?;
 
     Ok(gradient)
 }
 
-pub async fn get_gradient_layers_by_gradient_id(
+pub async fn get_gradient_layers_by_gradient_id<'a, E>(
     gradient_id: i64, 
-    tx: &mut Transaction<'_, Sqlite> 
-) -> Result<Vec<GradientLayer>, sqlx::Error> {
+    executor: E
+) -> Result<Vec<GradientLayer>, sqlx::Error> 
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
     let layers = sqlx::query_as!(
             GradientLayer, 
             "
@@ -42,16 +48,19 @@ pub async fn get_gradient_layers_by_gradient_id(
             ",
             gradient_id
         )
-        .fetch_all(tx.as_mut()) 
+        .fetch_all(executor) 
         .await?;
 
     Ok(layers)
 }
 
-pub async fn get_gradient_layers_by_layer_id(
+pub async fn get_gradient_layers_by_layer_id<'a, E>(
     layer_id: i64, 
-    tx: &mut Transaction<'_, Sqlite> 
-) -> Result<GradientLayer, sqlx::Error> {
+    executor: E
+) -> Result<GradientLayer, sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
     let layers = sqlx::query_as!(
             GradientLayer, 
             "
@@ -69,17 +78,20 @@ pub async fn get_gradient_layers_by_layer_id(
             ",
             layer_id
         )
-        .fetch_one(tx.as_mut()) 
+        .fetch_one(executor) 
         .await?;
 
     Ok(layers)
 }
 
 
-pub async fn get_gradient_stops_by_gradient_id(
+pub async fn get_gradient_stops_by_gradient_id<'a, E>(
     gradient_id: i64, 
-    tx: &mut Transaction<'_, Sqlite> 
-) -> Result<Vec<GradientStop>, sqlx::Error> {
+    executor: E
+) -> Result<Vec<GradientStop>, sqlx::Error> 
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
     let stops = sqlx::query_as!(
             GradientStop, 
             "
@@ -98,16 +110,18 @@ pub async fn get_gradient_stops_by_gradient_id(
             ",
             gradient_id
         )
-        .fetch_all(tx.as_mut()) 
+        .fetch_all(executor) 
         .await?;
 
     Ok(stops)
 }
 
-pub async fn get_gradient_stops_by_stop_id(
+pub async fn get_gradient_stops_by_stop_id<'a, E>(
     stop_id: i64, 
-    tx: &mut Transaction<'_, Sqlite> 
-) -> Result<GradientStop, sqlx::Error> {
+    executor: E
+) -> Result<GradientStop, sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>, {
     let stops = sqlx::query_as!(
             GradientStop, 
             "
@@ -125,16 +139,18 @@ pub async fn get_gradient_stops_by_stop_id(
             ",
             stop_id
         )
-        .fetch_one(tx.as_mut()) 
+        .fetch_one(executor) 
         .await?;
 
     Ok(stops)
 }
 
-pub async fn get_gradient_stops_by_layer_id(
+pub async fn get_gradient_stops_by_layer_id<'a, E>(
     layer_id: i64, 
-    tx: &mut Transaction<'_, Sqlite> 
-) -> Result<Vec<GradientStop>, sqlx::Error> {
+    executor: E
+) -> Result<Vec<GradientStop>, sqlx::Error> 
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,{
     let stops = sqlx::query_as!(
             GradientStop, 
             "
@@ -152,29 +168,35 @@ pub async fn get_gradient_stops_by_layer_id(
             ",
             layer_id
         )
-        .fetch_all(tx.as_mut()) 
+        .fetch_all(executor) 
         .await?;
 
     Ok(stops)
 }
 
-pub async fn create_gradient(
+pub async fn create_gradient<'a, E>(
     gradient: & GradientRequest, 
-    tx: &mut  Transaction<'_, Sqlite> 
-) -> Result<i64, sqlx::Error> {
+    executor: E
+) -> Result<i64, sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
     
     let id: i64 = sqlx::query_scalar!("INSERT INTO gradient (name) VALUES ($1) RETURNING id", gradient.name)
-        .fetch_one(tx.as_mut()) 
+        .fetch_one(executor) 
         .await?;
 
     Ok(id)
 }
 
-pub async  fn create_layer(
+pub async  fn create_layer<'a, E>(
     layer: & GradientLayerRequest, 
     gradient_id: i64, 
-    tx: &mut Transaction<'_, Sqlite>
-)  -> Result<i64, sqlx::Error> {
+    executor: E
+)  -> Result<i64, sqlx::Error> 
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
        
     let id: i64 = sqlx::query_scalar!(
             r#"
@@ -199,17 +221,20 @@ pub async  fn create_layer(
              layer.color_space,
              layer.easing_function
             )
-        .fetch_one(tx.as_mut()) 
+        .fetch_one(executor) 
         .await?;
 
     Ok(id)
 }
 
-pub async  fn create_stop(
+pub async  fn create_stop<'a, E>(
     stop :& GradientStopRequest, 
     layer_id: i64, 
-    tx: &mut Transaction<'_, Sqlite>
-) ->  Result<i64, sqlx::Error> {
+    executor: E
+) ->  Result<i64, sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
      let id: i64 = sqlx::query_scalar!("INSERT INTO gradient_stop 
             (gradient_order, 
             layer_Id,
@@ -223,7 +248,7 @@ pub async  fn create_stop(
              stop.a,
              stop.position
             )
-        .fetch_one(tx.as_mut()) 
+        .fetch_one(executor) 
         .await?;
 
     Ok(id)
