@@ -4,10 +4,11 @@
 )]
 use tauri::{Manager};
 
-pub mod feat;
-pub mod infra;
-pub mod state;
-pub mod repo;
+mod feat;
+mod infra;
+mod state;
+mod repo;
+mod error;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {

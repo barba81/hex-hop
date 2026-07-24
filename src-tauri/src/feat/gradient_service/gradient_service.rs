@@ -2,12 +2,13 @@ use crate::feat::gradient_service::gradient_service_request::{GradientLayerReque
 use crate::feat::gradient_service::gradient_service_response::{GradientLayerResponse, GradientResponse, GradientStopResponse};
 use crate::state::DbState;
 use crate::repo;
+use crate::error::TauriError;
 
 #[tauri::command]
 pub async fn get_stop(
     state: tauri::State<'_, DbState>,
-    stop_id: i64) -> Result<GradientStopResponse, String>{
-    let stop = repo::gradient::get_gradient_stops_by_stop_id(stop_id, &state.pool).await.map_err(|e| e.to_string())?;
+    stop_id: i64) -> Result<GradientStopResponse, TauriError>{
+    let stop = repo::gradient::get_gradient_stops_by_stop_id(stop_id, &state.pool).await?;
     
   let response = GradientStopResponse {
             id: stop.id,
@@ -26,10 +27,10 @@ pub async fn get_stop(
 #[tauri::command]
 pub async fn get_layer(
     state: tauri::State<'_, DbState>,
-    layer_id: i64) -> Result<GradientLayerResponse, String>{
+    layer_id: i64) -> Result<GradientLayerResponse, TauriError>{
 
-    let layer = repo::gradient::get_gradient_layers_by_layer_id(layer_id, &state.pool).await.map_err(|e| e.to_string())?;
-    let gradient_stops = repo::gradient::get_gradient_stops_by_layer_id(layer_id, &state.pool).await.map_err(|e| e.to_string())?;
+    let layer = repo::gradient::get_gradient_layers_by_layer_id(layer_id, &state.pool).await?;
+    let gradient_stops = repo::gradient::get_gradient_stops_by_layer_id(layer_id, &state.pool).await?;
 
     let layer_stops: Vec<GradientStopResponse> = gradient_stops
         .iter()
@@ -63,10 +64,10 @@ pub async fn get_layer(
 #[tauri::command]
 pub async fn get_gradient(
     state: tauri::State<'_, DbState>,
-    gradient_id: i64) -> Result<GradientResponse, String>{
-    let gradient = repo::gradient::get_gradient_by_id(gradient_id, &state.pool).await.map_err(|e| e.to_string())?;
-    let gradient_layers = repo::gradient::get_gradient_layers_by_gradient_id(gradient_id, &state.pool).await.map_err(|e| e.to_string())?;
-    let gradient_stops = repo::gradient::get_gradient_stops_by_gradient_id(gradient_id, &state.pool).await.map_err(|e| e.to_string())?;
+    gradient_id: i64) -> Result<GradientResponse, TauriError>{
+    let gradient = repo::gradient::get_gradient_by_id(gradient_id, &state.pool).await?;
+    let gradient_layers = repo::gradient::get_gradient_layers_by_gradient_id(gradient_id, &state.pool).await?;
+    let gradient_stops = repo::gradient::get_gradient_stops_by_gradient_id(gradient_id, &state.pool).await?;
     
    
     let layers_response: Vec<GradientLayerResponse> = gradient_layers
@@ -114,27 +115,27 @@ pub async fn get_gradient(
 pub async fn save_gradient(
     state: tauri::State<'_, DbState>,
     gradient: GradientRequest,
-) -> Result<i64, String> {
+) -> Result<i64, TauriError> {
 
-    let mut tx = state.pool.begin().await.map_err(|e| e.to_string())?;
+    let mut tx = state.pool.begin().await?;
 
     let gradient_id = repo::gradient::create_gradient(&gradient, &mut *tx)
         .await
-        .map_err(|e| e.to_string())?;
+        ?;
 
     for layer in gradient.layers{
         let layer_id = repo::gradient::create_layer(&layer, gradient_id, &mut *tx)
         .await
-        .map_err(|e| e.to_string())?;
+        ?;
         
         for stop in layer.stops{
             repo::gradient::create_stop(&stop, layer_id, &mut *tx)
             .await
-            .map_err(|e| e.to_string())?;
+            ?;
         }
     }
 
-   tx.commit().await.map_err(|e| e.to_string())?;
+   tx.commit().await?;
 
     Ok(gradient_id)
 }
@@ -145,21 +146,21 @@ pub async fn save_layer(
     state: tauri::State<'_, DbState>,
     layer: GradientLayerRequest,
     gradient_id: i64 
-) -> Result<i64, String> {
+) -> Result<i64, TauriError> {
 
-    let mut tx = state.pool.begin().await.map_err(|e| e.to_string())?;
+    let mut tx = state.pool.begin().await?;
 
     let layer_id = repo::gradient::create_layer(&layer, gradient_id, &mut *tx)
     .await
-    .map_err(|e| e.to_string())?;
+    ?;
     
     for stop in layer.stops{
         repo::gradient::create_stop(&stop, layer_id, &mut *tx)
         .await
-        .map_err(|e| e.to_string())?;
+        ?;
     }
 
-   tx.commit().await.map_err(|e| e.to_string())?;
+   tx.commit().await?;
 
     Ok(layer_id)
 }
@@ -169,15 +170,15 @@ pub async fn save_stop(
     state: tauri::State<'_, DbState>,
     stop: GradientStopRequest,
     layer_id: i64 
-) -> Result<i64, String> {
+) -> Result<i64, TauriError> {
 
-    let mut tx = state.pool.begin().await.map_err(|e| e.to_string())?;
+    let mut tx = state.pool.begin().await?;
 
-    let stop_id =repo::gradient::create_stop(&stop, layer_id, &mut *tx)
+    let stop_id = repo::gradient::create_stop(&stop, layer_id, &mut *tx)
     .await
-    .map_err(|e| e.to_string())?;
+    ?;
 
-    tx.commit().await.map_err(|e| e.to_string())?;
+    tx.commit().await?;
 
     Ok(stop_id)
 }
