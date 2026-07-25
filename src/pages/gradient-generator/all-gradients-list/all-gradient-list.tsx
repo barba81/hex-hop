@@ -1,5 +1,3 @@
-import { GradientEntity } from "@/features/infrastructure/entity/gradient.entity";
-import { Plus } from "lucide-react";
 
 // export const AllGradientsList = () => {
 

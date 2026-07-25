@@ -4,7 +4,7 @@ import GradientColorSpaceBadgeText from "./gradient-color-badge-text";
 import "@/style/empty-checker-board.css";
 import { DragDots } from "@/components/common/drag-dots";
 
-const GradientHeaderSummery = ({layerId}:{layerId: number}) => {
+const GradientHeaderSummery = ({}:{layerId: number}) => {
   
   
   return (

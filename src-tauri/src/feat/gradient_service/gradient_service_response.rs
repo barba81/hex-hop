@@ -29,7 +29,7 @@ pub struct GradientStopResponse {
     pub r: f64,
     pub g: f64,
     pub b: f64,
-    pub a: f64,
+    pub a: Option<f64>,
     pub position: f64,
 }
 

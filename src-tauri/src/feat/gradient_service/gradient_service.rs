@@ -3,113 +3,37 @@ use crate::feat::gradient_service::gradient_service_response::{GradientLayerResp
 use crate::state::DbState;
 use crate::repo;
 use crate::error::TauriError;
+use crate::feat::gradient_service::gradient_data_mapper::{build_stop_response, build_layer_response, build_gradient_response};
 
 #[tauri::command]
 pub async fn get_stop(
     state: tauri::State<'_, DbState>,
-    stop_id: i64) -> Result<GradientStopResponse, TauriError>{
+    stop_id: i64,
+) -> Result<GradientStopResponse, TauriError> {
     let stop = repo::gradient::get_gradient_stops_by_stop_id(stop_id, &state.pool).await?;
-    
-  let response = GradientStopResponse {
-            id: stop.id,
-            gradient_order: stop.gradient_order,
-            r: stop.r,
-            g: stop.g,
-            b: stop.b,
-            a: stop.a.unwrap_or(1.0),
-            position: stop.position,
-        };
-
-    Ok(response)
+    Ok(build_stop_response(&stop))
 }
-
 
 #[tauri::command]
 pub async fn get_layer(
     state: tauri::State<'_, DbState>,
-    layer_id: i64) -> Result<GradientLayerResponse, TauriError>{
-
+    layer_id: i64,
+) -> Result<GradientLayerResponse, TauriError> {
     let layer = repo::gradient::get_gradient_layers_by_layer_id(layer_id, &state.pool).await?;
-    let gradient_stops = repo::gradient::get_gradient_stops_by_layer_id(layer_id, &state.pool).await?;
-
-    let layer_stops: Vec<GradientStopResponse> = gradient_stops
-        .iter()
-        .filter(|stop| stop.layer_id == layer.id)
-        .map(|stop| GradientStopResponse {
-            id: stop.id,
-            gradient_order: stop.gradient_order,
-            r: stop.r,
-            g: stop.g,
-            b: stop.b,
-            a: stop.a.unwrap_or(1.0),
-            position: stop.position,
-        })
-        .collect();
-
-    let response = GradientLayerResponse {
-        id: layer.id,
-        gradient_order: layer.gradient_order,
-        gradient_type: layer.gradient_type,
-        rotation_degree: layer.rotation_degree,
-        pattern_repeat_number: layer.pattern_repeat_number,
-        color_space: layer.color_space,
-        easing_function: layer.easing_function,
-        stops: layer_stops,
-    };
-
-    Ok(response)
-} 
-
+    let stops = repo::gradient::get_gradient_stops_by_layer_id(layer_id, &state.pool).await?;
+    Ok(build_layer_response(&layer, &stops))
+}
 
 #[tauri::command]
 pub async fn get_gradient(
     state: tauri::State<'_, DbState>,
-    gradient_id: i64) -> Result<GradientResponse, TauriError>{
+    gradient_id: i64,
+) -> Result<GradientResponse, TauriError> {
     let gradient = repo::gradient::get_gradient_by_id(gradient_id, &state.pool).await?;
-    let gradient_layers = repo::gradient::get_gradient_layers_by_gradient_id(gradient_id, &state.pool).await?;
-    let gradient_stops = repo::gradient::get_gradient_stops_by_gradient_id(gradient_id, &state.pool).await?;
-    
-   
-    let layers_response: Vec<GradientLayerResponse> = gradient_layers
-        .into_iter()
-        .map(|layer| {
-            // Find and map all stops belonging to this specific layer
-            let layer_stops: Vec<GradientStopResponse> = gradient_stops
-                .iter()
-                .filter(|stop| stop.layer_id == layer.id)
-                .map(|stop| GradientStopResponse {
-                    id: stop.id,
-                    gradient_order: stop.gradient_order,
-                    r: stop.r,
-                    g: stop.g,
-                    b: stop.b,
-                    a: stop.a.unwrap_or(1.0),
-                    position: stop.position,
-                })
-                .collect();
-
-            GradientLayerResponse {
-                id: layer.id,
-                gradient_order: layer.gradient_order,
-                gradient_type: layer.gradient_type,
-                rotation_degree: layer.rotation_degree,
-                pattern_repeat_number: layer.pattern_repeat_number,
-                color_space: layer.color_space,
-                easing_function: layer.easing_function,
-                stops: layer_stops,
-            }
-        })
-        .collect();
-
-    let response = GradientResponse {
-        id: gradient.id,
-        name: gradient.name,
-        layers: layers_response,
-    };
-
-
-    Ok(response)
-} 
+    let layers = repo::gradient::get_gradient_layers_by_gradient_id(gradient_id, &state.pool).await?;
+    let stops = repo::gradient::get_gradient_stops_by_gradient_id(gradient_id, &state.pool).await?;
+    Ok(build_gradient_response(&gradient, &layers, &stops))
+}
 
 #[tauri::command]
 pub async fn save_gradient(
@@ -119,19 +43,13 @@ pub async fn save_gradient(
 
     let mut tx = state.pool.begin().await?;
 
-    let gradient_id = repo::gradient::create_gradient(&gradient, &mut *tx)
-        .await
-        ?;
+    let gradient_id = repo::gradient::create_gradient(&gradient, &mut *tx).await?;
 
     for layer in gradient.layers{
-        let layer_id = repo::gradient::create_layer(&layer, gradient_id, &mut *tx)
-        .await
-        ?;
+        let layer_id = repo::gradient::create_layer(&layer, gradient_id, &mut *tx).await?;
         
         for stop in layer.stops{
-            repo::gradient::create_stop(&stop, layer_id, &mut *tx)
-            .await
-            ?;
+            repo::gradient::create_stop(&stop, layer_id, &mut *tx).await?;
         }
     }
 
@@ -150,14 +68,9 @@ pub async fn save_layer(
 
     let mut tx = state.pool.begin().await?;
 
-    let layer_id = repo::gradient::create_layer(&layer, gradient_id, &mut *tx)
-    .await
-    ?;
-    
+    let layer_id = repo::gradient::create_layer(&layer, gradient_id, &mut *tx).await?;
     for stop in layer.stops{
-        repo::gradient::create_stop(&stop, layer_id, &mut *tx)
-        .await
-        ?;
+        repo::gradient::create_stop(&stop, layer_id, &mut *tx).await?;
     }
 
    tx.commit().await?;
@@ -171,12 +84,9 @@ pub async fn save_stop(
     stop: GradientStopRequest,
     layer_id: i64 
 ) -> Result<i64, TauriError> {
-
     let mut tx = state.pool.begin().await?;
 
-    let stop_id = repo::gradient::create_stop(&stop, layer_id, &mut *tx)
-    .await
-    ?;
+    let stop_id = repo::gradient::create_stop(&stop, layer_id, &mut *tx).await?;
 
     tx.commit().await?;
 
