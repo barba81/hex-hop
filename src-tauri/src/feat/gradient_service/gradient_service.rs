@@ -52,7 +52,7 @@ pub async fn save_gradient(
 
    tx.commit().await?;
 
-    Ok(gradient_id)
+   Ok(gradient_id)
 }
 
 
@@ -66,11 +66,9 @@ pub async fn save_layer(
     let mut tx = state.pool.begin().await?;
 
     let layer_id = repo::gradient::create_layer(&layer, gradient_id, &mut *tx).await?;
-    for stop in layer.stops{
-        repo::gradient::create_stop(&stop, layer_id, &mut *tx).await?;
-    }
-
-   tx.commit().await?;
+    repo::gradient::create_stops(&layer.stops, layer_id, &mut *tx).await?;
+    
+    tx.commit().await?;
 
     Ok(layer_id)
 }
@@ -81,12 +79,6 @@ pub async fn save_stop(
     stop: GradientStopRequest,
     layer_id: i64 
 ) -> Result<i64, TauriError> {
-    let mut tx = state.pool.begin().await?;
-
-    let stop_id = repo::gradient::create_stop(&stop, layer_id, &mut *tx).await?;
-
-    tx.commit().await?;
-
-    Ok(stop_id)
+    Ok(repo::gradient::create_stop(&stop, layer_id, &state.pool).await?)
 }
 
