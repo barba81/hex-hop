@@ -1,9 +1,10 @@
+use crate::feat::gradient_service::gradient_create_model::{GradientLayerCreateModel, GradientStopCreateModel};
 use crate::feat::gradient_service::gradient_service_request::{GradientLayerRequest, GradientRequest, GradientStopRequest};
 use crate::feat::gradient_service::gradient_service_response::{GradientLayerResponse, GradientResponse, GradientStopResponse};
 use crate::state::DbState;
 use crate::repo;
 use crate::error::TauriError;
-use crate::feat::gradient_service::gradient_data_mapper::{build_stop_response, build_layer_response, build_gradient_response};
+use crate::feat::gradient_service::gradient_data_mapper::{build_creation_stop_model, build_gradient_response, build_layer_model, build_layer_response, build_stop_response};
 
 #[tauri::command]
 pub async fn get_stop(
@@ -45,16 +46,29 @@ pub async fn save_gradient(
 
     let gradient_id = repo::gradient::create_gradient(&gradient, &mut *tx).await?;
 
-    for layer in gradient.layers{
-        let layer_id = repo::gradient::create_layer(&layer, gradient_id, &mut *tx).await?;
-        repo::gradient::create_stops(&layer.stops, layer_id, &mut *tx).await?;
-    }
+    let layers: Vec<GradientLayerCreateModel> = gradient
+        .layers
+        .iter()
+        .map(|layer| build_layer_model(& layer, gradient_id))
+        .collect();
+
+    let layer_ids = repo::gradient::create_layers(&layers, &mut *tx).await?;
+
+    let all_stops: Vec<GradientStopCreateModel> = gradient
+        .layers
+        .iter()
+        .zip(layer_ids.iter()) // Pair each original layer with its generated layer_id
+        .flat_map(|(layer, &layer_id)| {
+            layer.stops.iter().map(move |stop| build_creation_stop_model(&stop, layer_id))
+        })
+        .collect();
+
+     repo::gradient::create_stops2(&all_stops, &mut *tx).await?;
 
    tx.commit().await?;
 
    Ok(gradient_id)
 }
-
 
 #[tauri::command]
 pub async fn save_layer(
@@ -66,7 +80,14 @@ pub async fn save_layer(
     let mut tx = state.pool.begin().await?;
 
     let layer_id = repo::gradient::create_layer(&layer, gradient_id, &mut *tx).await?;
-    repo::gradient::create_stops(&layer.stops, layer_id, &mut *tx).await?;
+
+    let stops: Vec<GradientStopCreateModel> = layer
+        .stops
+        .iter()
+        .map(|stop|build_creation_stop_model(&stop, layer_id))
+        .collect();
+
+    repo::gradient::create_stops2(&stops, &mut *tx).await?;
     
     tx.commit().await?;
 

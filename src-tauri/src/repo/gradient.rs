@@ -1,6 +1,6 @@
 use sqlx::QueryBuilder;
 
-use crate::feat::gradient_service::{gradient_data_model::{Gradient, GradientLayer, GradientStop}, gradient_service_request::{GradientLayerRequest, GradientRequest, GradientStopRequest}};
+use crate::feat::gradient_service::{gradient_create_model::{GradientLayerCreateModel, GradientStopCreateModel}, gradient_data_model::{Gradient, GradientLayer, GradientStop}, gradient_service_request::{GradientLayerRequest, GradientRequest, GradientStopRequest}};
 
 pub async  fn get_gradient_by_id<'a, E>(
     id: i64, 
@@ -227,6 +227,46 @@ where
     Ok(id)
 }
 
+pub async fn create_layers<'a, E>(
+    layers: &[GradientLayerCreateModel],
+    executor: E,
+) -> Result<Vec<i64>, sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
+    if layers.is_empty() {
+        return Ok(Vec::new());
+    }
+
+    let mut qb: QueryBuilder<sqlx::Sqlite> = QueryBuilder::new(
+        "INSERT INTO gradient_layer ( gradient_order, 
+                gradient_id,
+                gradient_type,
+                rotation_degree,
+                pattern_repeat_number,
+                color_space,
+                easing_function ) "
+    );
+
+    qb.push_values(layers, |mut b, layer| {
+        b.push_bind(layer.gradient_order)
+            .push_bind(layer.gradient_id)
+            .push_bind(layer.gradient_type.clone())
+            .push_bind(layer.rotation_degree)
+            .push_bind(layer.pattern_repeat_number)
+            .push_bind(layer.color_space.clone())
+            .push_bind(layer.easing_function.clone());
+    });
+
+       qb.push(" RETURNING id");
+
+    let ids: Vec<i64> = qb
+        .build_query_scalar()
+        .fetch_all(executor)
+        .await?;
+
+    Ok(ids)
+}
 
 
 
@@ -263,12 +303,12 @@ pub async fn create_stops<'a, E>(
     stops: &[GradientStopRequest],
     layer_id: i64,
     executor: E,
-) -> Result<(), sqlx::Error>
+) -> Result<Vec<i64>, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
     if stops.is_empty() {
-        return Ok(());
+        return Ok(Vec::new());
     }
 
     let mut qb: QueryBuilder<sqlx::Sqlite> = QueryBuilder::new(
@@ -284,8 +324,49 @@ where
             .push_bind(stop.a)
             .push_bind(stop.position);
     });
-   qb.build().execute(executor).await?;
+
+    qb.push(" RETURNING id");
+
+    let ids: Vec<i64> = qb
+        .build_query_scalar()
+        .fetch_all(executor)
+        .await?;
+
+    Ok(ids)
+}
 
 
-    Ok(())
+pub async fn create_stops2<'a, E>(
+    stops: &[GradientStopCreateModel],
+    executor: E,
+) -> Result<Vec<i64>, sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
+    if stops.is_empty() {
+        return Ok(Vec::new());
+    }
+
+    let mut qb: QueryBuilder<sqlx::Sqlite> = QueryBuilder::new(
+        "INSERT INTO gradient_stop (gradient_order, layer_id, r, g, b, a, position) "
+    );
+
+    qb.push_values(stops, |mut b, stop| {
+        b.push_bind(stop.gradient_order)
+            .push_bind(stop.layer_id)
+            .push_bind(stop.r)
+            .push_bind(stop.g)
+            .push_bind(stop.b)
+            .push_bind(stop.a)
+            .push_bind(stop.position);
+    });
+
+    qb.push(" RETURNING id");
+
+    let ids: Vec<i64> = qb
+        .build_query_scalar()
+        .fetch_all(executor)
+        .await?;
+
+    Ok(ids)
 }
