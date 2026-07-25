@@ -1,3 +1,5 @@
+use sqlx::QueryBuilder;
+
 use crate::feat::gradient_service::{gradient_data_model::{Gradient, GradientLayer, GradientStop}, gradient_service_request::{GradientLayerRequest, GradientRequest, GradientStopRequest}};
 
 pub async  fn get_gradient_by_id<'a, E>(
@@ -250,4 +252,36 @@ where
         .await?;
 
     Ok(id)
+}
+
+
+pub async fn create_stops<'a, E>(
+    stops: &[GradientStopRequest],
+    layer_id: i64,
+    executor: E,
+) -> Result<(), sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
+    if stops.is_empty() {
+        return Ok(());
+    }
+
+    let mut qb: QueryBuilder<sqlx::Sqlite> = QueryBuilder::new(
+        "INSERT INTO gradient_stop (gradient_order, layer_id, r, g, b, a, position) "
+    );
+
+    qb.push_values(stops, |mut b, stop| {
+        b.push_bind(stop.gradient_order)
+            .push_bind(layer_id)
+            .push_bind(stop.r)
+            .push_bind(stop.g)
+            .push_bind(stop.b)
+            .push_bind(stop.a)
+            .push_bind(stop.position);
+    });
+   qb.build().execute(executor).await?;
+
+
+    Ok(())
 }

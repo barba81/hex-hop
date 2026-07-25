@@ -47,10 +47,7 @@ pub async fn save_gradient(
 
     for layer in gradient.layers{
         let layer_id = repo::gradient::create_layer(&layer, gradient_id, &mut *tx).await?;
-        
-        for stop in layer.stops{
-            repo::gradient::create_stop(&stop, layer_id, &mut *tx).await?;
-        }
+        repo::gradient::create_stops(&layer.stops, layer_id, &mut *tx).await?;
     }
 
    tx.commit().await?;
