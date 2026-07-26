@@ -32,6 +32,9 @@ pub fn run() {
             feat::gradient_service::gradient_service::delete_gradient, 
             feat::gradient_service::gradient_service::delete_layer, 
             feat::gradient_service::gradient_service::delete_stop, 
+            feat::gradient_service::gradient_service::update_gradient, 
+            feat::gradient_service::gradient_service::update_gradient_layer, 
+            feat::gradient_service::gradient_service::update_stop, 
             ])
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_clipboard_manager::init())

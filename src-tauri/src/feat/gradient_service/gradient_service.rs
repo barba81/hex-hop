@@ -1,4 +1,5 @@
-use crate::feat::gradient_service::gradient_create_model::{GradientLayerCreateModel, GradientStopCreateModel};
+use crate::feat::gradient_service::gradient_create_model::{GradientCreateModel, GradientLayerCreateModel, GradientStopCreateModel};
+use crate::feat::gradient_service::gradient_data_model::{Gradient, GradientLayer, GradientStop};
 use crate::feat::gradient_service::gradient_service_request::{GradientLayerRequest, GradientRequest, GradientStopRequest};
 use crate::feat::gradient_service::gradient_service_response::{GradientLayerResponse, GradientResponse, GradientStopResponse};
 use crate::state::DbState;
@@ -107,30 +108,27 @@ pub async fn save_stop(
 #[tauri::command]
 pub async fn update_gradient(
     state: tauri::State<'_, DbState>,
-    stop: GradientStopRequest,
-    layer_id: i64 
-) -> Result<i64, TauriError> {
-    Ok(repo::gradient::create_stop(&stop, layer_id, &state.pool).await?)
+    gradient: Gradient,
+) -> Result<(), TauriError> {
+    Ok(repo::gradient::update_gradient_async(&gradient, &state.pool).await?)
 }
 
 
 #[tauri::command]
 pub async fn update_gradient_layer(
     state: tauri::State<'_, DbState>,
-    stop: GradientStopRequest,
-    layer_id: i64 
-) -> Result<i64, TauriError> {
-    Ok(repo::gradient::create_stop(&stop, layer_id, &state.pool).await?)
+    layer: GradientLayer,
+) -> Result<(), TauriError> {
+    Ok(repo::gradient::update_gradient_layer_async(&layer, &state.pool).await?)
 }
 
 
 #[tauri::command]
 pub async fn update_stop(
     state: tauri::State<'_, DbState>,
-    stop: GradientStopRequest,
-    layer_id: i64 
-) -> Result<i64, TauriError> {
-    Ok(repo::gradient::create_stop(&stop, layer_id, &state.pool).await?)
+    stop: GradientStop,
+) -> Result<(), TauriError> {
+    Ok(repo::gradient::update_stop(&stop, &state.pool).await?)
 }
 
 #[tauri::command]
