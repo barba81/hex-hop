@@ -1,8 +1,25 @@
-import { ColorSpaceType } from "../enum/color-space.enum";
-import { EasingFunctionType } from "../enum/easing-function";
-import { GradientTypes } from "../enum/gradient-types.enum";
+import type { ColorSpaceType, EasingFunctionType, GradientTypes } from "./enum";
 
+export type PaletteEntity =  {
+    kind: "palette",
+    id: number;
+    blockId:number;
+    order: number;
+    name: string;
+}
 
+export type ColorEntity =  {
+    kind: "color",
+    id: number;
+    blockId:number;
+    order: number;
+    name: string;
+    r: number;
+    g: number;
+    b: number;
+    a?: number;
+    paletteId?: number;
+}
 
 export type GradientEntity =  {
     kind: "gradient",

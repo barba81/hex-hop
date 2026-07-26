@@ -52,8 +52,8 @@ export const GradientStepIcon = ({
         rx={10.756}
         style={{
           fill: "url(#b)",
-          stroke: color,       // Wire up color to the border stroke
-          strokeWidth: strokeWidth, // Wire up dynamic stroke weight variable
+          stroke: color,       
+          strokeWidth: strokeWidth, 
           strokeLinejoin: "round",
           strokeDasharray: "none",
           strokeOpacity: 1,

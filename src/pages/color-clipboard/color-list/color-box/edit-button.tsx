@@ -1,4 +1,4 @@
-import { ColorEntity } from "@/features/infrastructure/entity/color.entity";
+import { ColorEntity } from "@/features/infrastructure/color.entity";
 import { Pencil } from "lucide-react";
 
 type EditButtonParams = {

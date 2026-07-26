@@ -3,7 +3,6 @@ import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import HeaderBar from "./components/header/header-bar";
 import { initThemeListener } from "./hooks/use-theme";
 import HexHopNavigator from "./components/navigator/hex-hop-navigator";
-import { getAllData } from "./features/common/get-all-data/get-all-data";
 
 import "./App.css";
 
@@ -12,7 +11,6 @@ function HexHopApp() {
     initThemeListener();
     moveWindow(Position.TopRight);
     const fetchColors = async () => {
-      await getAllData();
     };
 
     fetchColors();

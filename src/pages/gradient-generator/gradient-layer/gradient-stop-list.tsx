@@ -1,6 +1,6 @@
 import { addNewStop } from "@/features/gradient/add-new-gradient";
 import { deleteGradientStop } from "@/features/gradient/delete-gradient";
-import { GradientLayerEntity } from "@/features/infrastructure/entity/gradient.entity";
+import { GradientLayerEntity } from "@/features/infrastructure/entity";
 import { Plus, Trash2 } from "lucide-react";
 
 interface GradientStopListParm {

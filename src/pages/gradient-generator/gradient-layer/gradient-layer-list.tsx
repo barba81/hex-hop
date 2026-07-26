@@ -1,5 +1,5 @@
 import "@/style/empty-checker-board.css";
-import { GradientEntity } from "@/features/infrastructure/entity/gradient.entity";
+import { GradientEntity } from "@/features/infrastructure/entity";
 import GradientStopList from "./gradient-stop-list";
 import { Trash2 } from "lucide-react";
 import { deleteGradientLayer } from "@/features/gradient/delete-gradient";

@@ -3,7 +3,7 @@ import {
   GradientEntity,
   GradientLayerEntity,
   GradientStopEntity,
-} from "../infrastructure/entity/gradient.entity";
+} from "../infrastructure/entity";
 import { useGradientStore } from "@/store/use-gradient-store";
 
 export const newGradient = Object.freeze({

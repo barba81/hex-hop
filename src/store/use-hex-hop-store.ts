@@ -1,8 +1,8 @@
 
 import { create } from "zustand";
-import { type PaletteEntity } from "@/features/infrastructure/entity/palette.entity";
-import { type GradientEntity } from "@/features/infrastructure/entity/gradient.entity";
-import { type ColorEntity } from "@/features/infrastructure/entity/color.entity";
+import { type PaletteEntity } from "@/features/infrastructure/palette.entity";
+import { type GradientEntity } from "@/features/infrastructure/entity";
+import { type ColorEntity } from "@/features/infrastructure/color.entity";
 
 export type ColorBlockEntity = (PaletteEntity | ColorEntity | GradientEntity);
 

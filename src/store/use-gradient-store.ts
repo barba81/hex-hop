@@ -1,4 +1,4 @@
-import { GradientEntity, GradientLayerEntity, GradientStopEntity } from "@/features/infrastructure/entity/gradient.entity";
+import { GradientEntity, GradientLayerEntity, GradientStopEntity } from "@/features/infrastructure/entity";
 import { create } from "zustand";
 import { immer } from 'zustand/middleware/immer'
 
@@ -10,9 +10,16 @@ interface GradientStore {
 
 interface GradientAction {
   // CREATE -----------------------------------------------------------------------
+
   addGradient: (gradient: GradientEntity) => void;
   addLayerToSelected: (gradientId: number, layer: GradientLayerEntity) => void;
   addGradientStop: (gradientId: number, layerId: number, gradientStop: GradientStopEntity) => void;
+
+  // UPDATE   -----------------------------------------------------------------------
+
+  updateGradient: (gradient: GradientEntity) => void;
+  // updateLayerToSelected: (gradientId: number, layer: GradientLayerEntity) => void;
+  // updateGradientStop: (gradientId: number, layerId: number, gradientStop: GradientStopEntity) => void;
 
   // DELETE -----------------------------------------------------------------------
 
@@ -20,7 +27,7 @@ interface GradientAction {
   deleteGradientLayer: (gradientId: number, gradientLayerId: number) => void;
   deleteGradientStop: (gradientId: number, gradientLayerId: number, stopId: number) => void;
 
-  //-----------------------------------------------------------------------
+  // UI -----------------------------------------------------------------------
   toggleLayerExpanded: (layerId: number) => void;
 }
 
@@ -30,7 +37,7 @@ export const useGradientStore = create<GradientStore & GradientAction>()(immer((
   selectedGradientId: null,
 
   // CREATE -----------------------------------------------------------------------
-  
+
   addGradient: (gradient: GradientEntity) =>
     set((state) => {
       state.gradients.push(gradient);
@@ -49,6 +56,18 @@ export const useGradientStore = create<GradientStore & GradientAction>()(immer((
       if (!layer) return;
       layer.stops.push(stop);
     }),
+
+  // UPDATE   -----------------------------------------------------------------------
+
+  updateGradient: (gradient: GradientEntity) =>
+    set((state) => {
+      const index = state.gradients.findIndex((g) => g.id === gradient.id);
+      if (index === -1) return;
+      state.gradients[index] = gradient;
+    }),
+  // updateLayerToSelected: (gradientId: number, layer: GradientLayerEntity) => void;
+  // updateGradientStop: (gradientId: number, layerId: number, gradientStop: GradientStopEntity) => void;
+
 
   // DELETE -----------------------------------------------------------------------
 
@@ -82,12 +101,13 @@ export const useGradientStore = create<GradientStore & GradientAction>()(immer((
       }
     }),
 
-  //-----------------------------------------------------------------------
+  // UI -----------------------------------------------------------------------
 
   toggleLayerExpanded: (layerId: number) =>
     set((state) => {
       state.expandedLayers[layerId] = !state.expandedLayers[layerId];
     }),
+
 })));
 
 

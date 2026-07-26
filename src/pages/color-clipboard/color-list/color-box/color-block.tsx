@@ -4,7 +4,7 @@ import CopyLogo from "./copy-button";
 import CloseButton from "./close-button";
 import ColorName from "./color-name";
 import { DragDots } from "../../../../components/common/drag-dots";
-import { ColorEntity } from "@/features/infrastructure/entity/color.entity";
+import { ColorEntity } from "@/features/infrastructure/color.entity";
 import { colorDataToRoundData } from "@/features/color/color-format-changer";
 import { useDraggable } from "@dnd-kit/react";
 import EditButton from "./edit-button";

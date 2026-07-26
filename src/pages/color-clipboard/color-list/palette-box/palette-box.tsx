@@ -1,6 +1,6 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { DragDots } from "../../../../components/common/drag-dots";
-import { PaletteEntity } from "@/features/infrastructure/entity/palette.entity";
+import { PaletteEntity } from "@/features/infrastructure/palette.entity";
 import { PaletteBoxEmpty } from "./palette-box-empty";
 import { colorDataToHex } from "@/features/color/color-format-changer";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
