@@ -8,14 +8,17 @@ export const deleteGradient = async (gradientId: number) => {
   console.timeEnd();
 };
 
-export const deleteGradientLayer = async (layerId: number) => {
+export const deleteGradientLayer = async (gradientId: number, layerId: number) => {
   console.time();
   await invoke("delete_layer", { layerId: layerId });
+  useGradientStore.getState().deleteGradientLayer(gradientId, layerId);
+
   console.timeEnd();
 };
 
-export const deleteGradientStop = async (stopId: number) => {
+export const deleteGradientStop = async (gradientId: number, layerId: number, stopId: number) => {
   console.time();
   await invoke("delete_stop", { stopId: stopId });
+  useGradientStore.getState().deleteGradientStop(gradientId, layerId, stopId);
   console.timeEnd();
 };

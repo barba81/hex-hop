@@ -1,6 +1,7 @@
 import { addNewStop } from "@/features/gradient/add-new-gradient";
+import { deleteGradientStop } from "@/features/gradient/delete-gradient";
 import { GradientLayerEntity } from "@/features/infrastructure/entity/gradient.entity";
-import { Plus } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 
 interface GradientStopListParm {
   layer: GradientLayerEntity;
@@ -16,6 +17,8 @@ const GradientStopList = ({ layer, gradientId }: GradientStopListParm) => {
       <div key={ix}>{stop.g}</div>
       <div key={ix}>{stop.b}</div>
       <div key={ix}>{stop.a}</div>
+          <Trash2 onClick={()=>deleteGradientStop(gradientId, layer.id, stop.id)} />
+
     </div>
     </>
   ));

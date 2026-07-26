@@ -9,15 +9,18 @@ interface GradientStore {
 }
 
 interface GradientAction {
-
+  // CREATE -----------------------------------------------------------------------
   addGradient: (gradient: GradientEntity) => void;
-  deleteGradient: (gradientId: number) => void;
-  // setGradient: (blocks: GradientEntity[]) => void;
-  // removeGradient: (id: number) => void;
-  // setActiveGradient: (id: number) => void;
-
   addLayerToSelected: (gradientId: number, layer: GradientLayerEntity) => void;
   addGradientStop: (gradientId: number, layerId: number, gradientStop: GradientStopEntity) => void;
+
+  // DELETE -----------------------------------------------------------------------
+
+  deleteGradient: (gradientId: number) => void;
+  deleteGradientLayer: (gradientId: number, gradientLayerId: number) => void;
+  deleteGradientStop: (gradientId: number, gradientLayerId: number, stopId: number) => void;
+
+  //-----------------------------------------------------------------------
   toggleLayerExpanded: (layerId: number) => void;
 }
 
@@ -25,17 +28,9 @@ export const useGradientStore = create<GradientStore & GradientAction>()(immer((
   expandedLayers: {},
   gradients: [],
   selectedGradientId: null,
-  toggleLayerExpanded: (layerId: number) =>
-    set((state) => {
-      state.expandedLayers[layerId] = !state.expandedLayers[layerId];
-    }),
-  deleteGradient: (gradientId: number) =>
-    set((state) => {
-      const index = state.gradients.findIndex((x) => x.id === gradientId);
-      if (index !== -1) {
-        state.gradients.splice(index, 1);
-      }
-    }),
+
+  // CREATE -----------------------------------------------------------------------
+  
   addGradient: (gradient: GradientEntity) =>
     set((state) => {
       state.gradients.push(gradient);
@@ -53,6 +48,45 @@ export const useGradientStore = create<GradientStore & GradientAction>()(immer((
       let layer = gradient.layers.find(x => x.id === layerId);
       if (!layer) return;
       layer.stops.push(stop);
+    }),
+
+  // DELETE -----------------------------------------------------------------------
+
+  deleteGradient: (gradientId: number) =>
+    set((state) => {
+      const index = state.gradients.findIndex((x) => x.id === gradientId);
+      if (index !== -1) {
+        state.gradients.splice(index, 1);
+      }
+    }),
+
+  deleteGradientLayer: (gradientId: number, gradientLayerId: number) =>
+    set((state) => {
+      const gradientIndex = state.gradients.findIndex((x) => x.id === gradientId);
+      if (gradientIndex === -1) return;
+      const gradientLayerIndex = state.gradients[gradientIndex].layers.findIndex((x) => x.id === gradientLayerId);
+      if (gradientLayerIndex !== -1) {
+        state.gradients[gradientIndex].layers.splice(gradientLayerIndex, 1);
+      }
+    }),
+
+  deleteGradientStop: (gradientId: number, gradientLayerId: number, stopId: number) =>
+    set((state) => {
+      const gradientIndex = state.gradients.findIndex((x) => x.id === gradientId);
+      if (gradientIndex === -1) return;
+      const gradientLayerIndex = state.gradients[gradientIndex].layers.findIndex((x) => x.id === gradientLayerId);
+      if (gradientLayerIndex === -1) return;
+      const gradientStopIndex = state.gradients[gradientIndex].layers[gradientLayerIndex].stops.findIndex((x) => x.id === stopId);
+      if (gradientStopIndex !== -1) {
+        state.gradients[gradientIndex].layers[gradientLayerIndex].stops.splice(gradientStopIndex, 1);
+      }
+    }),
+
+  //-----------------------------------------------------------------------
+
+  toggleLayerExpanded: (layerId: number) =>
+    set((state) => {
+      state.expandedLayers[layerId] = !state.expandedLayers[layerId];
     }),
 })));
 
