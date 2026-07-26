@@ -1,3 +1,11 @@
+
+    #app {
+        border-radius: 50px;
+        height: 100vh;
+        background-color: #f3f3f3;
+        border-radius: 5px;
+    }
+
 html, body { background: transparent }
 @import "tailwindcss";
 @import "tw-animate-css";
@@ -23,6 +31,7 @@ html, body { background: transparent }
 
 ::-webkit-scrollbar {
   width: 3px;
+  height: 3px;
 }
 
 ::-webkit-scrollbar-track {

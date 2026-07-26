@@ -1,7 +1,7 @@
 {
   "name": "hex-hop",
   "private": true,
-  "version": "0.1.0",
+  "version": "0.1.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -10,6 +10,7 @@
     "tauri": "tauri"
   },
   "dependencies": {
+    "@dnd-kit/react": "^0.4.0",
     "@fontsource-variable/geist": "^5.2.8",
     "@tailwindcss/vite": "^4.2.2",
     "@tauri-apps/api": "^2",
@@ -17,12 +18,11 @@
     "@tauri-apps/plugin-opener": "^2",
     "@tauri-apps/plugin-os": "~2.3.2",
     "@tauri-apps/plugin-positioner": "~2",
-    "@tauri-apps/plugin-sql": "~2.4.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "culori": "^4.0.2",
+    "immer": "^11.1.15",
     "lucide-react": "^1.8.0",
-    "next-themes": "^0.4.6",
     "radix-ui": "^1.4.3",
     "react": "^19.1.0",
     "react-colorful": "^5.6.1",
@@ -36,6 +36,7 @@
   "devDependencies": {
     "@tauri-apps/cli": "^2",
     "@types/culori": "^4.0.1",
+    "@types/lodash": "^4.17.24",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
     "@vitejs/plugin-react": "^4.6.0",

@@ -1,0 +1,81 @@
+import _ from 'lodash';
+
+export async function getAllData() {
+    try {
+        // const db = await getContext();
+        // const palettes = await db.select<PaletteDto[]>(`
+        //     SELECT
+        //         palette.id,
+        //         palette.name,
+        //         b.id AS blockId,
+        //         b.[order]
+        //     FROM palette
+        //     INNER JOIN block b ON palette.blockId = b.id
+        // `);
+
+        // const colors = await db.select<ColorDto[]>(`SELECT
+        //             c.id,
+        //             c.paletteId,
+        //             c.r,
+        //             c.g,
+        //             c.b,
+        //             c.a,
+        //             c.name,
+        //             b.id AS blockId,
+        //             b.[order]
+        //         FROM color c
+        //  INNER JOIN block b ON c.blockId = b.id`);
+
+
+        // const colorModels: ColorEntity[] = colors.map(x => {
+        //     return {
+        //         kind: "color",
+        //         id: x.id,
+        //         blockId: x.blockId,
+        //         r: x.r,
+        //         g: x.g,
+        //         b: x.b,
+        //         a: x.a,
+        //         name: x.name,
+        //         order: x.order,
+        //         paletteId: x.paletteId
+        //     };
+        // });
+
+        //    const gradient1 = _.groupBy(gradient, 'id');
+        //    const gradient2 = _.groupBy(gradientLayer, 'id');
+        //    const gradient3 = _.groupBy(gradientId, 'id');
+
+        // const palletsModel: PaletteEntity[] = palettes.map(x => {
+        //     return {
+        //         kind: 'palette',
+        //         id: x.id,
+        //         blockId: x.blockId,
+        //         order: x.order,
+        //         name: x.name,
+        //     };
+        // });
+
+        // const gradientModels: GradientEntity[] = gradient.map(x => {
+        //     return {
+        //         id: x.id,
+        //         kind: 'gradient',
+        //         name: x.name,
+        //         order: x.order,
+        //         paletteId: x.paletteId,
+        //         blockId: x.blockId,
+        //         layers: [],
+        //     }
+        // })
+
+
+        // const colorBlocks: ColorBlockEntity[] = [...palletsModel, ...colorModels, ...gradientModels ];
+        // useHexHopStore.getState().actions.setColorBlock(colorBlocks);
+        // useGradientStore.getState().actions.setGradient(gradientModels);
+        // useGradientStore.getState().actions.setActiveGradient(gradientModels[0]?.id ?? null);
+    } catch (error) {
+        console.error("Failed to fetch all data:", error);
+        return [];
+    }
+
+}
