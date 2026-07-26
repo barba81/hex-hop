@@ -1,8 +1,8 @@
-use super::super::model::gradient_service_request::{*};
-use super::super::model::gradient_create_model::{*};
+// gradient_create_model
+use super::super::model::{*};
 
 pub async fn create_gradient<'a, E>(
-    gradient: & GradientRequest, 
+    gradient: & gradient_service_request::GradientRequest, 
     executor: E
 ) -> Result<i64, sqlx::Error>
 where
@@ -17,7 +17,7 @@ where
 }
 
 pub async  fn create_layer<'a, E>(
-    layer: & GradientLayerRequest, 
+    layer: & gradient_service_request::GradientLayerRequest, 
     gradient_id: i64, 
     executor: E
 )  -> Result<i64, sqlx::Error> 
@@ -55,7 +55,7 @@ where
 }
 
 pub async fn create_layers<'a, E>(
-    layers: &[GradientLayerCreateModel],
+    layers: &[gradient_create_model::GradientLayerCreateModel],
     executor: E,
 ) -> Result<Vec<i64>, sqlx::Error>
 where
@@ -98,7 +98,7 @@ where
 
 
 pub async  fn create_stop<'a, E>(
-    stop :& GradientStopRequest, 
+    stop :& gradient_service_request::GradientStopRequest, 
     layer_id: i64, 
     executor: E
 ) ->  Result<i64, sqlx::Error>
@@ -125,7 +125,7 @@ where
 }
 
 pub async fn create_stops<'a, E>(
-    stops: &[GradientStopCreateModel],
+    stops: &[ gradient_create_model::GradientStopCreateModel],
     executor: E,
 ) -> Result<Vec<i64>, sqlx::Error>
 where

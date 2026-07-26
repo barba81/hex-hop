@@ -1,11 +1,12 @@
-use crate::feat::gradient_service::gradient_data_model::{Gradient, GradientLayer, GradientStop};
 use crate::infra::error::TauriError;
 use crate::state::DbState;
 
-use super::model::gradient_service_request::{*};
-use super::model::gradient_service_response::{*};
-use super::model::gradient_data_mapper::{*};
-use super::model::gradient_create_model::{*};
+// use super::model::gradient_service_request::{*};
+// use super::model::gradient_service_response::{*};
+// use super::model::gradient_data_mapper::{*};
+// use super::model::gradient_create_model::{*};
+// use super::model::gradient_data_model::{*};
+use super::model::{*};
 use super::repo::{*};
 
 
@@ -13,7 +14,7 @@ use super::repo::{*};
 pub async fn get_stop(
     state: tauri::State<'_, DbState>,
     stop_id: i64,
-) -> Result<GradientStopResponse, TauriError> {
+) -> Result<gradient_service_response::GradientStopResponse, TauriError> {
     let stop = gradient_get_repo::get_gradient_stops_by_stop_id(stop_id, &state.pool).await?;
     Ok(build_stop_response(&stop))
 }

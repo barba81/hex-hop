@@ -1,7 +1,7 @@
-use super::super::model::gradient_data_model::{*};
+use super::super::model::{*};
 
 pub async fn update_gradient_async<'e, E>(
-    gradient: & Gradient, 
+    gradient: & gradient_data_model::Gradient, 
     executor: E,
 ) -> Result<(), sqlx::Error> 
 where
@@ -21,7 +21,7 @@ where
 
 
 pub async fn update_gradient_layer_async<'e, E>(
-    gradient_layer: & GradientLayer, 
+    gradient_layer: & gradient_data_model::GradientLayer, 
     executor: E,
 ) -> Result<(), sqlx::Error> 
 where
@@ -53,7 +53,7 @@ where
 
 
 pub async fn update_stop<'e, E>(
-    stop: & GradientStop, 
+    stop: & gradient_data_model::GradientStop, 
     executor: E,
 ) -> Result<(), sqlx::Error> 
 where

@@ -1,13 +1,13 @@
-use super::super::model::gradient_data_model::{*};
+use super::super::model::{*};
 
 pub async  fn get_gradient_by_id<'a, E>(
     id: i64, 
     executor: E
-) -> Result<Gradient, sqlx::Error>
+) -> Result<gradient_data_model::Gradient, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-  let gradient = sqlx::query_as!(Gradient, "
+  let gradient = sqlx::query_as!(gradient_data_model::Gradient, "
            SELECT 
                 g.id as \"id!\",
                 g.name as \"name!\"
@@ -24,12 +24,12 @@ where
 pub async fn get_gradient_layers_by_gradient_id<'a, E>(
     gradient_id: i64, 
     executor: E
-) -> Result<Vec<GradientLayer>, sqlx::Error> 
+) -> Result<Vec<gradient_data_model::GradientLayer>, sqlx::Error> 
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
     let layers = sqlx::query_as!(
-            GradientLayer, 
+           gradient_data_model::GradientLayer, 
             "
             SELECT 
                 gl.id as \"id!\",
@@ -55,12 +55,12 @@ where
 pub async fn get_gradient_layers_by_layer_id<'a, E>(
     layer_id: i64, 
     executor: E
-) -> Result<GradientLayer, sqlx::Error>
+) -> Result<gradient_data_model::GradientLayer, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
     let layers = sqlx::query_as!(
-            GradientLayer, 
+            gradient_data_model::GradientLayer, 
             "
             SELECT 
                 gl.id as \"id!\",
@@ -86,12 +86,12 @@ where
 pub async fn get_gradient_stops_by_gradient_id<'a, E>(
     gradient_id: i64, 
     executor: E
-) -> Result<Vec<GradientStop>, sqlx::Error> 
+) -> Result<Vec<gradient_data_model::GradientStop>, sqlx::Error> 
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
     let stops = sqlx::query_as!(
-            GradientStop, 
+            gradient_data_model::GradientStop, 
             "
             SELECT 
                 gs.id as \"id!\",
@@ -117,11 +117,11 @@ where
 pub async fn get_gradient_stops_by_stop_id<'a, E>(
     stop_id: i64, 
     executor: E
-) -> Result<GradientStop, sqlx::Error>
+) -> Result<gradient_data_model::GradientStop, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>, {
     let stops = sqlx::query_as!(
-            GradientStop, 
+            gradient_data_model::GradientStop, 
             "
             SELECT 
                 gs.id as \"id!\",
@@ -146,11 +146,11 @@ where
 pub async fn get_gradient_stops_by_layer_id<'a, E>(
     layer_id: i64, 
     executor: E
-) -> Result<Vec<GradientStop>, sqlx::Error> 
+) -> Result<Vec<gradient_data_model::GradientStop>, sqlx::Error> 
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,{
     let stops = sqlx::query_as!(
-            GradientStop, 
+            gradient_data_model::GradientStop, 
             "
             SELECT 
                 gs.id as \"id!\",
