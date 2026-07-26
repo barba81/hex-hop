@@ -1,3 +1,5 @@
+use super::super::model::gradient_service_request::{*};
+use super::super::model::gradient_create_model::{*};
 
 pub async fn create_gradient<'a, E>(
     gradient: & GradientRequest, 
@@ -63,7 +65,7 @@ where
         return Ok(Vec::new());
     }
 
-    let mut qb: QueryBuilder<sqlx::Sqlite> = QueryBuilder::new(
+    let mut qb: sqlx::QueryBuilder<sqlx::Sqlite> = sqlx::QueryBuilder::new(
         "INSERT INTO gradient_layer ( gradient_order, 
                 gradient_id,
                 gradient_type,
@@ -133,7 +135,7 @@ where
         return Ok(Vec::new());
     }
 
-    let mut qb: QueryBuilder<sqlx::Sqlite> = QueryBuilder::new(
+    let mut qb: sqlx::QueryBuilder<sqlx::Sqlite> = sqlx::QueryBuilder::new(
         "INSERT INTO gradient_stop (gradient_order, layer_id, r, g, b, a, position) "
     );
 

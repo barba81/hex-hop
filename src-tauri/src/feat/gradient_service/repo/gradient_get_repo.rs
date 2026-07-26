@@ -1,3 +1,4 @@
+use super::super::model::gradient_data_model::{*};
 
 pub async  fn get_gradient_by_id<'a, E>(
     id: i64, 

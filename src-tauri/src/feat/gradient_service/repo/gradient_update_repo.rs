@@ -1,3 +1,5 @@
+use super::super::model::gradient_data_model::{*};
+
 pub async fn update_gradient_async<'e, E>(
     gradient: & Gradient, 
     executor: E,

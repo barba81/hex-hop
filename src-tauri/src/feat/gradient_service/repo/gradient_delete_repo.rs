@@ -1,5 +1,4 @@
 
-
 pub async fn soft_delete_gradient_by_id<'e, E>(
     gradient_id: i64, 
     executor: E,
