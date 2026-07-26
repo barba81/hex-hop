@@ -1,7 +1,7 @@
 import { useHexHopStore } from "@/store/use-hex-hop-store";
 import { ColorData } from "./types";
 import { getNearestColorName } from "./color-name-suggestion";
-import { ColorEntity } from "../infrastructure/color.entity";
+import { ColorEntity } from "../infrastructure/entity";
 
 const getNextOrderNumber = () => {
   return useHexHopStore.getState().colorBlocks.length;

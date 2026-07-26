@@ -11,6 +11,7 @@ const GradientPreviewBox = ({gradientBackground} : {gradientBackground: string})
           }}
         ></div>
       </div>
+      
     </>
   );
 };

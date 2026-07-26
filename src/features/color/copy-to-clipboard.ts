@@ -1,10 +1,11 @@
 import { writeText } from '@tauri-apps/plugin-clipboard-manager';
-import { ColorEntity } from '../infrastructure/color.entity';
-import { ColorSpaceType } from '../infrastructure/enum/color-space.enum';
+
 import {
     formatRgb,
 } from "culori";
 import { toNormalForm } from './color-format-changer';
+import { ColorEntity } from '../infrastructure/entity';
+import { ColorSpaceType } from '../infrastructure/enum';
 
 
 export const copyToClipboard = async (color: ColorEntity, _colorFormat: ColorSpaceType) => {

@@ -1,4 +1,4 @@
-import GradientLayerList from "./gradient-layer/gradient-layer-list";
+import GradientLayerList from "./gradient-layer-list";
 import GradientPreviewBox from "./gradient-preview";
 import GradientInfo from "./gradient-info";
 import {
@@ -6,7 +6,7 @@ import {
   useGradientStoreSelectedGradient,
 } from "@/store/use-gradient-store";
 import GradientEmptyPage from "./gradient-empty-page";
-import { List, X } from "lucide-react";
+import { List } from "lucide-react";
 
 const GradientGeneratorPage = () => {
   const hasElements = useGradientStoreHasElements();

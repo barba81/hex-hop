@@ -1,16 +1,15 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { DragDots } from "../../../../components/common/drag-dots";
-import { PaletteEntity } from "@/features/infrastructure/palette.entity";
 import { PaletteBoxEmpty } from "./palette-box-empty";
 import { colorDataToHex } from "@/features/color/color-format-changer";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import { useHexHopStore } from "@/store/use-hex-hop-store";
 import { Button } from "@/components/ui/button";
-import { removeAllBlocks } from "@/features/palette/remove-all-blocks";
 import {
   useIsPaletteExtended,
   usePaletteStore,
 } from "@/store/use-palette-store";
+import { PaletteEntity } from "@/features/infrastructure/entity";
 
 type PaletteBoxParams = {
   palette: PaletteEntity;
@@ -34,6 +33,10 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
     id: palette.blockId,
     data: { parentId: palette.id },
   });
+
+  function removeAllBlocks(): void {
+    throw new Error("Function not implemented.");
+  }
 
   return (
     <>
@@ -97,7 +100,7 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
                     size="sm"
                     variant="outline"
                     className="relative  select-none hover:cursor-pointer  text-xs rounded-md h-6"
-                    onClick={() => removeAllBlocks(palette.id)}
+                    onClick={() => removeAllBlocks()}
                   >
                     {" "}
                     Remove all from palette{" "}
