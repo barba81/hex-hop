@@ -4,9 +4,9 @@
 )]
 use tauri::{Manager};
 
-mod feat;
-mod infra;
-mod state;
+pub mod feat;
+pub mod infra;
+pub mod state;
  
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {

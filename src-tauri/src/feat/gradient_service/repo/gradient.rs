@@ -1,6 +1,4 @@
-use sqlx::QueryBuilder;
 
-use crate::feat::gradient_service::{gradient_create_model::{GradientLayerCreateModel, GradientStopCreateModel}, gradient_data_model::{Gradient, GradientLayer, GradientStop}, gradient_service_request::{GradientLayerRequest, GradientRequest, GradientStopRequest}};
 
 pub async  fn get_gradient_by_id<'a, E>(
     id: i64, 

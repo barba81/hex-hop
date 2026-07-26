@@ -1,6 +1,7 @@
-use crate::feat::gradient_service::{gradient_service_request::{ GradientLayerRequest, GradientRequest, GradientStopRequest}, gradient_service_response::{GradientLayerResponse, GradientResponse, GradientStopResponse}};
-use crate::feat::gradient_service::gradient_data_model::{GradientStop, GradientLayer, Gradient};
-use crate::feat::gradient_service::gradient_create_model::{*};
+use super::gradient_service_request::{*};
+use super::gradient_service_response::{*};
+use super::gradient_data_model::{*};
+use super::gradient_create_model::{*};
 
 
 pub fn build_stop_response(stop: &GradientStop) -> GradientStopResponse {

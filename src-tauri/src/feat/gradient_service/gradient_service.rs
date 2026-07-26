@@ -1,10 +1,11 @@
-use crate::feat::gradient_service::gradient_create_model::{GradientCreateModel, GradientLayerCreateModel, GradientStopCreateModel};
-use crate::feat::gradient_service::gradient_data_model::{Gradient, GradientLayer, GradientStop};
-use crate::feat::gradient_service::gradient_service_request::{GradientLayerRequest, GradientRequest, GradientStopRequest};
-use crate::feat::gradient_service::gradient_service_response::{GradientLayerResponse, GradientResponse, GradientStopResponse};
+use crate::infra::error::TauriError;
 use crate::state::DbState;
-use crate::error::TauriError;
-use crate::feat::gradient_service::gradient_data_mapper::{build_creation_stop_model, build_gradient_response, build_layer_model, build_layer_response, build_stop_response};
+
+use super::model::gradient_service_request::{*};
+use super::model::gradient_service_response::{*};
+use super::model::gradient_data_mapper::{*};
+use super::model::gradient_data_model::{*};
+
 
 #[tauri::command]
 pub async fn get_stop(
