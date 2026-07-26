@@ -3,7 +3,6 @@ use crate::feat::gradient_service::gradient_data_model::{Gradient, GradientLayer
 use crate::feat::gradient_service::gradient_service_request::{GradientLayerRequest, GradientRequest, GradientStopRequest};
 use crate::feat::gradient_service::gradient_service_response::{GradientLayerResponse, GradientResponse, GradientStopResponse};
 use crate::state::DbState;
-use crate::repo;
 use crate::error::TauriError;
 use crate::feat::gradient_service::gradient_data_mapper::{build_creation_stop_model, build_gradient_response, build_layer_model, build_layer_response, build_stop_response};
 

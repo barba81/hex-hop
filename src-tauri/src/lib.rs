@@ -7,8 +7,6 @@ use tauri::{Manager};
 mod feat;
 mod infra;
 mod state;
-mod repo;
-mod error;
  
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
