@@ -63,7 +63,7 @@ pub async fn save_gradient(
         })
         .collect();
 
-     repo::gradient::create_stops2(&all_stops, &mut *tx).await?;
+     repo::gradient::create_stops(&all_stops, &mut *tx).await?;
 
    tx.commit().await?;
 
@@ -87,7 +87,7 @@ pub async fn save_layer(
         .map(|stop|build_creation_stop_model(&stop, layer_id))
         .collect();
 
-    repo::gradient::create_stops2(&stops, &mut *tx).await?;
+    repo::gradient::create_stops(&stops, &mut *tx).await?;
     
     tx.commit().await?;
 
@@ -103,3 +103,74 @@ pub async fn save_stop(
     Ok(repo::gradient::create_stop(&stop, layer_id, &state.pool).await?)
 }
 
+
+#[tauri::command]
+pub async fn update_gradient(
+    state: tauri::State<'_, DbState>,
+    stop: GradientStopRequest,
+    layer_id: i64 
+) -> Result<i64, TauriError> {
+    Ok(repo::gradient::create_stop(&stop, layer_id, &state.pool).await?)
+}
+
+
+#[tauri::command]
+pub async fn update_gradient_layer(
+    state: tauri::State<'_, DbState>,
+    stop: GradientStopRequest,
+    layer_id: i64 
+) -> Result<i64, TauriError> {
+    Ok(repo::gradient::create_stop(&stop, layer_id, &state.pool).await?)
+}
+
+
+#[tauri::command]
+pub async fn update_stop(
+    state: tauri::State<'_, DbState>,
+    stop: GradientStopRequest,
+    layer_id: i64 
+) -> Result<i64, TauriError> {
+    Ok(repo::gradient::create_stop(&stop, layer_id, &state.pool).await?)
+}
+
+#[tauri::command]
+pub async fn delete_gradient(
+    state: tauri::State<'_, DbState>,
+    gradient_id: i64 
+) -> Result<(), TauriError> {
+    let mut tx = state.pool.begin().await?;
+
+    repo::gradient::soft_delete_gradient_by_id(gradient_id, &mut *tx).await?;
+    repo::gradient::soft_delete_gradient_layer_by_gradient_id(gradient_id, &mut *tx).await?;
+    repo::gradient::soft_delete_stop_by_gradient_id(gradient_id, &mut *tx).await?;
+
+    tx.commit().await?;
+
+    Ok(())
+}
+
+
+#[tauri::command]
+pub async fn delete_layer(
+    state: tauri::State<'_, DbState>,
+    layer_id: i64 
+) -> Result<(), TauriError> {
+  let mut tx = state.pool.begin().await?;
+
+    repo::gradient::soft_delete_gradient_layer_by_id(layer_id, &mut *tx).await?;
+    repo::gradient::soft_delete_stop_by_layer_id(layer_id, &mut *tx).await?;
+
+    tx.commit().await?;
+
+    Ok(())
+}
+
+
+#[tauri::command]
+pub async fn delete_stop(
+    state: tauri::State<'_, DbState>,
+    stop_id: i64 
+) -> Result<(), TauriError> {
+    repo::gradient::soft_delete_stop_by_id(stop_id, &state.pool).await?;
+    Ok(())
+}

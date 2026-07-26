@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { addNewLayer } from "@/features/gradient/add-new-gradient";
+import { deleteGradient } from "@/features/gradient/delete-gradient";
 import { GradientEntity } from "@/features/infrastructure/entity/gradient.entity";
 import { Copy, Plus, Trash2 } from "lucide-react";
 
@@ -33,8 +34,10 @@ const GradientInfo = ({ gradient }: GradientInfoParm) => {
             size="sm"
             variant="outline"
             className="relative  select-none hover:cursor-pointer  text-xs rounded-md h-6"
+            onClick={async () => await deleteGradient(gradient.id)}
           >
-            <Trash2 size={20} className="stroke-red-400"/>
+
+            <Trash2 size={20} className="stroke-red-400" />
           </Button>
         </div>
       </div>

@@ -6,7 +6,7 @@ import {
   useGradientStoreSelectedGradient,
 } from "@/store/use-gradient-store";
 import GradientEmptyPage from "./gradient-empty-page";
-import { List } from "lucide-react";
+import { List, X } from "lucide-react";
 
 const GradientGeneratorPage = () => {
   const hasElements = useGradientStoreHasElements();

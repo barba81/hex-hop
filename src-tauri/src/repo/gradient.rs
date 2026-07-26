@@ -297,46 +297,7 @@ where
     Ok(id)
 }
 
-
-
 pub async fn create_stops<'a, E>(
-    stops: &[GradientStopRequest],
-    layer_id: i64,
-    executor: E,
-) -> Result<Vec<i64>, sqlx::Error>
-where
-    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
-{
-    if stops.is_empty() {
-        return Ok(Vec::new());
-    }
-
-    let mut qb: QueryBuilder<sqlx::Sqlite> = QueryBuilder::new(
-        "INSERT INTO gradient_stop (gradient_order, layer_id, r, g, b, a, position) "
-    );
-
-    qb.push_values(stops, |mut b, stop| {
-        b.push_bind(stop.gradient_order)
-            .push_bind(layer_id)
-            .push_bind(stop.r)
-            .push_bind(stop.g)
-            .push_bind(stop.b)
-            .push_bind(stop.a)
-            .push_bind(stop.position);
-    });
-
-    qb.push(" RETURNING id");
-
-    let ids: Vec<i64> = qb
-        .build_query_scalar()
-        .fetch_all(executor)
-        .await?;
-
-    Ok(ids)
-}
-
-
-pub async fn create_stops2<'a, E>(
     stops: &[GradientStopCreateModel],
     executor: E,
 ) -> Result<Vec<i64>, sqlx::Error>
@@ -369,4 +330,116 @@ where
         .await?;
 
     Ok(ids)
+}
+
+
+pub async fn soft_delete_gradient_by_id<'e, E>(
+    gradient_id: i64, 
+    executor: E,
+) -> Result<bool, sqlx::Error> 
+where
+    E: sqlx::Executor<'e, Database = sqlx::Sqlite>,
+{
+    let result = sqlx::query!(
+        "UPDATE gradient SET deleted = 1 WHERE id = ?", 
+        gradient_id
+    )
+    .execute(executor) 
+    .await?;
+
+    Ok(result.rows_affected() > 0)
+}
+
+pub async fn soft_delete_gradient_layer_by_gradient_id<'e, E>(
+    gradient_id: i64, 
+    executor: E,
+) -> Result<bool, sqlx::Error> 
+where
+    E: sqlx::Executor<'e, Database = sqlx::Sqlite>,
+{
+    let result = sqlx::query!(
+        "UPDATE gradient_layer SET deleted = 1 WHERE gradient_id = ?", 
+        gradient_id
+    )
+    .execute(executor) 
+    .await?;
+
+    Ok(result.rows_affected() > 0)
+}
+
+
+pub async fn soft_delete_stop_by_gradient_id<'e, E>(
+    gradient_id: i64, 
+    executor: E,
+) -> Result<bool, sqlx::Error> 
+where
+    E: sqlx::Executor<'e, Database = sqlx::Sqlite>,
+{
+    let result = sqlx::query!(
+        "UPDATE gradient_stop
+        SET deleted = 1
+        WHERE layer_id IN (
+            SELECT id 
+            FROM gradient_layer 
+            WHERE gradient_id = ?
+        );", 
+        gradient_id
+    )
+    .execute(executor) 
+    .await?;
+
+    Ok(result.rows_affected() > 0)
+}
+
+
+pub async fn soft_delete_gradient_layer_by_id<'e, E>(
+    layer_id: i64, 
+    executor: E,
+) -> Result<bool, sqlx::Error> 
+where
+    E: sqlx::Executor<'e, Database = sqlx::Sqlite>,
+{
+ let result = sqlx::query!(
+        "UPDATE gradient_layer SET deleted = 1 WHERE id = ?", 
+        layer_id
+    )
+    .execute(executor) 
+    .await?;
+
+    Ok(result.rows_affected() > 0)
+}
+
+pub async fn soft_delete_stop_by_layer_id<'e, E>(
+    layer_id: i64, 
+    executor: E,
+) -> Result<bool, sqlx::Error> 
+where
+    E: sqlx::Executor<'e, Database = sqlx::Sqlite>,
+{
+    let result = sqlx::query!(
+        "UPDATE gradient_stop SET deleted = 1 WHERE layer_id = ?", 
+        layer_id
+    )
+    .execute(executor) 
+    .await?;
+
+    Ok(result.rows_affected() > 0)
+}
+
+
+pub async fn soft_delete_stop_by_id<'e, E>(
+    stop_id: i64, 
+    executor: E,
+) -> Result<bool, sqlx::Error> 
+where
+    E: sqlx::Executor<'e, Database = sqlx::Sqlite>,
+{
+let result = sqlx::query!(
+        "UPDATE gradient_stop SET deleted = 1 WHERE id = ?", 
+        stop_id
+    )
+    .execute(executor) 
+    .await?;
+
+    Ok(result.rows_affected() > 0)
 }
