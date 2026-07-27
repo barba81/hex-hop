@@ -8,7 +8,7 @@ import { colorDataToRoundData } from "@/features/color/color-format-changer";
 import { useDraggable } from "@dnd-kit/react";
 import EditButton from "./edit-button";
 import { Pin } from "lucide-react";
-import { ColorEntity } from "@/features/infrastructure/entity";
+import { ColorEntity } from "@/infrastructure/entity";
 
 const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
   const { ref } = useDraggable({

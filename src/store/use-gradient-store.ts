@@ -1,4 +1,4 @@
-import { GradientEntity, GradientLayerEntity, GradientStopEntity } from "@/features/infrastructure/entity";
+import { GradientEntity, GradientLayerEntity, GradientStopEntity } from "@/infrastructure/entity";
 import { create } from "zustand";
 import { immer } from 'zustand/middleware/immer'
 

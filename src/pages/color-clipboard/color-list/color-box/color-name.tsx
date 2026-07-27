@@ -1,5 +1,5 @@
 import { updateColor } from "@/features/color/update-color";
-import { ColorEntity } from "@/features/infrastructure/entity";
+import { ColorEntity } from "@/infrastructure/entity";
 import { useState } from "react";
 
 type ColorNameParams = {

@@ -1,6 +1,6 @@
 import { updateAllBlocks } from "../common/update-all-blocks";
 import { useHexHopStore } from "@/store/use-hex-hop-store";
-import { ColorEntity } from "../infrastructure/entity";
+import { ColorEntity } from "../../infrastructure/entity";
 
 export const removeColor = async (colorEntity: ColorEntity) => {
     try {

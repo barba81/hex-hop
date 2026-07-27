@@ -9,7 +9,7 @@ import {
   useIsPaletteExtended,
   usePaletteStore,
 } from "@/store/use-palette-store";
-import { PaletteEntity } from "@/features/infrastructure/entity";
+import { PaletteEntity } from "@/infrastructure/entity";
 
 type PaletteBoxParams = {
   palette: PaletteEntity;

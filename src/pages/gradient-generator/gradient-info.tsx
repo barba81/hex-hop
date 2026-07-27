@@ -3,7 +3,7 @@ import { Input } from "@/components/ui/input";
 import { addNewLayer } from "@/features/gradient/add-new-gradient";
 import { deleteGradient } from "@/features/gradient/delete-gradient";
 import { updateGradient } from "@/features/gradient/update-gradient";
-import { GradientEntity } from "@/features/infrastructure/entity";
+import { GradientEntity } from "@/infrastructure/entity";
 import { Copy, Plus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 

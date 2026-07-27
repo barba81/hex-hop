@@ -1,5 +1,5 @@
 import { removeColor } from "@/features/color/remove-color";
-import { ColorEntity } from "@/features/infrastructure/entity";
+import { ColorEntity } from "@/infrastructure/entity";
 import { X } from "lucide-react";
 
 type CloseButtonParams = {

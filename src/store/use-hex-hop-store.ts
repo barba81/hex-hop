@@ -1,6 +1,6 @@
 
 import { create } from "zustand";
-import type { ColorEntity, PaletteEntity, GradientEntity } from "@/features/infrastructure/entity";
+import type { ColorEntity, PaletteEntity, GradientEntity } from "@/infrastructure/entity";
 export type ColorBlockEntity = (PaletteEntity | ColorEntity | GradientEntity);
 
 interface HexHopStore {

@@ -12,7 +12,9 @@ where
                 g.id as \"id!\",
                 g.name as \"name!\"
             FROM gradient g 
-            WHERE g.id = ?1",
+            WHERE g.id = ?1
+            AND g.deleted = 0
+            ",
             id
         )
         .fetch_one(executor) 
@@ -42,6 +44,7 @@ where
                 gl.rotation_degree as \"rotation_degree\"
             FROM gradient_layer gl 
             WHERE gl.gradient_id = ?1
+            AND gl.deleted = 0
             ORDER BY gl.gradient_order ASC
             ",
             gradient_id
@@ -73,6 +76,7 @@ where
                 gl.rotation_degree as \"rotation_degree\"
             FROM gradient_layer gl 
             WHERE gl.id = ?1
+            AND gl.deleted = 0
             ",
             layer_id
         )
@@ -105,6 +109,7 @@ where
             FROM gradient_stop gs
             INNER JOIN gradient_layer gl ON gl.id = gs.layer_id 
             WHERE gl.gradient_id = ?1
+            AND gs.deleted = 0
             ",
             gradient_id
         )
@@ -134,6 +139,7 @@ where
                 gs.position as \"position\"
             FROM gradient_stop gs
             WHERE gs.id = ?1
+            AND gs.deleted = 0
             ",
             stop_id
         )
@@ -163,6 +169,7 @@ where
                 gs.position as \"position\"
             FROM gradient_stop gs
             WHERE gs.layer_id = ?1
+            AND gs.deleted = 0
             ",
             layer_id
         )

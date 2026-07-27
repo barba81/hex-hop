@@ -7,7 +7,6 @@ pub async fn create_gradient<'a, E>(
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-    
     let id: i64 = sqlx::query_scalar!("INSERT INTO gradient (name) VALUES ($1) RETURNING id", gradient.name)
         .fetch_one(executor) 
         .await?;
