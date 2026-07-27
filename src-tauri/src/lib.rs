@@ -21,9 +21,9 @@ pub fn run() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             feat::color_picker::pick_color_mack, 
-            feat::gradient_service::gradient_service::save_gradient,
-            feat::gradient_service::gradient_service::save_layer, 
-            feat::gradient_service::gradient_service::save_stop, 
+            feat::gradient_service::gradient_service::create_gradient,
+            feat::gradient_service::gradient_service::create_layer, 
+            feat::gradient_service::gradient_service::create_stop, 
             feat::gradient_service::gradient_service::get_gradient, 
             feat::gradient_service::gradient_service::get_layer, 
             feat::gradient_service::gradient_service::get_stop, 

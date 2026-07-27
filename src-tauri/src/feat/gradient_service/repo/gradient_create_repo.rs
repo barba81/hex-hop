@@ -1,4 +1,3 @@
-// gradient_create_model
 use super::super::model::{*};
 
 pub async fn create_gradient<'a, E>(

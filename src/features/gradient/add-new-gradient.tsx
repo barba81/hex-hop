@@ -39,7 +39,7 @@ export const newGradient = Object.freeze({
 });
 
 export const addNewGradient = async () => {
-  let gradientId = await invoke("save_gradient", { gradient: newGradient });
+  let gradientId = await invoke("create_gradient", { gradient: newGradient });
   let gradient = await invoke<GradientEntity>("get_gradient", {
     gradientId: gradientId,
   });
@@ -47,7 +47,7 @@ export const addNewGradient = async () => {
 };
 
 export const addNewLayer = async (gradientId: number) => {
-  let layerId = await invoke("save_layer", {
+  let layerId = await invoke("create_layer", {
     layer: newGradient.layers[0],
     gradientId: gradientId,
   });
@@ -58,7 +58,7 @@ export const addNewLayer = async (gradientId: number) => {
 };
 
 export const addNewStop = async (gradientId: number, layerId: number) => {
-  let stopId = await invoke("save_stop", {
+  let stopId = await invoke("create_stop", {
     stop: newGradient.layers[0].stops[0],
     layerId: layerId,
   });
