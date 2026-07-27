@@ -1,6 +1,6 @@
 use crate::feat::gradient_service::model::gradient_data_model::{Gradient, GradientLayer,GradientStop};
 
-pub async fn get_all_gradient<'a, E> ( executor: E ) -> Result<Vec<Gradient>, sqlx::Error>
+pub async fn get_all_gradients<'a, E> ( executor: E ) -> Result<Vec<Gradient>, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
@@ -18,7 +18,7 @@ where
     Ok(gradient)
 }
 
-pub async fn get_all_gradient_layer<'a, E> ( executor: E ) -> Result<Vec<GradientLayer>, sqlx::Error>
+pub async fn get_all_gradient_layers<'a, E> ( executor: E ) -> Result<Vec<GradientLayer>, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {

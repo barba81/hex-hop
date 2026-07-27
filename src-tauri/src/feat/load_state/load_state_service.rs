@@ -7,9 +7,12 @@ use super::load_state_repo;
 pub async fn get_all_gradient(
     state: tauri::State<'_, DbState>,
 ) -> Result< Vec<GradientResponse>, TauriError> {
-    let gradients = load_state_repo::get_all_gradient(&state.pool).await?;
-    let layers = load_state_repo::get_all_gradient_layer(&state.pool).await?;
-    let stops = load_state_repo::get_all_gradient_stops(&state.pool).await?;
+    let mut tx = state.pool.begin().await?;
+
+    let gradients = load_state_repo::get_all_gradients(&mut *tx).await?;
+    let layers = load_state_repo::get_all_gradient_layers(&mut *tx).await?;
+    let stops = load_state_repo::get_all_gradient_stops(&mut *tx).await?;
+    tx.commit().await?;
 
     let response = build_all_gradients_response_fast(&gradients, &layers, &stops);
 
