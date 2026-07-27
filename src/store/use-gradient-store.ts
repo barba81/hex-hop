@@ -9,6 +9,10 @@ interface GradientStore {
 }
 
 interface GradientAction {
+  // INIT -----------------------------------------------------------------------
+
+  initGradient: (gradients: (GradientEntity)[]) => void;
+
   // CREATE -----------------------------------------------------------------------
 
   addGradient: (gradient: GradientEntity) => void;
@@ -35,6 +39,11 @@ export const useGradientStore = create<GradientStore & GradientAction>()(immer((
   expandedLayers: {},
   gradients: [],
   selectedGradientId: null,
+  // INIT -----------------------------------------------------------------------
+
+  initGradient: (gradients: (GradientEntity)[]) => set((state) => {
+      state.gradients = gradients;
+    }),
 
   // CREATE -----------------------------------------------------------------------
 

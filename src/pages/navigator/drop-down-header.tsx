@@ -12,9 +12,9 @@ import {
   Palette,
   Settings,
 } from "lucide-react";
-import GradientIcon from "../icons/gradient-icon";
 import { PagesTypes, useAppStore } from "@/store/use-theme-store";
-import { Button } from "../ui/button";
+import GradientIcon from "@/components/icons/gradient-icon";
+import { Button } from "@/components/ui/button";
 
 const size = 15;
 

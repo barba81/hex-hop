@@ -6,6 +6,8 @@ export type PaletteEntity =  {
     blockId:number;
     order: number;
     name: string;
+
+    blocks: (PaletteEntity| ColorEntity | GradientEntity)[];
 }
 
 export type ColorEntity =  {
