@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { platform as getPlatform } from "@tauri-apps/plugin-os";
 import MacHeaderButton from "./mac-header-button";
 import WindowsHeaderButton from "./windows-header-button";
-import DropDownHeader from "../navigator/drop-down-header";
+import DropDownHeader from "@/pages/navigator/drop-down-header";
 
 
 const HeaderBar = () => {

@@ -5,11 +5,13 @@ import { initThemeListener } from "./features/common/init-theme-listner";
 
 import "./App.css";
 import HexHopNavigator from "./pages/navigator/hex-hop-navigator";
+import { loadGradientData } from "./features/common/load-state";
 
 function HexHopApp() {
   useEffect(() => {
     initThemeListener();
     moveWindow(Position.TopRight);
+    loadGradientData();
   }, []);
 
   return (
