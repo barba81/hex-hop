@@ -1,5 +1,5 @@
 import { oklab } from "culori";
-import { ColorData } from "./types";
+import { ColorData } from "../../infrastructure/types";
 import { colorDataToHex } from "./color-format-changer";
 
 let colorData: [number, number, number, string][] | null = null;

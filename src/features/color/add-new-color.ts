@@ -1,5 +1,5 @@
 import { useHexHopStore } from "@/store/use-hex-hop-store";
-import { ColorData } from "./types";
+import { ColorData } from "../../infrastructure/types";
 import { getNearestColorName } from "./color-name-suggestion";
 import { ColorEntity } from "../../infrastructure/entity";
 

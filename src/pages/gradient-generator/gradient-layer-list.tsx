@@ -10,7 +10,7 @@ interface GradientLayerListParm {
 const GradientLayerList = ({ gradient }: GradientLayerListParm) => {
   return (
     <div className="flex-1 overflow-y-auto  flex flex-col  gap-3 py-1 bg-stone-900/20">
-      {gradient.layers.map((layer, ix) => (
+      {/* {gradient.layers.map((layer, ix) => (
         <div key={ix} className="flex flex-col w-full ">
           <div className="flex w-full justify-between">
             <div>{layer.id}</div>
@@ -24,7 +24,7 @@ const GradientLayerList = ({ gradient }: GradientLayerListParm) => {
             <GradientStopList gradientId={gradient.id} layer={layer} />
           </div>
         </div>
-      ))}
+      ))} */}
     </div>
   );
 };

@@ -1,5 +1,5 @@
 import { rgb } from "culori";
-import { ColorData } from "./types";
+import { ColorData } from "../../infrastructure/types";
 
 
 export function colorDataToHex(color: ColorData) {
@@ -27,7 +27,8 @@ export function colorStringToData(color: string){
     r: rbg.r,
     g: rbg.g,
     b: rbg.b,
-    a: rbg.alpha
+    a: rbg.alpha,
+    name:"test",
   } as ColorData;
 }
 

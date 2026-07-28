@@ -3,6 +3,7 @@ export type ColorData =  {
     g: number;
     b: number;
     a?: number;
+    name: string;
 }
 
 declare global {

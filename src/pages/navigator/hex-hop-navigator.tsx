@@ -5,6 +5,7 @@ import PaletteGenerator from "@/pages/palette-generator/palette-generator-page";
 import SettingsPage from "@/pages/format-settings/settings-page";
 import GradientGeneratorPage from "@/pages/gradient-generator/gradient-generator-page";
 import ImportExportPage from "@/pages/import-export/import-export-page";
+import ColorListPage from "../color-clipboard/color-list-page";
 
 
 const HexHopNavigator = () => {
@@ -12,8 +13,8 @@ const HexHopNavigator = () => {
   return (
     <>
  
-      {/* {activePage === "color-list" && <ColorListPage />} */}
-      {activePage === "color-list" && <GradientGeneratorPage />}
+      {activePage === "color-list" && <ColorListPage />}
+      {activePage === "gradient-creator" && <GradientGeneratorPage />}
       {activePage === "palette-generator" && <PaletteGenerator />}
       {activePage === "import-export" && <ImportExportPage />}
       {activePage === "color-contrast" && <ColorContrastPage />}

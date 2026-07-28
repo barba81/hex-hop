@@ -1,4 +1,4 @@
-import { ColorData } from "@/features/color/types";
+import { ColorData } from "@/infrastructure/types";
 
 type ColorBlockParams = {
   color: ColorData;

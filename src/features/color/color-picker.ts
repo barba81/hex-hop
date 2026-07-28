@@ -24,6 +24,8 @@ export const colorPicker = async () => {
         const coloBox = colorStringToData(result.sRGBHex);
         addNewColor(coloBox);
         setColorValidityAndMode(result.sRGBHex);
+
+
     } catch (e) {
         console.error("Color selection cancelled or failed");
     }

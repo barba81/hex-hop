@@ -1,5 +1,5 @@
 import GradientLayerList from "./gradient-layer-list";
-import GradientPreviewBox from "./gradient-preview";
+import GradientPreviewBox from "./gradient-preview-box";
 import GradientInfo from "./gradient-info";
 import {
   useGradientStoreHasElements,
