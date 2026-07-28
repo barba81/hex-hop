@@ -1,13 +1,10 @@
 import "@/style/empty-checker-board.css";
 import { GradientEntity } from "@/infrastructure/entity";
-import GradientStopList from "./gradient-stop-list";
-import { Trash2 } from "lucide-react";
-import { deleteGradientLayer } from "@/features/gradient/delete-gradient";
 interface GradientLayerListParm {
   gradient: GradientEntity;
 }
 
-const GradientLayerList = ({ gradient }: GradientLayerListParm) => {
+const GradientLayerList = ({  }: GradientLayerListParm) => {
   return (
     <div className="flex-1 overflow-y-auto  flex flex-col  gap-3 py-1 bg-stone-900/20">
       {/* {gradient.layers.map((layer, ix) => (
