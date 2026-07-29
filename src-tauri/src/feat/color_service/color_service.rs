@@ -1,4 +1,3 @@
-use crate::infra::data_seed::NamedColor;
 use crate::infra::error::TauriError;
 use crate::state::DbState;
 
@@ -8,7 +7,6 @@ use super::repo::{*};
 #[tauri::command]
 pub async fn create_color(
     state: tauri::State<'_, DbState>,
-    colors: tauri::State<'_, Vec<NamedColor>>,
     color: color_create_model::ColorCreateModel,
 ) -> Result<i64, TauriError> {
 

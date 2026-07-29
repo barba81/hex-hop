@@ -44,7 +44,7 @@ pub fn run() {
         .setup(|app| {
 
             tauri::async_runtime::block_on(async {
-                infra::data_seed::init(app)
+                infra::data_seed::init()
                     .await
                     .expect("Error setting up seed");
 
