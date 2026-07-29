@@ -1674,7 +1674,6 @@ dependencies = [
  "block",
  "objc",
  "serde",
- "serde_json",
  "sqlx",
  "tauri",
  "tauri-build",
@@ -1683,7 +1682,6 @@ dependencies = [
  "tauri-plugin-os",
  "tauri-plugin-positioner",
  "tauri-plugin-single-instance",
- "tokio",
  "tracing-subscriber",
  "window-vibrancy 0.7.1",
 ]

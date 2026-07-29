@@ -28,7 +28,6 @@ export function colorStringToData(color: string){
     g: rbg.g,
     b: rbg.b,
     a: rbg.alpha,
-    name:"test",
   } as ColorData;
 }
 
