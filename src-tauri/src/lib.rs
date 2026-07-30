@@ -23,6 +23,7 @@ pub fn run() {
             infra::data_seed::get_color_name_data,
             feat::color_picker::pick_color_mack, 
             feat::color_service::color_service::create_color,
+            feat::color_service::color_service::get_color,
             feat::gradient_service::gradient_service::create_gradient,
             feat::gradient_service::gradient_service::create_layer, 
             feat::gradient_service::gradient_service::create_stop, 

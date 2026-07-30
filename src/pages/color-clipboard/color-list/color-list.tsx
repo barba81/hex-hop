@@ -5,9 +5,10 @@ import ColorBlock from "./color-box/color-block";
 import { PaletteBox } from "./palette-box/palette-box";
 import React from "react";
 import DropLine from "./drop-line";
+import { useClipboardStore } from "@/store/use-cliboard-store";
 
 const ColorList = () => {
-  const colorBlocks = useHexHopStore().colorBlocks.filter(x => x.kind === 'palette' || !x.paletteId);
+  const colorBlocks = useClipboardStore().blocks;
 
   const handleDragEnd = ({}: DragEndEvent) => {
     // if (canceled || !operation.target || !operation.source?.id) return;
@@ -26,8 +27,8 @@ const ColorList = () => {
         {colorBlocks.length === 0 && <EmptyDisplay />}
 
         {colorBlocks
-          .sort((a, b) => a.order - b.order)
           .map((block, ix) => {
+            
             const renderBlock = () => {
               if (block.kind === "color") {
                 return <ColorBlock key={block.id} color={block} />;
@@ -39,11 +40,7 @@ const ColorList = () => {
 
             return (
               <React.Fragment key={block.id}>
-                <DropLine
-                  id={`before-${block.id}`}
-                  order={ix}
-                  parentId={undefined}
-                />
+         
                 {renderBlock()}
                 {ix === colorBlocks.length - 1 && (
                   <DropLine
