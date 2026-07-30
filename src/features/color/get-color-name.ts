@@ -3,10 +3,11 @@ import { invoke } from "@tauri-apps/api/core";
 import {
     nearest,
     differenceCiede2000,
+    Color,
 } from 'culori';
 import { colorDataToHex } from "./color-format-changer";
 
-let nearestNamedColorsCiede2000: any = null;
+let nearestNameGetter: ((color: Color | string, n?: number, τ?: number) => string[]) | null = null;
 
 const setUpNearestName = async () => {
     const colors = await invoke<string>("get_color_name_data");
@@ -25,15 +26,16 @@ const setUpNearestName = async () => {
         });
     const names = Object.keys(palette);
     const diffCiede2000 = differenceCiede2000();
-    nearestNamedColorsCiede2000 = nearest(names, diffCiede2000, name => palette[name]);
+    nearestNameGetter = nearest(names, diffCiede2000, name => palette[name]);
 
 }
 
 
 export const getSmartColorName2 = async (color: ColorData) => {
-    if (nearestNamedColorsCiede2000 === null) {
+    if (nearestNameGetter === null) {
         await setUpNearestName();
     }
-    const nearestNames = nearestNamedColorsCiede2000(colorDataToHex(color), 1);
-    return nearestNames[0];
+    return nearestNameGetter ?
+    nearestNameGetter(colorDataToHex(color), 1)[0]
+    : "New color";
 }

@@ -1,5 +1,8 @@
 import type { ColorSpaceType, EasingFunctionType, GradientTypes } from "./enum";
 
+
+export type BlockEntity = (PaletteEntity | ColorEntity | GradientEntity);
+
 export type PaletteEntity =  {
     kind: "palette",
     id: number;

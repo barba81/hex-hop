@@ -1,19 +1,31 @@
-import type { ColorEntity, GradientEntity, PaletteEntity } from "@/infrastructure/entity";
+import type { BlockEntity} from "@/infrastructure/entity";
 import { create } from "zustand";
 import { immer } from 'zustand/middleware/immer'
 
 interface ClipboardStore {
-  blocks: (PaletteEntity | ColorEntity | GradientEntity)[];
+  blocks:BlockEntity[];
 }
 
 interface ClipboardAction {
-  initBlocks: (blocks: (PaletteEntity | ColorEntity | GradientEntity)[]) => void;
+  // INIT -----------------------------------------------------------------------
+
+  initBlocks: (blocks:BlockEntity[]) => void;
+
+  // CREATE -----------------------------------------------------------------------
+
+  addColor: (gradient:BlockEntity) => void;
+
 }
 
-export const useGradientStore = create<ClipboardStore & ClipboardAction>()(immer((set) => ({
+export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(immer((set) => ({
   blocks: [],
-  initBlocks: (blocks: (PaletteEntity | ColorEntity | GradientEntity)[]) =>
+  initBlocks: (blocks:BlockEntity[]) =>
     set((state) => {
       state.blocks = blocks;
+    }),
+
+  addColor: (blocks:BlockEntity) =>
+    set((state) => {
+      state.blocks.push(blocks);
     }),
 })));
