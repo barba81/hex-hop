@@ -13,7 +13,7 @@ where
                 c.r as \"r!\",
                 c.g as \"g!\",
                 c.b as \"b!\",
-                c.a as \"a!\",
+                c.a as \"a\",
                 c.name as \"name\"
             FROM color c 
             WHERE c.id = ?1
