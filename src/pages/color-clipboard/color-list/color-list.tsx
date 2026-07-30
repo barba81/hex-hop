@@ -1,4 +1,3 @@
-import {  useHexHopStore } from "@/store/use-hex-hop-store";
 import { DragDropProvider, DragEndEvent } from "@dnd-kit/react";
 import EmptyDisplay from "./empty-display";
 import ColorBlock from "./color-box/color-block";

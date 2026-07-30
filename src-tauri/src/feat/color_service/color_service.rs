@@ -25,6 +25,5 @@ pub async fn get_color(
 ) -> Result<color_data_model::Color, TauriError> {
 
     let color = color_get_repo::get_color_by_id(color_id, &state.pool).await?;
-    println!("{:?}", color);
     Ok(color)
 }
