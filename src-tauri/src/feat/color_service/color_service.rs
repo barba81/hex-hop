@@ -13,7 +13,7 @@ pub async fn create_color(
     let mut tx = state.pool.begin().await?;
 
     let color_id = color_create_repo::create_gradient(&color, &mut *tx).await?;
-    
+    color_create_repo::create_block_color(color_id, Some(0), &mut *tx).await?;
     tx.commit().await?;
 
     Ok(color_id)

@@ -23,7 +23,7 @@ CREATE TABLE gradient (
 
 CREATE TABLE block (
     id            INTEGER PRIMARY KEY AUTOINCREMENT,
-    parent_palette_id    INTEGER NOT NULL, 
+    parent_palette_id    INTEGER , 
     block_order   INTEGER NOT NULL, 
     color_id      INTEGER,
     gradient_id   INTEGER,
