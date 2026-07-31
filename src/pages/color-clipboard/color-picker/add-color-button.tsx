@@ -2,8 +2,8 @@ import { useColorStore } from "@/store/use-color-store";
 import { buttonStyle } from "../../../style/default-style";
 import { Check } from "lucide-react";
 import { useState } from "react";
-import { colorStringToData } from "@/features/color/color-format-changer";
-import { addNewColor2 } from "@/features/color/add-new-color-2";
+import { colorStringToData } from "@/pages/color-clipboard/features/color/color-format-changer";
+import { addNewColorToClipboard } from "@/pages/color-clipboard/features/color/add-new-color";
 
 const AddColorButton = () => {
   const isColorValid = useColorStore().isColorValid;
@@ -30,7 +30,7 @@ const AddColorButton = () => {
           }, 600);
           // addNewColor(colorStringToData(inputColor));
 
-          addNewColor2(colorStringToData(inputColor))
+          addNewColorToClipboard(colorStringToData(inputColor))
         }}
       >
         <Check strokeWidth={3} size={16} />

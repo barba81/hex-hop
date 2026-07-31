@@ -1,10 +1,10 @@
 import { ColorData } from "@/infrastructure/types";
 import { invoke } from "@tauri-apps/api/core";
 import { getSmartColorName2 } from "./get-color-name";
-import { useClipboardStore } from "@/store/use-cliboard-store";
 import type { ColorEntity } from "@/infrastructure/entity";
+import { useClipboardStore } from "@/store/use-clipboard-store";
 
-export const addNewColor2 = async (colorData: ColorData) => {
+export const addNewColorToClipboard = async (colorData: ColorData) => {
     console.time();
     const name = await getSmartColorName2(colorData);
     const colorId = await invoke("create_color", { color: { ...colorData, name } });

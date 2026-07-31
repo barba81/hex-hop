@@ -4,8 +4,8 @@ import {
     formatRgb,
 } from "culori";
 import { toNormalForm } from './color-format-changer';
-import { ColorEntity } from '../../infrastructure/entity';
-import { ColorSpaceType } from '../../infrastructure/enum';
+import { ColorEntity } from '../../../../infrastructure/entity';
+import { ColorSpaceType } from '../../../../infrastructure/enum';
 
 
 export const copyToClipboard = async (color: ColorEntity, _colorFormat: ColorSpaceType) => {

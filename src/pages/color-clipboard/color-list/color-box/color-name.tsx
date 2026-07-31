@@ -1,4 +1,4 @@
-import { updateColor } from "@/features/color/update-color";
+import { updateColor } from "@/pages/color-clipboard/features/color/update-color";
 import { ColorEntity } from "@/infrastructure/entity";
 import { useState } from "react";
 

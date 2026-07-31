@@ -1,7 +1,7 @@
 import { useColorStore } from "@/store/use-color-store";
 import { colorStringToData } from "./color-format-changer";
-import { addNewColor } from "./add-new-color";
 import { setColorValidityAndMode } from "./color-validator";
+import { addNewColorToClipboard } from "./add-new-color";
 
 
 export const colorPicker = async () => {
@@ -22,7 +22,7 @@ export const colorPicker = async () => {
 
         setInputColor(result.sRGBHex);
         const coloBox = colorStringToData(result.sRGBHex);
-        addNewColor(coloBox);
+        await addNewColorToClipboard(coloBox);
         setColorValidityAndMode(result.sRGBHex);
 
 

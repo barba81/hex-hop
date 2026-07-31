@@ -4,7 +4,7 @@ import ColorBlock from "./color-box/color-block";
 import { PaletteBox } from "./palette-box/palette-box";
 import React from "react";
 import DropLine from "./drop-line";
-import { useClipboardStore } from "@/store/use-cliboard-store";
+import { useClipboardStore } from "@/store/use-clipboard-store";
 
 const ColorList = () => {
   const colorBlocks = useClipboardStore().blocks;

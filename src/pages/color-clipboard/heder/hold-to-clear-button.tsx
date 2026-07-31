@@ -1,5 +1,5 @@
 import HoldToButton from "@/components/common/hold-to-button";
-import { removeAllData } from "@/features/common/remove-all";
+import { removeAllData } from "@/pages/color-clipboard/features/remove-all";
 import { Trash2 } from "lucide-react";
 
 const HoldToClear = () => {

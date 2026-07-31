@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import HeaderBar from "./components/header/header-bar";
-import { initThemeListener } from "./features/common/init-theme-listner";
+import { initThemeListener } from "./pages/color-clipboard/features/init-theme-listner";
 
 import "./App.css";
 import HexHopNavigator from "./pages/navigator/hex-hop-navigator";
-import { loadGradientData } from "./features/common/load-state";
+import { loadGradientData } from "./pages/color-clipboard/features/load-state";
 
 function HexHopApp() {
   useEffect(() => {
