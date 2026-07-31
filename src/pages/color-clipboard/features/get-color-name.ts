@@ -31,7 +31,7 @@ const setUpNearestName = async () => {
 }
 
 
-export const getSmartColorName2 = async (color: ColorData) => {
+export const getSmartColorName = async (color: ColorData) => {
     if (nearestNameGetter === null) {
         await setUpNearestName();
     }

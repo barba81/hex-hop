@@ -1,5 +1,5 @@
+import { ColorEntity } from "@/infrastructure/entity";
 import { useHexHopStore } from "@/store/use-hex-hop-store";
-import { ColorEntity } from "../../../../infrastructure/entity";
 
 export const updateColor = async (colorEntity: ColorEntity) => {
     // const db = await getContext();

@@ -1,5 +1,5 @@
+import { ColorData } from "@/infrastructure/types";
 import { rgb } from "culori";
-import { ColorData } from "../../../../infrastructure/types";
 
 
 export function colorDataToHex(color: ColorData) {
