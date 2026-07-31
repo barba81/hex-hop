@@ -1,9 +1,9 @@
 import { Hash } from "lucide-react";
 import { useState } from "react";
 import CopyUx from "./copy-ux";
-import { copyToClipboard } from "@/pages/color-clipboard/features/color/copy-to-clipboard";
 import { ColorEntity } from "@/infrastructure/entity";
 import { ColorSpaceType } from "@/infrastructure/enum";
+import { copyToClipboard } from "../../features/copy-to-clipboard";
 
 export type CopyLogoParam = {
   color: ColorEntity;

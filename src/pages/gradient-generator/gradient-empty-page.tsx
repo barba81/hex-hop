@@ -8,7 +8,7 @@ import {
   EmptyTitle,
 } from "@/components/ui/empty";
 import { Button } from "@/components/ui/button";
-import { addNewGradient } from "@/features/gradient/add-new-gradient";
+import { addNewGradient } from "./feature/add-new-gradient";
 
 const GradientEmptyPage = () => {
 

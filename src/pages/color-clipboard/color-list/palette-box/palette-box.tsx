@@ -1,7 +1,6 @@
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { DragDots } from "../../../../components/common/drag-dots";
 import { PaletteBoxEmpty } from "./palette-box-empty";
-import { colorDataToHex } from "@/pages/color-clipboard/features/color/color-format-changer";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import { useHexHopStore } from "@/store/use-hex-hop-store";
 import { Button } from "@/components/ui/button";
@@ -10,6 +9,7 @@ import {
   usePaletteStore,
 } from "@/store/use-palette-store";
 import { PaletteEntity } from "@/infrastructure/entity";
+import { colorDataToHex } from "../../features/color-format-changer";
 
 type PaletteBoxParams = {
   palette: PaletteEntity;

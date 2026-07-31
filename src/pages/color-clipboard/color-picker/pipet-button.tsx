@@ -1,6 +1,6 @@
 import { Pipette } from "lucide-react";
 import { buttonStyle } from "../../../style/default-style";
-import { colorPicker } from "@/pages/color-clipboard/features/color/eye-dropper";
+import colorPicker from "./color-picker";
 
 const PipetButton = () => {
 

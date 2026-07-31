@@ -1,6 +1,6 @@
-import { removeColor } from "@/pages/color-clipboard/features/color/remove-color";
 import { ColorEntity } from "@/infrastructure/entity";
 import { X } from "lucide-react";
+import { removeColor } from "../../features/remove-color";
 
 type CloseButtonParams = {
   colorEntity: ColorEntity;

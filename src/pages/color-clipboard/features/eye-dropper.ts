@@ -3,7 +3,6 @@ import { colorStringToData } from "./color-format-changer";
 import { setColorValidityAndMode } from "./color-validator";
 import { addNewColorToClipboard } from "./add-new-color";
 
-
 export const colorPicker = async () => {
 
     // mack implementation 
@@ -30,3 +29,12 @@ export const colorPicker = async () => {
         console.error("Color selection cancelled or failed");
     }
 };
+
+
+declare global {
+  interface Window {
+    EyeDropper?: new () => {
+      open: () => Promise<{ sRGBHex: string }>;
+    };
+  }
+}

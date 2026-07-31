@@ -1,5 +1,5 @@
-import { setColorValidityAndMode } from "@/pages/color-clipboard/features/color/color-validator";
 import { useColorStore } from "@/store/use-color-store";
+import { setColorValidityAndMode } from "../features/color-validator";
 
 const ColorInput = () => {
   const setColor = useColorStore().setInputColor;

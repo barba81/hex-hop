@@ -5,10 +5,3 @@ export type ColorData =  {
     a?: number;
 }
 
-declare global {
-  interface Window {
-    EyeDropper?: new () => {
-      open: () => Promise<{ sRGBHex: string }>;
-    };
-  }
-}
