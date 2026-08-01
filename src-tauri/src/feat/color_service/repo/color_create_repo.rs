@@ -25,18 +25,22 @@ pub async fn create_block_color<'a, E>(
     color_id: i64,
     parent_palette_id: Option<i64>,
     executor: E,
-) -> Result<i64, sqlx::Error>
+) -> Result<(), sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-    let id = sqlx::query_scalar!(
-        "INSERT INTO block (color_id, parent_palette_id) VALUES ($1, $2) RETURNING id",
+    sqlx::query!(
+        "INSERT INTO block (color_id, parent_palette_id, block_order) 
+        VALUES (
+            $1, 
+            $2, 
+            (SELECT COALESCE(MAX(block_order), 0) + 1 FROM block WHERE parent_palette_id = $2)
+        );",
         color_id,
         parent_palette_id,
     )
-    .fetch_one(executor)
-    .await?
-    .expect("INTEGER PRIMARY KEY cannot be null");
+    .execute(executor)
+    .await?;
 
-    Ok(id)
+    Ok(())
 }
