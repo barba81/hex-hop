@@ -1,29 +1,27 @@
-use super::super::model::{*};
+use super::super::model::*;
 
 pub async fn update_gradient_async<'e, E>(
-    gradient: & gradient_data_model::Gradient, 
+    gradient: &gradient_data_model::Gradient,
     executor: E,
-) -> Result<(), sqlx::Error> 
+) -> Result<(), sqlx::Error>
 where
     E: sqlx::Executor<'e, Database = sqlx::Sqlite>,
 {
     sqlx::query!(
-        "UPDATE gradient SET name = ? WHERE id = ?", 
+        "UPDATE gradient SET name = ? WHERE id = ?",
         gradient.name,
         gradient.id,
     )
-    .execute(executor) 
+    .execute(executor)
     .await?;
 
     Ok(())
 }
 
-
-
 pub async fn update_gradient_layer_async<'e, E>(
-    gradient_layer: & gradient_data_model::GradientLayer, 
+    gradient_layer: &gradient_data_model::GradientLayer,
     executor: E,
-) -> Result<(), sqlx::Error> 
+) -> Result<(), sqlx::Error>
 where
     E: sqlx::Executor<'e, Database = sqlx::Sqlite>,
 {
@@ -35,7 +33,7 @@ where
         pattern_repeat_number = ?,
         color_space = ?,
         easing_function = ?
-        WHERE id = ?", 
+        WHERE id = ?",
         gradient_layer.gradient_order,
         gradient_layer.gradient_type,
         gradient_layer.rotation_degree,
@@ -44,18 +42,16 @@ where
         gradient_layer.easing_function,
         gradient_layer.id,
     )
-    .execute(executor) 
+    .execute(executor)
     .await?;
 
     Ok(())
 }
 
-
-
 pub async fn update_stop<'e, E>(
-    stop: & gradient_data_model::GradientStop, 
+    stop: &gradient_data_model::GradientStop,
     executor: E,
-) -> Result<(), sqlx::Error> 
+) -> Result<(), sqlx::Error>
 where
     E: sqlx::Executor<'e, Database = sqlx::Sqlite>,
 {
@@ -67,7 +63,7 @@ where
         b = ?,
         a = ?,
         position = ?
-        WHERE id = ?", 
+        WHERE id = ?",
         stop.gradient_order,
         stop.r,
         stop.g,
@@ -76,7 +72,7 @@ where
         stop.position,
         stop.id,
     )
-    .execute(executor) 
+    .execute(executor)
     .await?;
 
     Ok(())

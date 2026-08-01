@@ -1,12 +1,20 @@
 use std::collections::HashMap;
 
-use crate::{feat::gradient_service::model::{gradient_data_mapper::build_stop_response, gradient_data_model::{Gradient, GradientLayer, GradientStop}, gradient_service_response::{GradientLayerResponse, GradientResponse}}, infra::error::TauriError, state::DbState};
 use super::load_state_repo;
+use crate::{
+    feat::gradient_service::model::{
+        gradient_data_mapper::build_stop_response,
+        gradient_data_model::{Gradient, GradientLayer, GradientStop},
+        gradient_service_response::{GradientLayerResponse, GradientResponse},
+    },
+    infra::error::TauriError,
+    state::DbState,
+};
 
 #[tauri::command]
 pub async fn get_all_gradient(
     state: tauri::State<'_, DbState>,
-) -> Result< Vec<GradientResponse>, TauriError> {
+) -> Result<Vec<GradientResponse>, TauriError> {
     let mut tx = state.pool.begin().await?;
 
     let gradients = load_state_repo::get_all_gradients(&mut *tx).await?;
@@ -33,7 +41,10 @@ pub fn build_all_gradients_response_fast(
     // 2. Group layers by gradient_id
     let mut layers_by_gradient: HashMap<i64, Vec<&GradientLayer>> = HashMap::new();
     for layer in layers {
-        layers_by_gradient.entry(layer.gradient_id).or_default().push(layer);
+        layers_by_gradient
+            .entry(layer.gradient_id)
+            .or_default()
+            .push(layer);
     }
 
     // 3. Assemble response efficiently
@@ -41,7 +52,9 @@ pub fn build_all_gradients_response_fast(
         .iter()
         .map(|gradient| {
             let empty_layers = Vec::new();
-            let gradient_layers = layers_by_gradient.get(&gradient.id).unwrap_or(&empty_layers);
+            let gradient_layers = layers_by_gradient
+                .get(&gradient.id)
+                .unwrap_or(&empty_layers);
 
             let layer_responses = gradient_layers
                 .iter()

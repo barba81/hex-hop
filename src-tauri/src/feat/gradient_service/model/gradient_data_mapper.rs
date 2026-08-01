@@ -1,8 +1,7 @@
-use super::gradient_service_request::{*};
-use super::gradient_service_response::{*};
-use super::gradient_data_model::{*};
-use super::gradient_create_model::{*};
-
+use super::gradient_create_model::*;
+use super::gradient_data_model::*;
+use super::gradient_service_request::*;
+use super::gradient_service_response::*;
 
 pub fn build_stop_response(stop: &GradientStop) -> GradientStopResponse {
     GradientStopResponse {
@@ -55,30 +54,38 @@ pub fn build_gradient_response(
     }
 }
 
-pub fn build_creation_stop_model(stop_request: &GradientStopRequest, layer_id:i64 ) -> GradientStopCreateModel {
-    GradientStopCreateModel { 
-        gradient_order: stop_request.gradient_order, 
-        layer_id: layer_id, 
-        r: stop_request.r, 
-        g: stop_request.g, 
-        b: stop_request.b, 
-        a: stop_request.a, 
-        position: stop_request.position 
+pub fn build_creation_stop_model(
+    stop_request: &GradientStopRequest,
+    layer_id: i64,
+) -> GradientStopCreateModel {
+    GradientStopCreateModel {
+        gradient_order: stop_request.gradient_order,
+        layer_id: layer_id,
+        r: stop_request.r,
+        g: stop_request.g,
+        b: stop_request.b,
+        a: stop_request.a,
+        position: stop_request.position,
     }
 }
 
-pub fn build_layer_model(layer_request: &GradientLayerRequest, gradient_id: i64) -> GradientLayerCreateModel {
-    GradientLayerCreateModel { 
-        gradient_id: gradient_id, 
-        gradient_order: layer_request.gradient_order, 
+pub fn build_layer_model(
+    layer_request: &GradientLayerRequest,
+    gradient_id: i64,
+) -> GradientLayerCreateModel {
+    GradientLayerCreateModel {
+        gradient_id: gradient_id,
+        gradient_order: layer_request.gradient_order,
         gradient_type: layer_request.gradient_type.clone(),
-        rotation_degree: layer_request.rotation_degree, 
-        pattern_repeat_number: layer_request.pattern_repeat_number, 
-        color_space:  layer_request.color_space.clone(), 
-        easing_function:layer_request.easing_function.clone() 
+        rotation_degree: layer_request.rotation_degree,
+        pattern_repeat_number: layer_request.pattern_repeat_number,
+        color_space: layer_request.color_space.clone(),
+        easing_function: layer_request.easing_function.clone(),
     }
 }
 
-pub fn build_gradient_model(gradient_request:& GradientRequest) -> GradientCreateModel {
-    GradientCreateModel { name: gradient_request.name.clone() }
+pub fn build_gradient_model(gradient_request: &GradientRequest) -> GradientCreateModel {
+    GradientCreateModel {
+        name: gradient_request.name.clone(),
+    }
 }

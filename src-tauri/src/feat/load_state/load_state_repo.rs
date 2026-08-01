@@ -1,30 +1,34 @@
-use crate::feat::gradient_service::model::gradient_data_model::{Gradient, GradientLayer,GradientStop};
+use crate::feat::gradient_service::model::gradient_data_model::{
+    Gradient, GradientLayer, GradientStop,
+};
 
-pub async fn get_all_gradients<'a, E> ( executor: E ) -> Result<Vec<Gradient>, sqlx::Error>
+pub async fn get_all_gradients<'a, E>(executor: E) -> Result<Vec<Gradient>, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-        let gradient = sqlx::query_as!(Gradient, "
+    let gradient = sqlx::query_as!(
+        Gradient,
+        "
         SELECT 
             g.id as \"id!\",
             g.name as \"name!\"
         FROM gradient g 
         WHERE g.deleted = 0
         ",
-        )
-        .fetch_all(executor) 
-        .await?;
+    )
+    .fetch_all(executor)
+    .await?;
 
     Ok(gradient)
 }
 
-pub async fn get_all_gradient_layers<'a, E> ( executor: E ) -> Result<Vec<GradientLayer>, sqlx::Error>
+pub async fn get_all_gradient_layers<'a, E>(executor: E) -> Result<Vec<GradientLayer>, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-        let layers = sqlx::query_as!(
-           GradientLayer, 
-            "
+    let layers = sqlx::query_as!(
+        GradientLayer,
+        "
             SELECT 
                 gl.id as \"id!\",
                 gl.color_space as \"color_space!\",
@@ -37,20 +41,20 @@ where
             FROM gradient_layer gl 
             WHERE  gl.deleted = 0
             ",
-        )
-        .fetch_all(executor) 
-        .await?;
+    )
+    .fetch_all(executor)
+    .await?;
 
     Ok(layers)
 }
 
-pub async fn get_all_gradient_stops<'a, E> ( executor: E ) -> Result<Vec<GradientStop>, sqlx::Error>
+pub async fn get_all_gradient_stops<'a, E>(executor: E) -> Result<Vec<GradientStop>, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-      let stops = sqlx::query_as!(
-            GradientStop, 
-            "
+    let stops = sqlx::query_as!(
+        GradientStop,
+        "
             SELECT 
                 gs.id as \"id!\",
                 gs.gradient_order as \"gradient_order!\",
@@ -63,11 +67,9 @@ where
             FROM gradient_stop gs
             WHERE gs.deleted = 0
             ",
-        )
-        .fetch_all(executor) 
-        .await?;
+    )
+    .fetch_all(executor)
+    .await?;
 
     Ok(stops)
 }
-
-

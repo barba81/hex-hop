@@ -6,7 +6,7 @@ pub struct GradientCreateModel {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct GradientLayerCreateModel  {
+pub struct GradientLayerCreateModel {
     pub gradient_order: i64,
     pub gradient_id: i64,
     pub gradient_type: String,
@@ -17,7 +17,7 @@ pub struct GradientLayerCreateModel  {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct GradientStopCreateModel  {
+pub struct GradientStopCreateModel {
     pub gradient_order: i64,
     pub layer_id: i64,
     pub r: f64,

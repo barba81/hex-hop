@@ -1,4 +1,4 @@
-use serde::{Deserialize,Serialize};
+use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
@@ -32,5 +32,3 @@ pub struct GradientStopResponse {
     pub a: Option<f64>,
     pub position: f64,
 }
-
-
