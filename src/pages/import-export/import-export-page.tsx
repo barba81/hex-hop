@@ -2,11 +2,9 @@
 
 const ImportExportPage = () => {
   return (
-    <>
-      <div>
+    <div>
         Import export page
       </div>
-    </>
   );
 };
 

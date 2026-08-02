@@ -2,12 +2,9 @@ import GradientIcon from "@/components/icons/gradient-icon";
 import Button from "@/components/common/button";
 
 const FilterGradient = ({} :{selected: boolean}) => {
-    return (<>
-     <Button className={`outline-2 outline-amber-600 `}>
+    return (<Button className={`outline-2 outline-amber-600 `}>
         <GradientIcon strokeWidth={2} size={17} />
-      </Button>
-    
-    </>)
+      </Button>)
 };
 
 export default FilterGradient;

@@ -1,8 +1,8 @@
 import { Hash } from "lucide-react";
 import { useState } from "react";
 import CopyUx from "./copy-ux";
-import { ColorEntity } from "@/infrastructure/entity";
-import { ColorSpaceType } from "@/infrastructure/enum";
+import type { ColorEntity } from "@/infrastructure/entity";
+import type { ColorSpaceType } from "@/infrastructure/enum";
 import { copyToClipboard } from "../../features/copy-to-clipboard";
 
 export type CopyLogoParam = {
@@ -49,7 +49,7 @@ const CopyLogo = ({ color, fontClass }: CopyLogoParam) => {
             {f.isIcon ? <Hash size={18} strokeWidth={2.5} /> : f.label}
           </div>
 
-          {f.type === selectedType && coords && <CopyUx anchorRect={coords} />}
+          {f.type === selectedType && coords ? <CopyUx anchorRect={coords} /> : null}
         </div>
       ))}
     </div>

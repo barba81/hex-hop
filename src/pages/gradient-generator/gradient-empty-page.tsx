@@ -13,8 +13,7 @@ import { addNewGradient } from "./feature/add-new-gradient";
 const GradientEmptyPage = () => {
 
   return (
-    <>
-      <Empty>
+    <Empty>
         <EmptyHeader>
           <EmptyMedia>
             <GradientStepIcon size={100} className="opacity-70" />
@@ -26,7 +25,6 @@ const GradientEmptyPage = () => {
           <Button onClick={() => addNewGradient()}>Add new gradient</Button>
         </EmptyContent>
       </Empty>
-    </>
   );
 };
 

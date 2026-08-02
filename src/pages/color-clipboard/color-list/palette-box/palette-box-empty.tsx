@@ -8,8 +8,7 @@ type PaletteBoxParams = {
 export const PaletteBoxEmpty = ({className  }: PaletteBoxParams) => {
 
   return (
-    <>
-      <div
+    <div
         className={`${className} h-7  ${ "rounded-md"}  w-full shrink-0 relative flex items-center justify-between overflow-hidden `}
       >
         <div className="absolute inset-0 bg-checkerboard flex"></div>
@@ -21,6 +20,5 @@ export const PaletteBoxEmpty = ({className  }: PaletteBoxParams) => {
         
         </div>
       </div>
-    </>
   );
 };

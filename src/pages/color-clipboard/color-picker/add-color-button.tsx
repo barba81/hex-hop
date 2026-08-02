@@ -11,8 +11,7 @@ const AddColorButton = () => {
   const [, setCoords] = useState<DOMRect | null>(null);
 
   return (
-    <>
-      <div
+    <div
         className={`
           ${buttonStyle}       
           flex  
@@ -35,7 +34,6 @@ const AddColorButton = () => {
       >
         <Check strokeWidth={3} size={16} />
       </div>
-    </>
   );
 };
 

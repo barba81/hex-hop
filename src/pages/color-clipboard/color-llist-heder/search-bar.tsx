@@ -1,7 +1,6 @@
 const SearchBar = () => {
   return (
-    <>
-      <div
+    <div
         className="
               flex 
               h-7 
@@ -28,7 +27,6 @@ const SearchBar = () => {
           placeholder="Search color"
         />
       </div>
-    </>
   );
 };
 

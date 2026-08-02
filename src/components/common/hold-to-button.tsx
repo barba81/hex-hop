@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button";
-import { JSX, useRef, useState } from "react";
+import type { JSX} from "react";
+import { useRef, useState } from "react";
 
 type HoldToButtonParams = {
   action: () => void;

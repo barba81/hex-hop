@@ -6,14 +6,10 @@ const HoldToClear = () => {
   return (
     <HoldToButton
       text={
-        <>
-          <Trash2 />
-        </>
+        <Trash2 />
       }
       holdText={
-        <>
-          <Trash2 />
-        </>
+        <Trash2 />
       }
       action={() => {
         removeAllData();

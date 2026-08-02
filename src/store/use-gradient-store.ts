@@ -1,4 +1,4 @@
-import { GradientEntity, GradientLayerEntity, GradientStopEntity } from "@/infrastructure/entity";
+import type { GradientEntity, GradientLayerEntity, GradientStopEntity } from "@/infrastructure/entity";
 import { create } from "zustand";
 import { immer } from 'zustand/middleware/immer'
 
@@ -53,15 +53,15 @@ export const useGradientStore = create<GradientStore & GradientAction>()(immer((
     }),
   addLayerToSelected: (gradientId: number, layer: GradientLayerEntity) =>
     set((state) => {
-      let gradient = state.gradients.find(id => id.id = gradientId);
+      const gradient = state.gradients.find(id => id.id = gradientId);
       if (!gradient) return;
       gradient?.layers.push(layer);
     }),
   addGradientStop: (gradientId: number, layerId: number, stop: GradientStopEntity) =>
     set((state) => {
-      let gradient = state.gradients.find(id => id.id === gradientId);
+      const gradient = state.gradients.find(id => id.id === gradientId);
       if (!gradient) return;
-      let layer = gradient.layers.find(x => x.id === layerId);
+      const layer = gradient.layers.find(x => x.id === layerId);
       if (!layer) return;
       layer.stops.push(stop);
     }),

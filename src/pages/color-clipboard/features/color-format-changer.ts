@@ -1,4 +1,4 @@
-import { ColorData } from "@/infrastructure/types";
+import type { ColorData } from "@/infrastructure/types";
 import { rgb } from "culori";
 
 

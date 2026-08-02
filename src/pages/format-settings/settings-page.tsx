@@ -1,10 +1,8 @@
 const SettingsPage = () => {
   return (
-    <>
-      <div>
+    <div>
         Settings
       </div>
-    </>
   );
 };
 

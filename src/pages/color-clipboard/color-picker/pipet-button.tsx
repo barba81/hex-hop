@@ -6,8 +6,7 @@ const PipetButton = () => {
 
 
   return (
-    <>
-      <div
+    <div
         className={`
           ${buttonStyle}       
           flex  
@@ -24,7 +23,6 @@ const PipetButton = () => {
       >
         <Pipette strokeWidth={2} size={15} />
       </div>
-    </>
   );
 };
 

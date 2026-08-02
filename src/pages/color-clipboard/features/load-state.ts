@@ -1,4 +1,4 @@
-import { GradientEntity } from "@/infrastructure/entity";
+import type { GradientEntity } from "@/infrastructure/entity";
 import { invoke } from "@tauri-apps/api/core";
 
 export async function loadGradientData() {

@@ -14,8 +14,7 @@ const HeaderBar = () => {
   }, []);
 
   return (
-    <>
-      <div
+    <div
         data-tauri-drag-region
         className="flex bg-stone-50 dark:bg-black/50 w-full justify-between items-center gap-2 px-2 py-1 select-none "
       >
@@ -26,7 +25,6 @@ const HeaderBar = () => {
         </div>
         {platform !== "macos" && <WindowsHeaderButton />}
       </div>
-    </>
   );
 };
 

@@ -1,4 +1,4 @@
-import { GradientLayerEntity } from "@/infrastructure/entity";
+import type { GradientLayerEntity } from "@/infrastructure/entity";
 import { Plus, Trash2 } from "lucide-react";
 import { addNewStop } from "./feature/add-new-gradient";
 import { deleteGradientStop } from "./feature/delete-gradient";

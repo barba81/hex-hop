@@ -1,4 +1,4 @@
-import { ColorData } from "@/infrastructure/types";
+import type { ColorData } from "@/infrastructure/types";
 
 type ColorBlockParams = {
   color: ColorData;
@@ -20,12 +20,10 @@ const ColorText = ({ color }: ColorBlockParams) => {
           {color.b}
         </span>
 
-        {color.a && (
-          <span>
+        {color.a ? <span>
             <span className="opacity-50 mr-1">A</span>
             {color.a.toFixed(2)}
-          </span>
-        )}
+          </span> : null}
       </div>
   );
 };

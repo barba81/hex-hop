@@ -1,4 +1,4 @@
-import { ColorEntity } from "@/infrastructure/entity";
+import type { ColorEntity } from "@/infrastructure/entity";
 import { X } from "lucide-react";
 
 type CloseButtonParams = {

@@ -3,8 +3,7 @@ import { Minus, X } from "lucide-react";
 
 const WindowsHeaderButton = () => {
   return (
-    <>
-      <div className="flex gap-2">
+    <div className="flex gap-2">
         <div
           className="text-gray-900 dark:text-white cursor-pointer hover:bg-gray-400/50 dark:hover:bg-gray-500/50 p-1 rounded-md"
           onClick={() => {
@@ -22,7 +21,6 @@ const WindowsHeaderButton = () => {
           <X />
         </div>
       </div>
-    </>
   );
 };
 

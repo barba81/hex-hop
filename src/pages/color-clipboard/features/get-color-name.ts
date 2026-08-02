@@ -1,9 +1,10 @@
-import { ColorData } from "@/infrastructure/types";
+import type { ColorData } from "@/infrastructure/types";
 import { invoke } from "@tauri-apps/api/core";
+import type {
+    Color} from 'culori';
 import {
     nearest,
-    differenceCiede2000,
-    Color,
+    differenceCiede2000
 } from 'culori';
 import { colorDataToHex } from "./color-format-changer";
 

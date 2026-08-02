@@ -8,7 +8,7 @@ import {
   useIsPaletteExtended,
   usePaletteStore,
 } from "@/store/use-palette-store";
-import { PaletteEntity } from "@/infrastructure/entity";
+import type { PaletteEntity } from "@/infrastructure/entity";
 import { colorDataToHex } from "../../features/color-format-changer";
 
 type PaletteBoxParams = {
@@ -39,8 +39,7 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
   }
 
   return (
-    <>
-      <div ref={refDraggable} className="flex flex-col outline-3 rounded-md ">
+    <div ref={refDraggable} className="flex flex-col outline-3 rounded-md ">
         {colorBlocks.length === 0 && (
           <div ref={refDroppable}>
             {isDropTarget ? (
@@ -86,15 +85,14 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
                   }
                 >
                   {!expandPalette && <ChevronDown size={14} />}
-                  {expandPalette && <ChevronUp size={14} />}
+                  {expandPalette ? <ChevronUp size={14} /> : null}
                 </div>
               </div>
               {/* <div className="relative h-full   flex items-center justify-start overflow-hidden text-sm  text-red-50 bg-foreground/20 px-3 rounded-l-md font-mono">
             Test palette name
           </div> */}
             </div>
-            {expandPalette && (
-              <div className="flex flex-col px-1.5 gap-1 bg-foreground/2 rounded-b-md ">
+            {expandPalette ? <div className="flex flex-col px-1.5 gap-1 bg-foreground/2 rounded-b-md ">
                 <div>
                   <Button
                     size="sm"
@@ -133,11 +131,9 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
                     </React.Fragment>
                   );
                 })} */}
-              </div>
-            )}
+              </div> : null}
           </>
         )}
       </div>
-    </>
   );
 };

@@ -1,4 +1,4 @@
-import {  PaletteData } from "@/infrastructure/types";
+import type {  PaletteData } from "@/infrastructure/types";
 import { invoke } from "@tauri-apps/api/core";
 import type { PaletteEntity } from "@/infrastructure/entity";
 import { useClipboardStore } from "@/store/use-clipboard-store";

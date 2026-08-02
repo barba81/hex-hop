@@ -2,11 +2,9 @@
 
 const ColorContrastPage = () => {
   return (
-    <>
-      <div>
+    <div>
         Contrast 
       </div>
-    </>
   );
 };
 

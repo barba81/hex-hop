@@ -2,8 +2,7 @@ import { Clipboard } from "lucide-react";
 
 const EmptyDisplay = () => {
   return (
-    <>
-      <div className="h-full w-full  flex items-center justify-center flex-col gap-2 opacity-[0.15]">
+    <div className="h-full w-full  flex items-center justify-center flex-col gap-2 opacity-[0.15]">
         <Clipboard size={120} strokeWidth={2} />
         <div className="text-center ">
           <h2 className="text-4xl font-bold tracking-tight">HexHop</h2>
@@ -11,7 +10,6 @@ const EmptyDisplay = () => {
           <p className="text-sm mt-2 ">Pick a color from your screen</p>
         </div>
       </div>
-    </>
   );
 };
 

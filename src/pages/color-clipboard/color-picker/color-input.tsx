@@ -8,8 +8,7 @@ const ColorInput = () => {
   const inputColor = useColorStore().inputColor;
 
   return (
-    <>
-      <div
+    <div
         className="
           flex 
           h-7 
@@ -60,7 +59,6 @@ const ColorInput = () => {
           {colorFormat}
         </div>
       </div>
-    </>
   );
 };
 

@@ -12,7 +12,8 @@ import {
   Palette,
   Settings,
 } from "lucide-react";
-import { PagesTypes, useAppStore } from "@/store/use-theme-store";
+import type { PagesTypes} from "@/store/use-theme-store";
+import { useAppStore } from "@/store/use-theme-store";
 import GradientIcon from "@/components/icons/gradient-icon";
 import { Button } from "@/components/ui/button";
 
@@ -74,8 +75,7 @@ const DropDownHeader = () => {
   const setActivePage = useAppStore().setActivePage;
 
   return (
-    <>
-      <DropdownMenu>
+    <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <Button
             size="sm"
@@ -104,7 +104,6 @@ const DropDownHeader = () => {
           </DropdownMenuGroup>
         </DropdownMenuContent>
       </DropdownMenu>
-    </>
   );
 };
 

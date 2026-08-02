@@ -1,4 +1,5 @@
-import { DragDropProvider, DragEndEvent } from "@dnd-kit/react";
+import type { DragEndEvent } from "@dnd-kit/react";
+import { DragDropProvider } from "@dnd-kit/react";
 import EmptyDisplay from "./empty-display";
 import ColorBlock from "./color-box/color-block";
 import { PaletteBox } from "./palette-box/palette-box";

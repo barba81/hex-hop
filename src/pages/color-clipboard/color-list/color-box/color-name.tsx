@@ -1,4 +1,4 @@
-import { ColorEntity } from "@/infrastructure/entity";
+import type { ColorEntity } from "@/infrastructure/entity";
 import { useState } from "react";
 
 type ColorNameParams = {
@@ -23,14 +23,12 @@ const ColorName = ({ colorEntity }: ColorNameParams) => {
           {colorEntity.name}
         </div>
       )}
-      {inputVisible && (
-        <input
+      {inputVisible ? <input
           className="bg-stone-600 rounded-sm w-30 h-6   text-sm font-mono   "
           placeholder={colorEntity.name}
           onChange={(e) => setNewName(e.target.value)}
           onBlur={handleSave}
-        />
-      )}
+        /> : null}
     </>
   );
 };

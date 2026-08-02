@@ -1,5 +1,5 @@
 import "@/style/empty-checker-board.css";
-import { GradientEntity } from "@/infrastructure/entity";
+import type { GradientEntity } from "@/infrastructure/entity";
 interface GradientLayerListParm {
   gradient: GradientEntity;
 }

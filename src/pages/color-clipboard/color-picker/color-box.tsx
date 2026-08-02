@@ -20,8 +20,7 @@ const ColorBox = () => {
   };
 
   return (
-    <>
-      <div className="flex items-center gap-3 ">
+    <div className="flex items-center gap-3 ">
         <Popover>
           <PopoverTrigger asChild>
             <div className="bg-checkerboard rounded-md ">
@@ -41,7 +40,6 @@ const ColorBox = () => {
           </PopoverContent>
         </Popover>
       </div>
-    </>
   );
 };
 

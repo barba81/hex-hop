@@ -3,8 +3,7 @@ import { buttonStyle } from "@/style/default-style";
 
 export const AddNewPalette = () => {
   return (
-    <>
-      <div
+    <div
         className={`
                ${buttonStyle}       
                flex  
@@ -19,6 +18,5 @@ export const AddNewPalette = () => {
       >
         <Palette strokeWidth={2} size={17} />
       </div>
-    </>
   );
 };

@@ -1,4 +1,4 @@
-import { ColorData } from "@/infrastructure/types";
+import type { ColorData } from "@/infrastructure/types";
 import { invoke } from "@tauri-apps/api/core";
 import type { ColorEntity } from "@/infrastructure/entity";
 import { useClipboardStore } from "@/store/use-clipboard-store";

@@ -2,11 +2,9 @@
 
 const PaletteGenerator = () => {
   return (
-    <>
-      <div>
+    <div>
         Palette generator
       </div>
-    </>
   );
 };
 
