@@ -151,3 +151,27 @@ where
 
     Ok(ids)
 }
+
+pub async fn create_block_gradient<'a, E>(
+    gradient_id: i64,
+    parent_palette_id: Option<i64>,
+    executor: E,
+) -> Result<(), sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
+    sqlx::query!(
+        "INSERT INTO block (gradient_id, parent_palette_id, block_order) 
+        VALUES (
+            $1, 
+            $2, 
+            (SELECT COALESCE(MAX(block_order), 0) + 1 FROM block WHERE parent_palette_id IS $2)
+        );",
+        gradient_id,
+        parent_palette_id,
+    )
+    .execute(executor)
+    .await?;
+
+    Ok(())
+}

@@ -27,6 +27,6 @@ where
     )
     .fetch_one(executor)
     .await?;
-    println!("{:?}", color);
+
     Ok(color)
 }

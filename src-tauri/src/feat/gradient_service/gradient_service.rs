@@ -47,6 +47,8 @@ pub async fn create_gradient(
 
     let gradient_id = gradient_create_repo::create_gradient(&gradient, &mut *tx).await?;
 
+    gradient_create_repo::create_block_gradient(gradient_id, None, &mut *tx).await?;
+
     let layers: Vec<gradient_create_model::GradientLayerCreateModel> = gradient
         .layers
         .iter()
