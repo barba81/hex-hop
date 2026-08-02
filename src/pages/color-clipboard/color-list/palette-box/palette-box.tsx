@@ -23,7 +23,7 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
     .colorBlocks.filter(
       (x) => x.kind !== "palette" && x.paletteId === palette.id,
     )
-    .sort((a, b) => a.order - b.order);
+    .sort((a, b) => a.blockOrder - b.blockOrder);
 
   const { ref: refDraggable } = useDraggable({
     id: palette.blockId,

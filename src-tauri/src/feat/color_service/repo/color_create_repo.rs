@@ -34,7 +34,7 @@ where
         VALUES (
             $1, 
             $2, 
-            (SELECT COALESCE(MAX(block_order), 0) + 1 FROM block WHERE parent_palette_id = $2)
+            (SELECT COALESCE(MAX(block_order), 0) + 1 FROM block WHERE parent_palette_id IS $2)
         );",
         color_id,
         parent_palette_id,

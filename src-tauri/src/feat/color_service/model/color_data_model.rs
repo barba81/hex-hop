@@ -8,4 +8,5 @@ pub struct Color {
     pub b: f64,
     pub a: Option<f64>,
     pub name: String,
+    pub block_order: i64,
 }

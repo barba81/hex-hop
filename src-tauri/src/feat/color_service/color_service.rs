@@ -14,10 +14,12 @@ pub async fn create_color(
 
     let color_id = color_create_repo::create_gradient(&color, &mut *tx).await?;
     color_create_repo::create_block_color(color_id, parent_palette_id, &mut *tx).await?;
+
     tx.commit().await?;
 
     Ok(color_id)
 }
+
 #[tauri::command]
 pub async fn get_color(
     state: tauri::State<'_, DbState>,

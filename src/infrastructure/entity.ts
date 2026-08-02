@@ -17,7 +17,7 @@ export type ColorEntity =  {
     kind: "color",
     id: number;
     blockId:number;
-    order: number;
+    blockOrder: number;
     name: string;
     r: number;
     g: number;

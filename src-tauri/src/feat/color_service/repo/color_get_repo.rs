@@ -16,8 +16,10 @@ where
                 c.g as \"g!\",
                 c.b as \"b!\",
                 c.a as \"a\",
-                c.name as \"name\"
+                c.name as \"name\",
+                b.block_order as \"block_order\"
             FROM color c 
+            INNER JOIN  block b ON b.color_id = c.id
             WHERE c.id = ?1
             AND c.deleted = 0
             ",
@@ -25,6 +27,6 @@ where
     )
     .fetch_one(executor)
     .await?;
-
+    println!("{:?}", color);
     Ok(color)
 }
