@@ -1,6 +1,6 @@
 import ColorPicker from "./color-picker/color-picker";
 import ColorList from "./color-list/color-list";
-import HeaderColorList from "./color-llist-heder/header-color-list";
+import HeaderColorList from "./color-list-heder/header-color-list";
 
 const ColorListPage = () => {
 
