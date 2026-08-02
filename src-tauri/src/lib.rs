@@ -9,10 +9,10 @@ pub mod infra;
 pub mod state;
 
 use feat::color_picker::pick_color_mack;
-use feat::color_service::color_service::{create_color, get_color};
+use feat::color_service::color_service::*;
 use feat::gradient_service::gradient_service::*;
-use feat::load_state::load_state_service::get_all_gradient;
-use feat::palette_service::palette_service::{create_palette, get_palette};
+use feat::load_state::load_state_service::*;
+use feat::palette_service::palette_service::*;
 use infra::data_seed::get_color_name_data;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -41,9 +41,9 @@ pub fn run() {
             update_gradient,
             update_gradient_layer,
             update_stop,
-            get_all_gradient,
             create_palette,
             get_palette,
+            load_state
         ])
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_clipboard_manager::init())

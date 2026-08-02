@@ -1,12 +1,66 @@
-use crate::feat::gradient_service::model::gradient_data_model::{
-    Gradient, GradientLayer, GradientStop,
+use crate::feat::{
+    color_service::model::color_data_model::Color,
+    gradient_service::model::gradient_data_model::{Gradient, GradientLayer, GradientStop},
+    palette_service::model::palette_data_model::Palette,
 };
+
+pub async fn get_all_colors<'a, E>(executor: E) -> Result<Vec<Color>, sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
+    let colors = sqlx::query_as!(
+        Color,
+        "
+           SELECT 
+                c.id as \"id\",
+                c.r as \"r!\",
+                c.g as \"g!\",
+                c.b as \"b!\",
+                c.a as \"a\",
+                c.name as \"name\",
+                b.id as \"block_id\",
+                b.block_order as \"block_order\",
+                \"color\" as kind
+            FROM color c 
+            INNER JOIN  block b ON b.color_id = c.id
+            AND c.deleted = 0
+            ",
+    )
+    .fetch_all(executor)
+    .await?;
+
+    Ok(colors)
+}
+
+pub async fn get_all_palette<'a, E>(executor: E) -> Result<Vec<Palette>, sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
+    let color = sqlx::query_as!(
+        Palette,
+        "
+           SELECT 
+                p.id as \"id\",
+                p.name as \"name\",
+                b.id as \"block_id\",
+                b.block_order as \"block_order\",
+                \"palette\" as kind
+            FROM palette p 
+            INNER JOIN  block b ON b.sub_palette_id = p.id
+            AND p.deleted = 0
+            ",
+    )
+    .fetch_all(executor)
+    .await?;
+
+    Ok(color)
+}
 
 pub async fn get_all_gradients<'a, E>(executor: E) -> Result<Vec<Gradient>, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-    let gradient = sqlx::query_as!(
+    let gradients = sqlx::query_as!(
         Gradient,
         "
         SELECT 
@@ -23,7 +77,7 @@ where
     .fetch_all(executor)
     .await?;
 
-    Ok(gradient)
+    Ok(gradients)
 }
 
 pub async fn get_all_gradient_layers<'a, E>(executor: E) -> Result<Vec<GradientLayer>, sqlx::Error>

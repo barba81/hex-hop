@@ -1,9 +1,11 @@
 import { GradientEntity } from "@/infrastructure/entity";
-import { useGradientStore } from "@/store/use-gradient-store";
 import { invoke } from "@tauri-apps/api/core";
 
 export async function loadGradientData() {
-    const color = await invoke<GradientEntity[]>("get_all_colors");
-    const gradients = await invoke<GradientEntity[]>("get_all_gradient");
-    useGradientStore.getState().initGradient(gradients);
+    console.time("state");
+    const color = await invoke<GradientEntity[]>("load_state");
+    console.log(color);
+    console.timeEnd("state");
+    // const gradients = await invoke<GradientEntity[]>("get_all_gradient");
+    // useGradientStore.getState().initGradient(gradients);
 }

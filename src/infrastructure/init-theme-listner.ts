@@ -1,5 +1,7 @@
 import { useAppStore } from "@/store/use-theme-store";
 
+// TODO REMOVE THIS to infro or
+
 export function initThemeListener() {
   const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
   
@@ -10,5 +12,3 @@ export function initThemeListener() {
     useAppStore.getState().setIsDark(e.matches);
   });
 }
-
-// 

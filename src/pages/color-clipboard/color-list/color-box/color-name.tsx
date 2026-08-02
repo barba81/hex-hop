@@ -1,6 +1,5 @@
 import { ColorEntity } from "@/infrastructure/entity";
 import { useState } from "react";
-import { updateColor } from "../../features/update-color";
 
 type ColorNameParams = {
   colorEntity: ColorEntity;
@@ -11,7 +10,6 @@ const ColorName = ({ colorEntity }: ColorNameParams) => {
   const [newName, setNewName] = useState(colorEntity.name);
   const handleSave = () => {
     colorEntity.name = newName;
-    updateColor(colorEntity);
     setInputVisible(false);
   };
 

@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import HeaderBar from "./components/header/header-bar";
-import { initThemeListener } from "./pages/color-clipboard/features/init-theme-listner";
+import { initThemeListener } from "./infrastructure/init-theme-listner";
 
 import "./App.css";
 import HexHopNavigator from "./pages/navigator/hex-hop-navigator";
