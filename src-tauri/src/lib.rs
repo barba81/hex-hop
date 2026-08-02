@@ -8,6 +8,13 @@ pub mod feat;
 pub mod infra;
 pub mod state;
 
+use feat::color_picker::pick_color_mack;
+use feat::color_service::color_service::{create_color, get_color};
+use feat::gradient_service::gradient_service::*;
+use feat::load_state::load_state_service::get_all_gradient;
+use feat::palette_service::palette_service::{create_palette, get_palette};
+use infra::data_seed::get_color_name_data;
+
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tracing_subscriber::fmt()
@@ -18,25 +25,25 @@ pub fn run() {
 
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
-            infra::data_seed::get_color_name_data,
-            feat::color_picker::pick_color_mack,
-            feat::color_service::color_service::create_color,
-            feat::color_service::color_service::get_color,
-            feat::gradient_service::gradient_service::create_gradient,
-            feat::gradient_service::gradient_service::create_layer,
-            feat::gradient_service::gradient_service::create_stop,
-            feat::gradient_service::gradient_service::get_gradient,
-            feat::gradient_service::gradient_service::get_layer,
-            feat::gradient_service::gradient_service::get_stop,
-            feat::gradient_service::gradient_service::delete_gradient,
-            feat::gradient_service::gradient_service::delete_layer,
-            feat::gradient_service::gradient_service::delete_stop,
-            feat::gradient_service::gradient_service::update_gradient,
-            feat::gradient_service::gradient_service::update_gradient_layer,
-            feat::gradient_service::gradient_service::update_stop,
-            feat::load_state::load_state_service::get_all_gradient,
-            feat::palette_service::palette_service::create_palette,
-            feat::palette_service::palette_service::get_palette,
+            get_color_name_data,
+            pick_color_mack,
+            create_color,
+            get_color,
+            create_gradient,
+            create_layer,
+            create_stop,
+            get_gradient,
+            get_layer,
+            get_stop,
+            delete_gradient,
+            delete_layer,
+            delete_stop,
+            update_gradient,
+            update_gradient_layer,
+            update_stop,
+            get_all_gradient,
+            create_palette,
+            get_palette,
         ])
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_clipboard_manager::init())
