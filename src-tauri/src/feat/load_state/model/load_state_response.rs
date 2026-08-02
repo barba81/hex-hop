@@ -1,49 +1,18 @@
 use serde::Serialize;
 
-use crate::feat::gradient_service::model::gradient_service_response::GradientLayerResponse;
+use crate::feat::{
+    color_service::model::color_data_model::ColorDataModel,
+    gradient_service::model::gradient_service_response::{GradientLayerResponse, GradientResponse},
+    palette_service::model::palette_data_model::PaletteDataModel,
+};
 
 #[derive(Debug, Serialize, Clone)]
 #[serde(tag = "kind")]
 pub enum BlockResponse {
     #[serde(rename = "palette")]
-    Palette(PaletteResponse),
+    Palette(PaletteDataModel),
     #[serde(rename = "color")]
-    Color(ColorResponse),
+    Color(ColorDataModel),
     #[serde(rename = "gradient")]
-    Gradient(GradientBlockResponse),
-}
-
-#[derive(Debug, Serialize, Clone)]
-#[serde(rename_all = "camelCase")]
-pub struct PaletteResponse {
-    pub id: i64,
-    pub block_id: i64,
-    pub block_order: i64,
-    pub name: String,
-    pub blocks: Vec<BlockResponse>,
-}
-
-#[derive(Debug, Serialize, Clone)]
-#[serde(rename_all = "camelCase")]
-pub struct ColorResponse {
-    pub id: i64,
-    pub block_id: i64,
-    pub block_order: i64,
-    pub name: String,
-    pub r: i32,
-    pub g: i32,
-    pub b: i32,
-    pub a: Option<i32>,
-    pub palette_id: Option<i64>,
-}
-
-#[derive(Debug, Serialize, Clone)]
-#[serde(rename_all = "camelCase")]
-pub struct GradientBlockResponse {
-    pub id: i64,
-    pub block_id: i64,
-    pub block_order: i64,
-    pub name: String,
-    pub palette_id: Option<i64>,
-    pub layers: Vec<GradientLayerResponse>,
+    Gradient(GradientResponse),
 }
