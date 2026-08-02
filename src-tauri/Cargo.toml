@@ -32,8 +32,8 @@ objc = "0.2"
 block = "0.1"
 
 [profile.release]
-codegen-units = 1
-lto = true
-opt-level = "s"
-panic = "abort"
-strip = true
+panic = "abort"     # removes unwinding tables
+codegen-units = 1   # better optimization, slower build
+lto = true           # link-time optimization, often the biggest single win
+opt-level = "z"      # optimize for size over speed ("s" is a lighter version of this)
+strip = true   
