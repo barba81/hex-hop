@@ -2,23 +2,23 @@ use std::collections::HashMap;
 
 use crate::feat::gradient_service::model::{
     gradient_data_mapper::build_stop_response,
-    gradient_data_model::{Gradient, GradientLayer, GradientStop},
+    gradient_data_model::{GradientDataModel, GradientLayerDataModel, GradientStopDataModel},
     gradient_service_response::{GradientLayerResponse, GradientResponse},
 };
 
 pub fn build_all_gradients_response_fast(
-    gradients: &[Gradient],
-    layers: &[GradientLayer],
-    stops: &[GradientStop],
+    gradients: &[GradientDataModel],
+    layers: &[GradientLayerDataModel],
+    stops: &[GradientStopDataModel],
 ) -> Vec<GradientResponse> {
     // 1. Group stops by layer_id
-    let mut stops_by_layer: HashMap<i64, Vec<&GradientStop>> = HashMap::new();
+    let mut stops_by_layer: HashMap<i64, Vec<&GradientStopDataModel>> = HashMap::new();
     for stop in stops {
         stops_by_layer.entry(stop.layer_id).or_default().push(stop);
     }
 
     // 2. Group layers by gradient_id
-    let mut layers_by_gradient: HashMap<i64, Vec<&GradientLayer>> = HashMap::new();
+    let mut layers_by_gradient: HashMap<i64, Vec<&GradientLayerDataModel>> = HashMap::new();
     for layer in layers {
         layers_by_gradient
             .entry(layer.gradient_id)

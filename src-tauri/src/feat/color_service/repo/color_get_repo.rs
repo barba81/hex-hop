@@ -3,12 +3,12 @@ use super::super::model::*;
 pub async fn get_color_by_id<'a, E>(
     id: i64,
     executor: E,
-) -> Result<color_data_model::Color, sqlx::Error>
+) -> Result<color_data_model::ColorDataModel, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-    let color: color_data_model::Color = sqlx::query_as!(
-        color_data_model::Color,
+    let color: color_data_model::ColorDataModel = sqlx::query_as!(
+        color_data_model::ColorDataModel,
         "
            SELECT 
                 c.id as \"id\",

@@ -1,7 +1,7 @@
 use super::super::model::*;
 
 pub async fn update_gradient_async<'e, E>(
-    gradient: &gradient_data_model::Gradient,
+    gradient: &gradient_data_model::GradientDataModel,
     executor: E,
 ) -> Result<(), sqlx::Error>
 where
@@ -19,7 +19,7 @@ where
 }
 
 pub async fn update_gradient_layer_async<'e, E>(
-    gradient_layer: &gradient_data_model::GradientLayer,
+    gradient_layer: &gradient_data_model::GradientLayerDataModel,
     executor: E,
 ) -> Result<(), sqlx::Error>
 where
@@ -49,7 +49,7 @@ where
 }
 
 pub async fn update_stop<'e, E>(
-    stop: &gradient_data_model::GradientStop,
+    stop: &gradient_data_model::GradientStopDataModel,
     executor: E,
 ) -> Result<(), sqlx::Error>
 where

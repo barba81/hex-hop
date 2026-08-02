@@ -3,7 +3,7 @@ use super::gradient_data_model::*;
 use super::gradient_service_request::*;
 use super::gradient_service_response::*;
 
-pub fn build_stop_response(stop: &GradientStop) -> GradientStopResponse {
+pub fn build_stop_response(stop: &GradientStopDataModel) -> GradientStopResponse {
     GradientStopResponse {
         id: stop.id,
         gradient_order: stop.gradient_order,
@@ -16,8 +16,8 @@ pub fn build_stop_response(stop: &GradientStop) -> GradientStopResponse {
 }
 
 pub fn build_layer_response(
-    layer: &GradientLayer,
-    all_stops: &[GradientStop],
+    layer: &GradientLayerDataModel,
+    all_stops: &[GradientStopDataModel],
 ) -> GradientLayerResponse {
     let stops = all_stops
         .iter()
@@ -38,9 +38,9 @@ pub fn build_layer_response(
 }
 
 pub fn build_gradient_response(
-    gradient: &Gradient,
-    layers: &[GradientLayer],
-    stops: &[GradientStop],
+    gradient: &GradientDataModel,
+    layers: &[GradientLayerDataModel],
+    stops: &[GradientStopDataModel],
 ) -> GradientResponse {
     let layers_response = layers
         .iter()

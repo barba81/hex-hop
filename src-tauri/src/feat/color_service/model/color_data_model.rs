@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Color {
+pub struct ColorDataModel {
     pub id: i64,
     pub r: f64,
     pub g: f64,

@@ -1,15 +1,17 @@
 use crate::feat::{
-    color_service::model::color_data_model::Color,
-    gradient_service::model::gradient_data_model::{Gradient, GradientLayer, GradientStop},
-    palette_service::model::palette_data_model::Palette,
+    color_service::model::color_data_model::ColorDataModel,
+    gradient_service::model::gradient_data_model::{
+        GradientDataModel, GradientLayerDataModel, GradientStopDataModel,
+    },
+    palette_service::model::palette_data_model::PaletteDataModel,
 };
 
-pub async fn get_all_colors<'a, E>(executor: E) -> Result<Vec<Color>, sqlx::Error>
+pub async fn get_all_colors<'a, E>(executor: E) -> Result<Vec<ColorDataModel>, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
     let colors = sqlx::query_as!(
-        Color,
+        ColorDataModel,
         "
            SELECT 
                 c.id as \"id\",
@@ -32,12 +34,12 @@ where
     Ok(colors)
 }
 
-pub async fn get_all_palette<'a, E>(executor: E) -> Result<Vec<Palette>, sqlx::Error>
+pub async fn get_all_palette<'a, E>(executor: E) -> Result<Vec<PaletteDataModel>, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
     let color = sqlx::query_as!(
-        Palette,
+        PaletteDataModel,
         "
            SELECT 
                 p.id as \"id\",
@@ -56,12 +58,12 @@ where
     Ok(color)
 }
 
-pub async fn get_all_gradients<'a, E>(executor: E) -> Result<Vec<Gradient>, sqlx::Error>
+pub async fn get_all_gradients<'a, E>(executor: E) -> Result<Vec<GradientDataModel>, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
     let gradients = sqlx::query_as!(
-        Gradient,
+        GradientDataModel,
         "
         SELECT 
             g.id as \"id!\",
@@ -80,12 +82,14 @@ where
     Ok(gradients)
 }
 
-pub async fn get_all_gradient_layers<'a, E>(executor: E) -> Result<Vec<GradientLayer>, sqlx::Error>
+pub async fn get_all_gradient_layers<'a, E>(
+    executor: E,
+) -> Result<Vec<GradientLayerDataModel>, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
     let layers = sqlx::query_as!(
-        GradientLayer,
+        GradientLayerDataModel,
         "
             SELECT 
                 gl.id as \"id!\",
@@ -106,12 +110,14 @@ where
     Ok(layers)
 }
 
-pub async fn get_all_gradient_stops<'a, E>(executor: E) -> Result<Vec<GradientStop>, sqlx::Error>
+pub async fn get_all_gradient_stops<'a, E>(
+    executor: E,
+) -> Result<Vec<GradientStopDataModel>, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
     let stops = sqlx::query_as!(
-        GradientStop,
+        GradientStopDataModel,
         "
             SELECT 
                 gs.id as \"id!\",

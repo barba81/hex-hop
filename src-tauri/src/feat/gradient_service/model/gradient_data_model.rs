@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct Gradient {
+pub struct GradientDataModel {
     pub id: i64,
     pub name: String,
     pub block_order: i64,
@@ -10,7 +10,7 @@ pub struct Gradient {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct GradientLayer {
+pub struct GradientLayerDataModel {
     pub id: i64,
     pub gradient_order: i64,
     pub gradient_id: i64,
@@ -22,7 +22,7 @@ pub struct GradientLayer {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct GradientStop {
+pub struct GradientStopDataModel {
     pub id: i64,
     pub gradient_order: i64,
     pub layer_id: i64,

@@ -24,7 +24,7 @@ pub async fn create_palette(
 pub async fn get_palette(
     state: tauri::State<'_, DbState>,
     palette_id: i64,
-) -> Result<palette_data_model::Palette, TauriError> {
+) -> Result<palette_data_model::PaletteDataModel, TauriError> {
     let color = palette_get_repo::get_palette_by_id(palette_id, &state.pool).await?;
     Ok(color)
 }

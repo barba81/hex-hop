@@ -111,7 +111,7 @@ pub async fn create_stop(
 #[tauri::command]
 pub async fn update_gradient(
     state: tauri::State<'_, DbState>,
-    gradient: gradient_data_model::Gradient,
+    gradient: gradient_data_model::GradientDataModel,
 ) -> Result<(), TauriError> {
     Ok(gradient_update_repo::update_gradient_async(&gradient, &state.pool).await?)
 }
@@ -119,7 +119,7 @@ pub async fn update_gradient(
 #[tauri::command]
 pub async fn update_gradient_layer(
     state: tauri::State<'_, DbState>,
-    layer: gradient_data_model::GradientLayer,
+    layer: gradient_data_model::GradientLayerDataModel,
 ) -> Result<(), TauriError> {
     Ok(gradient_update_repo::update_gradient_layer_async(&layer, &state.pool).await?)
 }
@@ -127,7 +127,7 @@ pub async fn update_gradient_layer(
 #[tauri::command]
 pub async fn update_stop(
     state: tauri::State<'_, DbState>,
-    stop: gradient_data_model::GradientStop,
+    stop: gradient_data_model::GradientStopDataModel,
 ) -> Result<(), TauriError> {
     Ok(gradient_update_repo::update_stop(&stop, &state.pool).await?)
 }

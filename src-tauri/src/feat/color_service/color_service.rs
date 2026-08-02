@@ -24,7 +24,7 @@ pub async fn create_color(
 pub async fn get_color(
     state: tauri::State<'_, DbState>,
     color_id: i64,
-) -> Result<color_data_model::Color, TauriError> {
+) -> Result<color_data_model::ColorDataModel, TauriError> {
     let color = color_get_repo::get_color_by_id(color_id, &state.pool).await?;
     Ok(color)
 }
