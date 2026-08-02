@@ -35,6 +35,8 @@ pub fn run() {
             feat::gradient_service::gradient_service::update_gradient_layer,
             feat::gradient_service::gradient_service::update_stop,
             feat::load_state::load_state_service::get_all_gradient,
+            feat::palette_service::palette_service::create_palette,
+            feat::palette_service::palette_service::get_palette,
         ])
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_clipboard_manager::init())

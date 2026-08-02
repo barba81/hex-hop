@@ -1,10 +1,6 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
-pub struct ColorCreateModel {
-    pub r: f64,
-    pub g: f64,
-    pub b: f64,
-    pub a: Option<f64>,
+pub struct PaletteCreateModel {
     pub name: String,
 }
