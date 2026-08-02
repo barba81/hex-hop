@@ -4,6 +4,9 @@ use serde::{Deserialize, Serialize};
 pub struct Gradient {
     pub id: i64,
     pub name: String,
+    pub block_order: i64,
+    pub block_id: i64,
+    pub kind: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

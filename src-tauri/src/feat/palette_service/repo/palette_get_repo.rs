@@ -15,7 +15,7 @@ where
                 p.name as \"name\",
                 b.id as \"block_id\",
                 b.block_order as \"block_order\",
-                \"color\" as kind
+                \"palette\" as kind
             FROM palette p 
             INNER JOIN  block b ON b.sub_palette_id = p.id
             WHERE p.id = ?1

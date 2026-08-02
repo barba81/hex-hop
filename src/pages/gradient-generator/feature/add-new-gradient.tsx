@@ -1,11 +1,8 @@
 import { invoke } from "@tauri-apps/api/core";
-import {
-  GradientEntity,
-  GradientLayerEntity,
-  GradientStopEntity,
-} from "../../infrastructure/entity";
+
 import { useGradientStore } from "@/store/use-gradient-store";
 import { newGradient } from "./default-const-gradient";
+import type { GradientEntity, GradientLayerEntity, GradientStopEntity } from "@/infrastructure/entity";
 
 export const addNewGradient = async () => {
   const gradientId = await invoke("create_gradient", { gradient: newGradient });
@@ -13,6 +10,7 @@ export const addNewGradient = async () => {
     gradientId: gradientId,
   });
   useGradientStore.getState().addGradient(gradient);
+  console.log(gradient);
 };
 
 export const addNewLayer = async (gradientId: number) => {

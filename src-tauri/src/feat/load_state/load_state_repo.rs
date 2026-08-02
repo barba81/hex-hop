@@ -11,7 +11,8 @@ where
         "
         SELECT 
             g.id as \"id!\",
-            g.name as \"name!\"
+            g.name as \"name!\",
+            \"gradient\" as kind
         FROM gradient g 
         WHERE g.deleted = 0
         ",

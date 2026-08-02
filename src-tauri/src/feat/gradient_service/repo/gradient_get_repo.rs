@@ -12,8 +12,12 @@ where
         "
            SELECT 
                 g.id as \"id!\",
-                g.name as \"name!\"
+                g.name as \"name!\",
+                b.id as \"block_id\",
+                b.block_order as \"block_order\",
+                \"gradient\" as kind
             FROM gradient g 
+            INNER JOIN  block b ON b.gradient_id = g.id
             WHERE g.id = ?1
             AND g.deleted = 0
             ",
