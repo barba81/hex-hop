@@ -18,6 +18,17 @@ impl From<sqlx::Error> for TauriError {
 }
 
 impl Serialize for TauriError {
+    /// Serializes the wrapped error message as a string.
+    ///
+    /// # Examples
+    ///
+    /// ```
+    /// let error = TauriError::from(sqlx::Error::RowNotFound);
+    /// let serialized = serde_json::to_string(&error).unwrap();
+    ///
+    /// assert!(serialized.starts_with('"'));
+    /// assert!(serialized.ends_with('"'));
+    /// ```
     fn serialize<S>(&self, serializer: S) -> Result<S::Ok, S::Error>
     where
         S: serde::Serializer,

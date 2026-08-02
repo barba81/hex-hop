@@ -11,7 +11,19 @@ use crate::{
     state::DbState,
 };
 
-#[tauri::command]
+/// Loads all gradients and their associated layers and stops from the database.
+///
+/// # Examples
+///
+/// ```no_run
+/// # async fn example(state: tauri::State<'_, DbState>) -> Result<(), TauriError> {
+/// let gradients = get_all_gradient(state).await?;
+/// # let _ = gradients;
+/// # Ok(())
+/// # }
+/// ```
+///
+/// Returns the nested gradient responses or a database error.
 pub async fn get_all_gradient(
     state: tauri::State<'_, DbState>,
 ) -> Result<Vec<GradientResponse>, TauriError> {
@@ -27,6 +39,24 @@ pub async fn get_all_gradient(
     Ok(response)
 }
 
+/// Builds nested gradient responses from gradients, layers, and stops.
+///
+/// # Examples
+///
+/// ```
+/// let responses = build_all_gradients_response_fast(&[], &[], &[]);
+/// assert!(responses.is_empty());
+/// ```
+///
+/// # Arguments
+///
+/// * `gradients` - The gradients to convert.
+/// * `layers` - The layers associated with the gradients.
+/// * `stops` - The stops associated with the layers.
+///
+/// # Returns
+///
+/// A response for each gradient, including its associated layers and stops.
 pub fn build_all_gradients_response_fast(
     gradients: &[Gradient],
     layers: &[GradientLayer],

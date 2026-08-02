@@ -1,5 +1,24 @@
 use super::super::model::*;
 
+/// Creates a gradient record from its name.
+///
+/// # Examples
+///
+/// ```no_run
+/// # async fn example() -> Result<(), Box<dyn std::error::Error>> {
+/// let pool = sqlx::SqlitePool::connect("sqlite://gradients.db").await?;
+/// let gradient = gradient_service_request::GradientRequest {
+///     name: "Sunset".to_owned(),
+/// };
+/// let id = create_gradient(&gradient, &pool).await?;
+/// # let _ = id;
+/// # Ok(())
+/// # }
+/// ```
+///
+/// # Returns
+///
+/// The generated gradient ID.
 pub async fn create_gradient<'a, E>(
     gradient: &gradient_service_request::GradientRequest,
     executor: E,
@@ -17,6 +36,29 @@ where
     Ok(id)
 }
 
+/// Creates a layer associated with a gradient and returns its generated identifier.
+///
+/// # Arguments
+///
+/// * `layer` - The layer attributes to insert.
+/// * `gradient_id` - The identifier of the gradient that owns the layer.
+///
+/// # Returns
+///
+/// The generated layer identifier.
+///
+/// # Examples
+///
+/// ```no_run
+/// # async fn example(
+/// #     layer: &gradient_service_request::GradientLayerRequest,
+/// #     executor: sqlx::SqliteConnection,
+/// # ) -> Result<(), sqlx::Error> {
+/// let layer_id = create_layer(layer, 1, executor).await?;
+/// assert!(layer_id > 0);
+/// # Ok(())
+/// # }
+/// ```
 pub async fn create_layer<'a, E>(
     layer: &gradient_service_request::GradientLayerRequest,
     gradient_id: i64,
@@ -54,6 +96,22 @@ where
     Ok(id)
 }
 
+/// Inserts multiple gradient layers and returns their generated database IDs.
+///
+/// An empty input produces an empty vector without executing a database query.
+///
+/// # Examples
+///
+/// ```
+/// #[tokio::test]
+/// async fn creates_no_layers_from_empty_input() -> Result<(), sqlx::Error> {
+///     let pool = sqlx::SqlitePool::connect(":memory:").await?;
+///     let ids = create_layers(&[], pool).await?;
+///
+///     assert!(ids.is_empty());
+///     Ok(())
+/// }
+/// ```
 pub async fn create_layers<'a, E>(
     layers: &[gradient_create_model::GradientLayerCreateModel],
     executor: E,
@@ -92,6 +150,24 @@ where
     Ok(ids)
 }
 
+/// Creates a color stop associated with a gradient layer.
+///
+/// # Arguments
+///
+/// * `stop` - The stop's order, RGBA color components, and position.
+/// * `layer_id` - The identifier of the layer that owns the stop.
+///
+/// # Returns
+///
+/// The generated stop identifier.
+///
+/// # Examples
+///
+/// ```rust,ignore
+/// let stop = /* a GradientStopRequest */;
+/// let layer_id = 42;
+/// let id = create_stop(&stop, layer_id, &pool).await?;
+/// ```
 pub async fn create_stop<'a, E>(
     stop: &gradient_service_request::GradientStopRequest,
     layer_id: i64,
@@ -120,6 +196,27 @@ where
     Ok(id)
 }
 
+/// Creates multiple gradient stops and returns their generated database IDs.
+///
+/// An empty input produces an empty vector without executing a database query.
+///
+/// # Arguments
+///
+/// * `stops` - The gradient stops to insert.
+///
+/// # Examples
+///
+/// ```
+/// # async fn example() -> Result<(), sqlx::Error> {
+/// let pool = sqlx::SqlitePool::connect(":memory:").await?;
+/// let stops: &[gradient_create_model::GradientStopCreateModel] = &[];
+///
+/// let ids = create_stops(stops, &pool).await?;
+///
+/// assert!(ids.is_empty());
+/// # Ok(())
+/// # }
+/// ```
 pub async fn create_stops<'a, E>(
     stops: &[gradient_create_model::GradientStopCreateModel],
     executor: E,

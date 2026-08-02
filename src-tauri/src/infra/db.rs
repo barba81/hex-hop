@@ -7,6 +7,16 @@ use crate::state::DbState;
 
 const DATA_BASE_NAME: &str = "hex-hop.db";
 
+/// Initializes the application's SQLite database and registers its connection pool in application state.
+///
+/// # Examples
+///
+/// ```no_run
+/// # async fn example(app: &tauri::App) -> Result<(), Box<dyn std::error::Error>> {
+/// crate::init_database(app).await?;
+/// # Ok(())
+/// # }
+/// ```
 pub async fn init_database(app: &App) -> Result<(), Box<dyn std::error::Error>> {
     let app_dir = app.path().app_data_dir()?;
     if !app_dir.exists() {

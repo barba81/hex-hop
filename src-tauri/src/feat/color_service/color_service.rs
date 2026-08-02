@@ -4,7 +4,24 @@ use crate::state::DbState;
 use super::model::*;
 use super::repo::*;
 
-#[tauri::command]
+/// Creates a color and associates it with an optional parent palette in a single transaction.
+///
+/// # Returns
+///
+/// The identifier of the newly created color.
+///
+/// # Examples
+///
+/// ```no_run
+/// # async fn example(
+/// #     state: tauri::State<'_, DbState>,
+/// #     color: color_create_model::ColorCreateModel,
+/// # ) -> Result<(), TauriError> {
+/// let color_id = create_color(state, color, None).await?;
+/// assert!(color_id > 0);
+/// # Ok(())
+/// # }
+/// ```
 pub async fn create_color(
     state: tauri::State<'_, DbState>,
     color: color_create_model::ColorCreateModel,
@@ -20,7 +37,25 @@ pub async fn create_color(
     Ok(color_id)
 }
 
-#[tauri::command]
+/// Retrieves a color by its identifier.
+///
+/// # Examples
+///
+/// ```no_run
+/// # async fn example(state: tauri::State<'_, DbState>) -> Result<(), TauriError> {
+/// let color = get_color(state, 42).await?;
+/// # let _ = color;
+/// # Ok(())
+/// # }
+/// ```
+///
+/// # Returns
+///
+/// The color associated with `color_id`.
+///
+/// # Arguments
+///
+/// * `color_id` - The identifier of the color to retrieve.
 pub async fn get_color(
     state: tauri::State<'_, DbState>,
     color_id: i64,

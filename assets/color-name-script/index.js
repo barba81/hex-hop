@@ -3,6 +3,11 @@ import { converter } from 'culori';
 
 const toLab = converter('lab');
 
+/**
+ * Generates a compact JSON palette of color names and rounded CIELAB coordinates.
+ * Fetches color data, converts valid hexadecimal colors, and writes the result to
+ * `./color-name-lab.min.json`.
+ */
 async function generateLabPalette() {
     // Example of your data format: {"100438": "Congressional Navy", "102030": "The Count"}
     // If loading from a file locally, use:

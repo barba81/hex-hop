@@ -1,5 +1,23 @@
 use super::super::model::*;
 
+/// Inserts a gradient color record and returns its generated identifier.
+///
+/// # Examples
+///
+/// ```no_run
+/// # async fn example() -> Result<(), sqlx::Error> {
+/// let gradient: color_create_model::ColorCreateModel = todo!();
+/// let pool: sqlx::SqlitePool = todo!();
+///
+/// let id = create_gradient(&gradient, &pool).await?;
+/// # let _ = id;
+/// # Ok(())
+/// # }
+/// ```
+///
+/// # Returns
+///
+/// The generated database identifier for the inserted color.
 pub async fn create_gradient<'a, E>(
     gradient: &color_create_model::ColorCreateModel,
     executor: E,
@@ -21,6 +39,26 @@ where
     Ok(id)
 }
 
+/// Creates a block for a color and assigns the next order within its parent palette.
+///
+/// # Arguments
+///
+/// * `color_id` - ID of the color associated with the block.
+/// * `parent_palette_id` - Optional ID of the block's parent palette.
+///
+/// # Errors
+///
+/// Returns a database error if the block cannot be inserted.
+///
+/// # Examples
+///
+/// ```no_run
+/// # async fn example() -> Result<(), sqlx::Error> {
+/// let pool = sqlx::SqlitePool::connect("sqlite::memory:").await?;
+/// create_block_color(42, Some(7), &pool).await?;
+/// # Ok(())
+/// # }
+/// ```
 pub async fn create_block_color<'a, E>(
     color_id: i64,
     parent_palette_id: Option<i64>,

@@ -8,6 +8,13 @@ pub mod feat;
 pub mod infra;
 pub mod state;
 
+/// Initializes and starts the Tauri application with its commands, plugins, and database.
+///
+/// # Examples
+///
+/// ```no_run
+/// run();
+/// ```
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tracing_subscriber::fmt()

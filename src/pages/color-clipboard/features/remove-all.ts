@@ -1,5 +1,10 @@
 import { useHexHopStore } from "@/store/use-hex-hop-store";
 
+/**
+ * Attempts to remove all stored data and clears the color block state on success.
+ *
+ * @returns An empty array if cleanup fails; otherwise, `undefined`
+ */
 export async function removeAllData() {
     try {
 //         const db = await getContext();

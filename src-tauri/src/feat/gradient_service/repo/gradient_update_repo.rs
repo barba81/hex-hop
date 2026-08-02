@@ -1,5 +1,18 @@
 use super::super::model::*;
 
+/// Updates a gradient's name in the database using its ID.
+///
+/// # Examples
+///
+/// ```no_run
+/// # async fn example(
+/// #     gradient: &gradient_data_model::Gradient,
+/// #     pool: &sqlx::SqlitePool,
+/// # ) -> Result<(), sqlx::Error> {
+/// update_gradient_async(gradient, pool).await?;
+/// # Ok(())
+/// # }
+/// ```
 pub async fn update_gradient_async<'e, E>(
     gradient: &gradient_data_model::Gradient,
     executor: E,
@@ -18,6 +31,26 @@ where
     Ok(())
 }
 
+/// Updates a gradient layer's persisted properties by its identifier.
+///
+/// # Examples
+///
+/// ```no_run
+/// # async fn example<'e, E>(
+/// #     gradient_layer: &'e gradient_data_model::GradientLayer,
+/// #     executor: E,
+/// # ) -> Result<(), sqlx::Error>
+/// # where
+/// #     E: sqlx::Executor<'e, Database = sqlx::Sqlite>,
+/// # {
+/// update_gradient_layer_async(gradient_layer, executor).await?;
+/// # Ok(())
+/// # }
+/// ```
+///
+/// # Errors
+///
+/// Returns a [`sqlx::Error`] if the database update fails.
 pub async fn update_gradient_layer_async<'e, E>(
     gradient_layer: &gradient_data_model::GradientLayer,
     executor: E,
@@ -48,6 +81,24 @@ where
     Ok(())
 }
 
+/// Updates a gradient stop's order, color components, and position in the database.
+///
+/// # Examples
+///
+/// ```no_run
+/// # async fn example<E>(
+/// #     stop: &gradient_data_model::GradientStop,
+/// #     executor: E,
+/// # ) -> Result<(), sqlx::Error>
+/// # where
+/// #     E: sqlx::Executor<'static, Database = sqlx::Sqlite>,
+/// # {
+/// update_stop(stop, executor).await?;
+/// # Ok(())
+/// # }
+/// ```
+///
+/// Returns an error if the database update fails.
 pub async fn update_stop<'e, E>(
     stop: &gradient_data_model::GradientStop,
     executor: E,

@@ -1,5 +1,25 @@
 use super::super::model::*;
 
+/// Retrieves an active color and its associated block order by ID.
+///
+/// # Arguments
+///
+/// * `id` - The color ID to retrieve.
+/// * `executor` - The SQLite executor used to perform the query.
+///
+/// # Returns
+///
+/// The matching color, including its block order, or a SQLx error if the query fails.
+///
+/// # Examples
+///
+/// ```no_run
+/// # async fn example() -> Result<(), sqlx::Error> {
+/// let pool = sqlx::SqlitePool::connect("sqlite::memory:").await?;
+/// let color = get_color_by_id(1, &pool).await?;
+/// # Ok(())
+/// # }
+/// ```
 pub async fn get_color_by_id<'a, E>(
     id: i64,
     executor: E,

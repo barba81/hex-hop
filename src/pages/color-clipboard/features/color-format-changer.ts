@@ -2,6 +2,12 @@ import { ColorData } from "@/infrastructure/types";
 import { rgb } from "culori";
 
 
+/**
+ * Converts normalized color components to a hexadecimal color string.
+ *
+ * @param color - The color with RGB components and an optional alpha component normalized to values from 0 to 1
+ * @returns A hexadecimal color string with an optional alpha channel
+ */
 export function colorDataToHex(color: ColorData) {
     const toHex = (value: number): string => {
         const clamped = Math.max(0, Math.min(1, value));
@@ -18,6 +24,13 @@ export function colorDataToHex(color: ColorData) {
     return `#${rHex}${gHex}${bHex}${aHex}`;
 }
 
+/**
+ * Parses a color string into normalized RGB color data.
+ *
+ * @param color - The color string to parse
+ * @returns The parsed red, green, blue, and alpha components
+ * @throws Error if the color string is invalid
+ */
 export function colorStringToData(color: string){
  const rbg = rgb(color);
   if (!rbg) {

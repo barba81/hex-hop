@@ -5,6 +5,23 @@ use block::ConcreteBlock;
 #[cfg(target_os = "macos")]
 use objc::{class, msg_send, runtime::Object, sel, sel_impl};
 
+/// Opens the macOS color picker and converts the selected color to an uppercase `#RRGGBB` string.
+///
+/// Returns `None` when the picker is canceled. On non-macOS platforms, returns an error.
+///
+/// # Examples
+///
+/// ```no_run
+/// # async fn example(app_handle: tauri::AppHandle) -> Result<(), String> {
+/// let color = pick_color_mack(app_handle).await?;
+/// println!("{color:?}");
+/// # Ok(())
+/// # }
+/// ```
+///
+/// # Returns
+///
+/// The selected color as `Some("#RRGGBB")`, `None` if canceled, or an error message.
 #[tauri::command]
 pub async fn pick_color_mack(_app_handle: AppHandle) -> Result<Option<String>, String> {
     #[cfg(target_os = "macos")]

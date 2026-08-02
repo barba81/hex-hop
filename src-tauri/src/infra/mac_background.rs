@@ -3,6 +3,25 @@ use tauri::WebviewWindow;
 #[cfg(target_os = "windows")]
 use window_vibrancy::apply_acrylic;
 
+/// Applies a platform-specific translucent background effect to the window.
+///
+/// On macOS, applies vibrancy and a clear liquid-glass effect. On Windows,
+/// applies dark acrylic blur. Other platforms leave the window unchanged.
+///
+/// # Panics
+///
+/// Panics if a platform-specific effect is unavailable.
+///
+/// # Examples
+///
+/// ```no_run
+/// # let window: WebviewWindow = todo!();
+/// transparent_background(window).expect("failed to apply transparent background");
+/// ```
+///
+/// # Returns
+///
+/// `Ok(())` after applying the platform-specific effect.
 pub fn transparent_background(window: WebviewWindow) -> Result<(), String> {
     #[cfg(target_os = "macos")]
     {
