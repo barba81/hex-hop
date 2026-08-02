@@ -5,11 +5,8 @@ import { useClipboardStore } from "@/store/use-clipboard-store";
 import { getSmartColorName } from "./get-color-name";
 
 export const addNewColorToClipboard = async (colorData: ColorData) => {
-    console.time();
     const name = await getSmartColorName(colorData);
-    const colorId = await invoke("create_color", { color: { ...colorData, name } });
+    const colorId = await invoke("create_color", { color: { ...colorData, name:name } });
     const colorEntity = await invoke<ColorEntity>("get_color", { colorId });
-    useClipboardStore.getState().addColor({...colorEntity, kind:"color"});
-    console.timeEnd();
-    console.log({...colorEntity, kind:"color"});
+    useClipboardStore.getState().addBlock(colorEntity);
 }

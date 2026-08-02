@@ -1,6 +1,6 @@
 use super::super::model::*;
 
-pub async fn get_color_by_id<'a, E>(
+pub async fn get_palette_by_id<'a, E>(
     id: i64,
     executor: E,
 ) -> Result<color_data_model::Color, sqlx::Error>

@@ -3,5 +3,10 @@ export type ColorData =  {
     g: number;
     b: number;
     a?: number;
+    paletteId?: number;
+}
+
+export type PaletteData =  {
+    
 }
 

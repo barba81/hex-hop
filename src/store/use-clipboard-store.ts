@@ -13,7 +13,7 @@ interface ClipboardAction {
 
   // CREATE -----------------------------------------------------------------------
 
-  addColor: (gradient:BlockEntity) => void;
+  addBlock: (gradient:BlockEntity) => void;
 
 }
 
@@ -24,7 +24,7 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
       state.blocks = blocks;
     }),
 
-  addColor: (blocks:BlockEntity) =>
+  addBlock: (blocks:BlockEntity) =>
     set((state) => {
       state.blocks.push(blocks);
     }),
