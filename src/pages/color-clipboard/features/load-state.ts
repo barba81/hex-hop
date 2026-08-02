@@ -5,7 +5,6 @@ import { invoke } from "@tauri-apps/api/core";
 export async function loadGradientData() {
     console.time("state");
     const blocks = await invoke<GradientEntity[]>("load_state");
-    console.log(blocks);
     console.timeEnd("state");
     useClipboardStore.getState().initBlocks(blocks);
     // const gradients = await invoke<GradientEntity[]>("get_all_gradient");

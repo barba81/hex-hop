@@ -30,7 +30,7 @@ pub async fn load_state(
     tx.commit().await?;
 
     let gradients = build_all_gradients_response_fast(&gradients_data, &layers, &stops);
-    ///
+
     let mut root: Vec<BlockResponse> = Vec::new();
 
     for palette in palettes_data {

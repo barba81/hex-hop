@@ -10,7 +10,6 @@ export const addNewGradient = async () => {
     gradientId: gradientId,
   });
   useGradientStore.getState().addGradient(gradient);
-  console.log(gradient);
 };
 
 export const addNewLayer = async (gradientId: number) => {
