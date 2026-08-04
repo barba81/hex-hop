@@ -17,6 +17,7 @@ interface ClipboardAction {
 
   // DELETE  -----------------------------------------------------------------------
   deleteBlock: (blockId: number, paletteId?: number) => void;
+  deleteClipboard: () => void;
 
 }
 
@@ -35,18 +36,22 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
   // NEED TO UPDATE TO PALETTE
   deleteBlock: (blockId: number, paletteId?: number) =>
     set((state) => {
-      if (paletteId === undefined) {
-        const index = state.blocks.findIndex((x) => x.blockId === blockId);
-        if (index === -1) return;
-        state.blocks.splice(index, 1);
-      } else {
-        const index = state.blocks.findIndex((x) => x.blockId === paletteId);
-        if (index === -1) return;
-        const palette = state.blocks[index];
-        if (palette.kind !== 'palette') return;
-        const index2 = palette.blocks.findIndex((x) => x.blockId === blockId);
-        if (index2 === -1) return;
-        palette.blocks.splice(index2, 1);
+      if (paletteId == null) {
+        state.blocks = state.blocks.filter((block) => block.blockId !== blockId);
+        return;
       }
+
+      const palette = state.blocks.find(
+        (block) =>
+          block.blockId === paletteId
+      );
+
+      if (palette?.kind !== 'palette') return;
+
+      palette.blocks = palette.blocks.filter((block) => block.blockId !== blockId);
+    }),
+  deleteClipboard: () =>
+    set((state) => {
+      state.blocks.length = 0;
     }),
 })));

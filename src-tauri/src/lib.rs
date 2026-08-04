@@ -45,7 +45,8 @@ pub fn run() {
             create_palette,
             get_palette,
             load_state,
-            soft_delete_block
+            soft_delete_block,
+            soft_delete_clipboard
         ])
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_clipboard_manager::init())

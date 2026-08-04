@@ -1,10 +1,10 @@
 import SearchBar from "./search-bar";
 import FilterPalette from "./filter-palette";
 import FilterGradient from "./filter-gradient";
-import ClearAllButton from "./clear-all-button";
-import { Plus } from "lucide-react";
+import { Plus, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { addNewPalette } from "../features/add-new-palette";
+import { deleteClipboard } from "../features/delete-clipboard";
 
 const HeaderColorList = () => {
   return (
@@ -16,7 +16,7 @@ const HeaderColorList = () => {
       <FilterPalette />
 
       <SearchBar />
-      <ClearAllButton />
+      <X onClick={()=>deleteClipboard()} />
     </div>
   );
 };
