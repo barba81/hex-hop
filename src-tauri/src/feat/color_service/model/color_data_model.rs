@@ -10,6 +10,6 @@ pub struct ColorDataModel {
     pub name: String,
     pub block_order: i64,
     pub block_id: i64,
-    pub kind: String,
     pub parent_palette_id: Option<i64>,
+    pub kind: String,
 }

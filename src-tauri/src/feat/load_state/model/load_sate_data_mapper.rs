@@ -55,6 +55,7 @@ pub fn build_all_gradients_response_fast(
                 id: gradient.id,
                 name: gradient.name.clone(),
                 layers: layer_responses,
+                block_order: gradient.block_order,
                 parent_palette_id: gradient.parent_palette_id,
             }
         })

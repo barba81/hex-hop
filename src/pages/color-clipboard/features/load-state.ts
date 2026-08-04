@@ -7,5 +7,5 @@ export async function loadGradientData() {
     const blocks = await invoke<GradientEntity[]>("load_state");
     console.timeEnd("state");
     useClipboardStore.getState().initBlocks(blocks);
-    const gradients = await invoke<GradientEntity[]>("get_all_gradient");
+    console.log(blocks);
 }
