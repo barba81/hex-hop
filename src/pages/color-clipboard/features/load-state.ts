@@ -1,11 +1,11 @@
-import type { GradientEntity } from "@/infrastructure/entity";
+import type { BlockEntity } from "@/infrastructure/entity";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 import { invoke } from "@tauri-apps/api/core";
+import { convertDlchToLab65 } from "culori";
 
 export async function loadGradientData() {
-    console.time("state");
-    const blocks = await invoke<GradientEntity[]>("load_state");
-    console.timeEnd("state");
+    const blocks = await invoke<BlockEntity[]>("load_state");
     useClipboardStore.getState().initBlocks(blocks);
     console.log(blocks);
+    blocks.map(x=>console.log(x.blockId));
 }

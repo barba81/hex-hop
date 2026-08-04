@@ -11,13 +11,7 @@ const ColorList = () => {
   const colorBlocks = useClipboardStore().blocks;
 
   const handleDragEnd = ({}: DragEndEvent) => {
-    // if (canceled || !operation.target || !operation.source?.id) return;
 
-    // const sourceNum = operation.source.id as number; 
-    // const targetParentId = operation.target.data.parentId ?? null;
-    // const targetOrder: number = operation.target.data.order ?? null;
-
-    // dropNewPosition(sourceNum, targetParentId, targetOrder);
   };
 
   return (
@@ -31,20 +25,19 @@ const ColorList = () => {
             
             const renderBlock = () => {
               if (block.kind === "color") {
-                return <ColorBlock key={block.id} color={block} />;
+                return <ColorBlock key={block.blockId} color={block} />;
               } else if (block.kind === "palette") {
-                return <PaletteBox key={block.id} palette={block} />;
+                return <PaletteBox key={block.blockId} palette={block} />;
               }
               return null;
             };
 
             return (
-              <React.Fragment key={block.id}>
-         
+              <React.Fragment key={block.blockId}>
                 {renderBlock()}
                 {ix === colorBlocks.length - 1 && (
                   <DropLine
-                    id={`after-${block.id}`}
+                    id={`after-${block.blockId}`}
                     order={ix + 1}
                     parentId={undefined}
                   />

@@ -84,6 +84,7 @@ pub async fn load_state(
             }
         }
     }
+    println!("{:?}", root);
     Ok(root)
 }
 

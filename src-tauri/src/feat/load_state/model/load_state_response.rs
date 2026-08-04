@@ -7,12 +7,10 @@ use crate::feat::{
 };
 
 #[derive(Debug, Serialize, Clone)]
-#[serde(tag = "kind")]
+#[serde(rename_all = "camelCase")]
+#[serde(untagged)]
 pub enum BlockResponse {
-    #[serde(rename = "palette")]
     Palette(PaletteResponseModel),
-    #[serde(rename = "color")]
     Color(ColorDataModel),
-    #[serde(rename = "gradient")]
     Gradient(GradientResponse),
 }

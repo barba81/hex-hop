@@ -6,6 +6,7 @@ use crate::feat::{
 };
 
 #[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
 pub struct PaletteResponseModel {
     pub id: i64,
     pub name: String,
@@ -16,9 +17,9 @@ pub struct PaletteResponseModel {
 }
 
 #[derive(Debug, Serialize, Clone)]
+#[serde(rename_all = "camelCase")]
+#[serde(untagged)]
 pub enum BlockChildResponse {
-    #[serde(rename = "color")]
     Color(ColorDataModel),
-    #[serde(rename = "gradient")]
     Gradient(GradientResponse),
 }
