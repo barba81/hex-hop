@@ -1,3 +1,4 @@
+pub mod block_service;
 pub mod color_picker;
 pub mod color_service;
 pub mod gradient_service;

@@ -6,9 +6,10 @@ import ColorName from "./color-name";
 import { DragDots } from "../../../../components/common/drag-dots";
 import { useDraggable } from "@dnd-kit/react";
 import EditButton from "./edit-button";
-import { Pin } from "lucide-react";
+import { Pin, X } from "lucide-react";
 import type { ColorEntity } from "@/infrastructure/entity";
 import { colorDataToRoundData } from "../../features/color-format-changer";
+import { deleteBlock } from "../../features/delete-clipboard";
 
 const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
   const { ref } = useDraggable({
@@ -42,7 +43,7 @@ const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
         >
           <EditButton colorEntity={colorEntity} />
           <Pin size={14}/>
-          <CloseButton colorEntity={colorEntity} />
+           <X size={15} onClick={()=>deleteBlock(colorEntity.blockId)}/>
         </div>
     );
   };
