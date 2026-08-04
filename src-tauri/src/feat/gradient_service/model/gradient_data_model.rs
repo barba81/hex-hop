@@ -7,6 +7,7 @@ pub struct GradientDataModel {
     pub block_order: i64,
     pub block_id: i64,
     pub kind: String,
+    pub parent_palette_id: Option<i64>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

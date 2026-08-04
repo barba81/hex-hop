@@ -21,7 +21,7 @@ export const PaletteBox = ({ palette }: PaletteBoxParams) => {
 
   const colorBlocks = useHexHopStore()
     .colorBlocks.filter(
-      (x) => x.kind !== "palette" && x.paletteId === palette.id,
+      (x) => x.kind !== "palette" && x.parentPaletteId === palette.id,
     )
     .sort((a, b) => a.blockOrder - b.blockOrder);
 

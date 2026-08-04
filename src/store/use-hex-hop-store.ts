@@ -37,7 +37,7 @@ export const useHexHopStore = create<HexHopStore>((set) => ({
         },
         removeAllPaletteBlocks: (paletteId: number): void => {
             set((state) => ({
-                colorBlocks: state.colorBlocks.filter((x) => (x.kind === 'palette' || x.paletteId !== paletteId)),
+                colorBlocks: state.colorBlocks.filter((x) => (x.kind === 'palette' || x.parentPaletteId !== paletteId)),
             }));
         },
     }

@@ -11,13 +11,11 @@ pub fn build_all_gradients_response_fast(
     layers: &[GradientLayerDataModel],
     stops: &[GradientStopDataModel],
 ) -> Vec<GradientResponse> {
-    // 1. Group stops by layer_id
     let mut stops_by_layer: HashMap<i64, Vec<&GradientStopDataModel>> = HashMap::new();
     for stop in stops {
         stops_by_layer.entry(stop.layer_id).or_default().push(stop);
     }
 
-    // 2. Group layers by gradient_id
     let mut layers_by_gradient: HashMap<i64, Vec<&GradientLayerDataModel>> = HashMap::new();
     for layer in layers {
         layers_by_gradient
@@ -26,7 +24,6 @@ pub fn build_all_gradients_response_fast(
             .push(layer);
     }
 
-    // 3. Assemble response efficiently
     gradients
         .iter()
         .map(|gradient| {
@@ -58,6 +55,7 @@ pub fn build_all_gradients_response_fast(
                 id: gradient.id,
                 name: gradient.name.clone(),
                 layers: layer_responses,
+                parent_palette_id: gradient.parent_palette_id,
             }
         })
         .collect()

@@ -5,6 +5,7 @@ use serde::{Deserialize, Serialize};
 pub struct GradientResponse {
     pub id: i64,
     pub name: String,
+    pub parent_palette_id: Option<i64>,
     pub layers: Vec<GradientLayerResponse>,
 }
 

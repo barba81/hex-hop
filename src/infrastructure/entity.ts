@@ -9,8 +9,8 @@ export type PaletteEntity =  {
     blockId:number;
     blockOrder: number;
     name: string;
-
-    blocks: (PaletteEntity| ColorEntity | GradientEntity)[];
+         
+    blocks: (ColorEntity | GradientEntity)[];
 }
 
 export type ColorEntity =  {
@@ -23,7 +23,7 @@ export type ColorEntity =  {
     g: number;
     b: number;
     a?: number;
-    paletteId?: number;
+    parentPaletteId?: number;
 }
 
 export type GradientEntity =  {
@@ -32,7 +32,7 @@ export type GradientEntity =  {
     blockId:number;
     blockOrder: number;
     name: string;
-    paletteId: number | null;
+    parentPaletteId: number | null;
     
     layers: GradientLayerEntity[];
 }

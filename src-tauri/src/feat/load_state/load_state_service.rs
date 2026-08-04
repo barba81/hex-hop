@@ -31,19 +31,13 @@ pub async fn load_state(
 
     let gradients = build_all_gradients_response_fast(&gradients_data, &layers, &stops);
 
-    let mut root: Vec<BlockResponse> = Vec::new();
+    let mut root: Vec<BlockResponse> =
+        Vec::with_capacity(palettes_data.len() + colors_data.len() + gradients.len());
 
-    for palette in palettes_data {
-        root.push(BlockResponse::Palette(palette));
-    }
+    root.extend(palettes_data.into_iter().map(BlockResponse::Palette));
+    root.extend(colors_data.into_iter().map(BlockResponse::Color));
+    root.extend(gradients.into_iter().map(BlockResponse::Gradient));
 
-    for color in colors_data {
-        root.push(BlockResponse::Color(color));
-    }
-
-    for gradient in gradients {
-        root.push(BlockResponse::Gradient(gradient));
-    }
-
+    println!("{:?}", root);
     Ok(root)
 }

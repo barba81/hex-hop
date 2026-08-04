@@ -13,7 +13,7 @@ import { colorDataToRoundData } from "../../features/color-format-changer";
 const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
   const { ref } = useDraggable({
     id: colorEntity.blockId,
-    data: { parent: colorEntity.paletteId },
+    data: { parent: colorEntity.parentPaletteId },
   });
 
   const colorHexData = colorDataToRoundData(colorEntity);
