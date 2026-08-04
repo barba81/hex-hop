@@ -26,7 +26,7 @@ where
                 \"color\" as kind
             FROM color c 
             INNER JOIN  block b ON b.color_id = c.id
-            AND c.deleted = 0
+            AND b.deleted = 0
             ",
     )
     .fetch_all(executor)
@@ -50,7 +50,7 @@ where
                 \"palette\" as kind
             FROM palette p 
             INNER JOIN  block b ON b.sub_palette_id = p.id
-            AND p.deleted = 0
+            AND b.deleted = 0
             ",
     )
     .fetch_all(executor)
@@ -75,7 +75,7 @@ where
             \"gradient\" as kind
         FROM gradient g 
         INNER JOIN  block b ON b.gradient_id = g.id
-        AND g.deleted = 0
+        AND b.deleted = 0
         ",
     )
     .fetch_all(executor)

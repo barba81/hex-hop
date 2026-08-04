@@ -1,8 +1,7 @@
 -- Add migration script here
 CREATE TABLE palette (
     id      INTEGER PRIMARY KEY AUTOINCREMENT,
-    name    TEXT  NOT NULL,
-    deleted INTEGER DEFAULT 0 CHECK(deleted BETWEEN 0 AND 1)
+    name    TEXT  NOT NULL
 );
 
 CREATE TABLE color (
@@ -11,14 +10,12 @@ CREATE TABLE color (
     g       REAL DEFAULT 1 CHECK(g BETWEEN 0 AND 1),
     b       REAL DEFAULT 1 CHECK(b BETWEEN 0 AND 1),
     a       REAL DEFAULT NULL CHECK(a IS NULL OR a BETWEEN 0 AND 1),
-    name    TEXT NOT NULL,
-    deleted INTEGER DEFAULT 0 CHECK(deleted BETWEEN 0 AND 1)
+    name    TEXT NOT NULL
 );
 
 CREATE TABLE gradient (
     id      INTEGER PRIMARY KEY AUTOINCREMENT,
-    name    TEXT NOT NULL,
-    deleted INTEGER DEFAULT 0 CHECK(deleted BETWEEN 0 AND 1)
+    name    TEXT NOT NULL
 );
 
 CREATE TABLE block (
@@ -28,6 +25,7 @@ CREATE TABLE block (
     color_id      INTEGER,
     gradient_id   INTEGER,
     sub_palette_id INTEGER,
+    deleted INTEGER DEFAULT 0 CHECK(deleted BETWEEN 0 AND 1),
     
     FOREIGN KEY (parent_palette_id) REFERENCES palette(id) ON DELETE CASCADE,
     FOREIGN KEY (color_id) REFERENCES color(id) ON DELETE CASCADE,

@@ -5,9 +5,12 @@ pub async fn soft_delete_gradient_by_id<'e, E>(
 where
     E: sqlx::Executor<'e, Database = sqlx::Sqlite>,
 {
-    let result = sqlx::query!("UPDATE gradient SET deleted = 1 WHERE id = ?", gradient_id)
-        .execute(executor)
-        .await?;
+    let result = sqlx::query!(
+        "UPDATE block SET deleted = 1 WHERE gradient_id = ?",
+        gradient_id
+    )
+    .execute(executor)
+    .await?;
 
     Ok(result.rows_affected() > 0)
 }

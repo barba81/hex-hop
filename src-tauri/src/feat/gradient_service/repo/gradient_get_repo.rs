@@ -20,7 +20,7 @@ where
             FROM gradient g 
             INNER JOIN  block b ON b.gradient_id = g.id
             WHERE g.id = ?1
-            AND g.deleted = 0
+            AND b.deleted = 0
             ",
         id
     )

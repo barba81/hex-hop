@@ -19,7 +19,7 @@ where
             FROM palette p 
             INNER JOIN  block b ON b.sub_palette_id = p.id
             WHERE p.id = ?1
-            AND p.deleted = 0
+            AND b.deleted = 0
             ",
         id
     )

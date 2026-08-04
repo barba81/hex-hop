@@ -24,7 +24,7 @@ where
             FROM color c 
             INNER JOIN  block b ON b.color_id = c.id
             WHERE c.id = ?1
-            AND c.deleted = 0
+            AND b.deleted = 0
             ",
         id
     )
