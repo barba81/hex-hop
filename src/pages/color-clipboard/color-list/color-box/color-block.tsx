@@ -43,7 +43,7 @@ const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
         >
           <EditButton colorEntity={colorEntity} />
           <Pin size={14}/>
-           <X size={15} onClick={()=>deleteBlock(colorEntity.blockId)}/>
+           <X size={15} onClick={()=>deleteBlock(colorEntity.blockId, colorEntity.parentPaletteId)}/>
         </div>
     );
   };

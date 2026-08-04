@@ -1,7 +1,9 @@
+import { useClipboardStore } from "@/store/use-clipboard-store";
 import { invoke } from "@tauri-apps/api/core";
 
-export const deleteBlock = async (blockId: number) => {
+export const deleteBlock = async (blockId: number, paletteId?: number) => {
     await invoke("soft_delete_block", {blockId:blockId});
+    useClipboardStore.getState().deleteBlock(blockId, paletteId);
 } 
 
 export const deletePaletteBlocks = async (paletteId: number) => {

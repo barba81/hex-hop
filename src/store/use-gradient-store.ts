@@ -83,9 +83,8 @@ export const useGradientStore = create<GradientStore & GradientAction>()(immer((
   deleteGradient: (gradientId: number) =>
     set((state) => {
       const index = state.gradients.findIndex((x) => x.id === gradientId);
-      if (index !== -1) {
+      if (index === -1) return;
         state.gradients.splice(index, 1);
-      }
     }),
 
   deleteGradientLayer: (gradientId: number, gradientLayerId: number) =>
