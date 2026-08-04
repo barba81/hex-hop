@@ -7,6 +7,7 @@ pub struct GradientResponse {
     pub name: String,
     pub parent_palette_id: Option<i64>,
     pub block_order: i64,
+    pub block_id: i64,
     pub layers: Vec<GradientLayerResponse>,
 }
 
