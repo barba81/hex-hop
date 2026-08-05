@@ -1,7 +1,5 @@
 import type { ColorData } from "@/infrastructure/types";
-import { rgb } from "culori";
-
-
+import { rgb } from "culori/css";
 
 // we can use culori for thsi 
 export function colorDataToHex(color: ColorData) {

@@ -15,7 +15,7 @@ export const setColorValidityAndMode = (stringColor: string) => {
     state.setLastValidColor(formatHex(color));
 }
 
-export const validateColor = (stringColor: string) => {
+const validateColor = (stringColor: string) => {
     const color  = parse(stringColor);
 
     if (!color ) {

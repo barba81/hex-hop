@@ -6,10 +6,10 @@ export const deleteBlock = async (blockId: number, paletteId?: number) => {
     useClipboardStore.getState().deleteBlock(blockId, paletteId);
 } 
 
-export const deletePaletteBlocks = async (_: number) => {
+// const deletePaletteBlocks = async (_: number) => {
     // const blocks = await invoke<BlockEntity[]>("load_state");
     // useClipboardStore.getState().initBlocks(blocks);
-}
+// }
 
 export const deleteClipboard = async () => {
     await invoke("soft_delete_clipboard");
