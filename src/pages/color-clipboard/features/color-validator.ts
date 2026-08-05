@@ -1,10 +1,10 @@
+import { useClipboardStore } from "@/store/use-clipboard-store";
 import { formatHex, parse } from "culori";
-import { useColorStore } from "@/store/use-color-store";
 
 export const setColorValidityAndMode = (stringColor: string) => {
     const color = validateColor(stringColor);
 
-    const state = useColorStore.getState();
+    const state = useClipboardStore.getState();
     if (!color){
         state.setIsColorValid(false);
         return ;

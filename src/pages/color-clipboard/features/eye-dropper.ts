@@ -1,7 +1,7 @@
-import { useColorStore } from "@/store/use-color-store";
 import { colorStringToData } from "./color-format-changer";
 import { setColorValidityAndMode } from "./color-validator";
 import { addNewColorToClipboard } from "./add-new-block";
+import { useClipboardStore } from "@/store/use-clipboard-store";
 
 export const eyeDropperColorPicker = async () => {
 
@@ -17,7 +17,7 @@ export const eyeDropperColorPicker = async () => {
 
     try {
         const result = await eyeDropper.open();
-        const setInputColor = useColorStore.getState().setInputColor;
+        const setInputColor = useClipboardStore.getState().setInputColor;
 
         setInputColor(result.sRGBHex);
         const coloBox = colorStringToData(result.sRGBHex);

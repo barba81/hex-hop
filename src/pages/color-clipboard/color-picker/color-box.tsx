@@ -5,14 +5,14 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { buttonStyle } from "../../../style/default-style";
-import { useColorStore } from "@/store/use-color-store";
 
 import "@/style/empty-checker-board.css";
 import { setColorValidityAndMode } from "../features/color-validator";
+import { useClipboardStore } from "@/store/use-clipboard-store";
 
 const ColorBox = () => {
-  const currentColor = useColorStore().validColor;
-  const setColor = useColorStore().setInputColor;
+  const currentColor = useClipboardStore().validColor;
+  const setColor = useClipboardStore().setInputColor;
 
   const handleOnChange = (color: string) => {
     setColor(color);

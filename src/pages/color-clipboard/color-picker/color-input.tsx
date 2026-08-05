@@ -1,11 +1,12 @@
-import { useColorStore } from "@/store/use-color-store";
+;
+import { useClipboardStore } from "@/store/use-clipboard-store";
 import { setColorValidityAndMode } from "../features/color-validator";
 
 const ColorInput = () => {
-  const setColor = useColorStore().setInputColor;
-  const colorFormat = useColorStore().colorFormat;
-  const isColorValid = useColorStore().isColorValid;
-  const inputColor = useColorStore().inputColor;
+  const setColor = useClipboardStore().setInputColor;
+  const colorFormat = useClipboardStore().colorFormat;
+  const isColorValid = useClipboardStore().isColorValid;
+  const inputColor = useClipboardStore().inputColor;
 
   return (
     <div

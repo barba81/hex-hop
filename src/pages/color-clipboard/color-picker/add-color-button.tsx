@@ -1,12 +1,12 @@
-import { useColorStore } from "@/store/use-color-store";
 import { buttonStyle } from "../../../style/default-style";
 import { Check } from "lucide-react";
 import { colorStringToData } from "../features/color-format-changer";
 import { addNewColorToClipboard } from "../features/add-new-block";
+import { useClipboardStore } from "@/store/use-clipboard-store";
 
 const AddColorButton = () => {
-  const isColorValid = useColorStore().isColorValid;
-  const inputColor = useColorStore().inputColor;
+  const isColorValid = useClipboardStore().isColorValid;
+  const inputColor = useClipboardStore().inputColor;
 
   return (
     <div

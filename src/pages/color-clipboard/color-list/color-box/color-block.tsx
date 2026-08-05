@@ -1,12 +1,11 @@
 import "@/style/empty-checker-board.css";
 import ColorText from "./color-text";
 import CopyLogo from "./copy-button";
-import CloseButton from "./close-button";
 import ColorName from "./color-name";
 import { DragDots } from "../../../../components/common/drag-dots";
 import { useDraggable } from "@dnd-kit/react";
 import EditButton from "./edit-button";
-import { Pin, X } from "lucide-react";
+import { X } from "lucide-react";
 import type { ColorEntity } from "@/infrastructure/entity";
 import { colorDataToRoundData } from "../../features/color-format-changer";
 import { deleteBlock } from "../../features/delete-clipboard";

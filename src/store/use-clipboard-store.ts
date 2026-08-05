@@ -1,9 +1,14 @@
 import type { BlockEntity } from "@/infrastructure/entity";
 import { create } from "zustand";
 import { immer } from 'zustand/middleware/immer'
+const defaultInputColor = "#3b82f6";
 
 interface ClipboardStore {
   blocks: BlockEntity[];
+  validColor: string;
+  inputColor: string;
+  isColorValid: boolean;
+  colorFormat: string;
 }
 
 interface ClipboardAction {
@@ -19,10 +24,21 @@ interface ClipboardAction {
   deleteBlock: (blockId: number, paletteId?: number) => void;
   deleteClipboard: () => void;
 
+  // UI  -----------------------------------------------------------------------
+  setIsColorValid: (colorFormat: boolean) => void;
+  setLastValidColor: (color: string) => void;
+  setInputColor: (color: string) => void;
+  setFormat: (color: string) => void;
+
 }
 
 export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(immer((set) => ({
   blocks: [],
+  validColor: defaultInputColor,
+  inputColor: defaultInputColor,
+  isColorValid: true,
+  colorFormat: "RGB",
+
   initBlocks: (blocks: BlockEntity[]) =>
     set((state) => {
       state.blocks = blocks;
@@ -54,4 +70,9 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
     set((state) => {
       state.blocks.length = 0;
     }),
+
+  setLastValidColor: (newColor) => set({ validColor: newColor }),
+  setIsColorValid: (isColorValid) => set({ isColorValid }),
+  setInputColor: (newColor) => set({ inputColor: newColor }),
+  setFormat: (newColor) => set({ colorFormat: newColor }),
 })));
