@@ -1,5 +1,5 @@
 import { useClipboardStore } from "@/store/use-clipboard-store";
-import { formatHex, parse } from "culori";
+import { formatHex, parse } from "culori/fn";
 
 export const setColorValidityAndMode = (stringColor: string) => {
     const color = validateColor(stringColor);

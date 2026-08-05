@@ -5,7 +5,7 @@ import type {
 import {
     nearest,
     differenceCiede2000
-} from 'culori';
+} from 'culori/fn';
 import { colorDataToHex } from "./color-format-changer";
 
 let nearestNameGetter: ((color: Color | string, n?: number, τ?: number) => string[]) | null = null;
