@@ -12,8 +12,8 @@ pub async fn create_color(
 ) -> Result<i64, TauriError> {
     let mut tx = state.pool.begin().await?;
 
-    let color_id = color_create_repo::create_gradient(&color, &mut *tx).await?;
-    color_create_repo::create_block_color(color_id, parent_palette_id, &mut *tx).await?;
+    let block_id = color_create_repo::create_block_color(parent_palette_id, &mut *tx).await?;
+    let color_id = color_create_repo::create_color(&color, block_id, &mut *tx).await?;
 
     tx.commit().await?;
 

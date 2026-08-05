@@ -17,12 +17,12 @@ where
                 c.b as \"b!\",
                 c.a as \"a\",
                 c.name as \"name\",
-                b.id as \"block_id\",
+                c.block_id as \"block_id\",
                 b.block_order as \"block_order\",
                 b.parent_palette_id as \"parent_palette_id\",
                 \"color\" as kind
             FROM color c 
-            INNER JOIN  block b ON b.color_id = c.id
+            INNER JOIN  block b ON c.block_id = b.id
             WHERE c.id = ?1
             AND b.deleted = 0
             ",
