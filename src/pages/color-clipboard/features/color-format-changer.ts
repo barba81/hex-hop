@@ -1,34 +1,13 @@
 import type { ColorData } from "@/infrastructure/types";
-import { rgb } from "culori/css";
+import { useClipboardStore } from "@/store/use-clipboard-store";
+import { formatHex, parse } from "culori/fn";
 
-// we can use culori for thsi 
-export function colorDataToHex(color: ColorData) {
-    const toHex = (value: number): string => {
-        const clamped = Math.max(0, Math.min(1, value));
-        return Math.round(clamped * 255)
-            .toString(16)
-            .padStart(2, '0');
-    };
-
-    const rHex = toHex(color.r);
-    const gHex = toHex(color.g);
-    const bHex = toHex(color.b);
-    const aHex = (color.a !== undefined && color.a !== null) ? toHex(color.a) : '';
-
-    return `#${rHex}${gHex}${bHex}${aHex}`;
-}
-
-export function colorStringToData(color: string){
- const rbg = rgb(color);
-  if (!rbg) {
+export function colorStringToData(colorString: string){
+const color  = parse(colorString);
+  if (!color) {
     throw new Error("Invalid color string");
   }
-  return {
-    r: rbg.r,
-    g: rbg.g,
-    b: rbg.b,
-    a: rbg.alpha,
-  } as ColorData;
+  return color;
 }
 
 export function colorDataToRoundData(color: ColorData){
@@ -38,5 +17,19 @@ export function colorDataToRoundData(color: ColorData){
     b: Math.round(color.b*255),
     a: color.a
   } as ColorData;
+}
 
+export const setColorValidityAndMode = (stringColor: string) => {
+    const cleanColorName = stringColor.trim().toLowerCase();
+    const color  = parse(cleanColorName);
+
+    const state = useClipboardStore.getState();
+    if (!color){
+        state.setIsColorValid(false);
+        return ;
+    }
+
+    state.setIsColorValid(true);
+    state.setFormat( color.mode );
+    state.setLastValidColor(formatHex(color));
 }

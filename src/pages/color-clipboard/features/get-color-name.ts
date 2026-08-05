@@ -1,4 +1,3 @@
-import type { ColorData } from "@/infrastructure/types";
 import { invoke } from "@tauri-apps/api/core";
 import type {
     Color} from 'culori';
@@ -6,7 +5,6 @@ import {
     nearest,
     differenceCiede2000
 } from 'culori/fn';
-import { colorDataToHex } from "./color-format-changer";
 
 let nearestNameGetter: ((color: Color | string, n?: number, τ?: number) => string[]) | null = null;
 
@@ -32,11 +30,11 @@ const setUpNearestName = async () => {
 }
 
 
-export const getSmartColorName = async (color: ColorData) => {
+export const getSmartColorName = async (color: Color) => {
     if (nearestNameGetter === null) {
         await setUpNearestName();
     }
     return nearestNameGetter ?
-    nearestNameGetter(colorDataToHex(color), 1)[0]
+    nearestNameGetter(color, 1)[0]
     : "New color";
 }
