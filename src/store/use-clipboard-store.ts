@@ -1,8 +1,8 @@
 import type { BlockEntity } from "@/infrastructure/entity";
 import { create } from "zustand";
-import { immer } from 'zustand/middleware/immer'
-const defaultInputColor = "#3b82f6";
+import { immer } from "zustand/middleware/immer";
 
+const defaultInputColor = "#3b82f6";
 interface ClipboardStore {
   blocks: BlockEntity[];
   validColor: string;
