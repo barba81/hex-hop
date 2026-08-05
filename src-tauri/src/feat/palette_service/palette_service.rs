@@ -12,8 +12,10 @@ pub async fn create_palette(
 ) -> Result<i64, TauriError> {
     let mut tx = state.pool.begin().await?;
 
-    let palette_id = palette_create_repo::create_palette(&palette, &mut *tx).await?;
-    palette_create_repo::create_block_palette(palette_id, parent_palette_id, &mut *tx).await?;
+    let block_id =
+        crate::feat::block_service::repo::create_repo::create_block(parent_palette_id, &mut *tx)
+            .await?;
+    let palette_id = palette_create_repo::create_palette(&palette, block_id, &mut *tx).await?;
 
     tx.commit().await?;
 

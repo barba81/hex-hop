@@ -12,22 +12,22 @@ where
 {
     let colors = sqlx::query_as!(
         ColorDataModel,
-        "
-           SELECT 
-                c.id as \"id\",
-                c.r as \"r!\",
-                c.g as \"g!\",
-                c.b as \"b!\",
-                c.a as \"a\",
-                c.name as \"name\",
-                b.id as \"block_id\",
-                b.block_order as \"block_order\",
-                b.parent_palette_id as \"parent_palette_id\",
-                \"color\" as kind
-            FROM color c 
-            INNER JOIN  block b ON b.color_id = c.id
-            AND b.deleted = 0
-            ",
+        r#"
+    SELECT 
+        c.id                AS "id!",
+        c.r                 AS "r!",
+        c.g                 AS "g!",
+        c.b                 AS "b!",
+        c.a                 AS "a",       
+        c.name              AS "name!",
+        c.block_id          AS "block_id!",
+        b.block_order       AS "block_order!",
+        b.parent_palette_id AS "parent_palette_id", 
+        "color"             AS "kind!"   
+    FROM color c 
+    INNER JOIN block b ON b.id = c.block_id
+    WHERE b.deleted = 0
+    "#
     )
     .fetch_all(executor)
     .await?;
@@ -39,24 +39,24 @@ pub async fn get_all_palette<'a, E>(executor: E) -> Result<Vec<PaletteDataModel>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-    let color = sqlx::query_as!(
+    let palettes = sqlx::query_as!(
         PaletteDataModel,
-        "
-           SELECT 
-                p.id as \"id\",
-                p.name as \"name\",
-                b.id as \"block_id\",
-                b.block_order as \"block_order\",
-                \"palette\" as kind
-            FROM palette p 
-            INNER JOIN  block b ON b.sub_palette_id = p.id
-            AND b.deleted = 0
-            ",
+        r#"
+        SELECT 
+            p.id                AS "id!",
+            p.name              AS "name!",
+            p.block_id          AS "block_id!",
+            b.block_order       AS "block_order!",
+            "palette"           AS "kind!"              
+        FROM palette p 
+        INNER JOIN block b ON b.id = p.block_id
+        WHERE b.deleted = 0
+        "#
     )
     .fetch_all(executor)
     .await?;
 
-    Ok(color)
+    Ok(palettes)
 }
 
 pub async fn get_all_gradients<'a, E>(executor: E) -> Result<Vec<GradientDataModel>, sqlx::Error>
@@ -65,18 +65,18 @@ where
 {
     let gradients = sqlx::query_as!(
         GradientDataModel,
-        "
+        r#"
         SELECT 
-            g.id as \"id!\",
-            g.name as \"name!\",
-            b.id as \"block_id\",
-            b.block_order as \"block_order\",
-            b.parent_palette_id as \"parent_palette_id\",
-            \"gradient\" as kind
+            g.id as "id!",
+            g.name as "name!",
+            g.block_id as "block_id",
+            b.block_order as "block_order",
+            b.parent_palette_id as "parent_palette_id",
+            "gradient" as kind
         FROM gradient g 
-        INNER JOIN  block b ON b.gradient_id = g.id
+        INNER JOIN  block b ON b.id = g.block_id
         AND b.deleted = 0
-        ",
+        "#
     )
     .fetch_all(executor)
     .await?;
