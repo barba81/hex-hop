@@ -2,7 +2,9 @@ import { useClipboardStore } from "@/store/use-clipboard-store";
 import { formatHex, parse } from "culori/fn";
 
 export const setColorValidityAndMode = (stringColor: string) => {
-    const color = validateColor(stringColor);
+    const cleanColorName = stringColor.trim().toLowerCase();
+
+    const color = validateColor(cleanColorName);
 
     const state = useClipboardStore.getState();
     if (!color){
