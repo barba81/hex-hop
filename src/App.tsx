@@ -5,13 +5,13 @@ import { initThemeListener } from "./infrastructure/init-theme-listner";
 
 import "./App.css";
 import HexHopNavigator from "./pages/navigator/hex-hop-navigator";
-import { loadGradientData } from "./pages/color-clipboard/features/load-state";
+import { loadClipboardState } from "./pages/color-clipboard/features/load-state";
 
 function HexHopApp() {
   useEffect(() => {
     initThemeListener();
     moveWindow(Position.TopRight);
-    loadGradientData();
+    loadClipboardState();
   }, []);
 
   return (

@@ -1,7 +1,7 @@
 import { useColorStore } from "@/store/use-color-store";
 import { colorStringToData } from "./color-format-changer";
 import { setColorValidityAndMode } from "./color-validator";
-import { addNewColorToClipboard } from "./add-new-color";
+import { addNewColorToClipboard } from "./add-new-block";
 
 export const colorPicker = async () => {
 

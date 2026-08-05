@@ -1,5 +1,7 @@
 import { create } from 'zustand';
 
+// NEED TO REMOVE ALL THIS SHIT 
+
 const defaultInputColor = "#3b82f6";
 
 interface ColorState {

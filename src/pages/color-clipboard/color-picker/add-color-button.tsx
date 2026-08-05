@@ -3,7 +3,7 @@ import { buttonStyle } from "../../../style/default-style";
 import { Check } from "lucide-react";
 import { useState } from "react";
 import { colorStringToData } from "../features/color-format-changer";
-import { addNewColorToClipboard } from "../features/add-new-color";
+import { addNewColorToClipboard } from "../features/add-new-block";
 
 const AddColorButton = () => {
   const isColorValid = useColorStore().isColorValid;

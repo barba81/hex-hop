@@ -1,28 +1,27 @@
 import type { DragEndEvent } from "@dnd-kit/react";
 import { DragDropProvider } from "@dnd-kit/react";
-import EmptyDisplay from "./empty-display";
+import EmptyDisplay from "../empty-display";
 import ColorBlock from "./color-box/color-block";
 import { PaletteBox } from "./palette-box/palette-box";
 import React from "react";
-import DropLine from "./drop-line";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 
 const ColorList = () => {
   const colorBlocks = useClipboardStore().blocks;
 
-  const handleDragEnd = ({}: DragEndEvent) => {
+  const handleDragEnd = ({ }: DragEndEvent) => {
 
   };
 
   return (
-    <DragDropProvider onDragEnd={handleDragEnd} 
+    <DragDropProvider onDragEnd={handleDragEnd}
     >
-      <div className="flex-1 overflow-y-auto px-2 flex flex-col gap-1 p-2">
-        {colorBlocks.length === 0 && <EmptyDisplay />}
+      {colorBlocks.length === 0 && <EmptyDisplay />}
 
+      <div className="flex-1 overflow-y-auto px-2 flex flex-col gap-1 p-2">
         {colorBlocks
           .map((block, ix) => {
-            
+
             const renderBlock = () => {
               if (block.kind === "color") {
                 return <ColorBlock key={block.blockId} color={block} />;
@@ -35,13 +34,6 @@ const ColorList = () => {
             return (
               <React.Fragment key={block.blockId}>
                 {renderBlock()}
-                {ix === colorBlocks.length - 1 && (
-                  <DropLine
-                    id={`after-${block.blockId}`}
-                    order={ix + 1}
-                    parentId={undefined}
-                  />
-                )}
               </React.Fragment>
             );
           })}
