@@ -3,7 +3,7 @@ import { colorStringToData } from "./color-format-changer";
 import { setColorValidityAndMode } from "./color-validator";
 import { addNewColorToClipboard } from "./add-new-block";
 
-export const colorPicker = async () => {
+export const eyeDropperColorPicker = async () => {
 
     // mack implementation 
     // const hexColor = await invoke<string | null>('pick_color');

@@ -1,9 +1,8 @@
 import { Pipette } from "lucide-react";
 import { buttonStyle } from "../../../style/default-style";
-import colorPicker from "./color-picker";
+import { eyeDropperColorPicker } from "../features/eye-dropper";
 
-const PipetButton = () => {
-
+const EyeDropButton = () => {
 
   return (
     <div
@@ -18,7 +17,7 @@ const PipetButton = () => {
         text-gray-900 
         dark:text-white `}
         onClick={() => {
-          colorPicker();
+          eyeDropperColorPicker();
         }}
       >
         <Pipette strokeWidth={2} size={15} />
@@ -26,4 +25,4 @@ const PipetButton = () => {
   );
 };
 
-export default PipetButton;
+export default EyeDropButton;

@@ -1,5 +1,6 @@
 import { Palette } from "lucide-react";
 import { buttonStyle } from "@/style/default-style";
+import { addNewPalette } from "../features/add-new-block";
 
 export const AddNewPalette = () => {
   return (
@@ -14,7 +15,7 @@ export const AddNewPalette = () => {
              bg-stone-100
              text-gray-900 
              dark:text-white `}
-        onClick={() => AddNewPalette()}
+        onClick={() => addNewPalette({})}
       >
         <Palette strokeWidth={2} size={17} />
       </div>

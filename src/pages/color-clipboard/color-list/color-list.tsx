@@ -26,7 +26,7 @@ const ColorList = () => {
               if (block.kind === "color") {
                 return <ColorBlock key={block.blockId} color={block} />;
               } else if (block.kind === "palette") {
-                return <PaletteBox key={block.blockId} palette={block} />;
+                return <PaletteBox key={block.blockId}  />;
               }
               return null;
             };

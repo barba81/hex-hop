@@ -42,7 +42,6 @@ const ColorBlock = ({ color: colorEntity }: { color: ColorEntity }) => {
           className="absolute top-2 right-2  flex flex-row gap-2 "
         >
           <EditButton colorEntity={colorEntity} />
-          <Pin size={14}/>
            <X size={15} onClick={()=>deleteBlock(colorEntity.blockId, colorEntity.parentPaletteId)}/>
         </div>
     );
