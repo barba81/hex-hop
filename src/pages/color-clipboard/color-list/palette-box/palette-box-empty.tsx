@@ -1,11 +1,10 @@
-import { DragDots } from "../../../../components/common/drag-dots";
 
 type PaletteBoxParams = {
   name: string;
   className: string;
 };
 
-export const PaletteBoxEmpty = ({className  }: PaletteBoxParams) => {
+export const PaletteBoxEmpty = ({}: PaletteBoxParams) => {
 
   return (
     <div

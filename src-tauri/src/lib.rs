@@ -53,7 +53,6 @@ pub fn run() {
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_single_instance::init(|_app, _args, _cwd| {}))
         .plugin(tauri_plugin_positioner::init())
-        .plugin(tauri_plugin_opener::init())
         .setup(|app| {
             tauri::async_runtime::block_on(async {
                 infra::data_seed::init()

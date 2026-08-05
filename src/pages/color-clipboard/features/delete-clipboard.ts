@@ -6,7 +6,7 @@ export const deleteBlock = async (blockId: number, paletteId?: number) => {
     useClipboardStore.getState().deleteBlock(blockId, paletteId);
 } 
 
-export const deletePaletteBlocks = async (paletteId: number) => {
+export const deletePaletteBlocks = async (_: number) => {
     // const blocks = await invoke<BlockEntity[]>("load_state");
     // useClipboardStore.getState().initBlocks(blocks);
 }

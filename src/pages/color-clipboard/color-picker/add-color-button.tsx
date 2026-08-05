@@ -19,7 +19,7 @@ const AddColorButton = () => {
           dark:text-white 
             ${isColorValid && "bg-green-400/60 hover:bg-green-400/40"} 
           `}
-        onClick={(e) => {
+        onClick={() => {
           addNewColorToClipboard(colorStringToData(inputColor))
         }}
       >

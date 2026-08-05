@@ -20,7 +20,7 @@ const ColorList = () => {
 
       <div className="flex-1 overflow-y-auto px-2 flex flex-col gap-1 p-2">
         {colorBlocks
-          .map((block, ix) => {
+          .map((block) => {
 
             const renderBlock = () => {
               if (block.kind === "color") {

@@ -2,6 +2,8 @@ import type { ColorData } from "@/infrastructure/types";
 import { rgb } from "culori";
 
 
+
+// we can use culori for thsi 
 export function colorDataToHex(color: ColorData) {
     const toHex = (value: number): string => {
         const clamped = Math.max(0, Math.min(1, value));
@@ -40,13 +42,3 @@ export function colorDataToRoundData(color: ColorData){
   } as ColorData;
 
 }
-
-export const toNormalForm  = (color: ColorData) => {
-        return {
-            mode: 'rgb' as const,
-            r: color.r / 255,
-            g: color.g / 255,
-            b: color.b / 255,
-            alpha: color.a ?? 1
-        };
-    }
