@@ -1,3 +1,5 @@
+use crate::feat::block_service::repo::create_repo::create_block;
+use crate::feat::block_service::repo::delete_repo::soft_delete_block;
 use crate::infra::error::TauriError;
 use crate::state::DbState;
 
@@ -45,9 +47,8 @@ pub async fn create_gradient(
 ) -> Result<i64, TauriError> {
     let mut tx = state.pool.begin().await?;
 
-    let gradient_id = gradient_create_repo::create_gradient(&gradient, &mut *tx).await?;
-
-    gradient_create_repo::create_block_gradient(gradient_id, None, &mut *tx).await?;
+    let block_id = create_block(gradient.parent_palette_id, &mut *tx).await?;
+    let gradient_id = gradient_create_repo::create_gradient(&gradient, block_id, &mut *tx).await?;
 
     let layers: Vec<gradient_create_model::GradientLayerCreateModel> = gradient
         .layers
@@ -139,7 +140,8 @@ pub async fn delete_gradient(
 ) -> Result<(), TauriError> {
     let mut tx = state.pool.begin().await?;
 
-    gradient_delete_repo::soft_delete_gradient_by_id(gradient_id, &mut *tx).await?;
+    let gradient = gradient_get_repo::get_gradient_by_id(gradient_id, &state.pool).await?;
+    soft_delete_block(gradient.block_id, &mut *tx).await?;
     gradient_delete_repo::soft_delete_gradient_layer_by_gradient_id(gradient_id, &mut *tx).await?;
     gradient_delete_repo::soft_delete_stop_by_gradient_id(gradient_id, &mut *tx).await?;
 

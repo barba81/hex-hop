@@ -1,20 +1,3 @@
-pub async fn soft_delete_gradient_by_id<'e, E>(
-    gradient_id: i64,
-    executor: E,
-) -> Result<bool, sqlx::Error>
-where
-    E: sqlx::Executor<'e, Database = sqlx::Sqlite>,
-{
-    let result = sqlx::query!(
-        "UPDATE block SET deleted = 1 WHERE gradient_id = ?",
-        gradient_id
-    )
-    .execute(executor)
-    .await?;
-
-    Ok(result.rows_affected() > 0)
-}
-
 pub async fn soft_delete_gradient_layer_by_gradient_id<'e, E>(
     gradient_id: i64,
     executor: E,

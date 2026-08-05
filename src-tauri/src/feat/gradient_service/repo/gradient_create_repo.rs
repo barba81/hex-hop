@@ -2,14 +2,20 @@ use super::super::model::*;
 
 pub async fn create_gradient<'a, E>(
     gradient: &gradient_service_request::GradientRequest,
+    block_id: i64,
     executor: E,
 ) -> Result<i64, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-    let id: i64 = sqlx::query_scalar!(
-        "INSERT INTO gradient (name) VALUES ($1) RETURNING id",
-        gradient.name
+    let id = sqlx::query_scalar!(
+        r#"
+        INSERT INTO gradient (name,block_id)
+        VALUES ($1,$2)
+        RETURNING id AS "id!"
+        "#,
+        gradient.name,
+        block_id
     )
     .fetch_one(executor)
     .await?;
@@ -150,28 +156,4 @@ where
     let ids: Vec<i64> = qb.build_query_scalar().fetch_all(executor).await?;
 
     Ok(ids)
-}
-
-pub async fn create_block_gradient<'a, E>(
-    gradient_id: i64,
-    parent_palette_id: Option<i64>,
-    executor: E,
-) -> Result<(), sqlx::Error>
-where
-    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
-{
-    sqlx::query!(
-        "INSERT INTO block (gradient_id, parent_palette_id, block_order) 
-        VALUES (
-            $1, 
-            $2, 
-            (SELECT COALESCE(MAX(block_order), 0) + 1 FROM block WHERE parent_palette_id IS $2)
-        );",
-        gradient_id,
-        parent_palette_id,
-    )
-    .execute(executor)
-    .await?;
-
-    Ok(())
 }
