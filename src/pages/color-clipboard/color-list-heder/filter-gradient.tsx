@@ -1,5 +1,5 @@
 import GradientIcon from "@/components/icons/gradient-icon";
-import Button from "@/components/common/button";
+import { Button } from "@/components/ui/button";
 
 const FilterGradient = ({} :{selected: boolean}) => {
     return (<Button className={`outline-2 outline-amber-600 `}>
