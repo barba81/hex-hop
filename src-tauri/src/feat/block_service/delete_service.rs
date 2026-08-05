@@ -14,3 +14,16 @@ pub async fn soft_delete_clipboard(state: tauri::State<'_, DbState>) -> Result<(
     delete_repo::soft_delete_clipboard(&state.pool).await?;
     Ok(())
 }
+
+#[tauri::command]
+pub async fn hard_delete_blocks(state: tauri::State<'_, DbState>) -> Result<(), TauriError> {
+    let mut tx = state.pool.begin().await?;
+
+    delete_repo::hard_delete_colors(&mut *tx).await?;
+    delete_repo::hard_delete_palette(&mut *tx).await?;
+    delete_repo::hard_delete_gradients(&mut *tx).await?;
+
+    tx.commit().await?;
+
+    Ok(())
+}

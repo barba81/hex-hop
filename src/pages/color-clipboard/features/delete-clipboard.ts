@@ -17,8 +17,8 @@ export const deleteClipboard = async () => {
 }
 
 export const hardDelete = async () => {
-    // const blocks = await invoke<BlockEntity[]>("load_state");
-    // useClipboardStore.getState().initBlocks(blocks);
+    await invoke("hard_delete_blocks");
+    useClipboardStore.getState().deleteClipboard();
 }
 
 

@@ -27,3 +27,57 @@ where
 
     Ok(())
 }
+
+pub async fn hard_delete_colors<'a, E>(executor: E) -> Result<(), sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
+    sqlx::query!(
+        "DELETE FROM color 
+        WHERE id IN (
+            SELECT color_id 
+            FROM block 
+            WHERE deleted = 1
+        );",
+    )
+    .execute(executor)
+    .await?;
+
+    Ok(())
+}
+
+pub async fn hard_delete_palette<'a, E>(executor: E) -> Result<(), sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
+    sqlx::query!(
+        "DELETE FROM palette 
+        WHERE id IN (
+            SELECT sub_palette_id 
+            FROM block 
+            WHERE deleted = 1
+        );",
+    )
+    .execute(executor)
+    .await?;
+
+    Ok(())
+}
+
+pub async fn hard_delete_gradients<'a, E>(executor: E) -> Result<(), sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
+    sqlx::query!(
+        "DELETE FROM gradient 
+        WHERE id IN (
+            SELECT gradient_id
+            FROM block 
+            WHERE deleted = 1
+        );",
+    )
+    .execute(executor)
+    .await?;
+
+    Ok(())
+}

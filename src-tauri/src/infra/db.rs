@@ -16,7 +16,9 @@ pub async fn init_database(app: &App) -> Result<(), Box<dyn std::error::Error>> 
     let db_path = app_dir.join(DATA_BASE_NAME);
     let database_url = format!("sqlite:{}", db_path.to_string_lossy());
 
-    let connection_options = SqliteConnectOptions::from_str(&database_url)?.create_if_missing(true);
+    let connection_options = SqliteConnectOptions::from_str(&database_url)?
+        .foreign_keys(true)
+        .create_if_missing(true);
 
     let pool = SqlitePool::connect_with(connection_options).await?;
 
