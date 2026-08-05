@@ -25,8 +25,8 @@ interface ClipboardAction {
   deleteClipboard: () => void;
 
   // UI  -----------------------------------------------------------------------
-  setIsColorValid: (colorFormat: boolean) => void;
   setLastValidColor: (color: string) => void;
+  setIsColorValid: (colorFormat: boolean) => void;
   setInputColor: (color: string) => void;
   setFormat: (color: string) => void;
 
@@ -49,7 +49,6 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
       state.blocks.push(blocks);
     }),
 
-  // NEED TO UPDATE TO PALETTE
   deleteBlock: (blockId: number, paletteId?: number) =>
     set((state) => {
       if (paletteId == null) {

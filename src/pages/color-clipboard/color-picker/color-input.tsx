@@ -1,6 +1,6 @@
 ;
 import { useClipboardStore } from "@/store/use-clipboard-store";
-import { setColorValidityAndMode } from "../features/color-validator";
+import { setColorValidityAndMode } from "../features/color-format-changer";
 
 const ColorInput = () => {
   const setColor = useClipboardStore().setInputColor;

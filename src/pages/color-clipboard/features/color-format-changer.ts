@@ -1,9 +1,9 @@
 import type { ColorData } from "@/infrastructure/types";
 import { useClipboardStore } from "@/store/use-clipboard-store";
-import { formatHex, parse } from "culori/fn";
+import { formatHex, parse } from "culori";
 
 export function colorStringToData(colorString: string){
-const color  = parse(colorString);
+  const color  = parse(colorString);
   if (!color) {
     throw new Error("Invalid color string");
   }
