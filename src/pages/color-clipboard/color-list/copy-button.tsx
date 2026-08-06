@@ -3,7 +3,7 @@ import { useState } from "react";
 import CopyUx from "./copy-ux";
 import type { ColorEntity } from "@/infrastructure/entity";
 import type { ColorSpaceType } from "@/infrastructure/enum";
-import { copyToClipboard } from "../../features/copy-to-clipboard";
+import { copyToClipboard } from "../features/copy-to-clipboard";
 
 export type CopyLogoParam = {
   color: ColorEntity;
@@ -34,6 +34,9 @@ const CopyLogo = ({ color, fontClass }: CopyLogoParam) => {
   };
   const formats: { type: ColorSpaceType; label: string; isIcon?: boolean }[] = [
     { label: "#", type: "oklab", isIcon: true },
+    { label: "RGB", type: "oklab", isIcon: false },
+    { label: "OKLAB", type: "oklab", isIcon: false },
+    { label: "HVS", type: "oklab", isIcon: false },
   ];
 
   return (

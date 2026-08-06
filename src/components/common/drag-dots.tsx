@@ -3,7 +3,7 @@ const Dot = () => {
 };
 export const DragDots = () => {
   return (
-    <div className="relative cursor-pointer h-full w-4 gap-0.5 flex items-center justify-center bg-foreground/20 mr-1 px-1 ">
+    <div className="relative cursor-pointer h-full w-4 gap-0.5 flex items-center justify-center bg-foreground/20  px-1 ">
         <div className="w-2  flex flex-col items-center justify-center gap-1">
           <Dot />
           <Dot />

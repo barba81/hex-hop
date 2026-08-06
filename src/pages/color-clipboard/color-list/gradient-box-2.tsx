@@ -1,15 +1,12 @@
 import { DragDots } from "@/components/common/drag-dots";
-import { ColorEntity } from "@/infrastructure/entity";
-import { colorDataToRoundData } from "../features/color-format-changer";
-import ColorName from "./color-box/color-name";
-import CopyLogo from "./copy-button";
+import type { GradientEntity } from "@/infrastructure/entity";
+import { gradientToCssString } from "../features/gradient-to-css-string";
 
-type ColorBoxParams = {
-    color: ColorEntity
+type GradientBoxParams = {
+    gradientEntity: GradientEntity
 };
-export const ColorBlock2 = ({ color: colorEntity }: ColorBoxParams) => {
-    const colorHexData = colorDataToRoundData(colorEntity);
-
+export const GradientBlock2 = ({ gradientEntity }: GradientBoxParams) => {
+    const gradientBackground =  gradientToCssString(gradientEntity);
     return (
         <div
             className="h-17 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden"
@@ -20,18 +17,17 @@ export const ColorBlock2 = ({ color: colorEntity }: ColorBoxParams) => {
 
             <div className="flex-1 flex flex-col justify-between overflow-hidden">
                 <div
-                    className="w-full flex-1"
+                    className="w-full h-5 flex-1"
                     style={{
-                        backgroundColor: `rgba(${colorHexData.r}, ${colorHexData.g}, ${colorHexData.b}, ${colorHexData.a ?? 1.0})`,
+                        backgroundImage: gradientBackground,
                     }}
                 />
 
                 <div className="w-full h-7 flex flex-row justify-between pr-2">
                     <div className="flex">
-                        <CopyLogo color={colorEntity} fontClass={"white"} />
                     </div>
                     <div className="flex gap-2 h-full items-center">
-                        <ColorName colorEntity={colorEntity} />
+                        {gradientEntity.name}
                     </div>
                 </div>
             </div>

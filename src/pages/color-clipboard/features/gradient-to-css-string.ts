@@ -1,6 +1,6 @@
 import type { GradientEntity } from "@/infrastructure/entity";
 
-export const GradientToCssString = (gradient: GradientEntity) => {
+export const gradientToCssString = (gradient: GradientEntity) => {
     const sol =  gradient.layers
     .slice()
     .sort((a, b) => a.order - b.order)
@@ -9,7 +9,7 @@ export const GradientToCssString = (gradient: GradientEntity) => {
       const formattedStops = layer.stops
         .slice()
         .sort((a, b) => a.order - b.order)
-        .map((stop) => `rgba(${stop.r*255}, ${stop.g*255}, ${stop.b*255}, ${stop.a}) ${stop.position*100}%`)
+        .map((stop) => `rgba(${Math.round( stop.r*255)}, ${stop.g*255}, ${stop.b*255}, ${stop.a}) ${stop.position*100}%`)
         .join(', ');
 
       // 2. Format based on gradient type
@@ -26,5 +26,7 @@ export const GradientToCssString = (gradient: GradientEntity) => {
       return `linear-gradient(${layer.rotationDegree ?? 0}deg, ${formattedStops})`;
     })
     .join(', ');
+    console.log(sol);
 return sol;
+
 }
