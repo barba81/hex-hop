@@ -3,9 +3,9 @@ import { DragDropProvider } from "@dnd-kit/react";
 import EmptyDisplay from "../empty-display";
 import React from "react";
 import { useClipboardStore } from "@/store/use-clipboard-store";
-import { GradientBlock } from "./gradient-box";
 import ColorBlock from "./colo-block";
-import PaletteBlock from "./palette-box";
+import PaletteBlock from "./palette-block";
+import { GradientBlock } from "./gradient-Block";
 
 const ColorList = () => {
   const colorBlocks = useClipboardStore().blocks;
