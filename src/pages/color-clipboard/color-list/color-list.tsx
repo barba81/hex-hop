@@ -6,6 +6,7 @@ import { PaletteBox } from "./palette-box/palette-box";
 import React from "react";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 import { GradientBox } from "./gradient-box/gradient-box";
+import { ColorBlock2 } from "./colo-blox-2";
 
 const ColorList = () => {
   const colorBlocks = useClipboardStore().blocks;
@@ -25,7 +26,7 @@ const ColorList = () => {
 
             const renderBlock = () => {
               if (block.kind === "color") {
-                return <ColorBlock key={block.blockId} color={block} />;
+                return <ColorBlock2 key={block.blockId} color={block} />;
               } else if (block.kind === "palette") {
                 return <PaletteBox key={block.blockId}  />;
               } else if (block.kind === 'gradient') {
