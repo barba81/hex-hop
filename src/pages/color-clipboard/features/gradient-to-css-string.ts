@@ -26,6 +26,5 @@ export const GradientToCssString = (gradient: GradientEntity) => {
       return `linear-gradient(${layer.rotationDegree ?? 0}deg, ${formattedStops})`;
     })
     .join(', ');
-    console.log(sol);
 return sol;
 }
