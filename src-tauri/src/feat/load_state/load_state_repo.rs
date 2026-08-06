@@ -72,7 +72,7 @@ where
             g.block_id as "block_id",
             b.block_order as "block_order",
             b.parent_palette_id as "parent_palette_id",
-            "gradient" as kind
+            "gradient" as  "kind!" 
         FROM gradient g 
         INNER JOIN  block b ON b.id = g.block_id
         AND b.deleted = 0

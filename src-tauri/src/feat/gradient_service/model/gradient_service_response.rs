@@ -9,6 +9,7 @@ pub struct GradientResponse {
     pub block_order: i64,
     pub block_id: i64,
     pub layers: Vec<GradientLayerResponse>,
+    pub kind: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]

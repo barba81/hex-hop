@@ -58,6 +58,7 @@ pub fn build_all_gradients_response_fast(
                 block_order: gradient.block_order,
                 block_id: gradient.block_id,
                 parent_palette_id: gradient.parent_palette_id,
+                kind: gradient.kind.clone(),
             }
         })
         .collect()

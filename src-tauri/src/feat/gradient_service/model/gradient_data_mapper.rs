@@ -54,6 +54,7 @@ pub fn build_gradient_response(
         layers: layers_response,
         block_id: gradient.block_id,
         parent_palette_id: gradient.parent_palette_id,
+        kind: gradient.kind.clone(),
     }
 }
 
