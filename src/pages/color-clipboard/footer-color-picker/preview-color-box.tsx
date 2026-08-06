@@ -10,7 +10,7 @@ import "@/style/empty-checker-board.css";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 import { setColorValidityAndMode } from "../features/color-format-changer";
 
-const ColorBox = () => {
+const PreviewColorBox = () => {
   const currentColor = useClipboardStore().validColor;
   const setColor = useClipboardStore().setInputColor;
 
@@ -43,4 +43,4 @@ const ColorBox = () => {
   );
 };
 
-export default ColorBox;
+export default PreviewColorBox;

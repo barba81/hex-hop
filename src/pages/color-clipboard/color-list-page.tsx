@@ -1,6 +1,6 @@
-import ColorPicker from "./color-picker/color-picker";
+import FooterColorPicker from "./footer-color-picker/footer-color-picker";
 import ColorList from "./color-list/color-list";
-import HeaderColorList from "./color-list-heder/header-color-list";
+import HeaderColorList from "./header-color-list/header-color-list";
 
 const ColorListPage = () => {
 
@@ -8,7 +8,7 @@ const ColorListPage = () => {
     <>
         <HeaderColorList/>
         <ColorList />
-        <ColorPicker />
+        <FooterColorPicker />
     </>
   );
 };

@@ -27,6 +27,9 @@ const ColorList = () => {
                 return <ColorBlock key={block.blockId} color={block} />;
               } else if (block.kind === "palette") {
                 return <PaletteBox key={block.blockId}  />;
+              } else if (block.kind === 'gradient') {
+                return <PaletteBox key={block.blockId}  />;
+
               }
               return null;
             };

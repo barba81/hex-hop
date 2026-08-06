@@ -21,10 +21,12 @@ interface ClipboardAction {
   addBlock: (gradient: BlockEntity) => void;
 
   // DELETE  -----------------------------------------------------------------------
+
   deleteBlock: (blockId: number, paletteId?: number) => void;
   deleteClipboard: () => void;
 
   // UI  -----------------------------------------------------------------------
+  
   setLastValidColor: (color: string) => void;
   setIsColorValid: (colorFormat: boolean) => void;
   setInputColor: (color: string) => void;
