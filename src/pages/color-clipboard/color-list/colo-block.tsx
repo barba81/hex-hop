@@ -1,13 +1,13 @@
 import { DragDots } from "@/components/common/drag-dots";
 import { ColorEntity } from "@/infrastructure/entity";
 import { colorDataToRoundData } from "../features/color-format-changer";
-import ColorName from "./color-box/color-name";
 import CopyLogo from "./copy-button";
 
 type ColorBoxParams = {
-    color: ColorEntity
+    colorEntity: ColorEntity
 };
-export const ColorBlock2 = ({ color: colorEntity }: ColorBoxParams) => {
+
+const ColorBlock = ({ colorEntity: colorEntity }: ColorBoxParams) => {
     const colorHexData = colorDataToRoundData(colorEntity);
 
     return (
@@ -18,9 +18,9 @@ export const ColorBlock2 = ({ color: colorEntity }: ColorBoxParams) => {
                 <DragDots />
             </div>
 
-            <div className="flex-1 flex flex-col justify-between overflow-hidden">
+            <div className="flex-1 flex flex-col justify-between overflow-hidden bg-checkerboard">
                 <div
-                    className="w-full flex-1"
+                    className="w-full flex-1  "
                     style={{
                         backgroundColor: `rgba(${colorHexData.r}, ${colorHexData.g}, ${colorHexData.b}, ${colorHexData.a ?? 1.0})`,
                     }}
@@ -30,11 +30,13 @@ export const ColorBlock2 = ({ color: colorEntity }: ColorBoxParams) => {
                     <div className="flex">
                         <CopyLogo color={colorEntity} fontClass={"white"} />
                     </div>
-                    <div className="flex gap-2 h-full items-center">
-                        <ColorName colorEntity={colorEntity} />
+                    <div className="flex gap-2 h-full items-center font-mono text-md" >
+                        {colorEntity.name}
                     </div>
                 </div>
             </div>
         </div>
     );
 };
+
+export default ColorBlock;

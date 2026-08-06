@@ -1,9 +1,11 @@
 import { DragDots } from "@/components/common/drag-dots";
+import { PaletteEntity } from "@/infrastructure/entity";
 
 type PaletteBoxParams = {
+      paletteEntity: PaletteEntity
 };
 
-export const PaletteBox = ({ }: PaletteBoxParams) => {
+const PaletteBlock  = ({paletteEntity }: PaletteBoxParams) => {
   return (
     <div
       className={`h-14 rounded-md w-full shrink-0 relative flex items-center justify-between   outline-1 overflow-hidden `}
@@ -29,3 +31,5 @@ export const PaletteBox = ({ }: PaletteBoxParams) => {
     </div>
   );
 };
+
+export default PaletteBlock;
