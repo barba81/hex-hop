@@ -1,24 +1,21 @@
 import { DragDots } from "@/components/common/drag-dots";
-import { ColorEntity } from "@/infrastructure/entity";
-import { colorDataToRoundData } from "../features/color-format-changer";
-import CopyLogo from "./copy-button";
+import type { GradientEntity } from "@/infrastructure/entity";
+import { gradientToCssString } from "../features/gradient-to-css-string";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { deleteBlock } from "../features/delete-clipboard";
 
-type ColorBoxParams = {
-    colorEntity: ColorEntity
+type GradientBoxParams = {
+    gradientEntity: GradientEntity
 };
 
-const ColorBlock = ({ colorEntity: colorEntity }: ColorBoxParams) => {
-
-    const colorHexData = colorDataToRoundData(colorEntity);
-
+export const GradientBlock = ({ gradientEntity: gradientEntity }: GradientBoxParams) => {
+    const gradientBackground = gradientToCssString(gradientEntity);
     return (
         <ContextMenu>
             <ContextMenuTrigger>
                 <div
-                    className="h-17 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden "
+                    className="h-17 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-2 overflow-hidden"
                 >
                     <div className="flex items-center justify-center  shrink-0">
                         <DragDots />
@@ -26,18 +23,17 @@ const ColorBlock = ({ colorEntity: colorEntity }: ColorBoxParams) => {
 
                     <div className="flex-1 flex flex-col justify-between overflow-hidden bg-checkerboard">
                         <div
-                            className="w-full flex-1  "
+                            className="w-full h-5 flex-1"
                             style={{
-                                backgroundColor: `rgba(${colorHexData.r}, ${colorHexData.g}, ${colorHexData.b}, ${colorHexData.a ?? 1.0})`,
+                                backgroundImage: gradientBackground,
                             }}
                         />
 
                         <div className="w-full h-7 flex flex-row justify-between pr-2">
                             <div className="flex">
-                                <CopyLogo color={colorEntity} fontClass={"white"} />
                             </div>
-                            <div className="flex gap-2 h-full items-center font-mono text-md" >
-                                {colorEntity.name}
+                            <div className="flex gap-2 h-full items-center font-mono text-md">
+                                {gradientEntity.name}
                             </div>
                         </div>
                     </div>
@@ -59,7 +55,7 @@ const ColorBlock = ({ colorEntity: colorEntity }: ColorBoxParams) => {
                 <ContextMenuItem
                     variant="destructive"
                     className="gap-2"
-                    onClick={() => deleteBlock(colorEntity.blockId, colorEntity.parentPaletteId)}
+                    onClick={() => deleteBlock(gradientEntity.blockId, gradientEntity.parentPaletteId)}
                 >
                     <Trash2 className="size-4" />
                     Delete
@@ -68,5 +64,4 @@ const ColorBlock = ({ colorEntity: colorEntity }: ColorBoxParams) => {
         </ContextMenu>
     );
 };
-
-export default ColorBlock;
+export default GradientBlock;

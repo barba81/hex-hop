@@ -32,7 +32,7 @@ export type GradientEntity =  {
     blockId:number;
     blockOrder: number;
     name: string;
-    parentPaletteId: number | null;
+    parentPaletteId?: number;
     
     layers: GradientLayerEntity[];
 }

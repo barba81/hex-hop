@@ -5,7 +5,7 @@ import React from "react";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 import ColorBlock from "./colo-block";
 import PaletteBlock from "./palette-block";
-import { GradientBlock } from "./gradient-Block";
+import GradientBlock from "./gradient-blockk";
 
 const ColorList = () => {
   const colorBlocks = useClipboardStore().blocks;
