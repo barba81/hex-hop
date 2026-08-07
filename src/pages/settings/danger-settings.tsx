@@ -1,5 +1,5 @@
 import { X } from "lucide-react";
-import { hardDelete } from "../color-clipboard/features/delete-block";
+import { deleteBlock, hardDelete } from "../color-clipboard/features/delete-block";
 
 
 import {
@@ -45,7 +45,7 @@ export const DangerSettings = () => {
         <CardFooter className="border-t border-destructive/20 px-6 py-4">
           <AlertDialog>
             <AlertDialogTrigger asChild>
-              <Button variant="destructive">Delete Account</Button>
+              <Button variant="destructive">Delete Colors</Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
@@ -57,7 +57,7 @@ export const DangerSettings = () => {
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
+                <AlertDialogAction onClick={()=>hardDelete()} className="bg-destructive text-destructive-foreground hover:bg-destructive/90">
                   Yes, delete account
                 </AlertDialogAction>
               </AlertDialogFooter>

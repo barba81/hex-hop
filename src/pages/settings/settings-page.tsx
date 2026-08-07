@@ -1,5 +1,3 @@
-import { X } from "lucide-react";
-
 import { DangerSettings } from "./danger-settings";
 
 export function SettingsPage() {
