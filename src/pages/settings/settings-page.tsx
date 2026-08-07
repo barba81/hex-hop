@@ -1,12 +1,11 @@
 import { X } from "lucide-react";
-import { hardDelete } from "../color-clipboard/features/delete-block";
 
-const SettingsPage = () => {
+import { DangerSettings } from "./danger-settings";
+
+export function SettingsPage() {
   return (
-    <div>
-        <X onClick={() => hardDelete()}/>
-      </div>
-  );
-};
-
-export default SettingsPage;
+    <div className="px-5 py-2  ">
+      <DangerSettings />
+    </div>
+  )
+}

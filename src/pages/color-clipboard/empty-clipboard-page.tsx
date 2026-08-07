@@ -1,6 +1,6 @@
 import { Clipboard } from "lucide-react";
 
-const EmptyDisplay = () => {
+const EmptyClipboardPage = () => {
   return (
     <div className="h-full w-full  flex items-center justify-center flex-col gap-2 opacity-[0.15]">
         <Clipboard size={120} strokeWidth={2} />
@@ -13,4 +13,4 @@ const EmptyDisplay = () => {
   );
 };
 
-export default EmptyDisplay;
+export default EmptyClipboardPage;
