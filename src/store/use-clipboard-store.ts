@@ -1,4 +1,4 @@
-import type { BlockEntity } from "@/infrastructure/entity";
+import type { BlockEntity } from "@/infrastructure/models/entity";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 

@@ -1,6 +1,6 @@
 import { Palette } from "lucide-react";
 import { buttonStyle } from "@/style/default-style";
-import { addNewPalette } from "../features/add-new-block";
+import { addNewPalette } from "../features/add-block";
 
 export const AddNewPalette = () => {
   return (

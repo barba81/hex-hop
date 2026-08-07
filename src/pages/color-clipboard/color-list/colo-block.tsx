@@ -1,10 +1,10 @@
 import { DragDots } from "@/components/common/drag-dots";
-import { ColorEntity } from "@/infrastructure/entity";
-import { colorDataToRoundData } from "../features/color-format-changer";
+import { ColorEntity } from "@/infrastructure/models/entity";
+import { colorDataToRoundData } from "../../../infrastructure/utils/color-format-changer";
 import CopyLogo from "./copy-button";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
-import { deleteBlock } from "../features/delete-clipboard";
+import { deleteBlock } from "../features/delete-block";
 
 type ColorBoxParams = {
     colorEntity: ColorEntity
@@ -18,7 +18,7 @@ const ColorBlock = ({ colorEntity: colorEntity }: ColorBoxParams) => {
         <ContextMenu>
             <ContextMenuTrigger>
                 <div
-                    className="h-17 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden "
+                    className="h-15 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden "
                 >
                     <div className="flex items-center justify-center  shrink-0">
                         <DragDots />

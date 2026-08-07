@@ -2,7 +2,7 @@ import { invoke } from "@tauri-apps/api/core";
 
 import { useGradientStore } from "@/store/use-gradient-store";
 import { newGradient } from "./default-const-gradient";
-import type { GradientEntity, GradientLayerEntity, GradientStopEntity } from "@/infrastructure/entity";
+import type { GradientEntity, GradientLayerEntity, GradientStopEntity } from "@/infrastructure/models/entity";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 
 export const addNewGradient = async () => {

@@ -1,4 +1,4 @@
-import type { GradientEntity } from "@/infrastructure/entity";
+import type { GradientEntity } from "@/infrastructure/models/entity";
 
 export const gradientToCssString = (gradient: GradientEntity) => {
     const sol =  gradient.layers
@@ -12,7 +12,6 @@ export const gradientToCssString = (gradient: GradientEntity) => {
         .map((stop) => `rgba(${Math.round( stop.r*255)}, ${stop.g*255}, ${stop.b*255}, ${stop.a}) ${stop.position*100}%`)
         .join(', ');
 
-      // 2. Format based on gradient type
       const type = layer.gradientType.toLowerCase();
 
       if (type.includes('radial')) {
@@ -22,7 +21,6 @@ export const gradientToCssString = (gradient: GradientEntity) => {
         return `conic-gradient(from ${layer.rotationDegree ?? 0}deg, ${formattedStops})`;
       }
       
-      // Default: linear-gradient
       return `linear-gradient(${layer.rotationDegree ?? 0}deg, ${formattedStops})`;
     })
     .join(', ');

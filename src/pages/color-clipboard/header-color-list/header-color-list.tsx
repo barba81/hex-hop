@@ -1,7 +1,7 @@
 import SearchBar from "./search-bar";
 import { Redo, Trash2, Undo } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { deleteClipboard } from "../features/delete-clipboard";
+import { deleteClipboard } from "../features/delete-block";
 import { ButtonGroup } from "@/components/ui/button-group";
 
 const HeaderColorList = () => {

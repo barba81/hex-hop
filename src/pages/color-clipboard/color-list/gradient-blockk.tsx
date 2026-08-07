@@ -1,9 +1,9 @@
 import { DragDots } from "@/components/common/drag-dots";
-import type { GradientEntity } from "@/infrastructure/entity";
-import { gradientToCssString } from "../features/gradient-to-css-string";
+import type { GradientEntity } from "@/infrastructure/models/entity";
+import { gradientToCssString } from "../../../infrastructure/utils/gradient-to-css-string";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
-import { deleteBlock } from "../features/delete-clipboard";
+import { deleteBlock } from "../features/delete-block";
 
 type GradientBoxParams = {
     gradientEntity: GradientEntity

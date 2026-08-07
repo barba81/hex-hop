@@ -1,4 +1,4 @@
-import type { ColorData } from "@/infrastructure/types";
+import type { ColorData } from "@/infrastructure/models/types";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 import { formatHex, parse } from "culori";
 

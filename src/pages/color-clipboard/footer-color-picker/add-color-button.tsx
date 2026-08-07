@@ -1,6 +1,6 @@
 import { buttonStyle } from "../../../style/default-style";
 import { Check } from "lucide-react";
-import { addNewColorToClipboard } from "../features/add-new-block";
+import { addNewColorToClipboard } from "../features/add-block";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 
 const AddColorButton = () => {

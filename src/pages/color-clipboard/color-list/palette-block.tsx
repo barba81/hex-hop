@@ -1,5 +1,5 @@
 import { DragDots } from "@/components/common/drag-dots";
-import type { PaletteEntity } from "@/infrastructure/entity";
+import type { PaletteEntity } from "@/infrastructure/models/entity";
 import { ChevronDown, X } from "lucide-react";
 
 type PaletteBoxParams = {

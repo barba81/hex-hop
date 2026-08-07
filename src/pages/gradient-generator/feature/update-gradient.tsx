@@ -1,4 +1,4 @@
-import type { GradientEntity } from "@/infrastructure/entity";
+import type { GradientEntity } from "@/infrastructure/models/entity";
 import { useGradientStore } from "@/store/use-gradient-store";
 import { invoke } from "@tauri-apps/api/core";
 

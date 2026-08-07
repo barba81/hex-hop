@@ -1,6 +1,6 @@
-import { addNewColorToClipboard } from "./add-new-block";
+import { addNewColorToClipboard } from "./add-block";
 import { useClipboardStore } from "@/store/use-clipboard-store";
-import { setColorValidityAndMode } from "./color-format-changer";
+import { setColorValidityAndMode } from "../../../infrastructure/utils/color-format-changer";
 
 export const eyeDropperColorPicker = async () => {
 

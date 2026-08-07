@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import type { GradientEntity } from "@/infrastructure/entity";
+import type { GradientEntity } from "@/infrastructure/models/entity";
 import { Copy, Plus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { updateGradient } from "./feature/update-gradient";

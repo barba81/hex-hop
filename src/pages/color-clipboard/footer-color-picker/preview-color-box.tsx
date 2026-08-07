@@ -8,7 +8,7 @@ import { buttonStyle } from "../../../style/default-style";
 
 import "@/style/empty-checker-board.css";
 import { useClipboardStore } from "@/store/use-clipboard-store";
-import { setColorValidityAndMode } from "../features/color-format-changer";
+import { setColorValidityAndMode } from "../../../infrastructure/utils/color-format-changer";
 
 const PreviewColorBox = () => {
   const currentColor = useClipboardStore().validColor;
