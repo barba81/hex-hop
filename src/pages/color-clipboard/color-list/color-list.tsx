@@ -8,8 +8,8 @@ import GradientBlock from "./gradient-block";
 import EmptyClipboardPage from "../empty-clipboard-page";
 
 const ColorList = () => {
-  const colorBlocks = useClipboardStore().blocks;
-
+  const colorBlocks = useClipboardStore(x => x.blocks);
+  const editBoxId = useClipboardStore(x => x.editBlockId);
   const handleDragEnd = ({ }: DragEndEvent) => {
 
   };
@@ -25,7 +25,7 @@ const ColorList = () => {
 
             const renderBlock = () => {
               if (block.kind === "color") {
-                return <ColorBlock key={block.blockId} colorEntity={block} />;
+                return <ColorBlock key={block.blockId} colorEntity={block} edit={editBoxId===block.blockId} />;
               } else if (block.kind === "palette") {
                 return <PaletteBlock  key={block.blockId} paletteEntity={block} />;
               } else if (block.kind === 'gradient') {

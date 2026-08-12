@@ -10,6 +10,7 @@ interface ClipboardStore {
   isColorValid: boolean;
   colorFormat: string;
   openPalette: Record<number, boolean>;
+  editBlockId: number | null;
 }
 
 interface ClipboardAction {
@@ -33,6 +34,7 @@ interface ClipboardAction {
   setInputColor: (color: string) => void;
   setFormat: (color: string) => void;
   togglePalette: (paletteId: number) => void;
+  setEditBlock: (blockId: number) => void;
 }
 
 export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(immer((set) => ({
@@ -42,6 +44,7 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
   isColorValid: true,
   colorFormat: "RGB",
   openPalette: {},
+  editBlockId: null,
 
   initBlocks: (blocks: BlockEntity[]) =>
     set((state) => {
@@ -81,5 +84,9 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
   togglePalette: (paletteId) =>
     set((state) => {
       state.openPalette[paletteId] = !state.openPalette[paletteId];
+    }),
+  setEditBlock: (blockId) =>
+    set((state) => {
+      state.editBlockId = blockId;
     }),
 })));
