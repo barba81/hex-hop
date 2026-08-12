@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import HeaderBar from "./components/header/header-bar";
-import { initThemeListener } from "./infrastructure/models/init-theme-listner";
 
 import "./globals.css";
 import HexHopNavigator from "./pages/navigator/hex-hop-navigator";
@@ -10,7 +9,6 @@ import { ThemeProvider } from "./components/theme/theme-provider";
 
 function HexHopApp() {
   useEffect(() => {
-    initThemeListener();
     moveWindow(Position.TopRight);
     loadState();
   }, []);

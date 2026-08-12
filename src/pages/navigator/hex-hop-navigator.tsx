@@ -1,6 +1,6 @@
 import ColorContrastPage from "@/pages/color-contrast/color-contrast-page";
 
-import {  useAppStore } from "@/store/use-theme-store";
+import {  useAppStore } from "@/store/use-app-store";
 import PaletteGenerator from "@/pages/palette-generator/palette-generator-page";
 import GradientGeneratorPage from "@/pages/gradient-generator/gradient-generator-page";
 import ImportExportPage from "@/pages/import-export/import-export-page";

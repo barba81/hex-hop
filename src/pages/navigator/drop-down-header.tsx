@@ -12,8 +12,8 @@ import {
   Palette,
   Settings,
 } from "lucide-react";
-import type { PagesTypes} from "@/store/use-theme-store";
-import { useAppStore } from "@/store/use-theme-store";
+import type { PagesTypes} from "@/store/use-app-store";
+import { useAppStore } from "@/store/use-app-store";
 import GradientIcon from "@/components/icons/gradient-icon";
 import { Button } from "@/components/ui/button";
 
