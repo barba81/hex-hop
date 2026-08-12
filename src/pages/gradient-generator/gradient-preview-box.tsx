@@ -1,4 +1,4 @@
-import "@/style/empty-checker-board.css";
+import "@/globals.css";
 
 const GradientPreviewBox = ({gradientBackground} : {gradientBackground: string}) => {
   return (

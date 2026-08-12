@@ -6,6 +6,7 @@ import { initThemeListener } from "./infrastructure/models/init-theme-listner";
 import "./globals.css";
 import HexHopNavigator from "./pages/navigator/hex-hop-navigator";
 import { loadState } from "./infrastructure/utils/load-state";
+import { ThemeProvider } from "./components/theme/theme-provider";
 
 function HexHopApp() {
   useEffect(() => {
@@ -15,10 +16,12 @@ function HexHopApp() {
   }, []);
 
   return (
-    <div className="w-screen h-screen flex flex-col  bg-stone-50/80 dark:bg-stone-800/80 ">
+    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+      <div className="w-screen h-screen flex flex-col  bg-stone-50/80 dark:bg-stone-800/80 ">
         <HeaderBar />
         <HexHopNavigator />
       </div>
+    </ThemeProvider>
   );
 }
 

@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/popover";
 import { buttonStyle } from "../../../style/default-style";
 
-import "@/style/empty-checker-board.css";
+import "@/globals.css";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 import { setColorValidityAndMode } from "../../../infrastructure/utils/color-format-changer";
 

@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { deleteClipboard } from "../features/delete-block";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { ModeToggle } from "@/components/theme/mode-toggle";
 
 
 const HeaderDropdown = () => {
@@ -35,7 +36,7 @@ const HeaderDropdown = () => {
 
 const HeaderColorList = () => {
   return (
-    <div className="w-full px-2 p-2 bg-stone-800 flex gap-2 items-center justify-end ">
+    <div className="w-full px-2 p-2  flex gap-2 items-center justify-end ">
       <ButtonGroup>
         <Button variant="outline" onClick={() => { }}>
           <Undo />
@@ -48,6 +49,7 @@ const HeaderColorList = () => {
       <SearchBar />
 
       <HeaderDropdown />
+      <ModeToggle/>
     </div>
   );
 };

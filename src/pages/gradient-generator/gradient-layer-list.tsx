@@ -1,4 +1,4 @@
-import "@/style/empty-checker-board.css";
+import "@/globals.css";
 import type { GradientEntity } from "@/infrastructure/models/entity";
 interface GradientLayerListParm {
   gradient: GradientEntity;
