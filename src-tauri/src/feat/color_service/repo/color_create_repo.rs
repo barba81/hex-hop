@@ -23,5 +23,6 @@ where
     )
     .fetch_one(executor)
     .await?;
+    println!("{:?}", color_block);
     Ok(id)
 }

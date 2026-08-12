@@ -7,6 +7,7 @@ export function colorStringToData(colorString: string){
   if (!color) {
     throw new Error("Invalid color string");
   }
+
   return color;
 }
 

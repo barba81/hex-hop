@@ -5,6 +5,7 @@ pub struct ColorCreateModel {
     pub r: f64,
     pub g: f64,
     pub b: f64,
+    #[serde(rename = "alpha")]
     pub a: Option<f64>,
     pub name: String,
 }
