@@ -11,37 +11,37 @@ const HeaderDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button 
-          size="icon" 
-          className=" rounded-md shrink-0 select-none hover:cursor-pointer"
-        >
-          <EllipsisVertical />
+        <Button size='icon' variant="outline">
+          <EllipsisVertical  className="hover:cursor-pointer"/>
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="min-w-[160px] text-stone-200 border-stone-700">
+      <DropdownMenuContent className=" text-stone-200 border-stone-700">
         <DropdownMenuGroup>
-          <DropdownMenuItem 
-            onClick={() => deleteClipboard()} 
-            className="flex items-center gap-2 px-2 py-1.5 text-sm hover:bg-stone-700 cursor-pointer rounded-sm"
-          >
-            <Trash2 className="h-4 w-4" />
-          </DropdownMenuItem>
+           <DropdownMenuItem 
+           variant="destructive"
+           className="  cursor-pointer "
+              >
+                
+
+
+                <Trash2/> Clear All 
+              </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
   );
 };
-
+    
 
 const HeaderColorList = () => {
   return (
-    <div className="w-full px-2 p-2  flex gap-2 items-center justify-end ">
+    <div className="w-full  py-2 flex  items-center justify-between px-2  ">
       <ButtonGroup>
-        <Button variant="outline" onClick={() => { }}>
+        <Button variant="outline" size='icon' onClick={() => { }}>
           <Undo />
         </Button>
-        <Button variant="outline" onClick={() => { }}>
+        <Button variant="outline"  size='icon' onClick={() => { }} disabled={true}>
           <Redo />
         </Button>
       </ButtonGroup>
@@ -49,7 +49,7 @@ const HeaderColorList = () => {
       <SearchBar />
 
       <HeaderDropdown />
-      <ModeToggle/>
+      {/* <ModeToggle/> */}
     </div>
   );
 };

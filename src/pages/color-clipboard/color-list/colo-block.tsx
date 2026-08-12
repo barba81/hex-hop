@@ -35,7 +35,7 @@ const ColorBlock = ({ colorEntity: colorEntity }: ColorBoxParams) => {
                             <div className="flex">
                                 {/* <CopyLogo color={colorEntity} fontClass={"white"} /> */}
                             </div>
-                            <div className="flex gap-2 h-full items-center font-mono text-md" >
+                            <div className="flex gap-2 h-full items-center " >
                                 {colorEntity.name}
                             </div>
                         </div>
