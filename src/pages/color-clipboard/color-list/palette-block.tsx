@@ -19,7 +19,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
     <div>
       <div
         className={`h-15 w-full shrink-0 relative flex flex-row items-stretch border-2   overflow-hidden
-          ${isOpen ? 'rounded-t-md border-b-cyan-400' : 'rounded-md '}`}
+          ${isOpen ? 'rounded-t-md border-b-transparent' : 'rounded-md '}`}
       >
         <div className="flex items-center justify-center shrink-0">
           <DragDots />
@@ -65,7 +65,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
       </div>
 
       {isOpen && (
-        <div className="w-full bg-neutral-900/60 rounded-b-md border-2 border-t-0 p-2">
+        <div className="w-full dark:bg-neutral-900/70 rounded-b-md border-2 border-t-0 p-2">
           <div className="flex flex-col gap-2 border-neutral-700 ">
             {paletteEntity.blocks?.map((child) => {
               if (child.kind === 'color')

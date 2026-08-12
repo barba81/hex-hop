@@ -1,5 +1,4 @@
-import { X } from "lucide-react";
-import { deleteBlock, hardDelete } from "../color-clipboard/features/delete-block";
+import { hardDelete } from "../color-clipboard/features/delete-block";
 
 
 import {
