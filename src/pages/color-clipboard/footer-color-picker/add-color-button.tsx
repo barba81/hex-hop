@@ -16,7 +16,7 @@ const AddColorButton = () => {
           justify-center
           text-gray-900 
           dark:text-white 
-            ${isColorValid && "bg-green-400  hover:bg-green-400/50"} 
+            ${isColorValid && "bg-green-400  dark:bg-green-600  hover:bg-green-400/50"} 
           `}
         onClick={async () => {
           await addNewColorToClipboard(inputColor)
