@@ -2,7 +2,7 @@ import SearchBar from "./search-bar";
 import { EllipsisVertical, Palette, Redo, Trash2, Undo } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { deleteClipboard } from "../features/delete-block";
-import { MicroButton } from "@/components/common/micro-button";
+import { IconButton, MicroButton } from "@/components/common/micro-button";
 
 
 const HeaderDropdown = () => {
@@ -25,7 +25,7 @@ const HeaderDropdown = () => {
           <DropdownMenuItem
             variant="destructive"
             className="  cursor-pointer "
-            onClick={()=>deleteClipboard()}
+            onClick={() => deleteClipboard()}
           >
 
             <Trash2 /> Clear All
@@ -42,12 +42,10 @@ const HeaderDropdown = () => {
 const HeaderColorList = () => {
   return (
     <div className="w-full  py-2 flex  items-center justify-between px-2  ">
-        <MicroButton onClick={() => { }}>
-          <Undo />
-        </MicroButton>
-        <MicroButton onClick={() => { }} disabled={true}>
-          <Redo />
-        </MicroButton>
+      <div className="flex ">
+        <IconButton icon={Undo} onClick={() => { }} />
+        <IconButton icon={Redo} onClick={() => { }} />
+      </div>
 
       <SearchBar />
 

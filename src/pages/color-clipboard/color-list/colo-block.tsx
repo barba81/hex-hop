@@ -79,7 +79,9 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
                                         />
                                     </div>
                                 ))}
-                            <div><X/></div>
+                                    <MicroButton className="">
+                                        <X size={16} />
+                                    </MicroButton>
                             </div>
                         </div>
 
@@ -91,7 +93,6 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
                                     type="text"
                                     defaultValue={colorEntity.name}
                                     placeholder="Color Name"
-                                    className="w-full pl-2 pr-7 py-1 text-xs bg-muted/60 border border-input/60 rounded text-foreground focus:border-ring focus:bg-background focus:outline-none transition-colors truncate"
                                 />
                                 <MicroButton
                                     type="button"

@@ -15,7 +15,6 @@ import {
 import type { PagesTypes} from "@/store/use-app-store";
 import { useAppStore } from "@/store/use-app-store";
 import GradientIcon from "@/components/icons/gradient-icon";
-import { MicroButton } from "@/components/common/micro-button";
 
 const size = 15;
 
@@ -77,22 +76,22 @@ const DropDownHeader = () => {
   return (
     <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <MicroButton
-            className="relative  select-none hover:cursor-pointer  text-xs rounded-md h-6"
+          <button
+            className=" flex gap-2  items-center justify-center  relative h-6 px-3 font-semibold  hover:bg-stone-200 dark:hover:bg-stone-800 select-none hover:cursor-pointer rounded-md outline-1  text-xs "
           >
             {ICON_MAP[activePage]?.icon || <Clipboard />}
             {ICON_MAP[activePage]?.shortLabel }
-          </MicroButton>
+          </button>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent className="min-w-40   border-stone-700">
-          <DropdownMenuGroup>
+        <DropdownMenuContent className="min-w-40 ">
+          <DropdownMenuGroup >
             {Object.entries(ICON_MAP).map(([key, { icon, label }]) => (
               <DropdownMenuItem
                 
                 key={key}
                 onClick={() => setActivePage(key as PagesTypes)}
-                className="flex items-center gap-2 px-2 py-1.5 text-sm hover:bg-stone-700 cursor-pointer rounded-sm"
+                className="flex items-center gap-2 px-2 py-1.5 text-sm  cursor-pointer rounded-sm "
               >
                 <span className="">{icon}</span>
                 <span className="text-xs font-medium ">
