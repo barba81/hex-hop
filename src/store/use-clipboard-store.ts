@@ -34,7 +34,7 @@ interface ClipboardAction {
   setInputColor: (color: string) => void;
   setFormat: (color: string) => void;
   togglePalette: (paletteId: number) => void;
-  setEditBlock: (blockId: number) => void;
+  setEditBlock: (blockId: number | null) => void;
 }
 
 export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(immer((set) => ({

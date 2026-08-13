@@ -7,6 +7,9 @@ import { deleteBlock } from "../features/delete-block";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 import PreviewColorBox from "../footer-color-picker/preview-color-box";
 import { duplicateBlock } from "../features/duplicate-block";
+import { updateColorBlock } from "../features/update-block";
+import { Field, FieldLabel } from "@/components/ui/field";
+import { Input } from "@/components/ui/input";
 
 type ColorBoxParams = {
     colorEntity: ColorEntity
@@ -18,8 +21,15 @@ type ColorBoxParams = {
 const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
     const colorHexData = colorDataToRoundData(colorEntity);
     const backgroundCss = coloBackgroundCss(colorEntity);
-    return (<div className={` ${edit ? 'h-20' : 'h-15'}  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
-        <div className="flex items-center justify-center shrink-0">
+    const setEditBox = useClipboardStore(x => x.setEditBlock);
+
+    const handleEdit = () => {
+        setEditBox(null);
+        updateColorBlock(colorEntity);
+    }
+
+return (<div className={` ${edit ? 'h-20' : 'h-15'}  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
+        <div className={`flex items-center justify-center shrink-0 ${edit && 'hidden'}`}>
             <DragDots />
         </div>
         <div className={`w-full flex ${!edit && 'flex-col'} justify-between overflow-hidden bg-background  `}>
@@ -42,18 +52,18 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
                 {
                     /* Row 1: RGB Input Fields */
                 }
-                <div className="flex items-center justify-between gap-2">
+                <div className="flex items-center  gap-2">
                     <label className="flex items-center gap-1 text-xs font-semibold text-muted-foreground">
-                        R
-                        <input type="number" min="0" max="255" defaultValue={colorHexData.r} className="w-12 h-6 px-1 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
+                        <input type="number" min="0" max="255" defaultValue={colorHexData.r} className="w-12  px-1 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
                     </label>
                     <label className="flex items-center gap-1 text-xs font-semibold text-muted-foreground">
-                        G
-                        <input type="number" min="0" max="255" defaultValue={colorHexData.g} className="w-12 h-6 px-1 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
+                        <input type="number" min="0" max="255" defaultValue={colorHexData.g} className="w-12  px-1 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
                     </label>
                     <label className="flex items-center gap-1 text-xs font-semibold text-muted-foreground">
-                        B
-                        <input type="number" min="0" max="255" defaultValue={colorHexData.b} className="w-12 h-6 px-1 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
+                        <input type="number" min="0" max="255" defaultValue={colorHexData.b} className="w-12 px-1 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
+                    </label>  
+                    <label className="flex items-center gap-1 text-xs font-semibold text-muted-foreground">
+                        <input type="number" min="0" max="255" defaultValue={colorHexData.alpha} className="w-12  px-1 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
                     </label>
                 </div>
 
@@ -66,12 +76,10 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
                         <button type="button" className="p-1 rounded hover:bg-accent transition-colors" title="Refresh Name">
                             <RefreshCw className="size-3.5 text-muted-foreground" />
                         </button>
-                        <span className="text-xs font-medium text-foreground truncate max-w-[100px]">
-                            {colorEntity.name}
-                        </span>
+                        <input type="text" min="0" max="255" defaultValue=  {colorEntity.name} className="px-1 h-8 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
                     </div>
 
-                    <button type="button" className="p-1 rounded hover:bg-accent text-primary transition-colors" title="Save Changes">
+                    <button type="button" className="p-1 rounded hover:bg-accent text-primary transition-colors" title="Save Changes" onClick={()=>handleEdit()}>
                         <Check className="size-4" />
                     </button>
                 </div>
