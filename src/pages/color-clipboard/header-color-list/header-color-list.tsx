@@ -10,7 +10,7 @@ const HeaderDropdown = () => {
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <button className={`p-1 ${defaultButtonBackground} outline-1`}  >
-          <EllipsisVertical size={18} />
+          <EllipsisVertical size={15} />
         </button>
       </DropdownMenuTrigger>
 
@@ -41,7 +41,7 @@ const HeaderDropdown = () => {
 
 const HeaderColorList = () => {
   return (
-    <div className="w-full  flex gap-2  items-center justify-between bg-zinc-200 dark:bg-stone-900 p-1 ">
+    <div className="w-full  flex gap-2  items-center justify-between bg-zinc-50/50 dark:bg-zinc-800 p-1 px-3 ">
       <div className="flex gap-1">
         <button
           type="button"
@@ -52,7 +52,7 @@ const HeaderColorList = () => {
           ${defaultButtonBackground}
           `}
         >
-          <Undo size={18} />
+          <Undo size={15} />
         </button>
 
         <button
@@ -64,7 +64,7 @@ const HeaderColorList = () => {
           ${defaultButtonBackground}
           `}
         >
-          <Redo size={18} />
+          <Redo size={15} />
         </button>
       </div>
 
