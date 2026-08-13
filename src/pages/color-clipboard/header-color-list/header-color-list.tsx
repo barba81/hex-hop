@@ -1,18 +1,17 @@
 import SearchBar from "./search-bar";
 import { EllipsisVertical, Palette, Redo, Trash2, Undo } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { ButtonGroup } from "@/components/ui/button-group";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { deleteClipboard } from "../features/delete-block";
+import { MicroButton } from "@/components/common/micro-button";
 
 
 const HeaderDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button size='icon-sm' variant="outline" >
+        <MicroButton  >
           <EllipsisVertical className="hover:cursor-pointer" />
-        </Button>
+        </MicroButton>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="min-w-40   border-stone-700">
@@ -43,14 +42,12 @@ const HeaderDropdown = () => {
 const HeaderColorList = () => {
   return (
     <div className="w-full  py-2 flex  items-center justify-between px-2  ">
-      <ButtonGroup>
-        <Button variant="outline" size='icon-sm' onClick={() => { }}>
+        <MicroButton onClick={() => { }}>
           <Undo />
-        </Button>
-        <Button variant="outline" size='icon-sm' onClick={() => { }} disabled={true}>
+        </MicroButton>
+        <MicroButton onClick={() => { }} disabled={true}>
           <Redo />
-        </Button>
-      </ButtonGroup>
+        </MicroButton>
 
       <SearchBar />
 

@@ -1,6 +1,7 @@
 ;
 import { useClipboardStore } from "@/store/use-clipboard-store";
 import { setColorValidityAndMode } from "../features/set-color-validity-and-mode";
+import { MicroInput } from "@/components/common/micro-input";
 
 const ColorInput = () => {
   const setInputColor = useClipboardStore((state) => state.setInputColor);
@@ -26,7 +27,7 @@ const ColorInput = () => {
           focus-within:ring-ring 
           focus-within:border-input "
     >
-      <input
+      <MicroInput
         className="
             h-full 
             w-full 

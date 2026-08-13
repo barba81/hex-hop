@@ -4,11 +4,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import { buttonStyle } from "../../../style/default-style";
 
 import "@/globals.css";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 import { setColorValidityAndMode } from "../features/set-color-validity-and-mode";
+import { MicroButton } from "@/components/common/micro-button";
 
 const PreviewColorBox = () => {
   const currentColor = useClipboardStore(x => x.validColor);
@@ -23,8 +23,8 @@ const PreviewColorBox = () => {
         <Popover>
           <PopoverTrigger asChild>
             <div className="bg-checkerboard rounded-md  ">
-              <div
-                className={`${buttonStyle}hover:bg-white/90   overflow-hidden`}
+              <MicroButton
+                className={`hover:bg-white/90   overflow-hidden`}
                 style={{
                   backgroundColor: currentColor,
                 }}

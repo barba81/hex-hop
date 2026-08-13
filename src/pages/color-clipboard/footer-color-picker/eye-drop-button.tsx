@@ -1,13 +1,12 @@
 import { Pipette } from "lucide-react";
-import { buttonStyle } from "../../../style/default-style";
 import { eyeDropperColorPicker } from "../features/eye-dropper";
+import { MicroButton } from "@/components/common/micro-button";
 
 const EyeDropButton = () => {
 
   return (
-    <div
+    <MicroButton
         className={`
-          ${buttonStyle}       
           flex  
           items-center 
           justify-center
@@ -21,7 +20,7 @@ const EyeDropButton = () => {
         }}
       >
         <Pipette strokeWidth={2} size={15} />
-      </div>
+      </MicroButton>
   );
 };
 

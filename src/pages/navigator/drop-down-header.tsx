@@ -15,7 +15,7 @@ import {
 import type { PagesTypes} from "@/store/use-app-store";
 import { useAppStore } from "@/store/use-app-store";
 import GradientIcon from "@/components/icons/gradient-icon";
-import { Button } from "@/components/ui/button";
+import { MicroButton } from "@/components/common/micro-button";
 
 const size = 15;
 
@@ -77,14 +77,12 @@ const DropDownHeader = () => {
   return (
     <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button
-            size="sm"
-            variant="outline"
+          <MicroButton
             className="relative  select-none hover:cursor-pointer  text-xs rounded-md h-6"
           >
             {ICON_MAP[activePage]?.icon || <Clipboard />}
             {ICON_MAP[activePage]?.shortLabel }
-          </Button>
+          </MicroButton>
         </DropdownMenuTrigger>
 
         <DropdownMenuContent className="min-w-40   border-stone-700">

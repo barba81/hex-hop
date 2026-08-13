@@ -1,11 +1,11 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import type { GradientEntity } from "@/infrastructure/models/entity";
 import { Copy, Plus, Trash2 } from "lucide-react";
 import { useEffect, useState } from "react";
 import { updateGradient } from "./feature/update-gradient";
 import { deleteGradient } from "./feature/delete-gradient";
 import { addNewLayer } from "./feature/add-new-gradient";
+import { MicroInput } from "@/components/common/micro-input";
+import { MicroButton } from "@/components/common/micro-button";
 
 interface GradientInfoParm {
   gradient: GradientEntity;
@@ -30,37 +30,31 @@ const GradientInfo = ({ gradient }: GradientInfoParm) => {
 
   return (
     <div className="flex w-full justify-between px-2 gap-2">
-      <Input
+      <MicroInput
         placeholder="Enter text"
         value={text}
         onChange={(e) => setText(e.target.value)}
       />
       <div>{gradient.name}</div>
       <div className="flex gap-1">
-        <Button
-          size="sm"
-          variant="outline"
+        <MicroButton
           className="relative select-none hover:cursor-pointer text-xs rounded-md h-6"
           onClick={() => addNewLayer(gradient.id)}
         >
           <Plus />
           Add layer
-        </Button>
-        <Button
-          size="sm"
-          variant="outline"
+        </MicroButton>
+        <MicroButton
           className="relative select-none hover:cursor-pointer text-xs rounded-md h-6"
         >
           <Copy />
-        </Button>
-        <Button
-          size="sm"
-          variant="outline"
+        </MicroButton>
+        <MicroButton
           className="relative select-none hover:cursor-pointer text-xs rounded-md h-6"
           onClick={async () => await deleteGradient(gradient.id)}
         >
           <Trash2 size={20} className="stroke-red-400" />
-        </Button>
+        </MicroButton>
       </div>
     </div>
   );

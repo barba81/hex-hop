@@ -6,9 +6,9 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import { Button } from "@/components/ui/button";
 import { addNewGradient } from "./feature/add-new-gradient";
 import GradientIcon from "@/components/icons/gradient-icon";
+import { MicroButton } from "@/components/common/micro-button";
 
 const GradientEmptyPage = () => {
 
@@ -22,7 +22,7 @@ const GradientEmptyPage = () => {
           <EmptyDescription>No data found</EmptyDescription>
         </EmptyHeader>
         <EmptyContent>
-          <Button onClick={() => addNewGradient()}>Add new gradient</Button>
+          <MicroButton onClick={() => addNewGradient()}>Add new gradient</MicroButton>
         </EmptyContent>
       </Empty>
   );

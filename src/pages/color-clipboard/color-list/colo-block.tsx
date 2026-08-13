@@ -2,20 +2,19 @@ import { DragDots } from "@/components/common/drag-dots";
 import { ColorEntity } from "@/infrastructure/models/entity";
 import { coloBackground as coloBackgroundCss, colorDataToRoundData } from "../../../infrastructure/utils/color-format-changer";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
-import { Check, Copy, Pen, RefreshCw, Trash2 } from "lucide-react";
+import { Check, Copy, Pen, RefreshCw, Trash2, X } from "lucide-react";
 import { deleteBlock } from "../features/delete-block";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 import PreviewColorBox from "../footer-color-picker/preview-color-box";
 import { duplicateBlock } from "../features/duplicate-block";
 import { updateColorBlock } from "../features/update-block";
-import { Button } from "@/components/ui/button";
+import { MicroInput } from "@/components/common/micro-input";
+import { MicroButton } from "@/components/common/micro-button";
 
 type ColorBoxParams = {
     colorEntity: ColorEntity
     edit: boolean,
 };
-
-
 
 const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
     const colorHexData = colorDataToRoundData(colorEntity);
@@ -60,7 +59,7 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
                         {/* Row 1: RGBA Inputs in a tight 4-col grid */}
                         <div className="flex-1 flex flex-col justify-between gap-2 min-w-0">
                             {/* Row 1: RGBA Inputs in a tight 4-col grid */}
-                            <div className="grid grid-cols-4 gap-1">
+                            <div className="grid grid-cols-5 gap-1">
                                 {[
                                     { key: 'r', label: 'R', val: colorHexData.r, color: 'text-red-500' },
                                     { key: 'g', label: 'G', val: colorHexData.g, color: 'text-green-500' },
@@ -71,7 +70,7 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
                                         <span className={`absolute left-1.5 text-[10px] font-bold select-none pointer-events-none ${channel.color}`}>
                                             {channel.label}
                                         </span>
-                                        <input
+                                        <MicroInput
                                             type="number"
                                             min="0"
                                             max="255"
@@ -80,6 +79,7 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
                                         />
                                     </div>
                                 ))}
+                            <div><X/></div>
                             </div>
                         </div>
 
@@ -87,30 +87,28 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
                         <div className="flex items-center gap-1.5">
                             <PreviewColorBox />
                             <div className="relative flex-1 flex items-center">
-                                <input
+                                <MicroInput
                                     type="text"
                                     defaultValue={colorEntity.name}
                                     placeholder="Color Name"
                                     className="w-full pl-2 pr-7 py-1 text-xs bg-muted/60 border border-input/60 rounded text-foreground focus:border-ring focus:bg-background focus:outline-none transition-colors truncate"
                                 />
-                                <button
+                                <MicroButton
                                     type="button"
                                     title="Auto-generate name"
                                     onClick={handleRefreshName}
                                     className="absolute right-1 p-1 text-muted-foreground hover:text-foreground rounded-sm hover:bg-muted transition-colors"
                                 >
                                     <RefreshCw className="size-3" />
-                                </button>
+                                </MicroButton>
                             </div>
 
-                            <Button
-                                type="button"
-                                title="Save Changes"
+                            <MicroButton
                                 onClick={handleEdit}
                                 className="h-7 w-7 flex items-center justify-center shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 rounded transition-all shadow-sm active:scale-95"
                             >
                                 <Check className="size-3.5" />
-                            </Button>
+                            </MicroButton>
                         </div>
                     </div>
                 </div>

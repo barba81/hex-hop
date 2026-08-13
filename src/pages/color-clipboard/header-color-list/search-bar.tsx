@@ -1,8 +1,8 @@
-import { Input } from "@/components/ui/input";
+import { MicroInput } from "@/components/common/micro-input";
 
 const SearchBar = () => {
   return (
-    <Input placeholder="Enter text"  />
+    <MicroInput placeholder="Enter text"  />
   );
 };
 

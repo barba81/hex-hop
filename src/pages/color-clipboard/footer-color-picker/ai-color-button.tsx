@@ -1,15 +1,14 @@
-import { buttonStyle } from "../../../style/default-style";
 import { Astroid } from "lucide-react";
 import { addNewColorToClipboard } from "../features/add-block";
 import { useClipboardStore } from "@/store/use-clipboard-store";
+import { MicroButton } from "@/components/common/micro-button";
 
 const AiColorButton = () => {
   const inputColor = useClipboardStore((state)=>state.inputColor);
 
     return (
-        <div
+        <MicroButton
             className={`
-          ${buttonStyle}       
           flex  
           items-center 
           justify-center
@@ -21,7 +20,7 @@ const AiColorButton = () => {
             }}
         >
             <Astroid size={16} />
-        </div>
+        </MicroButton>
     );
 };
 
