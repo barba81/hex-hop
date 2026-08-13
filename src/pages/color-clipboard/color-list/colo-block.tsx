@@ -8,8 +8,7 @@ import { useClipboardStore } from "@/store/use-clipboard-store";
 import PreviewColorBox from "../footer-color-picker/preview-color-box";
 import { duplicateBlock } from "../features/duplicate-block";
 import { updateColorBlock } from "../features/update-block";
-import { Field, FieldLabel } from "@/components/ui/field";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 
 type ColorBoxParams = {
     colorEntity: ColorEntity
@@ -28,7 +27,7 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
         updateColorBlock(colorEntity);
     }
 
-return (<div className={` ${edit ? 'h-20' : 'h-15'}  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
+    return (<div className={` ${edit ? 'h-20' : 'h-15'}  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
         <div className={`flex items-center justify-center shrink-0 ${edit && 'hidden'}`}>
             <DragDots />
         </div>
@@ -61,7 +60,7 @@ return (<div className={` ${edit ? 'h-20' : 'h-15'}  rounded-md w-full shrink-0 
                     </label>
                     <label className="flex items-center gap-1 text-xs font-semibold text-muted-foreground">
                         <input type="number" min="0" max="255" defaultValue={colorHexData.b} className="w-12 px-1 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
-                    </label>  
+                    </label>
                     <label className="flex items-center gap-1 text-xs font-semibold text-muted-foreground">
                         <input type="number" min="0" max="255" defaultValue={colorHexData.alpha} className="w-12  px-1 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
                     </label>
@@ -70,18 +69,16 @@ return (<div className={` ${edit ? 'h-20' : 'h-15'}  rounded-md w-full shrink-0 
                 {
                     /* Row 2: Color Box, Refresh Name, Name Display, Checkbox */
                 }
-                <div className="flex items-center justify-between gap-2 pt-1 border-t border-border/50">
-                    <div className="flex items-center gap-2">
-                        <PreviewColorBox />
-                        <button type="button" className="p-1 rounded hover:bg-accent transition-colors" title="Refresh Name">
-                            <RefreshCw className="size-3.5 text-muted-foreground" />
-                        </button>
-                        <input type="text" min="0" max="255" defaultValue=  {colorEntity.name} className="px-1 h-8 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
+                <div className="flex items-center gap-2">
+                    <PreviewColorBox />
+                    <div className="flex "> 
+                   
+                    <input type="text" min="0" max="255" defaultValue={colorEntity.name} className="px-1 h-8 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
                     </div>
 
-                    <button type="button" className="p-1 rounded hover:bg-accent text-primary transition-colors" title="Save Changes" onClick={()=>handleEdit()}>
+                    <Button size='icon' title="Save Changes" onClick={() => handleEdit()}>
                         <Check className="size-4" />
-                    </button>
+                    </Button>
                 </div>
             </div>}
         </div>
@@ -96,7 +93,7 @@ const ColorBlock = ({ colorEntity: colorEntity, edit }: ColorBoxParams) => {
     return (
         <ContextMenu>
             <ContextMenuTrigger>
-                <ColorBlockMain edit={edit}  colorEntity={colorEntity}/>
+                <ColorBlockMain edit={edit} colorEntity={colorEntity} />
             </ContextMenuTrigger>
             <ContextMenuContent className="w-48">
                 <ContextMenuItem className="gap-2" onClick={() => setEditBox(colorEntity.blockId)}>
@@ -105,7 +102,7 @@ const ColorBlock = ({ colorEntity: colorEntity, edit }: ColorBoxParams) => {
                 </ContextMenuItem>
 
                 <ContextMenuItem className="gap-2"
-                 onClick={() => duplicateBlock(colorEntity)}>
+                    onClick={() => duplicateBlock(colorEntity)}>
                     <Copy className="size-4" />
                     Copy
                 </ContextMenuItem>

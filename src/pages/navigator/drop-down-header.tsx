@@ -87,16 +87,17 @@ const DropDownHeader = () => {
           </Button>
         </DropdownMenuTrigger>
 
-        <DropdownMenuContent className="min-w-[160px]  text-stone-200 border-stone-700">
+        <DropdownMenuContent className="min-w-40   border-stone-700">
           <DropdownMenuGroup>
             {Object.entries(ICON_MAP).map(([key, { icon, label }]) => (
               <DropdownMenuItem
+                
                 key={key}
                 onClick={() => setActivePage(key as PagesTypes)}
                 className="flex items-center gap-2 px-2 py-1.5 text-sm hover:bg-stone-700 cursor-pointer rounded-sm"
               >
-                <span className="text-stone-400">{icon}</span>
-                <span className="text-xs font-medium text-stone-400">
+                <span className="">{icon}</span>
+                <span className="text-xs font-medium ">
                   {label}
                 </span>
               </DropdownMenuItem>
