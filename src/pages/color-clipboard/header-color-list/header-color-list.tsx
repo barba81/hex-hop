@@ -3,6 +3,7 @@ import { EllipsisVertical, Palette, Redo, Trash2, Undo } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { deleteClipboard } from "../features/delete-block";
 
 
 const HeaderDropdown = () => {
@@ -25,6 +26,7 @@ const HeaderDropdown = () => {
           <DropdownMenuItem
             variant="destructive"
             className="  cursor-pointer "
+            onClick={()=>deleteClipboard()}
           >
 
             <Trash2 /> Clear All

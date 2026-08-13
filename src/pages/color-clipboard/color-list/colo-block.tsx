@@ -27,12 +27,16 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
         updateColorBlock(colorEntity);
     }
 
+    const handleRefreshName = () => {
+        // Handle auto-generating color name here
+    };
+
     return (<div className={` ${edit ? 'h-20' : 'h-15'}  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
         <div className={`flex items-center justify-center shrink-0 ${edit && 'hidden'}`}>
             <DragDots />
         </div>
         <div className={`w-full flex ${!edit && 'flex-col'} justify-between overflow-hidden bg-background  `}>
-            <div className={`${edit ? 'w-20' : 'flex-1'} bg-checkerboard`}>
+            <div className={`${edit ? 'w-25' : 'flex-1'} bg-checkerboard`}>
                 <div className="w-full h-full" style={{
                     backgroundColor: backgroundCss
                 }} />
@@ -47,40 +51,71 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
                     {colorEntity.name}
                 </div>
             </div>}
-            {edit && <div className="flex-1 flex flex-col justify-between p-2 gap-2 bg-background">
-                {
-                    /* Row 1: RGB Input Fields */
-                }
-                <div className="flex items-center  gap-2">
-                    <label className="flex items-center gap-1 text-xs font-semibold text-muted-foreground">
-                        <input type="number" min="0" max="255" defaultValue={colorHexData.r} className="w-12  px-1 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
-                    </label>
-                    <label className="flex items-center gap-1 text-xs font-semibold text-muted-foreground">
-                        <input type="number" min="0" max="255" defaultValue={colorHexData.g} className="w-12  px-1 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
-                    </label>
-                    <label className="flex items-center gap-1 text-xs font-semibold text-muted-foreground">
-                        <input type="number" min="0" max="255" defaultValue={colorHexData.b} className="w-12 px-1 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
-                    </label>
-                    <label className="flex items-center gap-1 text-xs font-semibold text-muted-foreground">
-                        <input type="number" min="0" max="255" defaultValue={colorHexData.alpha} className="w-12  px-1 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
-                    </label>
-                </div>
+            {edit &&
+                /* --- EDIT MODE --- */
+                <div className="p-2.5 flex gap-2.5 items-stretch w-full">
 
-                {
-                    /* Row 2: Color Box, Refresh Name, Name Display, Checkbox */
-                }
-                <div className="flex items-center gap-2">
-                    <PreviewColorBox />
-                    <div className="flex "> 
-                   
-                    <input type="text" min="0" max="255" defaultValue={colorEntity.name} className="px-1 h-8 text-xs text-foreground bg-muted border border-input rounded focus:outline-none focus:ring-1 focus:ring-ring" />
+                    {/* Right: Controls Stack */}
+                    <div className="flex-1 flex flex-col justify-between gap-2 min-w-0">
+                        {/* Row 1: RGBA Inputs in a tight 4-col grid */}
+                        <div className="flex-1 flex flex-col justify-between gap-2 min-w-0">
+                            {/* Row 1: RGBA Inputs in a tight 4-col grid */}
+                            <div className="grid grid-cols-4 gap-1">
+                                {[
+                                    { key: 'r', label: 'R', val: colorHexData.r, color: 'text-red-500' },
+                                    { key: 'g', label: 'G', val: colorHexData.g, color: 'text-green-500' },
+                                    { key: 'b', label: 'B', val: colorHexData.b, color: 'text-blue-500' },
+                                    { key: 'a', label: 'A', val: colorHexData.alpha, color: 'text-muted-foreground/40' },
+                                ].map(channel => (
+                                    <div key={channel.key} className="relative flex items-center">
+                                        <span className={`absolute left-1.5 text-[10px] font-bold select-none pointer-events-none ${channel.color}`}>
+                                            {channel.label}
+                                        </span>
+                                        <input
+                                            type="number"
+                                            min="0"
+                                            max="255"
+                                            defaultValue={channel.val}
+                                            className="w-full pl-4 pr-1 py-1 text-[11px] text-right font-mono bg-muted/60 border border-input/60 rounded focus:border-ring focus:bg-background focus:outline-none transition-colors [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+
+                        {/* Row 2: Name Input with Auto-gen Button + Save Checkmark */}
+                        <div className="flex items-center gap-1.5">
+                            <PreviewColorBox />
+                            <div className="relative flex-1 flex items-center">
+                                <input
+                                    type="text"
+                                    defaultValue={colorEntity.name}
+                                    placeholder="Color Name"
+                                    className="w-full pl-2 pr-7 py-1 text-xs bg-muted/60 border border-input/60 rounded text-foreground focus:border-ring focus:bg-background focus:outline-none transition-colors truncate"
+                                />
+                                <button
+                                    type="button"
+                                    title="Auto-generate name"
+                                    onClick={handleRefreshName}
+                                    className="absolute right-1 p-1 text-muted-foreground hover:text-foreground rounded-sm hover:bg-muted transition-colors"
+                                >
+                                    <RefreshCw className="size-3" />
+                                </button>
+                            </div>
+
+                            <Button
+                                type="button"
+                                title="Save Changes"
+                                onClick={handleEdit}
+                                className="h-7 w-7 flex items-center justify-center shrink-0 bg-primary text-primary-foreground hover:bg-primary/90 rounded transition-all shadow-sm active:scale-95"
+                            >
+                                <Check className="size-3.5" />
+                            </Button>
+                        </div>
                     </div>
-
-                    <Button size='icon' title="Save Changes" onClick={() => handleEdit()}>
-                        <Check className="size-4" />
-                    </Button>
                 </div>
-            </div>}
+
+            }
         </div>
     </div>);
 }
