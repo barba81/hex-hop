@@ -6,11 +6,12 @@ export function colorStringToData(colorString: string){
   if (!color) {
     throw new Error("Invalid color string");
   }
-
   return color;
 }
 
 export function coloBackground(color: ColorData){
+  console.log(formatCss({...color, alpha: color.alpha, mode:"rgb"}));
+  console.log(color);
   return formatCss({...color, mode:"rgb"});
 }
 

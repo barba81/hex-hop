@@ -71,8 +71,8 @@ const ICON_MAP = {
 };
 
 const DropDownHeader = () => {
-  const activePage = useAppStore().activePage;
-  const setActivePage = useAppStore().setActivePage;
+  const activePage = useAppStore((state)=>state.activePage);
+  const setActivePage = useAppStore((state)=>state.setActivePage);
 
   return (
     <DropdownMenu>

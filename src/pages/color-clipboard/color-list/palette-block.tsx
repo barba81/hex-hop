@@ -69,7 +69,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
           <div className="flex flex-col gap-2 border-neutral-700 ">
             {paletteEntity.blocks?.map((child) => {
               if (child.kind === 'color')
-                return <ColorBlock key={child.blockId} colorEntity={child} />;
+                return <ColorBlock key={child.blockId} colorEntity={child} edit={false} />;
               if (child.kind === 'gradient')
                 return <GradientBlock key={child.blockId} gradientEntity={child} />;
             })}
