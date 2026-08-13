@@ -10,9 +10,9 @@ export function colorStringToData(colorString: string){
 }
 
 export function coloBackground(color: ColorData){
-  console.log(formatCss({...color, alpha: color.alpha, mode:"rgb"}));
+  console.log(formatCss({...color, alpha: color.alpha ?? undefined, mode:"rgb"}));
   console.log(color);
-  return formatCss({...color, mode:"rgb"});
+  return formatCss({...color, alpha: color.alpha ?? undefined, mode:"rgb"});
 }
 
 export function colorDataToRoundData(color: ColorData){
