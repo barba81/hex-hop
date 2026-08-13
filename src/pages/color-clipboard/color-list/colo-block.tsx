@@ -1,14 +1,11 @@
 import { DragDots } from "@/components/common/drag-dots";
 import { ColorEntity } from "@/infrastructure/models/entity";
-import { colorDataToRoundData } from "../../../infrastructure/utils/color-format-changer";
+import { coloBackground as coloBackgroundCss, colorDataToRoundData } from "../../../infrastructure/utils/color-format-changer";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Check, Copy, Pen, RefreshCw, Trash2 } from "lucide-react";
 import { deleteBlock } from "../features/delete-block";
-import CopyLogo from "./copy-button";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 import PreviewColorBox from "../footer-color-picker/preview-color-box";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 
 type ColorBoxParams = {
     colorEntity: ColorEntity
@@ -17,28 +14,31 @@ type ColorBoxParams = {
 
 const ColorBlock = ({ colorEntity: colorEntity, edit }: ColorBoxParams) => {
     const colorHexData = colorDataToRoundData(colorEntity);
+    const backgroundCss = coloBackgroundCss(colorEntity);
     const setEditBox = useClipboardStore(x => x.setEditBlock);
 
     return (
         <ContextMenu>
             <ContextMenuTrigger>
                 <div
-                    className={` ${edit ?'h-20':'h-15'}  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}
+                    className={` ${edit ? 'h-20' : 'h-15'}  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}
                 >
                     <div className="flex items-center justify-center shrink-0">
                         <DragDots />
                     </div>
-                    <div className={`w-full flex ${!edit && 'flex-col'} justify-between overflow-hidden bg-background`}>
-                        <div
-                            className={`${edit ? 'w-20' : 'flex-1'}`}
-                            style={{
-                                backgroundColor: `rgba(${colorHexData.r}, ${colorHexData.g}, ${colorHexData.b}, ${colorHexData.a ?? 1.0})`,
-                            }}
-                        />
+                    <div className={`w-full flex ${!edit && 'flex-col'} justify-between overflow-hidden bg-background  `}>
+                        <div className={`${edit ? 'w-20' : 'flex-1'} bg-checkerboard`}>
+                            <div
+                                className="w-full h-full"
+                                style={{
+                                    backgroundColor: backgroundCss,
+                                }}
+                            />
+                        </div>
                         {!edit &&
                             <div className="p-0.5 flex flex-row justify-between pr-2">
                                 <div className="flex">
-                                    <CopyLogo color={colorEntity} fontClass={"white"} />
+                                    {/* <CopyLogo color={colorEntity} fontClass={"white"} /> */}
                                 </div>
                                 <div className="flex gap-2 h-full items-center " >
                                     {colorEntity.name}

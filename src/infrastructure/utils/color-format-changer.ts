@@ -1,5 +1,6 @@
 import type { ColorData } from "@/infrastructure/models/types";
-import { parse } from "culori";
+import { Color } from "@tauri-apps/api/webview";
+import { formatCss, parse } from "culori";
 
 export function colorStringToData(colorString: string){
   const color  = parse(colorString);
@@ -8,6 +9,12 @@ export function colorStringToData(colorString: string){
   }
 
   return color;
+}
+
+export function coloBackground(color: ColorData){
+  console.log(color);
+  console.log( formatCss({...color, alpha: color.a??1, mode:"rgb"}));
+  return formatCss({...color, alpha: color.a??1, mode:"rgb"});
 }
 
 export function colorDataToRoundData(color: ColorData){
