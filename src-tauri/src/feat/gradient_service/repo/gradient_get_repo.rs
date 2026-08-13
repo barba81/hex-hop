@@ -110,7 +110,7 @@ where
                 gs.r as \"r!\",
                 gs.g as \"g\",
                 gs.b as \"b\",
-                gs.a as \"a\",
+                gs.alpha as \"alpha\",
                 gs.position as \"position\"
             FROM gradient_stop gs
             INNER JOIN gradient_layer gl ON gl.id = gs.layer_id 
@@ -142,7 +142,7 @@ where
                 gs.r as \"r!\",
                 gs.g as \"g\",
                 gs.b as \"b\",
-                gs.a as \"a\",
+                gs.alpha as \"alpha\",
                 gs.position as \"position\"
             FROM gradient_stop gs
             WHERE gs.id = ?1
@@ -173,7 +173,7 @@ where
                 gs.r as \"r!\",
                 gs.g as \"g\",
                 gs.b as \"b\",
-                gs.a as \"a\",
+                gs.alpha as \"alpha\",
                 gs.position as \"position\"
             FROM gradient_stop gs
             WHERE gs.layer_id = ?1

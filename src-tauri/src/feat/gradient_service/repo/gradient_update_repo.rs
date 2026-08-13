@@ -61,14 +61,14 @@ where
         r = ?,
         g = ?,
         b = ?,
-        a = ?,
+        alpha = ?,
         position = ?
         WHERE id = ?",
         stop.gradient_order,
         stop.r,
         stop.g,
         stop.b,
-        stop.a,
+        stop.alpha,
         stop.position,
         stop.id,
     )

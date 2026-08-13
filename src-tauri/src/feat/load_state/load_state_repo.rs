@@ -18,7 +18,7 @@ where
         c.r                 AS "r!",
         c.g                 AS "g!",
         c.b                 AS "b!",
-        c.a                 AS "a",       
+        c.alpha             AS "alpha",       
         c.name              AS "name!",
         c.block_id          AS "block_id!",
         b.block_order       AS "block_order!",
@@ -128,7 +128,7 @@ where
                 gs.r as \"r!\",
                 gs.g as \"g\",
                 gs.b as \"b\",
-                gs.a as \"a\",
+                gs.alpha as \"alpha\",
                 gs.position as \"position\"
             FROM gradient_stop gs
             WHERE gs.deleted = 0

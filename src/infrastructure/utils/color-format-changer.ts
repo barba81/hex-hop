@@ -1,5 +1,4 @@
 import type { ColorData } from "@/infrastructure/models/types";
-import { Color } from "@tauri-apps/api/webview";
 import { formatCss, parse } from "culori";
 
 export function colorStringToData(colorString: string){
@@ -12,9 +11,7 @@ export function colorStringToData(colorString: string){
 }
 
 export function coloBackground(color: ColorData){
-  console.log(color);
-  console.log( formatCss({...color, alpha: color.a??1, mode:"rgb"}));
-  return formatCss({...color, alpha: color.a??1, mode:"rgb"});
+  return formatCss({...color, alpha: color.alpha??1, mode:"rgb"});
 }
 
 export function colorDataToRoundData(color: ColorData){
@@ -22,7 +19,7 @@ export function colorDataToRoundData(color: ColorData){
     r: Math.round(color.r*255),
     g: Math.round(color.g*255),
     b: Math.round(color.b*255),
-    a: color.a
+    alpha: color.alpha
   } as ColorData;
 }
 
@@ -32,8 +29,8 @@ const colorHexData = {
     r: Math.round(color.r*255),
     g: Math.round(color.g*255),
     b: Math.round(color.b*255),
-    a: color.a
+    alpha: color.alpha
   } as ColorData;
-  return `rgba(${colorHexData.r}, ${colorHexData.g}, ${colorHexData.b}, ${colorHexData.a ?? 1.0})`;
+  return `rgba(${colorHexData.r}, ${colorHexData.g}, ${colorHexData.b}, ${colorHexData.alpha ?? 1.0})`;
 }
 

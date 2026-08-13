@@ -27,6 +27,6 @@ pub struct GradientStopRequest {
     pub r: f64,
     pub g: f64,
     pub b: f64,
-    pub a: Option<f64>,
+    pub alpha: Option<f64>,
     pub position: f64,
 }

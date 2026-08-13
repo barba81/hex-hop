@@ -14,7 +14,7 @@ CREATE TABLE color (
     r               REAL  DEFAULT 1 CHECK(r BETWEEN 0 AND 1) NOT NULL,
     g               REAL  DEFAULT 1 CHECK(g BETWEEN 0 AND 1) NOT NULL,
     b               REAL  DEFAULT 1 CHECK(b BETWEEN 0 AND 1) NOT NULL,
-    a               REAL  DEFAULT NULL CHECK(a BETWEEN 0 AND 1),
+    alpha           REAL  DEFAULT NULL CHECK(alpha BETWEEN 0 AND 1),
     name     TEXT NOT NULL,
     
     FOREIGN KEY (block_id) REFERENCES block(id) ON DELETE CASCADE
@@ -57,7 +57,7 @@ CREATE TABLE gradient_stop (
     r               REAL  DEFAULT 1 CHECK(r BETWEEN 0 AND 1) NOT NULL,
     g               REAL  DEFAULT 1 CHECK(g BETWEEN 0 AND 1) NOT NULL,
     b               REAL  DEFAULT 1 CHECK(b BETWEEN 0 AND 1) NOT NULL,
-    a               REAL  DEFAULT NULL CHECK(a BETWEEN 0 AND 1),
+    alpha               REAL  DEFAULT NULL CHECK(alpha BETWEEN 0 AND 1),
     position        REAL  DEFAULT 1 CHECK(position BETWEEN 0 AND 1)  NOT NULL, 
     deleted         INTEGER DEFAULT 0 CHECK(deleted BETWEEN 0 AND 1) ,
 

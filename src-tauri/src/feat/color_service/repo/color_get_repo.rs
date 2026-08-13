@@ -15,7 +15,7 @@ where
                 c.r as \"r!\",
                 c.g as \"g!\",
                 c.b as \"b!\",
-                c.a as \"a\",
+                c.alpha as \"alpha\",
                 c.name as \"name\",
                 c.block_id as \"block_id\",
                 b.block_order as \"block_order\",

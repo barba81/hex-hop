@@ -10,7 +10,7 @@ pub fn build_stop_response(stop: &GradientStopDataModel) -> GradientStopResponse
         r: stop.r,
         g: stop.g,
         b: stop.b,
-        a: stop.a,
+        alpha: stop.alpha,
         position: stop.position,
     }
 }
@@ -68,7 +68,7 @@ pub fn build_creation_stop_model(
         r: stop_request.r,
         g: stop_request.g,
         b: stop_request.b,
-        a: stop_request.a,
+        alpha: stop_request.alpha,
         position: stop_request.position,
     }
 }

@@ -7,7 +7,7 @@ pub struct ColorDataModel {
     pub r: f64,
     pub g: f64,
     pub b: f64,
-    pub a: Option<f64>,
+    pub alpha: Option<f64>,
     pub name: String,
     pub block_order: i64,
     pub block_id: i64,

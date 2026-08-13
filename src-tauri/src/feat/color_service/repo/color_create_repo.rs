@@ -10,7 +10,7 @@ where
 {
     let id = sqlx::query_scalar!(
         r#"
-        INSERT INTO color (block_id, r, g, b, a, name)
+        INSERT INTO color (block_id, r, g, b, alpha, name)
         VALUES ($1, $2, $3, $4, $5, $6)
         RETURNING id AS "id!"
         "#,
@@ -18,11 +18,11 @@ where
         color_block.r,
         color_block.g,
         color_block.b,
-        color_block.a,
+        color_block.alpha,
         color_block.name
     )
     .fetch_one(executor)
     .await?;
-    println!("{:?}", color_block);
+
     Ok(id)
 }

@@ -110,14 +110,14 @@ where
         "INSERT INTO gradient_stop 
             (gradient_order, 
             layer_Id,
-            r,g,b,a,position
+            r,g,b,alpha,position
             ) VALUES ($1, $2, $3, $4, $5, $6, $7)  RETURNING id as \"id!\" ",
         stop.gradient_order,
         layer_id,
         stop.r,
         stop.g,
         stop.b,
-        stop.a,
+        stop.alpha,
         stop.position
     )
     .fetch_one(executor)
@@ -138,7 +138,7 @@ where
     }
 
     let mut qb: sqlx::QueryBuilder<sqlx::Sqlite> = sqlx::QueryBuilder::new(
-        "INSERT INTO gradient_stop (gradient_order, layer_id, r, g, b, a, position) ",
+        "INSERT INTO gradient_stop (gradient_order, layer_id, r, g, b, alpha, position) ",
     );
 
     qb.push_values(stops, |mut b, stop| {
@@ -147,7 +147,7 @@ where
             .push_bind(stop.r)
             .push_bind(stop.g)
             .push_bind(stop.b)
-            .push_bind(stop.a)
+            .push_bind(stop.alpha)
             .push_bind(stop.position);
     });
 
