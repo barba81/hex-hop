@@ -15,6 +15,7 @@ import {
 import type { PagesTypes} from "@/store/use-app-store";
 import { useAppStore } from "@/store/use-app-store";
 import GradientIcon from "@/components/icons/gradient-icon";
+import { defaultButtonBackground } from "@/components/common/micro-button";
 
 const size = 15;
 
@@ -77,7 +78,8 @@ const DropDownHeader = () => {
     <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button
-            className=" flex gap-2  items-center justify-center  relative h-6 px-3 font-semibold  hover:bg-stone-200 dark:hover:bg-stone-800 select-none hover:cursor-pointer rounded-md outline-1  text-xs "
+            className={`          ${defaultButtonBackground}
+  gap-2   h-6 px-3 font-semibold  select-none outline-1  text-xs `}
           >
             {ICON_MAP[activePage]?.icon || <Clipboard />}
             {ICON_MAP[activePage]?.shortLabel }

@@ -79,9 +79,9 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
                                         />
                                     </div>
                                 ))}
-                                    <MicroButton className="">
-                                        <X size={16} />
-                                    </MicroButton>
+                                <button className="hover:cursor-pointer" onClick={()=>  setEditBox(null)} >
+                                    <X size={16} />
+                                </button>
                             </div>
                         </div>
 

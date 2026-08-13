@@ -1,5 +1,18 @@
 import React from "react";
 
+export const defaultButtonBackground = `
+    flex items-center justify-center
+    bg-zinc-100
+    hover:bg-zinc-200
+    dark:bg-foreground/10
+    dark:hover:bg-foreground/15
+    rounded-md 
+    cursor-pointer
+    text-gray-900 
+    dark:text-white
+`;
+
+
 export const buttonStyle = `
 flex items-center justify-center
  cursor-pointer shrink-0 outline-0 rounded-md`;
@@ -28,8 +41,8 @@ export const IconButton = ({
   ...props
 }: IconButtonProps) => (
   <MicroButton
-  {...props}
-  className={`text-gray-900 dark:text-white ${className || ""}`}
+    {...props}
+    className={`text-gray-900 dark:text-white ${className || ""}`}
   >
     <Icon size={iconSize} className={iconClassName} />
   </MicroButton>

@@ -2,16 +2,16 @@ import SearchBar from "./search-bar";
 import { EllipsisVertical, Palette, Redo, Trash2, Undo } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { deleteClipboard } from "../features/delete-block";
-import { IconButton, MicroButton } from "@/components/common/micro-button";
+import { defaultButtonBackground } from "@/components/common/micro-button";
 
 
 const HeaderDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <MicroButton  >
-          <EllipsisVertical className="hover:cursor-pointer" />
-        </MicroButton>
+        <button className={`p-1 ${defaultButtonBackground} outline-1`}  >
+          <EllipsisVertical size={18} />
+        </button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="min-w-40   border-stone-700">
@@ -41,10 +41,31 @@ const HeaderDropdown = () => {
 
 const HeaderColorList = () => {
   return (
-    <div className="w-full  py-2 flex  items-center justify-between px-2  ">
-      <div className="flex ">
-        <IconButton icon={Undo} onClick={() => { }} />
-        <IconButton icon={Redo} onClick={() => { }} />
+    <div className="w-full  flex gap-2  items-center justify-between bg-zinc-200 dark:bg-stone-900 p-1 ">
+      <div className="flex gap-1">
+        <button
+          type="button"
+          aria-label="Undo"
+          className={`
+          p-1
+          outline-1
+          ${defaultButtonBackground}
+          `}
+        >
+          <Undo size={18} />
+        </button>
+
+        <button
+          type="button"
+          aria-label="Redo"
+          className={`
+          p-1
+          outline-1
+          ${defaultButtonBackground}
+          `}
+        >
+          <Redo size={18} />
+        </button>
       </div>
 
       <SearchBar />

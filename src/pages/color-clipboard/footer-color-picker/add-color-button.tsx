@@ -11,17 +11,18 @@ const AddColorButton = () => {
     <MicroButton
         className={`
           flex  
+          w-7 h-7 overflow-hidden outline-1    cursor-pointer
           items-center 
           justify-center
           text-gray-900 
           dark:text-white 
-            ${isColorValid && "bg-green-400/60 hover:bg-green-400/40"} 
+            ${isColorValid && "bg-green-400  hover:bg-green-400/50"} 
           `}
         onClick={async () => {
           await addNewColorToClipboard(inputColor)
         }}
       >
-        <Check strokeWidth={3} size={16} />
+        <Check strokeWidth={3.5} size={16} />
       </MicroButton>
   );
 };

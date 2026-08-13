@@ -1,12 +1,10 @@
 import { Palette } from "lucide-react";
-import { buttonStyle } from "@/style/default-style";
 import { addNewPalette } from "../features/add-block";
 
 export const AddNewPalette = () => {
   return (
     <div
         className={`
-               ${buttonStyle}       
                flex  
                items-center 
                justify-center

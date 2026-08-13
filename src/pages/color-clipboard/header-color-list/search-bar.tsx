@@ -2,7 +2,7 @@ import { MicroInput } from "@/components/common/micro-input";
 
 const SearchBar = () => {
   return (
-    <MicroInput placeholder="Enter text"  />
+    <MicroInput className="w-full" placeholder="Search for color"  />
   );
 };
 
