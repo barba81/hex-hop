@@ -11,7 +11,7 @@ const AddColorButton = () => {
     <MicroButton
         className={`
           flex  
-          w-7 h-7 overflow-hidden outline-1    cursor-pointer
+          w-6 h-6 overflow-hidden outline-1    cursor-pointer
           items-center 
           justify-center
           text-gray-900 

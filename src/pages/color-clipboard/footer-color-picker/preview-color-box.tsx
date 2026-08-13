@@ -20,23 +20,23 @@ const PreviewColorBox = () => {
 
   return (
         <Popover>
-          <PopoverTrigger asChild>
-            <div className="bg-checkerboard rounded-md   w-7 h-7 overflow-hidden outline-1    cursor-pointer ">
-              <button
-                className={`hover:bg-white/90  w-full h-full `}
-                style={{
-                  backgroundColor: currentColor,
-                }}
-              />
-            </div>
-          </PopoverTrigger>
-          <PopoverContent className="w-auto p-3">
-            <HexAlphaColorPicker
-              color={currentColor}
-              onChange={handleOnChange}
-            />
-          </PopoverContent>
-        </Popover>
+  <PopoverTrigger asChild>
+    <div className="bg-checkerboard rounded-md w-6 h-6 overflow-hidden outline-1 cursor-pointer">
+      <div
+        className="w-full h-full transition-opacity hover:opacity-90"
+        style={{
+          backgroundColor: currentColor,
+        }}
+      />
+    </div>
+  </PopoverTrigger>
+  <PopoverContent className="w-auto p-3">
+    <HexAlphaColorPicker
+      color={currentColor}
+      onChange={handleOnChange}
+    />
+  </PopoverContent>
+</Popover>
   );
 };
 

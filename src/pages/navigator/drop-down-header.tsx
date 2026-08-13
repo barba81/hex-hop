@@ -78,8 +78,7 @@ const DropDownHeader = () => {
     <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <button
-            className={`          ${defaultButtonBackground}
-  gap-2   h-6 px-3 font-semibold  select-none outline-1  text-xs `}
+            className={`          ${defaultButtonBackground} gap-2   h-6 px-3 font-semibold  select-none outline-1  text-xs `}
           >
             {ICON_MAP[activePage]?.icon || <Clipboard />}
             {ICON_MAP[activePage]?.shortLabel }

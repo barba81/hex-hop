@@ -10,7 +10,7 @@ const AiColorButton = () => {
         <button
             className={`         
                 ${defaultButtonBackground}
-             w-7 h-7 overflow-hidden outline-1`}
+             w-6 h-6 overflow-hidden outline-1`}
             onClick={async () => {
                 await addNewColorToClipboard(inputColor);
             }}

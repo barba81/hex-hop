@@ -8,14 +8,14 @@ const EyeDropButton = () => {
     <button
         className={`
           ${defaultButtonBackground}
-          w-7 h-7
+          w-6 h-6
           outline-1
         `}
         onClick={() => {
           eyeDropperColorPicker();
         }}
       >
-        <Pipette strokeWidth={2} size={15} />
+        <Pipette strokeWidth={2} size={14} />
       </button>
   );
 };
