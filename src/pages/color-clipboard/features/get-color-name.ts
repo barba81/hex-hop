@@ -26,7 +26,6 @@ const setUpNearestName = async () => {
     const names = Object.keys(palette);
     const diffCiede2000 = differenceCiede2000();
     nearestNameGetter = nearest(names, diffCiede2000, name => palette[name]);
-
 }
 
 

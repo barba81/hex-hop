@@ -11,7 +11,7 @@ export function colorStringToData(colorString: string){
 }
 
 export function coloBackground(color: ColorData){
-  return formatCss({...color, alpha: color.alpha??1, mode:"rgb"});
+  return formatCss({...color, mode:"rgb"});
 }
 
 export function colorDataToRoundData(color: ColorData){
