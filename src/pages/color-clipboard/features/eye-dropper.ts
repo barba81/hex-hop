@@ -1,6 +1,6 @@
 import { addNewColorToClipboard } from "./add-block";
 import { useClipboardStore } from "@/store/use-clipboard-store";
-import { setColorValidityAndMode } from "../../../infrastructure/utils/color-format-changer";
+import { setColorValidityAndMode } from "./set-color-validity-and-mode";
 
 export const eyeDropperColorPicker = async () => {
 
@@ -19,8 +19,8 @@ export const eyeDropperColorPicker = async () => {
         const setInputColor = useClipboardStore.getState().setInputColor;
 
         setInputColor(result.sRGBHex);
-        await addNewColorToClipboard(result.sRGBHex);
         setColorValidityAndMode(result.sRGBHex);
+        await addNewColorToClipboard(result.sRGBHex);
 
       } catch (e) {
         console.error("Color selection cancelled or failed");

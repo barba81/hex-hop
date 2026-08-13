@@ -8,14 +8,14 @@ import { buttonStyle } from "../../../style/default-style";
 
 import "@/globals.css";
 import { useClipboardStore } from "@/store/use-clipboard-store";
-import { setColorValidityAndMode } from "../../../infrastructure/utils/color-format-changer";
+import { setColorValidityAndMode } from "../features/set-color-validity-and-mode";
 
 const PreviewColorBox = () => {
-  const currentColor = useClipboardStore().validColor;
-  const setColor = useClipboardStore().setInputColor;
+  const currentColor = useClipboardStore(x => x.validColor);
+  const setInputColor = useClipboardStore(x => x.setInputColor);
 
   const handleOnChange = (color: string) => {
-    setColor(color);
+    setInputColor(color);
     setColorValidityAndMode(color);
   };
 

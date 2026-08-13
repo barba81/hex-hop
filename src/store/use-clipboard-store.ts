@@ -5,7 +5,7 @@ import { immer } from "zustand/middleware/immer";
 const defaultInputColor = "#3b82f6";
 interface ClipboardStore {
   blocks: BlockEntity[];
-  validColor: string;
+   validColor: string;
   inputColor: string;
   isColorValid: boolean;
   colorFormat: string;
@@ -72,6 +72,7 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
 
       palette.blocks = palette.blocks.filter((block) => block.blockId !== blockId);
     }),
+    
   deleteClipboard: () =>
     set((state) => {
       state.blocks.length = 0;

@@ -4,8 +4,8 @@ import { addNewColorToClipboard } from "../features/add-block";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 
 const AddColorButton = () => {
-  const isColorValid = useClipboardStore().isColorValid;
-  const inputColor = useClipboardStore().inputColor;
+  const isColorValid = useClipboardStore((state)=>state.isColorValid);
+  const inputColor = useClipboardStore((state)=>state.inputColor);
 
   return (
     <div

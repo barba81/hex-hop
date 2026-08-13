@@ -1,16 +1,21 @@
 ;
 import { useClipboardStore } from "@/store/use-clipboard-store";
-import { setColorValidityAndMode } from "../../../infrastructure/utils/color-format-changer";
+import { setColorValidityAndMode } from "../features/set-color-validity-and-mode";
 
 const ColorInput = () => {
-  const setColor = useClipboardStore().setInputColor;
-  const colorFormat = useClipboardStore().colorFormat;
-  const isColorValid = useClipboardStore().isColorValid;
-  const inputColor = useClipboardStore().inputColor;
+  const setInputColor = useClipboardStore((state) => state.setInputColor);
+  const colorFormat = useClipboardStore((state) => state.colorFormat);
+  const isColorValid = useClipboardStore((state) => state.isColorValid);
+  const inputColor = useClipboardStore((state) => state.inputColor);
+
+  const handleOnChange = (color: string) => {
+    setInputColor(color);
+    setColorValidityAndMode(color);
+  };
 
   return (
     <div
-        className="
+      className="
           flex 
           h-7 
           items-center 
@@ -20,9 +25,9 @@ const ColorInput = () => {
           focus-within:ring-2 
           focus-within:ring-ring 
           focus-within:border-input "
-      >
-        <input
-          className="
+    >
+      <input
+        className="
             h-full 
             w-full 
             px-2 
@@ -33,17 +38,15 @@ const ColorInput = () => {
             dark:bg-stone-900  
             text-sm 
             placeholder:text-muted-foreground"
-          placeholder="Enter color"
-          value={inputColor}
-          onChange={(e) => {
-            setColor(e.target.value);
-            setColorValidityAndMode(e.target.value);
-          }}
-        />
+        placeholder="Enter color"
+        value={inputColor}
+        onChange={(e) => {
+          handleOnChange(e.target.value);
+        }}
+      />
 
-        <div
-          className={`${
-            !isColorValid ? "hidden" : "flex"
+      <div
+        className={`${!isColorValid ? "hidden" : "flex"
           }
           h-full 
           items-center 
@@ -56,10 +59,10 @@ const ColorInput = () => {
           uppercase 
           select-none
           text-muted-foreground`}
-        >
-          {colorFormat}
-        </div>
+      >
+        {colorFormat}
       </div>
+    </div>
   );
 };
 

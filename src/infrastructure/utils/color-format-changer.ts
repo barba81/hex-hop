@@ -1,6 +1,5 @@
 import type { ColorData } from "@/infrastructure/models/types";
-import { useClipboardStore } from "@/store/use-clipboard-store";
-import { formatHex, parse } from "culori";
+import { parse } from "culori";
 
 export function colorStringToData(colorString: string){
   const color  = parse(colorString);
@@ -31,18 +30,3 @@ const colorHexData = {
   return `rgba(${colorHexData.r}, ${colorHexData.g}, ${colorHexData.b}, ${colorHexData.a ?? 1.0})`;
 }
 
-
-export const setColorValidityAndMode = (stringColor: string) => {
-    const cleanColorName = stringColor.trim().toLowerCase();
-    const color  = parse(cleanColorName);
-
-    const state = useClipboardStore.getState();
-    if (!color){
-        state.setIsColorValid(false);
-        return ;
-    }
-
-    state.setIsColorValid(true);
-    state.setFormat( color.mode );
-    state.setLastValidColor(formatHex(color));
-}

@@ -1,10 +1,8 @@
 import SearchBar from "./search-bar";
 import { EllipsisVertical, Palette, Redo, Trash2, Undo } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { deleteClipboard } from "../features/delete-block";
 import { ButtonGroup } from "@/components/ui/button-group";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { ModeToggle } from "@/components/theme/mode-toggle";
 
 
 const HeaderDropdown = () => {
