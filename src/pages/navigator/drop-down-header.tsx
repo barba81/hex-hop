@@ -5,6 +5,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+
 import {
   Clipboard,
   Eye,
@@ -12,22 +13,28 @@ import {
   Palette,
   Settings,
 } from "lucide-react";
-import type { PagesTypes} from "@/store/use-app-store";
-import { useAppStore } from "@/store/use-app-store";
+
+import { useLocation, useNavigate } from "react-router";
+
 import GradientIcon from "@/components/icons/gradient-icon";
 import { defaultButtonBackground } from "@/components/common/micro-button";
 
 const size = 15;
 
 const ICON_MAP = {
-  "color-list": {
+  "/": {
     icon: (
-      <Clipboard size={size} strokeWidth={2.5} className="dark:text-gray-300" />
+      <Clipboard
+        size={size}
+        strokeWidth={2.5}
+        className="dark:text-gray-300"
+      />
     ),
     label: "Color List",
     shortLabel: "Clipboard",
   },
-  "gradient-creator": {
+
+  "/gradient": {
     icon: (
       <GradientIcon
         size={size}
@@ -38,9 +45,10 @@ const ICON_MAP = {
     label: "Gradient",
     shortLabel: "Gradient",
   },
-  "palette-generator": {
+
+  "/palette": {
     icon: (
-      <Palette 
+      <Palette
         size={size}
         strokeWidth={2.5}
         className="dark:text-gray-300"
@@ -49,21 +57,38 @@ const ICON_MAP = {
     label: "Palette",
     shortLabel: "Palette",
   },
-  "color-contrast": {
-    icon: <Eye size={size} strokeWidth={2.5} className="dark:text-gray-300" />,
+
+  "/color-contrast": {
+    icon: (
+      <Eye
+        size={size}
+        strokeWidth={2.5}
+        className="dark:text-gray-300"
+      />
+    ),
     label: "Accessibility",
     shortLabel: "Accessibility",
   },
-  "import-export": {
+
+  "/import-export": {
     icon: (
-      <Import size={size} strokeWidth={2.5} className="dark:text-gray-300" />
+      <Import
+        size={size}
+        strokeWidth={2.5}
+        className="dark:text-gray-300"
+      />
     ),
     label: "Import/Export",
     shortLabel: "Export",
   },
-  settings: {
+
+  "/settings": {
     icon: (
-      <Settings size={size} strokeWidth={2.5} className="dark:text-gray-300" />
+      <Settings
+        size={size}
+        strokeWidth={2.5}
+        className="dark:text-gray-300"
+      />
     ),
     label: "Settings",
     shortLabel: "Settings",
@@ -71,38 +96,49 @@ const ICON_MAP = {
 };
 
 const DropDownHeader = () => {
-  const activePage = useAppStore((state)=>state.activePage);
-  const setActivePage = useAppStore((state)=>state.setActivePage);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const getActivePath = () => {
+    if (location.pathname.startsWith("/settings")) {
+      return "/settings";
+    }
+
+    return location.pathname;
+  };
+
+  const activePath = getActivePath();
+  const activePage = ICON_MAP[activePath as keyof typeof ICON_MAP];
 
   return (
     <DropdownMenu>
-        <DropdownMenuTrigger asChild>
-          <button
-            className={`          ${defaultButtonBackground} gap-2   h-6 px-2 font-semibold  select-none outline-1  text-xs `}
-          >
-            {ICON_MAP[activePage]?.icon || <Clipboard />}
-            {ICON_MAP[activePage]?.shortLabel }
-          </button>
-        </DropdownMenuTrigger>
+      <DropdownMenuTrigger asChild>
+        <button
+          className={`${defaultButtonBackground} gap-2 h-6 px-2 font-semibold select-none outline-1 text-xs`}
+        >
+          {activePage?.icon || <Clipboard size={size} />}
+          {activePage?.shortLabel || "Color List"}
+        </button>
+      </DropdownMenuTrigger>
 
-        <DropdownMenuContent className="min-w-40 ">
-          <DropdownMenuGroup >
-            {Object.entries(ICON_MAP).map(([key, { icon, label }]) => (
-              <DropdownMenuItem
-                
-                key={key}
-                onClick={() => setActivePage(key as PagesTypes)}
-                className="flex items-center gap-2 px-2 py-1.5 text-sm  cursor-pointer rounded-sm "
-              >
-                <span className="">{icon}</span>
-                <span className="text-xs font-medium ">
-                  {label}
-                </span>
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuGroup>
-        </DropdownMenuContent>
-      </DropdownMenu>
+      <DropdownMenuContent className="min-w-40">
+        <DropdownMenuGroup>
+          {Object.entries(ICON_MAP).map(([path, { icon, label }]) => (
+            <DropdownMenuItem
+              key={path}
+              onClick={() => navigate(path)}
+              className="flex items-center gap-2 px-2 py-1.5 text-sm cursor-pointer rounded-sm"
+            >
+              <span>{icon}</span>
+
+              <span className="text-xs font-medium">
+                {label}
+              </span>
+            </DropdownMenuItem>
+          ))}
+        </DropdownMenuGroup>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 

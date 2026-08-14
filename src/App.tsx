@@ -7,6 +7,7 @@ import HexHopNavigator from "./pages/navigator/hex-hop-navigator";
 import { loadState } from "./infrastructure/utils/load-state";
 import { ThemeProvider } from "./components/theme/theme-provider";
 import { Toaster } from "react-hot-toast";
+import { Outlet } from "react-router";
 
 function HexHopApp() {
   useEffect(() => {
@@ -19,7 +20,7 @@ function HexHopApp() {
       <Toaster position="top-center" />
       <div className="w-screen h-screen flex flex-col  bg-stone-50/80 dark:bg-stone-800/80 ">
         <HeaderBar />
-        <HexHopNavigator />
+        <Outlet />
       </div>
     </ThemeProvider>
   );
