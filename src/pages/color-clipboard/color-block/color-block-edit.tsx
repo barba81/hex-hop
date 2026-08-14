@@ -1,4 +1,4 @@
-import { ColorEntity } from "@/infrastructure/models/entity";
+import type { ColorEntity } from "@/infrastructure/models/entity";
 import { coloBackground as coloBackgroundCss, colorDataToRoundData } from "../../../infrastructure/utils/color-format-changer";
 import { Check, RefreshCw, X } from "lucide-react";
 import { useClipboardStore } from "@/store/use-clipboard-store";
@@ -14,8 +14,7 @@ type ColorBlockEditParams = {
 };
 
 const ColorPopover = ({ backgroundCss }: { backgroundCss: string }) => {
-    return <>
-        <Popover>
+    return <Popover>
             <PopoverTrigger asChild>
                 <div className={`w-22 bg-checkerboard cursor-pointer`}>
                     <div className="w-full h-full" style={{
@@ -31,7 +30,6 @@ const ColorPopover = ({ backgroundCss }: { backgroundCss: string }) => {
                 />
             </PopoverContent>
         </Popover>
-    </>
 }
 
 
@@ -52,7 +50,6 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
     return (<div className=' h-18  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden '>
         <div className={`w-full flex  justify-between overflow-hidden bg-background  `}>
             <ColorPopover backgroundCss={backgroundCss} />
-
 
             <div className="p-2.5 flex gap-2.5 items-stretch w-full">
 

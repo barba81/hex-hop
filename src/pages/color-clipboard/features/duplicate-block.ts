@@ -1,4 +1,4 @@
-import { ColorEntity } from "@/infrastructure/models/entity";
+import type { ColorEntity } from "@/infrastructure/models/entity";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 import { invoke } from "@tauri-apps/api/core";
 

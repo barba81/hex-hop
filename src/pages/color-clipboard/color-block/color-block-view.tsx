@@ -1,7 +1,6 @@
-import { ColorEntity } from "@/infrastructure/models/entity";
+import type { ColorEntity } from "@/infrastructure/models/entity";
 import { coloBackground  } from "../../../infrastructure/utils/color-format-changer";
 import { DragDots } from "@/components/common/drag-dots";
-import CopyLogo from "./copy-button";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity

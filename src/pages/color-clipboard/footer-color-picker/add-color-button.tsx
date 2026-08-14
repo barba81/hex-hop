@@ -2,7 +2,6 @@ import { Check } from "lucide-react";
 import { addNewColorToClipboard } from "../features/add-block";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 import { MicroButton } from "@/components/common/micro-button";
-import toast from "react-hot-toast";
 
 const AddColorButton = () => {
   const isColorValid = useClipboardStore((state) => state.isColorValid);

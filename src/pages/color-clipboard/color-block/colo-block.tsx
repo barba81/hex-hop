@@ -1,4 +1,4 @@
-import { ColorEntity } from "@/infrastructure/models/entity";
+import type { ColorEntity } from "@/infrastructure/models/entity";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { deleteBlock } from "../features/delete-block";

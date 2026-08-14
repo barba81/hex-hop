@@ -64,8 +64,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
         </div>
       </div>
 
-      {isOpen && (
-        <div className="w-full dark:bg-neutral-900/70 rounded-b-md border-2 border-t-0 p-2">
+      {isOpen ? <div className="w-full dark:bg-neutral-900/70 rounded-b-md border-2 border-t-0 p-2">
           <div className="flex flex-col gap-2 border-neutral-700 ">
             {paletteEntity.blocks?.map((child) => {
               if (child.kind === 'color')
@@ -74,8 +73,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
                 return <GradientBlock key={child.blockId} gradientEntity={child} />;
             })}
           </div>
-        </div>
-      )}
+        </div> : null}
     </div>
   );
 };
