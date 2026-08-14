@@ -16,7 +16,7 @@ const HeaderBar = () => {
   return (
     <div
         data-tauri-drag-region
-        className="flex bg-zinc-100 dark:bg-zinc-900 w-full justify-between items-center gap-2 px-2 py-1 select-none "
+        className="flex bg-zinc-100 dark:bg-zinc-900 w-full justify-between items-center gap-2 px-2 pt-1 select-none "
       >
         
         {platform === "macos" && <MacHeaderButton />}

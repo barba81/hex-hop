@@ -10,7 +10,7 @@ const WindowsHeaderButton = () => {
             getCurrentWindow().minimize();
           }}
         >
-          <Minus size={20}/>
+          <Minus />
         </div>
         <div
           className="text-gray-900 dark:text-white cursor-pointer  hover:bg-red-400/50 p-1 rounded-md"
@@ -18,7 +18,7 @@ const WindowsHeaderButton = () => {
             getCurrentWindow().close();
           }}
         >
-          <X size={20}/>
+          <X />
         </div>
       </div>
   );

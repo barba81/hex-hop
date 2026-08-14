@@ -41,7 +41,7 @@ const HeaderDropdown = () => {
 
 const HeaderColorList = () => {
   return (
-    <div className="w-full  flex gap-2  items-center justify-between bg-zinc-50/50 dark:bg-zinc-800 p-1 px-3 ">
+    <div className="w-full  flex gap-2  items-center justify-between bg-zinc-100 dark:bg-zinc-900 p-2  ">
       <div className="flex gap-1">
         <button
           type="button"

@@ -10,7 +10,7 @@ const baseInputClass = `
   appearance-none outline-none
   
   /* Sizing & Typography */
-  h-7 px-2 text-xs font-mono leading-none
+  h-6 px-2 text-xs font-mono leading-none
   
   /* Colors & Borders */
   bg-muted text-foreground border border-input rounded-md

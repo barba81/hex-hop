@@ -17,16 +17,15 @@ const ColorInput = () => {
     <div
       className="
           flex 
-          h-7 
+          h-6 
           items-center 
           rounded-md 
           flex-1
           outline-1
           w-full
-          overflow-hidden
           focus-within:ring-2 
           focus-within:ring-ring 
-          focus-within:border-input "
+          focus-within:border-input overflow-hidden"
     >
       <input
         className="
@@ -35,10 +34,24 @@ const ColorInput = () => {
             px-2 
             outline-none 
             overflow-hidden
-            bg-stone-100 
-            dark:bg-stone-900  
             text-sm 
-            placeholder:text-muted-foreground"
+            placeholder:text-muted-foreground
+              /* Appearance & Reset */
+        appearance-none 
+        
+        /* Sizing & Typography */
+        font-mono leading-none
+        
+        /* Colors & Borders */
+        bg-muted text-foreground border border-input 
+        rounded-l-md
+        /* Focus States (Replaces OS focus rings everywhere) */
+        focus:border-ring focus:ring-1 focus:ring-ring focus:bg-background
+        
+        /* Behavior */
+        transition-colors select-text truncate
+            
+            "
         placeholder="Enter color"
         value={inputColor}
         onChange={(e) => {
@@ -59,6 +72,7 @@ const ColorInput = () => {
           font-semibold 
           uppercase 
           select-none
+          overflow-hidden
           text-muted-foreground`}
       >
         {colorFormat}

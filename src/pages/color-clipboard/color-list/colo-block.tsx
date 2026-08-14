@@ -30,7 +30,7 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
         // Handle auto-generating color name here
     };
 
-    return (<div className={` ${edit ? 'h-20' : 'h-15'}  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
+    return (<div className={` ${edit ? 'h-18' : 'h-15'}  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
         <div className={`flex items-center justify-center shrink-0 ${edit && 'hidden'}`}>
             <DragDots />
         </div>
@@ -62,11 +62,12 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
                             bg-red-100
                             hover:bg-red-200
                             dark:bg-foreground/10
-                            dark:hover:bg-red-800
+                            dark:hover:bg-destructive/50
                             rounded-full 
-                            cursor-pointer  w-4 h-4 outline-1 `}
+                            p-0.5
+                            cursor-pointer   `}
                             onClick={() => setEditBox(null)} >
-                            <X />
+                            <X size={13}/>
                         </button>
 
                         {/* Row 1: RGBA Inputs in a tight 4-col grid */}
@@ -121,7 +122,7 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
                             </div>
                             <button
                                 onClick={handleEdit}
-                                className={`h-7 w-7 ${defaultButtonBackground} outline-1`}
+                                className={`h-6 w-6 ${defaultButtonBackground} outline-1`}
                             >
                                 <Check className="size-3.5" />
                             </button>
