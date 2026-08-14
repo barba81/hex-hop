@@ -4,8 +4,8 @@ import { colorDataToCss } from "@/infrastructure/utils/color-format-changer";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 import { ChevronDown } from "lucide-react";
-import ColorBlock from "./colo-block";
 import GradientBlock from "./gradient-block";
+import ColorBlock from "../color-block/colo-block";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity
