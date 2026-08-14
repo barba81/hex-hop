@@ -2,6 +2,7 @@ import { Check } from "lucide-react";
 import { addNewColorToClipboard } from "../features/add-block";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 import { MicroButton } from "@/components/common/micro-button";
+import { toast } from "sonner";
 
 const AddColorButton = () => {
   const isColorValid = useClipboardStore((state)=>state.isColorValid);
@@ -19,7 +20,8 @@ const AddColorButton = () => {
             ${isColorValid && "bg-green-400  dark:bg-green-600  hover:bg-green-400/50"} 
           `}
         onClick={async () => {
-          await addNewColorToClipboard(inputColor)
+          await addNewColorToClipboard(inputColor);
+          toast("Event has been created.",  { position: "top-center" });
         }}
       >
         <Check strokeWidth={3.5} size={16} />

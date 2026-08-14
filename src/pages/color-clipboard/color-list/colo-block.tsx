@@ -36,14 +36,14 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
             <DragDots />
         </div>
         <div className={`w-full flex ${!edit && 'flex-col'} justify-between overflow-hidden bg-background  `}>
-            <div className={`${edit ? 'w-25' : 'flex-1'} bg-checkerboard`}>
+            <div className={`${edit ? 'w-20' : 'flex-1'} bg-checkerboard`}>
                 <div className="w-full h-full" style={{
                     backgroundColor: backgroundCss
                 }} />
             </div>
             {!edit && <div className="p-0.5 flex flex-row justify-between pr-2">
                 <div className="flex">
-                         {/* <CopyLogo color={colorEntity} fontClass={"white"} />  */}
+                         <CopyLogo color={colorEntity} fontClass={"white"} /> 
                 </div>
                 <div className="flex gap-2 h-full items-center ">
                     {colorEntity.name}
