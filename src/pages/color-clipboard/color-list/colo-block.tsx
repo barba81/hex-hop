@@ -10,6 +10,7 @@ import { duplicateBlock } from "../features/duplicate-block";
 import { updateColorBlock } from "../features/update-block";
 import { MicroInput } from "@/components/common/micro-input";
 import { defaultButtonBackground } from "@/components/common/micro-button";
+import CopyLogo from "./copy-button";
 
 type ColorBoxParams = {
     colorEntity: ColorEntity
@@ -42,9 +43,7 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
             </div>
             {!edit && <div className="p-0.5 flex flex-row justify-between pr-2">
                 <div className="flex">
-                    {
-                        /* <CopyLogo color={colorEntity} fontClass={"white"} /> */
-                    }
+                         {/* <CopyLogo color={colorEntity} fontClass={"white"} />  */}
                 </div>
                 <div className="flex gap-2 h-full items-center ">
                     {colorEntity.name}
@@ -59,7 +58,6 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
 
                         <button className={`absolute right-0 top-0 
                             flex items-center justify-center
-                            bg-red-100
                             hover:bg-red-200
                             dark:bg-foreground/10
                             dark:hover:bg-destructive/50
@@ -145,7 +143,7 @@ const ColorBlock = ({ colorEntity: colorEntity, edit }: ColorBoxParams) => {
             <ContextMenuTrigger>
                 <ColorBlockMain edit={edit} colorEntity={colorEntity} />
             </ContextMenuTrigger>
-            <ContextMenuContent className="w-48">
+            <ContextMenuContent className="w-20">
                 <ContextMenuItem className="gap-2" onClick={() => setEditBox(colorEntity.blockId)}>
                     <Pen className="size-4" />
                     Edit

@@ -21,9 +21,9 @@ const PreviewColorBox = () => {
   return (
         <Popover>
   <PopoverTrigger asChild>
-    <div className="bg-checkerboard rounded-md w-6 h-6 overflow-hidden outline-1 cursor-pointer">
+    <div className="bg-checkerboard rounded-md w-6 h-6 overflow-hidden outline-1 cursor-pointer ">
       <div
-        className="w-full h-full transition-opacity hover:opacity-90"
+        className="w-full h-full transition-opacity "
         style={{
           backgroundColor: currentColor,
         }}
