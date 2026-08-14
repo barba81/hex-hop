@@ -1,5 +1,5 @@
 import type { BlockEntity } from "@/infrastructure/models/entity";
-import { useClipboardStore } from "@/store/use-clipboard-store";
+import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { invoke } from "@tauri-apps/api/core";
 
 export const loadState = async () => {

@@ -1,7 +1,7 @@
 import type { PaletteData } from "@/infrastructure/models/types";
 import { invoke } from "@tauri-apps/api/core";
 import type { ColorEntity, PaletteEntity } from "@/infrastructure/models/entity";
-import { useClipboardStore } from "@/store/use-clipboard-store";
+import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { getSmartColorName } from "./get-color-name";
 import { colorStringToData } from "../../../infrastructure/utils/color-format-changer";
 

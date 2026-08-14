@@ -1,4 +1,4 @@
-import { useClipboardStore } from "@/store/use-clipboard-store";
+import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { invoke } from "@tauri-apps/api/core";
 
 export const deleteBlock = async (blockId: number, paletteId?: number) => {

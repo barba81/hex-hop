@@ -2,7 +2,7 @@ import { DragDots } from "@/components/common/drag-dots";
 import type { PaletteEntity } from "@/infrastructure/models/entity";
 import { colorDataToCss } from "@/infrastructure/utils/color-format-changer";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
-import { useClipboardStore } from "@/store/use-clipboard-store";
+import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { ChevronDown } from "lucide-react";
 import GradientBlock from "./gradient-block";
 import ColorBlock from "../color-block/colo-block";

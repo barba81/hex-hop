@@ -1,7 +1,7 @@
 import type { ColorEntity } from "@/infrastructure/models/entity";
 import { coloBackground as coloBackgroundCss, colorDataToRoundData } from "../../../infrastructure/utils/color-format-changer";
 import { Check, RefreshCw, X } from "lucide-react";
-import { useClipboardStore } from "@/store/use-clipboard-store";
+import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { updateColorBlock } from "../features/update-block";
 import { MicroInput } from "@/components/common/micro-input";
 import { defaultButtonBackground } from "@/components/common/micro-button";

@@ -2,7 +2,7 @@ import type { ColorEntity } from "@/infrastructure/models/entity";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { deleteBlock } from "../features/delete-block";
-import { useClipboardStore } from "@/store/use-clipboard-store";
+import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { duplicateBlock } from "../features/duplicate-block";
 import ColorBlockEdit from "./color-block-edit";
 import ColorBlockView from "./color-block-view";

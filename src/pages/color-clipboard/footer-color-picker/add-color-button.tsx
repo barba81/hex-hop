@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 import { addNewColorToClipboard } from "../features/add-block";
-import { useClipboardStore } from "@/store/use-clipboard-store";
+import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { MicroButton } from "@/components/common/micro-button";
 
 const AddColorButton = () => {

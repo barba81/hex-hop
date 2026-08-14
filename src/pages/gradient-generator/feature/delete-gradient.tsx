@@ -1,4 +1,4 @@
-import { useGradientStore } from "@/store/use-gradient-store";
+import { useGradientStore } from "@/pages/gradient-generator/store/use-gradient-store";
 import { invoke } from "@tauri-apps/api/core";
 
 export const deleteGradient = async (gradientId: number) => {
