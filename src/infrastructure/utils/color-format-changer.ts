@@ -10,8 +10,6 @@ export function colorStringToData(colorString: string){
 }
 
 export function coloBackground(color: ColorData){
-  console.log(formatCss({...color, alpha: color.alpha ?? undefined, mode:"rgb"}));
-  console.log(color);
   return formatCss({...color, alpha: color.alpha ?? undefined, mode:"rgb"});
 }
 
@@ -20,7 +18,7 @@ export function colorDataToRoundData(color: ColorData){
     r: Math.round(color.r*255),
     g: Math.round(color.g*255),
     b: Math.round(color.b*255),
-    alpha: color.alpha
+    alpha: color.alpha?.toFixed(2)
   } as ColorData;
 }
 

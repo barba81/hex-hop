@@ -20,14 +20,8 @@ const AddColorButton = () => {
             ${isColorValid && "bg-green-400  dark:bg-green-600  hover:bg-green-400/50"} 
           `}
       onClick={async () => {
-        toast.promise(
-          addNewColorToClipboard(inputColor),
-          {
-            loading: 'Saving...',
-            success: <b>Color added!</b>,
-            error: <b>Could not save color.</b>,
-          }
-        );
+                 addNewColorToClipboard(inputColor);
+
       }}
     >
       <Check strokeWidth={3.5} size={16} />

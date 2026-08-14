@@ -1,23 +1,18 @@
-import { DragDots } from "@/components/common/drag-dots";
 import { ColorEntity } from "@/infrastructure/models/entity";
 import { coloBackground as coloBackgroundCss, colorDataToRoundData } from "../../../infrastructure/utils/color-format-changer";
-import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
-import { Check, Copy, Pen, RefreshCw, Trash2, X } from "lucide-react";
-import { deleteBlock } from "../features/delete-block";
+import { Check, RefreshCw, X } from "lucide-react";
 import { useClipboardStore } from "@/store/use-clipboard-store";
 import PreviewColorBox from "../footer-color-picker/preview-color-box";
-import { duplicateBlock } from "../features/duplicate-block";
 import { updateColorBlock } from "../features/update-block";
 import { MicroInput } from "@/components/common/micro-input";
 import { defaultButtonBackground } from "@/components/common/micro-button";
-import CopyLogo from "./copy-button";
 
-type ColorBoxParams = {
+
+type ColorBlockEditParams = {
     colorEntity: ColorEntity
-    edit: boolean,
 };
 
-const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
+const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
     const colorHexData = colorDataToRoundData(colorEntity);
     const backgroundCss = coloBackgroundCss(colorEntity);
     const setEditBox = useClipboardStore(x => x.setEditBlock);
@@ -31,29 +26,16 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
         // Handle auto-generating color name here
     };
 
-    return (<div className={` ${edit ? 'h-18' : 'h-15'}  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
-        <div className={`flex items-center justify-center shrink-0 ${edit && 'hidden'}`}>
-            <DragDots />
-        </div>
-        <div className={`w-full flex ${!edit && 'flex-col'} justify-between overflow-hidden bg-background  `}>
-            <div className={`${edit ? 'w-20' : 'flex-1'} bg-checkerboard`}>
+    return (<div className=' h-18  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden '>
+        <div className={`w-full flex  justify-between overflow-hidden bg-background  `}>
+            <div className={`w-20 bg-checkerboard`}>
                 <div className="w-full h-full" style={{
                     backgroundColor: backgroundCss
                 }} />
             </div>
-            {!edit && <div className="p-0.5 flex flex-row justify-between pr-2">
-                <div className="flex">
-                         <CopyLogo color={colorEntity} fontClass={"white"} /> 
-                </div>
-                <div className="flex gap-2 h-full items-center ">
-                    {colorEntity.name}
-                </div>
-            </div>}
-            {edit &&
-                /* --- EDIT MODE --- */
+      
                 <div className="p-2.5 flex gap-2.5 items-stretch w-full">
 
-                    {/* Right: Controls Stack */}
                     <div className="flex-1 flex flex-col justify-between gap-2 min-w-0 relative">
 
                         <button className={`absolute right-0 top-0 
@@ -65,12 +47,11 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
                             p-0.5
                             cursor-pointer   `}
                             onClick={() => setEditBox(null)} >
-                            <X size={13}/>
+                            <X size={13} />
                         </button>
 
                         {/* Row 1: RGBA Inputs in a tight 4-col grid */}
                         <div className="flex-1 flex flex-col justify-between gap-2 min-w-0">
-                            {/* Row 1: RGBA Inputs */}
                             <div className="flex gap-1 w-[90%]">
                                 {[
                                     { key: 'r', label: 'R', val: colorHexData.r, color: 'text-red-500' },
@@ -127,47 +108,8 @@ const ColorBlockMain = ({ colorEntity, edit }: ColorBoxParams) => {
                         </div>
                     </div>
                 </div>
-
-            }
         </div>
     </div>);
 }
 
-
-const ColorBlock = ({ colorEntity: colorEntity, edit }: ColorBoxParams) => {
-
-    const setEditBox = useClipboardStore(x => x.setEditBlock);
-
-    return (
-        <ContextMenu>
-            <ContextMenuTrigger>
-                <ColorBlockMain edit={edit} colorEntity={colorEntity} />
-            </ContextMenuTrigger>
-            <ContextMenuContent className="w-20">
-                <ContextMenuItem className="gap-2" onClick={() => setEditBox(colorEntity.blockId)}>
-                    <Pen className="size-4" />
-                    Edit
-                </ContextMenuItem>
-
-                <ContextMenuItem className="gap-2"
-                    onClick={() => duplicateBlock(colorEntity)}>
-                    <Copy className="size-4" />
-                    Copy
-                </ContextMenuItem>
-
-                <ContextMenuSeparator />
-
-                <ContextMenuItem
-                    variant="destructive"
-                    className="gap-2"
-                    onClick={() => deleteBlock(colorEntity.blockId, colorEntity.parentPaletteId)}
-                >
-                    <Trash2 className="size-4" />
-                    Delete
-                </ContextMenuItem>
-            </ContextMenuContent>
-        </ContextMenu>
-    );
-};
-
-export default ColorBlock;
+export default ColorBlockEdit;
