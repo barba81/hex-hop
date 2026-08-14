@@ -49,7 +49,7 @@ pub fn run() {
             soft_delete_clipboard,
             hard_delete_blocks
         ])
-        .plugin(tauri_plugin_prevent_default::debug())
+        .plugin(tauri_plugin_prevent_default::init())
         .plugin(tauri_plugin_os::init())
         .plugin(tauri_plugin_clipboard_manager::init())
         .plugin(tauri_plugin_single_instance::init(|_app, _args, _cwd| {}))

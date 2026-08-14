@@ -127,7 +127,7 @@ const DropDownHeader = () => {
             <DropdownMenuItem
               key={path}
               onClick={() => navigate(path)}
-              className="flex items-center gap-2 px-2 py-1.5 text-sm cursor-pointer rounded-sm"
+              className="flex items-center gap-2 px-2 py-1.5 text-sm cursor-pointer rounded-sm "
             >
               <span>{icon}</span>
 

@@ -3,7 +3,6 @@ import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import HeaderBar from "./components/header/header-bar";
 
 import "./globals.css";
-import HexHopNavigator from "./pages/navigator/hex-hop-navigator";
 import { loadState } from "./infrastructure/utils/load-state";
 import { ThemeProvider } from "./components/theme/theme-provider";
 import { Toaster } from "react-hot-toast";
