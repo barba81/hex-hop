@@ -23,7 +23,7 @@ export const eyeDropperColorPicker = async () => {
         await addNewColorToClipboard(result.sRGBHex);
 
       } catch (e) {
-        console.error("Color selection cancelled or failed");
+        console.error(e);
     }
 };
 
