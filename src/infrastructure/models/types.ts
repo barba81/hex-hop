@@ -6,7 +6,6 @@ export type ColorData =  {
     paletteId?: number;
 }
 
-// propably useles 
 export type PaletteData =  {
     
 }

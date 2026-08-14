@@ -13,7 +13,7 @@ const HexHopNavigator = () => {
   return (
     <>
  
-      {activePage === "color-list" && <ColorListPage />}
+      {activePage === "color-list" && <SettingsPage />}
       {activePage === "gradient-creator" && <GradientGeneratorPage />}
       {activePage === "palette-generator" && <PaletteGenerator />}
       {activePage === "import-export" && <ImportExportPage />}
