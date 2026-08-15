@@ -1,11 +1,13 @@
 use serde::{Deserialize, Serialize};
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct GradientCreateModel {
     pub name: String,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct GradientLayerCreateModel {
     pub gradient_order: i64,
     pub gradient_id: i64,
@@ -17,6 +19,7 @@ pub struct GradientLayerCreateModel {
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
 pub struct GradientStopCreateModel {
     pub gradient_order: i64,
     pub layer_id: i64,

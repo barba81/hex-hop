@@ -47,7 +47,8 @@ pub fn run() {
             load_state,
             soft_delete_block,
             soft_delete_clipboard,
-            hard_delete_blocks
+            hard_delete_blocks,
+            update_color
         ])
         .plugin(tauri_plugin_prevent_default::debug())
         .plugin(tauri_plugin_os::init())

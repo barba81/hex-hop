@@ -25,15 +25,15 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
 
-        let parsedValue: string | number = value;
+        let parsedValue: string | number | null = value;
 
         if (["r", "g", "b"].includes(name)) {
             const num = parseFloat(value);
-            const clamped = isNaN(num) ? 0 : Math.min(255, Math.max(0, num));
-            parsedValue = clamped / 255;
+            const clamped = isNaN(num) ? null: Math.min(255, Math.max(0, num))/ 255;
+            parsedValue = clamped ;
         } else if (name === "alpha" || name === "a") {
             const num = parseFloat(value);
-            parsedValue = isNaN(num) ? 1 : Math.min(1, Math.max(0, num));
+            parsedValue = isNaN(num) ? null : num;
         }
 
         setColorUpdateEntity((prev) => ({
@@ -48,19 +48,28 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
     };
 
     const handleColorBox = (newColor: string) => {
-        const color = hexaToRgbaNormalized(newColor)
+        const color = hexaToRgbaNormalized(newColor);
         setColorUpdateEntity((prev) => ( { ...prev, ...color }));
     }
 
-    const handleEdit = async () => {
+        const handleEdit = async () => {
+            console.time("ew");
 
-        await updateColorBlock({
-            ...colorEntity,
-            ...colorUpdateEntity,
-        });
+            const entity = {
+                ...colorEntity,
+                ...colorUpdateEntity,
+            };
 
-        setEditBox(null);
-    }
+            console.timeLog("ew", "after spread");
+
+            await updateColorBlock(entity);
+
+            console.timeLog("ew", "after update");
+
+            setEditBox(null);
+
+            console.timeEnd("ew");
+        };
 
     return (<div className=' h-18  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden '>
         <div className={`w-full flex  justify-between overflow-hidden bg-background p  `}>
@@ -124,6 +133,7 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                                         type="text"
                                         name="name"
                                         onChange={handleChange}
+                                        
                                         value={colorUpdateEntity.name}
                                         className="w-full pr-8"
                                         placeholder="Color Name"

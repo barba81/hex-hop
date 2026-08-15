@@ -26,7 +26,7 @@ export function colorEntityToRoundedEntity(color: ColorEntity){
     g: Math.round(color.g*255),
     b: Math.round(color.b*255),
     name: color.name,
-    alpha: color.alpha?.toFixed(2),
+    alpha: color.alpha,
   }  as ColorData;
 }
 
@@ -35,10 +35,10 @@ export function hexaToRgbaNormalized(hexaString: string) {
   if (!parsed) return null;
 
   return {
-    r: parsed.r ?? 0,      // 0..1
-    g: parsed.g ?? 0,      // 0..1
-    b: parsed.b ?? 0,      // 0..1
-    a: parsed.alpha ?? 1,  // 0..1 (defaults to 1 if no alpha in HEX)
+    r: parsed.r ?? 0,     
+    g: parsed.g ?? 0,      
+    b: parsed.b ?? 0,     
+    alpha: parsed.alpha ?? 1, 
   };
 }
 

@@ -20,7 +20,11 @@ interface ClipboardAction {
 
   // CREATE -----------------------------------------------------------------------
 
-  addBlock: (gradient: BlockEntity) => void;
+  addBlock: (block: BlockEntity) => void;
+
+  // UPDATE -----------------------------------------------------------------------
+
+  updateBlock: (block: BlockEntity) => void;
 
   // DELETE  -----------------------------------------------------------------------
 
@@ -51,9 +55,18 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
       state.blocks = blocks;
     }),
 
-  addBlock: (blocks: BlockEntity) =>
+  addBlock: (block: BlockEntity) =>
     set((state) => {
-      state.blocks.push(blocks);
+
+      state.blocks.push(block);
+    }),
+
+    
+  updateBlock: (updateBlock: BlockEntity) =>
+    set((state) => {
+      let index =  state.blocks.findIndex(x => x.blockId === updateBlock.blockId);
+       if (index === -1) return;
+      state.blocks[index] = updateBlock;
     }),
 
   deleteBlock: (blockId: number, paletteId?: number) =>

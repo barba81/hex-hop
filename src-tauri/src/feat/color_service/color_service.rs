@@ -1,4 +1,5 @@
 use crate::feat::block_service::repo::create_repo::create_block;
+use crate::feat::block_service::repo::update_repo::update_block;
 use crate::infra::error::TauriError;
 use crate::state::DbState;
 
@@ -29,4 +30,25 @@ pub async fn get_color(
     let color = color_get_repo::get_color_by_id(color_id, &state.pool).await?;
 
     Ok(color)
+}
+
+#[tauri::command]
+pub async fn update_color(
+    state: tauri::State<'_, DbState>,
+    color: color_create_model::ColorUpdateModel,
+) -> Result<(), TauriError> {
+    let mut tx = state.pool.begin().await?;
+
+    update_block(
+        color.block_id,
+        color.block_order,
+        color.parent_palette_id,
+        &mut *tx,
+    )
+    .await?;
+    color_update_repo::update_color(&color, &mut *tx).await?;
+
+    tx.commit().await?;
+
+    Ok(())
 }
