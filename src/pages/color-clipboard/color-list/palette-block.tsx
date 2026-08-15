@@ -1,6 +1,6 @@
 import { DragDots } from "@/components/common/drag-dots";
 import type { PaletteEntity } from "@/infrastructure/models/entity";
-import { colorDataToCss } from "@/infrastructure/utils/color-format-changer";
+import { coloBackground } from "@/infrastructure/utils/color-format-changer";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { ChevronDown } from "lucide-react";
@@ -33,7 +33,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
                   <div
                     key={child.id}
                     className="w-full h-full"
-                    style={{ backgroundColor: colorDataToCss(child) }}
+                    style={{ backgroundColor: coloBackground(child) }}
                   />
                 );
               if (child.kind === 'gradient')

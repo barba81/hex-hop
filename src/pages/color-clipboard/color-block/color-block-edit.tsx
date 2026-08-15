@@ -1,5 +1,5 @@
 import type { ColorEntity } from "@/infrastructure/models/entity";
-import { coloBackground as coloBackgroundCss, colorDataToRoundData, colorEntityToColor, colorEntityToRoundedEntity, colorRoundEntityToEntity } from "../../../infrastructure/utils/color-format-changer";
+import { colorEntityToColor, colorEntityToRoundedEntity, hexaToRgbaNormalized, toHex8 } from "../../../infrastructure/utils/color-format-changer";
 import { Check, RefreshCw, X } from "lucide-react";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { updateColorBlock } from "../features/update-block";
@@ -19,7 +19,8 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
     const setEditBox = useClipboardStore(x => x.setEditBlock);
     const [colorUpdateEntity, setColorUpdateEntity] = useState(colorEntity);
     const roundedEntity = colorEntityToRoundedEntity(colorUpdateEntity)
-    const backgroundCss = coloBackgroundCss(colorUpdateEntity);
+    const hexColor = toHex8(colorUpdateEntity);
+    
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -43,8 +44,13 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
 
     const handleRefreshName = async () => {
         const newName = await getSmartColorName(colorEntityToColor(colorUpdateEntity))
-        setColorUpdateEntity({ ...colorUpdateEntity, name: newName });
+        setColorUpdateEntity((prev) => ( { ...prev, name: newName }));
     };
+
+    const handleColorBox = (newColor: string) => {
+        const color = hexaToRgbaNormalized(newColor)
+        setColorUpdateEntity((prev) => ( { ...prev, ...color }));
+    }
 
     const handleEdit = async () => {
 
@@ -62,15 +68,15 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                 <PopoverTrigger asChild>
                     <div className={`w-22 bg-checkerboard cursor-pointer`}>
                         <div className="w-full h-full" style={{
-                            backgroundColor: backgroundCss
+                            backgroundColor: hexColor
                         }} />
                     </div>
 
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-3">
                     <HexAlphaColorPicker
-                    //   color={currentColor}
-                    //   onChange={handleOnChange}
+                      color={hexColor}
+                        onChange={handleColorBox}
                     />
                 </PopoverContent>
             </Popover>
