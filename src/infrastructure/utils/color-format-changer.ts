@@ -1,5 +1,5 @@
 import type { ColorData } from "@/infrastructure/models/types";
-import { formatCss, parse } from "culori";
+import { Color, formatCss, parse, rgb } from "culori";
 import type { ColorEntity } from "../models/entity";
 
 
@@ -15,6 +15,19 @@ export function coloBackground(color: ColorData){
   return formatCss({...color, alpha: color.alpha ?? undefined, mode:"rgb"});
 }
 
+
+export function toRgb255(colorEntity: Color) {
+  const parsed = rgb(colorEntity);
+  if (!parsed) return null;
+
+  return {
+    r: Math.round((parsed.r ?? 0) * 255),
+    g: Math.round((parsed.g ?? 0) * 255),
+    b: Math.round((parsed.b ?? 0) * 255),
+    alpha: parsed.alpha ?? 1,
+  };
+}
+
 export function colorRoundEntityToEntity(color: ColorData){
   return {
     r: color.r/255,
@@ -24,6 +37,15 @@ export function colorRoundEntityToEntity(color: ColorData){
     alpha: color.alpha
   } as ColorData;
 }
+
+export function colorEntityToColor(colorEntity: ColorData ){
+  return {
+    ...colorEntity,
+    alpha: colorEntity.alpha ?? undefined,
+    mode: "rgb",
+  }  as Color;
+}
+
 
 export function colorEntityToRoundedEntity(color: ColorEntity){
   return {

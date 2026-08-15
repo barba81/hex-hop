@@ -1,5 +1,5 @@
 import type { ColorEntity } from "@/infrastructure/models/entity";
-import { coloBackground as coloBackgroundCss, colorDataToRoundData, colorEntityToRoundedEntity, colorRoundEntityToEntity } from "../../../infrastructure/utils/color-format-changer";
+import { coloBackground as coloBackgroundCss, colorDataToRoundData, colorEntityToColor, colorEntityToRoundedEntity, colorRoundEntityToEntity } from "../../../infrastructure/utils/color-format-changer";
 import { Check, RefreshCw, X } from "lucide-react";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { updateColorBlock } from "../features/update-block";
@@ -17,34 +17,44 @@ type ColorBlockEditParams = {
 
 const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
     const setEditBox = useClipboardStore(x => x.setEditBlock);
-    const [colorHexData, setColorHexData] = useState(colorEntityToRoundedEntity(colorEntity));
-    const [backgroundCss, setBackgroundCss] = useState(coloBackgroundCss(colorEntity));
+    const [colorUpdateEntity, setColorUpdateEntity] = useState(colorEntity);
+    const roundedEntity = colorEntityToRoundedEntity(colorUpdateEntity)
+    const backgroundCss = coloBackgroundCss(colorUpdateEntity);
 
-    const handleChange = (e: ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
+    const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-        const newColor = {
-            ...colorHexData,
-            [name]: value
-        };
-        setColorHexData(newColor);
-        setBackgroundCss(coloBackgroundCss(colorRoundEntityToEntity(newColor)));
-    }
+
+        let parsedValue: string | number = value;
+
+        if (["r", "g", "b"].includes(name)) {
+            const num = parseFloat(value);
+            const clamped = isNaN(num) ? 0 : Math.min(255, Math.max(0, num));
+            parsedValue = clamped / 255;
+        } else if (name === "alpha" || name === "a") {
+            const num = parseFloat(value);
+            parsedValue = isNaN(num) ? 1 : Math.min(1, Math.max(0, num));
+        }
+
+        setColorUpdateEntity((prev) => ({
+            ...prev,
+            [name]: parsedValue,
+        }));
+    };
+
+    const handleRefreshName = async () => {
+        const newName = await getSmartColorName(colorEntityToColor(colorUpdateEntity))
+        setColorUpdateEntity({ ...colorUpdateEntity, name: newName });
+    };
 
     const handleEdit = async () => {
-        const updatedColor = colorRoundEntityToEntity(colorHexData)
 
         await updateColorBlock({
             ...colorEntity,
-            ...updatedColor,
+            ...colorUpdateEntity,
         });
+
         setEditBox(null);
     }
-
-    const handleRefreshName = async () => {
-        const updatedColor = colorRoundEntityToEntity(colorHexData)
-        const newName = await getSmartColorName({ ...updatedColor, mode: 'rgb' })
-        setColorHexData({ ...colorHexData, name: newName });
-    };
 
     return (<div className=' h-18  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden '>
         <div className={`w-full flex  justify-between overflow-hidden bg-background p  `}>
@@ -73,10 +83,10 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                     <div className="flex-1 flex flex-col justify-between gap-2 min-w-0">
                         <div className="flex gap-1 w-[90%]">
                             {[
-                                { key: 'r', label: 'R', val: colorHexData.r, color: 'text-red-500' },
-                                { key: 'g', label: 'G', val: colorHexData.g, color: 'text-green-500' },
-                                { key: 'b', label: 'B', val: colorHexData.b, color: 'text-blue-500' },
-                                { key: 'a', label: 'A', val: colorHexData.alpha, color: 'text-muted-foreground/40' },
+                                { key: 'r', label: 'R', val: roundedEntity.r, color: 'text-red-500' },
+                                { key: 'g', label: 'G', val: roundedEntity.g, color: 'text-green-500' },
+                                { key: 'b', label: 'B', val: roundedEntity.b, color: 'text-blue-500' },
+                                { key: 'alpha', label: 'A', val: roundedEntity.alpha, color: 'text-muted-foreground/40' },
                             ].map(channel => (
                                 <div
                                     key={channel.key}
@@ -105,31 +115,31 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                             <div className="flex-1">
                                 <div className="relative flex items-center w-full">
                                     <MicroInput
-                                    type="text"
-                                    name="name"
-                                    onChange={handleChange}
-                                    value={colorHexData.name}
-                                    className="w-full pr-8" 
-                                    placeholder="Color Name"
+                                        type="text"
+                                        name="name"
+                                        onChange={handleChange}
+                                        value={colorUpdateEntity.name}
+                                        className="w-full pr-8"
+                                        placeholder="Color Name"
                                     />
                                     <div className="absolute right-1.5 flex items-center">
-                                    <Tooltip>
-                                        <TooltipTrigger asChild>
-                                        <button
-                                            type="button"
-                                            onClick={handleRefreshName}
-                                            className="p-1  text-muted-foreground hover:text-foreground rounded-sm hover:bg-muted-foreground/20 transition-colors cursor-pointer flex items-center justify-center"
-                                        >
-                                            <RefreshCw className="size-3" />
-                                        </button>
-                                        </TooltipTrigger>
-                                        <TooltipContent>
-                                        Generate name
-                                        </TooltipContent>
-                                    </Tooltip>
+                                        <Tooltip>
+                                            <TooltipTrigger asChild>
+                                                <button
+                                                    type="button"
+                                                    onClick={handleRefreshName}
+                                                    className="p-1  text-muted-foreground hover:text-foreground rounded-sm hover:bg-muted-foreground/20 transition-colors cursor-pointer flex items-center justify-center"
+                                                >
+                                                    <RefreshCw className="size-3" />
+                                                </button>
+                                            </TooltipTrigger>
+                                            <TooltipContent>
+                                                Generate name
+                                            </TooltipContent>
+                                        </Tooltip>
                                     </div>
                                 </div>
-                                </div>
+                            </div>
                         </div>
                         <button
                             onClick={handleEdit}
