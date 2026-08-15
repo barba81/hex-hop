@@ -53,22 +53,12 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
     }
 
         const handleEdit = async () => {
-            console.time("ew");
-
-            const entity = {
+            await updateColorBlock({
                 ...colorEntity,
                 ...colorUpdateEntity,
-            };
-
-            console.timeLog("ew", "after spread");
-
-            await updateColorBlock(entity);
-
-            console.timeLog("ew", "after update");
+            });
 
             setEditBox(null);
-
-            console.timeEnd("ew");
         };
 
     return (<div className=' h-18  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden '>

@@ -5,12 +5,13 @@ import { immer } from "zustand/middleware/immer";
 const defaultInputColor = "#3b82f6";
 interface ClipboardStore {
   blocks: BlockEntity[];
-   validColor: string;
+  openPalette: Record<number, boolean>;
+  editBlockId: number | null;
+  
+  validColor: string;
   inputColor: string;
   isColorValid: boolean;
   colorFormat: string;
-  openPalette: Record<number, boolean>;
-  editBlockId: number | null;
 }
 
 interface ClipboardAction {
