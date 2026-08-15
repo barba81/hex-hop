@@ -9,6 +9,7 @@ import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover
 import { HexAlphaColorPicker } from "react-colorful";
 import { ChangeEvent, useState } from "react";
 import { getSmartColorName } from "../features/get-color-name";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 type ColorBlockEditParams = {
     colorEntity: ColorEntity
@@ -17,7 +18,7 @@ type ColorBlockEditParams = {
 const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
     const setEditBox = useClipboardStore(x => x.setEditBlock);
     const [colorHexData, setColorHexData] = useState(colorEntityToRoundedEntity(colorEntity));
-    const [backgroundCss, setBackgroundCss] = useState( coloBackgroundCss(colorEntity));
+    const [backgroundCss, setBackgroundCss] = useState(coloBackgroundCss(colorEntity));
 
     const handleChange = (e: ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -26,7 +27,7 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
             [name]: value
         };
         setColorHexData(newColor);
-        setBackgroundCss(coloBackgroundCss( colorRoundEntityToEntity(newColor)));
+        setBackgroundCss(coloBackgroundCss(colorRoundEntityToEntity(newColor)));
     }
 
     const handleEdit = async () => {
@@ -99,26 +100,36 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
 
 
                     {/* Row 2: Name Input with Auto-gen Button + Save Checkmark */}
-                    <div className="flex items-center justify-start gap-1.5">
-                        <div className="flex-1" >
-                            <div className="relative  flex items-center">
-                                <MicroInput
+                    <div className="flex items-center justify-start gap-1.5 ">
+                        <div className="flex-1 " >
+                            <div className="flex-1">
+                                <div className="relative flex items-center w-full">
+                                    <MicroInput
                                     type="text"
                                     name="name"
                                     onChange={handleChange}
                                     value={colorHexData.name}
-                                    className="w-full"
+                                    className="w-full pr-8" 
                                     placeholder="Color Name"
-                                />
-                                <button
-                                    type="button"
-                                    title="Auto-generate name"
-                                    onClick={handleRefreshName}
-                                    className="absolute right-1 p-1 text-muted-foreground hover:text-foreground rounded-sm hover:bg-muted transition-colors hover:cursor-pointer "
-                                >
-                                    <RefreshCw className="size-3" />
-                                </button>
-                            </div>
+                                    />
+                                    <div className="absolute right-1.5 flex items-center">
+                                    <Tooltip>
+                                        <TooltipTrigger asChild>
+                                        <button
+                                            type="button"
+                                            onClick={handleRefreshName}
+                                            className="p-1  text-muted-foreground hover:text-foreground rounded-sm hover:bg-muted-foreground/20 transition-colors cursor-pointer flex items-center justify-center"
+                                        >
+                                            <RefreshCw className="size-3" />
+                                        </button>
+                                        </TooltipTrigger>
+                                        <TooltipContent>
+                                        Generate name
+                                        </TooltipContent>
+                                    </Tooltip>
+                                    </div>
+                                </div>
+                                </div>
                         </div>
                         <button
                             onClick={handleEdit}
