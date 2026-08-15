@@ -4,6 +4,7 @@ export type ColorData =  {
     b: number;
     alpha?: number;
     paletteId?: number;
+    name: string
 }
 
 export type PaletteData =  {

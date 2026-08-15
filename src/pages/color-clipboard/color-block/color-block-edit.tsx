@@ -1,5 +1,5 @@
 import type { ColorEntity } from "@/infrastructure/models/entity";
-import { coloBackground as coloBackgroundCss, colorDataToRoundData } from "../../../infrastructure/utils/color-format-changer";
+import { coloBackground as coloBackgroundCss, colorDataToRoundData, colorEntityToRoundedEntity, colorRoundEntityToEntity } from "../../../infrastructure/utils/color-format-changer";
 import { Check, RefreshCw, X } from "lucide-react";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { updateColorBlock } from "../features/update-block";
@@ -7,49 +7,62 @@ import { MicroInput } from "@/components/common/micro-input";
 import { defaultButtonBackground } from "@/components/common/micro-button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { HexAlphaColorPicker } from "react-colorful";
-
+import { ChangeEvent, useState } from "react";
+import { getSmartColorName } from "../features/get-color-name";
 
 type ColorBlockEditParams = {
     colorEntity: ColorEntity
 };
 
-const ColorPopover = ({ backgroundCss }: { backgroundCss: string }) => {
-    return <Popover>
-            <PopoverTrigger asChild>
-                <div className={`w-22 bg-checkerboard cursor-pointer`}>
-                    <div className="w-full h-full" style={{
-                        backgroundColor: backgroundCss
-                    }} />
-                </div>
-
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-3">
-                <HexAlphaColorPicker
-                //   color={currentColor}
-                //   onChange={handleOnChange}
-                />
-            </PopoverContent>
-        </Popover>
-}
-
-
 const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
     const setEditBox = useClipboardStore(x => x.setEditBlock);
-    const colorHexData = colorDataToRoundData(colorEntity);
-    const backgroundCss = coloBackgroundCss(colorEntity);
+    const [colorHexData, setColorHexData] = useState(colorEntityToRoundedEntity(colorEntity));
+    const [backgroundCss, setBackgroundCss] = useState( coloBackgroundCss(colorEntity));
 
-    const handleEdit = () => {
-        setEditBox(null);
-        updateColorBlock(colorEntity);
+    const handleChange = (e: ChangeEvent<HTMLInputElement, HTMLInputElement>) => {
+        const { name, value } = e.target;
+        const newColor = {
+            ...colorHexData,
+            [name]: value
+        };
+        setColorHexData(newColor);
+        setBackgroundCss(coloBackgroundCss( colorRoundEntityToEntity(newColor)));
     }
 
-    const handleRefreshName = () => {
-        // Handle auto-generating color name here
+    const handleEdit = async () => {
+        const updatedColor = colorRoundEntityToEntity(colorHexData)
+
+        await updateColorBlock({
+            ...colorEntity,
+            ...updatedColor,
+        });
+        setEditBox(null);
+    }
+
+    const handleRefreshName = async () => {
+        const updatedColor = colorRoundEntityToEntity(colorHexData)
+        const newName = await getSmartColorName({ ...updatedColor, mode: 'rgb' })
+        setColorHexData({ ...colorHexData, name: newName });
     };
 
     return (<div className=' h-18  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden '>
-        <div className={`w-full flex  justify-between overflow-hidden bg-background  `}>
-            <ColorPopover backgroundCss={backgroundCss} />
+        <div className={`w-full flex  justify-between overflow-hidden bg-background p  `}>
+            <Popover>
+                <PopoverTrigger asChild>
+                    <div className={`w-22 bg-checkerboard cursor-pointer`}>
+                        <div className="w-full h-full" style={{
+                            backgroundColor: backgroundCss
+                        }} />
+                    </div>
+
+                </PopoverTrigger>
+                <PopoverContent className="w-auto p-3">
+                    <HexAlphaColorPicker
+                    //   color={currentColor}
+                    //   onChange={handleOnChange}
+                    />
+                </PopoverContent>
+            </Popover>
 
             <div className="p-2.5 flex gap-2.5 items-stretch w-full">
 
@@ -73,8 +86,10 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                                         {channel.label}
                                     </span>
                                     <MicroInput
+                                        name={channel.key}
+                                        onChange={(e) => handleChange(e)}
                                         type="number"
-                                        defaultValue={channel.val}
+                                        value={channel.val}
                                         className="w-full pl-4 pr-1 py-1 text-right font-mono bg-muted/60 border border-input/60 rounded focus:border-ring focus:bg-background focus:outline-none transition-colors [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                     />
                                 </div>
@@ -89,7 +104,9 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                             <div className="relative  flex items-center">
                                 <MicroInput
                                     type="text"
-                                    defaultValue={colorEntity.name}
+                                    name="name"
+                                    onChange={handleChange}
+                                    value={colorHexData.name}
                                     className="w-full"
                                     placeholder="Color Name"
                                 />
