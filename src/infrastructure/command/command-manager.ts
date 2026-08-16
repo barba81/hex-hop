@@ -20,8 +20,6 @@ export class CommandManager {
     }
 
     this.redoStack = [];
-    console.log(this.undoStack);
-    console.log(this.redoStack);
   };
 
   undo = async (): Promise<void> => {

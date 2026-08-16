@@ -1,13 +1,14 @@
 import { Check } from "lucide-react";
-import { addNewColorToClipboard, AddNewColorToClipboardCommand } from "../features/add-block";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { MicroButton } from "@/components/common/micro-button";
-import { useCommandManager } from "@/infrastructure/command/command-manager-context";
+import { AddNewColorToClipboardCommand } from "../commands/add-block-command";
+import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
 
 const AddColorButton = () => {
   const isColorValid = useClipboardStore((state) => state.isColorValid);
   const inputColor = useClipboardStore((state) => state.inputColor);
-  const commandManager = useCommandManager();
+  const execute = useColorListCommands((state)=> state.execute);
+  
 
   return (
     <MicroButton
@@ -21,7 +22,7 @@ const AddColorButton = () => {
             ${isColorValid && "bg-green-400  dark:bg-green-600  hover:bg-green-400/50"} 
           `}
       onClick={async () => {
-        await commandManager.execute(
+        await execute(
           new AddNewColorToClipboardCommand(
             inputColor,
             null

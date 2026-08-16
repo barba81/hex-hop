@@ -4,6 +4,7 @@ import { deleteClipboard } from "./features/delete-block";
 import { defaultButtonBackground } from "@/components/common/micro-button";
 import { MicroInput } from "@/components/common/micro-input";
 import {  useCommandManager } from "@/infrastructure/command/command-manager-context";
+import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
 
 const HeaderDropdown = () => {
 
@@ -42,16 +43,15 @@ const HeaderDropdown = () => {
 
 
 const DoUnDoArrows = () => {
-  const manager = useCommandManager();
-
+const { undo, redo, canUndo, canRedo } = useColorListCommands();
 
   return (
     <div className="flex gap-1">
       <button
         type="button"
         aria-label="Undo"
-        disabled={!manager.canUndo()}
-        onClick={() => manager?.undo()}
+        disabled={!canUndo}
+        onClick={() => undo()}
         className={`
           p-1
           outline-1
@@ -67,8 +67,8 @@ const DoUnDoArrows = () => {
       <button
         type="button"
         aria-label="Redo"
-        disabled={!manager.canRedo()}
-        onClick={() => manager?.redo()}
+        disabled={!canRedo}
+        onClick={() => redo()}
         className={`
           p-1
           outline-1
