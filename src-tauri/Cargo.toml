@@ -1,6 +1,6 @@
 [package]
 name = "hex-hop"
-version = "0.1.7"
+version = "0.1.10"
 description = "hex hop"
 authors = ["barbar"]
 edition = "2024"

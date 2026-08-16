@@ -4,8 +4,6 @@ import { coloBackground } from "@/infrastructure/utils/color-format-changer";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { ChevronDown } from "lucide-react";
-import GradientBlock from "./gradient-block";
-import ColorBlock from "../color-block/colo-block";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity
@@ -66,12 +64,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
 
       {isOpen ? <div className="w-full dark:bg-neutral-900/70 rounded-b-md border-2 border-t-0 p-2">
           <div className="flex flex-col gap-2 border-neutral-700 ">
-            {paletteEntity.blocks?.map((child) => {
-              if (child.kind === 'color')
-                return <ColorBlock key={child.blockId} colorEntity={child} edit={false} />;
-              if (child.kind === 'gradient')
-                return <GradientBlock key={child.blockId} gradientEntity={child} />;
-            })}
+            
           </div>
         </div> : null}
     </div>

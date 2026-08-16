@@ -1,8 +1,6 @@
 import type { DragEndEvent } from "@dnd-kit/react";
 import { DragDropProvider } from "@dnd-kit/react";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
-import PaletteBlock from "./palette-block";
-import GradientBlock from "./gradient-block";
 import EmptyClipboardPage from "../empty-clipboard-page";
 import ColorBlock from "../color-block/colo-block";
 

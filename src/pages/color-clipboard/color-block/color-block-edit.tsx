@@ -53,12 +53,14 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
     }
 
         const handleEdit = async () => {
+            console.time();
             await updateColorBlock({
                 ...colorEntity,
                 ...colorUpdateEntity,
             });
 
             setEditBox(null);
+            console.timeEnd();
         };
 
     return (<div className=' h-18  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden '>
@@ -91,7 +93,7 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                                 { key: 'r', label: 'R', val: roundedEntity.r, color: 'text-red-500' },
                                 { key: 'g', label: 'G', val: roundedEntity.g, color: 'text-green-500' },
                                 { key: 'b', label: 'B', val: roundedEntity.b, color: 'text-blue-500' },
-                                { key: 'alpha', label: 'A', val: roundedEntity.alpha, color: 'text-muted-foreground/40' },
+                                { key: 'alpha', label: 'A', val: roundedEntity.alpha ?? "", color: 'text-muted-foreground/40' },
                             ].map(channel => (
                                 <div
                                     key={channel.key}
