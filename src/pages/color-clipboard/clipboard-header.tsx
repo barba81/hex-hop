@@ -3,8 +3,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { deleteClipboard } from "./features/delete-block";
 import { defaultButtonBackground } from "@/components/common/micro-button";
 import { MicroInput } from "@/components/common/micro-input";
-import { useContext } from "react";
-import { CommandManagerContext } from "@/infrastructure/command/command-manager-context";
+import {  useCommandManager } from "@/infrastructure/command/command-manager-context";
 
 const HeaderDropdown = () => {
 
@@ -43,7 +42,7 @@ const HeaderDropdown = () => {
 
 
 const DoUnDoArrows = () => {
-  const manager = useContext(CommandManagerContext);
+  const manager = useCommandManager();
 
 
   return (
@@ -51,7 +50,7 @@ const DoUnDoArrows = () => {
       <button
         type="button"
         aria-label="Undo"
-        disabled={manager?.canUndo}
+        disabled={!manager.canUndo()}
         onClick={() => manager?.undo()}
         className={`
           p-1
@@ -68,7 +67,7 @@ const DoUnDoArrows = () => {
       <button
         type="button"
         aria-label="Redo"
-        disabled={!manager?.canRedo}
+        disabled={!manager.canRedo()}
         onClick={() => manager?.redo()}
         className={`
           p-1

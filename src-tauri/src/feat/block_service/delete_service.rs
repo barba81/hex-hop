@@ -5,7 +5,7 @@ pub async fn soft_delete_block(
     state: tauri::State<'_, DbState>,
     block_id: i64,
 ) -> Result<(), TauriError> {
-    delete_repo::soft_delete_block(block_id, &state.pool).await?;
+    delete_repo::soft_delete_block(block_id, true, &state.pool).await?;
     Ok(())
 }
 
@@ -19,5 +19,14 @@ pub async fn soft_delete_clipboard(state: tauri::State<'_, DbState>) -> Result<(
 pub async fn hard_delete_blocks(state: tauri::State<'_, DbState>) -> Result<(), TauriError> {
     delete_repo::hard_delete_blocks(&state.pool).await?;
 
+    Ok(())
+}
+
+#[tauri::command]
+pub async fn restore_block(
+    state: tauri::State<'_, DbState>,
+    block_id: i64,
+) -> Result<(), TauriError> {
+    delete_repo::soft_delete_block(block_id, false, &state.pool).await?;
     Ok(())
 }

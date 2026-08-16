@@ -33,7 +33,7 @@ interface ClipboardAction {
 
   // DELETE  -----------------------------------------------------------------------
 
-  deleteBlock: (blockId: number, paletteId?: number) => void;
+  deleteBlock: (blockId: number, paletteId: number | null) => void;
   deleteClipboard: () => void;
 
   // UI  -----------------------------------------------------------------------

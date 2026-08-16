@@ -141,7 +141,7 @@ pub async fn delete_gradient(
     let mut tx = state.pool.begin().await?;
 
     let gradient = gradient_get_repo::get_gradient_by_id(gradient_id, &state.pool).await?;
-    soft_delete_block(gradient.block_id, &mut *tx).await?;
+    soft_delete_block(gradient.block_id, true, &mut *tx).await?;
     gradient_delete_repo::soft_delete_gradient_layer_by_gradient_id(gradient_id, &mut *tx).await?;
     gradient_delete_repo::soft_delete_stop_by_gradient_id(gradient_id, &mut *tx).await?;
 
