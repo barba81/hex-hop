@@ -3,9 +3,11 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { deleteClipboard } from "./features/delete-block";
 import { defaultButtonBackground } from "@/components/common/micro-button";
 import { MicroInput } from "@/components/common/micro-input";
-
+import { useContext } from "react";
+import { CommandManagerContext } from "@/infrastructure/command/command-manager-context";
 
 const HeaderDropdown = () => {
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -41,13 +43,16 @@ const HeaderDropdown = () => {
 
 
 const DoUnDoArrows = () => {
+  const manager = useContext(CommandManagerContext);
+
+
   return (
     <div className="flex gap-1">
       <button
         type="button"
         aria-label="Undo"
-        disabled={false}
-        // onClick={onUndo}
+        disabled={manager?.canUndo}
+        onClick={() => manager?.undo()}
         className={`
           p-1
           outline-1
@@ -63,8 +68,8 @@ const DoUnDoArrows = () => {
       <button
         type="button"
         aria-label="Redo"
-        disabled={true}
-        // onClick={onRedo}
+        disabled={!manager?.canRedo}
+        onClick={() => manager?.redo()}
         className={`
           p-1
           outline-1
@@ -82,7 +87,7 @@ const DoUnDoArrows = () => {
 
 const SearchBar = () => {
   return (
-    <MicroInput className="w-full" placeholder="Search for color"  />
+    <MicroInput className="w-full" placeholder="Search for color" />
   );
 };
 
@@ -90,7 +95,7 @@ const SearchBar = () => {
 const HeaderColorList = () => {
   return (
     <div className="w-full  flex gap-2  items-center justify-between bg-zinc-100 dark:bg-zinc-900 p-2  ">
-      <DoUnDoArrows/>
+      <DoUnDoArrows />
       <SearchBar />
       <HeaderDropdown />
     </div>

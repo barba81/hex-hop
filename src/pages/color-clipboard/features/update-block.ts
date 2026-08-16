@@ -6,5 +6,4 @@ export const updateColorBlock = async (newEntity: ColorEntity) => {
     await invoke("update_color", { color: { ...newEntity} });
     const colorEntity = await invoke<ColorEntity>("get_color", { colorId: newEntity.id });
     useClipboardStore.getState().updateBlock(colorEntity);
-
 }
