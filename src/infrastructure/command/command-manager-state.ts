@@ -1,7 +1,6 @@
 import { create } from 'zustand';
 
 export interface Command {
-  execute(): Promise<void>;
   undo(): Promise<void>;
   redo(): Promise<void>;
 }
@@ -11,7 +10,7 @@ export interface CommandStore {
   redoStack: Command[];
   canUndo: boolean;
   canRedo: boolean;
-  execute: (command: Command) => Promise<void>;
+  push: (command: Command) => Promise<void>;
   undo: () => Promise<void>;
   redo: () => Promise<void>;
 }
@@ -23,9 +22,7 @@ export const createCommandStore = (maxHistory = 50) =>
     canUndo: false,
     canRedo: false,
 
-    execute: async (command: Command) => {
-      await command.execute();
-
+    push: async (command: Command) => {
       set((state) => {
         const nextUndo = [...state.undoStack, command];
         if (nextUndo.length > maxHistory) {
@@ -41,12 +38,11 @@ export const createCommandStore = (maxHistory = 50) =>
     },
 
     undo: async () => {
-      const { undoStack } = get();
+      const { undoStack, redoStack } = get();
       if (undoStack.length === 0) return;
 
       const command = undoStack[undoStack.length - 1];
       await command.undo();
-
       set((state) => {
         const nextUndo = state.undoStack.slice(0, -1);
         const nextRedo = [...state.redoStack, command];
@@ -57,6 +53,8 @@ export const createCommandStore = (maxHistory = 50) =>
           canRedo: true,
         };
       });
+      console.log(undoStack)
+      console.log(redoStack)
     },
 
     redo: async () => {
