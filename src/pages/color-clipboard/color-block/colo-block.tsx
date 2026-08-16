@@ -8,18 +8,23 @@ import ColorBlockEdit from "./color-block-edit";
 import ColorBlockView from "./color-block-view";
 
 type ColorBoxParams = {
-    colorEntity: ColorEntity
-    edit: boolean,
+    blockId: number
 };
 
-const ColorBlock = ({ colorEntity: colorEntity, edit }: ColorBoxParams) => {
+const ColorBlock = ({ blockId }: ColorBoxParams) => {
 
     const setEditBox = useClipboardStore(x => x.setEditBlock);
-
+    const isEditing = useClipboardStore(
+        state => state.editBlockId === blockId
+    );
+    const colorEntity = useClipboardStore(
+        state => state.blocksById[blockId]
+    ) as ColorEntity;
+    
     return (
         <ContextMenu>
             <ContextMenuTrigger>
-                {edit ? <ColorBlockEdit colorEntity={colorEntity} /> : <ColorBlockView colorEntity={colorEntity} />}
+                {isEditing ? <ColorBlockEdit colorEntity={colorEntity} /> : <ColorBlockView colorEntity={colorEntity} />}
             </ContextMenuTrigger>
             <ContextMenuContent className="w-20">
                 <ContextMenuItem className="gap-2" onClick={() => setEditBox(colorEntity.blockId)}>

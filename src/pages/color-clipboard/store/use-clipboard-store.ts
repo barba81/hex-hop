@@ -3,11 +3,15 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
 const defaultInputColor = "#3b82f6";
+
 interface ClipboardStore {
-  blocks: BlockEntity[];
-  openPalette: Record<number, boolean>;
+  blockIds: number[];
+  blocksById: Record<number, BlockEntity>;
+
   editBlockId: number | null;
-  
+
+  openPalette: Record<number, boolean>;
+
   validColor: string;
   inputColor: string;
   isColorValid: boolean;
@@ -43,7 +47,8 @@ interface ClipboardAction {
 }
 
 export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(immer((set) => ({
-  blocks: [],
+  blockIds: [],
+  blocksById: {},
   validColor: defaultInputColor,
   inputColor: defaultInputColor,
   isColorValid: true,
@@ -51,45 +56,37 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
   openPalette: {},
   editBlockId: null,
 
-  initBlocks: (blocks: BlockEntity[]) =>
-    set((state) => {
-      state.blocks = blocks;
+  initBlocks: (blocks) =>
+    set(state => {
+      state.blockIds = blocks.map(block => block.blockId);
+
+      state.blocksById = {};
+
+      for (const block of blocks) {
+        state.blocksById[block.blockId] = block;
+      }
     }),
 
   addBlock: (block: BlockEntity) =>
     set((state) => {
-
-      state.blocks.push(block);
+      state.blockIds.push(block.blockId);
+      state.blocksById[block.blockId] = block;
     }),
 
-    
+
   updateBlock: (updateBlock: BlockEntity) =>
     set((state) => {
-      let index =  state.blocks.findIndex(x => x.blockId === updateBlock.blockId);
-       if (index === -1) return;
-      state.blocks[index] = updateBlock;
+      state.blocksById[updateBlock.blockId] = updateBlock;
     }),
 
-  deleteBlock: (blockId: number, paletteId?: number) =>
-    set((state) => {
-      if (paletteId == null) {
-        state.blocks = state.blocks.filter((block) => block.blockId !== blockId);
-        return;
-      }
-
-      const palette = state.blocks.find(
-        (block) =>
-          block.blockId === paletteId
-      );
-
-      if (palette?.kind !== 'palette') return;
-
-      palette.blocks = palette.blocks.filter((block) => block.blockId !== blockId);
+  deleteBlock: (blockId) =>
+    set(state => {
+      state.blockIds = state.blockIds.filter(id => id !== blockId);
+      delete state.blocksById[blockId];
     }),
-    
   deleteClipboard: () =>
     set((state) => {
-      state.blocks.length = 0;
+      state.blockIds.length = 0;
     }),
 
   setLastValidColor: (newColor) => set({ validColor: newColor }),
