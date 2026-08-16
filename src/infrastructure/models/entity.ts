@@ -23,7 +23,7 @@ export type ColorEntity =  {
     g: number;
     b: number;
     alpha?: number;
-    parentPaletteId?: number;
+    parentPaletteId: number | null;
 }
 
 export type GradientEntity =  {
