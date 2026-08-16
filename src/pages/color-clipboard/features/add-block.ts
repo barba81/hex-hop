@@ -6,7 +6,7 @@ import { getSmartColorName } from "./get-color-name";
 import { colorStringToData } from "../../../infrastructure/utils/color-format-changer";
 import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
 
-export const addNewColorToClipboard = async (inputColor: string, paletteId?: number | null) => {
+export const addNewColorToClipboard = async (inputColor: string, paletteId: number | null) => {
 
     const colorData = colorStringToData(inputColor);
     const name = await getSmartColorName(colorData);
@@ -19,7 +19,7 @@ export const addNewColorToClipboard = async (inputColor: string, paletteId?: num
     useColorListCommands.getState().push({
         async undo() {
             await invoke("soft_delete_block", { blockId });
-            useClipboardStore.getState().deleteBlock(blockId, null);
+            useClipboardStore.getState().deleteBlock(blockId, paletteId);
         },
         async redo() {
             await invoke("restore_block", { blockId });

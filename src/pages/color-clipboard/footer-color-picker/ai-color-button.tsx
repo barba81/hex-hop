@@ -12,7 +12,7 @@ const AiColorButton = () => {
                 ${defaultButtonBackground}
              w-6 h-6 overflow-hidden outline-1`}
             onClick={async () => {
-                await addNewColorToClipboard(inputColor);
+                await addNewColorToClipboard(inputColor, null);
             }}
         >
             <Astroid size={16} />

@@ -20,7 +20,7 @@ export const eyeDropperColorPicker = async () => {
 
         setInputColor(result.sRGBHex);
         setColorValidityAndMode(result.sRGBHex);
-        await addNewColorToClipboard(result.sRGBHex);
+        await addNewColorToClipboard(result.sRGBHex, null);
 
       } catch (e) {
         console.error(e);
