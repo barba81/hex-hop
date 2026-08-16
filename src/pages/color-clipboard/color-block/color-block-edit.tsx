@@ -57,7 +57,7 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
             await updateColorBlock({
                 ...colorEntity,
                 ...colorUpdateEntity,
-            });
+            }, colorEntity);
 
             setEditBox(null);
             console.timeEnd();
