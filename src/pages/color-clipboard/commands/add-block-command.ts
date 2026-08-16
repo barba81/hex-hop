@@ -2,8 +2,8 @@ import { invoke } from "@tauri-apps/api/core";
 import type { ColorEntity,  } from "@/infrastructure/models/entity";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { colorStringToData } from "../../../infrastructure/utils/color-format-changer";
-import { Command } from "@/infrastructure/command/command-manager";
 import { getSmartColorName } from "../features/get-color-name";
+import { Command } from "@/infrastructure/command/command-manager-state";
 
 export class AddNewColorToClipboardCommand implements Command {
     private blockId!: number;

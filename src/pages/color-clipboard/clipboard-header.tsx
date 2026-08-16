@@ -3,7 +3,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { deleteClipboard } from "./features/delete-block";
 import { defaultButtonBackground } from "@/components/common/micro-button";
 import { MicroInput } from "@/components/common/micro-input";
-import {  useCommandManager } from "@/infrastructure/command/command-manager-context";
 import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
 
 const HeaderDropdown = () => {
