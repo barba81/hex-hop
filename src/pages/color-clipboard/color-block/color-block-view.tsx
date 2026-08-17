@@ -6,13 +6,17 @@ import { Copy, Pen, Trash2 } from "lucide-react";
 import { duplicateBlock } from "../features/duplicate-block";
 import { deleteColorBlock } from "../features/delete-block";
 import { useClipboardStore } from "../store/use-clipboard-store";
+import { useDraggable } from "@dnd-kit/react";
 
 type ColorBlockViewParams = {
     blockId: number
 };
 
 const ColorBlockView = ({ blockId }: ColorBlockViewParams) => {
-      const colorEntity = useClipboardStore(
+    const { ref, handleRef } = useDraggable({
+        id: blockId,
+    });
+    const colorEntity = useClipboardStore(
         state => state.blocksById[blockId]
     ) as ColorEntity;
 
@@ -22,9 +26,8 @@ const ColorBlockView = ({ blockId }: ColorBlockViewParams) => {
     return <ContextMenu>
         <ContextMenuTrigger>
 
-
-            <div className={` h-15 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
-                <div className={`flex items-center justify-center shrink-0 `}>
+            <div ref={ref} className={` h-15 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
+                <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer`}>
                     <DragDots />
                 </div>
                 <div className={`w-full flex flex-col justify-between overflow-hidden bg-background  `}>
@@ -43,6 +46,7 @@ const ColorBlockView = ({ blockId }: ColorBlockViewParams) => {
                     </div>
                 </div>
             </div>
+
 
 
         </ContextMenuTrigger>
@@ -75,3 +79,4 @@ const ColorBlockView = ({ blockId }: ColorBlockViewParams) => {
 }
 
 export default ColorBlockView;
+

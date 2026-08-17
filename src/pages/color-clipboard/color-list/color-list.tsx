@@ -7,24 +7,26 @@ import ColorBlock from "../color-block/colo-block";
 const ColorList = () => {
   const colorBlocks = useClipboardStore(x => x.blockIds);
 
-  const handleDragEnd = ({}: DragEndEvent) => {
-
+  const handleDragEnd = ({ }: DragEndEvent) => {
+    debugger
   };
 
   return (
-    <DragDropProvider onDragEnd={handleDragEnd}
-    >
-      {colorBlocks.length === 0 && <EmptyClipboardPage />}
-
-      <div className="flex-1 overflow-y-auto flex flex-col gap-2.5 p-2">
-        {colorBlocks.map((blockId) => 
-             <ColorBlock
-              key={blockId}
-              blockId={blockId}
+    <>
+      {colorBlocks.length === 0 ? <EmptyClipboardPage /> :
+        <DragDropProvider onDragEnd={handleDragEnd}
+        >
+          <div className="flex-1 overflow-y-auto flex flex-col gap-2.5 p-2">
+            {colorBlocks.map((blockId) =>
+              <ColorBlock
+                key={blockId}
+                blockId={blockId}
               />
-        )}
-      </div>
-    </DragDropProvider>
+            )}
+          </div>
+        </DragDropProvider>
+      }
+    </>
   );
 };
 
