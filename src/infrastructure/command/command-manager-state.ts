@@ -38,7 +38,7 @@ export const createCommandStore = (maxHistory = 50) =>
     },
 
     undo: async () => {
-      const { undoStack, redoStack } = get();
+      const { undoStack } = get();
       if (undoStack.length === 0) return;
 
       const command = undoStack[undoStack.length - 1];
@@ -53,8 +53,6 @@ export const createCommandStore = (maxHistory = 50) =>
           canRedo: true,
         };
       });
-      console.log(undoStack)
-      console.log(redoStack)
     },
 
     redo: async () => {
