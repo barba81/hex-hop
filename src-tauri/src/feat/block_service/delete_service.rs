@@ -32,3 +32,12 @@ pub async fn restore_block(
     delete_repo::soft_delete_block(block_id, false, &state.pool).await?;
     Ok(())
 }
+
+#[tauri::command]
+pub async fn restore_blocks(
+    state: tauri::State<'_, DbState>,
+    block_ids: Vec<i64>,
+) -> Result<(), TauriError> {
+    delete_repo::soft_delete_blocks(&block_ids, false, &state.pool).await?;
+    Ok(())
+}

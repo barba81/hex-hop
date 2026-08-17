@@ -18,11 +18,7 @@ use infra::data_seed::get_color_name_data;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    tracing_subscriber::fmt()
-        .with_env_filter(
-            tracing_subscriber::EnvFilter::try_from_default_env().unwrap_or_else(|_| "info".into()),
-        )
-        .init();
+    tracing_subscriber::fmt::init();
 
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
@@ -50,6 +46,7 @@ pub fn run() {
             restore_block,
             hard_delete_blocks,
             update_color,
+            restore_blocks
         ])
         .plugin(tauri_plugin_prevent_default::debug())
         .plugin(tauri_plugin_os::init())
