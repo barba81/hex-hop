@@ -3,7 +3,7 @@ import type { GradientEntity } from "@/infrastructure/models/entity";
 import { gradientToCssString } from "../../../infrastructure/utils/gradient-to-css-string";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
-import { deleteColorBlock, deleteGradientBlock } from "../features/delete-block";
+import { deleteGradientBlock } from "../features/delete-block";
 
 type GradientBoxParams = {
     gradientEntity: GradientEntity
