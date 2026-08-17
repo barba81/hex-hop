@@ -10,9 +10,11 @@ pub async fn soft_delete_block(
 }
 
 #[tauri::command]
-pub async fn soft_delete_clipboard(state: tauri::State<'_, DbState>) -> Result<(), TauriError> {
-    delete_repo::soft_delete_clipboard(&state.pool).await?;
-    Ok(())
+pub async fn soft_delete_clipboard(
+    state: tauri::State<'_, DbState>,
+) -> Result<Vec<i64>, TauriError> {
+    let ids = delete_repo::soft_delete_clipboard(&state.pool).await?;
+    Ok(ids)
 }
 
 #[tauri::command]

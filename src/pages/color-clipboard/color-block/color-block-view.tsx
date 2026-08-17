@@ -4,7 +4,7 @@ import { DragDots } from "@/components/common/drag-dots";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { duplicateBlock } from "../features/duplicate-block";
-import { deleteBlock } from "../features/delete-block";
+import { deleteGradientBlock } from "../features/delete-block";
 import { useClipboardStore } from "../store/use-clipboard-store";
 
 type ColorBlockViewParams = {
@@ -63,7 +63,7 @@ const ColorBlockView = ({ blockId }: ColorBlockViewParams) => {
             <ContextMenuItem
                 variant="destructive"
                 className="gap-2"
-                onClick={() => deleteBlock(colorEntity.blockId, colorEntity.parentPaletteId)}
+                onClick={() => deleteGradientBlock(colorEntity.blockId, colorEntity.id, colorEntity.parentPaletteId)}
             >
                 <Trash2 className="size-4" />
                 Delete

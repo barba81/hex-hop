@@ -19,18 +19,20 @@ where
     Ok(())
 }
 
-pub async fn soft_delete_clipboard<'a, E>(executor: E) -> Result<(), sqlx::Error>
+pub async fn soft_delete_clipboard<'a, E>(executor: E) -> Result<Vec<i64>, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-    sqlx::query!(
+    let ids = sqlx::query_scalar!(
         "UPDATE block
-            SET deleted = 1",
+         SET deleted = 1
+         WHERE deleted = 0
+         RETURNING id",
     )
-    .execute(executor)
+    .fetch_all(executor)
     .await?;
 
-    Ok(())
+    Ok(ids)
 }
 
 pub async fn hard_delete_blocks<'a, E>(executor: E) -> Result<(), sqlx::Error>

@@ -3,14 +3,14 @@ import { ColorEntity } from "@/infrastructure/models/entity";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { invoke } from "@tauri-apps/api/core";
 
-export const deleteBlock = async (blockId: number, paletteId: number | null) => {
+export const deleteColorBlock = async (blockId: number, colorId: number, paletteId: number | null) => {
     await invoke("soft_delete_block", { blockId: blockId });
     useClipboardStore.getState().deleteBlock(blockId, paletteId);
 
     useColorListCommands.getState().push({
         async undo() {
             await invoke("restore_block", { blockId });
-            const entity = await invoke<ColorEntity>("get_color", { colorId:'1' });
+            const entity = await invoke<ColorEntity>("get_color", { colorId: colorId });
             useClipboardStore.getState().addBlock(entity);
         },
         async redo() {
@@ -20,14 +20,47 @@ export const deleteBlock = async (blockId: number, paletteId: number | null) => 
     });
 }
 
+export const deleteGradientBlock = async (blockId: number, gradientId: number, paletteId: number | null) => {
+    debugger;
+    console.log("deleteGradientBlock", blockId, gradientId, paletteId);
+    await invoke("soft_delete_block", { blockId: blockId });
+    useClipboardStore.getState().deleteBlock(blockId, paletteId);
+
+    useColorListCommands.getState().push({
+        async undo() {
+            await invoke("restore_block", { blockId });
+            const entity = await invoke<ColorEntity>("get_gradient", { gradientId });
+            useClipboardStore.getState().addBlock(entity);
+        },
+        async redo() {
+            await invoke("soft_delete_block", { blockId: blockId });
+            useClipboardStore.getState().deleteBlock(blockId, paletteId);
+        },
+    });
+}
+
+
 // const deletePaletteBlocks = async (_: number) => {
 // const blocks = await invoke<BlockEntity[]>("load_state");
 // useClipboardStore.getState().initBlocks(blocks);
 // }
 
 export const deleteClipboard = async () => {
-    await invoke("soft_delete_clipboard");
+    const ids = await invoke("soft_delete_clipboard");
     useClipboardStore.getState().deleteClipboard();
+
+
+    useColorListCommands.getState().push({
+        async undo() {
+            // await invoke("restore_block", { blockId });
+            // const entity = await invoke<ColorEntity>("get_gradient", { gradientId });
+            // useClipboardStore.getState().addBlock(entity);
+        },
+        async redo() {
+            // await invoke("soft_delete_block", { blockId: blockId });
+            // useClipboardStore.getState().deleteBlock(blockId, paletteId);
+        },
+    });
 }
 
 export const hardDelete = async () => {

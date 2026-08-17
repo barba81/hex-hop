@@ -3,7 +3,7 @@ import type { GradientEntity } from "@/infrastructure/models/entity";
 import { gradientToCssString } from "../../../infrastructure/utils/gradient-to-css-string";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
-import { deleteBlock } from "../features/delete-block";
+import { deleteColorBlock, deleteGradientBlock } from "../features/delete-block";
 
 type GradientBoxParams = {
     gradientEntity: GradientEntity
@@ -55,7 +55,7 @@ export const GradientBlock = ({ gradientEntity: gradientEntity }: GradientBoxPar
                 <ContextMenuItem
                     variant="destructive"
                     className="gap-2"
-                    onClick={() => deleteBlock(gradientEntity.blockId, gradientEntity.parentPaletteId)}
+                    onClick={() => deleteGradientBlock(gradientEntity.blockId, gradientEntity.id,  gradientEntity.parentPaletteId)}
                 >
                     <Trash2 className="size-4" />
                     Delete
