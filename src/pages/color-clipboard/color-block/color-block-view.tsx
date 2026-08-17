@@ -8,10 +8,14 @@ import { deleteBlock } from "../features/delete-block";
 import { useClipboardStore } from "../store/use-clipboard-store";
 
 type ColorBlockViewParams = {
-    colorEntity: ColorEntity
+    blockId: number
 };
 
-const ColorBlockView = ({ colorEntity }: ColorBlockViewParams) => {
+const ColorBlockView = ({ blockId }: ColorBlockViewParams) => {
+      const colorEntity = useClipboardStore(
+        state => state.blocksById[blockId]
+    ) as ColorEntity;
+
     const backgroundCss = coloBackground(colorEntity);
     const setEditBox = useClipboardStore(x => x.setEditBlock);
 

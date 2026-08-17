@@ -7,20 +7,29 @@ import { MicroInput } from "@/components/common/micro-input";
 import { defaultButtonBackground } from "@/components/common/micro-button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { HexAlphaColorPicker } from "react-colorful";
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import { getSmartColorName } from "../features/get-color-name";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 type ColorBlockEditParams = {
-    colorEntity: ColorEntity
+    blockId: number
 };
 
-const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
-    const setEditBox = useClipboardStore(x => x.setEditBlock);
-    const [colorUpdateEntity, setColorUpdateEntity] = useState(colorEntity);
+const ColorBlockEdit = ({ blockId }: ColorBlockEditParams) => {
+
+
+    const colorEntity = useClipboardStore(
+        state => state.blocksById[blockId]
+    ) as ColorEntity;
+    const setEditBox = useClipboardStore(state => state.setEditBlock);
+    const [colorUpdateEntity, setColorUpdateEntity] = useState(() => ({ ...colorEntity }));
+
+    useEffect(() => {
+        setColorUpdateEntity({ ...colorEntity });
+    }, [colorEntity]);
     const roundedEntity = colorEntityToRoundedEntity(colorUpdateEntity)
     const hexColor = toHex8(colorUpdateEntity);
-    
+
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
@@ -29,8 +38,8 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
 
         if (["r", "g", "b"].includes(name)) {
             const num = parseFloat(value);
-            const clamped = isNaN(num) ? null: Math.min(255, Math.max(0, num))/ 255;
-            parsedValue = clamped ;
+            const clamped = isNaN(num) ? null : Math.min(255, Math.max(0, num)) / 255;
+            parsedValue = clamped;
         } else if (name === "alpha" || name === "a") {
             const num = parseFloat(value);
             parsedValue = isNaN(num) ? null : num;
@@ -44,24 +53,22 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
 
     const handleRefreshName = async () => {
         const newName = await getSmartColorName(colorEntityToColor(colorUpdateEntity))
-        setColorUpdateEntity((prev) => ( { ...prev, name: newName }));
+        setColorUpdateEntity((prev) => ({ ...prev, name: newName }));
     };
 
     const handleColorBox = (newColor: string) => {
         const color = hexaToRgbaNormalized(newColor);
-        setColorUpdateEntity((prev) => ( { ...prev, ...color }));
+        setColorUpdateEntity((prev) => ({ ...prev, ...color }));
     }
 
-        const handleEdit = async () => {
-            console.time();
-            await updateColorBlock({
-                ...colorEntity,
-                ...colorUpdateEntity,
-            }, colorEntity);
+    const handleEdit = async () => {
+        await updateColorBlock({
+            ...colorEntity,
+            ...colorUpdateEntity,
+        }, colorEntity);
 
-            setEditBox(null);
-            console.timeEnd();
-        };
+        setEditBox(null);
+    };
 
     return (<div className=' h-18  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden '>
         <div className={`w-full flex  justify-between overflow-hidden bg-background p  `}>
@@ -76,7 +83,7 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                 </PopoverTrigger>
                 <PopoverContent className="w-auto p-3">
                     <HexAlphaColorPicker
-                      color={hexColor}
+                        color={hexColor}
                         onChange={handleColorBox}
                     />
                 </PopoverContent>
@@ -125,7 +132,7 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                                         type="text"
                                         name="name"
                                         onChange={handleChange}
-                                        
+
                                         value={colorUpdateEntity.name}
                                         className="w-full pr-8"
                                         placeholder="Color Name"

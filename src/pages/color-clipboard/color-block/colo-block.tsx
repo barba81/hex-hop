@@ -12,12 +12,8 @@ const ColorBlock = ({ blockId }: ColorBoxParams) => {
     const isEditing = useClipboardStore(
         state => state.editBlockId === blockId
     );
-    const colorEntity = useClipboardStore(
-        state => state.blocksById[blockId]
-    ) as ColorEntity;
-
     return (
-        isEditing ? <ColorBlockEdit colorEntity={colorEntity} /> : <ColorBlockView colorEntity={colorEntity} />
+        isEditing ? <ColorBlockEdit blockId={blockId} /> : <ColorBlockView blockId={blockId} />
     );
 };
 
