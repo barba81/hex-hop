@@ -1,4 +1,3 @@
-import type { ColorEntity } from "@/infrastructure/models/entity";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import ColorBlockEdit from "./color-block-edit";
 import ColorBlockView from "./color-block-view";

@@ -7,18 +7,25 @@ import { duplicateBlock } from "../features/duplicate-block";
 import { deleteColorBlock } from "../features/delete-block";
 import { useClipboardStore } from "../store/use-clipboard-store";
 import { useDraggable } from "@dnd-kit/react";
+import { DraggableData } from "../features/darg-and-drop";
 
 type ColorBlockViewParams = {
     blockId: number
 };
 
 const ColorBlockView = ({ blockId }: ColorBlockViewParams) => {
-    const { ref, handleRef } = useDraggable({
-        id: `drag:${blockId}`,
-    });
     const colorEntity = useClipboardStore(
         state => state.blocksById[blockId]
     ) as ColorEntity;
+
+    const { ref, handleRef } = useDraggable<DraggableData>({
+        id: `drag:${blockId}`,
+        data: {
+            blockId: colorEntity.blockId,
+            kind: "block",
+            palette: colorEntity.parentPaletteId
+        }
+    });
 
     const backgroundCss = coloBackground(colorEntity);
     const setEditBox = useClipboardStore(x => x.setEditBlock);
