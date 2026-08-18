@@ -5,17 +5,22 @@ import EmptyClipboardPage from "../empty-clipboard-page";
 import ColorBlock from "../color-block/colo-block";
 import React from "react";
 
-function Droppable(props) {
+function Droppable({ id }: { id: string }) {
   const { isDropTarget, ref } = useDroppable({
-    id: props.id,
+    id,
   });
 
   return (
-    <div ref={ref} className={`${isDropTarget ? "h-15" : "h-0.5"} bg-amber-200 w-full shrink-0`}>
+    <div
+      ref={ref}
+      className="h-1 w-full shrink-0"
+    >
+      {isDropTarget && (
+        <div className="h-1 w-full rounded-full bg-blue-500" />
+      )}
     </div>
   );
 }
-
 const ColorList = () => {
   const colorBlocks = useClipboardStore(state => state.blockIds);
   const setBlockIds = useClipboardStore(state => state.setBlockIds);
@@ -68,7 +73,7 @@ const ColorList = () => {
       {colorBlocks.length === 0 ? <EmptyClipboardPage /> :
         <DragDropProvider onDragEnd={(e) => handleDragEnd(e)}
         >
-          <div className="flex-1 overflow-y-auto flex flex-col gap-2.5 p-2">
+          <div className="flex-1 overflow-y-auto flex flex-col gap-1 px-2">
             <Droppable id={"drop:start"} key='drop:start' />
             {colorBlocks.map((blockId) =>
               <React.Fragment key={blockId}>
