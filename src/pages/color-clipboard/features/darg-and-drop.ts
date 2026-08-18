@@ -1,5 +1,6 @@
 import type { DragEndEvent } from "@dnd-kit/react";
 import { useClipboardStore } from "../store/use-clipboard-store";
+import { addNewPalette } from "./add-block";
 
 export interface DraggableData {
   blockId: number;
@@ -10,7 +11,6 @@ export interface DraggableData {
 
 export const handleDragEnd = (event: DragEndEvent, colorBlocks: number[]) => {
   const { operation, canceled } = event;
-  debugger
 
   if (canceled) return;
 
@@ -22,25 +22,38 @@ export const handleDragEnd = (event: DragEndEvent, colorBlocks: number[]) => {
   const targetData = target.data as DraggableData;
   if ((sourceData.kind === 'block' || sourceData.kind === 'palette') && targetData.kind === 'droppable') {
     blockInDroppable(sourceData, targetData, colorBlocks);
-  } else if (sourceData.kind === 'block'  && targetData.kind === 'block') {
+  } else if (sourceData.kind === 'block' && targetData.kind === 'block') {
     blockInBlock(sourceData, targetData, colorBlocks);
-  }
-
+  } else  if (sourceData.kind === 'block' && targetData.kind === 'block') {
+    blockInPalette(sourceData, targetData, colorBlocks);
+  } 
 };
 
+// push to end of palette, so closed palette 
+const blockInPalette = (sourceData: DraggableData, targetData: DraggableData, colorBlocks: number[]) => {
+
+}
 
 // create new palette, the just need to be not in palette
 const blockInBlock = (sourceData: DraggableData, targetData: DraggableData, colorBlocks: number[]) => {
-  console.log("Block in block");
-  console.log(sourceData);
-  console.log(targetData);
-  console.log(colorBlocks);
+  const draggedId = sourceData.blockId;
+  const targetId = targetData.blockId;
+
+  if (draggedId === targetId) return;
+
+  const newBlocks = [...colorBlocks];
+  const blockId1 = colorBlocks.indexOf(targetId);
+  newBlocks.splice(blockId1, 1);
+
+  const blockId2 = newBlocks.indexOf(draggedId);
+  newBlocks.splice(blockId2, 1);
+
+  useClipboardStore.getState().setBlockIds(newBlocks);
+
+  const paletteId = addNewPalette({});
+
 }
 
-// push to end of palette
-const blockInPalette = () => {
-
-}
 
 // chekc palette 
 const blockInDroppable = (sourceData: DraggableData, targetData: DraggableData, colorBlocks: number[]) => {

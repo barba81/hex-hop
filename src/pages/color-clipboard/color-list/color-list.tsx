@@ -18,7 +18,9 @@ const ColorList = () => {
           <div className="flex-1 overflow-y-auto flex flex-col gap-1 px-2">
             <Droppable id={"drop:start"} blockId={-1} key='drop:start' palette={null} />
             {colorBlocks.map((blockId) =>
+
               <React.Fragment key={blockId}>
+                {}
                 <ColorBlock blockId={blockId} />
                 <Droppable id={`drop:${blockId}`}  blockId={blockId}  palette={null}/>
               </React.Fragment>

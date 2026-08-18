@@ -12,15 +12,10 @@ import { getSmartColorName } from "../features/get-color-name";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 
 type ColorBlockEditParams = {
-    blockId: number
+    colorEntity: ColorEntity
 };
 
-const ColorBlockEdit = ({ blockId }: ColorBlockEditParams) => {
-
-
-    const colorEntity = useClipboardStore(
-        state => state.blocksById[blockId]
-    ) as ColorEntity;
+const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
     const setEditBox = useClipboardStore(state => state.setEditBlock);
     const [colorUpdateEntity, setColorUpdateEntity] = useState(() => ({ ...colorEntity }));
 

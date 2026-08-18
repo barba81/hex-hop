@@ -34,4 +34,5 @@ export const addNewPalette = async (paletteData: PaletteData) => {
     const paletteId = await invoke("create_palette", { palette: { ...paletteData, name: "New palette" } });
     const paletteEntity = await invoke<PaletteEntity>("get_palette", { paletteId });
     useClipboardStore.getState().addBlock(paletteEntity);
+    return paletteId;
 }

@@ -11,9 +11,11 @@ import { DraggableData } from "../features/darg-and-drop";
 
 type ColorBlockViewParams = {
     blockId: number
+        colorEntity: ColorEntity
+
 };
 
-const ColorBlockView = ({ blockId }: ColorBlockViewParams) => {
+const ColorBlockView = ({ blockId, colorEntity }: ColorBlockViewParams) => {
     const { isDropTarget, ref: dropRef } = useDroppable<DraggableData>({
         id: `darg:${blockId}`,
         data: {
@@ -22,10 +24,6 @@ const ColorBlockView = ({ blockId }: ColorBlockViewParams) => {
             palette: null
         }
     });
-
-    const colorEntity = useClipboardStore(
-        state => state.blocksById[blockId]
-    ) as ColorEntity;
 
     const { ref: dragRef, handleRef } = useDraggable<DraggableData>({
         id: `drag:${blockId}`,
