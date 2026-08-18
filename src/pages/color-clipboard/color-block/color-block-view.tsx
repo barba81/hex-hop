@@ -14,7 +14,7 @@ type ColorBlockViewParams = {
 
 const ColorBlockView = ({ blockId }: ColorBlockViewParams) => {
     const { ref, handleRef } = useDraggable({
-        id: blockId,
+        id: `drag:${blockId}`,
     });
     const colorEntity = useClipboardStore(
         state => state.blocksById[blockId]

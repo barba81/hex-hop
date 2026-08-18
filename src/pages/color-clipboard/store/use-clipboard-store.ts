@@ -44,6 +44,8 @@ interface ClipboardAction {
   setFormat: (color: string) => void;
   togglePalette: (paletteId: number) => void;
   setEditBlock: (blockId: number | null) => void;
+
+  setBlockIds: (blockId: number[]) => void;
 }
 
 export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(immer((set) => ({
@@ -55,6 +57,10 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
   colorFormat: "RGB",
   openPalette: {},
   editBlockId: null,
+  setBlockIds: (blockIds) =>
+    set(state => {
+      state.blockIds=blockIds;
+    }),
 
   initBlocks: (blocks) =>
     set(state => {
