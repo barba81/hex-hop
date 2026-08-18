@@ -9,8 +9,8 @@ export interface DraggableData {
 
 
 export const handleDragEnd = (event: DragEndEvent, colorBlocks: number[]) => {
-  console.time();
   const { operation, canceled } = event;
+  debugger
 
   if (canceled) return;
 
@@ -20,18 +20,21 @@ export const handleDragEnd = (event: DragEndEvent, colorBlocks: number[]) => {
 
   const sourceData = source.data as DraggableData;
   const targetData = target.data as DraggableData;
-
   if ((sourceData.kind === 'block' || sourceData.kind === 'palette') && targetData.kind === 'droppable') {
     blockInDroppable(sourceData, targetData, colorBlocks);
+  } else if (sourceData.kind === 'block'  && targetData.kind === 'block') {
+    blockInBlock(sourceData, targetData, colorBlocks);
   }
 
-  console.timeEnd();
 };
 
 
 // create new palette, the just need to be not in palette
-const blockInBlock = () => {
-
+const blockInBlock = (sourceData: DraggableData, targetData: DraggableData, colorBlocks: number[]) => {
+  console.log("Block in block");
+  console.log(sourceData);
+  console.log(targetData);
+  console.log(colorBlocks);
 }
 
 // push to end of palette

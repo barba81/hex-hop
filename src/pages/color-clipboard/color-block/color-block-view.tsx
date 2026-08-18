@@ -6,7 +6,7 @@ import { Copy, Pen, Trash2 } from "lucide-react";
 import { duplicateBlock } from "../features/duplicate-block";
 import { deleteColorBlock } from "../features/delete-block";
 import { useClipboardStore } from "../store/use-clipboard-store";
-import { useDraggable } from "@dnd-kit/react";
+import { useDraggable, useDroppable } from "@dnd-kit/react";
 import { DraggableData } from "../features/darg-and-drop";
 
 type ColorBlockViewParams = {
@@ -14,11 +14,20 @@ type ColorBlockViewParams = {
 };
 
 const ColorBlockView = ({ blockId }: ColorBlockViewParams) => {
+    const { isDropTarget, ref: dropRef } = useDroppable<DraggableData>({
+        id: `darg:${blockId}`,
+        data: {
+            blockId: blockId,
+            kind: "block",
+            palette: null
+        }
+    });
+
     const colorEntity = useClipboardStore(
         state => state.blocksById[blockId]
     ) as ColorEntity;
 
-    const { ref, handleRef } = useDraggable<DraggableData>({
+    const { ref: dragRef, handleRef } = useDraggable<DraggableData>({
         id: `drag:${blockId}`,
         data: {
             blockId: colorEntity.blockId,
@@ -30,10 +39,15 @@ const ColorBlockView = ({ blockId }: ColorBlockViewParams) => {
     const backgroundCss = coloBackground(colorEntity);
     const setEditBox = useClipboardStore(x => x.setEditBlock);
 
+    const setCombinedRef = (node: HTMLDivElement | null) => {
+        dragRef(node);
+        dropRef(node);
+    };
+
     return <ContextMenu>
         <ContextMenuTrigger>
 
-            <div ref={ref} className={` h-15 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
+            <div ref={setCombinedRef} className={ `${isDropTarget && 'outline-2 outline-accent'} h-15 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
                 <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer`}>
                     <DragDots />
                 </div>
