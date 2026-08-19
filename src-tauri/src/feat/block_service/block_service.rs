@@ -56,10 +56,11 @@ pub async fn update_block(
 ) -> Result<(), TauriError> {
     update_repo::update_block(
         request.block_id,
-        request.block_id,
+        request.block_order,
         request.parent_palette_id,
         &state.pool,
     )
     .await?;
+    println!("{:?}", request);
     Ok(())
 }

@@ -26,9 +26,9 @@ export const handleDragEnd = (event: DragEndEvent, colorBlocks: number[]) => {
     blockInDroppable(sourceData, targetData, colorBlocks);
   } else if (sourceData.kind === 'block' && targetData.kind === 'block') {
     blockInBlock(sourceData, targetData, colorBlocks);
-  } else  if (sourceData.kind === 'block' && targetData.kind === 'block') {
+  } else if (sourceData.kind === 'block' && targetData.kind === 'block') {
     blockInPalette(sourceData, targetData, colorBlocks);
-  } 
+  }
 };
 
 // push to end of palette, so closed palette 
@@ -38,28 +38,31 @@ const blockInPalette = (sourceData: DraggableData, targetData: DraggableData, co
 
 // create new palette, the just need to be not in palette
 const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData, colorBlocks: number[]) => {
-  const draggedId = sourceData.blockId;
-  const targetId = targetData.blockId;
-
-  if (draggedId === targetId) return;
+  const draggedBlockId = sourceData.blockId;
+  const targetBlockId = targetData.blockId;
+  debugger
+  if (draggedBlockId === targetBlockId) return;
 
   const newBlocks = [...colorBlocks];
-  const blockId1 = colorBlocks.indexOf(targetId);
-  newBlocks.splice(blockId1, 1);
+  const blockIx1 = colorBlocks.indexOf(targetBlockId);
+  newBlocks.splice(blockIx1, 1);
 
-  const blockId2 = newBlocks.indexOf(draggedId);
-  newBlocks.splice(blockId2, 1);
+  const blockIx2 = newBlocks.indexOf(draggedBlockId);
+  newBlocks.splice(blockIx2, 1);
 
   // useClipboardStore.getState().setBlockIds(newBlocks);
 
   // smehow update paretn of block
-    await invoke("update_block", { color: { ...newEntity } });
-    await invoke("update_block", { color: { ...newEntity } });
-  
-
   const paletteId = await invoke("create_palette", { palette: { name: "New palette" } });
+  await invoke("update_block", { request: { blockId: draggedBlockId, blockOrder: 0, parentPaletteId: paletteId } });
+  await invoke("update_block", { request: { blockId: targetBlockId, blockOrder: 1, parentPaletteId: paletteId } });
+
+
   const paletteEntity = await invoke<PaletteEntity>("get_palette", { paletteId });
 
+  newBlocks.unshift(paletteEntity.blockId);
+  
+  useClipboardStore.getState().setBlockIds(newBlocks);
 }
 
 

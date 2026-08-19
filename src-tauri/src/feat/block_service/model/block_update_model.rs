@@ -4,6 +4,6 @@ use serde::{Deserialize, Serialize};
 #[serde(rename_all = "camelCase")]
 pub struct BlockUpdateModel {
     pub block_id: i64,
-    pub order: i64,
+    pub block_order: i64,
     pub parent_palette_id: Option<i64>,
 }

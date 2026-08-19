@@ -8,7 +8,7 @@ pub mod feat;
 pub mod infra;
 pub mod state;
 
-use feat::block_service::delete_service::*;
+use feat::block_service::block_service::*;
 use feat::color_picker::pick_color_mack;
 use feat::color_service::color_service::*;
 use feat::gradient_service::gradient_service::*;
