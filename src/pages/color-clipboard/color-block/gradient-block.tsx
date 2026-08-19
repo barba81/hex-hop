@@ -31,13 +31,13 @@ export const GradientBlock = ({ gradientEntity: gradientEntity }: GradientBoxPar
     });
 
 
-        const setCombinedRef = (node: HTMLDivElement | null) => {
+    const setCombinedRef = (node: HTMLDivElement | null) => {
         dragRef(node);
         dropRef(node);
     };
 
     const gradientBackground = gradientToCssString(gradientEntity);
-    
+
     return (
         <ContextMenu>
             <ContextMenuTrigger>
@@ -49,12 +49,14 @@ export const GradientBlock = ({ gradientEntity: gradientEntity }: GradientBoxPar
                     </div>
 
                     <div className="flex-1 flex flex-col justify-between overflow-hidden bg-background">
-                        <div
-                            className="w-full h-5 flex-1"
-                            style={{
-                                backgroundImage: gradientBackground,
-                            }}
-                        />
+                        <div className="w-full h-5 flex-1   bg-checkerboard">
+                            <div
+                                className="w-full h-full  flex-1 "
+                                style={{
+                                    backgroundImage: gradientBackground,
+                                }}
+                            />
+                        </div>
 
                         <div className="w-full h-7 flex flex-row justify-between pr-2">
                             <div className="flex">

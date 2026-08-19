@@ -9,7 +9,7 @@ export const gradientToCssString = (gradient: GradientEntity) => {
       const formattedStops = layer.stops
         .slice()
         .sort((a, b) => a.order - b.order)
-        .map((stop) => `rgba(${Math.round(stop.r * 255)}, ${stop.g * 255}, ${stop.b * 255},1) ${stop.position * 100}%`)
+        .map((stop) => `rgba(${Math.round(stop.r * 255)}, ${stop.g * 255}, ${stop.b * 255},0.5) ${stop.position * 100}%`)
         .join(', ');
 
       const type = layer.gradientType.toLowerCase();
