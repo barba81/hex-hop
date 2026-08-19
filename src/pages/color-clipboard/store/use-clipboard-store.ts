@@ -50,7 +50,7 @@ interface ClipboardAction {
 }
 
 export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(immer((set) => ({
-  blockIds: {  [rootBlockId]:[]},
+  blockIds: { [rootBlockId]: [] },
   blocksById: {},
   validColor: defaultInputColor,
   inputColor: defaultInputColor,
@@ -58,7 +58,7 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
   colorFormat: "RGB",
   openPalette: {},
   editBlockId: null,
-   initBlocks: (blocks) =>
+  initBlocks: (blocks) =>
     set(state => {
       state.blockIds[rootBlockId] = blocks.map(block => block.blockId);
 
@@ -66,15 +66,27 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
 
       for (const block of blocks) {
         state.blocksById[block.blockId] = block;
+
+        if (block.kind === 'palette') {
+
+          if(!block.blocks ) {debugger; continue;}
+          state.blockIds[block.id] = block.blocks.map(x => x.blockId);
+
+          for (const inner_block of block.blocks) {
+            state.blocksById[inner_block.blockId] = inner_block;
+          }
+        }
       }
     }),
 
-  setBlockIds: (blockIds,paletteId) =>
+    // THIS IS SHIT 
+  setBlockIds: (blockIds, paletteId) =>
     set(state => {
-      state.blockIds[paletteId?? rootBlockId]=blockIds;
+      state.blockIds[paletteId ?? rootBlockId] = blockIds;
     }),
- 
 
+
+    // ADD BLOCK TO END
   addBlock: (block: BlockEntity, paletteId: number | null) =>
     set((state) => {
       state.blockIds[paletteId ?? rootBlockId].unshift(block.blockId);
@@ -87,17 +99,19 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
       state.blocksById[updateBlock.blockId] = updateBlock;
     }),
 
-  deleteBlock: (blockId) =>
+  deleteBlock: (blockId, paletteId) =>
     set(state => {
-      // state.blockIds = state.blockIds[rootBlockId].filter(id => id !== blockId);
-      // delete state.blocksById[blockId];
+      console.log(paletteId);
+      state.blockIds[paletteId ?? rootBlockId] = state.blockIds[paletteId?? rootBlockId].filter(id => id !== blockId);
+      delete state.blocksById[blockId];
     }),
+
   deleteClipboard: () =>
     set((state) => {
-      // for(const block of state.blockIds){
-
-      // }
-      // state.blockIds.length = 0;
+      for(const list of  Object.values(state.blockIds)){
+        list.length = 0;
+      }
+      state.blocksById = {}
     }),
 
   setLastValidColor: (newColor) => set({ validColor: newColor }),

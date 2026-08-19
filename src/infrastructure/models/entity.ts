@@ -10,7 +10,7 @@ export type PaletteEntity =  {
     blockOrder: number;
     name: string;
          
-    blocks: (ColorEntity | GradientEntity)[];
+    blocks: (ColorEntity | GradientEntity)[] | null;
 }
 
 export type ColorEntity =  {

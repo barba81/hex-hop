@@ -39,7 +39,7 @@ const blockInPalette = (sourceData: DraggableData, targetData: DraggableData, co
 const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData, colorBlocks: number[]) => {
   const draggedBlockId = sourceData.blockId;
   const targetBlockId = targetData.blockId;
-  debugger
+
   if (draggedBlockId === targetBlockId) return;
 
   const newBlocks = [...colorBlocks];

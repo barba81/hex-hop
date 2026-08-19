@@ -7,11 +7,11 @@ import { ChevronDown } from "lucide-react";
 import { DraggableData } from "../features/darg-and-drop";
 import { coloBackground } from "@/infrastructure/utils/color-format-changer";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
+import InnerBlock from "./inner-block";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity
 };
-
 
 const PaletteTopBar = ({ blockId }: { blockId: number }) => {
   const block = useClipboardStore(
@@ -43,7 +43,7 @@ const PaletteTopBar = ({ blockId }: { blockId: number }) => {
 
 
 const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
-  const colorBlocksId = useClipboardStore(state => state.blockIds[paletteEntity.blockId]) ?? [];
+  const colorBlocksId = useClipboardStore(state => state.blockIds[paletteEntity.id]) ?? [];
 
   const isOpen = useClipboardStore((state) => !!state.openPalette[paletteEntity.blockId]);
   const togglePalette = useClipboardStore((state) => state.togglePalette);
@@ -112,6 +112,9 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
 
       {isOpen ? <div className="w-full dark:bg-neutral-900/70 rounded-b-md border-2 border-t-0 p-2">
         <div className="flex flex-col gap-2 border-neutral-700 ">
+          {
+            colorBlocksId.map((id) => (<InnerBlock blockId={id} key={id} />))
+          }
 
         </div>
       </div> : null}

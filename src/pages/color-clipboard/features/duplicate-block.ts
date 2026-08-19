@@ -6,7 +6,7 @@ import { invoke } from "@tauri-apps/api/core";
 export const duplicateBlock = async (colorData: ColorEntity) => {
     const colorId = await invoke("create_color", { color: { ...colorData, name:colorData.name+" Copy" } });
     const colorEntity = await invoke<ColorEntity>("get_color", { colorId });
-    useClipboardStore.getState().addBlock(colorEntity);
+    useClipboardStore.getState().addBlock(colorEntity, null);
 
     const blockId = colorEntity.blockId;
     const paletteId = colorEntity.parentPaletteId;
@@ -19,7 +19,7 @@ export const duplicateBlock = async (colorData: ColorEntity) => {
         async redo() {
             await invoke("restore_block", { blockId });
             const entity = await invoke<ColorEntity>("get_color", { colorId });
-            useClipboardStore.getState().addBlock(entity);
+            useClipboardStore.getState().addBlock(entity, null);
         },
     });
     
