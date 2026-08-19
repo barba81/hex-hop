@@ -1,4 +1,11 @@
-use crate::{feat::block_service::repo::delete_repo, infra::error::TauriError, state::DbState};
+use crate::{
+    feat::block_service::{
+        model::block_update_model::BlockUpdateModel,
+        repo::{delete_repo, update_repo},
+    },
+    infra::error::TauriError,
+    state::DbState,
+};
 
 #[tauri::command]
 pub async fn soft_delete_block(
@@ -39,5 +46,20 @@ pub async fn restore_blocks(
     block_ids: Vec<i64>,
 ) -> Result<(), TauriError> {
     delete_repo::soft_delete_blocks(&block_ids, false, &state.pool).await?;
+    Ok(())
+}
+
+#[tauri::command]
+pub async fn update_block(
+    state: tauri::State<'_, DbState>,
+    request: BlockUpdateModel,
+) -> Result<(), TauriError> {
+    update_repo::update_block(
+        request.block_id,
+        request.block_id,
+        request.parent_palette_id,
+        &state.pool,
+    )
+    .await?;
     Ok(())
 }

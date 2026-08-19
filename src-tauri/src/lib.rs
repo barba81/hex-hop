@@ -41,6 +41,7 @@ pub fn run() {
             create_palette,
             get_palette,
             load_state,
+            update_block,
             soft_delete_block,
             soft_delete_clipboard,
             restore_block,

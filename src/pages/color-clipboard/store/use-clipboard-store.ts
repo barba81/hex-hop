@@ -75,7 +75,7 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
 
   addBlock: (block: BlockEntity) =>
     set((state) => {
-      state.blockIds.push(block.blockId);
+      state.blockIds.unshift(block.blockId);
       state.blocksById[block.blockId] = block;
     }),
 

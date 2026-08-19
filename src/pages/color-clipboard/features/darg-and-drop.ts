@@ -1,6 +1,8 @@
 import type { DragEndEvent } from "@dnd-kit/react";
 import { useClipboardStore } from "../store/use-clipboard-store";
 import { addNewPalette } from "./add-block";
+import { invoke } from "@tauri-apps/api/core";
+import { PaletteEntity } from "@/infrastructure/models/entity";
 
 export interface DraggableData {
   blockId: number;
@@ -35,7 +37,7 @@ const blockInPalette = (sourceData: DraggableData, targetData: DraggableData, co
 }
 
 // create new palette, the just need to be not in palette
-const blockInBlock = (sourceData: DraggableData, targetData: DraggableData, colorBlocks: number[]) => {
+const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData, colorBlocks: number[]) => {
   const draggedId = sourceData.blockId;
   const targetId = targetData.blockId;
 
@@ -48,9 +50,15 @@ const blockInBlock = (sourceData: DraggableData, targetData: DraggableData, colo
   const blockId2 = newBlocks.indexOf(draggedId);
   newBlocks.splice(blockId2, 1);
 
-  useClipboardStore.getState().setBlockIds(newBlocks);
+  // useClipboardStore.getState().setBlockIds(newBlocks);
 
-  const paletteId = addNewPalette({});
+  // smehow update paretn of block
+    await invoke("update_block", { color: { ...newEntity } });
+    await invoke("update_block", { color: { ...newEntity } });
+  
+
+  const paletteId = await invoke("create_palette", { palette: { name: "New palette" } });
+  const paletteEntity = await invoke<PaletteEntity>("get_palette", { paletteId });
 
 }
 
