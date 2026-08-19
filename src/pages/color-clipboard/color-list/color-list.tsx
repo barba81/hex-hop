@@ -1,7 +1,7 @@
 import { DragDropProvider } from "@dnd-kit/react";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import EmptyClipboardPage from "../empty-clipboard-page";
-import ColorBlock from "../color-block/colo-block";
+import Block from "../color-block/block";
 import React from "react";
 import Droppable from "./droppable";
 import { handleDragEnd } from "../features/darg-and-drop";
@@ -21,7 +21,7 @@ const ColorList = () => {
 
               <React.Fragment key={blockId}>
                 {}
-                <ColorBlock blockId={blockId} />
+                <Block blockId={blockId} />
                 <Droppable id={`drop:${blockId}`}  blockId={blockId}  palette={null}/>
               </React.Fragment>
             )}

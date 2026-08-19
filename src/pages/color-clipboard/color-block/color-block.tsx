@@ -10,23 +10,22 @@ import { useDraggable, useDroppable } from "@dnd-kit/react";
 import { DraggableData } from "../features/darg-and-drop";
 
 type ColorBlockViewParams = {
-    blockId: number
-        colorEntity: ColorEntity
+    colorEntity: ColorEntity
 
 };
 
-const ColorBlockView = ({ blockId, colorEntity }: ColorBlockViewParams) => {
+const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
     const { isDropTarget, ref: dropRef } = useDroppable<DraggableData>({
-        id: `darg:${blockId}`,
+        id: `darg:${colorEntity.blockId}`,
         data: {
-            blockId: blockId,
+            blockId: colorEntity.blockId,
             kind: "block",
             palette: null
         }
     });
 
     const { ref: dragRef, handleRef } = useDraggable<DraggableData>({
-        id: `drag:${blockId}`,
+        id: `drag:${colorEntity.blockId}`,
         data: {
             blockId: colorEntity.blockId,
             kind: "block",
@@ -45,7 +44,7 @@ const ColorBlockView = ({ blockId, colorEntity }: ColorBlockViewParams) => {
     return <ContextMenu>
         <ContextMenuTrigger>
 
-            <div ref={setCombinedRef} className={ `${isDropTarget && 'outline-2 outline-accent'} h-15 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
+            <div ref={setCombinedRef} className={`${isDropTarget && 'outline-2 outline-accent'} h-15 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
                 <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer`}>
                     <DragDots />
                 </div>
@@ -97,5 +96,5 @@ const ColorBlockView = ({ blockId, colorEntity }: ColorBlockViewParams) => {
 
 }
 
-export default ColorBlockView;
+export default ColorBlock;
 

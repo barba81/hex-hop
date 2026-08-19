@@ -1,7 +1,7 @@
 import type { GradientEntity } from "@/infrastructure/models/entity";
 
 export const gradientToCssString = (gradient: GradientEntity) => {
-    const sol =  gradient.layers
+  const sol = gradient.layers
     .slice()
     .sort((a, b) => a.order - b.order)
     .map((layer) => {
@@ -9,7 +9,7 @@ export const gradientToCssString = (gradient: GradientEntity) => {
       const formattedStops = layer.stops
         .slice()
         .sort((a, b) => a.order - b.order)
-        .map((stop) => `rgba(${Math.round( stop.r*255)}, ${stop.g*255}, ${stop.b*255}, ${stop.a}) ${stop.position*100}%`)
+        .map((stop) => `rgba(${Math.round(stop.r * 255)}, ${stop.g * 255}, ${stop.b * 255},1) ${stop.position * 100}%`)
         .join(', ');
 
       const type = layer.gradientType.toLowerCase();
@@ -20,10 +20,11 @@ export const gradientToCssString = (gradient: GradientEntity) => {
       if (type.includes('conic')) {
         return `conic-gradient(from ${layer.rotationDegree ?? 0}deg, ${formattedStops})`;
       }
-      
+
       return `linear-gradient(${layer.rotationDegree ?? 0}deg, ${formattedStops})`;
     })
     .join(', ');
-return sol;
+    console.log(sol)
+  return sol;
 
 }

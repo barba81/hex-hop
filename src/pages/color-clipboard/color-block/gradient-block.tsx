@@ -4,24 +4,51 @@ import { gradientToCssString } from "../../../infrastructure/utils/gradient-to-c
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { deleteGradientBlock } from "../features/delete-block";
+import { useDraggable, useDroppable } from "@dnd-kit/react";
+import { DraggableData } from "../features/darg-and-drop";
 
 type GradientBoxParams = {
     gradientEntity: GradientEntity
 };
 
 export const GradientBlock = ({ gradientEntity: gradientEntity }: GradientBoxParams) => {
+    const { isDropTarget, ref: dropRef } = useDroppable<DraggableData>({
+        id: `darg:${gradientEntity.blockId}`,
+        data: {
+            blockId: gradientEntity.blockId,
+            kind: "block",
+            palette: null
+        }
+    });
+
+    const { ref: dragRef, handleRef } = useDraggable<DraggableData>({
+        id: `drag:${gradientEntity.blockId}`,
+        data: {
+            blockId: gradientEntity.blockId,
+            kind: "block",
+            palette: gradientEntity.parentPaletteId
+        }
+    });
+
+
+        const setCombinedRef = (node: HTMLDivElement | null) => {
+        dragRef(node);
+        dropRef(node);
+    };
+
     const gradientBackground = gradientToCssString(gradientEntity);
+    
     return (
         <ContextMenu>
             <ContextMenuTrigger>
-                <div
-                    className="h-17 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-2 overflow-hidden"
+                <div ref={setCombinedRef}
+                    className=" h-15 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden"
                 >
-                    <div className="flex items-center justify-center  shrink-0">
+                    <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer`}>
                         <DragDots />
                     </div>
 
-                    <div className="flex-1 flex flex-col justify-between overflow-hidden bg-checkerboard">
+                    <div className="flex-1 flex flex-col justify-between overflow-hidden bg-background">
                         <div
                             className="w-full h-5 flex-1"
                             style={{
@@ -55,7 +82,7 @@ export const GradientBlock = ({ gradientEntity: gradientEntity }: GradientBoxPar
                 <ContextMenuItem
                     variant="destructive"
                     className="gap-2"
-                    onClick={() => deleteGradientBlock(gradientEntity.blockId, gradientEntity.id,  gradientEntity.parentPaletteId)}
+                    onClick={() => deleteGradientBlock(gradientEntity.blockId, gradientEntity.id, gradientEntity.parentPaletteId)}
                 >
                     <Trash2 className="size-4" />
                     Delete

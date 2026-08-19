@@ -54,6 +54,6 @@ export type GradientStopEntity = {
     r: number;
     g: number;
     b: number;
-    a: number;
+    alpha: number;
     position: number;
 }
