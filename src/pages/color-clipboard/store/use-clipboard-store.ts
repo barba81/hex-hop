@@ -73,7 +73,6 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
     set(state => {
       state.blockIds[paletteId?? rootBlockId]=blockIds;
     }),
-
  
 
   addBlock: (block: BlockEntity, paletteId: number | null) =>

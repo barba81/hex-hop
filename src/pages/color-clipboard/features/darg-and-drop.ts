@@ -1,6 +1,5 @@
 import type { DragEndEvent } from "@dnd-kit/react";
 import { useClipboardStore } from "../store/use-clipboard-store";
-import { addNewPalette } from "./add-block";
 import { invoke } from "@tauri-apps/api/core";
 import { PaletteEntity } from "@/infrastructure/models/entity";
 
@@ -53,7 +52,10 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
   const paletteId = await invoke("create_palette", { palette: { name: "New palette", blockIds: [draggedBlockId, targetBlockId] } });
   const paletteEntity = await invoke<PaletteEntity>("get_palette", { paletteId });
 
+
+  // THIS IS SHIT
   newBlocks.unshift(paletteEntity.blockId);
+  useClipboardStore.getState().addBlock(paletteEntity, null);
   useClipboardStore.getState().setBlockIds(newBlocks, null);
 }
 
@@ -77,6 +79,6 @@ const blockInDroppable = (sourceData: DraggableData, targetData: DraggableData, 
     const newTargetIndex = newBlocks.indexOf(targetId);
     newBlocks.splice(newTargetIndex + 1, 0, draggedId);
   }
-  useClipboardStore.getState().setBlockIds(newBlocks, null);
 
+  useClipboardStore.getState().setBlockIds(newBlocks, null);
 }

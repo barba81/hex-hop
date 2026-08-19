@@ -1,17 +1,53 @@
 import { DragDots } from "@/components/common/drag-dots";
 import type { PaletteEntity } from "@/infrastructure/models/entity";
-import { coloBackground } from "@/infrastructure/utils/color-format-changer";
-import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
+
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import { ChevronDown } from "lucide-react";
 import { DraggableData } from "../features/darg-and-drop";
+import { coloBackground } from "@/infrastructure/utils/color-format-changer";
+import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity
 };
 
+
+const PaletteTopBar = ({ blockId }: { blockId: number }) => {
+  const block = useClipboardStore(
+    state => state.blocksById[blockId]
+  );
+  switch (block.kind) {
+    case "color":
+      return (
+        <div
+          key={blockId}
+          className="w-full h-full"
+          style={{ backgroundColor: coloBackground(block) }}
+        />
+      );
+
+    case "gradient":
+      return (
+        <div
+          key={blockId}
+          className="w-full h-full"
+          style={{ backgroundImage: gradientToCssString(block) }}
+        />
+      );
+
+    default:
+      return null;
+  }
+}
+
+
 const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
+  const colorBlocksId = useClipboardStore(state => state.blockIds[paletteEntity.blockId]) ?? [];
+
+  const isOpen = useClipboardStore((state) => !!state.openPalette[paletteEntity.blockId]);
+  const togglePalette = useClipboardStore((state) => state.togglePalette);
+
   const { isDropTarget, ref: dropRef } = useDroppable<DraggableData>({
     id: `darg:${paletteEntity.blockId}`,
     data: {
@@ -36,8 +72,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
     dropRef(node);
   };
 
-  const isOpen = useClipboardStore((state) => !!state.openPalette[paletteEntity.blockId]);
-  const togglePalette = useClipboardStore((state) => state.togglePalette);
+
 
   return (
     <div ref={setCombinedRef}>
@@ -51,23 +86,9 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
 
         <div className="flex-1 flex flex-col justify-between overflow-hidden bg-background">
           <div className="w-full h-15 flex-1 flex  bg-checkerboard">
-            {paletteEntity.blocks?.map((child) => {
-              if (child.kind === 'color')
-                return (
-                  <div
-                    key={child.id}
-                    className="w-full h-full"
-                    style={{ backgroundColor: coloBackground(child) }}
-                  />
-                );
-              if (child.kind === 'gradient')
-                return (
-                  <div
-                    key={child.id}
-                    className={`w-full h-full ${gradientToCssString(child)}`}
-                  />
-                );
-            })}
+            {
+              colorBlocksId.map((id) => (<PaletteTopBar blockId={id} key={id} />))
+            }
           </div>
 
           <div className="w-full h-7 flex flex-row justify-between items-center pr-2">
