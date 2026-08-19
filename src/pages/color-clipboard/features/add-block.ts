@@ -15,7 +15,6 @@ export const addNewColorToClipboard = async (inputColor: string, paletteId: numb
     useClipboardStore.getState().addBlock(colorEntity);
     const blockId = colorEntity.blockId;
 
-
     useColorListCommands.getState().push({
         async undo() {
             await invoke("soft_delete_block", { blockId });

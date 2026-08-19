@@ -42,7 +42,7 @@ export const GradientBlock = ({ gradientEntity: gradientEntity }: GradientBoxPar
         <ContextMenu>
             <ContextMenuTrigger>
                 <div ref={setCombinedRef}
-                    className=" h-15 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden"
+                    className={`${isDropTarget && 'outline-2 outline-accent'} h-15 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden`}
                 >
                     <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer`}>
                         <DragDots />
@@ -60,6 +60,7 @@ export const GradientBlock = ({ gradientEntity: gradientEntity }: GradientBoxPar
 
                         <div className="w-full h-7 flex flex-row justify-between pr-2">
                             <div className="flex">
+                                CSS, SOME OTHER
                             </div>
                             <div className="flex gap-2 h-full items-center font-mono text-md">
                                 {gradientEntity.name}

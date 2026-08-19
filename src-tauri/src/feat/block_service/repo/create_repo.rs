@@ -9,7 +9,7 @@ where
         "INSERT INTO block (parent_palette_id, block_order) 
         VALUES (
             $1, 
-            (SELECT COALESCE(MAX(block_order), 0) + 1 FROM block WHERE parent_palette_id IS $1)
+            (SELECT COALESCE(MAX(block_order), 0) + 1 FROM block WHERE parent_palette_id IS $1 AND deleted=0)
         ) RETURNING id",
         parent_palette_id
     )

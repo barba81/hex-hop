@@ -17,7 +17,7 @@ const  Droppable= ({ id, blockId }: { blockId: number, id: string, palette: numb
       className="h-1 w-full shrink-0"
     >
       {isDropTarget && (
-        <div className="h-1 w-full rounded-full bg-blue-500" />
+        <div className="h-1 w-full rounded-full bg-primary" />
       )}
     </div>
   );
