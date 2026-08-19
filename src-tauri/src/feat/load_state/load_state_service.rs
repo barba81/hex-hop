@@ -76,11 +76,11 @@ pub async fn load_state(
     }
 
     root.extend(palette_map.into_values().map(BlockResponse::Palette));
-    root.sort_by_key(|block| block.block_order());
+    root.sort_by(|a, b| b.block_order().cmp(&a.block_order()));
     for item in &mut root {
         if let BlockResponse::Palette(palette) = item {
             if let Some(blocks) = &mut palette.blocks {
-                blocks.sort_by_key(|block| block.block_order());
+                blocks.sort_by(|a, b| b.block_order().cmp(&a.block_order()));
             }
         }
     }
