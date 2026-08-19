@@ -1,3 +1,6 @@
+use crate::feat::load_state::model::load_sate_data_mapper::build_all_gradients_response_fast;
+use crate::feat::palette_service::model::palette_response_model::BlockChildResponse;
+use crate::feat::palette_service::model::palette_response_model::PaletteResponseModel;
 use crate::infra::error::TauriError;
 use crate::state::DbState;
 
@@ -26,7 +29,43 @@ pub async fn create_palette(
 pub async fn get_palette(
     state: tauri::State<'_, DbState>,
     palette_id: i64,
-) -> Result<palette_data_model::PaletteDataModel, TauriError> {
-    let palette = palette_get_repo::get_palette_by_id(palette_id, &state.pool).await?;
-    Ok(palette)
+) -> Result<PaletteResponseModel, TauriError> {
+    let mut tx = state.pool.begin().await?;
+
+    let palette = palette_get_repo::get_palette_by_id(palette_id, &mut *tx).await?;
+
+    let colors_data = palette_get_repo::get_colors_by_palette_id(palette.id, &mut *tx).await?;
+    let gradients_data = palette_get_repo::get_gradients_palette_id(palette.id, &mut *tx).await?;
+    let layers = palette_get_repo::get_gradient_layers_palette_id(palette.id, &mut *tx).await?;
+
+    let stops = palette_get_repo::get_gradient_stops_palette_id(palette.id, &mut *tx).await?;
+
+    tx.commit().await?;
+    let gradients = build_all_gradients_response_fast(&gradients_data, &layers, &stops);
+
+    let mut palette_response = PaletteResponseModel {
+        id: palette.id,
+        name: palette.name,
+        block_order: palette.block_order,
+        block_id: palette.block_id,
+        kind: palette.kind,
+        blocks: None,
+    };
+
+    for color in colors_data {
+        palette_response
+            .blocks
+            .get_or_insert_with(Vec::new)
+            .push(BlockChildResponse::Color(color));
+    }
+
+    for gradient in gradients {
+        palette_response
+            .blocks
+            .get_or_insert_with(Vec::new)
+            .push(BlockChildResponse::Gradient(gradient));
+        continue;
+    }
+
+    Ok(palette_response)
 }

@@ -50,19 +50,14 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
   const blockIx2 = newBlocks.indexOf(draggedBlockId);
   newBlocks.splice(blockIx2, 1);
 
-  // useClipboardStore.getState().setBlockIds(newBlocks);
 
-  // smehow update paretn of block
   const paletteId = await invoke("create_palette", { palette: { name: "New palette" } });
   await invoke("update_block", { request: { blockId: draggedBlockId, blockOrder: 0, parentPaletteId: paletteId } });
   await invoke("update_block", { request: { blockId: targetBlockId, blockOrder: 1, parentPaletteId: paletteId } });
 
-
   const paletteEntity = await invoke<PaletteEntity>("get_palette", { paletteId });
-
   newBlocks.unshift(paletteEntity.blockId);
-  
-  useClipboardStore.getState().setBlockIds(newBlocks);
+  // useClipboardStore.getState().setBlockIds(newBlocks, null);
 }
 
 
@@ -87,6 +82,4 @@ const blockInDroppable = (sourceData: DraggableData, targetData: DraggableData, 
   }
   useClipboardStore.getState().setBlockIds(newBlocks);
 
-  console.log(
-    useClipboardStore.getState().blocksById);
 }

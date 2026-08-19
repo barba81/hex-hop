@@ -3,9 +3,10 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
 const defaultInputColor = "#3b82f6";
+export const rootBlockId = -1;
 
 interface ClipboardStore {
-  blockIds: number[];
+  blockIds: Record<number, number[]>;
   blocksById: Record<number, BlockEntity>;
 
   editBlockId: number | null;
@@ -25,7 +26,7 @@ interface ClipboardAction {
 
   // CREATE -----------------------------------------------------------------------
 
-  addBlock: (block: BlockEntity) => void;
+  addBlock: (block: BlockEntity, paletteId: number | null) => void;
 
   // UPDATE -----------------------------------------------------------------------
 
@@ -45,11 +46,11 @@ interface ClipboardAction {
   togglePalette: (paletteId: number) => void;
   setEditBlock: (blockId: number | null) => void;
 
-  setBlockIds: (blockId: number[]) => void;
+  setBlockIds: (blockId: number[], paletteId: number | null) => void;
 }
 
 export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(immer((set) => ({
-  blockIds: [],
+  blockIds: {  [rootBlockId]:[]},
   blocksById: {},
   validColor: defaultInputColor,
   inputColor: defaultInputColor,
@@ -57,14 +58,9 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
   colorFormat: "RGB",
   openPalette: {},
   editBlockId: null,
-  setBlockIds: (blockIds) =>
+   initBlocks: (blocks) =>
     set(state => {
-      state.blockIds=blockIds;
-    }),
-
-  initBlocks: (blocks) =>
-    set(state => {
-      state.blockIds = blocks.map(block => block.blockId);
+      state.blockIds[rootBlockId] = blocks.map(block => block.blockId);
 
       state.blocksById = {};
 
@@ -73,9 +69,16 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
       }
     }),
 
-  addBlock: (block: BlockEntity) =>
+  setBlockIds: (blockIds,paletteId) =>
+    set(state => {
+      state.blockIds[paletteId?? rootBlockId]=blockIds;
+    }),
+
+ 
+
+  addBlock: (block: BlockEntity, paletteId: number | null) =>
     set((state) => {
-      state.blockIds.unshift(block.blockId);
+      state.blockIds[paletteId ?? rootBlockId].unshift(block.blockId);
       state.blocksById[block.blockId] = block;
     }),
 
@@ -87,12 +90,15 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
 
   deleteBlock: (blockId) =>
     set(state => {
-      state.blockIds = state.blockIds.filter(id => id !== blockId);
-      delete state.blocksById[blockId];
+      // state.blockIds = state.blockIds[rootBlockId].filter(id => id !== blockId);
+      // delete state.blocksById[blockId];
     }),
   deleteClipboard: () =>
     set((state) => {
-      state.blockIds.length = 0;
+      // for(const block of state.blockIds){
+
+      // }
+      // state.blockIds.length = 0;
     }),
 
   setLastValidColor: (newColor) => set({ validColor: newColor }),

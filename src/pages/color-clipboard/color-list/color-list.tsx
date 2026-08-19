@@ -1,5 +1,5 @@
 import { DragDropProvider } from "@dnd-kit/react";
-import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
+import { rootBlockId, useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import EmptyClipboardPage from "../empty-clipboard-page";
 import Block from "../color-block/block";
 import React from "react";
@@ -8,7 +8,7 @@ import { handleDragEnd } from "../features/darg-and-drop";
 
 
 const ColorList = () => {
-  const colorBlocks = useClipboardStore(state => state.blockIds);
+  const colorBlocks = useClipboardStore(state => state.blockIds[rootBlockId]);
 
   return (
     <>
