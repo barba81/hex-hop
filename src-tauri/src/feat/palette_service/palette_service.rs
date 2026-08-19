@@ -1,4 +1,6 @@
+use crate::feat::block_service::repo::update_repo::set_up_blocks_to_palette;
 use crate::feat::load_state::model::load_sate_data_mapper::build_all_gradients_response_fast;
+use crate::feat::palette_service::model::palette_create_model::PaletteCreateModel;
 use crate::feat::palette_service::model::palette_response_model::BlockChildResponse;
 use crate::feat::palette_service::model::palette_response_model::PaletteResponseModel;
 use crate::infra::error::TauriError;
@@ -10,15 +12,20 @@ use super::repo::*;
 #[tauri::command]
 pub async fn create_palette(
     state: tauri::State<'_, DbState>,
-    palette: palette_create_model::PaletteCreateModel,
+    palette: palette_create_model::PaletteCreateRequest,
     parent_palette_id: Option<i64>,
 ) -> Result<i64, TauriError> {
+    let palette_create_model = PaletteCreateModel { name: palette.name };
+
     let mut tx = state.pool.begin().await?;
 
     let block_id =
         crate::feat::block_service::repo::create_repo::create_block(parent_palette_id, &mut *tx)
             .await?;
-    let palette_id = palette_create_repo::create_palette(&palette, block_id, &mut *tx).await?;
+    let palette_id =
+        palette_create_repo::create_palette(&palette_create_model, block_id, &mut *tx).await?;
+
+    set_up_blocks_to_palette(palette_id, &palette.block_ids, &mut *tx).await?;
 
     tx.commit().await?;
 
