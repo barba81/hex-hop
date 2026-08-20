@@ -73,3 +73,12 @@ pub async fn update_block_order(
     update_repo::update_block_order(&reorder_blocks, &state.pool).await?;
     Ok(())
 }
+
+#[tauri::command]
+pub async fn get_block_ids(
+    state: tauri::State<'_, DbState>,
+    palette_id: Option<i64>,
+) -> Result<Vec<i64>, TauriError> {
+    let ids = update_repo::get_block_ids(palette_id, &state.pool).await?;
+    Ok(ids)
+}

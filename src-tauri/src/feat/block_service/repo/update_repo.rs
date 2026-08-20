@@ -81,3 +81,26 @@ where
 
     Ok(())
 }
+
+pub async fn get_block_ids<'a, E>(
+    parent_palette_id: Option<i64>,
+    executor: E,
+) -> Result<Vec<i64>, sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
+    let ids = sqlx::query_scalar!(
+        r#"
+        SELECT b.id AS "id!"
+        FROM block b
+        WHERE b.parent_palette_id IS ?1
+          AND b.deleted = 0
+        ORDER BY block_order DESC
+    "#,
+        parent_palette_id
+    )
+    .fetch_all(executor)
+    .await?;
+
+    Ok(ids)
+}

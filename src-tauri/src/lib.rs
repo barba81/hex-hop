@@ -49,6 +49,7 @@ pub fn run() {
             update_color,
             restore_blocks,
             update_block_order,
+            get_block_ids
         ])
         .plugin(tauri_plugin_prevent_default::debug())
         .plugin(tauri_plugin_os::init())
