@@ -7,7 +7,3 @@ export type ColorData =  {
     name: string
 }
 
-export type PaletteData =  {
-    
-}
-

@@ -1,4 +1,3 @@
-import type { PaletteData } from "@/infrastructure/models/types";
 import { invoke } from "@tauri-apps/api/core";
 import type { ColorEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
@@ -28,9 +27,8 @@ export const addNewColorToClipboard = async (inputColor: string, paletteId: numb
     });
 }
 
-
-export const addNewPalette = async (paletteData: PaletteData) => {
-    const paletteId = await invoke("create_palette", { palette: { ...paletteData, name: "New palette" } });
+export const addNewPalette = async (blockIds: number[]) => {
+    const paletteId = await invoke("create_palette", { palette: { name: "New palette", blockIds } });
     const paletteEntity = await invoke<PaletteEntity>("get_palette", { paletteId });
     useClipboardStore.getState().addBlock(paletteEntity, null);
     return paletteId;

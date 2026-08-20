@@ -4,6 +4,7 @@ import { deleteClipboard } from "./features/delete-block";
 import { defaultButtonBackground } from "@/components/common/micro-button";
 import { MicroInput } from "@/components/common/micro-input";
 import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
+import { addNewPalette } from "./features/add-block";
 
 const HeaderDropdown = () => {
 
@@ -19,6 +20,7 @@ const HeaderDropdown = () => {
         <DropdownMenuGroup>
           <DropdownMenuItem
             className="  cursor-pointer "
+             onClick={() => addNewPalette([])}
           >
             <Palette /> Add new palette
           </DropdownMenuItem>
