@@ -1,5 +1,7 @@
 use sqlx::{QueryBuilder, Sqlite};
 
+use crate::feat::block_service::model::block_update_model::ReorderBlockUpdateModel;
+
 pub async fn update_block<'a, E>(
     block_id: i64,
     block_order: i64,
@@ -48,6 +50,32 @@ where
         separated.push_bind(id);
     }
     separated.push_unseparated(")");
+
+    builder.build().execute(executor).await?;
+
+    Ok(())
+}
+
+pub async fn update_block_order<'a, E>(
+    reorder_blocks: &[ReorderBlockUpdateModel],
+    executor: E,
+) -> Result<(), sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
+    if reorder_blocks.is_empty() {
+        return Ok(());
+    }
+
+    let mut builder: QueryBuilder<Sqlite> = QueryBuilder::new("WITH data(id, block_order) AS (");
+
+    builder.push_values(reorder_blocks, |mut b, elem| {
+        b.push_bind(elem.block_id).push_bind(elem.block_order);
+    });
+
+    builder.push(
+        ") UPDATE block SET block_order = data.block_order FROM data WHERE block.id = data.id;",
+    );
 
     builder.build().execute(executor).await?;
 

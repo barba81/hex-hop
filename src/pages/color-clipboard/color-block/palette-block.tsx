@@ -8,6 +8,7 @@ import { DraggableData } from "../features/darg-and-drop";
 import { coloBackground } from "@/infrastructure/utils/color-format-changer";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
 import InnerBlock from "./inner-block";
+import DroppableLine from "../color-list/droppable";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity
@@ -108,9 +109,15 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
       </div>
 
       {isOpen && colorBlocksId.length  ? <div className="w-full dark:bg-neutral-900/70 rounded-b-md border-2 border-t-0 p-2">
-          <div className="flex flex-col gap-2 border-neutral-700 ">
+          <div className="flex flex-col gap-1 border-neutral-700 ">
             {
-              colorBlocksId.map((id) => (<InnerBlock blockId={id} key={id} />))
+              
+              colorBlocksId.map((blockId) => (
+              <>
+              <InnerBlock blockId={blockId} key={blockId} />
+              <DroppableLine id={`drop:${blockId}`}  blockId={blockId}  palette={paletteEntity.id} />
+              </>
+            ))
             }
           </div>
       </div> : null}

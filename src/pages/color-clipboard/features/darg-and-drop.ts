@@ -1,7 +1,7 @@
 import type { DragEndEvent } from "@dnd-kit/react";
-import { useClipboardStore } from "../store/use-clipboard-store";
+import { rootBlockId, useClipboardStore } from "../store/use-clipboard-store";
 import { invoke } from "@tauri-apps/api/core";
-import { PaletteEntity } from "@/infrastructure/models/entity";
+import { BlockEntity, PaletteEntity } from "@/infrastructure/models/entity";
 
 export interface DraggableData {
   blockId: number;
@@ -10,7 +10,7 @@ export interface DraggableData {
 }
 
 
-export const handleDragEnd = (event: DragEndEvent, colorBlocks: number[]) => {
+export const handleDragEnd = (event: DragEndEvent,) => {
   const { operation, canceled } = event;
 
   if (canceled) return;
@@ -21,29 +21,38 @@ export const handleDragEnd = (event: DragEndEvent, colorBlocks: number[]) => {
 
   const sourceData = source.data as DraggableData;
   const targetData = target.data as DraggableData;
+
   if ((sourceData.kind === 'block' || sourceData.kind === 'palette') && targetData.kind === 'droppable') {
-    blockInDroppable(sourceData, targetData, colorBlocks);
+    blockInDroppable(sourceData, targetData);
   } else if (sourceData.kind === 'block' && targetData.kind === 'block') {
-    blockInBlock(sourceData, targetData, colorBlocks);
+    blockInBlock(sourceData, targetData);
   } else if (sourceData.kind === 'block' && targetData.kind === 'block') {
-    blockInPalette(sourceData, targetData, colorBlocks);
+    blockInPalette(sourceData, targetData);
   }
 };
 
 // push to end of palette, so closed palette 
-const blockInPalette = (sourceData: DraggableData, targetData: DraggableData, colorBlocks: number[]) => {
+const blockInPalette = (sourceData: DraggableData, targetData: DraggableData) => {
 
 }
 
 // create new palette, the just need to be not in palette
-const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData, colorBlocks: number[]) => {
+const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData) => {
   const draggedBlockId = sourceData.blockId;
   const targetBlockId = targetData.blockId;
 
   if (draggedBlockId === targetBlockId) return;
 
-  const newBlocks = [...colorBlocks];
-  const blockIx1 = colorBlocks.indexOf(targetBlockId);
+  const draggedParent = sourceData.palette;
+  const targetParent = targetData.palette;
+
+  const state = useClipboardStore.getState();
+
+  const draggedColorBlocks = state.blockIds[draggedParent ?? rootBlockId];
+  const targetColorBlocks = state.blockIds[targetParent ?? rootBlockId];
+
+  const newBlocks = [...draggedColorBlocks];
+  const blockIx1 = draggedColorBlocks.indexOf(targetBlockId);
   newBlocks.splice(blockIx1, 1);
 
   const blockIx2 = newBlocks.indexOf(draggedBlockId);
@@ -62,24 +71,59 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
 
 
 // chekc palette 
-const blockInDroppable = (sourceData: DraggableData, targetData: DraggableData, colorBlocks: number[]) => {
+const blockInDroppable = async (sourceData: DraggableData, targetData: DraggableData) => {
   const draggedId = sourceData.blockId;
   const targetId = targetData.blockId;
 
   if (draggedId === targetId) return;
-  const oldIndex = colorBlocks.indexOf(draggedId);
+
+  const state = useClipboardStore.getState();
+  const draggedParent = sourceData.palette;
+  const targetParent = targetData.palette;
+  const draggedColorBlocks = state.blockIds[draggedParent ?? rootBlockId];
+  const targetColorBlocks = state.blockIds[targetParent ?? rootBlockId];
+
+
+  const newDraggedBlocks = [...draggedColorBlocks];
+
+  const oldIndex = newDraggedBlocks.indexOf(draggedId);
   if (oldIndex === -1) return;
-  const newBlocks = [...colorBlocks];
-  newBlocks.splice(oldIndex, 1);
+  newDraggedBlocks.splice(oldIndex, 1);
+
 
   if (targetId === -1) {
-    newBlocks.splice(0, 0, draggedId);
+    newDraggedBlocks.splice(0, 0, draggedId);
   } else {
-    const targetIndex = colorBlocks.indexOf(targetId);
+    const targetIndex = newDraggedBlocks.indexOf(targetId);
     if (targetIndex === -1) return;
-    const newTargetIndex = newBlocks.indexOf(targetId);
-    newBlocks.splice(newTargetIndex + 1, 0, draggedId);
+    const newTargetIndex = newDraggedBlocks.indexOf(targetId);
+    newDraggedBlocks.splice(newTargetIndex + 1, 0, draggedId);
   }
 
-  useClipboardStore.getState().setBlockIds(newBlocks, null);
+  const reorderBlocks = [
+    ...reorderHelper(newDraggedBlocks, state.blocksById),
+  ];
+
+
+  await invoke("update_block_order", { reorderBlocks } );
+  // const blockIds1 = await invoke("get_block_ids", {paletteId: 0});
+
+  state.setBlockIds(newDraggedBlocks, null);
+}
+
+export type ReorderBlock = { blockId: number, blockOrder: number };
+
+const reorderHelper = (blockId: number[], blocksById: Record<number, BlockEntity>) => {
+  const ids: ReorderBlock[] = [];
+  for (const [ix, id] of blockId.entries()) {
+    const order = blockId.length - ix;
+    console.log(id, order, blocksById[id].blockOrder);
+
+    if (blocksById[id].blockOrder !== order) {
+      ids.push({ blockId: id, blockOrder: order });
+    }
+  }
+
+
+  return ids;
 }

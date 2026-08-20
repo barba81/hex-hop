@@ -13,14 +13,13 @@ const ColorList = () => {
   return (
     <>
       {colorBlocks.length === 0 ? <EmptyClipboardPage /> :
-        <DragDropProvider  onDragEnd={(e) => handleDragEnd(e,colorBlocks)}
+        <DragDropProvider  onDragEnd={(e) => handleDragEnd(e)}
         >
           <div className="flex-1 overflow-y-auto flex flex-col gap-1 px-2">
             <DroppableLine id={"drop:start"} blockId={-1} key='drop:start' palette={null} />
             {colorBlocks.map((blockId) =>
 
               <React.Fragment key={blockId}>
-                {}
                 <Block blockId={blockId} />
                 <DroppableLine id={`drop:${blockId}`}  blockId={blockId}  palette={null} />
               </React.Fragment>

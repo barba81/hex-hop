@@ -1,6 +1,6 @@
 use crate::{
     feat::block_service::{
-        model::block_update_model::BlockUpdateModel,
+        model::block_update_model::{BlockUpdateModel, ReorderBlockUpdateModel},
         repo::{delete_repo, update_repo},
     },
     infra::error::TauriError,
@@ -61,6 +61,15 @@ pub async fn update_block(
         &state.pool,
     )
     .await?;
-    println!("{:?}", request);
+
+    Ok(())
+}
+
+#[tauri::command]
+pub async fn update_block_order(
+    state: tauri::State<'_, DbState>,
+    reorder_blocks: Vec<ReorderBlockUpdateModel>,
+) -> Result<(), TauriError> {
+    update_repo::update_block_order(&reorder_blocks, &state.pool).await?;
     Ok(())
 }
