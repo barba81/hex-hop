@@ -25,7 +25,7 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
         }
     });
 
-    const { ref: dragRef, handleRef } = useDraggable<DraggableData>({
+    const { ref: dragRef, handleRef, isDragging } = useDraggable<DraggableData>({
         id: `drag:${colorEntity.blockId}`,
         data: {
             blockId: colorEntity.blockId,
@@ -45,7 +45,7 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
     return <ContextMenu>
         <ContextMenuTrigger>
 
-            <div ref={setCombinedRef} className={`${isDropTarget && 'outline-2 outline-accent'} h-15 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
+            <div ref={setCombinedRef} className={`${isDropTarget && 'outline-2 outline-accent'} ${isDragging && 'opacity-50'} h-15 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
                 <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer`}>
                     <DragDots />
                 </div>

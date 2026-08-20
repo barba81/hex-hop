@@ -17,6 +17,7 @@ const PaletteTopBar = ({ blockId }: { blockId: number }) => {
   const block = useClipboardStore(
     state => state.blocksById[blockId]
   );
+
   switch (block.kind) {
     case "color":
       return (
@@ -72,8 +73,6 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
     dropRef(node);
   };
 
-
-
   return (
     <div ref={setCombinedRef}>
       <div
@@ -85,7 +84,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
         </div>
 
         <div className="flex-1 flex flex-col justify-between overflow-hidden bg-background">
-          <div className="w-full h-15 flex-1 flex  bg-checkerboard">
+          <div className="w-full h-15 flex-1 flex  bg-checkerboard gap-0.5">
             {
               colorBlocksId.map((id) => (<PaletteTopBar blockId={id} key={id} />))
             }
