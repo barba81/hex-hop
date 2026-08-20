@@ -47,7 +47,7 @@ interface ClipboardAction {
   togglePalette: (paletteId: number) => void;
   setEditBlock: (blockId: number | null) => void;
 
-  setBlockIds: (blockId: number[], paletteId: number | null) => void;
+  setBlocksIds: (blocks: {blockId: number[], paletteId: number | null}[]) => void;
 }
 
 export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(immer((set) => ({
@@ -80,10 +80,11 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
       }
     }),
 
-  // THIS IS SHIT 
-  setBlockIds: (blockIds, paletteId) =>
+  setBlocksIds: (blocks) =>
     set(state => {
-      state.blockIds[paletteId ?? rootBlockId] = blockIds;
+      for(const block of blocks){
+        state.blockIds[block.paletteId ?? rootBlockId] = block.blockId;
+      }
     }),
 
 

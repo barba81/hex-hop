@@ -26,14 +26,41 @@ export const handleDragEnd = (event: DragEndEvent,) => {
     blockInDroppable(sourceData, targetData);
   } else if (sourceData.kind === 'block' && targetData.kind === 'block') {
     blockInBlock(sourceData, targetData);
-  } else if (sourceData.kind === 'block' && targetData.kind === 'block') {
+  } else if (sourceData.kind === 'block' && targetData.kind === 'palette') {
     blockInPalette(sourceData, targetData);
   }
 };
 
 // push to end of palette, so closed palette 
-const blockInPalette = (sourceData: DraggableData, targetData: DraggableData) => {
+const blockInPalette = async (sourceData: DraggableData, targetData: DraggableData) => {
+  const draggedBlockId = sourceData.blockId;
 
+  const draggedParent = sourceData.palette;
+  const targetParent = targetData.palette;
+  const state = useClipboardStore.getState();
+
+  const draggedColorBlocks = state.blockIds[draggedParent ?? rootBlockId];
+  const targetColorBlocks = state.blockIds[targetParent ?? rootBlockId];
+
+
+  const newDraggedBlocks = [...draggedColorBlocks];
+  const newTargetColorBlocks = [...targetColorBlocks];
+  const blockIx1 = draggedColorBlocks.indexOf(draggedBlockId);
+
+  newDraggedBlocks.splice(blockIx1, 1);
+  newTargetColorBlocks.push(draggedBlockId);
+
+  state.setBlocksIds([
+    { blockId: newDraggedBlocks, paletteId: draggedParent },
+    { blockId: newTargetColorBlocks, paletteId: targetParent }
+  ]);
+
+   const reorderBlocksDrag = [...reorderHelper(newDraggedBlocks, state.blocksById)];
+   const reorderBlocksTarget = [...reorderHelper(newTargetColorBlocks, state.blocksById)];
+  
+   await invoke("update_block_order", { reorderBlocks:reorderBlocksDrag });
+   await invoke("update_block_order", { reorderBlocks:reorderBlocksTarget });
+   await invoke("update_blocks_parent", {paletteId: targetParent, blockIds: [draggedBlockId] });
 }
 
 // create new palette, the just need to be not in palette
@@ -97,22 +124,22 @@ const blockInDroppable = async (sourceData: DraggableData, targetData: Draggable
     newDraggedBlocks.splice(newTargetIndex + 1, 0, draggedId);
   }
 
-  useClipboardStore.getState().setBlockIds(newDraggedBlocks, draggedParent);
+  state.setBlocksIds([{ blockId: newDraggedBlocks, paletteId: draggedParent }]);
 
   try {
     const reorderBlocks = [...reorderHelper(newDraggedBlocks, state.blocksById)];
     await invoke("update_block_order", { reorderBlocks });
   } catch (error) {
     console.error("Failed to save order to DB:", error);
-    useClipboardStore.getState().setBlockIds(draggedColorBlocks, draggedParent);
+    state.setBlocksIds([{blockId: draggedColorBlocks, paletteId: draggedParent }]);
   }
 }
 
 export type ReorderBlock = { blockId: number, blockOrder: number };
 
 const reorderHelper = (blockId: number[], blocksById: Record<number, BlockEntity>) => {
-
   const ids: ReorderBlock[] = [];
+
   for (const [ix, id] of blockId.entries()) {
 
     const order = blockId.length - ix;
@@ -121,7 +148,5 @@ const reorderHelper = (blockId: number[], blocksById: Record<number, BlockEntity
       ids.push({ blockId: id, blockOrder: order });
     }
   }
-
-
   return ids;
 }

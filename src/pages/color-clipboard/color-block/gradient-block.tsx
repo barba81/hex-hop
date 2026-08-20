@@ -17,7 +17,7 @@ export const GradientBlock = ({ gradientEntity: gradientEntity }: GradientBoxPar
         data: {
             blockId: gradientEntity.blockId,
             kind: "block",
-            palette: null
+            palette: gradientEntity.parentPaletteId
         }
     });
 

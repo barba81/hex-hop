@@ -55,7 +55,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
     data: {
       blockId: paletteEntity.blockId,
       kind: "palette",
-      palette: null
+      palette: paletteEntity.id
     }
   });
 
@@ -64,7 +64,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
     data: {
       blockId: paletteEntity.blockId,
       kind: "palette",
-      palette: null
+      palette: paletteEntity.id
     }
   });
 

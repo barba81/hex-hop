@@ -66,6 +66,16 @@ pub async fn update_block(
 }
 
 #[tauri::command]
+pub async fn update_blocks_parent(
+    state: tauri::State<'_, DbState>,
+    palette_id: Option<i64>,
+    block_ids: Vec<i64>,
+) -> Result<(), TauriError> {
+    update_repo::update_blocks_parent(palette_id, &block_ids, &state.pool).await?;
+    Ok(())
+}
+
+#[tauri::command]
 pub async fn update_block_order(
     state: tauri::State<'_, DbState>,
     reorder_blocks: Vec<ReorderBlockUpdateModel>,

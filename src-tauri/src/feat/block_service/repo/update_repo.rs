@@ -104,3 +104,29 @@ where
 
     Ok(ids)
 }
+
+pub async fn update_blocks_parent<'a, E>(
+    palette_id: Option<i64>,
+    block_ids: &[i64],
+    executor: E,
+) -> Result<(), sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
+    if block_ids.is_empty() {
+        return Ok(());
+    }
+
+    let mut builder: QueryBuilder<Sqlite> = QueryBuilder::new("WITH data(id) AS (");
+
+    builder.push_values(block_ids, |mut b, elem| {
+        b.push_bind(elem);
+    });
+
+    builder.push(") UPDATE block SET parent_palette_id =");
+    builder.push_bind(palette_id);
+    builder.push(" FROM data WHERE block.id = data.id;");
+    builder.build().execute(executor).await?;
+
+    Ok(())
+}

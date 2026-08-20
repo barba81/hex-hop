@@ -21,7 +21,7 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
         data: {
             blockId: colorEntity.blockId,
             kind: "block",
-            palette: null
+            palette: colorEntity.parentPaletteId
         }
     });
 
