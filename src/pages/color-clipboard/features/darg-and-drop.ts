@@ -37,8 +37,9 @@ const blockInPalette = async (sourceData: DraggableData, targetData: DraggableDa
 
   const draggedParent = sourceData.palette;
   const targetParent = targetData.palette;
+  if (draggedParent === targetParent) return;
   const state = useClipboardStore.getState();
-  debugger
+
   const draggedColorBlocks = state.blockIds[draggedParent ?? rootBlockId];
   const targetColorBlocks = state.blockIds[targetParent ?? rootBlockId] ?? [];
 
@@ -94,7 +95,6 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
   useClipboardStore.getState().addPalette(paletteEntity, [draggedBlockId, targetBlockId]);
   // useClipboardStore.getState().setBlockIds(newBlocks, null);
 }
-
 
 // chekc palette 
 const blockInDroppable = async (sourceData: DraggableData, targetData: DraggableData) => {
