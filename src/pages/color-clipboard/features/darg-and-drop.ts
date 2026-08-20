@@ -38,10 +38,9 @@ const blockInPalette = async (sourceData: DraggableData, targetData: DraggableDa
   const draggedParent = sourceData.palette;
   const targetParent = targetData.palette;
   const state = useClipboardStore.getState();
-
+  debugger
   const draggedColorBlocks = state.blockIds[draggedParent ?? rootBlockId];
-  const targetColorBlocks = state.blockIds[targetParent ?? rootBlockId];
-
+  const targetColorBlocks = state.blockIds[targetParent ?? rootBlockId] ?? [];
 
   const newDraggedBlocks = [...draggedColorBlocks];
   const newTargetColorBlocks = [...targetColorBlocks];

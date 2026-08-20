@@ -5,4 +5,5 @@ import { invoke } from "@tauri-apps/api/core";
 export const loadState = async () => {
     const blocks = await invoke<BlockEntity[]>("load_state");
     useClipboardStore.getState().initBlocks(blocks);
+    debugger
 }

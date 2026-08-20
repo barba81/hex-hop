@@ -114,7 +114,6 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
 
   deleteBlock: (blockId, paletteId) =>
     set(state => {
-      console.log(paletteId);
       state.blockIds[paletteId ?? rootBlockId] = state.blockIds[paletteId ?? rootBlockId].filter(id => id !== blockId);
       delete state.blocksById[blockId];
     }),

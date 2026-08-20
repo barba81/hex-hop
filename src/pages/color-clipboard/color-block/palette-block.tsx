@@ -9,6 +9,7 @@ import { coloBackground } from "@/infrastructure/utils/color-format-changer";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
 import InnerBlock from "./inner-block";
 import DroppableLine from "../color-list/droppable";
+import React from "react";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity
@@ -108,18 +109,19 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
         </div>
       </div>
 
-      {isOpen && colorBlocksId.length  ? <div className="w-full dark:bg-neutral-900/70 rounded-b-md border-2 border-t-0 p-2">
-          <div className="flex flex-col gap-1 border-neutral-700 ">
-            {
-              
-              colorBlocksId.map((blockId) => (
-              <>
-              <InnerBlock blockId={blockId} key={blockId} />
-              <DroppableLine id={`drop:${blockId}`}  blockId={blockId}  palette={paletteEntity.id} />
-              </>
+      {isOpen && colorBlocksId.length ? <div className="w-full dark:bg-neutral-900/70 rounded-b-md border-2 border-t-0 p-2">
+        <div className="flex flex-col gap-1 border-neutral-700 ">
+          <DroppableLine id={"drop:start"} blockId={-1} key='drop:start' palette={paletteEntity.id} />
+          {
+
+            colorBlocksId.map((blockId) => (
+              <React.Fragment key={blockId}>
+                <InnerBlock blockId={blockId} />
+                <DroppableLine id={`drop:${blockId}`} blockId={blockId} palette={paletteEntity.id} />
+              </React.Fragment>
             ))
-            }
-          </div>
+          }
+        </div>
       </div> : null}
     </div>
   );
