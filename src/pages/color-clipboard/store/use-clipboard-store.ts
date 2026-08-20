@@ -1,4 +1,4 @@
-import type { BlockEntity } from "@/infrastructure/models/entity";
+import type { BlockEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
@@ -27,6 +27,7 @@ interface ClipboardAction {
   // CREATE -----------------------------------------------------------------------
 
   addBlock: (block: BlockEntity, paletteId: number | null) => void;
+  addPalette: (palette: PaletteEntity, blockId: number[]) => void;
 
   // UPDATE -----------------------------------------------------------------------
 
@@ -69,7 +70,7 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
 
         if (block.kind === 'palette') {
 
-          if(!block.blocks ) {debugger; continue;}
+          if (!block.blocks) { continue; }
           state.blockIds[block.id] = block.blocks.map(x => x.blockId);
 
           for (const inner_block of block.blocks) {
@@ -79,18 +80,29 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
       }
     }),
 
-    // THIS IS SHIT 
+  // THIS IS SHIT 
   setBlockIds: (blockIds, paletteId) =>
     set(state => {
       state.blockIds[paletteId ?? rootBlockId] = blockIds;
     }),
 
 
-    // ADD BLOCK TO END
+  // ADD BLOCK TO END
   addBlock: (block: BlockEntity, paletteId: number | null) =>
     set((state) => {
       state.blockIds[paletteId ?? rootBlockId].unshift(block.blockId);
       state.blocksById[block.blockId] = block;
+    }),
+
+  addPalette: (palette: PaletteEntity, blockIds: number[]) =>
+    set((state) => {
+      state.blockIds[rootBlockId].unshift(palette.blockId);
+      state.blocksById[palette.blockId] = palette;
+
+      for (const blocId of blockIds) {
+        if (!state.blockIds[palette.id]) state.blockIds[palette.id] = [];
+        state.blockIds[palette.id].push(blocId);
+      }
     }),
 
 
@@ -102,13 +114,13 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
   deleteBlock: (blockId, paletteId) =>
     set(state => {
       console.log(paletteId);
-      state.blockIds[paletteId ?? rootBlockId] = state.blockIds[paletteId?? rootBlockId].filter(id => id !== blockId);
+      state.blockIds[paletteId ?? rootBlockId] = state.blockIds[paletteId ?? rootBlockId].filter(id => id !== blockId);
       delete state.blocksById[blockId];
     }),
 
   deleteClipboard: () =>
     set((state) => {
-      for(const list of  Object.values(state.blockIds)){
+      for (const list of Object.values(state.blockIds)) {
         list.length = 0;
       }
       state.blocksById = {}

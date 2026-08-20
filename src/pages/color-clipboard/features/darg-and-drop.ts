@@ -55,8 +55,9 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
 
   // THIS IS SHIT
   newBlocks.unshift(paletteEntity.blockId);
-  useClipboardStore.getState().addBlock(paletteEntity, null);
-  useClipboardStore.getState().setBlockIds(newBlocks, null);
+
+  useClipboardStore.getState().addPalette(paletteEntity, [draggedBlockId, targetBlockId]);
+  // useClipboardStore.getState().setBlockIds(newBlocks, null);
 }
 
 

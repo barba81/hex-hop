@@ -77,7 +77,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
   return (
     <div ref={setCombinedRef}>
       <div
-        className={`${isDropTarget && 'outline-2 outline-accent'} h-15 w-full shrink-0 relative flex flex-row items-stretch border-2   overflow-hidden
+        className={`${isDropTarget && 'outline-2 outline-accent'} h-15 w-full shrink-0 relative flex flex-row items-stretch border-2  overflow-hidden
           ${isOpen ? 'rounded-t-md border-b-transparent' : 'rounded-md '}`}
       >
         <div ref={handleRef} className="flex items-center justify-center shrink-0">
@@ -91,32 +91,29 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
             }
           </div>
 
-          <div className="w-full h-7 flex flex-row justify-between items-center pr-2">
+          <div className="w-full h-7 flex flex-row justify-between items-center ">
             <div className="flex">
-              TAILWIND, XX
             </div>
             <div className="flex gap-2 h-full items-center  text-md">
 
               {paletteEntity.name}
               <div
                 onClick={() => togglePalette(paletteEntity.blockId)}
-                className="  w-6 h-6 flex items-center justify-center transition-transform duration-200"
-                style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }}
+                className="bg-secondary h-full   flex items-center justify-center cursor-pointer"
               >
-                <ChevronDown size={16} />
+                <ChevronDown className="transition-transform duration-200" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {isOpen ? <div className="w-full dark:bg-neutral-900/70 rounded-b-md border-2 border-t-0 p-2">
-        <div className="flex flex-col gap-2 border-neutral-700 ">
-          {
-            colorBlocksId.map((id) => (<InnerBlock blockId={id} key={id} />))
-          }
-
-        </div>
+      {isOpen && colorBlocksId.length  ? <div className="w-full dark:bg-neutral-900/70 rounded-b-md border-2 border-t-0 p-2">
+          <div className="flex flex-col gap-2 border-neutral-700 ">
+            {
+              colorBlocksId.map((id) => (<InnerBlock blockId={id} key={id} />))
+            }
+          </div>
       </div> : null}
     </div>
   );
