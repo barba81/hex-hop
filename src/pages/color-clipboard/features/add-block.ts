@@ -2,12 +2,13 @@ import { invoke } from "@tauri-apps/api/core";
 import type { ColorEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { getSmartColorName } from "./get-color-name";
-import { colorStringToData } from "../../../infrastructure/utils/color-format-changer";
+import { colorStringToData, randomColor } from "../../../infrastructure/utils/color-format-changer";
 import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
 
 export const addNewColorToClipboard = async (inputColor: string, paletteId: number | null) => {
     
-    const colorData = colorStringToData(inputColor);
+    // const colorData = colorStringToData(inputColor);
+    const colorData = randomColor();
     const name = await getSmartColorName(colorData);
     const colorId = await invoke<number>("create_color", { color: { ...colorData, name: name } });
     const colorEntity = await invoke<ColorEntity>("get_color", { colorId });

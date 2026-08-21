@@ -72,7 +72,6 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
 
   const draggedParent = sourceData.palette;
   const targetParent = targetData.palette;
-  debugger
 
   // you can create palette only in root 
   if (targetParent !== null) return;
@@ -103,19 +102,27 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
   const newPaletteBlocIds = [targetBlockId, draggedBlockId];
   // reorder them and save 
 
- await invoke("update_block_order", { reorderBlocks: [{blockId: targetBlockId, blockOrder: 1},{blockId: draggedBlockId, blockOrder: 0}] });
 
   const paletteId = await invoke<number>("create_palette", { palette: { name: "New palette", blockIds: [targetBlockId, draggedBlockId] } });
   const paletteEntity = await invoke<PaletteEntity>("get_palette", { paletteId });
-  newTargetColorBlocksBlocksBlocks.unshift(paletteEntity.blockId); // insert at position of target 
+
+  newTargetColorBlocksBlocksBlocks.splice(blockIx2, 0, paletteEntity.blockId);
+  debugger
 
   // THIS IS SHIT
   state.addBlock(paletteEntity, null);
-  state.setBlocksIds([ 
+  state.setBlocksIds([
     { blockId: newPaletteBlocIds, paletteId: paletteId },
     { blockId: newDraggedColorBlocksBlocks, paletteId: draggedParent },
     { blockId: newTargetColorBlocksBlocksBlocks, paletteId: targetParent },
-  ] );
+  ]);
+
+  const reorderBlocks = [
+    { blockId: targetBlockId, blockOrder: 1 }, { blockId: draggedBlockId, blockOrder: 0 },
+    ...reorderHelper(newDraggedColorBlocksBlocks, useClipboardStore.getState().blocksById),
+    ...reorderHelper(newTargetColorBlocksBlocksBlocks, useClipboardStore.getState().blocksById),
+  ];
+  await invoke("update_block_order", { reorderBlocks });
 }
 
 // chekc palette 
@@ -137,7 +144,7 @@ const blockInDroppable = async (sourceData: DraggableData, targetData: Draggable
   if (oldIndex === -1) return;
   newDraggedBlocks.splice(oldIndex, 1);
 
-    let newTargetColorBlocksBlocksBlocks = []
+  let newTargetColorBlocksBlocksBlocks = []
   if (draggedParent === targetParent) {
     newTargetColorBlocksBlocksBlocks = newDraggedBlocks;
   } else {

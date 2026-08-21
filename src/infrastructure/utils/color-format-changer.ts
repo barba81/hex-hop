@@ -1,6 +1,17 @@
 import type { ColorData } from "@/infrastructure/models/types";
-import { Color, formatCss, formatHex8, parse, rgb } from "culori";
+import { Color, formatCss, formatHex, formatHex8, parse, rgb } from "culori";
 import type { ColorEntity } from "../models/entity";
+
+
+export const randomColor = () => {
+  const randomHex = formatHex({
+  mode: 'rgb',
+  r: Math.random(),
+  g: Math.random(),
+  b: Math.random()
+});
+  return  colorStringToData(randomHex); 
+}
 
 
 export function colorStringToData(colorString: string){
