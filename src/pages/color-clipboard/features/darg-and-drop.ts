@@ -33,34 +33,43 @@ export const handleDragEnd = (event: DragEndEvent,) => {
 
 // push to end of palette, so closed palette 
 const blockInPalette = async (sourceData: DraggableData, targetData: DraggableData) => {
-  const draggedBlockId = sourceData.blockId;
+  const draggedId = sourceData.blockId;
+  const targetId = targetData.blockId;
 
-  const draggedParent = sourceData.palette;
-  const targetParent = targetData.palette;
+  // bug palette is carred 
+  const draggedPalette = sourceData.palette;
+  const targetPalette = targetData.palette;
 
-  if (draggedParent === targetParent) return;
+  if (draggedPalette === targetPalette) return;
+  if (draggedId === targetId) return;
+
   const state = useClipboardStore.getState();
 
-  const draggedColorBlocks = state.blockIds[draggedParent ?? rootBlockId];
-  const targetColorBlocks = state.blockIds[targetParent ?? rootBlockId] ?? [];
+  const draggedColorBlocks = state.blockIds[draggedPalette ?? rootBlockId];
+  const targetColorBlocks = state.blockIds[targetPalette ?? rootBlockId] ?? [];
 
   const newDraggedBlocks = [...draggedColorBlocks];
   const newTargetColorBlocks = [...targetColorBlocks];
-  const blockIx1 = draggedColorBlocks.indexOf(draggedBlockId);
 
+  const blockIx1 = draggedColorBlocks.indexOf(draggedId);
   newDraggedBlocks.splice(blockIx1, 1);
-  newTargetColorBlocks.push(draggedBlockId);
-  state.setBlocksIds([
-    { blockId: newDraggedBlocks, paletteId: draggedParent },
-    { blockId: newTargetColorBlocks, paletteId: targetParent }
+
+  newTargetColorBlocks.push(draggedId);
+
+  useClipboardStore.getState().setBlocksIds([
+    { blockId: newDraggedBlocks, paletteId: draggedPalette },
+    { blockId: newTargetColorBlocks, paletteId: targetPalette }
   ]);
 
-  const reorderBlocksDrag = [...reorderHelper(newDraggedBlocks, state.blocksById)];
-  const reorderBlocksTarget = [...reorderHelper(newTargetColorBlocks, state.blocksById)];
+  const reorderBlocksDrag = [
+    ...reorderHelper(newTargetColorBlocks, useClipboardStore.getState().blocksById),
+    ...reorderHelper(newDraggedBlocks, useClipboardStore.getState().blocksById),
+  ];
 
+  state.updateOrder(reorderBlocksDrag);
+
+  await invoke("update_blocks_parent", { paletteId: targetPalette, blockIds: [draggedId] });
   await invoke("update_block_order", { reorderBlocks: reorderBlocksDrag });
-  await invoke("update_block_order", { reorderBlocks: reorderBlocksTarget });
-  await invoke("update_blocks_parent", { paletteId: targetParent, blockIds: [draggedBlockId] });
 }
 
 // create new palette, the just need to be not in palette
@@ -107,7 +116,6 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
   const paletteEntity = await invoke<PaletteEntity>("get_palette", { paletteId });
 
   newTargetColorBlocksBlocksBlocks.splice(blockIx2, 0, paletteEntity.blockId);
-  debugger
 
   // THIS IS SHIT
   state.addBlock(paletteEntity, null);
@@ -118,10 +126,14 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
   ]);
 
   const reorderBlocks = [
-    { blockId: targetBlockId, blockOrder: 1 }, { blockId: draggedBlockId, blockOrder: 0 },
+    { blockId: targetBlockId, blockOrder: 2 }, { blockId: draggedBlockId, blockOrder: 1 },
     ...reorderHelper(newDraggedColorBlocksBlocks, useClipboardStore.getState().blocksById),
     ...reorderHelper(newTargetColorBlocksBlocksBlocks, useClipboardStore.getState().blocksById),
   ];
+
+  state.updateOrder(reorderBlocks);
+  console.log(reorderBlocks)
+
   await invoke("update_block_order", { reorderBlocks });
 }
 
@@ -174,12 +186,11 @@ const blockInDroppable = async (sourceData: DraggableData, targetData: Draggable
 
 export type ReorderBlock = { blockId: number, blockOrder: number };
 
-const reorderHelper = (blockId: number[], blocksById: Record<number, BlockEntity>) => {
+const reorderHelper = (blockIds: number[], blocksById: Record<number, BlockEntity>) => {
   const ids: ReorderBlock[] = [];
+  for (const [ix, id] of blockIds.entries()) {
 
-  for (const [ix, id] of blockId.entries()) {
-
-    const order = blockId.length - ix;
+    const order = blockIds.length - ix;
 
     if (blocksById[id].blockOrder !== order) {
       ids.push({ blockId: id, blockOrder: order });

@@ -1,6 +1,7 @@
 import type { BlockEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
+import { ReorderBlock } from "../features/darg-and-drop";
 
 const defaultInputColor = "#3b82f6";
 export const rootBlockId = -1;
@@ -46,7 +47,7 @@ interface ClipboardAction {
   setFormat: (color: string) => void;
   togglePalette: (paletteId: number) => void;
   setEditBlock: (blockId: number | null) => void;
-
+  updateOrder: (blocks: ReorderBlock[]) => void;
   setBlocksIds: (blocks: {blockId: number[], paletteId: number | null}[]) => void;
 }
 
@@ -80,10 +81,23 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
       }
     }),
 
+    updateOrder: (blocks) =>
+    set(state => {
+      for(const block of blocks){
+        state.blocksById[block.blockId].blockOrder = block.blockOrder;
+      }
+    }),
+
   setBlocksIds: (blocks) =>
     set(state => {
       for(const block of blocks){
         state.blockIds[block.paletteId ?? rootBlockId] = block.blockId;
+        for(const bb of block.blockId){
+          const b =  state.blocksById[bb];
+          if ( b.kind !== 'palette'){
+            b.parentPaletteId = block.paletteId;
+          }
+        }
       }
     }),
 
