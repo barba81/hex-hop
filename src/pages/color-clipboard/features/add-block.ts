@@ -6,7 +6,7 @@ import { colorStringToData } from "../../../infrastructure/utils/color-format-ch
 import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
 
 export const addNewColorToClipboard = async (inputColor: string, paletteId: number | null) => {
-
+    
     const colorData = colorStringToData(inputColor);
     const name = await getSmartColorName(colorData);
     const colorId = await invoke<number>("create_color", { color: { ...colorData, name: name } });

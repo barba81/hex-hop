@@ -11,7 +11,7 @@ export const addNewGradient = async () => {
     gradientId: gradientId,
   });
   useGradientStore.getState().addGradient(gradient);
-  useClipboardStore.getState().addBlock(gradient);
+  useClipboardStore.getState().addBlock(gradient, null);
 };
 
 export const addNewLayer = async (gradientId: number) => {

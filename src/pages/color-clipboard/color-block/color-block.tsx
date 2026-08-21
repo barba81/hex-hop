@@ -8,7 +8,6 @@ import { deleteColorBlock } from "../features/delete-block";
 import { useClipboardStore } from "../store/use-clipboard-store";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import { DraggableData } from "../features/darg-and-drop";
-import CopyLogo from "../color-list/copy-button";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity
