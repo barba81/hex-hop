@@ -15,7 +15,7 @@ type ColorBlockViewParams = {
 
 };
 
-const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
+const ColorBlockOutline = ({ colorEntity }: ColorBlockViewParams) => {
     const { isDropTarget, ref: dropRef } = useDroppable<DraggableData>({
         id: `darg:${colorEntity.blockId}`,
         data: {
@@ -45,7 +45,7 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
     return <ContextMenu>
         <ContextMenuTrigger>
 
-            <div ref={setCombinedRef} className={`${isDropTarget && 'outline-2 outline-accent'} ${isDragging && 'opacity-50'} h-15 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
+            <div ref={setCombinedRef} className={`${isDropTarget && 'outline-2 outline-accent'} ${isDragging && 'opacity-50'} h-10 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
                 <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer`}>
                     <DragDots />
                 </div>
@@ -97,5 +97,5 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
 
 }
 
-export default ColorBlock;
+export default ColorBlockOutline;
 

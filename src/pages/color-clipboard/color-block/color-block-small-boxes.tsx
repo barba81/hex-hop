@@ -45,24 +45,25 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
     return <ContextMenu>
         <ContextMenuTrigger>
 
-            <div ref={setCombinedRef} className={`${isDropTarget && 'outline-2 outline-accent'} ${isDragging && 'opacity-50'} h-15 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
+            <div ref={setCombinedRef} className={`${isDropTarget && 'outline-2 outline-accent'} ${isDragging && 'opacity-50'} h-9 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
                 <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer`}>
                     <DragDots />
                 </div>
-                <div className={`w-full flex flex-col justify-between overflow-hidden bg-background  `}>
-                    <div className={`flex-1 bg-checkerboard`}>
+                <div className={`w-full  flex justify-between overflow-hidden bg-background  `}>
+                    <div className={` w-9  bg-checkerboard`}>
                         <div className="w-full h-full" style={{
                             backgroundColor: backgroundCss
                         }} />
                     </div>
-                    <div className="p-0.5 flex flex-row justify-between pr-2">
+                    <div className="p-0.5 flex-1 flex flex-row justify-between pr-2">
                         <div className="flex">
                             <CopyLogo color={colorEntity} fontClass={"white"} /> 
                         </div>
-                        <div className="flex gap-2 h-full items-center ">
+                        <div className="flex gap-2 h-full items-center   w-27">
                             {colorEntity.name}
                         </div>
                     </div>
+                    
                 </div>
             </div>
 
