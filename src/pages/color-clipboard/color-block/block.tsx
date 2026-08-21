@@ -5,6 +5,8 @@ import PaletteBlock from "./palette-block";
 import GradientBlock from "./gradient-block";
 import ColorBlockOutline from "./color-block-outline";
 import ColorBlockSmallBoxes from "./color-block-small-boxes";
+import PaletteBlockEdit from "./palette-block-edit";
+import GradientBlockEdit from "./gradient-block-edit";
 
 type ColorBoxParams = {
     blockId: number
@@ -22,21 +24,17 @@ const Block = ({ blockId }: ColorBoxParams) => {
     switch (block.kind) {
         case "color":
             return (
-                isEditing ? <ColorBlockEdit colorEntity={block} /> : <ColorBlock  colorEntity={block} />
+                isEditing ? <ColorBlockEdit colorEntity={block} /> : <ColorBlockSmallBoxes colorEntity={block} />
             );
 
         case "palette":
             return (
-                <PaletteBlock
-                    paletteEntity={block}
-                />
+                isEditing ? <PaletteBlockEdit paletteEntity={block} /> : <PaletteBlock paletteEntity={block} />
             );
 
         case "gradient":
             return (
-                <GradientBlock
-                    gradientEntity={block}
-                />
+                isEditing ? <GradientBlockEdit gradientEntity={block} /> : <GradientBlock gradientEntity={block} />
             );
 
         default:
