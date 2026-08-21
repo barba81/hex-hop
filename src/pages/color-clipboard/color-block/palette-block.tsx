@@ -115,8 +115,8 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
           </div>
         </div>
 
-        {isOpen && colorBlocksId.length ? <div className="w-full dark:bg-neutral-900/70 rounded-b-md border-2 border-t-0 p-2">
-          <div className="flex flex-col gap-1 border-neutral-700 ">
+        {isOpen && colorBlocksId.length ? <div className="w-full dark:bg-neutral-900/70 rounded-b-md border-2 border-t-0 px-1">
+          <div className="flex flex-col gap-0.5 border-neutral-700 ">
             <DroppableLine id={`drop:start:${paletteEntity.id}`} blockId={-1} key='drop:start' palette={paletteEntity.id} />
             {
 

@@ -2,6 +2,8 @@ import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-s
 import ColorBlockEdit from "./color-block-edit";
 import ColorBlock from "./color-block";
 import GradientBlock from "./gradient-block";
+import ColorBlockSmall from "./color-block-small-boxes";
+import GradientBlockSmall from "./gradient-block-small";
 
 type ColorBoxParams = {
     blockId: number
@@ -19,12 +21,12 @@ const InnerBlock = ({ blockId }: ColorBoxParams) => {
     switch (block.kind) {
         case "color":
             return (
-                isEditing ? <ColorBlockEdit colorEntity={block} /> : <ColorBlock  colorEntity={block} />
+                isEditing ? <ColorBlockEdit colorEntity={block} /> : <ColorBlockSmall  colorEntity={block} />
             );
 
         case "gradient":
             return (
-                <GradientBlock
+                <GradientBlockSmall 
                     gradientEntity={block}
                 />
             );
