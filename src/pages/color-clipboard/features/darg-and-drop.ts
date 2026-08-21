@@ -145,10 +145,11 @@ const blockInDroppable = async (sourceData: DraggableData, targetData: Draggable
   if (draggedId === targetId) return;
 
   const state = useClipboardStore.getState();
-  const draggedParent = sourceData.palette;
-  const targetParent = targetData.palette;
+  const draggedParent = sourceData.kind === 'palette' ? null: sourceData.palette;
+
+  const targetParent =  targetData.palette; 
   const draggedColorBlocks = state.blockIds[draggedParent ?? rootBlockId];
-  const targetColorBlocks = state.blockIds[targetId ?? rootBlockId];
+  const targetColorBlocks = state.blockIds[targetParent ?? rootBlockId];
 
   const newDraggedBlocks = [...draggedColorBlocks];
 
@@ -165,19 +166,22 @@ const blockInDroppable = async (sourceData: DraggableData, targetData: Draggable
 
 
   if (targetId === -1) {
-    newDraggedBlocks.splice(0, 0, draggedId);
+    newTargetColorBlocksBlocksBlocks.splice(0, 0, draggedId);
   } else {
-    const targetIndex = newDraggedBlocks.indexOf(targetId);
+    const targetIndex = newTargetColorBlocksBlocksBlocks.indexOf(targetId);
     if (targetIndex === -1) return;
-    const newTargetIndex = newDraggedBlocks.indexOf(targetId);
-    newDraggedBlocks.splice(newTargetIndex + 1, 0, draggedId);
+    const newTargetIndex = newTargetColorBlocksBlocksBlocks.indexOf(targetId);
+    newTargetColorBlocksBlocksBlocks.splice(newTargetIndex + 1, 0, draggedId);
   }
 
-  state.setBlocksIds([{ blockId: newDraggedBlocks, paletteId: draggedParent }]);
-
+  state.setBlocksIds([{ blockId: newDraggedBlocks, paletteId: draggedParent }, {blockId: newTargetColorBlocksBlocksBlocks, paletteId: targetParent}]);
+  
   try {
-    const reorderBlocks = [...reorderHelper(newDraggedBlocks, state.blocksById)];
+      await invoke("update_blocks_parent", { paletteId: targetParent, blockIds: [draggedId] });
+
+    const reorderBlocks = [...reorderHelper(newDraggedBlocks, useClipboardStore.getState().blocksById), ...reorderHelper(newTargetColorBlocksBlocksBlocks, useClipboardStore.getState().blocksById)];
     await invoke("update_block_order", { reorderBlocks });
+    state.updateOrder(reorderBlocks);
   } catch (error) {
     console.error("Failed to save order to DB:", error);
     state.setBlocksIds([{ blockId: draggedColorBlocks, paletteId: draggedParent }]);

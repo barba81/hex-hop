@@ -1,13 +1,13 @@
 import { useDroppable } from "@dnd-kit/react";
 import { DraggableData } from "../features/darg-and-drop";
 
-const  DroppableLine= ({ id, blockId }: { blockId: number, id: string, palette: number | null }) => {
+const  DroppableLine= ({ id, blockId, palette }: { blockId: number, id: string, palette: number | null }) => {
   const { isDropTarget, ref } = useDroppable<DraggableData>({
     id,
     data: {
       blockId: blockId,
       kind: "droppable",
-      palette: null
+      palette: palette
     }
   });
 
