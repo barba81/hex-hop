@@ -11,7 +11,6 @@ import InnerBlock from "./inner-block";
 import DroppableLine from "../color-list/droppable";
 import React from "react";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
-import { deleteColorBlock } from "../features/delete-block";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity

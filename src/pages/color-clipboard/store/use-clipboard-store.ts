@@ -1,7 +1,6 @@
 import type { BlockEntity, ColorEntity, GradientEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { ReorderBlock } from "../features/darg-and-drop";
 
 const defaultInputColor = "#3b82f6";
 export const rootBlockId = -1;

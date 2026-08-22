@@ -1,9 +1,6 @@
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import ColorBlockEdit from "./color-block-edit";
-import ColorBlock from "./color-block";
 import PaletteBlock from "./palette-block";
-import GradientBlock from "./gradient-block";
-import ColorBlockOutline from "./color-block-outline";
 import ColorBlockSmallBoxes from "./color-block-small-boxes";
 import PaletteBlockEdit from "./palette-block-edit";
 import GradientBlockEdit from "./gradient-block-edit";
