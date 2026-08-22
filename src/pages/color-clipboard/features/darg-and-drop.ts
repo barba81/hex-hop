@@ -167,7 +167,6 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
   const { ids: id2, oldIds: oldIds2 } = reorderHelper2(targetBlocks, updateState.blocksById);
 
   const reorderBlocks = [
-    { blockId: targetBlockId, blockOrder: 2 }, { blockId: draggedBlockId, blockOrder: 1 },
     ...id1, ...id2
   ];
   const oldReorderBlocks = [...oldIds1, ...oldIds2];
@@ -198,12 +197,11 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
 
     },
     async redo() {
-      debugger;
       await invoke("restore_block", { blockId: paletteEntity.blockId });
       const entity = await invoke<PaletteEntity>("get_palette", { paletteId });
       await invoke("update_block_order", { reorderBlocks });
-      await invoke("update_blocks_parent", { paletteId: targetParentId, blockIds: [targetBlockId, draggedBlockId] });
-
+      await invoke("update_blocks_parent", { paletteId: paletteId, blockIds: [targetBlockId, draggedBlockId] });
+      
       state.insertPalette(entity, [targetBlockId, draggedBlockId], targetIx);
       state.reorderBlocks([
         { blockId: newPaletteBlocIds, paletteId: paletteId },
