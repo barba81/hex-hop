@@ -128,8 +128,11 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
 
   const draggedColorBlocks = state.blockIds[draggedParentId ?? rootBlockId];
   const targetColorBlocks = state.blockIds[targetParentId ?? rootBlockId];
+  const root = [...state.blockIds[rootBlockId]];
 
   const sourceBlocks = [...draggedColorBlocks];
+  const oldSourceBlocks = [...draggedColorBlocks];
+  const oldTargetBlocks = [...targetColorBlocks];
 
   // this shit is if there are from same 
   let targetBlocks = []
@@ -158,12 +161,16 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
   targetBlocks.splice(targetIx, 0, paletteEntity.blockId);
 
   // THIS IS SHIT
+  const updateState = useClipboardStore.getState();
+
+  const { ids: id1, oldIds: oldIds1 } = reorderHelper2(sourceBlocks, updateState.blocksById);
+  const { ids: id2, oldIds: oldIds2 } = reorderHelper2(targetBlocks, updateState.blocksById);
 
   const reorderBlocks = [
     { blockId: targetBlockId, blockOrder: 2 }, { blockId: draggedBlockId, blockOrder: 1 },
-    ...reorderHelper(sourceBlocks, useClipboardStore.getState().blocksById),
-    ...reorderHelper(targetBlocks, useClipboardStore.getState().blocksById),
+    ...id1, ...id2
   ];
+  const oldReorderBlocks = [...oldIds1, ...oldIds2];
 
   state.reorderBlocks([
     { blockId: newPaletteBlocIds, paletteId: paletteId },
@@ -172,6 +179,40 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
   ]);
 
   await invoke("update_block_order", { reorderBlocks });
+
+
+  useColorListCommands.getState().push({
+    async undo() {
+
+      await invoke("soft_delete_block", { blockId: paletteEntity.blockId });
+      await invoke("update_blocks_parent", { paletteId: draggedParentId, blockIds: [draggedBlockId] });
+      await invoke("update_blocks_parent", { paletteId: targetParentId, blockIds: [targetBlockId] });
+      await invoke("update_block_order", { reorderBlocks: oldReorderBlocks });
+
+      useClipboardStore.getState().deleteBlock(paletteEntity.blockId, null);
+      state.reorderBlocks([
+        { blockId: root, paletteId: null },
+        { blockId: oldSourceBlocks, paletteId: draggedParentId },
+        { blockId: oldTargetBlocks, paletteId: targetParentId },
+      ]);
+
+    },
+    async redo() {
+      debugger;
+      await invoke("restore_block", { blockId: paletteEntity.blockId });
+      const entity = await invoke<PaletteEntity>("get_palette", { paletteId });
+      await invoke("update_block_order", { reorderBlocks });
+      await invoke("update_blocks_parent", { paletteId: targetParentId, blockIds: [targetBlockId, draggedBlockId] });
+
+      state.insertPalette(entity, [targetBlockId, draggedBlockId], targetIx);
+      state.reorderBlocks([
+        { blockId: newPaletteBlocIds, paletteId: paletteId },
+        { blockId: sourceBlocks, paletteId: draggedParentId },
+        { blockId: targetBlocks, paletteId: targetParentId },
+      ]);
+    },
+  });
+
 }
 // push to end of palette, so closed palette 
 const blockInPalette = async (sourceData: DraggableData, targetData: DraggableData) => {
@@ -251,7 +292,6 @@ const reorderHelper = (blockIds: number[], blocksById: Record<number, BlockEntit
   }
   return ids;
 }
-
 
 const reorderHelper2 = (blockIds: number[], blocksById: Record<number, BlockEntity>) => {
   const ids: ReorderBlock[] = [];
