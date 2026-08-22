@@ -31,6 +31,6 @@ export const addNewColorToClipboard = async (inputColor: string, paletteId: numb
 export const addNewPalette = async (blockIds: number[]) => {
     const paletteId = await invoke("create_palette", { palette: { name: "New palette", blockIds } });
     const paletteEntity = await invoke<PaletteEntity>("get_palette", { paletteId });
-    useClipboardStore.getState().pushBlock(paletteEntity, null);
+    useClipboardStore.getState().pushPalette(paletteEntity, []);
     return paletteId;
 }
