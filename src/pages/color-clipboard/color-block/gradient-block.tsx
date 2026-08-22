@@ -5,7 +5,7 @@ import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator,
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { deleteGradientBlock } from "../features/delete-block";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
-import { DraggableData } from "../features/darg-and-drop";
+import type { DraggableData } from "../features/darg-and-drop";
 
 type GradientBoxParams = {
     gradientEntity: GradientEntity

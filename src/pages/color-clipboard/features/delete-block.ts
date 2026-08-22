@@ -1,5 +1,5 @@
 import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
-import { BlockEntity, ColorEntity } from "@/infrastructure/models/entity";
+import type { BlockEntity, ColorEntity } from "@/infrastructure/models/entity";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { invoke } from "@tauri-apps/api/core";
 

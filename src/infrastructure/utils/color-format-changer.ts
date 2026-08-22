@@ -1,5 +1,6 @@
 import type { ColorData } from "@/infrastructure/models/types";
-import { Color, formatCss, formatHex, formatHex8, parse, rgb } from "culori";
+import type { Color} from "culori";
+import { formatCss, formatHex, formatHex8, parse, rgb } from "culori";
 import type { ColorEntity } from "../models/entity";
 
 

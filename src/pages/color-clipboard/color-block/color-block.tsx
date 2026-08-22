@@ -7,7 +7,7 @@ import { duplicateBlock } from "../features/duplicate-block";
 import { deleteColorBlock } from "../features/delete-block";
 import { useClipboardStore } from "../store/use-clipboard-store";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
-import { DraggableData } from "../features/darg-and-drop";
+import type { DraggableData } from "../features/darg-and-drop";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity

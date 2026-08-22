@@ -4,7 +4,7 @@ import type { PaletteEntity } from "@/infrastructure/models/entity";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import { ChevronDown, Pen, Trash2 } from "lucide-react";
-import { DraggableData } from "../features/darg-and-drop";
+import type { DraggableData } from "../features/darg-and-drop";
 import { coloBackground } from "@/infrastructure/utils/color-format-changer";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
 import InnerBlock from "./inner-block";
