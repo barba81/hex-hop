@@ -1,4 +1,4 @@
-export const Input = (props: React.InputHTMLAttributes<HTMLInputElement>) => (
+export const CustomInput = (props: React.InputHTMLAttributes<HTMLInputElement>) => (
   <input
     {...props}
     className={`${baseInputClass} ${props.className || ''}`}

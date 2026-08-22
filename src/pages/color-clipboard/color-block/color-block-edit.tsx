@@ -3,8 +3,8 @@ import { colorEntityToColor, colorEntityToRoundedEntity, hexaToRgbaNormalized, t
 import { Check, RefreshCw, X } from "lucide-react";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
 import { updateColorBlock } from "../features/update-block";
-import { Input } from "@/components/common/micro-input";
-import { defaultButtonBackground } from "@/components/common/micro-button";
+import { CustomInput } from "@/components/common/custom-input";
+import { defaultButtonBackground } from "@/components/common/custom-button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { HexAlphaColorPicker } from "react-colorful";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -105,7 +105,7 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                                     <span className={`absolute left-1.5 text-[10px] font-bold select-none pointer-events-none ${channel.color}`}>
                                         {channel.label}
                                     </span>
-                                    <Input
+                                    <CustomInput
                                         name={channel.key}
                                         onChange={(e) => handleChange(e)}
                                         type="number"
@@ -123,7 +123,7 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                         <div className="flex-1 " >
                             <div className="flex-1">
                                 <div className="relative flex items-center w-full">
-                                    <Input
+                                    <CustomInput
                                         type="text"
                                         name="name"
                                         onChange={handleChange}

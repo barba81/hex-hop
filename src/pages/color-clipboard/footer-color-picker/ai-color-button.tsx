@@ -1,7 +1,7 @@
 import { Astroid } from "lucide-react";
 import { addNewColorToClipboard } from "../features/add-block";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
-import { defaultButtonBackground } from "@/components/common/micro-button";
+import { defaultButtonBackground } from "@/components/common/custom-button";
 
 const AiColorButton = () => {
     const inputColor = useClipboardStore((state) => state.inputColor);

@@ -1,9 +1,9 @@
-import { Input } from "@/components/common/micro-input";
+import { CustomInput } from "@/components/common/custom-input";
 import { PaletteEntity } from "@/infrastructure/models/entity";
 import { Check, X } from "lucide-react";
 import { useClipboardStore } from "../store/use-clipboard-store";
 import { ChangeEvent, useState } from "react";
-import { defaultButtonBackground } from "@/components/common/micro-button";
+import { defaultButtonBackground } from "@/components/common/custom-button";
 import { updatePaletteBlock } from "../features/update-block";
 
 type PaletteBlockEditParams = {
@@ -29,7 +29,7 @@ const PaletteBlockEdit = ({ paletteEntity }: PaletteBlockEditParams) => {
         <div className={`w-full flex flex-col justify-between overflow-hidden bg-background p-2 `}>
 
             <div className="flex justify-end items-end gap-3">
-                <Input type="text"
+                <CustomInput type="text"
                     name="name"
                     onChange={handleChange}
 

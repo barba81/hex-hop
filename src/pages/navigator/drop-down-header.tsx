@@ -17,7 +17,7 @@ import {
 import { useLocation, useNavigate } from "react-router";
 
 import GradientIcon from "@/components/icons/gradient-icon";
-import { defaultButtonBackground } from "@/components/common/micro-button";
+import { defaultButtonBackground } from "@/components/common/custom-button";
 
 const size = 15;
 
