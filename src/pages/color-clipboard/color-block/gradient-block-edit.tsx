@@ -4,7 +4,7 @@ import { ChangeEvent, useState } from "react";
 import { Check, X } from "lucide-react";
 import { MicroInput } from "@/components/common/micro-input";
 import { defaultButtonBackground } from "@/components/common/micro-button";
-import { updateGradientBlock, updatePaletteBlock } from "../features/update-block";
+import { updateGradientBlock } from "../features/update-block";
 
 type GradientBlockEditParams = {
     gradientEntity: GradientEntity
