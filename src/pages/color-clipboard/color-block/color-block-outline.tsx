@@ -57,7 +57,7 @@ const ColorBlockOutline = ({ colorEntity }: ColorBlockViewParams) => {
                     </div>
                     <div className="p-0.5 flex flex-row justify-between pr-2">
                         <div className="flex">
-                            <CopyLogo color={colorEntity} fontClass={"white"} /> 
+                            {/* <CopyLogo color={colorEntity} fontClass={"white"} />  */}
                         </div>
                         <div className="flex gap-2 h-full items-center ">
                             {colorEntity.name}

@@ -11,7 +11,7 @@ export const deleteColorBlock = async (blockId: number, colorId: number, palette
         async undo() {
             await invoke("restore_block", { blockId });
             const entity = await invoke<ColorEntity>("get_color", { colorId: colorId });
-            useClipboardStore.getState().addBlock(entity, null);
+            useClipboardStore.getState().pushBlock(entity, null);
         },
         async redo() {
             await invoke("soft_delete_block", { blockId: blockId });
@@ -28,7 +28,7 @@ export const deleteGradientBlock = async (blockId: number, gradientId: number, p
         async undo() {
             await invoke("restore_block", { blockId });
             const entity = await invoke<ColorEntity>("get_gradient", { gradientId });
-            useClipboardStore.getState().addBlock(entity, null);
+            useClipboardStore.getState().pushBlock(entity, null);
         },
         async redo() {
             await invoke("soft_delete_block", { blockId: blockId });

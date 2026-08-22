@@ -24,6 +24,8 @@ export const handleDragEnd = (event: DragEndEvent,) => {
   const sourceData = source.data as DraggableData;
   const targetData = target.data as DraggableData;
 
+  if (sourceData.blockId === targetData.blockId) return;
+
   if ((sourceData.kind === 'block' || sourceData.kind === 'palette') && targetData.kind === 'droppable') {
     blockInDroppable(sourceData, targetData);
   } else if (sourceData.kind === 'block' && targetData.kind === 'block') {
@@ -33,115 +35,10 @@ export const handleDragEnd = (event: DragEndEvent,) => {
   }
 };
 
-// push to end of palette, so closed palette 
-const blockInPalette = async (sourceData: DraggableData, targetData: DraggableData) => {
-  const draggedId = sourceData.blockId;
-  const targetId = targetData.blockId;
-
-  // bug palette is carred 
-  const draggedPalette = sourceData.palette;
-  const targetPalette = targetData.palette;
-
-  if (draggedPalette === targetPalette) return;
-  if (draggedId === targetId) return;
-
-  const state = useClipboardStore.getState();
-
-  const draggedColorBlocks = state.blockIds[draggedPalette ?? rootBlockId];
-  const targetColorBlocks = state.blockIds[targetPalette ?? rootBlockId] ?? [];
-
-  const newDraggedBlocks = [...draggedColorBlocks];
-  const newTargetColorBlocks = [...targetColorBlocks];
-
-  const blockIx1 = draggedColorBlocks.indexOf(draggedId);
-  newDraggedBlocks.splice(blockIx1, 1);
-
-  newTargetColorBlocks.push(draggedId);
-
-  const reorderBlocksDrag = [
-    ...reorderHelper(newTargetColorBlocks, useClipboardStore.getState().blocksById),
-    ...reorderHelper(newDraggedBlocks, useClipboardStore.getState().blocksById),
-  ];
-
-  state.reorderBlocks([
-    { blockId: newDraggedBlocks, paletteId: draggedPalette },
-    { blockId: newTargetColorBlocks, paletteId: targetPalette }
-  ]);
-
-  await invoke("update_blocks_parent", { paletteId: targetPalette, blockIds: [draggedId] });
-  await invoke("update_block_order", { reorderBlocks: reorderBlocksDrag });
-}
-
-// create new palette, the just need to be not in palette
-const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData) => {
-  const draggedBlockId = sourceData.blockId;
-  const targetBlockId = targetData.blockId;
-
-  if (draggedBlockId === targetBlockId) return;
-
-  const draggedParent = sourceData.palette;
-  const targetParent = targetData.palette;
-
-  // you can create palette only in root 
-  if (targetParent !== null) return;
-
-  const state = useClipboardStore.getState();
-
-  const draggedColorBlocks = state.blockIds[draggedParent ?? rootBlockId];
-  const targetColorBlocks = state.blockIds[targetParent ?? rootBlockId];
-
-  const newDraggedColorBlocksBlocks = [...draggedColorBlocks];
-
-  // this shit is if there are from same 
-  let newTargetColorBlocksBlocksBlocks = []
-  if (draggedParent === targetParent) {
-    newTargetColorBlocksBlocksBlocks = newDraggedColorBlocksBlocks;
-  } else {
-    newTargetColorBlocksBlocksBlocks = [...targetColorBlocks];
-  }
-
-
-  // remove them form draggedBlockId
-  const blockIx1 = newDraggedColorBlocksBlocks.indexOf(draggedBlockId);
-  newDraggedColorBlocksBlocks.splice(blockIx1, 1);
-
-  const blockIx2 = newTargetColorBlocksBlocksBlocks.indexOf(targetBlockId);
-  newTargetColorBlocksBlocksBlocks.splice(blockIx2, 1);
-  // create nwe bloc
-  const newPaletteBlocIds = [targetBlockId, draggedBlockId];
-
-  // create palette and insert into the new list 
-  const paletteId = await invoke<number>("create_palette", { palette: { name: "New palette", blockIds: [targetBlockId, draggedBlockId] } });
-  const paletteEntity = await invoke<PaletteEntity>("get_palette", { paletteId });
-  
-  state.addBlock(paletteEntity, null);
-
-  newTargetColorBlocksBlocksBlocks.splice(blockIx2, 0, paletteEntity.blockId);
-
-  // THIS IS SHIT
-
-  const reorderBlocks = [
-    { blockId: targetBlockId, blockOrder: 2 }, { blockId: draggedBlockId, blockOrder: 1 },
-    ...reorderHelper(newDraggedColorBlocksBlocks, useClipboardStore.getState().blocksById),
-    ...reorderHelper(newTargetColorBlocksBlocksBlocks, useClipboardStore.getState().blocksById),
-  ];
-
-  state.reorderBlocks([
-    { blockId: newPaletteBlocIds, paletteId: paletteId },
-    { blockId: newDraggedColorBlocksBlocks, paletteId: draggedParent },
-    { blockId: newTargetColorBlocksBlocksBlocks, paletteId: targetParent },
-  ]);
-
-  await invoke("update_block_order", { reorderBlocks });
-}
-
 // chekc palette 
 const blockInDroppable = async (sourceData: DraggableData, targetData: DraggableData) => {
   const draggedId = sourceData.blockId;
   const targetId = targetData.blockId;
-
-  if (draggedId === targetId) return;
-
   const state = useClipboardStore.getState();
   const draggedParent = sourceData.kind === 'palette' ? null : sourceData.palette;
 
@@ -152,6 +49,7 @@ const blockInDroppable = async (sourceData: DraggableData, targetData: Draggable
   const newDraggedBlocks = [...draggedColorBlocks];
 
   const oldIndex = newDraggedBlocks.indexOf(draggedId);
+
   if (oldIndex === -1) return;
   newDraggedBlocks.splice(oldIndex, 1);
 
@@ -182,6 +80,91 @@ const blockInDroppable = async (sourceData: DraggableData, targetData: Draggable
     console.error("Failed to save order to DB:", error);
     state.reorderBlocks([{ blockId: draggedColorBlocks, paletteId: draggedParent }]);
   }
+}
+
+const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData) => {
+  const draggedBlockId = sourceData.blockId;
+  const targetBlockId = targetData.blockId;
+  const sourceParentId = sourceData.palette ?? rootBlockId;
+  const targetParentId = targetData.palette ?? rootBlockId;
+
+  if (targetParentId !== rootBlockId) return;
+
+  const state = useClipboardStore.getState();
+
+  const isSameParent = sourceParentId === targetParentId;
+
+  const sourceBlocks = [...(state.blockIds[sourceParentId] ?? [])];
+  const targetBlocks = isSameParent ? sourceBlocks : [...(state.blockIds[targetParentId] ?? [])];
+
+  // remove them form draggedBlockId
+  const dropIx = sourceBlocks.indexOf(draggedBlockId);
+  sourceBlocks.splice(dropIx, 1);
+
+  const targetIx = targetBlocks.indexOf(targetBlockId);
+  targetBlocks.splice(targetIx, 1);
+
+  // create palette and insert into the new list 
+
+  const paletteId = await invoke<number>("create_palette", { palette: { name: "New palette", blockIds: [targetBlockId, draggedBlockId] } });
+  const paletteEntity = await invoke<PaletteEntity>("get_palette", { paletteId });
+
+  state.insertPalette(paletteEntity, [targetBlockId, draggedBlockId], targetIx);
+  targetBlocks.splice(targetIx, 0, paletteEntity.blockId);
+
+  state.reorderBlocks([
+    { blockId: sourceBlocks, paletteId: sourceParentId },
+    { blockId: targetBlocks, paletteId: targetBlockId },
+  ]);
+
+  const updatedState = useClipboardStore.getState();
+  const reorderBlocks = [
+    { blockId: targetBlockId, blockOrder: 2 }, { blockId: draggedBlockId, blockOrder: 1 },
+    ...reorderHelper(sourceBlocks, updatedState.blocksById),
+    ...reorderHelper(targetBlocks, updatedState.blocksById),
+  ];
+
+  await invoke("update_block_order", { reorderBlocks });
+}
+
+// push to end of palette, so closed palette 
+const blockInPalette = async (sourceData: DraggableData, targetData: DraggableData) => {
+  const draggedId = sourceData.blockId;
+
+  // bug palette is carred 
+  const draggedPalette = sourceData.palette;
+  const targetPalette = targetData.palette;
+
+  if (draggedPalette === targetPalette) return;
+
+  const state = useClipboardStore.getState();
+
+  const draggedColorBlocks = state.blockIds[draggedPalette ?? rootBlockId];
+  const targetColorBlocks = state.blockIds[targetPalette ?? rootBlockId] ?? [];
+
+  const newDraggedBlocks = [...draggedColorBlocks];
+  const newTargetColorBlocks = [...targetColorBlocks];
+
+  const blockIx1 = draggedColorBlocks.indexOf(draggedId);
+  newDraggedBlocks.splice(blockIx1, 1);
+
+  newTargetColorBlocks.push(draggedId);
+
+  const reorderBlocksDrag = [
+    ...reorderHelper(newTargetColorBlocks, useClipboardStore.getState().blocksById),
+    ...reorderHelper(newDraggedBlocks, useClipboardStore.getState().blocksById),
+  ];
+
+  state.reorderBlocks([
+    { blockId: newDraggedBlocks, paletteId: draggedPalette },
+    { blockId: newTargetColorBlocks, paletteId: targetPalette }
+  ]);
+
+  await invoke("update_blocks_parent", { paletteId: targetPalette, blockIds: [draggedId] });
+  await invoke("update_block_order", { reorderBlocks: reorderBlocksDrag });
+
+
+  
 }
 
 // need to get old and new order delta

@@ -9,7 +9,7 @@ export const duplicateBlock = async (colorData: ColorEntity) => {
     const blockId = colorEntity.blockId;
     const paletteId = colorEntity.parentPaletteId;
 
-    useClipboardStore.getState().addBlock(colorEntity, paletteId);
+    useClipboardStore.getState().pushBlock(colorEntity, paletteId);
 
     useColorListCommands.getState().push({
         async undo() {
@@ -19,7 +19,7 @@ export const duplicateBlock = async (colorData: ColorEntity) => {
         async redo() {
             await invoke("restore_block", { blockId });
             const entity = await invoke<ColorEntity>("get_color", { colorId });
-            useClipboardStore.getState().addBlock(entity, paletteId);
+            useClipboardStore.getState().pushBlock(entity, paletteId);
         },
     });
     

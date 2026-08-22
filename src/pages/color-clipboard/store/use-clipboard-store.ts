@@ -1,4 +1,4 @@
-import type { BlockEntity, PaletteEntity } from "@/infrastructure/models/entity";
+import type { BlockEntity, ColorEntity, GradientEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { ReorderBlock } from "../features/darg-and-drop";
@@ -27,8 +27,9 @@ interface ClipboardAction {
 
   // CREATE -----------------------------------------------------------------------
 
-  addBlock: (block: BlockEntity, paletteId: number | null) => void;
-  addPalette: (palette: PaletteEntity, blockId: number[]) => void;
+  pushBlock: (block: ColorEntity | GradientEntity, paletteId: number | null) => void;
+  pushPalette: (palette: PaletteEntity, blockId: number[]) => void;
+  insertPalette: (palette: PaletteEntity, blockId: number[], ix: number) => void;
 
   // UPDATE -----------------------------------------------------------------------
 
@@ -97,13 +98,13 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
     }),
 
   // ADD BLOCK TO END
-  addBlock: (block: BlockEntity, paletteId: number | null) =>
+  pushBlock: (block: ColorEntity | GradientEntity, paletteId: number | null) =>
     set((state) => {
       state.blockIds[paletteId ?? rootBlockId].unshift(block.blockId);
       state.blocksById[block.blockId] = block;
     }),
 
-  addPalette: (palette: PaletteEntity, blockIds: number[]) =>
+  pushPalette: (palette: PaletteEntity, blockIds: number[]) =>
     set((state) => {
       state.blockIds[rootBlockId].unshift(palette.blockId);
       state.blocksById[palette.blockId] = palette;
@@ -113,6 +114,18 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
         state.blockIds[palette.id].push(blocId);
       }
     }),
+
+    insertPalette: (palette: PaletteEntity, blockIds: number[], ix: number) =>
+    set((state) => {
+      state.blockIds[rootBlockId].splice(ix,0, palette.blockId);
+      state.blocksById[palette.blockId] = palette;
+
+      for (const blocId of blockIds) {
+        if (!state.blockIds[palette.id]) state.blockIds[palette.id] = [];
+        state.blockIds[palette.id].push(blocId);
+      }
+    }),
+
 
 
   updateBlock: (updateBlock: BlockEntity) =>
