@@ -6,7 +6,7 @@ use block::ConcreteBlock;
 use objc::{class, msg_send, runtime::Object, sel, sel_impl};
 
 #[tauri::command]
-pub async fn pick_color_mack(_app_handle: AppHandle) -> Result<Option<String>, String> {
+pub async fn eye_drop_mack(_app_handle: AppHandle) -> Result<Option<String>, String> {
     #[cfg(target_os = "macos")]
     {
         // Channel to send the color back from the Objective-C block to our async Rust task

@@ -77,8 +77,8 @@ const blockInDroppable = async (sourceData: DraggableData, targetData: Draggable
   const updatedState = useClipboardStore.getState();
 
 
-  const { ids: id, oldIds: oldIds1 } = reorderHelper2(newDraggedBlocks, updatedState.blocksById);
-  const { ids: id2, oldIds: oldIds2 } = reorderHelper2(newTargetBlocks, updatedState.blocksById);
+  const { ids: id, oldIds: oldIds1 } = reorderHelper(newDraggedBlocks, updatedState.blocksById);
+  const { ids: id2, oldIds: oldIds2 } = reorderHelper(newTargetBlocks, updatedState.blocksById);
 
   const newReorderBlocks = [...id, ...id2];
   const oldReorderBlocks = [...oldIds1, ...oldIds2];
@@ -163,8 +163,8 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
   // THIS IS SHIT
   const updateState = useClipboardStore.getState();
 
-  const { ids: id1, oldIds: oldIds1 } = reorderHelper2(sourceBlocks, updateState.blocksById);
-  const { ids: id2, oldIds: oldIds2 } = reorderHelper2(targetBlocks, updateState.blocksById);
+  const { ids: id1, oldIds: oldIds1 } = reorderHelper(sourceBlocks, updateState.blocksById);
+  const { ids: id2, oldIds: oldIds2 } = reorderHelper(targetBlocks, updateState.blocksById);
 
   const reorderBlocks = [
     ...id1, ...id2
@@ -240,8 +240,8 @@ const blockInPalette = async (sourceData: DraggableData, targetData: DraggableDa
 
   const updatedState = useClipboardStore.getState();
 
-  const { ids: id, oldIds: oldIds1 } = reorderHelper2(newTargetColorBlocks, updatedState.blocksById);
-  const { ids: id2, oldIds: oldIds2 } = reorderHelper2(newDraggedBlocks, updatedState.blocksById);
+  const { ids: id, oldIds: oldIds1 } = reorderHelper(newTargetColorBlocks, updatedState.blocksById);
+  const { ids: id2, oldIds: oldIds2 } = reorderHelper(newDraggedBlocks, updatedState.blocksById);
 
   const reorderBlocksDrag = [...id, ...id2];
   const oldReorderBlocksDrag = [...oldIds1, ...oldIds2];
@@ -277,21 +277,7 @@ const blockInPalette = async (sourceData: DraggableData, targetData: DraggableDa
   });
 }
 
-// need to get old and new order delta
 const reorderHelper = (blockIds: number[], blocksById: Record<number, BlockEntity>) => {
-  const ids: ReorderBlock[] = [];
-  for (const [ix, id] of blockIds.entries()) {
-
-    const order = blockIds.length - ix;
-
-    if (blocksById[id].blockOrder !== order) {
-      ids.push({ blockId: id, blockOrder: order });
-    }
-  }
-  return ids;
-}
-
-const reorderHelper2 = (blockIds: number[], blocksById: Record<number, BlockEntity>) => {
   const ids: ReorderBlock[] = [];
   const oldIds: ReorderBlock[] = [];
   for (const [ix, id] of blockIds.entries()) {

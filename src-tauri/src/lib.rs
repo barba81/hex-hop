@@ -9,7 +9,7 @@ pub mod infra;
 pub mod state;
 
 use feat::block_service::block_service::*;
-use feat::color_picker::pick_color_mack;
+use feat::color_picker::eye_drop_mack;
 use feat::color_service::color_service::*;
 use feat::gradient_service::gradient_service::*;
 use feat::load_state::load_state_service::*;
@@ -23,7 +23,7 @@ pub fn run() {
     tauri::Builder::default()
         .invoke_handler(tauri::generate_handler![
             get_color_name_data,
-            pick_color_mack,
+            eye_drop_mack,
             create_color,
             get_color,
             create_gradient,
