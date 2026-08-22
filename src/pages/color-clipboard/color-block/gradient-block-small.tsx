@@ -6,12 +6,15 @@ import { Copy, Pen, Trash2 } from "lucide-react";
 import { deleteGradientBlock } from "../features/delete-block";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import { DraggableData } from "../features/darg-and-drop";
+import { useClipboardStore } from "../store/use-clipboard-store";
 
 type GradientBoxParams = {
     gradientEntity: GradientEntity
 };
 
 export const GradientBlockSmall = ({ gradientEntity: gradientEntity }: GradientBoxParams) => {
+    const setEditBox = useClipboardStore(state => state.setEditBlock);
+
     const { isDropTarget, ref: dropRef } = useDroppable<DraggableData>({
         id: `darg:${gradientEntity.blockId}`,
         data: {
@@ -67,7 +70,7 @@ export const GradientBlockSmall = ({ gradientEntity: gradientEntity }: GradientB
                 </div>
             </ContextMenuTrigger>
             <ContextMenuContent className="w-48">
-                <ContextMenuItem className="gap-2">
+                <ContextMenuItem className="gap-2" onClick={() => setEditBox(gradientEntity.blockId)}>
                     <Pen className="size-4" />
                     Edit
                 </ContextMenuItem>

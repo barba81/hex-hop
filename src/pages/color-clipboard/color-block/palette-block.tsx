@@ -84,7 +84,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
 
       <div ref={setCombinedRef}>
         <div
-          className={`${isDropTarget && 'outline-2 outline-accent'} h-15 w-full shrink-0 relative flex flex-row items-stretch border-2  overflow-hidden
+          className={`${isDropTarget && 'outline-2 outline-accent'} h-13 w-full shrink-0 relative flex flex-row items-stretch border-2  overflow-hidden
           ${isOpen ? 'rounded-t-md border-b-transparent' : 'rounded-md '}`}
         >
           <div ref={handleRef} className="flex items-center justify-center shrink-0">
