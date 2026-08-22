@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/empty";
 import { addNewGradient } from "./feature/add-new-gradient";
 import GradientIcon from "@/components/icons/gradient-icon";
-import { MicroButton } from "@/components/common/micro-button";
+import { Button } from "@/components/common/micro-button";
 
 const GradientEmptyPage = () => {
 
@@ -22,7 +22,7 @@ const GradientEmptyPage = () => {
           <EmptyDescription>No data found</EmptyDescription>
         </EmptyHeader>
         <EmptyContent>
-          <MicroButton onClick={() => addNewGradient()}>Add new gradient</MicroButton>
+          <Button onClick={() => addNewGradient()}>Add new gradient</Button>
         </EmptyContent>
       </Empty>
   );

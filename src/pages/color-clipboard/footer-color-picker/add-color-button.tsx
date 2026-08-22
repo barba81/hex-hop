@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
-import { MicroButton } from "@/components/common/micro-button";
+import { Button } from "@/components/common/micro-button";
 import { addNewColorToClipboard } from "../features/add-block";
 
 const AddColorButton = () => {
@@ -9,7 +9,7 @@ const AddColorButton = () => {
   
 
   return (
-    <MicroButton
+    <Button
       className={`
           flex  
           w-6 h-6 overflow-hidden outline-1    cursor-pointer
@@ -24,7 +24,7 @@ const AddColorButton = () => {
       }}
     >
       <Check strokeWidth={3.5} size={16} />
-    </MicroButton>
+    </Button>
   );
 };
 

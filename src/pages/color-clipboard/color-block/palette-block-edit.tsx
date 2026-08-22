@@ -1,4 +1,4 @@
-import { MicroInput } from "@/components/common/micro-input";
+import { Input } from "@/components/common/micro-input";
 import { PaletteEntity } from "@/infrastructure/models/entity";
 import { Check, X } from "lucide-react";
 import { useClipboardStore } from "../store/use-clipboard-store";
@@ -29,7 +29,7 @@ const PaletteBlockEdit = ({ paletteEntity }: PaletteBlockEditParams) => {
         <div className={`w-full flex flex-col justify-between overflow-hidden bg-background p-2 `}>
 
             <div className="flex justify-end items-end gap-3">
-                <MicroInput type="text"
+                <Input type="text"
                     name="name"
                     onChange={handleChange}
 

@@ -2,7 +2,7 @@ import { GradientEntity } from "@/infrastructure/models/entity";
 import { useClipboardStore } from "../store/use-clipboard-store";
 import { ChangeEvent, useState } from "react";
 import { Check, X } from "lucide-react";
-import { MicroInput } from "@/components/common/micro-input";
+import { Input } from "@/components/common/micro-input";
 import { defaultButtonBackground } from "@/components/common/micro-button";
 import { updateGradientBlock } from "../features/update-block";
 
@@ -29,7 +29,7 @@ const GradientBlockEdit = ({ gradientEntity }: GradientBlockEditParams) => {
         <div className={`w-full flex flex-col justify-between overflow-hidden bg-background p-2 `}>
 
             <div className="flex justify-end items-end gap-3">
-                <MicroInput type="text"
+                <Input type="text"
                     name="name"
                     onChange={handleChange}
 

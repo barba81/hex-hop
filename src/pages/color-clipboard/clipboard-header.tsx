@@ -2,7 +2,7 @@ import { EllipsisVertical, Palette, Redo, Trash2, Undo } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { deleteClipboard } from "./features/delete-block";
 import { defaultButtonBackground } from "@/components/common/micro-button";
-import { MicroInput } from "@/components/common/micro-input";
+import { Input } from "@/components/common/micro-input";
 import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
 import { addNewPalette } from "./features/add-block";
 
@@ -87,7 +87,7 @@ const { undo, redo, canUndo, canRedo } = useColorListCommands();
 
 const SearchBar = () => {
   return (
-    <MicroInput className="w-full" placeholder="Search for color" />
+    <Input className="w-full" placeholder="Search for color" />
   );
 };
 

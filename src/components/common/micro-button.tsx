@@ -17,7 +17,7 @@ export const buttonStyle = `
 flex items-center justify-center
  cursor-pointer shrink-0 outline-0 rounded-md`;
 
-export const MicroButton = (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
+export const Button = (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
   <button
     {...props}
     type={props.type || "button"}
@@ -40,10 +40,10 @@ export const IconButton = ({
   className,
   ...props
 }: IconButtonProps) => (
-  <MicroButton
+  <Button
     {...props}
     className={`text-gray-900 dark:text-white ${className || ""}`}
   >
     <Icon size={iconSize} className={iconClassName} />
-  </MicroButton>
+  </Button>
 );
