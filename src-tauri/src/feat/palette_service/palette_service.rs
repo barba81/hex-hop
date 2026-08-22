@@ -1,8 +1,11 @@
 use crate::feat::block_service::repo::update_repo::set_up_blocks_to_palette;
+use crate::feat::block_service::repo::update_repo::update_block;
 use crate::feat::load_state::model::load_sate_data_mapper::build_all_gradients_response_fast;
 use crate::feat::palette_service::model::palette_create_model::PaletteCreateModel;
+use crate::feat::palette_service::model::palette_create_model::PaletteUpdateRequest;
 use crate::feat::palette_service::model::palette_response_model::BlockChildResponse;
 use crate::feat::palette_service::model::palette_response_model::PaletteResponseModel;
+use crate::feat::palette_service::repo::palette_create_repo::update_palette_repo;
 use crate::infra::error::TauriError;
 use crate::state::DbState;
 
@@ -75,4 +78,45 @@ pub async fn get_palette(
     }
 
     Ok(palette_response)
+}
+
+#[tauri::command]
+pub async fn get_palette_meta_data(
+    state: tauri::State<'_, DbState>,
+    palette_id: i64,
+) -> Result<PaletteResponseModel, TauriError> {
+    let palette = palette_get_repo::get_palette_by_id(palette_id, &state.pool).await?;
+
+    let palette_response = PaletteResponseModel {
+        id: palette.id,
+        name: palette.name,
+        block_order: palette.block_order,
+        block_id: palette.block_id,
+        kind: palette.kind,
+        blocks: None,
+    };
+
+    Ok(palette_response)
+}
+
+#[tauri::command]
+pub async fn update_palette(
+    state: tauri::State<'_, DbState>,
+    palette_update: PaletteUpdateRequest,
+) -> Result<(), TauriError> {
+    let mut tx = state.pool.begin().await?;
+
+    update_block(
+        palette_update.block_id,
+        palette_update.block_order,
+        palette_update.parent_palette_id,
+        &mut *tx,
+    )
+    .await?;
+
+    update_palette_repo(&palette_update, &mut *tx).await?;
+
+    tx.commit().await?;
+
+    Ok(())
 }

@@ -50,7 +50,9 @@ pub fn run() {
             update_color,
             restore_blocks,
             update_block_order,
-            get_block_ids
+            get_block_ids,
+            get_palette_meta_data,
+            update_palette
         ])
         .plugin(tauri_plugin_prevent_default::debug())
         .plugin(tauri_plugin_os::init())

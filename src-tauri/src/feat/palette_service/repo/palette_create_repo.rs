@@ -1,3 +1,5 @@
+use crate::feat::palette_service::model::palette_create_model::PaletteUpdateRequest;
+
 use super::super::model::*;
 
 pub async fn create_palette<'a, E>(
@@ -21,4 +23,26 @@ where
     .await?;
 
     Ok(id)
+}
+
+pub async fn update_palette_repo<'a, E>(
+    palette_block: &PaletteUpdateRequest,
+    executor: E,
+) -> Result<(), sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
+    sqlx::query!(
+        r#"
+        UPDATE palette 
+        SET name = $1
+        WHERE id = $2
+        "#,
+        palette_block.name,
+        palette_block.id
+    )
+    .execute(executor)
+    .await?;
+
+    Ok(())
 }
