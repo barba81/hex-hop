@@ -74,21 +74,21 @@ const blockInDroppable = async (sourceData: DraggableData, targetData: Draggable
     newTargetBlocks.splice(newTargetIndex + 1, 0, draggedId);
   }
 
-  const updatedState =  useClipboardStore.getState();
+  const updatedState = useClipboardStore.getState();
 
 
-  const {ids: id, oldIds: oldIds1} =  reorderHelper2(newDraggedBlocks, updatedState.blocksById);
-  const {ids: id2, oldIds: oldIds2} =  reorderHelper2(newTargetBlocks, updatedState.blocksById);
+  const { ids: id, oldIds: oldIds1 } = reorderHelper2(newDraggedBlocks, updatedState.blocksById);
+  const { ids: id2, oldIds: oldIds2 } = reorderHelper2(newTargetBlocks, updatedState.blocksById);
 
-  const  newReorderBlocks = [...id, ...id2];
-  const  oldReorderBlocks = [...oldIds1, ...oldIds2];
+  const newReorderBlocks = [...id, ...id2];
+  const oldReorderBlocks = [...oldIds1, ...oldIds2];
 
   state.reorderBlocks([
-    { blockId: newDraggedBlocks, paletteId: draggedParent }, 
+    { blockId: newDraggedBlocks, paletteId: draggedParent },
     { blockId: newTargetBlocks, paletteId: targetParent }]);
 
   await invoke("update_blocks_parent", { paletteId: targetParent, blockIds: [draggedId] });
-  await invoke("update_block_order", { reorderBlocks:newReorderBlocks });
+  await invoke("update_block_order", { reorderBlocks: newReorderBlocks });
 
   useColorListCommands.getState().push({
     async undo() {
@@ -96,8 +96,8 @@ const blockInDroppable = async (sourceData: DraggableData, targetData: Draggable
         { blockId: oldDroppableOrder, paletteId: draggedParent },
         { blockId: oldTargetOrder, paletteId: targetParent }]);
 
-        await invoke("update_blocks_parent", { paletteId: draggedParent, blockIds: [draggedId] });
-        await invoke("update_block_order", { reorderBlocks:oldReorderBlocks });
+      await invoke("update_blocks_parent", { paletteId: draggedParent, blockIds: [draggedId] });
+      await invoke("update_block_order", { reorderBlocks: oldReorderBlocks });
 
     },
     async redo() {
@@ -106,7 +106,7 @@ const blockInDroppable = async (sourceData: DraggableData, targetData: Draggable
         { blockId: newTargetBlocks, paletteId: targetParent }]);
 
       await invoke("update_blocks_parent", { paletteId: targetParent, blockIds: [draggedId] });
-      await invoke("update_block_order", { reorderBlocks:newReorderBlocks });
+      await invoke("update_block_order", { reorderBlocks: newReorderBlocks });
     },
   });
 }
@@ -188,6 +188,9 @@ const blockInPalette = async (sourceData: DraggableData, targetData: DraggableDa
   const draggedColorBlocks = state.blockIds[draggedPalette ?? rootBlockId];
   const targetColorBlocks = state.blockIds[targetPalette ?? rootBlockId] ?? [];
 
+  const oldDraggedBlocks = [...draggedColorBlocks];
+  const oldTargetColorBlocks = [...targetColorBlocks];
+
   const newDraggedBlocks = [...draggedColorBlocks];
   const newTargetColorBlocks = [...targetColorBlocks];
 
@@ -196,10 +199,13 @@ const blockInPalette = async (sourceData: DraggableData, targetData: DraggableDa
 
   newTargetColorBlocks.push(draggedId);
 
-  const reorderBlocksDrag = [
-    ...reorderHelper(newTargetColorBlocks, useClipboardStore.getState().blocksById),
-    ...reorderHelper(newDraggedBlocks, useClipboardStore.getState().blocksById),
-  ];
+  const updatedState = useClipboardStore.getState();
+
+  const { ids: id, oldIds: oldIds1 } = reorderHelper2(newTargetColorBlocks, updatedState.blocksById);
+  const { ids: id2, oldIds: oldIds2 } = reorderHelper2(newDraggedBlocks, updatedState.blocksById);
+
+  const reorderBlocksDrag = [...id, ...id2];
+  const oldReorderBlocksDrag = [...oldIds1, ...oldIds2];
 
   state.reorderBlocks([
     { blockId: newDraggedBlocks, paletteId: draggedPalette },
@@ -210,7 +216,26 @@ const blockInPalette = async (sourceData: DraggableData, targetData: DraggableDa
   await invoke("update_block_order", { reorderBlocks: reorderBlocksDrag });
 
 
+  useColorListCommands.getState().push({
+    async undo() {
+      state.reorderBlocks([
+        { blockId: oldDraggedBlocks, paletteId: draggedPalette },
+        { blockId: oldTargetColorBlocks, paletteId: targetPalette }
+      ]);
+      await invoke("update_blocks_parent", { paletteId: draggedPalette, blockIds: [draggedId] });
+      await invoke("update_block_order", { reorderBlocks: oldReorderBlocksDrag });
+    },
+    async redo() {
 
+      state.reorderBlocks([
+        { blockId: newDraggedBlocks, paletteId: draggedPalette },
+        { blockId: newTargetColorBlocks, paletteId: targetPalette }
+      ]);
+
+      await invoke("update_blocks_parent", { paletteId: targetPalette, blockIds: [draggedId] });
+      await invoke("update_block_order", { reorderBlocks: reorderBlocksDrag });
+    },
+  });
 }
 
 // need to get old and new order delta
@@ -237,8 +262,8 @@ const reorderHelper2 = (blockIds: number[], blocksById: Record<number, BlockEnti
     const block = blocksById[id];
     if (block.blockOrder !== order) {
       ids.push({ blockId: id, blockOrder: order });
-      oldIds.push({ blockId: id, blockOrder:block.blockOrder });
+      oldIds.push({ blockId: id, blockOrder: block.blockOrder });
     }
   }
-  return {ids, oldIds};
+  return { ids, oldIds };
 }
