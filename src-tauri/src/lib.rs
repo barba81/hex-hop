@@ -18,15 +18,11 @@ use infra::data_seed::get_color_name_data;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
-    #[cfg(debug_assertions)] // only enable instrumentation in development builds
-    let devtools = tauri_plugin_devtools::init();
-
-    let mut builder = tauri::Builder::default();
-
     #[cfg(debug_assertions)]
-    {
-        builder = builder.plugin(devtools);
-    }
+    let builder = tauri::Builder::default().plugin(tauri_plugin_devtools::init());
+
+    #[cfg(not(debug_assertions))]
+    let builder = tauri::Builder::default();
 
     builder
         .invoke_handler(tauri::generate_handler![

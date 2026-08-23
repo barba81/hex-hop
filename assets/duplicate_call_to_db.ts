@@ -9,8 +9,8 @@ await invoke("update_block_order", { reorderBlocks: oldReorderBlocks });
 await invoke("update_blocks_parent", { paletteId: targetParent, blockIds: [draggedId] });
 await invoke("update_block_order", { reorderBlocks: newReorderBlocks });
 ///
-  const paletteId = await invoke<number>("create_palette", { palette: { name: "New palette", blockIds: [targetBlockId, draggedBlockId] } });
-  const paletteEntity = await invoke<PaletteEntity>("get_palette", { paletteId });
+const paletteId = await invoke<number>("create_palette", { palette: { name: "New palette", blockIds: [targetBlockId, draggedBlockId] } });
+const paletteEntity = await invoke<PaletteEntity>("get_palette", { paletteId });
 
 /////
 await invoke("soft_delete_block", { blockId: paletteEntity.blockId });
@@ -78,9 +78,13 @@ const paletteEntity = await invoke<GradientEntity>("get_gradient", { gradientId:
  await invoke("update_gradient", { gradient: { ...oldEntityCopy } });
 const paletteEntity = await invoke<GradientEntity>("get_gradient", { gradientId: newEntity.id });
             ///
-await invoke("update_gradient", { gradient: { ...newEntity } });
+await invoke<GradientEntity>("update_gradient", { gradient: { ...newEntity } });
 const paletteEntity = await invoke<GradientEntity>("get_gradient", { gradientId: newEntity.id });
 
+
+//// get_gradinet_summary
+//// get_gradinet_layer_summary
+//// get_palette_summary
 
 
 

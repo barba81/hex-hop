@@ -3,6 +3,15 @@ import type { ColorSpaceType, EasingFunctionType, GradientTypes } from "./enum";
 
 export type BlockEntity = (PaletteEntity | ColorEntity | GradientEntity);
 
+export type PaletteEntitySummary = {
+    kind: "palette",
+    id: number;
+    blockId:number;
+    blockOrder: number;
+    name: string;
+}
+
+
 export type PaletteEntity =  {
     kind: "palette",
     id: number;
@@ -36,6 +45,26 @@ export type GradientEntity =  {
     
     layers: GradientLayerEntity[];
 }
+
+export type GradientEntitySummary = {
+    kind: "gradient",
+    id: number;
+    blockId:number;
+    blockOrder: number;
+    name: string;
+    parentPaletteId: number | null;
+}
+
+export type GradientLayerEntitySummary = {
+    id: number;
+    order: number;
+    gradientType: GradientTypes;
+    rotationDegree: number;
+    patternRepeatNumber: number;
+    colorSpace: ColorSpaceType;
+    easingFunction: EasingFunctionType;
+}
+
 
 export type GradientLayerEntity =  {
     id: number;
