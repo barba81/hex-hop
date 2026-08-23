@@ -19,7 +19,7 @@ const InnerBlock = ({ blockId }: ColorBoxParams) => {
     switch (block.kind) {
         case "color":
             return (
-                isEditing ? <ColorBlockEdit colorEntity={block} /> : <ColorBlockSmall  colorEntity={block} />
+                isEditing ? <ColorBlockEdit key={block.blockId} colorEntity={block} /> : <ColorBlockSmall  colorEntity={block} />
             );
 
         case "gradient":
