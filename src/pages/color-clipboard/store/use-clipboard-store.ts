@@ -1,4 +1,4 @@
-import type { BlockEntity, ColorEntity, GradientEntity, PaletteEntity } from "@/infrastructure/models/entity";
+import type { BlockEntity, ColorEntity, GradientEntity, GradientEntitySummary, PaletteEntity, PaletteEntitySummary } from "@/infrastructure/models/entity";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
@@ -31,8 +31,8 @@ interface ClipboardAction {
   insertPalette: (palette: PaletteEntity, blockId: number[], ix: number) => void;
 
   // UPDATE -----------------------------------------------------------------------
-
   updateBlock: (block: BlockEntity) => void;
+  updateBlockSummary: (updateBlock: PaletteEntitySummary | GradientEntitySummary) => void;
 
   // DELETE  -----------------------------------------------------------------------
 
@@ -83,7 +83,7 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
   reorderBlocks: (reorderedBlocks) =>
     set(state => {
       for (const block of reorderedBlocks) {
-         for (const [ix, blockId] of block.blockId.entries()) {
+        for (const [ix, blockId] of block.blockId.entries()) {
           const childBlock = state.blocksById[blockId];
 
           childBlock.blockOrder = block.blockId.length - ix
@@ -114,9 +114,9 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
       }
     }),
 
-    insertPalette: (palette: PaletteEntity, blockIds: number[], ix: number) =>
+  insertPalette: (palette: PaletteEntity, blockIds: number[], ix: number) =>
     set((state) => {
-      state.blockIds[rootBlockId].splice(ix,0, palette.blockId);
+      state.blockIds[rootBlockId].splice(ix, 0, palette.blockId);
       state.blocksById[palette.blockId] = palette;
 
       for (const blocId of blockIds) {
@@ -125,7 +125,13 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
       }
     }),
 
-
+  updateBlockSummary: (updateBlock: PaletteEntitySummary | GradientEntitySummary) =>
+    set((state) => {
+      const block = state.blocksById[updateBlock.blockId];
+      if (block) {
+        Object.assign(block, updateBlock);
+      }
+    }),
 
   updateBlock: (updateBlock: BlockEntity) =>
     set((state) => {

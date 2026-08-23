@@ -30,3 +30,10 @@ pub struct GradientStopRequest {
     pub alpha: Option<f64>,
     pub position: f64,
 }
+
+#[derive(Debug, Clone, Serialize, Deserialize)]
+#[serde(rename_all = "camelCase")]
+pub struct GradientUpdateRequest {
+    pub id: i64,
+    pub name: String,
+}

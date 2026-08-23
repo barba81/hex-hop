@@ -1,5 +1,5 @@
 import { CustomInput } from "@/components/common/custom-input";
-import type { PaletteEntity } from "@/infrastructure/models/entity";
+import { toGradientSummary, toPaletteSummary, type PaletteEntity } from "@/infrastructure/models/entity";
 import { Check, X } from "lucide-react";
 import { useClipboardStore } from "../store/use-clipboard-store";
 import type { ChangeEvent} from "react";
@@ -12,9 +12,9 @@ type PaletteBlockEditParams = {
 };
 const PaletteBlockEdit = ({ paletteEntity }: PaletteBlockEditParams) => {
     const setEditBox = useClipboardStore(x => x.setEditBlock);
-    const [paletteUpdateEntity, setColorUpdateEntity] = useState(() => ({ ...paletteEntity }));
+    const [paletteUpdateEntity, setColorUpdateEntity] = useState(() => ( toPaletteSummary(paletteEntity)));
     const handleEdit = async () => {
-        updatePaletteBlock(paletteUpdateEntity , paletteEntity );
+        updatePaletteBlock(paletteUpdateEntity ,  toPaletteSummary(paletteEntity) );
         setEditBox(null);
     };
 

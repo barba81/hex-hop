@@ -1,5 +1,7 @@
 use crate::feat::block_service::repo::create_repo::create_block;
 use crate::feat::block_service::repo::delete_repo::soft_delete_block;
+use crate::feat::gradient_service::model::gradient_data_model::GradientDataModel;
+use crate::feat::gradient_service::model::gradient_service_request::GradientUpdateRequest;
 use crate::infra::error::TauriError;
 use crate::state::DbState;
 
@@ -112,7 +114,7 @@ pub async fn create_stop(
 #[tauri::command]
 pub async fn update_gradient(
     state: tauri::State<'_, DbState>,
-    gradient: gradient_data_model::GradientDataModel,
+    gradient: GradientUpdateRequest,
 ) -> Result<(), TauriError> {
     Ok(gradient_update_repo::update_gradient_async(&gradient, &state.pool).await?)
 }
@@ -169,4 +171,14 @@ pub async fn delete_layer(
 pub async fn delete_stop(state: tauri::State<'_, DbState>, stop_id: i64) -> Result<(), TauriError> {
     gradient_delete_repo::soft_delete_stop_by_id(stop_id, &state.pool).await?;
     Ok(())
+}
+
+#[tauri::command]
+pub async fn update_gradient_summary(
+    state: tauri::State<'_, DbState>,
+    gradient_request: GradientUpdateRequest,
+) -> Result<GradientDataModel, TauriError> {
+    gradient_update_repo::update_gradient_async(&gradient_request, &state.pool).await?;
+    let gradient = gradient_get_repo::get_gradient_by_id(gradient_request.id, &state.pool).await?;
+    Ok(gradient)
 }

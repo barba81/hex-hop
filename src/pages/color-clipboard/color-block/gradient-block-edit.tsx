@@ -1,4 +1,4 @@
-import type { GradientEntity } from "@/infrastructure/models/entity";
+import { GradientEntitySummary, toGradientSummary, type GradientEntity } from "@/infrastructure/models/entity";
 import { useClipboardStore } from "../store/use-clipboard-store";
 import type { ChangeEvent} from "react";
 import { useState } from "react";
@@ -10,11 +10,13 @@ import { updateGradientBlock } from "../features/update-block";
 type GradientBlockEditParams = {
     gradientEntity: GradientEntity
 };
+
+
 const GradientBlockEdit = ({ gradientEntity }: GradientBlockEditParams) => {
    const setEditBox = useClipboardStore(x => x.setEditBlock);
-    const [gradientUpdateEntity, setColorUpdateEntity] = useState(() => ({ ...gradientEntity }));
+    const [gradientUpdate, setColorUpdateEntity] = useState<GradientEntitySummary>(() => (toGradientSummary( gradientEntity )));
     const handleEdit = async () => {
-        updateGradientBlock(gradientUpdateEntity , gradientEntity );
+        updateGradientBlock(gradientUpdate , toGradientSummary( gradientEntity ) );
         setEditBox(null);
     };
 
@@ -34,7 +36,7 @@ const GradientBlockEdit = ({ gradientEntity }: GradientBlockEditParams) => {
                     name="name"
                     onChange={handleChange}
 
-                    value={gradientUpdateEntity.name}
+                    value={gradientUpdate.name}
                     className="w-50 pr-8"
                     placeholder="Palette name" />
                 <button

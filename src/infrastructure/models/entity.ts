@@ -3,6 +3,7 @@ import type { ColorSpaceType, EasingFunctionType, GradientTypes } from "./enum";
 
 export type BlockEntity = (PaletteEntity | ColorEntity | GradientEntity);
 
+
 export type PaletteEntitySummary = {
     kind: "palette",
     id: number;
@@ -11,16 +12,15 @@ export type PaletteEntitySummary = {
     name: string;
 }
 
-
 export type PaletteEntity =  {
-    kind: "palette",
-    id: number;
-    blockId:number;
-    blockOrder: number;
-    name: string;
-         
     blocks: (ColorEntity | GradientEntity)[] | null;
+} & PaletteEntitySummary;
+
+export const  toPaletteSummary = (entity: PaletteEntity): PaletteEntitySummary => {
+  const { blocks, ...summary } = entity;
+  return summary;
 }
+
 
 export type ColorEntity =  {
     kind: "color",
@@ -35,17 +35,6 @@ export type ColorEntity =  {
     parentPaletteId: number | null;
 }
 
-export type GradientEntity =  {
-    kind: "gradient",
-    id: number;
-    blockId:number;
-    blockOrder: number;
-    name: string;
-    parentPaletteId: number | null;
-    
-    layers: GradientLayerEntity[];
-}
-
 export type GradientEntitySummary = {
     kind: "gradient",
     id: number;
@@ -53,6 +42,17 @@ export type GradientEntitySummary = {
     blockOrder: number;
     name: string;
     parentPaletteId: number | null;
+}
+
+
+export type GradientEntity =  {
+    layers: GradientLayerEntity[];
+} & GradientEntitySummary;
+
+
+export const  toGradientSummary = (entity: GradientEntity): GradientEntitySummary => {
+  const { layers, ...summary } = entity;
+  return summary;
 }
 
 export type GradientLayerEntitySummary = {

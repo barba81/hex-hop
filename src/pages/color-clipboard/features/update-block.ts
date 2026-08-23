@@ -1,4 +1,5 @@
-import type { ColorEntity, GradientEntity, PaletteEntity } from "@/infrastructure/models/entity"
+
+import type { ColorEntity, GradientEntity, GradientEntitySummary, PaletteEntity, PaletteEntitySummary } from "@/infrastructure/models/entity"
 import { invoke } from "@tauri-apps/api/core";
 import { useClipboardStore } from "../store/use-clipboard-store";
 import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
@@ -25,13 +26,14 @@ export const updateColorBlock = async (newEntity: ColorEntity, oldEntity: ColorE
     });
 }
 
-export const updatePaletteBlock = async (newEntity: PaletteEntity, oldEntity: PaletteEntity) => {
+export const updatePaletteBlock = async (newEntity: PaletteEntitySummary, oldEntity: PaletteEntitySummary) => {
     const oldEntityCopy = { ...oldEntity };
-
+    console.time();
     await invoke("update_palette", { paletteUpdate: { ...newEntity } });
     const paletteEntity = await invoke<PaletteEntity>("get_palette_meta_data", { paletteId: newEntity.id });
 
-    useClipboardStore.getState().updateBlock(paletteEntity);
+    useClipboardStore.getState().updateBlockSummary(paletteEntity);
+    console.timeEnd();
 
     useColorListCommands.getState().push({
         async undo() {
@@ -47,24 +49,23 @@ export const updatePaletteBlock = async (newEntity: PaletteEntity, oldEntity: Pa
     });
 }
 
-export const updateGradientBlock = async (newEntity: GradientEntity, oldEntity: GradientEntity) => {
+export const updateGradientBlock = async (newEntity: GradientEntitySummary, oldEntity: GradientEntitySummary) => {
     const oldEntityCopy = { ...oldEntity };
-
-    await invoke("update_gradient", { gradient: { ...newEntity } });
-    const paletteEntity = await invoke<GradientEntity>("get_gradient", { gradientId: oldEntityCopy.id });
-
-    useClipboardStore.getState().updateBlock(paletteEntity);
+    console.time();
+    const gradientSummary = await invoke<GradientEntitySummary>("update_gradient_summary", { gradientRequest: { ...newEntity } });
+    useClipboardStore.getState().updateBlockSummary(gradientSummary);
+    console.timeEnd();
 
     useColorListCommands.getState().push({
         async undo() {
-            await invoke("update_gradient", { gradient: { ...oldEntityCopy } });
-            const paletteEntity = await invoke<GradientEntity>("get_gradient", { gradientId: newEntity.id });
-            useClipboardStore.getState().updateBlock(paletteEntity);
+            const gradientSummary = await invoke<GradientEntitySummary>("update_gradient_summary", { gradientRequest: { ...oldEntityCopy } });
+            useClipboardStore.getState().updateBlockSummary(gradientSummary);
         },
         async redo() {
-            await invoke("update_gradient", { gradient: { ...newEntity } });
-            const paletteEntity = await invoke<GradientEntity>("get_gradient", { gradientId: newEntity.id });
-            useClipboardStore.getState().updateBlock(paletteEntity);
+            const gradientSummary = await invoke<GradientEntitySummary>("update_gradient_summary", { gradientRequest: { ...newEntity } });
+            useClipboardStore.getState().updateBlockSummary(gradientSummary);
         },
     });
+
 }
+

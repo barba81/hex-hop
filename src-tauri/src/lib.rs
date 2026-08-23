@@ -56,7 +56,8 @@ pub fn run() {
             update_block_order,
             get_block_ids,
             get_palette_meta_data,
-            update_palette
+            update_palette,
+            update_gradient_summary
         ])
         .plugin(tauri_plugin_prevent_default::debug())
         .plugin(tauri_plugin_os::init())

@@ -1,7 +1,9 @@
+use crate::feat::gradient_service::model::gradient_service_request::GradientUpdateRequest;
+
 use super::super::model::*;
 
 pub async fn update_gradient_async<'e, E>(
-    gradient: &gradient_data_model::GradientDataModel,
+    gradient: &GradientUpdateRequest,
     executor: E,
 ) -> Result<(), sqlx::Error>
 where
