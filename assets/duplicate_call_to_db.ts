@@ -36,52 +36,26 @@ await invoke("update_block_order", { reorderBlocks: reorderBlocksDrag });
 
 
 //// add blocks 
-const colorId = await invoke<number>("create_color", { color: { ...colorData, name: name } });
-const colorEntity = await invoke<ColorEntity>("get_color", { colorId });
-
 await invoke("restore_block", { blockId });
 const entity = await invoke<ColorEntity>("get_color", { colorId });
 
-const paletteId = await invoke("create_palette", { palette: { name: "New palette", blockIds } });
-const paletteEntity = await invoke<PaletteEntity>("get_palette", { paletteId });
-
-
 // delete blocks 
-await invoke("restore_block", { blockId });
+await invoke("restore_block_", { blockId });
             const entity = await invoke<ColorEntity>("get_color", { colorId: colorId });
 
-await invoke("restore_block", { blockId });
+await invoke("restore_block_gradient", { blockId });
 const entity = await invoke<ColorEntity>("get_gradient", { gradientId });
 
 // duplicate blocks
-await invoke("restore_block", { blockId });
+await invoke("restore_block_color", { colorId });
 const entity = await invoke<ColorEntity>("get_color", { colorId });
 
 
+
+await invoke("restore_blocks", { blockIds });
+const blocks = await invoke<BlockEntity[]>("load_state");
+
 // update-block
-
-await invoke("update_color", { color: { ...newEntity } });
-const colorEntity = await invoke<ColorEntity>("get_color", { colorId: newEntity.id });
-///
-await invoke("update_color", { color: { ...oldEntityCopy } });
-const colorEntity = await invoke<ColorEntity>("get_color", { colorId: newEntity.id });
-////
-await invoke("update_color", { color: { ...newEntity } });
-const colorEntity = await invoke<ColorEntity>("get_color", { colorId: newEntity.id });
-///
-await invoke("update_palette", { paletteUpdate: { ...newEntity } });
-const paletteEntity = await invoke<PaletteEntity>("get_palette_meta_data", { paletteId: newEntity.id });
-////
-await invoke("update_gradient", { gradient: { ...newEntity } });
-const paletteEntity = await invoke<GradientEntity>("get_gradient", { gradientId: oldEntityCopy.id });
-////
- await invoke("update_gradient", { gradient: { ...oldEntityCopy } });
-const paletteEntity = await invoke<GradientEntity>("get_gradient", { gradientId: newEntity.id });
-            ///
-await invoke<GradientEntity>("update_gradient", { gradient: { ...newEntity } });
-const paletteEntity = await invoke<GradientEntity>("get_gradient", { gradientId: newEntity.id });
-
-
 //// get_gradinet_summary
 //// get_gradinet_layer_summary
 //// get_palette_summary

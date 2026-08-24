@@ -20,8 +20,7 @@ export const addNewColorToClipboard = async (inputColor: string, paletteId: numb
             useClipboardStore.getState().deleteBlock(blockId, paletteId);
         },
         async redo() {
-            await invoke("restore_block", { blockId });
-            const entity = await invoke<ColorEntity>("get_color", { colorId:colorEntity.id });
+            const entity = await invoke<ColorEntity>("restore_color", { colorId:colorEntity.id });
             useClipboardStore.getState().pushBlock(entity, null);
         },
     });

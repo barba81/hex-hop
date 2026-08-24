@@ -29,3 +29,23 @@ where
 
     Ok(())
 }
+
+pub async fn restore_color<'a, E>(color_id: i64, executor: E) -> Result<(), sqlx::Error>
+where
+    E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
+{
+    sqlx::query!(
+        r#"
+        UPDATE block
+        SET deleted = 0
+        WHERE id = (
+            SELECT block_id FROM color WHERE id = ?
+        )
+        "#,
+        color_id
+    )
+    .execute(executor)
+    .await?;
+
+    Ok(())
+}

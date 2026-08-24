@@ -58,7 +58,8 @@ pub fn run() {
             get_palette_summery,
             update_palette,
             update_gradient_summary,
-            update_palette_summary
+            update_palette_summary,
+            restore_color
         ])
         .plugin(tauri_plugin_prevent_default::debug())
         .plugin(tauri_plugin_os::init())

@@ -50,7 +50,23 @@ pub async fn update_color(
     color_update_repo::update_color(&color, &mut *tx).await?;
 
     tx.commit().await?;
+
     let color = color_get_repo::get_color_by_id(color.id, &state.pool).await?;
+
+    Ok(color)
+}
+
+#[tauri::command]
+pub async fn restore_color(
+    state: tauri::State<'_, DbState>,
+    color_id: i64,
+) -> Result<color_data_model::ColorDataModel, TauriError> {
+    let mut tx = state.pool.begin().await?;
+
+    color_update_repo::restore_color(color_id, &mut *tx).await?;
+    let color = color_get_repo::get_color_by_id(color_id, &mut *tx).await?;
+
+    tx.commit().await?;
 
     Ok(color)
 }
