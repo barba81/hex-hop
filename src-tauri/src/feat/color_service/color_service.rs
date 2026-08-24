@@ -37,7 +37,7 @@ pub async fn get_color(
 pub async fn update_color(
     state: tauri::State<'_, DbState>,
     color: color_create_model::ColorUpdateModel,
-) -> Result<(), TauriError> {
+) -> Result<color_data_model::ColorDataModel, TauriError> {
     let mut tx = state.pool.begin().await?;
 
     update_block(
@@ -50,6 +50,7 @@ pub async fn update_color(
     color_update_repo::update_color(&color, &mut *tx).await?;
 
     tx.commit().await?;
+    let color = color_get_repo::get_color_by_id(color.id, &state.pool).await?;
 
-    Ok(())
+    Ok(color)
 }

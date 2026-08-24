@@ -115,8 +115,20 @@ pub async fn create_stop(
 pub async fn update_gradient(
     state: tauri::State<'_, DbState>,
     gradient: GradientUpdateRequest,
-) -> Result<(), TauriError> {
-    Ok(gradient_update_repo::update_gradient_async(&gradient, &state.pool).await?)
+) -> Result<gradient_service_response::GradientResponse, TauriError> {
+    let mut tx = state.pool.begin().await?;
+    gradient_update_repo::update_gradient_async(&gradient, &mut *tx).await?;
+
+    let gradient = gradient_get_repo::get_gradient_by_id(gradient.id, &mut *tx).await?;
+    let layers =
+        gradient_get_repo::get_gradient_layers_by_gradient_id(gradient.id, &mut *tx).await?;
+    let stops = gradient_get_repo::get_gradient_stops_by_gradient_id(gradient.id, &mut *tx).await?;
+
+    tx.commit().await?;
+
+    Ok(gradient_data_mapper::build_gradient_response(
+        &gradient, &layers, &stops,
+    ))
 }
 
 #[tauri::command]
