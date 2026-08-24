@@ -6,6 +6,7 @@ use crate::feat::palette_service::model::palette_create_model::PaletteUpdateRequ
 use crate::feat::palette_service::model::palette_response_model::BlockChildResponse;
 use crate::feat::palette_service::model::palette_response_model::PaletteResponseModel;
 use crate::feat::palette_service::model::palette_response_model::PaletteSummaryResponseModel;
+use crate::feat::palette_service::repo::palette_create_repo::restore_palette_async;
 use crate::feat::palette_service::repo::palette_create_repo::update_palette_repo;
 use crate::infra::error::TauriError;
 use crate::state::DbState;
@@ -37,7 +38,9 @@ pub async fn create_palette(
     let colors_data = palette_get_repo::get_colors_by_palette_id(palette.id, &mut *tx).await?;
     let gradients_data = palette_get_repo::get_gradients_palette_id(palette.id, &mut *tx).await?;
     let layers = palette_get_repo::get_gradient_layers_palette_id(palette.id, &mut *tx).await?;
-    let stops = palette_get_repo::get_gradient_stops_palette_id(palette.id, &mut *tx).await?;
+    let stops: Vec<
+        crate::feat::gradient_service::model::gradient_data_model::GradientStopDataModel,
+    > = palette_get_repo::get_gradient_stops_palette_id(palette.id, &mut *tx).await?;
 
     tx.commit().await?;
     let gradients = build_all_gradients_response_fast(&gradients_data, &layers, &stops);
@@ -174,6 +177,55 @@ pub async fn update_palette_summary(
         block_id: palette.block_id,
         kind: palette.kind,
     };
+
+    Ok(palette_response)
+}
+
+#[tauri::command]
+pub async fn restore_palette(
+    state: tauri::State<'_, DbState>,
+    palette_id: i64,
+) -> Result<PaletteResponseModel, TauriError> {
+    let mut tx = state.pool.begin().await?;
+
+    restore_palette_async(palette_id, &mut *tx).await?;
+
+    let palette = palette_get_repo::get_palette_by_id(palette_id, &mut *tx).await?;
+
+    let colors_data = palette_get_repo::get_colors_by_palette_id(palette.id, &mut *tx).await?;
+    let gradients_data = palette_get_repo::get_gradients_palette_id(palette.id, &mut *tx).await?;
+    let layers = palette_get_repo::get_gradient_layers_palette_id(palette.id, &mut *tx).await?;
+    let stops: Vec<
+        crate::feat::gradient_service::model::gradient_data_model::GradientStopDataModel,
+    > = palette_get_repo::get_gradient_stops_palette_id(palette.id, &mut *tx).await?;
+
+    tx.commit().await?;
+
+    let gradients = build_all_gradients_response_fast(&gradients_data, &layers, &stops);
+
+    let mut palette_response = PaletteResponseModel {
+        id: palette.id,
+        name: palette.name,
+        block_order: palette.block_order,
+        block_id: palette.block_id,
+        kind: palette.kind,
+        blocks: None,
+    };
+
+    for color in colors_data {
+        palette_response
+            .blocks
+            .get_or_insert_with(Vec::new)
+            .push(BlockChildResponse::Color(color));
+    }
+
+    for gradient in gradients {
+        palette_response
+            .blocks
+            .get_or_insert_with(Vec::new)
+            .push(BlockChildResponse::Gradient(gradient));
+        continue;
+    }
 
     Ok(palette_response)
 }

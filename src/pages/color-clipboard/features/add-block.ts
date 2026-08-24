@@ -29,4 +29,18 @@ export const addNewColorToClipboard = async (inputColor: string, paletteId: numb
 export const addNewPalette = async (blockIds: number[]) => {
     const paletteEntity = await invoke<PaletteEntity>("create_palette", { palette: { name: "New palette", blockIds } });
     useClipboardStore.getState().pushPalette(paletteEntity, blockIds);
+    const blockId = paletteEntity.blockId;
+    const paletteId = paletteEntity.id;
+
+      useColorListCommands.getState().push({
+        async undo() {
+            await invoke("soft_delete_block", { blockId });
+            useClipboardStore.getState().deleteBlock(blockId, null);
+        },
+        async redo() {
+            const entity = await invoke<PaletteEntity>("restore_palette", { paletteId:paletteId});
+            useClipboardStore.getState().pushPalette(entity, blockIds);
+        },
+    });
+
 }

@@ -199,3 +199,18 @@ pub async fn update_gradient_summary(
 
     Ok(gradient)
 }
+
+#[tauri::command]
+pub async fn restore_gradient(
+    state: tauri::State<'_, DbState>,
+    gradient_id: i64,
+) -> Result<i64, TauriError> {
+    let mut tx = state.pool.begin().await?;
+
+    // update
+    // get gradient
+
+    tx.commit().await?;
+
+    Ok(gradient_id)
+}
