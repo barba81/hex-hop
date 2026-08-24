@@ -10,8 +10,7 @@ export const addNewColorToClipboard = async (inputColor: string, paletteId: numb
     const colorData = colorStringToData(inputColor);
     // const colorData = randomColor();
     const name = await getSmartColorName(colorData);
-    const colorId = await invoke<number>("create_color", { color: { ...colorData, name: name } });
-    const colorEntity = await invoke<ColorEntity>("get_color", { colorId });
+    const colorEntity = await invoke<ColorEntity>("create_color", { color: { ...colorData, name: name } });
     useClipboardStore.getState().pushBlock(colorEntity, null);
     const blockId = colorEntity.blockId;
 
@@ -22,15 +21,13 @@ export const addNewColorToClipboard = async (inputColor: string, paletteId: numb
         },
         async redo() {
             await invoke("restore_block", { blockId });
-            const entity = await invoke<ColorEntity>("get_color", { colorId });
+            const entity = await invoke<ColorEntity>("get_color", { colorId:colorEntity.id });
             useClipboardStore.getState().pushBlock(entity, null);
         },
     });
 }
 
 export const addNewPalette = async (blockIds: number[]) => {
-    const paletteId = await invoke("create_palette", { palette: { name: "New palette", blockIds } });
-    const paletteEntity = await invoke<PaletteEntity>("get_palette", { paletteId });
-    useClipboardStore.getState().pushPalette(paletteEntity, []);
-    return paletteId;
+    const paletteEntity = await invoke<PaletteEntity>("create_palette", { palette: { name: "New palette", blockIds } });
+    useClipboardStore.getState().pushPalette(paletteEntity, blockIds);
 }

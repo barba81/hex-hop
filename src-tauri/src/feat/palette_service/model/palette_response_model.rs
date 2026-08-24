@@ -23,3 +23,13 @@ pub enum BlockChildResponse {
     Color(ColorDataModel),
     Gradient(GradientResponse),
 }
+
+#[derive(Debug, Clone, Serialize)]
+#[serde(rename_all = "camelCase")]
+pub struct PaletteSummaryResponseModel {
+    pub id: i64,
+    pub name: String,
+    pub block_order: i64,
+    pub block_id: i64,
+    pub kind: String,
+}

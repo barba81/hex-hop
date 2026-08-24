@@ -153,8 +153,7 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
   const newPaletteBlocIds = [targetBlockId, draggedBlockId];
 
   // create palette and insert into the new list 
-  const paletteId = await invoke<number>("create_palette", { palette: { name: "New palette", blockIds: [targetBlockId, draggedBlockId] } });
-  const paletteEntity = await invoke<PaletteEntity>("get_palette", { paletteId });
+  const paletteEntity = await invoke<PaletteEntity>("create_palette", { palette: { name: "New palette", blockIds: [targetBlockId, draggedBlockId] } });
 
   state.insertPalette(paletteEntity, [targetBlockId, draggedBlockId], targetIx);
 
@@ -172,7 +171,7 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
   const oldReorderBlocks = [...oldIds1, ...oldIds2];
 
   state.reorderBlocks([
-    { blockId: newPaletteBlocIds, paletteId: paletteId },
+    { blockId: newPaletteBlocIds, paletteId: paletteEntity.id },
     { blockId: sourceBlocks, paletteId: draggedParentId },
     { blockId: targetBlocks, paletteId: targetParentId },
   ]);
@@ -198,13 +197,13 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
     },
     async redo() {
       await invoke("restore_block", { blockId: paletteEntity.blockId });
-      const entity = await invoke<PaletteEntity>("get_palette", { paletteId });
+      const entity = await invoke<PaletteEntity>("get_palette", { paletteId:paletteEntity.id });
       await invoke("update_block_order", { reorderBlocks });
-      await invoke("update_blocks_parent", { paletteId: paletteId, blockIds: [targetBlockId, draggedBlockId] });
+      await invoke("update_blocks_parent", { paletteId: paletteEntity.id, blockIds: [targetBlockId, draggedBlockId] });
       
       state.insertPalette(entity, [targetBlockId, draggedBlockId], targetIx);
       state.reorderBlocks([
-        { blockId: newPaletteBlocIds, paletteId: paletteId },
+        { blockId: newPaletteBlocIds, paletteId: paletteEntity.id },
         { blockId: sourceBlocks, paletteId: draggedParentId },
         { blockId: targetBlocks, paletteId: targetParentId },
       ]);

@@ -178,7 +178,12 @@ pub async fn update_gradient_summary(
     state: tauri::State<'_, DbState>,
     gradient_request: GradientUpdateRequest,
 ) -> Result<GradientDataModel, TauriError> {
-    gradient_update_repo::update_gradient_async(&gradient_request, &state.pool).await?;
-    let gradient = gradient_get_repo::get_gradient_by_id(gradient_request.id, &state.pool).await?;
+    let mut tx = state.pool.begin().await?;
+
+    gradient_update_repo::update_gradient_async(&gradient_request, &mut *tx).await?;
+    let gradient = gradient_get_repo::get_gradient_by_id(gradient_request.id, &mut *tx).await?;
+
+    tx.commit().await?;
+
     Ok(gradient)
 }

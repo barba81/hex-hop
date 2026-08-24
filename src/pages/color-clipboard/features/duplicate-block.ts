@@ -4,8 +4,7 @@ import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-s
 import { invoke } from "@tauri-apps/api/core";
 
 export const duplicateBlock = async (colorData: ColorEntity) => {
-    const colorId = await invoke("create_color", { color: { ...colorData, name:colorData.name+" Copy" } });
-    const colorEntity = await invoke<ColorEntity>("get_color", { colorId });
+    const colorEntity = await invoke<ColorEntity>("create_color", { color: { ...colorData, name:colorData.name+" Copy" } });
     const blockId = colorEntity.blockId;
     const paletteId = colorEntity.parentPaletteId;
 
@@ -18,7 +17,7 @@ export const duplicateBlock = async (colorData: ColorEntity) => {
         },
         async redo() {
             await invoke("restore_block", { blockId });
-            const entity = await invoke<ColorEntity>("get_color", { colorId });
+            const entity = await invoke<ColorEntity>("get_color", {  colorId:colorEntity.id  });
             useClipboardStore.getState().pushBlock(entity, paletteId);
         },
     });

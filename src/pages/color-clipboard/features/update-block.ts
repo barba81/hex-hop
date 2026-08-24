@@ -28,23 +28,18 @@ export const updateColorBlock = async (newEntity: ColorEntity, oldEntity: ColorE
 
 export const updatePaletteBlock = async (newEntity: PaletteEntitySummary, oldEntity: PaletteEntitySummary) => {
     const oldEntityCopy = { ...oldEntity };
-    console.time();
-    await invoke("update_palette", { paletteUpdate: { ...newEntity } });
-    const paletteEntity = await invoke<PaletteEntity>("get_palette_meta_data", { paletteId: newEntity.id });
-
+    debugger
+    const paletteEntity = await invoke<PaletteEntitySummary>("update_palette_summary", { paletteUpdate: { ...newEntity } });
     useClipboardStore.getState().updateBlockSummary(paletteEntity);
-    console.timeEnd();
 
     useColorListCommands.getState().push({
         async undo() {
-            await invoke("update_palette", { paletteUpdate: { ...oldEntityCopy } });
-            const paletteEntity = await invoke<ColorEntity>("get_palette_meta_data", { paletteId: newEntity.id });
-            useClipboardStore.getState().updateBlock(paletteEntity);
+            const paletteEntity = await invoke<PaletteEntitySummary>("update_palette_summary", { paletteUpdate: { ...oldEntityCopy } });
+            useClipboardStore.getState().updateBlockSummary(paletteEntity);
         },
         async redo() {
-            await invoke("update_palette", { paletteUpdate: { ...newEntity } });
-            const paletteEntity = await invoke<ColorEntity>("get_palette_meta_data", { paletteId: newEntity.id });
-            useClipboardStore.getState().updateBlock(paletteEntity);
+            const paletteEntity = await invoke<PaletteEntitySummary>("update_palette_summary", { paletteUpdate: { ...newEntity } });
+            useClipboardStore.getState().updateBlockSummary(paletteEntity);
         },
     });
 }
