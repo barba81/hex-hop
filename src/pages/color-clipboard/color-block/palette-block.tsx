@@ -86,7 +86,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
 
       <div ref={setCombinedRef}>
         <div
-          className={`${isDropTarget && 'outline-2 outline-accent'} h-13 w-full shrink-0 relative flex flex-row items-stretch border-2  overflow-hidden
+          className={`${isDropTarget && 'outline-1 outline-accent'} h-12 w-full shrink-0 relative flex flex-row items-stretch border-2  overflow-hidden
           ${isOpen ? 'rounded-t-md border-b-transparent' : 'rounded-md '}`}
         >
           <div ref={handleRef} className="flex items-center justify-center shrink-0">
@@ -94,7 +94,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
           </div>
 
           <div className="flex-1 flex flex-col justify-between overflow-hidden bg-background">
-            <div className="w-full h-15 flex-1 flex   bg-checkerboard">
+            <div className="w-full h-6  flex gap-0.5   bg-checkerboard">
               {
                 colorBlocksId.map((id) => (<PaletteTopBar blockId={id} key={id} />))
               }

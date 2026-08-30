@@ -15,7 +15,7 @@ const ColorList = () => {
       {colorBlocks.length === 0 ? <EmptyClipboardPage /> :
         <DragDropProvider  onDragEnd={(e) => handleDragEnd(e)}
         >
-          <div className="flex-1 overflow-y-auto flex flex-col px-2 gap-0.5 ">
+          <div className="flex-1 overflow-y-auto flex flex-col px-2  ">
             <DroppableLine id={"drop:start"} blockId={-1} key='drop:start' palette={null} />
             {colorBlocks.map((blockId) =>
 

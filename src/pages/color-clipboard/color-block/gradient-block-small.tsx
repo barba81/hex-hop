@@ -7,6 +7,7 @@ import { deleteGradientBlock } from "../features/delete-block";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import type { DraggableData } from "../features/darg-and-drop";
 import { useClipboardStore } from "../store/use-clipboard-store";
+import { distanceDetector } from "./color-block-small-boxes";
 
 type GradientBoxParams = {
     gradientEntity: GradientEntity
@@ -17,6 +18,8 @@ export const GradientBlockSmall = ({ gradientEntity: gradientEntity }: GradientB
 
     const { isDropTarget, ref: dropRef } = useDroppable<DraggableData>({
         id: `darg:${gradientEntity.blockId}`,
+            collisionDetector: distanceDetector,
+        
         data: {
             blockId: gradientEntity.blockId,
             kind: "block",
@@ -45,7 +48,7 @@ export const GradientBlockSmall = ({ gradientEntity: gradientEntity }: GradientB
         <ContextMenu>
             <ContextMenuTrigger>
                 <div ref={setCombinedRef}
-                    className={`${isDropTarget && 'outline-2 outline-accent'} h-9 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden`}
+                    className={`${isDropTarget && 'outline-2 outline-accent'} h-10 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden`}
                 >
                     <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer`}>
                         <DragDots />
