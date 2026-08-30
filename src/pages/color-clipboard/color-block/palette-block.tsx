@@ -11,6 +11,7 @@ import InnerBlock from "./inner-block";
 import DroppableLine from "../color-list/droppable";
 import React from "react";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
+import { distanceDetector } from "./color-block-small-boxes";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity
@@ -55,6 +56,8 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
 
   const { isDropTarget, ref: dropRef } = useDroppable<DraggableData>({
     id: `darg:${paletteEntity.blockId}`,
+    collisionDetector: distanceDetector,
+
     data: {
       blockId: paletteEntity.blockId,
       kind: "palette",

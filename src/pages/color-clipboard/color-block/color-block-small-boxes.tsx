@@ -8,15 +8,35 @@ import { deleteColorBlock } from "../features/delete-block";
 import { useClipboardStore } from "../store/use-clipboard-store";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import type { DraggableData } from "../features/darg-and-drop";
+import {CollisionDetector, CollisionPriority, CollisionType} from '@dnd-kit/abstract';
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity
 
 };
 
+
+export const distanceDetector: CollisionDetector = ({dragOperation, droppable}) => {
+  const dragShape = dragOperation.shape?.current; // <-- unwrap history
+  const dropShape = droppable.shape;
+
+  if (!dragShape || !dropShape) return null;
+
+  const dy = dragShape.center.y - dropShape.center.y;
+  const distance = Math.sqrt(dy * dy);
+  console.log( droppable.id, distance);
+  return {
+    id: droppable.id,
+    value: -distance,
+    type: CollisionType.Collision,
+    priority: CollisionPriority.Normal,
+  };
+};
+
 const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
     const { isDropTarget, ref: dropRef } = useDroppable<DraggableData>({
         id: `darg:${colorEntity.blockId}`,
+        collisionDetector: distanceDetector,
         data: {
             blockId: colorEntity.blockId,
             kind: "block",
@@ -44,7 +64,7 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
     return <ContextMenu>
         <ContextMenuTrigger>
 
-            <div ref={setCombinedRef} className={`${isDropTarget && 'outline-2 outline-accent'} ${isDragging && 'opacity-50'} h-9 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
+            <div ref={setCombinedRef} className={`${isDropTarget && !isDragging&& 'outline-2 outline-primary'} ${isDragging && 'opacity-50'}  h-10 rounded-md w-full  shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
                 <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer`}>
                     <DragDots />
                 </div>
