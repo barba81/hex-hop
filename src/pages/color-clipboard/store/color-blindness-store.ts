@@ -1,4 +1,4 @@
-import { ColorBlindnessType } from "@/infrastructure/models/color-blidness-types";
+import { ColorBlindnessType } from "@/infrastructure/models/color-blindness-types";
 import { create } from "zustand";
 
 interface ColorBlindnessStore {
