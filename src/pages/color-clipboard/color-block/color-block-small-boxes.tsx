@@ -9,6 +9,7 @@ import { useClipboardStore } from "../store/clipboard-store";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import type { DraggableData } from "../features/darg-and-drop";
 import {CollisionDetector, CollisionPriority, CollisionType} from '@dnd-kit/abstract';
+import { useColorBlindnessStore } from "../store/color-blindness-store";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity
@@ -34,6 +35,8 @@ export const distanceDetector: CollisionDetector = ({dragOperation, droppable}) 
 };
 
 const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
+    const { colorBlindnessMode} = useColorBlindnessStore();
+
     const { isDropTarget, ref: dropRef } = useDroppable<DraggableData>({
         id: `darg:${colorEntity.blockId}`,
         collisionDetector: distanceDetector,
@@ -53,7 +56,7 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
         }
     });
 
-    const backgroundCss = coloBackground(colorEntity);
+    const backgroundCss = coloBackground(colorEntity, colorBlindnessMode);
     const setEditBox = useClipboardStore(x => x.setEditBlock);
 
     const setCombinedRef = (node: HTMLDivElement | null) => {

@@ -1,1 +1,3 @@
-export type ColorBlindnessType = 'protanopia' | 'deuteranopia' | 'tritanopia' | 'achromatopsia' | 'regular' ;
+import { Deficiency } from "@bjornlu/colorblind";
+
+export type ColorBlindnessType =  'regular' | Deficiency ;
