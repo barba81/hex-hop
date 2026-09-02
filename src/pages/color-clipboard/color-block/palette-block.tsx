@@ -1,7 +1,7 @@
 import { DragDots } from "@/components/common/drag-dots";
 import type { PaletteEntity } from "@/infrastructure/models/entity";
 
-import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
+import { useClipboardStore } from "@/pages/color-clipboard/store/clipboard-store";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import { ChevronDown, Pen, Trash2 } from "lucide-react";
 import type { DraggableData } from "../features/darg-and-drop";

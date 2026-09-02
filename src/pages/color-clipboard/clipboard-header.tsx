@@ -5,6 +5,7 @@ import { defaultButtonBackground } from "@/components/common/custom-button";
 import { CustomInput } from "@/components/common/custom-input";
 import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
 import { addNewPalette } from "./features/add-block";
+import ColorBlindsDropDown from "./color-blindness-drop-down";
 
 const HeaderDropdown = () => {
 
@@ -91,12 +92,12 @@ const SearchBar = () => {
   );
 };
 
-
 const HeaderColorList = () => {
   return (
     <div className="w-full  flex gap-2  items-center justify-between bg-zinc-100 dark:bg-zinc-900 p-2  ">
       <DoUnDoArrows />
       <SearchBar />
+      <ColorBlindsDropDown/>
       <HeaderDropdown />
     </div>
   );

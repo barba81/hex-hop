@@ -1,6 +1,6 @@
 import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
 import type { ColorEntity } from "@/infrastructure/models/entity";
-import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
+import { useClipboardStore } from "@/pages/color-clipboard/store/clipboard-store";
 import { invoke } from "@tauri-apps/api/core";
 
 export const duplicateBlock = async (colorData: ColorEntity) => {

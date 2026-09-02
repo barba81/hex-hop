@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/popover";
 
 import "@/globals.css";
-import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
+import { useClipboardStore } from "@/pages/color-clipboard/store/clipboard-store";
 import { setColorValidityAndMode } from "../features/set-color-validity-and-mode";
 
 const PreviewColorBox = () => {

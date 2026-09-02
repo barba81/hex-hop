@@ -5,7 +5,7 @@ import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator,
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { duplicateBlock } from "../features/duplicate-block";
 import { deleteColorBlock } from "../features/delete-block";
-import { useClipboardStore } from "../store/use-clipboard-store";
+import { useClipboardStore } from "../store/clipboard-store";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import type { DraggableData } from "../features/darg-and-drop";
 import {CollisionDetector, CollisionPriority, CollisionType} from '@dnd-kit/abstract';

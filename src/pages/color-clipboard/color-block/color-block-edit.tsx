@@ -1,7 +1,7 @@
 import type { ColorEntity } from "@/infrastructure/models/entity";
 import { colorEntityToColor, colorEntityToRoundedEntity, hexaToRgbaNormalized, toHex8 } from "../../../infrastructure/utils/color-format-changer";
 import { Check, RefreshCw, X } from "lucide-react";
-import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
+import { useClipboardStore } from "@/pages/color-clipboard/store/clipboard-store";
 import { updateColorBlock } from "../features/update-block";
 import { CustomInput } from "@/components/common/custom-input";
 import { defaultButtonBackground } from "@/components/common/custom-button";

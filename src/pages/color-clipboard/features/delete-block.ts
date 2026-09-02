@@ -1,6 +1,6 @@
 import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
 import type { BlockEntity, ColorEntity } from "@/infrastructure/models/entity";
-import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
+import { useClipboardStore } from "@/pages/color-clipboard/store/clipboard-store";
 import { invoke } from "@tauri-apps/api/core";
 
 export const deleteColorBlock = async (blockId: number, colorId: number, paletteId: number | null) => {

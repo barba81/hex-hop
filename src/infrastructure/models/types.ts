@@ -6,4 +6,3 @@ export type ColorData =  {
     paletteId?: number;
     name: string
 }
-

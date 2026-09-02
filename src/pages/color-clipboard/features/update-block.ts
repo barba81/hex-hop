@@ -1,7 +1,7 @@
 
 import type { ColorEntity, GradientEntitySummary, PaletteEntitySummary } from "@/infrastructure/models/entity"
 import { invoke } from "@tauri-apps/api/core";
-import { useClipboardStore } from "../store/use-clipboard-store";
+import { useClipboardStore } from "../store/clipboard-store";
 import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
 
 export const updateColorBlock = async (newEntity: ColorEntity, oldEntity: ColorEntity) => {

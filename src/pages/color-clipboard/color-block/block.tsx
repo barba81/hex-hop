@@ -1,4 +1,4 @@
-import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
+import { useClipboardStore } from "@/pages/color-clipboard/store/clipboard-store";
 import ColorBlockEdit from "./color-block-edit";
 import PaletteBlock from "./palette-block";
 import ColorBlockSmallBoxes from "./color-block-small-boxes";

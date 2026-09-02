@@ -1,7 +1,7 @@
 import { CustomInput } from "@/components/common/custom-input";
 import { toGradientSummary, toPaletteSummary, type PaletteEntity } from "@/infrastructure/models/entity";
 import { Check, X } from "lucide-react";
-import { useClipboardStore } from "../store/use-clipboard-store";
+import { useClipboardStore } from "../store/clipboard-store";
 import type { ChangeEvent} from "react";
 import { useState } from "react";
 import { defaultButtonBackground } from "@/components/common/custom-button";

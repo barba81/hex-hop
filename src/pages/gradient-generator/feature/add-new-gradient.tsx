@@ -3,7 +3,7 @@ import { invoke } from "@tauri-apps/api/core";
 import { useGradientStore } from "@/pages/gradient-generator/store/use-gradient-store";
 import { newGradient } from "./default-const-gradient";
 import type { GradientEntity, GradientLayerEntity, GradientStopEntity } from "@/infrastructure/models/entity";
-import { useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
+import { useClipboardStore } from "@/pages/color-clipboard/store/clipboard-store";
 
 export const addNewGradient = async () => {
   const gradientId = await invoke("create_gradient", { gradient: newGradient });

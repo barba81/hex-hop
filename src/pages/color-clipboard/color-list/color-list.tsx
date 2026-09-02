@@ -1,5 +1,5 @@
 import { DragDropProvider } from "@dnd-kit/react";
-import { rootBlockId, useClipboardStore } from "@/pages/color-clipboard/store/use-clipboard-store";
+import { rootBlockId, useClipboardStore } from "@/pages/color-clipboard/store/clipboard-store";
 import EmptyClipboardPage from "../empty-clipboard-page";
 import Block from "../color-block/block";
 import React from "react";
@@ -15,7 +15,7 @@ const ColorList = () => {
       {colorBlocks.length === 0 ? <EmptyClipboardPage /> :
         <DragDropProvider  onDragEnd={(e) => handleDragEnd(e)}
         >
-          <div className="flex-1 overflow-y-auto flex flex-col px-2  ">
+          <div className="flex-1 overflow-y-scroll flex flex-col px-2  ">
             <DroppableLine id={"drop:start"} blockId={-1} key='drop:start' palette={null} />
             {colorBlocks.map((blockId) =>
 

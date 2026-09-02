@@ -8,6 +8,9 @@ importers:
 
   .:
     dependencies:
+      '@bjornlu/colorblind':
+        specifier: ^1.0.3
+        version: 1.0.3
       '@dnd-kit/abstract':
         specifier: ^0.5.0
         version: 0.5.0
@@ -293,6 +296,9 @@ packages:
   '@babel/types@7.29.8':
     resolution: {integrity: sha512-Vj1jF3cPfxg7OAfoI7QnVKLoILlm2JF9pnVHrX8qx7AHMiYWT+NDAA7jChlNgRS4WTLc/fD1lXLmPixluj+3Gg==}
     engines: {node: '>=6.9.0'}
+
+  '@bjornlu/colorblind@1.0.3':
+    resolution: {integrity: sha512-RG9W0BuFib5xN19R4U1dFK7s26+UPiJqHdwqawpvH7sywXJ6zc37onPpRpnFP0aNuKLhhmuitqPAXxLxOA+HgQ==}
 
   '@dnd-kit/abstract@0.4.0':
     resolution: {integrity: sha512-loEEJxKT5oLOLeRBJVTO9qpgvvW/Qq902xO20v1JMbpANuN/NLurUdpxIwNpVz+RtOSyzznnbc7lO7psmOhc9A==}
@@ -4183,6 +4189,8 @@ snapshots:
     dependencies:
       '@babel/helper-string-parser': 7.29.7
       '@babel/helper-validator-identifier': 7.29.7
+
+  '@bjornlu/colorblind@1.0.3': {}
 
   '@dnd-kit/abstract@0.4.0':
     dependencies:

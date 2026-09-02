@@ -1,5 +1,5 @@
 import { GradientEntitySummary, toGradientSummary, type GradientEntity } from "@/infrastructure/models/entity";
-import { useClipboardStore } from "../store/use-clipboard-store";
+import { useClipboardStore } from "../store/clipboard-store";
 import type { ChangeEvent} from "react";
 import { useState } from "react";
 import { Check, X } from "lucide-react";
