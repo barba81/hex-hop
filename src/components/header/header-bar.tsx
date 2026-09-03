@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { platform as getPlatform } from "@tauri-apps/plugin-os";
 import MacHeaderButton from "./mac-header-button";
 import WindowsHeaderButton from "./windows-header-button";
@@ -6,8 +5,8 @@ import DropDownHeader from "@/pages/navigator/drop-down-header";
 
 
 const HeaderBar = () => {
-  const [platform] = useState<string>( getPlatform());
-
+  const platform =  getPlatform();
+  
   return (
     <div
         data-tauri-drag-region

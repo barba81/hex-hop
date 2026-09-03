@@ -12,7 +12,7 @@ const HeaderDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className={`p-1 ${defaultButtonBackground} outline-1`}  >
+        <button className={`p-1 ${defaultButtonBackground} outline-1`} aria-label="settings" >
           <EllipsisVertical size={15} />
         </button>
       </DropdownMenuTrigger>

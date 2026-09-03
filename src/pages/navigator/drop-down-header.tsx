@@ -58,29 +58,8 @@ const ICON_MAP = {
     shortLabel: "Palette",
   },
 
-  "/color-contrast": {
-    icon: (
-      <Eye
-        size={size}
-        strokeWidth={2.5}
-        className="dark:text-gray-300"
-      />
-    ),
-    label: "Accessibility",
-    shortLabel: "Accessibility",
-  },
 
-  "/import-export": {
-    icon: (
-      <Import
-        size={size}
-        strokeWidth={2.5}
-        className="dark:text-gray-300"
-      />
-    ),
-    label: "Import/Export",
-    shortLabel: "Export",
-  },
+ 
 
   "/settings": {
     icon: (
@@ -92,6 +71,17 @@ const ICON_MAP = {
     ),
     label: "Settings",
     shortLabel: "Settings",
+  },
+   "/import-export": {
+    icon: (
+      <Import
+        size={size}
+        strokeWidth={2.5}
+        className="dark:text-gray-300"
+      />
+    ),
+    label: "Export",
+    shortLabel: "Export",
   },
 };
 

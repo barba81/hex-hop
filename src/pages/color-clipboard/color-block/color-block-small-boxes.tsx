@@ -13,12 +13,11 @@ import { useColorBlindnessStore } from "../store/color-blindness-store";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity
-
 };
 
 
 export const distanceDetector: CollisionDetector = ({dragOperation, droppable}) => {
-  const dragShape = dragOperation.shape?.current; // <-- unwrap history
+  const dragShape = dragOperation.shape?.current;
   const dropShape = droppable.shape;
 
   if (!dragShape || !dropShape) return null;

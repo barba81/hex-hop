@@ -1,6 +1,6 @@
 import { ModeToggle } from "@/components/theme/mode-toggle"
 
 
-export const SettingsView = () => {
+export const SettingsPaletteBlock = () => {
     return <ModeToggle />
 }
