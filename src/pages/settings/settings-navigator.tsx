@@ -2,15 +2,14 @@ import GradientIcon from "@/components/icons/gradient-icon";
 import { Copy, Palette, TriangleAlert, TvMinimal } from "lucide-react";
 import { NavLink } from "react-router";
 
+
 export const SettingsNavigator = () => {
   return (
-    <div className="flex w-full dark:bg-zinc-800 px-1 py-1 h-8 gap-2">
+    <div className="flex w-full dark:bg-zinc-900 px-1 py-1 h-8 gap-2">
       <NavLink
         to="/settings/color-block"
-        end
-        className={({ isActive }) =>
-          `flex px-2 rounded-md gap-1.5 text-sm items-center cursor-pointer hover:bg-accent ${
-            isActive ? "bg-primary" : ""
+         className={({ isActive }) =>
+          `flex p-1.5 rounded-md gap-1.5 text-sm items-center cursor-pointer   ${isActive ? "bg-accent" : ""
           }`
         }
       >
@@ -20,21 +19,19 @@ export const SettingsNavigator = () => {
 
       <NavLink
         to="/settings/gradient-block"
-        className={({ isActive }) =>
-          `flex px-2 rounded-md gap-1.5 text-sm items-center cursor-pointer hover:bg-accent ${
-            isActive ? "bg-primary" : ""
+          className={({ isActive }) =>
+          `flex p-1.5 rounded-md gap-1.5 text-sm items-center cursor-pointer   ${isActive ? "bg-accent" : ""
           }`
         }
       >
         <GradientIcon size={15} />
-        Gradient 
+        Gradient
       </NavLink>
 
-            <NavLink
+      <NavLink
         to="/settings/palette-block"
         className={({ isActive }) =>
-          `flex p-1.5 rounded-md gap-1.5 text-sm items-center cursor-pointer   ${
-            isActive ? "bg-primary" : ""
+          `flex p-1.5 rounded-md gap-1.5 text-sm items-center cursor-pointer   ${isActive ? "bg-accent" : ""
           }`
         }
       >
@@ -45,8 +42,7 @@ export const SettingsNavigator = () => {
       <NavLink
         to="/settings/danger-settings"
         className={({ isActive }) =>
-          `flex p-1.5 rounded-md gap-1.5 text-sm items-center cursor-pointer text-destructive hover:bg-destructive/20  ${
-            isActive ? "bg-destructive/20" : ""
+          `flex p-1.5 rounded-md gap-1.5 text-sm items-center cursor-pointer text-destructive hover:bg-destructive/20  ${isActive ? "bg-destructive/20" : ""
           }`
         }
       >

@@ -6,7 +6,7 @@ export const SettingsPage = () => {
     <div>
       <SettingsNavigator />
 
-      <div className="p-3">
+      <div className="p-1">
         <Outlet />
       </div>
     </div>

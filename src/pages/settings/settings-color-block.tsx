@@ -4,8 +4,7 @@ import { defaultInputColor } from "../color-clipboard/store/clipboard-store";
 const ColorBlockPreview = () => {
     const backgroundCss = defaultInputColor;
 
-    return <>
-
+    return <div className="px-3">
         <div className={` h-10 rounded-md w-full  shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
             <div className={`flex items-center justify-center shrink-0 cursor-pointer`}>
                 <DragDots />
@@ -28,8 +27,7 @@ const ColorBlockPreview = () => {
 
             </div>
         </div>
-
-    </>
+    </div>
 
 }
 
