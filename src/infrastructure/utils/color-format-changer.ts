@@ -24,9 +24,9 @@ export function colorStringToData(colorString: string) {
   return color;
 }
 
-export function coloBackground(color: ColorData, colorBlindnessMode: ColorBlindnessType | null | undefined) {
+export function coloBackground(color: ColorData, colorBlindnessMode?: ColorBlindnessType | null ) {
 
-  if (colorBlindnessMode === 'regular' || colorBlindnessMode === null || colorBlindnessMode === undefined) {
+  if (colorBlindnessMode === 'regular' || colorBlindnessMode == null ) {
     return formatCss({ ...color, alpha: color.alpha ?? undefined, mode: "rgb" });
 
   }

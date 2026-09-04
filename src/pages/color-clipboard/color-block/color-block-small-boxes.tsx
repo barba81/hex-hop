@@ -24,7 +24,6 @@ export const distanceDetector: CollisionDetector = ({dragOperation, droppable}) 
 
   const dy = dragShape.center.y - dropShape.center.y;
   const distance = Math.sqrt(dy * dy);
-  console.log( droppable.id, distance);
   return {
     id: droppable.id,
     value: -distance,

@@ -6,7 +6,7 @@ export const SettingsNavigator = () => {
   return (
     <div className="flex w-full dark:bg-zinc-800 px-1 py-1 h-8 gap-2">
       <NavLink
-        to="/settings/color-box"
+        to="/settings/color-block"
         end
         className={({ isActive }) =>
           `flex px-2 rounded-md gap-1.5 text-sm items-center cursor-pointer hover:bg-accent ${
@@ -19,7 +19,7 @@ export const SettingsNavigator = () => {
       </NavLink>
 
       <NavLink
-        to="/settings/gradient-box"
+        to="/settings/gradient-block"
         className={({ isActive }) =>
           `flex px-2 rounded-md gap-1.5 text-sm items-center cursor-pointer hover:bg-accent ${
             isActive ? "bg-primary" : ""
@@ -31,7 +31,7 @@ export const SettingsNavigator = () => {
       </NavLink>
 
             <NavLink
-        to="/settings/palette-box"
+        to="/settings/palette-block"
         className={({ isActive }) =>
           `flex p-1.5 rounded-md gap-1.5 text-sm items-center cursor-pointer   ${
             isActive ? "bg-primary" : ""

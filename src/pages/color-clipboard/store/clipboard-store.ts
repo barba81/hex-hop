@@ -2,7 +2,7 @@ import type { BlockEntity, ColorEntity, GradientEntity, GradientEntitySummary, P
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
-const defaultInputColor = "#3b82f6";
+export const defaultInputColor = "#3b82f6";
 export const rootBlockId = -1;
 
 interface ClipboardStore {
