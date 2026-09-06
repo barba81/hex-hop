@@ -1,4 +1,5 @@
 import type { BlockEntity, ColorEntity, GradientEntity, GradientEntitySummary, PaletteEntity, PaletteEntitySummary } from "@/infrastructure/models/entity";
+import { invoke } from "@tauri-apps/api/core";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 
@@ -22,7 +23,7 @@ interface ClipboardStore {
 interface ClipboardAction {
   // INIT -----------------------------------------------------------------------
 
-  initBlocks: (blocks: BlockEntity[]) => void;
+  initBlocks: () => void;
 
   // CREATE -----------------------------------------------------------------------
 
@@ -59,8 +60,12 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
   colorFormat: "RGB",
   openPalette: {},
   editBlockId: null,
-  initBlocks: (blocks) =>
-    set(state => {
+
+  initBlocks: async () => {
+    const blocks = await invoke<BlockEntity[]>("load_state");
+
+    return set(state => {
+
       state.blockIds[rootBlockId] = blocks.map(block => block.blockId);
 
       state.blocksById = {};
@@ -78,7 +83,9 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
           }
         }
       }
-    }),
+    }
+    )
+  },
 
   reorderBlocks: (reorderedBlocks) =>
     set(state => {

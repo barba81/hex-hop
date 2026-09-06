@@ -8,11 +8,15 @@ import { ThemeProvider } from "./components/theme/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { Outlet } from "react-router";
 import { TooltipProvider } from "./components/ui/tooltip";
+import { useClipboardStore } from "./pages/color-clipboard/store/clipboard-store";
 
 function HexHopApp() {
+  const initBlock = useClipboardStore((state) => state.initBlocks2);
+
   useEffect(() => {
     moveWindow(Position.TopRight);
-    loadState();
+    initBlock();
+    // loadState();
   }, []);
 
   return (

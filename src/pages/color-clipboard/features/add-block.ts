@@ -8,7 +8,7 @@ import { colorStringToData } from "@/infrastructure/utils/color-format-changer";
 export const addNewColorToClipboard = async (inputColor: string, paletteId: number | null) => {
     
     const colorData = colorStringToData(inputColor);
-    // const colorData = randomColor();
+
     const name = await getSmartColorName(colorData);
     const colorEntity = await invoke<ColorEntity>("create_color", { color: { ...colorData, name: name } });
     useClipboardStore.getState().pushBlock(colorEntity, null);
