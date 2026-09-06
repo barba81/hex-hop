@@ -4,6 +4,8 @@ import { immer } from 'zustand/middleware/immer'
 
 interface GradientStore {
   expandedLayers: Record<string, boolean>;
+  gradientsMap: Record<number, GradientEntity>;
+  gradientsIds: number[];
   gradients: GradientEntity[];
   selectedGradientId: number | null;
 }
@@ -38,6 +40,8 @@ interface GradientAction {
 export const useGradientStore = create<GradientStore & GradientAction>()(immer((set) => ({
   expandedLayers: {},
   gradients: [],
+  gradientsMap: {},
+  gradientsIds: [],
   selectedGradientId: null,
   // INIT -----------------------------------------------------------------------
 

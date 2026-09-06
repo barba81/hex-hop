@@ -23,7 +23,7 @@ interface ClipboardStore {
 interface ClipboardAction {
   // INIT -----------------------------------------------------------------------
 
-  initBlocks: () => void;
+  initBlocks: () => Promise<void>;
 
   // CREATE -----------------------------------------------------------------------
 

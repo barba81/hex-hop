@@ -3,7 +3,6 @@ import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import HeaderBar from "./components/header/header-bar";
 
 import "./globals.css";
-import { loadState } from "./infrastructure/utils/load-state";
 import { ThemeProvider } from "./components/theme/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { Outlet } from "react-router";
@@ -11,13 +10,18 @@ import { TooltipProvider } from "./components/ui/tooltip";
 import { useClipboardStore } from "./pages/color-clipboard/store/clipboard-store";
 
 function HexHopApp() {
-  const initBlock = useClipboardStore((state) => state.initBlocks2);
+  const initBlock = useClipboardStore((state) => state.initBlocks);
+
 
   useEffect(() => {
+  const init = async () => {
     moveWindow(Position.TopRight);
-    initBlock();
-    // loadState();
-  }, []);
+    await initBlock();
+  };
+
+  init();
+}, []);
+
 
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
