@@ -7,30 +7,22 @@ import { ThemeProvider } from "./components/theme/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { Outlet } from "react-router";
 import { TooltipProvider } from "./components/ui/tooltip";
-import { useClipboardStore } from "./pages/color-clipboard/store/clipboard-store";
 
 function HexHopApp() {
-  const initBlock = useClipboardStore((state) => state.initBlocks);
-
 
   useEffect(() => {
-  const init = async () => {
     moveWindow(Position.TopRight);
-    await initBlock();
-  };
-
-  init();
-}, []);
+  }, []);
 
 
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
       <TooltipProvider>
         <Toaster position="top-center" />
-          <div className="w-screen h-screen flex flex-col  bg-stone-50/80 dark:bg-stone-800/80 ">
-            <HeaderBar />
-            <Outlet />
-          </div>
+        <div className="w-screen h-screen flex flex-col  bg-stone-50/80 dark:bg-stone-800/80 ">
+          <HeaderBar />
+          <Outlet />
+        </div>
       </TooltipProvider>
     </ThemeProvider>
   );

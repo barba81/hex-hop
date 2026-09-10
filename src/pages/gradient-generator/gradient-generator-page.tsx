@@ -1,9 +1,27 @@
-import GradientEmptyPage from "./gradient-empty-page";
+import { useEffect } from "react";
 import { useGradientStore } from "./store/use-gradient-store";
+import GradientEmptyPage from "./gradient-empty-page";
+import GradientList from "./gradient-list";
+import { useShallow } from "zustand/shallow";
 
 const GradientGeneratorPage = () => {
-  const gradients = useGradientStore((state)=>state.gradients);
-  return {};
+  const { gradientsIds, initGradient } = useGradientStore(
+    useShallow((state) => ({
+      gradientsIds: state.gradientsIds,
+      initGradient: state.initGradient,
+    }))
+  );
+
+  useEffect(() => {
+    initGradient();
+  }, [initGradient]);
+
+  return (
+    <>
+      {gradientsIds.length === 0 && <GradientEmptyPage />}
+      {gradientsIds.length > 0 && <GradientList />}
+    </>
+  );
 };
 
 export default GradientGeneratorPage;

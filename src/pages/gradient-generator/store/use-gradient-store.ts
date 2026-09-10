@@ -1,4 +1,5 @@
 import type { GradientEntity, GradientLayerEntity, GradientStopEntity } from "@/infrastructure/models/entity";
+import { invoke } from "@tauri-apps/api/core";
 import { create } from "zustand";
 import { immer } from 'zustand/middleware/immer'
 
@@ -13,7 +14,7 @@ interface GradientStore {
 interface GradientAction {
   // INIT -----------------------------------------------------------------------
 
-  initGradient: (gradients: (GradientEntity)[]) => void;
+  initGradient: () => Promise<void>;
 
   // CREATE -----------------------------------------------------------------------
 
@@ -45,9 +46,13 @@ export const useGradientStore = create<GradientStore & GradientAction>()(immer((
   selectedGradientId: null,
   // INIT -----------------------------------------------------------------------
 
-  initGradient: (gradients: (GradientEntity)[]) => set((state) => {
+  initGradient: async () => {
+    const gradients = await invoke<GradientEntity[]>("load_state");
+    return set(state => {
+
       state.gradients = gradients;
-    }),
+    })
+  },
 
   // CREATE -----------------------------------------------------------------------
 
@@ -88,7 +93,7 @@ export const useGradientStore = create<GradientStore & GradientAction>()(immer((
     set((state) => {
       const index = state.gradients.findIndex((x) => x.id === gradientId);
       if (index === -1) return;
-        state.gradients.splice(index, 1);
+      state.gradients.splice(index, 1);
     }),
 
   deleteGradientLayer: (gradientId: number, gradientLayerId: number) =>
@@ -121,7 +126,3 @@ export const useGradientStore = create<GradientStore & GradientAction>()(immer((
     }),
 
 })));
-
-
-export const useGradientStoreHasElements = () => useGradientStore((state) => state.gradients.length > 0);
-export const useGradientStoreSelectedGradient = () => useGradientStore((state) => state.gradients[0]);

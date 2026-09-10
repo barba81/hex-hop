@@ -38,10 +38,6 @@ export const deleteGradientBlock = async (blockId: number, gradientId: number, p
 }
 
 
-// const deletePaletteBlocks = async (_: number) => {
-// const blocks = await invoke<BlockEntity[]>("load_state");
-// useClipboardStore.getState().initBlocks(blocks);
-// }
 
 export const deleteClipboard = async () => {
     const blockIds = await invoke("soft_delete_clipboard");
@@ -51,7 +47,7 @@ export const deleteClipboard = async () => {
         async undo() {
             await invoke("restore_blocks", { blockIds });
             const blocks = await invoke<BlockEntity[]>("load_state");
-            useClipboardStore.getState().initBlocks(blocks);
+            await useClipboardStore.getState().initBlocks();
         },
         async redo() {
             await invoke("soft_delete_clipboard");
