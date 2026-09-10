@@ -2,7 +2,7 @@ import type { DragEndEvent } from "@dnd-kit/react";
 import { rootBlockId, useClipboardStore } from "../../../store/clipboard-store";
 import { invoke } from "@tauri-apps/api/core";
 import type { BlockEntity, PaletteEntity } from "@/infrastructure/models/entity";
-import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
+import { useColorListCommands } from "@/store/command-manager-provider";
 
 export interface DraggableData {
   blockId: number;

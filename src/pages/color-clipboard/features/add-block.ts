@@ -2,7 +2,7 @@ import { invoke } from "@tauri-apps/api/core";
 import type { ColorEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { useClipboardStore } from "@/store/clipboard-store";
 import { getSmartColorName } from "./get-color-name";
-import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
+import { useColorListCommands } from "@/store/command-manager-provider";
 import { colorStringToData } from "@/infrastructure/utils/color-format-changer";
 
 export const addNewColorToClipboard = async (inputColor: string, paletteId: number | null) => {

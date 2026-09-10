@@ -1,4 +1,4 @@
-import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
+import { useColorListCommands } from "@/store/command-manager-provider";
 import type { ColorEntity } from "@/infrastructure/models/entity";
 import { useClipboardStore } from "@/store/clipboard-store";
 import { invoke } from "@tauri-apps/api/core";

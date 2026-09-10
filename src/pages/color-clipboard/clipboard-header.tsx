@@ -3,7 +3,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { deleteClipboard } from "./features/delete-block";
 import { defaultButtonBackground } from "@/components/common/custom-button";
 import { CustomInput } from "@/components/common/custom-input";
-import { useColorListCommands } from "@/infrastructure/command/command-manager-provider";
+import { useColorListCommands } from "@/store/command-manager-provider";
 import { addNewPalette } from "./features/add-block";
 import ColorBlindsDropDown from "./color-blindness-drop-down";
 
