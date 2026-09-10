@@ -1,7 +1,7 @@
 import { DragDots } from "@/components/common/drag-dots";
 import type { PaletteEntity } from "@/infrastructure/models/entity";
 
-import { useClipboardStore } from "@/pages/color-clipboard/store/clipboard-store";
+import { useClipboardStore } from "@/store/clipboard-store";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import { ChevronDown, Pen, Trash2 } from "lucide-react";
 import type { DraggableData } from "../features/darg-and-drop";
@@ -12,7 +12,7 @@ import DroppableLine from "../color-list/droppable";
 import React from "react";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { distanceDetector } from "./color-block-small-boxes";
-import { useColorBlindnessStore } from "../store/color-blindness-store";
+import { useColorBlindnessStore } from "../../../store/color-blindness-store";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity

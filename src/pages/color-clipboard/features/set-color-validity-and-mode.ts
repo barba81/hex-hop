@@ -1,4 +1,4 @@
-import { useClipboardStore } from "@/pages/color-clipboard/store/clipboard-store";
+import { useClipboardStore } from "@/store/clipboard-store";
 import { formatHex8, parse } from "culori";
 
 export const setColorValidityAndMode = (stringColor: string) => {

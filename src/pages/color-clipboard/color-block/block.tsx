@@ -1,4 +1,4 @@
-import { useClipboardStore } from "@/pages/color-clipboard/store/clipboard-store";
+import { useClipboardStore } from "@/store/clipboard-store";
 import ColorBlockEdit from "./color-block-edit";
 import PaletteBlock from "./palette-block";
 import ColorBlockSmallBoxes from "./color-block-small-boxes";
@@ -11,6 +11,8 @@ type ColorBoxParams = {
 };
 
 const Block = ({ blockId }: ColorBoxParams) => {
+
+    
     const block = useClipboardStore(
         state => state.blocksById[blockId]
     );

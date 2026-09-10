@@ -1,5 +1,5 @@
 import { DragDropProvider } from "@dnd-kit/react";
-import { rootBlockId, useClipboardStore } from "@/pages/color-clipboard/store/clipboard-store";
+import { rootBlockId, useClipboardStore } from "@/store/clipboard-store";
 import EmptyClipboardPage from "../empty-clipboard-page";
 import Block from "../color-block/block";
 import React from "react";

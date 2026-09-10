@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/dropdown-menu"; // Update import path if needed
 import { defaultButtonBackground } from "@/components/common/custom-button";
 import { ColorBlindnessType } from "@/infrastructure/models/color-blindness-types";
-import { useColorBlindnessStore } from "./store/color-blindness-store";
+import { useColorBlindnessStore } from "../../store/color-blindness-store";
 
 interface ColorBlindOption {
   label: string;

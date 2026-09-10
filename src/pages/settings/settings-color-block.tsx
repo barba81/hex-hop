@@ -1,5 +1,5 @@
 import { DragDots } from "@/components/common/drag-dots"
-import { defaultInputColor } from "../color-clipboard/store/clipboard-store";
+import { defaultInputColor } from "../../store/clipboard-store";
 
 const ColorBlockPreview = () => {
     const backgroundCss = defaultInputColor;
