@@ -1,3 +1,4 @@
+import { ColorCopyList, defaultColorCopyList } from "@/infrastructure/models/color-copy-list";
 import type { BlockEntity, ColorEntity, GradientEntity, GradientEntitySummary, PaletteEntity, PaletteEntitySummary } from "@/infrastructure/models/entity";
 import { invoke } from "@tauri-apps/api/core";
 import { create } from "zustand";
@@ -18,6 +19,7 @@ interface ClipboardStore {
   inputColor: string;
   isColorValid: boolean;
   colorFormat: string;
+  copyList: ColorCopyList[],
 }
 
 interface ClipboardAction {
@@ -60,7 +62,7 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
   colorFormat: "RGB",
   openPalette: {},
   editBlockId: null,
-
+  copyList: defaultColorCopyList,
   initBlocks: async () => {
     const blocks = await invoke<BlockEntity[]>("load_state");
 

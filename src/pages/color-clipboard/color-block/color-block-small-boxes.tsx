@@ -10,6 +10,7 @@ import { useDraggable, useDroppable } from "@dnd-kit/react";
 import type { DraggableData } from "../features/darg-and-drop";
 import {CollisionDetector, CollisionPriority, CollisionType} from '@dnd-kit/abstract';
 import { useColorBlindnessStore } from "../../../store/color-blindness-store";
+import { ColorBlockCopyList } from "./color-block-copy-list";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity
@@ -62,6 +63,7 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
         dropRef(node);
     };
 
+
     return <ContextMenu>
         <ContextMenuTrigger>
 
@@ -77,7 +79,7 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
                     </div>
                     <div className="p-0.5 flex-1 flex flex-row justify-between pr-2">
                         <div className="flex">
-                            {/* <CopyLogo color={colorEntity} fontClass={"white"} />  */}
+                            <ColorBlockCopyList colorEntity={colorEntity}  /> 
                         </div>
                         <div className="flex gap-2 h-full items-center ">
                             {colorEntity.name}
