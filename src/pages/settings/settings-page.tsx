@@ -3,10 +3,9 @@ import SettingsNavigator from "./settings-navigator";
 
 export const SettingsPage = () => {
   return (
-    <div>
+    <div className="flex flex-col h-full">
       <SettingsNavigator />
-
-      <div className="p-1">
+      <div className="flex-1 h-full ">
         <Outlet />
       </div>
     </div>

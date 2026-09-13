@@ -3,6 +3,8 @@ import { defaultInputColor, useClipboardStore } from "../../store/clipboard-stor
 import { ColorCopyList } from "@/infrastructure/models/color-copy-list";
 import { useSortable } from '@dnd-kit/react/sortable';
 import ColorBlock from "../color-clipboard/color-block/color-block-small-boxes";
+import { ChevronDown, ChevronUp, SquareChevronDown, SquareChevronUp } from "lucide-react";
+import { ColorFormulaCreator } from "./color-formula-creator";
 
 const ColorBlockPreview = () => {
     const backgroundCss = defaultInputColor;
@@ -35,6 +37,7 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyLis
     const { ref } = useSortable({ id: copyBlock.id, index: index });
     const setColorCopyFormulaActive = useClipboardStore((state) => state.setColorCopyFormulaActive);
     const colorCopyFormulaActiveId = useClipboardStore((state) => state.colorCopyFormulaActiveId);
+    const Icon = copyBlock.icon;
 
     return <div onClick={() => setColorCopyFormulaActive(copyBlock.id)} ref={ref}
 
@@ -46,15 +49,17 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyLis
         </div>
         <div className={`w-full  flex justify-between overflow-hidden bg-background  `}>
 
-            <div className=" flex-1 flex flex-row justify-between pr-2">
-                <div className="flex">
+            <div className=" flex-1 flex flex-row justify-between px-1">
+                <div className="flex w-5 items-center gap-1 ">
+                    <Icon size={20} />
+                    {copyBlock.fallBackName}
                 </div>
                 <div className="flex gap-2 h-full items-center  text-sm">
-
+                    {copyBlock.formula}
                 </div>
-                <div className="flex">
-                <div>V</div>
-                <div>A</div>
+                <div className="flex items-center justify-center gap-1">
+                    <div className="cursor-pointer border rounded-md hover:border-primary hover:bg-secondary" onClick={() => { }}><ChevronUp size={20} /></div>
+                    <div className="cursor-pointer border rounded-md hover:border-primary hover:bg-secondary" onClick={() => { }}><ChevronDown size={20} /></div>
                 </div>
             </div>
 
@@ -73,11 +78,10 @@ export const ColorFormat = () => {
 
 export const SettingsColorBlock = () => {
 
-    return <>
-        <div className="flex flex-col gap-1">
-
-            <ColorBlockPreview />
-            <ColorFormat />
-        </div>
-    </>
+    return <div className="h-full flex flex-col gap-1 overflow-auto px-1 ">
+        <ColorBlockPreview />
+        <ColorFormat />
+        <ColorFormulaCreator />
+    </div>
 }
+

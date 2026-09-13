@@ -21,6 +21,7 @@ function HexHopApp() {
         <Toaster position="top-center" />
         <div className="w-screen h-screen flex flex-col  bg-stone-50/80 dark:bg-stone-800/80 ">
           <HeaderBar />
+
           <Outlet />
         </div>
       </TooltipProvider>

@@ -17,8 +17,6 @@ const ColorListPage = () => {
     init();
   }, []);
 
-
-
   return (
     <div className="h-full flex flex-col gap-1 overflow-auto">
       <HeaderColorList />
