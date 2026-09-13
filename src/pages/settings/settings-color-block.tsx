@@ -78,7 +78,7 @@ export const ColorFormat = () => {
 
 export const SettingsColorBlock = () => {
 
-    return <div className="h-full flex flex-col gap-1 overflow-auto px-1 ">
+    return <div className="h-full flex flex-col gap-1 overflow-auto p-1 ">
         <ColorBlockPreview />
         <ColorFormat />
         <ColorFormulaCreator />
