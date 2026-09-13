@@ -38,6 +38,7 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyLis
     const { ref } = useSortable({ id: copyBlock.id, index: index });
     const setColorCopyFormulaActive = useClipboardStore((state) => state.setColorCopyFormulaActive);
     const colorCopyFormulaActiveId = useClipboardStore((state) => state.colorCopyFormulaActiveId);
+    const flitColorCopyBloc = useClipboardStore((state) => state.flitColorCopyBloc);
     const Icon = copyBlock.icon;
 
     return <div onClick={() => setColorCopyFormulaActive(copyBlock.id)} ref={ref}
@@ -52,7 +53,7 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyLis
 
             <div className=" flex-1 flex flex-row justify-between px-1">
                 <div className="flex w-4 items-center gap-1 ">
-                    <Icon  />
+                    <Icon />
                     {copyBlock.fallBackName}
                 </div>
                 <div className="flex gap-2 h-full items-center  text-sm">
@@ -60,8 +61,13 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyLis
                 </div>
 
                 <div className="flex items-center justify-center gap-1">
-                    <Eye size={18}/>
-                    <EyeClosed size={18}/>
+                    <div className="cursor-pointer border rounded-md hover:border-primary hover:bg-secondary p-0.5 " 
+                    onClick={()=> flitColorCopyBloc(copyBlock.id)}> 
+                    {copyBlock.enabled ? <Eye size={18} /> :
+                        <EyeClosed size={18} />
+                    }
+                    </div>
+
                     <div className="cursor-pointer border rounded-md hover:border-primary hover:bg-secondary" onClick={() => { }}><ChevronUp size={20} /></div>
                     <div className="cursor-pointer border rounded-md hover:border-primary hover:bg-secondary" onClick={() => { }}><ChevronDown size={20} /></div>
                     <EllipsisVertical size={18} />

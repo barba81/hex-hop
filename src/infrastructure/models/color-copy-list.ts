@@ -14,7 +14,7 @@ export interface ColorCopyList {
 }
 
 export const defaultColorCopyList: ColorCopyList[] = [
-    { id: -1, fallBackName: "CSS", icon: CSSIcon, isIcon: true, order: 0, formula: "" },
-    { id: -2, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 1, formula: "" },
+    { id: -1, enabled: true, fallBackName: "CSS", icon: CSSIcon, isIcon: true, order: 0, formula: "rgb(r, g, b)" },
+    { id: -2, enabled: true, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 1, formula: "#RRGGBB" },
 
 ];
