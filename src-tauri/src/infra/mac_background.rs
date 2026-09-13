@@ -1,5 +1,8 @@
 use tauri::WebviewWindow;
-
+use window_vibrancy::NSGlassEffectViewStyle;
+use window_vibrancy::apply_liquid_glass;
+use window_vibrancy::NSVisualEffectMaterial;
+use window_vibrancy::apply_vibrancy;
 #[cfg(target_os = "windows")]
 use window_vibrancy::apply_acrylic;
 
