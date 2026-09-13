@@ -1,35 +1,67 @@
-const ColorFormulaTitle = () => {
+import { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
+import { useClipboardStore } from "@/store/clipboard-store";
+import { BlendIcon, Edit2, Trash2 } from "lucide-react";
+
+const ColorFormulaTitle = ({ copyFormula }: { copyFormula: ColorCopyFormula }) => {
+
     return (
-        <div className="w-full h-10  border-b-2 border-black">
+        <div className="w-full flex  h-7  border-b-2 border-black items-center justify-between px-2 bg-background">
+            <div className="flex items-center gap-2">
+                {copyFormula.fallBackName}
+            </div>
+            <div className="flex gap-2">
+                <Edit2 size={18} />
+                <Trash2 size={18} />
+            </div>
         </div>
     );
 };
 
 const ColorFormulaInputList = () => {
     return (
-        <div className=" h-full w-[30%] border-l-2 border-black">
+        <div className=" h-full w-[30%] border-l-2 border-black bg-stone-900">
+            <div>
+                RGB
+            </div>
+            <div>
+                HSL
+            </div>
+            <div>
+                OAKLAB
+            </div>
         </div>
     );
 };
 
-const ColorFormula = () => {
+const ColorFormula = ({ copyFormula }: { copyFormula: ColorCopyFormula }) => {
     return (
         <div className=" h-full w-[70%]">
+            <div className=" w-full h-[80%] bg-stone-800">{copyFormula.formula}</div>
+            <div className=" w-full h-[20%] bg-stone-900 border-t-2 border-black">{
+
+            }</div>
         </div>
     );
 };
 
 export const ColorFormulaCreator = () => {
+    const copyBlock = useClipboardStore((state) => state.copyList.find(x => x.id === state.colorCopyFormulaActiveId));
+
     return (
-        <div className="flex flex-col flex-1  rounded-md overflow-hidden border border-black">
-            
-            <ColorFormulaTitle />
+        <>
+            {copyBlock == undefined && <></>}
+            {copyBlock !== undefined &&
+                <div className="flex flex-col flex-1  rounded-md overflow-hidden border border-black">
 
-            <div className="flex flex-1 min-h-0">
-                <ColorFormula />
-                <ColorFormulaInputList />
-            </div>
+                    <ColorFormulaTitle copyFormula={copyBlock} />
 
-        </div>
+                    <div className="flex flex-1 min-h-0">
+                        <ColorFormula copyFormula={copyBlock} />
+                        <ColorFormulaInputList />
+                    </div>
+
+                </div>
+            }
+        </>
     );
 };

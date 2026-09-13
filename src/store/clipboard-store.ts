@@ -1,4 +1,4 @@
-import { ColorCopyList, defaultColorCopyList } from "@/infrastructure/models/color-copy-list";
+import { ColorCopyFormula, defaultColorCopyFormula, defaultColorCopyList } from "@/infrastructure/models/color-copy-list";
 import type { BlockEntity, ColorEntity, GradientEntity, GradientEntitySummary, PaletteEntity, PaletteEntitySummary } from "@/infrastructure/models/entity";
 import { invoke } from "@tauri-apps/api/core";
 import { create } from "zustand";
@@ -19,7 +19,7 @@ interface ClipboardStore {
   inputColor: string;
   isColorValid: boolean;
   colorFormat: string;
-  copyList: ColorCopyList[],
+  copyList: ColorCopyFormula[],
   colorCopyFormulaActiveId: number | null,
 }
 
@@ -54,6 +54,7 @@ interface ClipboardAction {
   setColorCopyFormulaActive: (blockId: number | null) => void;
   flitColorCopyBloc: (blockId: number | null) => void;
   reorderBlocks: (reorderedBlocks: { blockId: number[], paletteId: number | null }[]) => void;
+  addNewColorCopyBlock: () => void;
 }
 
 export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(immer((set) => ({
@@ -181,11 +182,14 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
     set((state) => {
       state.colorCopyFormulaActiveId = blockId;
     }),
-     flitColorCopyBloc: (copyListId) =>
+  flitColorCopyBloc: (copyListId) =>
     set((state) => {
-      debugger;
-      const copyBlock = state.copyList.findIndex(x=>x.id === copyListId);
-      if(copyBlock < 0) return; 
-       state.copyList[copyBlock].enabled = !state.copyList[copyBlock].enabled;
+      const copyBlock = state.copyList.findIndex(x => x.id === copyListId);
+      if (copyBlock < 0) return;
+      state.copyList[copyBlock].enabled = !state.copyList[copyBlock].enabled;
+    }),
+  addNewColorCopyBlock: () =>
+    set((state) => {
+      state.copyList.push({...defaultColorCopyFormula, id: 12});
     }),
 })));

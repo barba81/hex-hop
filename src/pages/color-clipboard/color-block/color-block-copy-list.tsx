@@ -1,11 +1,11 @@
-import { ColorCopyList } from "@/infrastructure/models/color-copy-list"
+import { ColorCopyFormula } from "@/infrastructure/models/color-copy-list"
 import { ColorEntity } from "@/infrastructure/models/entity"
 import { useClipboardStore } from "@/store/clipboard-store"
 
 
 interface ColorBlockCopyProps {
     colorEntity: ColorEntity,
-    copyBlock: ColorCopyList,
+    copyBlock: ColorCopyFormula,
 }
 
 const ColorCopyBlock = ({ colorEntity, copyBlock }: ColorBlockCopyProps) => {
