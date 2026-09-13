@@ -1,21 +1,25 @@
+import { BlenderIcon } from "@/components/icons/css-icon";
 import { CSSIcon } from "@/components/icons/css-icon";
-import { HexIcon } from "@/components/icons/hex-icon";
 import type { ComponentType } from "react";
 // import CSSIcon from "@/assets/icons/Official_CSS_Logo.svg?react";
 
 export interface ColorCopyList {
     id: number;
-    fallBack: string;
+    fallBackName: string;
     icon?: ComponentType;
     isIcon: boolean,
+    order: number, 
+    formula: string,
 }
 
 export const defaultColorCopyList: ColorCopyList[] = [
-    { id: -1, fallBack: "CSS", icon: CSSIcon, isIcon: true },
-    { id: -2, fallBack: "HEX", icon: CSSIcon, isIcon: true },
-    { id: -2, fallBack: "HEX", icon: CSSIcon, isIcon: true },
-    { id: -2, fallBack: "HEX", icon: CSSIcon, isIcon: true },
-    { id: -2, fallBack: "HEX", icon: CSSIcon, isIcon: true },
-    { id: -3, fallBack: "OKLAB", isIcon: false },
-    { id: -4, fallBack: "VEC4", isIcon: false },
+    { id: -1, fallBackName: "CSS", icon: CSSIcon, isIcon: true, order: 0, formula: "" },
+    { id: -2, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 0, formula: "" },
+    { id: -3, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 0, formula: "" },
+    { id: -4, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 0, formula: "" },
+    { id: -5, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 0, formula: "" },
+    { id: -6, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 0, formula: "" },
+    { id: -7, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 0, formula: "" },
+    { id: -8, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 0, formula: "" },
+    { id: -9, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 0, formula: "" },
 ];

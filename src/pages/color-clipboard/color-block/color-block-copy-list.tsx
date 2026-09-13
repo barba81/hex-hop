@@ -12,13 +12,14 @@ const ColorCopyBlock = ({ colorEntity, copyBlock }: ColorBlockCopyProps) => {
     const Icon = copyBlock.icon;
 
     return (
-        <div className="w-3 cursor-pointer">
+        <div className="cursor-pointer">
             {copyBlock.isIcon && copyBlock.icon ? (
-
-                <Icon size={20} />
+                <div className="w-4">
+                    <Icon size={20} />
+                </div>
             ) : (
                 <div className="text-xs">{
-                    copyBlock.fallBack
+                    copyBlock.fallBackName
                 }
                 </div>
             )}
@@ -34,7 +35,7 @@ interface ColorBlockCopyListProps {
 export const ColorBlockCopyList = (param: ColorBlockCopyListProps) => {
     const copyList = useClipboardStore((state) => state.copyList);
 
-    return <div className="flex h-full items-center gap-1 w-40 ">
+    return <div className="flex items-start flex-wrap  gap-1 w-30 px-1">
         {copyList.map((copyBlock) => {
             return <ColorCopyBlock key={copyBlock.id} colorEntity={param.colorEntity} copyBlock={copyBlock} />
         })}

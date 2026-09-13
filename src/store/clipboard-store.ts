@@ -20,6 +20,7 @@ interface ClipboardStore {
   isColorValid: boolean;
   colorFormat: string;
   copyList: ColorCopyList[],
+  colorCopyFormulaActiveId: number | null,
 }
 
 interface ClipboardAction {
@@ -50,6 +51,7 @@ interface ClipboardAction {
   setFormat: (color: string) => void;
   togglePalette: (paletteId: number) => void;
   setEditBlock: (blockId: number | null) => void;
+  setColorCopyFormulaActive: (blockId: number | null) => void;
   reorderBlocks: (reorderedBlocks: { blockId: number[], paletteId: number | null }[]) => void;
 }
 
@@ -63,6 +65,7 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
   openPalette: {},
   editBlockId: null,
   copyList: defaultColorCopyList,
+  colorCopyFormulaActiveId: null,
   initBlocks: async () => {
     const blocks = await invoke<BlockEntity[]>("load_state");
 
@@ -172,5 +175,9 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
   setEditBlock: (blockId) =>
     set((state) => {
       state.editBlockId = blockId;
+    }),
+  setColorCopyFormulaActive: (blockId) =>
+    set((state) => {
+      state.colorCopyFormulaActiveId = blockId;
     }),
 })));
