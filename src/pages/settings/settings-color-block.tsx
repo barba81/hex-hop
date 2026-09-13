@@ -3,8 +3,9 @@ import { defaultInputColor, useClipboardStore } from "../../store/clipboard-stor
 import { ColorCopyList } from "@/infrastructure/models/color-copy-list";
 import { useSortable } from '@dnd-kit/react/sortable';
 import ColorBlock from "../color-clipboard/color-block/color-block-small-boxes";
-import { ChevronDown, ChevronUp, SquareChevronDown, SquareChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, EllipsisVertical, Eye, EyeClosed, Plus, SquareChevronDown, SquareChevronUp } from "lucide-react";
 import { ColorFormulaCreator } from "./color-formula-creator";
+import { CustomButton, defaultButtonBackground } from "@/components/common/custom-button";
 
 const ColorBlockPreview = () => {
     const backgroundCss = defaultInputColor;
@@ -50,16 +51,20 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyLis
         <div className={`w-full  flex justify-between overflow-hidden bg-background  `}>
 
             <div className=" flex-1 flex flex-row justify-between px-1">
-                <div className="flex w-5 items-center gap-1 ">
-                    <Icon size={20} />
+                <div className="flex w-4 items-center gap-1 ">
+                    <Icon  />
                     {copyBlock.fallBackName}
                 </div>
                 <div className="flex gap-2 h-full items-center  text-sm">
                     {copyBlock.formula}
                 </div>
+
                 <div className="flex items-center justify-center gap-1">
+                    <Eye size={18}/>
+                    <EyeClosed size={18}/>
                     <div className="cursor-pointer border rounded-md hover:border-primary hover:bg-secondary" onClick={() => { }}><ChevronUp size={20} /></div>
                     <div className="cursor-pointer border rounded-md hover:border-primary hover:bg-secondary" onClick={() => { }}><ChevronDown size={20} /></div>
+                    <EllipsisVertical size={18} />
                 </div>
             </div>
 
@@ -67,12 +72,33 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyLis
     </div>
 }
 
+const ColorFormatHeader = () => {
+    return <div className="py-1 flex w-full justify-end ">
+
+        <button
+            className={`         
+                ${defaultButtonBackground}
+             w-6 h-6 overflow-hidden outline-1 `}
+            onClick={async () => {
+                // await addNewColorToClipboard(inputColor, null);
+            }}
+        >
+            <Plus size={20} />
+        </button>
+
+
+    </div>
+}
+
 export const ColorFormat = () => {
     const copyList = useClipboardStore((state) => state.copyList);
-    return <div className="flex flex-col gap-2 px-1 max-h-40 overflow-x-scroll bg-accent p-2 rounded-md">
-        {copyList.map((copyBlock, index) => {
-            return <ColorFormatBlock key={copyBlock.id} copyBlock={copyBlock} index={index} />
-        })}
+    return <div className=" px-1 h-40 overflow-x-scroll bg-accent p-1  rounded-md">
+        <ColorFormatHeader />
+        <div className="flex flex-col gap-2 ">
+            {copyList.map((copyBlock, index) => {
+                return <ColorFormatBlock key={copyBlock.id} copyBlock={copyBlock} index={index} />
+            })}
+        </div>
     </div>
 }
 

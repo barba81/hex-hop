@@ -10,14 +10,11 @@ export interface ColorCopyList {
     isIcon: boolean,
     order: number, 
     formula: string,
+    enabled: boolean
 }
 
 export const defaultColorCopyList: ColorCopyList[] = [
     { id: -1, fallBackName: "CSS", icon: CSSIcon, isIcon: true, order: 0, formula: "" },
     { id: -2, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 1, formula: "" },
-    { id: -3, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 2, formula: "" },
-    { id: -4, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 3, formula: "" },
-    { id: -5, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 4, formula: "" },
-    { id: -6, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 0, formula: "" },
-    { id: -7, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 0, formula: "" },
+
 ];

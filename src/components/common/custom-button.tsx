@@ -2,10 +2,9 @@ import type React from "react";
 
 export const defaultButtonBackground = `
     flex items-center justify-center
-    bg-zinc-200
-    hover:bg-zinc-300
-    dark:bg-foreground/10
-    dark:hover:bg-foreground/15
+    hover:bg-secondary
+    hover:outline-primary
+    dark:bg-secondary/60
     rounded-md 
     cursor-pointer
     text-gray-900 

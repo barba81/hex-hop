@@ -9,8 +9,6 @@ import {
 import { addNewGradient } from "./feature/add-new-gradient";
 import GradientIcon from "@/components/icons/gradient-icon";
 import { CustomButton } from "@/components/common/custom-button";
-import { useGradientStore } from "./store/use-gradient-store";
-import { useEffect } from "react";
 
 const GradientEmptyPage = () => {
 
