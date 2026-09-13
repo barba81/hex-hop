@@ -52,9 +52,7 @@ export const ColorFormulaCreator = () => {
             {copyBlock == undefined && <></>}
             {copyBlock !== undefined &&
                 <div className="flex flex-col flex-1  rounded-md overflow-hidden border border-black">
-
                     <ColorFormulaTitle copyFormula={copyBlock} />
-
                     <div className="flex flex-1 min-h-0">
                         <ColorFormula copyFormula={copyBlock} />
                         <ColorFormulaInputList />
