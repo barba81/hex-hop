@@ -6,6 +6,9 @@ import ColorBlock from "../color-clipboard/color-block/color-block-small-boxes";
 import { ChevronDown, ChevronUp, EllipsisVertical, Eye, EyeClosed, Plus, SquareChevronDown, SquareChevronUp } from "lucide-react";
 import { ColorFormulaCreator } from "./color-formula-creator";
 import { CustomButton, defaultButtonBackground } from "@/components/common/custom-button";
+import {RestrictToVerticalAxis} from '@dnd-kit/abstract/modifiers';
+
+
 
 const ColorBlockPreview = () => {
     const backgroundCss = defaultInputColor;
@@ -35,7 +38,7 @@ const ColorBlockPreview = () => {
 }
 
 export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFormula, index: number }) => {
-    const { ref } = useSortable({ id: copyBlock.id, index: index });
+    const { ref } = useSortable({ id: copyBlock.id, index: index,    modifiers: [RestrictToVerticalAxis],});
     const setColorCopyFormulaActive = useClipboardStore((state) => state.setColorCopyFormulaActive);
     const colorCopyFormulaActiveId = useClipboardStore((state) => state.colorCopyFormulaActiveId);
     const flitColorCopyBloc = useClipboardStore((state) => state.flitColorCopyBloc);
@@ -54,7 +57,7 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFor
             <div className=" flex-1 flex flex-row justify-between px-1">
                 <div className="flex w-4 items-center gap-1 ">
                     <Icon />
-                    {copyBlock.fallBackName}
+                    {copyBlock.formulaName}
                 </div>
                 <div className="flex gap-2 h-full items-center  text-sm">
                     {copyBlock.formula}

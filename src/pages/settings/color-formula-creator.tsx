@@ -7,7 +7,7 @@ const ColorFormulaTitle = ({ copyFormula }: { copyFormula: ColorCopyFormula }) =
     return (
         <div className="w-full flex  h-7  border-b-2 border-black items-center justify-between px-2 bg-background">
             <div className="flex items-center gap-2">
-                {copyFormula.fallBackName}
+                {copyFormula.formulaName}
             </div>
             <div className="flex gap-2">
                 <Edit2 size={18} />

@@ -7,19 +7,18 @@ import type { ComponentType } from "react";
 
 export interface ColorCopyFormula {
     id: number;
-    fallBackName: string;
+    formulaName: string;
     icon?: ComponentType;
-    isIcon: boolean,
-    order: number,
+    formulaOrder: number,
     formula: string,
     enabled: boolean
 }
 export const defaultColorCopyFormula = {  enabled: true, fallBackName: "Tailwind2", icon: TailwindIcon, isIcon: true, order: 2, formula: "#RRGGBB" };
 
 export const defaultColorCopyList: ColorCopyFormula[] = [
-    { id: -1, enabled: true, fallBackName: "CSS", icon: CSSIcon, isIcon: true, order: 0, formula: "rgb(r, g, b)" },
-    { id: 2, enabled: true, fallBackName: "HEX", icon: BlenderIcon, isIcon: true, order: 1, formula: "#RRGGBB" },
-    { id: 3, enabled: true, fallBackName: "Tailwind", icon: TailwindIcon, isIcon: true, order: 2, formula: "#RRGGBB" },
+    { id: -1, enabled: true, formulaName: "CSS", icon: CSSIcon,  formulaOrder: 0, formula: "rgb(r, g, b)" },
+    { id: 2, enabled: true, formulaName: "HEX", icon: BlenderIcon, formulaOrder: 1, formula: "#RRGGBB" },
+    { id: 3, enabled: true, formulaName: "Tailwind", icon: TailwindIcon, formulaOrder: 2, formula: "#RRGGBB" },
 ];
 
 

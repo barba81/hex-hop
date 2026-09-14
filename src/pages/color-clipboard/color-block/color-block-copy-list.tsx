@@ -13,13 +13,13 @@ const ColorCopyBlock = ({ colorEntity, copyBlock }: ColorBlockCopyProps) => {
 
     return (
         <div className="cursor-pointer">
-            {copyBlock.isIcon && copyBlock.icon ? (
+            { copyBlock.icon ? (
                 <div className="w-4">
                     <Icon size={20} />
                 </div>
             ) : (
                 <div className="text-xs">{
-                    copyBlock.fallBackName
+                    copyBlock.formulaName
                 }
                 </div>
             )}
