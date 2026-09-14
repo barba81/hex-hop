@@ -61,7 +61,11 @@ pub fn run() {
             update_palette_summary,
             restore_color,
             restore_palette,
-            restore_gradient
+            restore_gradient,
+            create_color_copy_formul,
+            get_all_color_copy_formul,
+            delete_color_copy_formul,
+            update_color_copy_formul,
         ])
         .plugin(tauri_plugin_prevent_default::debug())
         .plugin(tauri_plugin_os::init())
