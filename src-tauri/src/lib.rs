@@ -14,6 +14,7 @@ use feat::color_service::color_service::*;
 use feat::gradient_service::gradient_service::*;
 use feat::load_state::load_state_service::*;
 use feat::palette_service::palette_service::*;
+use feat::color_formula_service::color_formula_service::*;
 use infra::data_seed::get_color_name_data;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]

@@ -1,6 +1,6 @@
 -- Add migration script here
 
-CREATE TABLE copy_formula (
+CREATE TABLE color_copy_formula (
     id TEXT PRIMARY KEY,
     formula TEXT NOT NULL,
     formula_order INTEGER NOT NULL,
