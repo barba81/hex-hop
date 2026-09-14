@@ -2,26 +2,24 @@ use crate::feat::color_formula_service::color_formula_model::ColorCopyFormulaMod
 
 pub async fn create_color<'a, E>(
     color_formula_model: &ColorCopyFormulaModel,
-    block_id: i64,
     executor: E,
-) -> Result<i64, sqlx::Error>
+) -> Result<(), sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-    let id = sqlx::query_scalar!(
+    sqlx::query!(
         r#"
-        INSERT INTO color (block_id, r, g, b, alpha, name)
+        INSERT INTO color_copy_formula (id, formula, formula_order, formula_name, enabled, icon_id)
         VALUES ($1, $2, $3, $4, $5, $6)
-        RETURNING id AS "id!"
         "#,
-        block_id,
-        color_block.r,
-        color_block.g,
-        color_block.b,
-        color_block.alpha,
-        color_block.name
+        color_formula_model.id,
+        color_formula_model.formula,
+        color_formula_model.formula_order,
+        color_formula_model.formula_name,
+        color_formula_model.enabled,
+        color_formula_model.icon_id,
     )
-    .fetch_one(executor)
+    .execute(executor) // Use .execute instead of .fetch_one
     .await?;
 
     Ok(id)
