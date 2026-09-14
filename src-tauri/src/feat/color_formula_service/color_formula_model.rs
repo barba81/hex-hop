@@ -6,9 +6,8 @@ use sqlx::prelude::FromRow;
 pub struct ColorCopyFormulaModel {
     pub id: String,
     pub formula: String,
-    pub formula_order: i32,
+    pub formula_order: i64,
     pub formula_name: String,
-    pub enabled: bool,
-    pub deleted: bool,
-    pub icon_id: Option<i32>,
+    pub enabled: i64,
+    pub icon_id: Option<i64>,
 }
