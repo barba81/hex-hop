@@ -6,19 +6,23 @@ import type { ComponentType } from "react";
 // import CSSIcon from "@/assets/icons/Official_CSS_Logo.svg?react";
 
 export interface ColorCopyFormula {
-    id: number;
+    id: string;
     formulaName: string;
     icon?: ComponentType;
     formulaOrder: number,
     formula: string,
-    enabled: boolean
+    enabled: number,
+    
 }
-export const defaultColorCopyFormula = {  enabled: true, fallBackName: "Tailwind2", icon: TailwindIcon, isIcon: true, order: 2, formula: "#RRGGBB" };
+export const defaultColorCopyFormula:ColorCopyFormula = {
+  enabled: 1, formulaName: "Tailwind2", icon: TailwindIcon, formulaOrder: 2, formula: "#RRGGBB",
+  id: ""
+};
 
 export const defaultColorCopyList: ColorCopyFormula[] = [
-    { id: -1, enabled: true, formulaName: "CSS", icon: CSSIcon,  formulaOrder: 0, formula: "rgb(r, g, b)" },
-    { id: 2, enabled: true, formulaName: "HEX", icon: BlenderIcon, formulaOrder: 1, formula: "#RRGGBB" },
-    { id: 3, enabled: true, formulaName: "Tailwind", icon: TailwindIcon, formulaOrder: 2, formula: "#RRGGBB" },
+    { id: '1', enabled: 1, formulaName: "CSS", icon: CSSIcon,  formulaOrder: 0, formula: "rgb(r, g, b)" },
+    { id: '2', enabled: 1, formulaName: "HEX", icon: BlenderIcon, formulaOrder: 1, formula: "#RRGGBB" },
+    { id: '3', enabled: 1, formulaName: "Tailwind", icon: TailwindIcon, formulaOrder: 2, formula: "#RRGGBB" },
 ];
 
 

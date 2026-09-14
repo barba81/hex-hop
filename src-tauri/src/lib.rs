@@ -9,12 +9,12 @@ pub mod infra;
 pub mod state;
 
 use feat::block_service::block_service::*;
+use feat::color_formula_service::color_formula_service::*;
 use feat::color_picker::eye_drop_mack;
 use feat::color_service::color_service::*;
 use feat::gradient_service::gradient_service::*;
 use feat::load_state::load_state_service::*;
 use feat::palette_service::palette_service::*;
-use feat::color_formula_service::color_formula_service::*;
 use infra::data_seed::get_color_name_data;
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
@@ -63,10 +63,10 @@ pub fn run() {
             restore_color,
             restore_palette,
             restore_gradient,
-            create_color_copy_formul,
-            get_all_color_copy_formul,
-            delete_color_copy_formul,
-            update_color_copy_formul,
+            create_color_copy_formula,
+            get_all_color_copy_formula,
+            delete_color_copy_formula,
+            update_color_copy_formula,
         ])
         .plugin(tauri_plugin_prevent_default::debug())
         .plugin(tauri_plugin_os::init())

@@ -26,14 +26,13 @@ where
     Ok(id)
 }
 
-
-pub async fn get_all_color_formula<'a, E>(
+pub async fn get_all_color_formula_repo<'a, E>(
     executor: E,
 ) -> Result<Vec<ColorCopyFormulaModel>, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-        let formulas: Vec<ColorCopyFormulaModel> = sqlx::query_as!(
+    let formulas: Vec<ColorCopyFormulaModel> = sqlx::query_as!(
         ColorCopyFormulaModel,
         r#"
         SELECT 
@@ -46,24 +45,21 @@ where
         FROM color_copy_formula ccf
         WHERE deleted = 0
         "#
-        )
-        .fetch_all(executor)
-        .await?;
+    )
+    .fetch_all(executor)
+    .await?;
 
     Ok(formulas)
 }
 
-
-
-
-pub async fn get_color_formula<'a, E>(
+pub async fn get_color_formula_repo<'a, E>(
     color_formula_id: &str,
     executor: E,
 ) -> Result<ColorCopyFormulaModel, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-        let formulas: ColorCopyFormulaModel = sqlx::query_as!(
+    let formulas: ColorCopyFormulaModel = sqlx::query_as!(
         ColorCopyFormulaModel,
         r#"
         SELECT 
@@ -78,13 +74,12 @@ where
         and ccf.id=$1
         "#,
         color_formula_id,
-        )
-        .fetch_one(executor)
-        .await?;
+    )
+    .fetch_one(executor)
+    .await?;
 
     Ok(formulas)
 }
-
 
 pub async fn update_color_formula<'a, E>(
     color_formula_model: &ColorCopyFormulaModel,
@@ -118,8 +113,8 @@ where
     Ok(())
 }
 
-pub async fn delete_color_formula<'a, E>(
-    color_formula_model: &ColorCopyFormulaModel,
+pub async fn delete_color_formula_repo<'a, E>(
+    color_formula_model_id: &str,
     executor: E,
 ) -> Result<(), sqlx::Error>
 where
@@ -132,7 +127,7 @@ where
         WHERE id = $1
           AND deleted = 0
         "#,
-        color_formula_model.id,
+        color_formula_model_id,
     )
     .execute(executor)
     .await?;

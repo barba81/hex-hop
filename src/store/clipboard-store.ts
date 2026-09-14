@@ -52,7 +52,7 @@ interface ClipboardAction {
   togglePalette: (paletteId: number) => void;
   setEditBlock: (blockId: number | null) => void;
   setColorCopyFormulaActive: (blockId: number | null) => void;
-  flitColorCopyBloc: (blockId: number | null) => void;
+  flitColorCopyBloc: (blockId: string | null) => void;
   reorderBlocks: (reorderedBlocks: { blockId: number[], paletteId: number | null }[]) => void;
   addNewColorCopyBlock: () => void;
 }
@@ -186,10 +186,15 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
     set((state) => {
       const copyBlock = state.copyList.findIndex(x => x.id === copyListId);
       if (copyBlock < 0) return;
-      state.copyList[copyBlock].enabled = !state.copyList[copyBlock].enabled;
+      // state.copyList[copyBlock].enabled = !state.copyList[copyBlock].enabled;
     }),
-  addNewColorCopyBlock: () =>
-    set((state) => {
-      state.copyList.push({...defaultColorCopyFormula, id: 12});
-    }),
+  addNewColorCopyBlock: async () =>{
+    const newCopyFormula = await invoke<ColorCopyFormula>("create_color_copy_formula", { 
+      colorCopyFormula: {...defaultColorCopyFormula, id:crypto.randomUUID()}
+    });
+    debugger
+    return set((state) => {
+      state.copyList.push(newCopyFormula);
+    })
+  }
 })));
