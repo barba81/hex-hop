@@ -66,12 +66,15 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
   colorFormat: "RGB",
   openPalette: {},
   editBlockId: null,
-  copyList: defaultColorCopyList,
+  copyList: [],
   colorCopyFormulaActiveId: null,
   initBlocks: async () => {
     const blocks = await invoke<BlockEntity[]>("load_state");
+    const allCopyFormulas = await invoke<ColorCopyFormula[]>("get_all_color_copy_formula");
 
     return set(state => {
+      state.colorCopyFormulaActiveId = allCopyFormulas[0].id;
+      state.copyList = allCopyFormulas;
 
       state.blockIds[rootBlockId] = blocks.map(block => block.blockId);
 
@@ -186,7 +189,7 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
     set((state) => {
       const copyBlock = state.copyList.findIndex(x => x.id === copyListId);
       if (copyBlock < 0) return;
-      // state.copyList[copyBlock].enabled = !state.copyList[copyBlock].enabled;
+      state.copyList[copyBlock].enabled = !state.copyList[copyBlock].enabled;
     }),
   addNewColorCopyBlock: async () =>{
     const newCopyFormula = await invoke<ColorCopyFormula>("create_color_copy_formula", { 
