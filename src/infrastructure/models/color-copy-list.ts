@@ -12,17 +12,18 @@ export interface ColorCopyFormula {
     formulaOrder: number,
     formula: string,
     enabled: number,
-    
+    iconId: number|null
 }
+
 export const defaultColorCopyFormula:ColorCopyFormula = {
-  enabled: 1, formulaName: "Tailwind2", icon: TailwindIcon, formulaOrder: 2, formula: "#RRGGBB",
+  enabled: 1, formulaName: "Tailwind2", iconId: null, formulaOrder: 2, formula: "#RRGGBB",
   id: ""
 };
 
 export const defaultColorCopyList: ColorCopyFormula[] = [
-    { id: '1', enabled: 1, formulaName: "CSS", icon: CSSIcon,  formulaOrder: 0, formula: "rgb(r, g, b)" },
-    { id: '2', enabled: 1, formulaName: "HEX", icon: BlenderIcon, formulaOrder: 1, formula: "#RRGGBB" },
-    { id: '3', enabled: 1, formulaName: "Tailwind", icon: TailwindIcon, formulaOrder: 2, formula: "#RRGGBB" },
+    { id: '1', enabled: 1, formulaName: "CSS", iconId: null,  formulaOrder: 0, formula: "rgb(r, g, b)" },
+    { id: '2', enabled: 1, formulaName: "HEX", iconId:  null, formulaOrder: 1, formula: "#RRGGBB" },
+    { id: '3', enabled: 1, formulaName: "Tailwind", iconId: null, formulaOrder: 2, formula: "#RRGGBB" },
 ];
 
 

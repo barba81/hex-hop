@@ -56,7 +56,7 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFor
 
             <div className=" flex-1 flex flex-row justify-between px-1">
                 <div className="flex w-4 items-center gap-1 ">
-                    <Icon />
+                    {/* <Icon /> */}
                     {copyBlock.formulaName}
                 </div>
                 <div className="flex gap-2 h-full items-center  text-sm">

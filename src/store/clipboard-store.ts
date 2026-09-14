@@ -20,7 +20,7 @@ interface ClipboardStore {
   isColorValid: boolean;
   colorFormat: string;
   copyList: ColorCopyFormula[],
-  colorCopyFormulaActiveId: number | null,
+  colorCopyFormulaActiveId: string | null,
 }
 
 interface ClipboardAction {
@@ -51,7 +51,7 @@ interface ClipboardAction {
   setFormat: (color: string) => void;
   togglePalette: (paletteId: number) => void;
   setEditBlock: (blockId: number | null) => void;
-  setColorCopyFormulaActive: (blockId: number | null) => void;
+  setColorCopyFormulaActive: (blockId: string | null) => void;
   flitColorCopyBloc: (blockId: string | null) => void;
   reorderBlocks: (reorderedBlocks: { blockId: number[], paletteId: number | null }[]) => void;
   addNewColorCopyBlock: () => void;

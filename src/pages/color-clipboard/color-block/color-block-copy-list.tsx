@@ -9,13 +9,11 @@ interface ColorBlockCopyProps {
 }
 
 const ColorCopyBlock = ({ colorEntity, copyBlock }: ColorBlockCopyProps) => {
-    const Icon = copyBlock.icon;
-
     return (
         <div className="cursor-pointer">
             { copyBlock.icon ? (
                 <div className="w-4">
-                    <Icon size={20} />
+                    {/* <Icon size={20} /> */}
                 </div>
             ) : (
                 <div className="text-xs">{
