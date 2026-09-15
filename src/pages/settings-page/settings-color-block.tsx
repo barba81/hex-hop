@@ -42,7 +42,7 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFor
     const setColorCopyFormulaActive = useClipboardStore((state) => state.setColorCopyFormulaActive);
     const colorCopyFormulaActiveId = useClipboardStore((state) => state.colorCopyFormulaActiveId);
     const flitColorCopyBloc = useClipboardStore((state) => state.flitColorCopyBloc);
-    const Icon = copyBlock.icon;
+    const Icon = ICON_T;
 
     return <div onClick={() => setColorCopyFormulaActive(copyBlock.id)} ref={ref}
 
