@@ -41,7 +41,7 @@ where
             ccf.formula_order as "formula_order!",
             ccf.formula_name as "formula_name!",
             ccf.icon_id as "icon_id",
-            ccf.enabled as "enabled!"
+            (ccf.enabled != 0) as "enabled!: bool"
         FROM color_copy_formula ccf
         WHERE deleted = 0
         "#
@@ -68,7 +68,7 @@ where
             ccf.formula_order as "formula_order!",
             ccf.formula_name as "formula_name!",
             ccf.icon_id as "icon_id",
-            ccf.enabled as "enabled!"
+            (ccf.enabled != 0) as "enabled!: bool"
         FROM color_copy_formula ccf
         WHERE deleted = 0
         and ccf.id=$1
