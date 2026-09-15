@@ -55,6 +55,7 @@ interface ClipboardAction {
   flitColorCopyBloc: (blockId: string | null) => void;
   reorderBlocks: (reorderedBlocks: { blockId: number[], paletteId: number | null }[]) => void;
   addNewColorCopyBlock: () => void;
+  deleteColorCopyBlock: (id: string) => void;
 }
 
 export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(immer((set, get) => ({
@@ -196,8 +197,6 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
     const newCopyFormula = await invoke<ColorCopyFormula>("update_color_copy_formula", { 
       colorCopyFormula: {...oldBlock, enabled: !oldBlock.enabled }
     });
-    console.log(newCopyFormula);
-    debugger
    return set((state) => {
       state.copyList[copyBlockIx] = newCopyFormula;
     })
@@ -208,6 +207,14 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
     });
     return set((state) => {
       state.copyList.push(newCopyFormula);
+    })
+  },
+  deleteColorCopyBlock: async (id: string) => {
+     await invoke("delete_color_copy_formula", { 
+      colorFormulaId: id
+    });
+    return set((state) => {
+      state.copyList = state.copyList.filter(x => x.id !== id);
     })
   }
 })));

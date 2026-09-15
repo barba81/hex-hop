@@ -3,6 +3,7 @@ import { useClipboardStore } from "@/store/clipboard-store";
 import { BlendIcon, Edit2, Trash2 } from "lucide-react";
 
 const ColorFormulaTitle = ({ copyFormula }: { copyFormula: ColorCopyFormula }) => {
+    const deleteColorCopyBlock = useClipboardStore((state) => state.deleteColorCopyBlock);
 
     return (
         <div className="w-full flex  h-7  border-b-2 border-black items-center justify-between px-2 bg-background">
@@ -11,7 +12,7 @@ const ColorFormulaTitle = ({ copyFormula }: { copyFormula: ColorCopyFormula }) =
             </div>
             <div className="flex gap-2">
                 <Edit2 size={18} />
-                <Trash2 size={18} />
+                <Trash2 size={18}  onClick={()=> deleteColorCopyBlock(copyFormula.id) }/>
             </div>
         </div>
     );
