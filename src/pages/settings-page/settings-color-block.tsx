@@ -7,6 +7,7 @@ import { ChevronDown, ChevronUp, EllipsisVertical, Eye, EyeClosed, Plus, SquareC
 import { ColorFormulaCreator } from "./color-formula-creator";
 import { CustomButton, defaultButtonBackground } from "@/components/common/custom-button";
 import {RestrictToVerticalAxis} from '@dnd-kit/abstract/modifiers';
+import { DynamicIconMapper, ICON_MAP } from "@/infrastructure/utils/icon-mapper";
 
 
 
@@ -42,7 +43,7 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFor
     const setColorCopyFormulaActive = useClipboardStore((state) => state.setColorCopyFormulaActive);
     const colorCopyFormulaActiveId = useClipboardStore((state) => state.colorCopyFormulaActiveId);
     const flitColorCopyBloc = useClipboardStore((state) => state.flitColorCopyBloc);
-    const Icon = ICON_T;
+  
 
     return <div onClick={() => setColorCopyFormulaActive(copyBlock.id)} ref={ref}
 
@@ -56,7 +57,9 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFor
 
             <div className=" flex-1 flex flex-row justify-between px-1">
                 <div className="flex w-4 items-center gap-1 ">
-                    {/* <Icon /> */}
+                    {copyBlock.iconId !== null && copyBlock.iconId !== undefined && (
+  <DynamicIconMapper iconId={copyBlock.iconId} />
+)}
                     {copyBlock.formulaName}
                 </div>
                 <div className="flex gap-2 h-full items-center  text-sm">
