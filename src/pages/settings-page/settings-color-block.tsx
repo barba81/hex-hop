@@ -7,7 +7,7 @@ import { ChevronDown, ChevronUp, EllipsisVertical, Eye, EyeClosed, Plus, SquareC
 import { ColorFormulaCreator } from "./color-formula-creator";
 import { CustomButton, defaultButtonBackground } from "@/components/common/custom-button";
 import {RestrictToVerticalAxis} from '@dnd-kit/abstract/modifiers';
-import { DynamicIconMapper, ICON_MAP } from "@/infrastructure/utils/icon-mapper";
+import { DynamicIconMapper } from "@/infrastructure/utils/icon-mapper";
 
 
 
@@ -42,7 +42,7 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFor
     const { ref } = useSortable({ id: copyBlock.id, index: index,    modifiers: [RestrictToVerticalAxis],});
     const setColorCopyFormulaActive = useClipboardStore((state) => state.setColorCopyFormulaActive);
     const colorCopyFormulaActiveId = useClipboardStore((state) => state.colorCopyFormulaActiveId);
-    const flitColorCopyBloc = useClipboardStore((state) => state.flitColorCopyBloc);
+    const flipColorCopyBloc = useClipboardStore((state) => state.flitColorCopyBloc);
   
 
     return <div onClick={() => setColorCopyFormulaActive(copyBlock.id)} ref={ref}
@@ -58,8 +58,8 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFor
             <div className=" flex-1 flex flex-row justify-between px-1">
                 <div className="flex w-4 items-center gap-1 ">
                     {copyBlock.iconId !== null && copyBlock.iconId !== undefined && (
-  <DynamicIconMapper iconId={copyBlock.iconId} />
-)}
+                        <DynamicIconMapper iconId={copyBlock.iconId} />
+                        )}
                     {copyBlock.formulaName}
                 </div>
                 <div className="flex gap-2 h-full items-center  text-sm">
@@ -68,7 +68,7 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFor
 
                 <div className="flex items-center justify-center gap-1">
                     <div className="cursor-pointer border rounded-md hover:border-primary hover:bg-secondary p-0.5 " 
-                    onClick={()=> flitColorCopyBloc(copyBlock.id)}> 
+                    onClick={()=> flipColorCopyBloc(copyBlock.id)}> 
                     {copyBlock.enabled ? <Eye size={18} /> :
                         <EyeClosed size={18} />
                     }

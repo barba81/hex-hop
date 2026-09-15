@@ -57,7 +57,7 @@ interface ClipboardAction {
   addNewColorCopyBlock: () => void;
 }
 
-export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(immer((set) => ({
+export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(immer((set, get) => ({
   blockIds: { [rootBlockId]: [] },
   blocksById: {},
   validColor: defaultInputColor,
@@ -185,17 +185,27 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
     set((state) => {
       state.colorCopyFormulaActiveId = blockId;
     }),
-  flitColorCopyBloc: (copyListId) =>
-    set((state) => {
-      const copyBlock = state.copyList.findIndex(x => x.id === copyListId);
-      if (copyBlock < 0) return;
-      state.copyList[copyBlock].enabled = !state.copyList[copyBlock].enabled;
-    }),
+  flitColorCopyBloc: async (copyListId) => {
+    
+    const state = get();
+    const copyBlockIx = state.copyList.findIndex(x => x.id === copyListId);
+    
+    if (copyBlockIx < 0) return;
+
+    const oldBlock =  state.copyList[copyBlockIx];
+    const newCopyFormula = await invoke<ColorCopyFormula>("update_color_copy_formula", { 
+      colorCopyFormula: {...oldBlock, enabled: !oldBlock.enabled }
+    });
+    console.log(newCopyFormula);
+    debugger
+   return set((state) => {
+      state.copyList[copyBlockIx] = newCopyFormula;
+    })
+  },
   addNewColorCopyBlock: async () =>{
     const newCopyFormula = await invoke<ColorCopyFormula>("create_color_copy_formula", { 
       colorCopyFormula: {...defaultColorCopyFormula, id:crypto.randomUUID()}
     });
-    debugger
     return set((state) => {
       state.copyList.push(newCopyFormula);
     })
