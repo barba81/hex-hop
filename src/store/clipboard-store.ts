@@ -7,8 +7,14 @@ import { Command } from "./command-manager-state";
 export const defaultInputColor = "#3b82f6";
 export const rootBlockId = -1;
 
-interface ClipboardStore {
-  // Clipboard -----------------------------------------------------------------------
+export type CommandScope = 'clipboard' | 'colorBlockSettings';
+
+export interface CommandHistory {
+  undoStack: Command[];
+  redoStack: Command[];
+}
+
+export interface ClipboardStore {
 
   blockIds: Record<number, number[]>;
   blocksById: Record<number, BlockEntity>;
@@ -25,16 +31,21 @@ interface ClipboardStore {
   clipBoardUndoStack: Command[];
   clipBoardRedoStack: Command[];
 
-  // Color blocks settings  -----------------------------------------------------------------------
   copyList: ColorCopyFormula[],
   colorCopyFormulaActiveId: string | null,
 
   
   colorBlockSettingsUndoStack: Command[];
   colorBlockSettingsRedoStack: Command[];
-}
 
-export const useClipboardStore = create<ClipboardStore>()(immer((set, get) => ({
+  history: Record<CommandScope, CommandHistory>;
+}
+const initialScopeHistory: CommandHistory = {
+  undoStack: [],
+  redoStack: [],
+};
+
+export const useClipboardStore = create<ClipboardStore>()(immer((set) => ({
   blockIds: { [rootBlockId]: [] },
   blocksById: {},
   validColor: defaultInputColor,
@@ -50,6 +61,11 @@ export const useClipboardStore = create<ClipboardStore>()(immer((set, get) => ({
   colorCopyFormulaActiveId: null,
   colorBlockSettingsUndoStack: [],
   colorBlockSettingsRedoStack: [],
+
+  history: {
+    clipboard: { ...initialScopeHistory },
+    colorBlockSettings: { ...initialScopeHistory },
+  },
 
   reorderBlocks: (reorderedBlocks) =>
     set(state => {
