@@ -7,14 +7,9 @@ import { ThemeProvider } from "./components/theme/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { Outlet } from "react-router";
 import { TooltipProvider } from "./components/ui/tooltip";
+import { useClipboardStore } from "./store/clipboard-store";
 
 function HexHopApp() {
-
-  useEffect(() => {
-    moveWindow(Position.TopRight);
-  }, []);
-
-
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
       <TooltipProvider>

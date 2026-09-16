@@ -8,7 +8,7 @@ import { ColorFormulaCreator } from "./color-formula-creator";
 import { CustomButton, defaultButtonBackground } from "@/components/common/custom-button";
 import {RestrictToVerticalAxis} from '@dnd-kit/abstract/modifiers';
 import { DynamicIconMapper } from "@/infrastructure/utils/icon-mapper";
-import { addNewColorCopyBlock, flipColorCopyBlockVisiblity } from "./color-settings-store-actions";
+import { addNewColorCopyBlock, flipColorCopyBlockVisiblity, setColorCopyFormulaActive } from "./color-settings-store-actions";
 
 
 
@@ -41,9 +41,7 @@ const ColorBlockPreview = () => {
 
 export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFormula, index: number }) => {
     const { ref } = useSortable({ id: copyBlock.id, index: index,    modifiers: [RestrictToVerticalAxis],});
-    const setColorCopyFormulaActive = useClipboardStore((state) => state.setColorCopyFormulaActive);
     const colorCopyFormulaActiveId = useClipboardStore((state) => state.colorCopyFormulaActiveId);
-  
 
     return <div onClick={() => setColorCopyFormulaActive(copyBlock.id)} ref={ref}
 

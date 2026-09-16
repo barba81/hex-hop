@@ -39,3 +39,9 @@ export const deleteColorCopyBlock = async (copyBlockId: string) => {
     state.copyList = state.copyList.filter((x) => x.id !== copyBlockId);
   });
 };
+
+export const setColorCopyFormulaActive = async (copyBlockId: string) => {
+  useClipboardStore.setState((state) => {
+     state.colorCopyFormulaActiveId = copyBlockId;
+  });
+};

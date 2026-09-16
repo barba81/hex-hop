@@ -23,39 +23,7 @@ interface ClipboardStore {
   colorCopyFormulaActiveId: string | null,
 }
 
-interface ClipboardAction {
-  // INIT -----------------------------------------------------------------------
-
-  initBlocks: () => Promise<void>;
-
-  // CREATE -----------------------------------------------------------------------
-
-  pushBlock: (block: ColorEntity | GradientEntity, paletteId: number | null) => void;
-  pushPalette: (palette: PaletteEntity, blockId: number[]) => void;
-  insertPalette: (palette: PaletteEntity, blockId: number[], ix: number) => void;
-
-  // UPDATE -----------------------------------------------------------------------
-  updateBlock: (block: BlockEntity) => void;
-  updateBlockSummary: (updateBlock: PaletteEntitySummary | GradientEntitySummary) => void;
-
-  // DELETE  -----------------------------------------------------------------------
-
-  deleteBlock: (blockId: number, paletteId: number | null) => void;
-  deleteClipboard: () => void;
-
-  // UI  -----------------------------------------------------------------------
-
-  setLastValidColor: (color: string) => void;
-  setIsColorValid: (colorFormat: boolean) => void;
-  setInputColor: (color: string) => void;
-  setFormat: (color: string) => void;
-  togglePalette: (paletteId: number) => void;
-  setEditBlock: (blockId: number | null) => void;
-  setColorCopyFormulaActive: (blockId: string | null) => void;
-  reorderBlocks: (reorderedBlocks: { blockId: number[], paletteId: number | null }[]) => void;
-}
-
-export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(immer((set, get) => ({
+export const useClipboardStore = create<ClipboardStore>()(immer((set, get) => ({
   blockIds: { [rootBlockId]: [] },
   blocksById: {},
   validColor: defaultInputColor,
@@ -66,34 +34,6 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
   editBlockId: null,
   copyList: [],
   colorCopyFormulaActiveId: null,
-  initBlocks: async () => {
-    const blocks = await invoke<BlockEntity[]>("load_state");
-    const allCopyFormulas = await invoke<ColorCopyFormula[]>("get_all_color_copy_formula");
-
-    return set(state => {
-      state.colorCopyFormulaActiveId = allCopyFormulas[0].id;
-      state.copyList = allCopyFormulas;
-
-      state.blockIds[rootBlockId] = blocks.map(block => block.blockId);
-
-      state.blocksById = {};
-
-      for (const block of blocks) {
-        state.blocksById[block.blockId] = block;
-
-        if (block.kind === 'palette') {
-
-          if (!block.blocks) { continue; }
-          state.blockIds[block.id] = block.blocks.map(x => x.blockId);
-
-          for (const inner_block of block.blocks) {
-            state.blocksById[inner_block.blockId] = inner_block;
-          }
-        }
-      }
-    }
-    )
-  },
 
   reorderBlocks: (reorderedBlocks) =>
     set(state => {
@@ -179,10 +119,5 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
     set((state) => {
       state.editBlockId = blockId;
     }),
-  setColorCopyFormulaActive: (blockId) =>
-    set((state) => {
-      state.colorCopyFormulaActiveId = blockId;
-    }),
-    
 
 })));
