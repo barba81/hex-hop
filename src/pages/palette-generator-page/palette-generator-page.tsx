@@ -3,8 +3,8 @@
 const PaletteGenerator = () => {
   return (
     <div>
-        Palette generator
-      </div>
+      Palette generator
+    </div>
   );
 };
 

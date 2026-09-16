@@ -2,10 +2,9 @@ import { DragDots } from "@/components/common/drag-dots"
 import { defaultInputColor, useClipboardStore } from "../../../store/clipboard-store";
 import { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import { useSortable } from '@dnd-kit/react/sortable';
-import ColorBlock from "../clipboard-page/color-block/color-block-small-boxes";
-import { ChevronDown, ChevronUp, EllipsisVertical, Eye, EyeClosed, Plus, SquareChevronDown, SquareChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, Eye, EyeClosed, Plus } from "lucide-react";
 import { ColorFormulaCreator } from "./ui/color-formula-creator";
-import { CustomButton, defaultButtonBackground } from "@/components/common/custom-button";
+import { defaultButtonBackground } from "@/components/common/custom-button";
 import {RestrictToVerticalAxis} from '@dnd-kit/abstract/modifiers';
 import { DynamicIconMapper } from "@/infrastructure/utils/icon-mapper";
 import { addNewColorCopyBlock, flipColorCopyBlockVisiblity, setColorCopyFormulaActive } from "./feature/store-actions/color-settings-store-actions";
