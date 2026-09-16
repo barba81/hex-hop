@@ -1,13 +1,13 @@
 import { DragDots } from "@/components/custom/drag-dots"
 import { defaultInputColor, useClipboardStore } from "../../../store/clipboard-store";
-import { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
+import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import { useSortable } from '@dnd-kit/react/sortable';
 import { ChevronDown, ChevronUp, Eye, EyeClosed, Plus } from "lucide-react";
 import { ColorFormulaCreator } from "./ui/color-formula-creator";
 import { defaultButtonBackground } from "@/components/custom/custom-button";
 import {RestrictToVerticalAxis} from '@dnd-kit/abstract/modifiers';
 import { DynamicIconMapper } from "@/infrastructure/utils/icon-mapper";
-import { addNewColorCopyBlock, flipColorCopyBlockVisiblity, setColorCopyFormulaActive } from "./feature/color-settings-store-actions";
+import { addNewColorCopyBlock, flipColorCopyBlockVisibility, setColorCopyFormulaActive } from "./feature/color-settings-store-actions";
 
 
 
@@ -65,7 +65,7 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFor
 
                 <div className="flex items-center justify-center gap-1">
                     <div className="cursor-pointer border rounded-md hover:border-primary hover:bg-secondary p-0.5 " 
-                    onClick={()=> flipColorCopyBlockVisiblity(copyBlock.id)}> 
+                    onClick={()=> flipColorCopyBlockVisibility(copyBlock.id)}> 
                     {copyBlock.enabled ? <Eye size={18} /> :
                         <EyeClosed size={18} />
                     }

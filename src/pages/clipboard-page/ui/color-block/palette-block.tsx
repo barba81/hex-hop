@@ -11,7 +11,7 @@ import DroppableLine from "../color-list/droppable";
 import React from "react";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { distanceDetector } from "./color-block-small-boxes";
-import { DraggableData } from "../../features/darg-and-drop";
+import type { DraggableData } from "../../features/darg-and-drop";
 import { setEditBlock, togglePalette } from "../../features/store-actions/clipboard-store-actions";
 
 type PaletteBoxParams = {

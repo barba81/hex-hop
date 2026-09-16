@@ -1,4 +1,5 @@
-import { GradientEntitySummary, toGradientSummary, type GradientEntity } from "@/infrastructure/models/entity";
+import type { GradientEntitySummary} from "@/infrastructure/models/entity";
+import { toGradientSummary, type GradientEntity } from "@/infrastructure/models/entity";
 import type { ChangeEvent} from "react";
 import { useState } from "react";
 import { Check, X } from "lucide-react";

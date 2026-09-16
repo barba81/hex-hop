@@ -1,8 +1,12 @@
 use tauri::WebviewWindow;
+#[cfg(target_os = "macos")]
 use window_vibrancy::NSGlassEffectViewStyle;
+#[cfg(target_os = "macos")]
 use window_vibrancy::NSVisualEffectMaterial;
 use window_vibrancy::apply_acrylic;
+#[cfg(target_os = "macos")]
 use window_vibrancy::apply_liquid_glass;
+#[cfg(target_os = "macos")]
 use window_vibrancy::apply_vibrancy;
 
 pub fn transparent_background(window: WebviewWindow) -> Result<(), String> {

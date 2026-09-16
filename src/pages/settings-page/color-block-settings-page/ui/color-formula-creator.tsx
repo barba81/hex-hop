@@ -1,6 +1,6 @@
-import { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
+import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import { useClipboardStore } from "@/store/clipboard-store";
-import { BlendIcon, Edit2, FormInput, Trash2 } from "lucide-react";
+import { Edit2, FormInput, Trash2 } from "lucide-react";
 import { deleteColorCopyBlock } from "../feature/color-settings-store-actions";
 
 const ColorFormulaTitle = ({ copyFormula }: { copyFormula: ColorCopyFormula }) => {

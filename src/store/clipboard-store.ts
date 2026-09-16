@@ -1,4 +1,5 @@
-import { ColorCopyFormula, defaultColorCopyFormula, defaultColorCopyList } from "@/infrastructure/models/color-copy-list";
+import type { ColorCopyFormula} from "@/infrastructure/models/color-copy-list";
+import { defaultColorCopyFormula, defaultColorCopyList } from "@/infrastructure/models/color-copy-list";
 import type { BlockEntity, ColorEntity, GradientEntity, GradientEntitySummary, PaletteEntity, PaletteEntitySummary } from "@/infrastructure/models/entity";
 import { invoke } from "@tauri-apps/api/core";
 import { create } from "zustand";

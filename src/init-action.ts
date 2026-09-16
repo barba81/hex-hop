@@ -1,7 +1,7 @@
 import { invoke } from "@tauri-apps/api/core";
 import { useClipboardStore, rootBlockId } from "@/store/clipboard-store";
-import { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
-import { BlockEntity } from "@/infrastructure/models/entity";
+import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
+import type { BlockEntity } from "@/infrastructure/models/entity";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 
 

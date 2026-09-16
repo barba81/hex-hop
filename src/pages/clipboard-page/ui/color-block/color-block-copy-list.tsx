@@ -1,5 +1,5 @@
-import { ColorCopyFormula } from "@/infrastructure/models/color-copy-list"
-import { ColorEntity } from "@/infrastructure/models/entity"
+import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list"
+import type { ColorEntity } from "@/infrastructure/models/entity"
 import { useClipboardStore } from "@/store/clipboard-store"
 
 

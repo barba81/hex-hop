@@ -1,5 +1,5 @@
 import GradientIcon from "@/components/icons/gradient-icon";
-import { Copy, Palette, TriangleAlert, TvMinimal } from "lucide-react";
+import { Palette, TriangleAlert, TvMinimal } from "lucide-react";
 import { NavLink } from "react-router";
 
 

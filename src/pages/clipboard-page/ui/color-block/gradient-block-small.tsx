@@ -4,7 +4,7 @@ import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator,
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import { distanceDetector } from "./color-block-small-boxes";
-import { DraggableData } from "../../features/darg-and-drop";
+import type { DraggableData } from "../../features/darg-and-drop";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
 import { setEditBlock } from "../../features/store-actions/clipboard-store-actions";
 import { deleteGradientBlock } from "../../features/delete-block";

@@ -1,4 +1,5 @@
-import { ColorCopyFormula, defaultColorCopyFormula } from "@/infrastructure/models/color-copy-list";
+import type { ColorCopyFormula} from "@/infrastructure/models/color-copy-list";
+import { defaultColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import { useClipboardStore } from "@/store/clipboard-store";
 import { invoke } from "@tauri-apps/api/core";
 
@@ -12,7 +13,7 @@ export const addNewColorCopyBlock = async () => {
   });
 };
 
-export const flipColorCopyBlockVisiblity = async (copyBlockId: string) => {
+export const flipColorCopyBlockVisibility = async (copyBlockId: string) => {
   const currentList = useClipboardStore.getState().copyList;
   const oldBlock = currentList.find((x) => x.id === copyBlockId);
 

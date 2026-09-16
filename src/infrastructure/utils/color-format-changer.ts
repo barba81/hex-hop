@@ -3,7 +3,6 @@ import type { Color } from "culori";
 import { formatCss, formatHex, formatHex8, parse, rgb } from "culori";
 import type { ColorEntity } from "../models/entity";
 import { simulate } from '@bjornlu/colorblind';
-import { ColorBlindnessType } from "../models/color-blindness-types";
 
 export const randomColor = () => {
   const randomHex = formatHex({
@@ -24,19 +23,8 @@ export function colorStringToData(colorString: string) {
   return color;
 }
 
-export function coloBackground(color: ColorData, colorBlindnessMode?: ColorBlindnessType | null ) {
-
-  if (colorBlindnessMode === 'regular' || colorBlindnessMode == null ) {
-    return formatCss({ ...color, alpha: color.alpha ?? undefined, mode: "rgb" });
-
-  }
-
-  const result = simulate({ r: 255*color.r, g: 255*color.g, b: 255*color.b }, colorBlindnessMode);
-
-  result.r /= 255;
-  result.g /= 255;
-  result.b /= 255;
-  return formatCss({ ...result, alpha: color.alpha ?? undefined, mode: "rgb" });
+export function coloBackground(color: ColorData ) {
+  return formatCss({ ...color, alpha: color.alpha ?? undefined, mode: "rgb" });
 }
 
 export function toHex8(color: ColorData) {

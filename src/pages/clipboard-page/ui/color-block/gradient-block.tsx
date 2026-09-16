@@ -3,7 +3,7 @@ import type { GradientEntity } from "@/infrastructure/models/entity";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
-import { DraggableData } from "../../features/darg-and-drop";
+import type { DraggableData } from "../../features/darg-and-drop";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
 import { deleteGradientBlock } from "../../features/delete-block";
 
