@@ -1,16 +1,15 @@
 import type { ColorEntity } from "@/infrastructure/models/entity";
-import { coloBackground } from "../../../infrastructure/utils/color-format-changer";
 import { DragDots } from "@/components/common/drag-dots";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
-import { duplicateBlock } from "../features/duplicate-block";
-import { deleteColorBlock } from "../features/delete-block";
-import { useClipboardStore } from "../../../store/clipboard-store";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
-import type { DraggableData } from "../features/darg-and-drop";
 import {CollisionDetector, CollisionPriority, CollisionType} from '@dnd-kit/abstract';
 import { ColorBlockCopyList } from "./color-block-copy-list";
-import { setEditBlock } from "../store-actions/clipboard-store-actions";
+import { DraggableData } from "../../features/darg-and-drop";
+import { coloBackground } from "@/infrastructure/utils/color-format-changer";
+import { setEditBlock } from "../../features/store-actions/clipboard-store-actions";
+import { duplicateBlock } from "../../features/duplicate-block";
+import { deleteColorBlock } from "../../features/delete-block";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity

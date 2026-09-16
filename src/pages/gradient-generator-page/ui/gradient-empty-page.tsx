@@ -6,9 +6,9 @@ import {
   EmptyMedia,
   EmptyTitle,
 } from "@/components/ui/empty";
-import { addNewGradient } from "./feature/add-new-gradient";
 import GradientIcon from "@/components/icons/gradient-icon";
 import { CustomButton } from "@/components/common/custom-button";
+import { addNewGradient } from "../feature/add-new-gradient";
 
 const GradientEmptyPage = () => {
 

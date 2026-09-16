@@ -1,16 +1,16 @@
 import type { ColorEntity } from "@/infrastructure/models/entity";
-import { colorEntityToColor, colorEntityToRoundedEntity, hexaToRgbaNormalized, toHex8 } from "../../../infrastructure/utils/color-format-changer";
 import { Check, RefreshCw, X } from "lucide-react";
-import { updateColorBlock } from "../features/update-block";
 import { CustomInput } from "@/components/common/custom-input";
 import { defaultButtonBackground } from "@/components/common/custom-button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { HexAlphaColorPicker } from "react-colorful";
 import type { ChangeEvent} from "react";
 import { useEffect, useState } from "react";
-import { getSmartColorName } from "../features/get-color-name";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { setEditBlock } from "../store-actions/clipboard-store-actions";
+import { colorEntityToColor, colorEntityToRoundedEntity, hexaToRgbaNormalized, toHex8 } from "@/infrastructure/utils/color-format-changer";
+import { getSmartColorName } from "../../features/get-color-name";
+import { updateColorBlock } from "../../features/update-block";
+import { setEditBlock } from "../../features/store-actions/clipboard-store-actions";
 
 type ColorBlockEditParams = {
     colorEntity: ColorEntity

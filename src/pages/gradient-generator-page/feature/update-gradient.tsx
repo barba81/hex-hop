@@ -1,6 +1,6 @@
 import type { GradientEntity } from "@/infrastructure/models/entity";
-import { useGradientStore } from "@/pages/gradient-generator/store/use-gradient-store";
 import { invoke } from "@tauri-apps/api/core";
+import { useGradientStore } from "./store/use-gradient-store";
 
 export const updateGradient = async (oldGradient: GradientEntity) => {
   await invoke("update_gradient", { gradient: oldGradient });

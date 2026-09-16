@@ -1,6 +1,6 @@
 import { Pipette } from "lucide-react";
-import { eyeDropperColorPicker } from "../features/eye-dropper";
 import { defaultButtonBackground } from "@/components/common/custom-button";
+import { eyeDropperColorPicker } from "../../features/eye-dropper";
 
 const EyeDropButton = () => {
 

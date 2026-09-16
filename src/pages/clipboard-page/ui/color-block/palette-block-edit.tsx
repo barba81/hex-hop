@@ -1,12 +1,11 @@
 import { CustomInput } from "@/components/common/custom-input";
 import { toGradientSummary, toPaletteSummary, type PaletteEntity } from "@/infrastructure/models/entity";
 import { Check, X } from "lucide-react";
-import { useClipboardStore } from "../../../store/clipboard-store";
 import type { ChangeEvent} from "react";
 import { useState } from "react";
 import { defaultButtonBackground } from "@/components/common/custom-button";
-import { updatePaletteBlock } from "../features/update-block";
-import { setEditBlock } from "../store-actions/clipboard-store-actions";
+import { setEditBlock } from "../../features/store-actions/clipboard-store-actions";
+import { updatePaletteBlock } from "../../features/update-block";
 
 type PaletteBlockEditParams = {
     paletteEntity: PaletteEntity

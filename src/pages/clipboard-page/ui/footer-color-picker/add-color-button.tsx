@@ -1,7 +1,7 @@
 import { Check } from "lucide-react";
 import { useClipboardStore } from "@/store/clipboard-store";
 import { CustomButton } from "@/components/common/custom-button";
-import { addNewColorToClipboard } from "../features/add-block";
+import { addNewColorToClipboard } from "../../features/add-block";
 
 const AddColorButton = () => {
   const isColorValid = useClipboardStore((state) => state.isColorValid);

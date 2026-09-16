@@ -1,10 +1,10 @@
 import { EllipsisVertical, Palette, Redo, Trash2, Undo } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { deleteClipboard } from "./features/delete-block";
 import { defaultButtonBackground } from "@/components/common/custom-button";
 import { CustomInput } from "@/components/common/custom-input";
 import { useColorListCommands } from "@/store/command-manager-provider";
-import { addNewPalette } from "./features/add-block";
+import { addNewPalette } from "../features/add-block";
+import { deleteClipboard } from "../features/delete-block";
 
 const HeaderDropdown = () => {
 
