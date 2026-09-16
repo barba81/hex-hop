@@ -12,7 +12,6 @@ import DroppableLine from "../color-list/droppable";
 import React from "react";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { distanceDetector } from "./color-block-small-boxes";
-import { useColorBlindnessStore } from "../../../store/color-blindness-store";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity
@@ -23,15 +22,13 @@ const PaletteTopBar = ({ blockId }: { blockId: number }) => {
     state => state.blocksById[blockId]
   );
 
-  const { colorBlindnessMode} = useColorBlindnessStore();
-
   switch (block.kind) {
     case "color":
       return (
         <div
           key={blockId}
           className="w-full h-full"
-          style={{ backgroundColor: coloBackground(block, colorBlindnessMode) }}
+          style={{ backgroundColor: coloBackground(block) }}
         />
       );
 
