@@ -1,7 +1,7 @@
 import { platform as getPlatform } from "@tauri-apps/plugin-os";
 import MacHeaderButton from "./mac-header-button";
 import WindowsHeaderButton from "./windows-header-button";
-import DropDownHeader from "@/components/common/navigator/drop-down-header";
+import DropDownHeader from "@/components/custom/drop-down-header";
 
 
 const HeaderBar = () => {

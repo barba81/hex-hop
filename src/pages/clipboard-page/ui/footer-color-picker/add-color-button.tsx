@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 import { useClipboardStore } from "@/store/clipboard-store";
-import { CustomButton } from "@/components/common/custom-button";
+import { CustomButton } from "@/components/custom/custom-button";
 import { addNewColorToClipboard } from "../../features/add-block";
 
 const AddColorButton = () => {

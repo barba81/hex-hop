@@ -1,7 +1,7 @@
 import type { ColorEntity } from "@/infrastructure/models/entity";
 import { Check, RefreshCw, X } from "lucide-react";
-import { CustomInput } from "@/components/common/custom-input";
-import { defaultButtonBackground } from "@/components/common/custom-button";
+import { CustomInput } from "@/components/custom/custom-input";
+import { defaultButtonBackground } from "@/components/custom/custom-button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { HexAlphaColorPicker } from "react-colorful";
 import type { ChangeEvent} from "react";

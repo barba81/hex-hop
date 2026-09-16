@@ -8,7 +8,6 @@ import {
 
 import {
   Clipboard,
-  Eye,
   Import,
   Palette,
   Settings,
@@ -17,7 +16,7 @@ import {
 import { useLocation, useNavigate } from "react-router";
 
 import GradientIcon from "@/components/icons/gradient-icon";
-import { defaultButtonBackground } from "@/components/common/custom-button";
+import { defaultButtonBackground } from "@/components/custom/custom-button";
 
 const size = 15;
 
