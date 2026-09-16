@@ -1,9 +1,8 @@
 import type { ColorCopyFormula} from "@/infrastructure/models/color-copy-list";
-import { defaultColorCopyFormula, defaultColorCopyList } from "@/infrastructure/models/color-copy-list";
 import type { BlockEntity, ColorEntity, GradientEntity, GradientEntitySummary, PaletteEntity, PaletteEntitySummary } from "@/infrastructure/models/entity";
-import { invoke } from "@tauri-apps/api/core";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
+import { Command } from "./command-manager-state";
 
 export const defaultInputColor = "#3b82f6";
 export const rootBlockId = -1;
@@ -23,40 +22,16 @@ interface ClipboardStore {
   isColorValid: boolean;
   colorFormat: string;
 
-  // Color blocks settings  -----------------------------------------------------------------------
+  clipBoardUndoStack: Command[];
+  clipBoardRedoStack: Command[];
 
+  // Color blocks settings  -----------------------------------------------------------------------
   copyList: ColorCopyFormula[],
   colorCopyFormulaActiveId: string | null,
-}
 
-interface ClipboardAction {
-  // INIT -----------------------------------------------------------------------
-
-
-  // CREATE -----------------------------------------------------------------------
-
-  pushBlock: (block: ColorEntity | GradientEntity, paletteId: number | null) => void;
-  pushPalette: (palette: PaletteEntity, blockId: number[]) => void;
-  insertPalette: (palette: PaletteEntity, blockId: number[], ix: number) => void;
-
-  // UPDATE -----------------------------------------------------------------------
-  updateBlock: (block: BlockEntity) => void;
-  updateBlockSummary: (updateBlock: PaletteEntitySummary | GradientEntitySummary) => void;
-
-  // DELETE  -----------------------------------------------------------------------
-
-  deleteBlock: (blockId: number, paletteId: number | null) => void;
-  deleteClipboard: () => void;
-
-  // UI  -----------------------------------------------------------------------
-
-  setLastValidColor: (color: string) => void;
-  setIsColorValid: (colorFormat: boolean) => void;
-  setInputColor: (color: string) => void;
-  setFormat: (color: string) => void;
-  togglePalette: (paletteId: number) => void;
-  setColorCopyFormulaActive: (blockId: string | null) => void;
-  reorderBlocks: (reorderedBlocks: { blockId: number[], paletteId: number | null }[]) => void;
+  
+  colorBlockSettingsUndoStack: Command[];
+  colorBlockSettingsRedoStack: Command[];
 }
 
 export const useClipboardStore = create<ClipboardStore>()(immer((set, get) => ({
@@ -68,8 +43,13 @@ export const useClipboardStore = create<ClipboardStore>()(immer((set, get) => ({
   colorFormat: "RGB",
   openPalette: {},
   editBlockId: null,
+  clipBoardUndoStack:[],
+  clipBoardRedoStack: [],
+  
   copyList: [],
   colorCopyFormulaActiveId: null,
+  colorBlockSettingsUndoStack: [],
+  colorBlockSettingsRedoStack: [],
 
   reorderBlocks: (reorderedBlocks) =>
     set(state => {

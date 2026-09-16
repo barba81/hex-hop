@@ -1,8 +1,4 @@
-import { TailwindIcon } from "@/components/icons/css-icon";
-import { BlenderIcon } from "@/components/icons/css-icon";
-import { CSSIcon } from "@/components/icons/css-icon";
 import type { Color } from "culori";
-import type { ComponentType } from "react";
 // import CSSIcon from "@/assets/icons/Official_CSS_Logo.svg?react";
 
 export interface ColorCopyFormula {
