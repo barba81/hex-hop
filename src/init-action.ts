@@ -4,8 +4,6 @@ import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import type { BlockEntity } from "@/infrastructure/models/entity";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 
-
-
 let isInitialized = false;
 
 export const initializeApp = async () => {

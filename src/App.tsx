@@ -1,13 +1,9 @@
-import { useEffect } from "react";
-import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import HeaderBar from "./components/header/header-bar";
-
 import "./globals.css";
 import { ThemeProvider } from "./components/theme/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { Outlet } from "react-router";
 import { TooltipProvider } from "./components/ui/tooltip";
-import { useClipboardStore } from "./store/clipboard-store";
 
 function HexHopApp() {
   return (
