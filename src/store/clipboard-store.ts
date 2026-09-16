@@ -52,10 +52,7 @@ interface ClipboardAction {
   togglePalette: (paletteId: number) => void;
   setEditBlock: (blockId: number | null) => void;
   setColorCopyFormulaActive: (blockId: string | null) => void;
-  flitColorCopyBloc: (blockId: string | null) => void;
   reorderBlocks: (reorderedBlocks: { blockId: number[], paletteId: number | null }[]) => void;
-  addNewColorCopyBlock: () => void;
-  deleteColorCopyBlock: (id: string) => void;
 }
 
 export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(immer((set, get) => ({
@@ -186,35 +183,6 @@ export const useClipboardStore = create<ClipboardStore & ClipboardAction>()(imme
     set((state) => {
       state.colorCopyFormulaActiveId = blockId;
     }),
-  flitColorCopyBloc: async (copyListId) => {
     
-    const state = get();
-    const copyBlockIx = state.copyList.findIndex(x => x.id === copyListId);
-    
-    if (copyBlockIx < 0) return;
 
-    const oldBlock =  state.copyList[copyBlockIx];
-    const newCopyFormula = await invoke<ColorCopyFormula>("update_color_copy_formula", { 
-      colorCopyFormula: {...oldBlock, enabled: !oldBlock.enabled }
-    });
-   return set((state) => {
-      state.copyList[copyBlockIx] = newCopyFormula;
-    })
-  },
-  addNewColorCopyBlock: async () =>{
-    const newCopyFormula = await invoke<ColorCopyFormula>("create_color_copy_formula", { 
-      colorCopyFormula: {...defaultColorCopyFormula, id:crypto.randomUUID()}
-    });
-    return set((state) => {
-      state.copyList.push(newCopyFormula);
-    })
-  },
-  deleteColorCopyBlock: async (id: string) => {
-     await invoke("delete_color_copy_formula", { 
-      colorFormulaId: id
-    });
-    return set((state) => {
-      state.copyList = state.copyList.filter(x => x.id !== id);
-    })
-  }
 })));

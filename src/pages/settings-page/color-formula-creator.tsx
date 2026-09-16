@@ -1,9 +1,9 @@
 import { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import { useClipboardStore } from "@/store/clipboard-store";
-import { BlendIcon, Edit2, Trash2 } from "lucide-react";
+import { BlendIcon, Edit2, FormInput, Trash2 } from "lucide-react";
+import { deleteColorCopyBlock } from "./color-settings-store-actions";
 
 const ColorFormulaTitle = ({ copyFormula }: { copyFormula: ColorCopyFormula }) => {
-    const deleteColorCopyBlock = useClipboardStore((state) => state.deleteColorCopyBlock);
 
     return (
         <div className="w-full flex  h-7  border-b-2 border-black items-center justify-between px-2 bg-background">
@@ -34,23 +34,39 @@ const ColorFormulaInputList = () => {
     );
 };
 
+
+
+const ColorFormulaTester = () => {
+
+}
+
 const ColorFormula = ({ copyFormula }: { copyFormula: ColorCopyFormula }) => {
     return (
         <div className=" h-full w-[70%]">
             <div className=" w-full h-[80%] bg-stone-800">{copyFormula.formula}</div>
-            <div className=" w-full h-[20%] bg-stone-900 border-t-2 border-black">{
-
-            }</div>
+            <div className=" w-full h-[20%] bg-stone-900 border-t-2 border-black">
+                <div className="w-5 h-5">   
+                </div>
+            </div>
         </div>
     );
 };
+
+const EmpytColorFormula = () => {
+    return  <div className="flex flex-col flex-1 items-center justify-center  rounded-md overflow-hidden border border-black">
+        <FormInput size={50} />
+        <div>
+            Select one color formula
+        </div>
+    </div>
+}
 
 export const ColorFormulaCreator = () => {
     const copyBlock = useClipboardStore((state) => state.copyList.find(x => x.id === state.colorCopyFormulaActiveId));
 
     return (
         <>
-            {copyBlock == undefined && <></>}
+            {copyBlock == undefined && <EmpytColorFormula/>}
             {copyBlock !== undefined &&
                 <div className="flex flex-col flex-1  rounded-md overflow-hidden border border-black">
                     <ColorFormulaTitle copyFormula={copyBlock} />
@@ -58,7 +74,6 @@ export const ColorFormulaCreator = () => {
                         <ColorFormula copyFormula={copyBlock} />
                         <ColorFormulaInputList />
                     </div>
-
                 </div>
             }
         </>

@@ -8,6 +8,7 @@ import { ColorFormulaCreator } from "./color-formula-creator";
 import { CustomButton, defaultButtonBackground } from "@/components/common/custom-button";
 import {RestrictToVerticalAxis} from '@dnd-kit/abstract/modifiers';
 import { DynamicIconMapper } from "@/infrastructure/utils/icon-mapper";
+import { addNewColorCopyBlock, flipColorCopyBlockVisiblity } from "./color-settings-store-actions";
 
 
 
@@ -42,7 +43,6 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFor
     const { ref } = useSortable({ id: copyBlock.id, index: index,    modifiers: [RestrictToVerticalAxis],});
     const setColorCopyFormulaActive = useClipboardStore((state) => state.setColorCopyFormulaActive);
     const colorCopyFormulaActiveId = useClipboardStore((state) => state.colorCopyFormulaActiveId);
-    const flipColorCopyBloc = useClipboardStore((state) => state.flitColorCopyBloc);
   
 
     return <div onClick={() => setColorCopyFormulaActive(copyBlock.id)} ref={ref}
@@ -68,7 +68,7 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFor
 
                 <div className="flex items-center justify-center gap-1">
                     <div className="cursor-pointer border rounded-md hover:border-primary hover:bg-secondary p-0.5 " 
-                    onClick={()=> flipColorCopyBloc(copyBlock.id)}> 
+                    onClick={()=> flipColorCopyBlockVisiblity(copyBlock.id)}> 
                     {copyBlock.enabled ? <Eye size={18} /> :
                         <EyeClosed size={18} />
                     }
@@ -84,8 +84,6 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFor
 }
 
 const ColorFormatHeader = () => {
-    const addNewColorCopyBlock = useClipboardStore((state) => state.addNewColorCopyBlock);
-
 
     return <div className="p-1 flex w-full justify-between border-b-3 ">
         <div className="text-sm">
@@ -96,7 +94,7 @@ const ColorFormatHeader = () => {
                 ${defaultButtonBackground}
              w-6 h-6 overflow-hidden outline-1 `}
             onClick={async () => {
-                await addNewColorCopyBlock()
+                addNewColorCopyBlock()
             }}
         >
             <Plus  size={20} />
