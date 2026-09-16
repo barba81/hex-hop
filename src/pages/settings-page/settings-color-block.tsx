@@ -8,7 +8,7 @@ import { ColorFormulaCreator } from "./color-formula-creator";
 import { CustomButton, defaultButtonBackground } from "@/components/common/custom-button";
 import {RestrictToVerticalAxis} from '@dnd-kit/abstract/modifiers';
 import { DynamicIconMapper } from "@/infrastructure/utils/icon-mapper";
-import { addNewColorCopyBlock, flipColorCopyBlockVisiblity, setColorCopyFormulaActive } from "./color-settings-store-actions";
+import { addNewColorCopyBlock, flipColorCopyBlockVisiblity, setColorCopyFormulaActive } from "./color-block-settings-page/store-actions/color-settings-store-actions";
 
 
 

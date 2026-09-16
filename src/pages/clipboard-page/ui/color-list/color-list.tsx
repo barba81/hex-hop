@@ -4,7 +4,7 @@ import EmptyClipboardPage from "../empty-clipboard-page";
 import Block from "../color-block/block";
 import React from "react";
 import DroppableLine from "./droppable";
-import { handleDragEnd } from "../features/darg-and-drop";
+import { handleDragEnd } from "../../features/darg-and-drop";
 
 
 const ColorList = () => {

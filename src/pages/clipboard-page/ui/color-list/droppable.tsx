@@ -1,5 +1,5 @@
 import { useDroppable } from "@dnd-kit/react";
-import type { DraggableData } from "../features/darg-and-drop";
+import type { DraggableData } from "../../features/darg-and-drop";
 import { distanceDetector } from "../color-block/color-block-small-boxes";
 
 const DroppableLine = ({
