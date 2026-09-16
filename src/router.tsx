@@ -4,11 +4,11 @@ import ImportExportPage from "./pages/import-export/import-export-page";
 import PaletteGenerator from "./pages/palette-generator/palette-generator-page";
 import GradientGeneratorPage from "./pages/gradient-generator/gradient-generator-page";
 import ColorListPage from "./pages/clipboard-page/ui/clipboard-page";
-import SettingsPage from "./pages/settings-page/settings-page";
-import { SettingsColorBlock } from "./pages/settings-page/settings-color-block";
-import { SettingsGradientBlock } from "./pages/settings-page/settings-gradient-block";
-import { SettingsPaletteBlock } from "./pages/settings-page/settings-palette-block";
-import { SettingsDanger } from "./pages/settings-page/settings-danger";
+import SettingsPage from "./pages/settings-page/ui/settings-page";
+import { SettingsColorBlock } from "./pages/settings-page/color-block-settings-page/settings-color-block";
+import { SettingsGradientBlock } from "./pages/settings-page/gradient-block-settings-page/settings-gradient-block";
+import { SettingsPaletteBlock } from "./pages/settings-page/palette-settings-page/settings-palette-block";
+import { SettingsDanger } from "./pages/settings-page/dangrous-settings-page/settings-danger";
 
 
 export const router = createBrowserRouter([
