@@ -1,7 +1,6 @@
 import type { ColorEntity } from "@/infrastructure/models/entity";
 import { colorEntityToColor, colorEntityToRoundedEntity, hexaToRgbaNormalized, toHex8 } from "../../../infrastructure/utils/color-format-changer";
 import { Check, RefreshCw, X } from "lucide-react";
-import { useClipboardStore } from "@/store/clipboard-store";
 import { updateColorBlock } from "../features/update-block";
 import { CustomInput } from "@/components/common/custom-input";
 import { defaultButtonBackground } from "@/components/common/custom-button";
@@ -11,13 +10,13 @@ import type { ChangeEvent} from "react";
 import { useEffect, useState } from "react";
 import { getSmartColorName } from "../features/get-color-name";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { setEditBlock } from "../clipboard-store-actions";
 
 type ColorBlockEditParams = {
     colorEntity: ColorEntity
 };
 
 const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
-    const setEditBox = useClipboardStore(state => state.setEditBlock);
     const [colorUpdateEntity, setColorUpdateEntity] = useState(() => ({ ...colorEntity }));
 
     useEffect(() => {
@@ -64,7 +63,7 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
             ...colorUpdateEntity,
         }, colorEntity);
 
-        setEditBox(null);
+        setEditBlock(null);
     };
 
     return (<div className=' h-18  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden '>
@@ -168,7 +167,7 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                             rounded-full 
                             p-0.5
                             cursor-pointer   `}
-                        onClick={() => setEditBox(null)} >
+                        onClick={() => setEditBlock(null)} >
                         <X size={13} />
                     </button>
                 </div>
@@ -178,3 +177,4 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
 }
 
 export default ColorBlockEdit;
+

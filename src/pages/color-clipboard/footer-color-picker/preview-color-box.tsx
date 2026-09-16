@@ -8,10 +8,10 @@ import {
 import "@/globals.css";
 import { useClipboardStore } from "@/store/clipboard-store";
 import { setColorValidityAndMode } from "../features/set-color-validity-and-mode";
+import { setInputColor } from "../clipboard-store-actions";
 
 const PreviewColorBox = () => {
   const currentColor = useClipboardStore(x => x.validColor);
-  const setInputColor = useClipboardStore(x => x.setInputColor);
 
   const handleOnChange = (color: string) => {
     setInputColor(color);

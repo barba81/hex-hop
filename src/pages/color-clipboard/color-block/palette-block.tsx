@@ -12,6 +12,7 @@ import DroppableLine from "../color-list/droppable";
 import React from "react";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { distanceDetector } from "./color-block-small-boxes";
+import { setEditBlock, togglePalette } from "../clipboard-store-actions";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity
@@ -51,8 +52,6 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
   const colorBlocksId = useClipboardStore(state => state.blockIds[paletteEntity.id]) ?? [];
 
   const isOpen = useClipboardStore((state) => !!state.openPalette[paletteEntity.blockId]);
-  const togglePalette = useClipboardStore((state) => state.togglePalette);
-  const setEditBox = useClipboardStore(x => x.setEditBlock);
 
   const { isDropTarget, ref: dropRef } = useDroppable<DraggableData>({
     id: `darg:${paletteEntity.blockId}`,
@@ -135,7 +134,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
 
     </ContextMenuTrigger>
     <ContextMenuContent className="w-20">
-      <ContextMenuItem className="gap-2" onClick={() => setEditBox(paletteEntity.blockId)}>
+      <ContextMenuItem className="gap-2" onClick={() => setEditBlock(paletteEntity.blockId)}>
         <Pen className="size-4" />
         Edit
       </ContextMenuItem>

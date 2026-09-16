@@ -8,6 +8,8 @@ export const defaultInputColor = "#3b82f6";
 export const rootBlockId = -1;
 
 interface ClipboardStore {
+  // Clipboard -----------------------------------------------------------------------
+
   blockIds: Record<number, number[]>;
   blocksById: Record<number, BlockEntity>;
 
@@ -19,8 +21,41 @@ interface ClipboardStore {
   inputColor: string;
   isColorValid: boolean;
   colorFormat: string;
+
+  // Color blocks settings  -----------------------------------------------------------------------
+
   copyList: ColorCopyFormula[],
   colorCopyFormulaActiveId: string | null,
+}
+
+interface ClipboardAction {
+  // INIT -----------------------------------------------------------------------
+
+
+  // CREATE -----------------------------------------------------------------------
+
+  pushBlock: (block: ColorEntity | GradientEntity, paletteId: number | null) => void;
+  pushPalette: (palette: PaletteEntity, blockId: number[]) => void;
+  insertPalette: (palette: PaletteEntity, blockId: number[], ix: number) => void;
+
+  // UPDATE -----------------------------------------------------------------------
+  updateBlock: (block: BlockEntity) => void;
+  updateBlockSummary: (updateBlock: PaletteEntitySummary | GradientEntitySummary) => void;
+
+  // DELETE  -----------------------------------------------------------------------
+
+  deleteBlock: (blockId: number, paletteId: number | null) => void;
+  deleteClipboard: () => void;
+
+  // UI  -----------------------------------------------------------------------
+
+  setLastValidColor: (color: string) => void;
+  setIsColorValid: (colorFormat: boolean) => void;
+  setInputColor: (color: string) => void;
+  setFormat: (color: string) => void;
+  togglePalette: (paletteId: number) => void;
+  setColorCopyFormulaActive: (blockId: string | null) => void;
+  reorderBlocks: (reorderedBlocks: { blockId: number[], paletteId: number | null }[]) => void;
 }
 
 export const useClipboardStore = create<ClipboardStore>()(immer((set, get) => ({
@@ -105,19 +140,6 @@ export const useClipboardStore = create<ClipboardStore>()(immer((set, get) => ({
         list.length = 0;
       }
       state.blocksById = {}
-    }),
-
-  setLastValidColor: (newColor) => set({ validColor: newColor }),
-  setIsColorValid: (isColorValid) => set({ isColorValid }),
-  setInputColor: (newColor) => set({ inputColor: newColor }),
-  setFormat: (newColor) => set({ colorFormat: newColor }),
-  togglePalette: (paletteId) =>
-    set((state) => {
-      state.openPalette[paletteId] = !state.openPalette[paletteId];
-    }),
-  setEditBlock: (blockId) =>
-    set((state) => {
-      state.editBlockId = blockId;
     }),
 
 })));

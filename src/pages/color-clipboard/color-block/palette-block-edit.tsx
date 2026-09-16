@@ -6,16 +6,16 @@ import type { ChangeEvent} from "react";
 import { useState } from "react";
 import { defaultButtonBackground } from "@/components/common/custom-button";
 import { updatePaletteBlock } from "../features/update-block";
+import { setEditBlock } from "../clipboard-store-actions";
 
 type PaletteBlockEditParams = {
     paletteEntity: PaletteEntity
 };
 const PaletteBlockEdit = ({ paletteEntity }: PaletteBlockEditParams) => {
-    const setEditBox = useClipboardStore(x => x.setEditBlock);
     const [paletteUpdateEntity, setColorUpdateEntity] = useState(() => ( toPaletteSummary(paletteEntity)));
     const handleEdit = async () => {
         updatePaletteBlock(paletteUpdateEntity ,  toPaletteSummary(paletteEntity) );
-        setEditBox(null);
+        setEditBlock(null);
     };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -43,7 +43,7 @@ const PaletteBlockEdit = ({ paletteEntity }: PaletteBlockEditParams) => {
                 >
                     <Check className="size-3.5" />
                 </button>
-                <button onClick={() => setEditBox(null)}
+                <button onClick={() => setEditBlock(null)}
                     className={`h-6 w-6 ${defaultButtonBackground} outline-1`}
                 >
                     <X className="size-3.5" />

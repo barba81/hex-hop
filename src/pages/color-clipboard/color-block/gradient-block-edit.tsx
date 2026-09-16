@@ -1,11 +1,11 @@
 import { GradientEntitySummary, toGradientSummary, type GradientEntity } from "@/infrastructure/models/entity";
-import { useClipboardStore } from "../../../store/clipboard-store";
 import type { ChangeEvent} from "react";
 import { useState } from "react";
 import { Check, X } from "lucide-react";
 import { CustomInput } from "@/components/common/custom-input";
 import { defaultButtonBackground } from "@/components/common/custom-button";
 import { updateGradientBlock } from "../features/update-block";
+import { setEditBlock } from "../clipboard-store-actions";
 
 type GradientBlockEditParams = {
     gradientEntity: GradientEntity
@@ -13,11 +13,10 @@ type GradientBlockEditParams = {
 
 
 const GradientBlockEdit = ({ gradientEntity }: GradientBlockEditParams) => {
-   const setEditBox = useClipboardStore(x => x.setEditBlock);
     const [gradientUpdate, setColorUpdateEntity] = useState<GradientEntitySummary>(() => (toGradientSummary( gradientEntity )));
     const handleEdit = async () => {
         updateGradientBlock(gradientUpdate , toGradientSummary( gradientEntity ) );
-        setEditBox(null);
+        setEditBlock(null);
     };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -45,7 +44,7 @@ const GradientBlockEdit = ({ gradientEntity }: GradientBlockEditParams) => {
                 >
                     <Check className="size-3.5" />
                 </button>
-                <button onClick={() => setEditBox(null)}
+                <button onClick={() => setEditBlock(null)}
                     className={`h-6 w-6 ${defaultButtonBackground} outline-1`}
                 >
                     <X className="size-3.5" />

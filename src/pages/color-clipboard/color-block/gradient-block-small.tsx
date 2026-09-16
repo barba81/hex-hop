@@ -8,13 +8,13 @@ import { useDraggable, useDroppable } from "@dnd-kit/react";
 import type { DraggableData } from "../features/darg-and-drop";
 import { useClipboardStore } from "../../../store/clipboard-store";
 import { distanceDetector } from "./color-block-small-boxes";
+import { setEditBlock } from "../clipboard-store-actions";
 
 type GradientBoxParams = {
     gradientEntity: GradientEntity
 };
 
 export const GradientBlockSmall = ({ gradientEntity: gradientEntity }: GradientBoxParams) => {
-    const setEditBox = useClipboardStore(state => state.setEditBlock);
 
     const { isDropTarget, ref: dropRef } = useDroppable<DraggableData>({
         id: `darg:${gradientEntity.blockId}`,
@@ -73,7 +73,7 @@ export const GradientBlockSmall = ({ gradientEntity: gradientEntity }: GradientB
                 </div>
             </ContextMenuTrigger>
             <ContextMenuContent className="w-48">
-                <ContextMenuItem className="gap-2" onClick={() => setEditBox(gradientEntity.blockId)}>
+                <ContextMenuItem className="gap-2" onClick={() => setEditBlock(gradientEntity.blockId)}>
                     <Pen className="size-4" />
                     Edit
                 </ContextMenuItem>

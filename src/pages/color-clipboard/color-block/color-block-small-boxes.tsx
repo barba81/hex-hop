@@ -10,6 +10,7 @@ import { useDraggable, useDroppable } from "@dnd-kit/react";
 import type { DraggableData } from "../features/darg-and-drop";
 import {CollisionDetector, CollisionPriority, CollisionType} from '@dnd-kit/abstract';
 import { ColorBlockCopyList } from "./color-block-copy-list";
+import { setEditBlock } from "../clipboard-store-actions";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity
@@ -54,7 +55,6 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
     });
 
     const backgroundCss = coloBackground(colorEntity);
-    const setEditBox = useClipboardStore(x => x.setEditBlock);
 
     const setCombinedRef = (node: HTMLDivElement | null) => {
         dragRef(node);
@@ -91,7 +91,7 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
 
         </ContextMenuTrigger>
         <ContextMenuContent className="w-20">
-            <ContextMenuItem className="gap-2" onClick={() => setEditBox(colorEntity.blockId)}>
+            <ContextMenuItem className="gap-2" onClick={() => setEditBlock(colorEntity.blockId)}>
                 <Pen className="size-4" />
                 Edit
             </ContextMenuItem>
