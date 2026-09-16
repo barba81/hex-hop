@@ -8,7 +8,7 @@ import { useDraggable, useDroppable } from "@dnd-kit/react";
 import type { DraggableData } from "../features/darg-and-drop";
 import { useClipboardStore } from "../../../store/clipboard-store";
 import { distanceDetector } from "./color-block-small-boxes";
-import { setEditBlock } from "../clipboard-store-actions";
+import { setEditBlock } from "../store-actions/clipboard-store-actions";
 
 type GradientBoxParams = {
     gradientEntity: GradientEntity

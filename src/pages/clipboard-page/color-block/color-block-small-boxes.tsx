@@ -10,7 +10,7 @@ import { useDraggable, useDroppable } from "@dnd-kit/react";
 import type { DraggableData } from "../features/darg-and-drop";
 import {CollisionDetector, CollisionPriority, CollisionType} from '@dnd-kit/abstract';
 import { ColorBlockCopyList } from "./color-block-copy-list";
-import { setEditBlock } from "../clipboard-store-actions";
+import { setEditBlock } from "../store-actions/clipboard-store-actions";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity

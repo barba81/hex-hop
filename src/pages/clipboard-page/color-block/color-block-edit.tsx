@@ -10,7 +10,7 @@ import type { ChangeEvent} from "react";
 import { useEffect, useState } from "react";
 import { getSmartColorName } from "../features/get-color-name";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { setEditBlock } from "../clipboard-store-actions";
+import { setEditBlock } from "../store-actions/clipboard-store-actions";
 
 type ColorBlockEditParams = {
     colorEntity: ColorEntity

@@ -6,7 +6,7 @@ import type { ChangeEvent} from "react";
 import { useState } from "react";
 import { defaultButtonBackground } from "@/components/common/custom-button";
 import { updatePaletteBlock } from "../features/update-block";
-import { setEditBlock } from "../clipboard-store-actions";
+import { setEditBlock } from "../store-actions/clipboard-store-actions";
 
 type PaletteBlockEditParams = {
     paletteEntity: PaletteEntity

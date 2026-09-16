@@ -56,6 +56,8 @@ export const deleteClipboard = async () => {
     });
 }
 
+
+// put to dangerous settings 
 export const hardDelete = async () => {
     await invoke("hard_delete_blocks");
 }

@@ -12,7 +12,7 @@ import DroppableLine from "../color-list/droppable";
 import React from "react";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { distanceDetector } from "./color-block-small-boxes";
-import { setEditBlock, togglePalette } from "../clipboard-store-actions";
+import { setEditBlock, togglePalette } from "../store-actions/clipboard-store-actions";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity
