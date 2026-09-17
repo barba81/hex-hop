@@ -13,12 +13,14 @@ export const defaultButtonBackground = `
     rounded-2xl
 `;
 
-interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface IconButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode
+  iconSize?: number
 }
 
 export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ className, children, ...props }, ref) => {
+  ({ className, children, iconSize = 15, ...props }, ref) => {
     return (
       <button
         ref={ref}
@@ -34,7 +36,12 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
         )}
         {...props}
       >
-        {children}
+        {React.isValidElement(children)
+          ? React.cloneElement(
+              children as React.ReactElement<{ size?: number }>,
+              { size: iconSize }
+            )
+          : children}
       </button>
     )
   }

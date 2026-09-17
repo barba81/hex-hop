@@ -1,6 +1,6 @@
 import { EllipsisVertical, Palette, Redo, Trash2, Undo } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { defaultButtonBackground, IconButton } from "@/components/custom/icon-button";
+import { IconButton } from "@/components/custom/icon-button";
 import { CustomInput } from "@/components/custom/custom-input";
 import { useColorListCommands } from "@/store/command-manager-provider";
 import { addNewPalette } from "../features/add-block";
@@ -52,14 +52,14 @@ const DoUnDoArrows = () => {
         disabled={!canUndo}
         onClick={() => undo()}
       >
-        <Undo size={15} />
+        <Undo  />
       </IconButton>
 
       <IconButton
         disabled={!canRedo}
         onClick={() => redo()}
       >
-        <Redo size={15} />
+        <Redo  />
       </IconButton>
     </div>
   );
