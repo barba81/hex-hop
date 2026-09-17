@@ -20,7 +20,7 @@ const HeaderDropdown = () => {
         <DropdownMenuGroup>
           <DropdownMenuItem
             className="  cursor-pointer "
-             onClick={() => addNewPalette([])}
+            onClick={() => addNewPalette([])}
           >
             <Palette /> Add new palette
           </DropdownMenuItem>
@@ -44,43 +44,23 @@ const HeaderDropdown = () => {
 
 
 const DoUnDoArrows = () => {
-const { undo, redo, canUndo, canRedo } = useColorListCommands();
+  const { undo, redo, canUndo, canRedo } = useColorListCommands();
 
   return (
     <div className="flex gap-1">
-      <button
-        type="button"
-        aria-label="Undo"
+      <IconButton
         disabled={!canUndo}
         onClick={() => undo()}
-        className={`
-          p-1
-          outline-1
-          ${defaultButtonBackground}
-          disabled:opacity-40
-          disabled:cursor-not-allowed
-          disabled:pointer-events-none
-        `}
       >
         <Undo size={15} />
-      </button>
+      </IconButton>
 
-      <button
-        type="button"
-        aria-label="Redo"
+      <IconButton
         disabled={!canRedo}
         onClick={() => redo()}
-        className={`
-          p-1
-          outline-1
-          ${defaultButtonBackground}
-          disabled:opacity-40
-          disabled:cursor-not-allowed
-          disabled:pointer-events-none
-        `}
       >
         <Redo size={15} />
-      </button>
+      </IconButton>
     </div>
   );
 };

@@ -10,7 +10,7 @@ export const defaultButtonBackground = `
     cursor-pointer
     text-gray-900 
     dark:text-white
-    roundend-2xl
+    rounded-2xl
 `;
 
 interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -27,6 +27,9 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
           "text-gray-900 dark:text-white",
           "hover:bg-secondary hover:outline-primary",
           "rounded-md w-6 h-6",
+          "disabled:opacity-40",
+          "disabled:cursor-not-allowed",
+          "disabled:pointer-events-none",
           className
         )}
         {...props}
