@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 import { useClipboardStore } from "@/store/clipboard-store";
-import { CustomButton } from "@/components/custom/custom-button";
+import { IconButton } from "@/components/custom/icon-button";
 import { addNewColorToClipboard } from "../../features/add-block";
 
 const AddColorButton = () => {
@@ -9,14 +9,8 @@ const AddColorButton = () => {
   
 
   return (
-    <CustomButton
+    <IconButton
       className={`
-          flex  
-          w-6 h-6 overflow-hidden outline-1    cursor-pointer
-          items-center 
-          justify-center
-          text-gray-900 
-          dark:text-white 
             ${isColorValid && "bg-green-400  dark:bg-green-600  hover:bg-green-400/50"} 
           `}
       onClick={async () => {
@@ -24,7 +18,7 @@ const AddColorButton = () => {
       }}
     >
       <Check strokeWidth={3.5} size={16} />
-    </CustomButton>
+    </IconButton>
   );
 };
 

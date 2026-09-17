@@ -3,7 +3,7 @@ import { toGradientSummary, toPaletteSummary, type PaletteEntity } from "@/infra
 import { Check, X } from "lucide-react";
 import type { ChangeEvent} from "react";
 import { useState } from "react";
-import { defaultButtonBackground } from "@/components/custom/custom-button";
+import { defaultButtonBackground } from "@/components/custom/icon-button";
 import { setEditBlock } from "../../features/store-actions/clipboard-store-actions";
 import { updatePaletteBlock } from "../../features/update-block";
 

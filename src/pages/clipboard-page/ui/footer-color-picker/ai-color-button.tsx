@@ -1,6 +1,6 @@
 import { Astroid } from "lucide-react";
 import { useClipboardStore } from "@/store/clipboard-store";
-import { defaultButtonBackground } from "@/components/custom/custom-button";
+import { defaultButtonBackground } from "@/components/custom/icon-button";
 import { addNewColorToClipboard } from "../../features/add-block";
 
 const AiColorButton = () => {

@@ -4,7 +4,7 @@ import type { ChangeEvent} from "react";
 import { useState } from "react";
 import { Check, X } from "lucide-react";
 import { CustomInput } from "@/components/custom/custom-input";
-import { defaultButtonBackground } from "@/components/custom/custom-button";
+import { defaultButtonBackground } from "@/components/custom/icon-button";
 import { updateGradientBlock } from "../../features/update-block";
 import { setEditBlock } from "../../features/store-actions/clipboard-store-actions";
 

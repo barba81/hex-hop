@@ -18,14 +18,6 @@ export const buttonStyle = `
 flex items-center justify-center
  cursor-pointer shrink-0 outline-0 rounded-md`;
 
-export const CustomButton = (props: React.ButtonHTMLAttributes<HTMLButtonElement>) => (
-  <button
-    {...props}
-    type={props.type || "button"}
-    className={`${buttonStyle} ${props.className || ""}`}
-  />
-);
-
 interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode
 }
@@ -39,7 +31,7 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
           "flex items-center justify-center cursor-pointer outline-1",
           "text-gray-900 dark:text-white",
           "hover:bg-secondary hover:outline-primary",
-          "rounded-md p-0.5",
+          "rounded-md w-6 h-6",
           className
         )}
         {...props}

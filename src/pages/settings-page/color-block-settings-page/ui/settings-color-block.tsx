@@ -4,7 +4,7 @@ import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import { useSortable } from '@dnd-kit/react/sortable';
 import { ChevronDown, ChevronUp, Eye, EyeClosed, Plus } from "lucide-react";
 import { ColorFormulaCreator } from "./color-formula-creator";
-import { defaultButtonBackground, IconButton } from "@/components/custom/custom-button";
+import { defaultButtonBackground, IconButton } from "@/components/custom/icon-button";
 import { RestrictToVerticalAxis } from '@dnd-kit/abstract/modifiers';
 import { DynamicIconMapper } from "@/infrastructure/utils/icon-mapper";
 import { addNewColorCopyBlock, flipColorCopyBlockVisibility, setColorCopyFormulaActive } from "../feature/color-settings-store-actions";
