@@ -3,6 +3,7 @@ import { rootBlockId, useClipboardStore } from "../../../store/clipboard-store";
 import { invoke } from "@tauri-apps/api/core";
 import type { BlockEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { useColorListCommands } from "@/store/command-manager-provider";
+import { CollisionDetector, CollisionPriority, CollisionType } from "@dnd-kit/abstract";
 
 export interface DraggableData {
   blockId: number;
@@ -290,3 +291,20 @@ const reorderHelper = (blockIds: number[], blocksById: Record<number, BlockEntit
   }
   return { ids, oldIds };
 }
+
+
+export const distanceDetector: CollisionDetector = ({dragOperation, droppable}) => {
+  const dragShape = dragOperation.shape?.current;
+  const dropShape = droppable.shape;
+
+  if (!dragShape || !dropShape) return null;
+
+  const dy = dragShape.center.y - dropShape.center.y;
+  const distance = Math.sqrt(dy * dy);
+  return {
+    id: droppable.id,
+    value: -distance,
+    type: CollisionType.Collision,
+    priority: CollisionPriority.Normal,
+  };
+};

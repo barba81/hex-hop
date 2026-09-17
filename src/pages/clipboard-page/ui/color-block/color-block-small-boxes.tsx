@@ -3,10 +3,8 @@ import { DragDots } from "@/components/custom/drag-dots";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
-import type {CollisionDetector} from '@dnd-kit/abstract';
-import { CollisionPriority, CollisionType} from '@dnd-kit/abstract';
 import { ColorBlockCopyList } from "./color-block-copy-list";
-import type { DraggableData } from "../../features/darg-and-drop";
+import { distanceDetector, type DraggableData } from "../../features/darg-and-drop";
 import { coloBackground } from "@/infrastructure/utils/color-format-changer";
 import { setEditBlock } from "../../features/store-actions/clipboard-store-actions";
 import { duplicateBlock } from "../../features/duplicate-block";
@@ -14,23 +12,6 @@ import { deleteColorBlock } from "../../features/delete-block";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity
-};
-
-
-export const distanceDetector: CollisionDetector = ({dragOperation, droppable}) => {
-  const dragShape = dragOperation.shape?.current;
-  const dropShape = droppable.shape;
-
-  if (!dragShape || !dropShape) return null;
-
-  const dy = dragShape.center.y - dropShape.center.y;
-  const distance = Math.sqrt(dy * dy);
-  return {
-    id: droppable.id,
-    value: -distance,
-    type: CollisionType.Collision,
-    priority: CollisionPriority.Normal,
-  };
 };
 
 const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
