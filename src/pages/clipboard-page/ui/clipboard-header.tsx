@@ -1,6 +1,6 @@
 import { EllipsisVertical, Palette, Redo, Trash2, Undo } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { defaultButtonBackground } from "@/components/custom/icon-button";
+import { defaultButtonBackground, IconButton } from "@/components/custom/icon-button";
 import { CustomInput } from "@/components/custom/custom-input";
 import { useColorListCommands } from "@/store/command-manager-provider";
 import { addNewPalette } from "../features/add-block";
@@ -11,9 +11,9 @@ const HeaderDropdown = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <button className={`p-1 ${defaultButtonBackground} outline-1`} aria-label="settings" >
+        <IconButton   >
           <EllipsisVertical size={15} />
-        </button>
+        </IconButton>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="min-w-40   border-stone-700">

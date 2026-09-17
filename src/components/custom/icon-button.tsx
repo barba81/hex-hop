@@ -13,11 +13,6 @@ export const defaultButtonBackground = `
     roundend-2xl
 `;
 
-
-export const buttonStyle = `
-flex items-center justify-center
- cursor-pointer shrink-0 outline-0 rounded-md`;
-
 interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode
 }
