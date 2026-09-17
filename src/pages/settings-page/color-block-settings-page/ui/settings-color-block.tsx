@@ -1,13 +1,13 @@
 import { DragDots } from "@/components/custom/drag-dots"
-import { defaultInputColor, useClipboardStore } from "../../../store/clipboard-store";
+import { defaultInputColor, useClipboardStore } from "../../../../store/clipboard-store";
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import { useSortable } from '@dnd-kit/react/sortable';
 import { ChevronDown, ChevronUp, Eye, EyeClosed, Plus } from "lucide-react";
-import { ColorFormulaCreator } from "./ui/color-formula-creator";
-import { defaultButtonBackground } from "@/components/custom/custom-button";
-import {RestrictToVerticalAxis} from '@dnd-kit/abstract/modifiers';
+import { ColorFormulaCreator } from "./color-formula-creator";
+import { defaultButtonBackground, IconButton } from "@/components/custom/custom-button";
+import { RestrictToVerticalAxis } from '@dnd-kit/abstract/modifiers';
 import { DynamicIconMapper } from "@/infrastructure/utils/icon-mapper";
-import { addNewColorCopyBlock, flipColorCopyBlockVisibility, setColorCopyFormulaActive } from "./feature/color-settings-store-actions";
+import { addNewColorCopyBlock, flipColorCopyBlockVisibility, setColorCopyFormulaActive } from "../feature/color-settings-store-actions";
 
 
 
@@ -39,13 +39,13 @@ const ColorBlockPreview = () => {
 }
 
 export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFormula, index: number }) => {
-    const { ref } = useSortable({ id: copyBlock.id, index: index,    modifiers: [RestrictToVerticalAxis],});
+    const { ref } = useSortable({ id: copyBlock.id, index: index, modifiers: [RestrictToVerticalAxis], });
     const colorCopyFormulaActiveId = useClipboardStore((state) => state.colorCopyFormulaActiveId);
 
     return <div onClick={() => setColorCopyFormulaActive(copyBlock.id)} ref={ref}
 
 
-        className={` h-7 rounded-md w-full   shrink-0 relative flex flex-row items-stretch outline-2  overflow-hidden ${!copyBlock.enabled&& "opacity-50"} 
+        className={` h-7 rounded-md w-full   shrink-0 relative flex flex-row items-stretch outline-2  overflow-hidden ${!copyBlock.enabled && "opacity-50"} 
          ${colorCopyFormulaActiveId === copyBlock.id && 'outline-2 outline-primary'}`}>
         <div className={`flex items-center justify-center shrink-0 cursor-pointer`}>
             <DragDots />
@@ -56,7 +56,7 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFor
                 <div className="flex w-4 items-center gap-1 ">
                     {copyBlock.iconId !== null && copyBlock.iconId !== undefined && (
                         <DynamicIconMapper iconId={copyBlock.iconId} />
-                        )}
+                    )}
                     {copyBlock.formulaName}
                 </div>
                 <div className="flex gap-2 h-full items-center  text-sm">
@@ -64,11 +64,11 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFor
                 </div>
 
                 <div className="flex items-center justify-center gap-1">
-                    <div className="cursor-pointer border rounded-md hover:border-primary hover:bg-secondary p-0.5 " 
-                    onClick={()=> flipColorCopyBlockVisibility(copyBlock.id)}> 
-                    {copyBlock.enabled ? <Eye size={18} /> :
-                        <EyeClosed size={18} />
-                    }
+                    <div className="cursor-pointer border rounded-md hover:border-primary hover:bg-secondary p-0.5 "
+                        onClick={() => flipColorCopyBlockVisibility(copyBlock.id)}>
+                        {copyBlock.enabled ? <Eye size={18} /> :
+                            <EyeClosed size={18} />
+                        }
                     </div>
 
                     <div className="cursor-pointer border rounded-md hover:border-primary hover:bg-secondary" onClick={() => { }}><ChevronUp size={20} /></div>
@@ -84,18 +84,11 @@ const ColorFormatHeader = () => {
 
     return <div className="p-1 flex w-full justify-between border-b-3 ">
         <div className="text-sm">
-        Color format formulas
+            Color format formulas
         </div>
-        <button
-            className={`         
-                ${defaultButtonBackground}
-             w-6 h-6 overflow-hidden outline-1 `}
-            onClick={async () => {
-                addNewColorCopyBlock()
-            }}
-        >
-            <Plus  size={20} />
-        </button>
+        <IconButton onClick={async () => addNewColorCopyBlock()}>
+            <Plus size={20} />
+        </IconButton>
 
 
     </div>

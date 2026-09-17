@@ -1,4 +1,5 @@
-import type React from "react";
+import { cn } from "@/lib/utils";
+import React from "react";
 
 export const defaultButtonBackground = `
     flex items-center justify-center
@@ -9,6 +10,7 @@ export const defaultButtonBackground = `
     cursor-pointer
     text-gray-900 
     dark:text-white
+    roundend-2xl
 `;
 
 
@@ -24,25 +26,28 @@ export const CustomButton = (props: React.ButtonHTMLAttributes<HTMLButtonElement
   />
 );
 
-type IconComponent = React.ComponentType<{ size?: number | string; className?: string }>;
-
 interface IconButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  icon: IconComponent;
-  iconSize?: number | string;
-  iconClassName?: string;
+  children?: React.ReactNode
 }
 
-export const IconButton = ({
-  icon: Icon,
-  iconSize = 16,
-  iconClassName,
-  className,
-  ...props
-}: IconButtonProps) => (
-  <CustomButton
-    {...props}
-    className={`text-gray-900 dark:text-white ${className || ""}`}
-  >
-    <Icon size={iconSize} className={iconClassName} />
-  </CustomButton>
-);
+export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
+  ({ className, children, ...props }, ref) => {
+    return (
+      <button
+        ref={ref}
+        className={cn(
+          "flex items-center justify-center cursor-pointer outline-1",
+          "text-gray-900 dark:text-white",
+          "hover:bg-secondary hover:outline-primary",
+          "rounded-md p-0.5",
+          className
+        )}
+        {...props}
+      >
+        {children}
+      </button>
+    )
+  }
+)
+
+IconButton.displayName = "IconButton"
