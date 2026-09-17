@@ -4,11 +4,11 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-
 import "@/globals.css";
 import { useClipboardStore } from "@/store/clipboard-store";
 import { setInputColor } from "../../features/store-actions/clipboard-store-actions";
 import { setColorValidityAndMode } from "../../features/set-color-validity-and-mode";
+import { IconButton } from "@/components/custom/icon-button";
 
 const PreviewColorBox = () => {
   const currentColor = useClipboardStore(x => x.validColor);
@@ -21,14 +21,15 @@ const PreviewColorBox = () => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <div className="bg-checkerboard rounded-md w-6 h-6 overflow-hidden outline-1 cursor-pointer ">
+        <IconButton className="overflow-hidden bg-checkerboard" >
           <div
             className="w-full h-full transition-opacity "
             style={{
               backgroundColor: currentColor,
             }}
           />
-        </div>
+        </IconButton>
+
       </PopoverTrigger>
       <PopoverContent className="w-auto p-3">
         <HexAlphaColorPicker

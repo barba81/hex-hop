@@ -111,7 +111,7 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                                         onChange={(e) => handleChange(e)}
                                         type="number"
                                         value={channel.val}
-                                        className="w-full pl-4 pr-1 py-1 text-right font-mono bg-muted/60 border border-input/60 rounded focus:border-ring focus:bg-background focus:outline-none transition-colors [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
+                                        className="w-full pl-4 pr-1 py-1 text-right font-mono "
                                     />
                                 </div>
                             ))}

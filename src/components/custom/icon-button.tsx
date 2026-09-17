@@ -13,6 +13,7 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
       <button
         ref={ref}
         className={cn(
+          "bg-muted",
           "flex items-center justify-center cursor-pointer outline-1",
           "text-gray-900 dark:text-white",
           "hover:bg-secondary hover:outline-primary",
