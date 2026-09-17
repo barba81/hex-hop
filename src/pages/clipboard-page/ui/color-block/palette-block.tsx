@@ -7,7 +7,7 @@ import { ChevronDown, Pen, Trash2 } from "lucide-react";
 import { coloBackground } from "@/infrastructure/utils/color-format-changer";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
 import InnerBlock from "./inner-block";
-import DroppableLine from "../color-list/droppable";
+import DroppableLine from "../../../../components/custom/drag-and-drop/drop-line";
 import React from "react";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { distanceDetector, type DraggableData } from "../../features/darg-and-drop";

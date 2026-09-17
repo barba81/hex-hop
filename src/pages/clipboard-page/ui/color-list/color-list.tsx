@@ -3,7 +3,7 @@ import { rootBlockId, useClipboardStore } from "@/store/clipboard-store";
 import EmptyClipboardPage from "../empty-clipboard-page";
 import Block from "../color-block/block";
 import React from "react";
-import DroppableLine from "./droppable";
+import DroppableLine from "../../../../components/custom/drag-and-drop/drop-line";
 import { handleDragEnd } from "../../features/darg-and-drop";
 
 

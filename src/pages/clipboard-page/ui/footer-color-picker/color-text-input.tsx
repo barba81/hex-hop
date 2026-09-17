@@ -23,8 +23,10 @@ const ColorInput = () => {
           flex-1
           w-full
           outline-1
+
           focus-within:ring-2 
-          focus-within:ring-ring 
+          focus-within:ring-primary 
+          focus-within:outline-primary 
           focus-within:border-input overflow-hidden"
     >
       <input

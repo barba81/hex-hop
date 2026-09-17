@@ -1,5 +1,5 @@
 import { useDroppable } from "@dnd-kit/react";
-import { distanceDetector, type DraggableData } from "../../features/darg-and-drop";
+import { distanceDetector, type DraggableData } from "../../../pages/clipboard-page/features/darg-and-drop";
 
 const DroppableLine = ({
   id,
@@ -27,6 +27,7 @@ const DroppableLine = ({
     >
       {isDropTarget ? <>
           <div className="absolute left-0 top-1/2 h-3 w-3 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary" />
+          <div className="absolute left-0 top-1/2 h-2 w-2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-secondary" />
 
           <div className="h-1 w-full rounded-full bg-primary" />
         </> : null}
