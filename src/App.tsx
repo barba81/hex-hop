@@ -7,10 +7,10 @@ import { TooltipProvider } from "./components/ui/tooltip";
 
 function HexHopApp() {
   return (
-    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme">
+    <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme" >
       <TooltipProvider>
         <Toaster position="top-center" />
-        <div className="w-screen h-screen flex flex-col  bg-stone-50/80 dark:bg-stone-800/80 ">
+        <div className="w-screen h-screen flex flex-col overflow-hidden rounded-2xl  bg-stone-50/80 dark:bg-stone-800/80 ">
           <HeaderBar />
 
           <Outlet />

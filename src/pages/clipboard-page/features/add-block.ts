@@ -7,8 +7,6 @@ import { colorStringToData } from "@/infrastructure/utils/color-format-changer";
 import { pushCommand } from "@/infrastructure/history/history";
 
 
-
-// Optional: Helper functions for store block operations if they are also externalized
 export const pushBlockToStore = (colorEntity: ColorEntity, targetId: number | null) => {
   useClipboardStore.setState((state) => ({
     blocksById: { ...state.blocksById, [colorEntity.blockId]: colorEntity },
