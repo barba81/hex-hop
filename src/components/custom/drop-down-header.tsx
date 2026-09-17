@@ -58,7 +58,7 @@ const ICON_MAP = {
   },
 
 
- 
+
 
   "/settings": {
     icon: (
@@ -71,7 +71,7 @@ const ICON_MAP = {
     label: "Settings",
     shortLabel: "Settings",
   },
-   "/import-export": {
+  "/import-export": {
     icon: (
       <Import
         size={size}
