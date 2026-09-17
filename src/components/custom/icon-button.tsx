@@ -1,18 +1,6 @@
 import { cn } from "@/lib/utils";
 import React from "react";
 
-export const defaultButtonBackground = `
-    flex items-center justify-center
-    hover:bg-secondary
-    hover:outline-primary
-    dark:bg-secondary/60
-    rounded-md 
-    cursor-pointer
-    text-gray-900 
-    dark:text-white
-    rounded-2xl
-`;
-
 interface IconButtonProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode
@@ -32,7 +20,7 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
           "disabled:opacity-40",
           "disabled:cursor-not-allowed",
           "disabled:pointer-events-none",
-          className
+          className,
         )}
         {...props}
       >

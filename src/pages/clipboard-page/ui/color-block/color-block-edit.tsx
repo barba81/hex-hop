@@ -1,7 +1,7 @@
 import type { ColorEntity } from "@/infrastructure/models/entity";
 import { Check, RefreshCw, X } from "lucide-react";
 import { CustomInput } from "@/components/custom/custom-input";
-import { defaultButtonBackground } from "@/components/custom/icon-button";
+import { IconButton } from "@/components/custom/icon-button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { HexAlphaColorPicker } from "react-colorful";
 import type { ChangeEvent} from "react";
@@ -152,12 +152,9 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                                 </div>
                             </div>
                         </div>
-                        <button
-                            onClick={handleEdit}
-                            className={`h-6 w-6 ${defaultButtonBackground} outline-1`}
-                        >
-                            <Check className="size-3.5" />
-                        </button>
+                        <IconButton onClick={handleEdit}>
+                            <Check />
+                        </IconButton>
                     </div>
                     <button className={`absolute right-0 top-0 
                             flex items-center justify-center

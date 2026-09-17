@@ -1,9 +1,9 @@
 import { CustomInput } from "@/components/custom/custom-input";
-import { toGradientSummary, toPaletteSummary, type PaletteEntity } from "@/infrastructure/models/entity";
+import { toPaletteSummary, type PaletteEntity } from "@/infrastructure/models/entity";
 import { Check, X } from "lucide-react";
 import type { ChangeEvent} from "react";
 import { useState } from "react";
-import { defaultButtonBackground } from "@/components/custom/icon-button";
+import { IconButton } from "@/components/custom/icon-button";
 import { setEditBlock } from "../../features/store-actions/clipboard-store-actions";
 import { updatePaletteBlock } from "../../features/update-block";
 
@@ -36,17 +36,12 @@ const PaletteBlockEdit = ({ paletteEntity }: PaletteBlockEditParams) => {
                     value={paletteUpdateEntity.name}
                     className="w-50 pr-8"
                     placeholder="Palette name" />
-                <button
-                    onClick={handleEdit}
-                    className={`h-6 w-6 ${defaultButtonBackground} outline-1`}
-                >
+                <IconButton onClick={handleEdit}>
                     <Check className="size-3.5" />
-                </button>
-                <button onClick={() => setEditBlock(null)}
-                    className={`h-6 w-6 ${defaultButtonBackground} outline-1`}
-                >
+                </IconButton>
+                <IconButton onClick={() => setEditBlock(null)}>
                     <X className="size-3.5" />
-                </button>
+                </IconButton>
             </div>
         </div>
     </div>);
