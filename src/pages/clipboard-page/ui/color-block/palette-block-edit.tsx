@@ -4,7 +4,7 @@ import { Check, X } from "lucide-react";
 import type { ChangeEvent} from "react";
 import { useState } from "react";
 import { IconButton } from "@/components/custom/icon-button";
-import { setEditBlock } from "../../features/store-actions/clipboard-store-actions";
+import { setEditBlock } from "../../features/clipboard-store-actions";
 import { updatePaletteBlock } from "../../features/update-block";
 
 type PaletteBlockEditParams = {

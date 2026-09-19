@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import GradientEmptyPage from "./gradient-empty-page";
 import GradientList from "./gradient-list";
 import { useShallow } from "zustand/shallow";
-import { useGradientStore } from "../feature/store/use-gradient-store";
+import { useGradientStore } from "../feature/use-gradient-store";
 
 const GradientGeneratorPage = () => {
   const { gradientsIds, initGradient } = useGradientStore(

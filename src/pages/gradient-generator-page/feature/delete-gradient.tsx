@@ -1,5 +1,5 @@
 import { invoke } from "@tauri-apps/api/core";
-import { useGradientStore } from "./store/use-gradient-store";
+import { useGradientStore } from "./use-gradient-store";
 
 export const deleteGradient = async (gradientId: number) => {
   await invoke("delete_gradient", { gradientId: gradientId });

@@ -10,7 +10,7 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { colorEntityToColor, colorEntityToRoundedEntity, hexaToRgbaNormalized, toHex8 } from "@/infrastructure/utils/color-format-changer";
 import { getSmartColorName } from "../../features/get-color-name";
 import { updateColorBlock } from "../../features/update-block";
-import { setEditBlock } from "../../features/store-actions/clipboard-store-actions";
+import { setEditBlock } from "../../features/clipboard-store-actions";
 
 type ColorBlockEditParams = {
     colorEntity: ColorEntity

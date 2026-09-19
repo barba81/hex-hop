@@ -6,7 +6,7 @@ import { useDraggable, useDroppable } from "@dnd-kit/react";
 import { ColorBlockCopyList } from "./color-block-copy-list";
 import { distanceDetector, type DraggableData } from "../../features/darg-and-drop";
 import { coloBackground } from "@/infrastructure/utils/color-format-changer";
-import { setEditBlock } from "../../features/store-actions/clipboard-store-actions";
+import { setEditBlock } from "../../features/clipboard-store-actions";
 import { duplicateBlock } from "../../features/duplicate-block";
 import { deleteColorBlock } from "../../features/delete-block";
 

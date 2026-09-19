@@ -5,7 +5,7 @@ import { Copy, Pen, Trash2 } from "lucide-react";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import { distanceDetector, type DraggableData } from "../../features/darg-and-drop";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
-import { setEditBlock } from "../../features/store-actions/clipboard-store-actions";
+import { setEditBlock } from "../../features/clipboard-store-actions";
 import { deleteGradientBlock } from "../../features/delete-block";
 
 type GradientBoxParams = {

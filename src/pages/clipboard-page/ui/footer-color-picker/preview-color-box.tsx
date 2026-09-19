@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/popover";
 import "@/globals.css";
 import { useClipboardStore } from "@/store/clipboard-store";
-import { setInputColor } from "../../features/store-actions/clipboard-store-actions";
+import { setInputColor } from "../../features/clipboard-store-actions";
 import { setColorValidityAndMode } from "../../features/set-color-validity-and-mode";
 import { IconButton } from "@/components/custom/icon-button";
 

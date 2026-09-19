@@ -6,7 +6,7 @@ import { Check, X } from "lucide-react";
 import { CustomInput } from "@/components/custom/custom-input";
 import { IconButton } from "@/components/custom/icon-button";
 import { updateGradientBlock } from "../../features/update-block";
-import { setEditBlock } from "../../features/store-actions/clipboard-store-actions";
+import { setEditBlock } from "../../features/clipboard-store-actions";
 
 type GradientBlockEditParams = {
     gradientEntity: GradientEntity
