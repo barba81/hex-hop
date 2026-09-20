@@ -73,7 +73,7 @@ const SearchBar = () => {
 
 const HeaderColorList = () => {
   return (
-    <div className="w-full  flex gap-2  items-center justify-between bg-background dark:bg-background p-2  ">
+    <div className="w-full  flex gap-2  items-center justify-between bg-background dark:bg-background p-1  ">
       <DoUnDoArrows />
       <SearchBar />
       <HeaderDropdown />
