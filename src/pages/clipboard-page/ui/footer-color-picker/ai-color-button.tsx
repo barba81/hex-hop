@@ -1,17 +1,17 @@
 import { Astroid } from "lucide-react";
 import { useClipboardStore } from "@/store/clipboard-store";
-import { IconButton } from "@/components/custom/icon-button";
 import { addNewColorToClipboard } from "../../features/add-block";
+import { Button } from "@/components/ui/button";
 
 const AiColorButton = () => {
     const inputColor = useClipboardStore((state) => state.inputColor);
 
     return (
-        <IconButton
+        <Button size='icon-sm' variant='outline'
             onClick={async () => { await addNewColorToClipboard(inputColor, null); }}
         >
-            <Astroid  />
-        </IconButton>
+            <Astroid />
+        </Button>
     );
 };
 

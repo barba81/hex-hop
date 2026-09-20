@@ -8,7 +8,6 @@ import "@/globals.css";
 import { useClipboardStore } from "@/store/clipboard-store";
 import { setInputColor } from "../../features/clipboard-store-actions";
 import { setColorValidityAndMode } from "../../features/set-color-validity-and-mode";
-import { IconButton } from "@/components/custom/icon-button";
 
 const PreviewColorBox = () => {
   const currentColor = useClipboardStore(x => x.validColor);
@@ -21,14 +20,14 @@ const PreviewColorBox = () => {
   return (
     <Popover>
       <PopoverTrigger>
-        <IconButton className="overflow-hidden bg-checkerboard" >
+        <div className="overflow-hidden bg-checkerboard w-8 h-8 rounded-md" >
           <div
-            className=" transition-opacity "
+            className=" transition-opacity w-full h-full "
             style={{
               backgroundColor: currentColor,
             }}
           />
-        </IconButton>
+        </div>
 
       </PopoverTrigger>
       <PopoverContent className="w-auto p-3">

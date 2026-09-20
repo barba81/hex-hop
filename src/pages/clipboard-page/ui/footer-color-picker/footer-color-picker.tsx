@@ -6,7 +6,7 @@ import AiColorButton from "./ai-color-button";
 
 const FooterColorPicker = () => {
   return (
-    <div className="flex  items-center justify-between p-1 gap-2 bg-background dark:background">
+    <div className="flex  items-center justify-between p-1 gap-1 bg-background dark:background">
       <EyeDropButton />
       <PreviewColorBox />
       <ColorInput />

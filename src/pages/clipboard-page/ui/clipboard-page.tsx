@@ -5,7 +5,7 @@ import FooterColorPicker from "./footer-color-picker/footer-color-picker";
 const ColorListPage = () => {
 
   return (
-    <div className="h-full flex flex-col gap-1 overflow-auto">
+    <div className="h-full flex flex-col  overflow-auto">
       <HeaderColorList />
       <ColorList />
       <FooterColorPicker />
