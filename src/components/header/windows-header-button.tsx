@@ -1,25 +1,30 @@
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { Minus, X } from "lucide-react";
+import { Button } from "../ui/button";
 
 const WindowsHeaderButton = () => {
   return (
     <div className="flex gap-2 ">
-        <div
-          className="text-gray-900 dark:text-white cursor-pointer hover:bg-gray-400/50 dark:hover:bg-gray-500/50 p-1 rounded-md"
+        <Button
+          variant='ghost'
+          size='icon-xs'
+          className="hover:bg-gray-400 dark:hover:bg-gray-800"
           onClick={() => {
             getCurrentWindow().minimize();
           }}
         >
-          <Minus size={18}/>
-        </div>
-        <div
-          className="text-gray-900 dark:text-white cursor-pointer  hover:bg-red-400/50 p-1 rounded-md"
+          <Minus />
+        </Button>
+        <Button
+           variant='ghost'
+          size='icon-xs'
+          className="hover:bg-red-700 dark:hover:bg-red-700/50"
           onClick={() => {
             getCurrentWindow().close();
           }}
         >
           <X size={18}/>
-        </div>
+        </Button>
       </div>
   );
 };

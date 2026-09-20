@@ -1,19 +1,19 @@
 import { EllipsisVertical, Palette, Redo, Trash2, Undo } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { IconButton } from "@/components/custom/icon-button";
 import { CustomInput } from "@/components/custom/custom-input";
 import { useColorListCommands } from "@/store/command-manager-provider";
 import { addNewPalette } from "../features/add-block";
 import { deleteClipboard } from "../features/delete-block";
+import { Button } from "@/components/ui/button";
 
 const HeaderDropdown = () => {
 
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
-        <IconButton   >
+        <Button size='icon-xs' variant='outline'>
           <EllipsisVertical size={15} />
-        </IconButton>
+        </Button>
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="min-w-40   border-stone-700">
@@ -48,19 +48,23 @@ const DoUnDoArrows = () => {
 
   return (
     <div className="flex gap-1">
-      <IconButton
+      <Button
+        size='icon-xs'
+        variant='outline'
         disabled={!canUndo}
         onClick={() => undo()}
       >
         <Undo  />
-      </IconButton>
+      </Button>
 
-      <IconButton
+      <Button
+        size='icon-xs'
+        variant='outline'
         disabled={!canRedo}
         onClick={() => redo()}
       >
         <Redo  />
-      </IconButton>
+      </Button>
     </div>
   );
 };
@@ -73,7 +77,7 @@ const SearchBar = () => {
 
 const HeaderColorList = () => {
   return (
-    <div className="w-full  flex gap-2  items-center justify-between bg-background dark:bg-background p-1  ">
+    <div className="w-full  flex gap-1  items-center justify-between bg-background p-1  ">
       <DoUnDoArrows />
       <SearchBar />
       <HeaderDropdown />
