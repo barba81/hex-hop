@@ -9,6 +9,7 @@ import { coloBackground } from "@/infrastructure/utils/color-format-changer";
 import { setEditBlock } from "../../features/clipboard-store-actions";
 import { duplicateBlock } from "../../features/duplicate-block";
 import { deleteColorBlock } from "../../features/delete-block";
+import { BlenderIcon, CSSIcon, TailwindIcon } from "@/components/icons/css-icon";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity
@@ -47,7 +48,7 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
         <ContextMenuTrigger>
 
             <div ref={setCombinedRef} className={`${isDropTarget && !isDragging&& 'outline-2 outline-primary'} ${isDragging && 'opacity-50'}  h-10 rounded-md w-full  shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
-                <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer`}>
+                <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer `}>
                     <DragDots />
                 </div>
                 <div className={`w-full  flex justify-between overflow-hidden bg-background  `}>
@@ -57,8 +58,10 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
                         }} />
                     </div>
                     <div className="p-0.5 flex-1 flex flex-row justify-between pr-2">
-                        <div className="flex">
-                            <ColorBlockCopyList colorEntity={colorEntity}  /> 
+                        <div className="flex w-5 gap-1">
+                          <CSSIcon size={5}/>
+                          <BlenderIcon size={5}/>
+                          <TailwindIcon size={5}/>
                         </div>
                         <div className="flex gap-2 h-full items-center ">
                             {colorEntity.name}
