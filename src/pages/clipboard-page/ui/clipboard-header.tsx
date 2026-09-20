@@ -10,7 +10,7 @@ const HeaderDropdown = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger>
         <IconButton   >
           <EllipsisVertical size={15} />
         </IconButton>

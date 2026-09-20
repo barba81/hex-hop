@@ -10,12 +10,13 @@ interface IconButtonProps
 }
 
 export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
-  ({ className, children, iconSize = 15, ...props }, ref) => {
+  ({ className, children, ...props }, ref) => {
     return (
       <Button
+        size="icon-sm"
+        variant="secondary"
         ref={ref}
         className={cn(
-          "rounded-md w-7 h-7",
           className,
         )}
         {...props}
@@ -23,7 +24,6 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
         {React.isValidElement(children)
           ? React.cloneElement(
               children as React.ReactElement<{ size?: number }>,
-              { size: iconSize }
             )
           : children}
       </Button>

@@ -20,7 +20,7 @@ const PreviewColorBox = () => {
 
   return (
     <Popover>
-      <PopoverTrigger asChild>
+      <PopoverTrigger>
         <IconButton className="overflow-hidden bg-checkerboard" >
           <div
             className=" transition-opacity "

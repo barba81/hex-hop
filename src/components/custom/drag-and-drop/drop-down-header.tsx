@@ -101,7 +101,7 @@ const DropDownHeader = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
+      <DropdownMenuTrigger>
         <IconButton className="w-23 text-xs gap-1 items-center">
           {activePage?.icon || <Clipboard size={size} />}
           {activePage?.shortLabel || "Color List"}

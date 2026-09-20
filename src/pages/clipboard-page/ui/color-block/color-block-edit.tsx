@@ -69,7 +69,7 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
     return (<div className=' h-18  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden '>
         <div className={`w-full flex  justify-between overflow-hidden bg-background p  `}>
             <Popover>
-                <PopoverTrigger asChild>
+                <PopoverTrigger>
                     <div className={`w-22 bg-checkerboard cursor-pointer`}>
                         <div className="w-full h-full" style={{
                             backgroundColor: hexColor
@@ -135,7 +135,7 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                                     />
                                     <div className="absolute right-1.5 flex items-center">
                                         <Tooltip>
-                                            <TooltipTrigger asChild>
+                                            <TooltipTrigger>
                                                 <button
                                                     type="button"
                                                     onClick={handleRefreshName}
