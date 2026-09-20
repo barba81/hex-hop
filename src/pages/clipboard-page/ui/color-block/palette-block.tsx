@@ -12,6 +12,7 @@ import React from "react";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { distanceDetector, type DraggableData } from "../../features/darg-and-drop";
 import { setEditBlock, togglePalette } from "../../features/clipboard-store-actions";
+import { Button } from "@/components/ui/button";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity
@@ -104,12 +105,13 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
               <div className="flex gap-2 h-full items-center  text-md">
 
                 {paletteEntity.name}
-                <div
+                <Button
+                  variant='ghost'
                   onClick={() => togglePalette(paletteEntity.blockId)}
-                  className="bg-secondary h-full   flex items-center justify-center cursor-pointer"
+                  className="w-5 hover:bg-secondary h-full   flex items-center justify-center cursor-pointer"
                 >
                   <ChevronDown className="transition-transform duration-200" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
-                </div>
+                </Button>
               </div>
             </div>
           </div>
