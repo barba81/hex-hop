@@ -1,4 +1,6 @@
 import { cn } from "@/lib/utils";
+import { Button } from "../ui/button";
+
 import React from "react";
 
 interface IconButtonProps
@@ -10,17 +12,10 @@ interface IconButtonProps
 export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
   ({ className, children, iconSize = 15, ...props }, ref) => {
     return (
-      <button
+      <Button
         ref={ref}
         className={cn(
-          "bg-muted",
-          "flex items-center justify-center cursor-pointer outline-1",
-          "text-gray-900 dark:text-white",
-          "hover:bg-secondary hover:outline-primary",
-          "rounded-md w-6 h-6",
-          "disabled:opacity-40",
-          "disabled:cursor-not-allowed",
-          "disabled:pointer-events-none",
+          "rounded-md w-7 h-7",
           className,
         )}
         {...props}
@@ -31,7 +26,7 @@ export const IconButton = React.forwardRef<HTMLButtonElement, IconButtonProps>(
               { size: iconSize }
             )
           : children}
-      </button>
+      </Button>
     )
   }
 )
