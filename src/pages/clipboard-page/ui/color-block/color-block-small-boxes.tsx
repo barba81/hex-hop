@@ -3,7 +3,6 @@ import { DragDots } from "@/components/custom/drag-dots";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
-import { ColorBlockCopyList } from "./color-block-copy-list";
 import { distanceDetector, type DraggableData } from "../../features/darg-and-drop";
 import { coloBackground } from "@/infrastructure/utils/color-format-changer";
 import { setEditBlock } from "../../features/clipboard-store-actions";

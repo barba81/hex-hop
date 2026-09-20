@@ -23,7 +23,7 @@ const ColorInput = () => {
         }}
       />
       {isColorValid &&
-        <InputGroupAddon align="inline-end" className="border-l-2 px-2 text-sm ">{colorFormat}</InputGroupAddon>
+        <InputGroupAddon align="inline-end" className="border-l px-2 text-sm ">{colorFormat}</InputGroupAddon>
       }
     </InputGroup>
   );

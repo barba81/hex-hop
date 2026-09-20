@@ -4,17 +4,94 @@ import { CustomInput } from "@/components/custom/custom-input";
 import { IconButton } from "@/components/custom/icon-button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { HexAlphaColorPicker } from "react-colorful";
-import type { ChangeEvent} from "react";
+import type { ChangeEvent } from "react";
 import { useEffect, useState } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { colorEntityToColor, colorEntityToRoundedEntity, hexaToRgbaNormalized, toHex8 } from "@/infrastructure/utils/color-format-changer";
 import { getSmartColorName } from "../../features/get-color-name";
 import { updateColorBlock } from "../../features/update-block";
 import { setEditBlock } from "../../features/clipboard-store-actions";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
+import { Button } from "@/components/ui/button";
+import { useClipboardStore } from "@/store/clipboard-store";
+import { Checkbox } from "@/components/ui/checkbox";
 
 type ColorBlockEditParams = {
     colorEntity: ColorEntity
 };
+
+const ColorNameInput = () => {
+    return (
+        <InputGroup className="h-6 " >
+            <InputGroupInput
+                type="text"
+                className="text-xs"
+                placeholder="Color Name"
+            />
+            <InputGroupAddon align="inline-end">
+                <Tooltip>
+                    <TooltipTrigger>
+                        <Button
+                            type="button"
+                            variant='ghost'
+                            size='icon-xs'
+                        >
+                            <RefreshCw />
+                        </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                        Generate name
+                    </TooltipContent>
+                </Tooltip>
+            </InputGroupAddon>
+        </InputGroup>
+    );
+};
+
+const ColorInputChannel = ({ channel = "r", ...props }) => {
+
+    const label = channel.toUpperCase();
+
+    return (
+        <InputGroup className="h-6 w-20 ">
+            <InputGroupInput
+                type="text"
+                placeholder={label}
+                className={`text-xs transition-colors `}
+                {...props}
+            />
+            <InputGroupAddon >
+                R
+            </InputGroupAddon>
+        </InputGroup>
+    );
+};
+
+
+const ColorBoxPreview = () => {
+    const currentColor = useClipboardStore(x => x.validColor);
+
+    return <Popover>
+        <PopoverTrigger>
+            <div className="overflow-hidden bg-checkerboard w-12 h-12 rounded-md" >
+                <div
+                    className=" transition-opacity w-full h-full "
+                    style={{
+                        backgroundColor: currentColor,
+                    }}
+                />
+            </div>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-3">
+            <HexAlphaColorPicker
+            // color={hexColor}
+            // onChange={handleColorBox}
+            />
+        </PopoverContent>
+    </Popover>
+
+}
+
 
 const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
     const [colorUpdateEntity, setColorUpdateEntity] = useState(() => ({ ...colorEntity }));
@@ -22,7 +99,7 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
     useEffect(() => {
         setColorUpdateEntity({ ...colorEntity });
     }, [colorEntity]);
-    
+
     const roundedEntity = colorEntityToRoundedEntity(colorUpdateEntity)
     const hexColor = toHex8(colorUpdateEntity);
 
@@ -66,111 +143,29 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
         setEditBlock(null);
     };
 
-    return (<div className=' h-18  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden '>
-        <div className={`w-full flex  justify-between overflow-hidden bg-background p  `}>
-            <Popover>
-                <PopoverTrigger>
-                    <div className={`w-22 bg-checkerboard cursor-pointer`}>
-                        <div className="w-full h-full" style={{
-                            backgroundColor: hexColor
-                        }} />
-                    </div>
+    return (
+        <div className=' h-15 p-1 gap-1  rounded-md relative flex flex-row items-center  outline-1 overflow-hidden bg-background'>
+            <ColorBoxPreview />
+            <div className="flex flex-col gap-1">
+                {/* row 1*/}
+                <div className="flex-1 flex  justify-end items-top gap-1">
+                    <ColorInputChannel />
+                    <ColorInputChannel channel="g" />
+                    <ColorInputChannel channel="a" />
+                    <Button variant='destructive' size='icon-xs' onClick={() => setEditBlock(null)}> <X /></Button>
+                </div>
 
-                </PopoverTrigger>
-                <PopoverContent className="w-auto p-3">
-                    <HexAlphaColorPicker
-                        color={hexColor}
-                        onChange={handleColorBox}
-                    />
-                </PopoverContent>
-            </Popover>
+                {/* row 2  */}
 
-            <div className="p-2.5 flex gap-2.5 items-stretch w-full">
-
-                <div className="flex-1 flex flex-col justify-between gap-2 min-w-0 relative">
-
-                    {/* Row 1: RGBA Inputs in a tight 4-col grid */}
-                    <div className="flex-1 flex flex-col justify-between gap-2 min-w-0">
-                        <div className="flex gap-1 w-[90%]">
-                            {[
-                                { key: 'r', label: 'R', val: roundedEntity.r, color: 'text-red-500' },
-                                { key: 'g', label: 'G', val: roundedEntity.g, color: 'text-green-500' },
-                                { key: 'b', label: 'B', val: roundedEntity.b, color: 'text-blue-500' },
-                                { key: 'alpha', label: 'A', val: roundedEntity.alpha ?? "", color: 'text-muted-foreground/40' },
-                            ].map(channel => (
-                                <div
-                                    key={channel.key}
-                                    className={`relative flex items-center ${channel.key === 'a' ? 'flex-[1.25]' : 'flex-1'
-                                        }`}
-                                >
-                                    <span className={`absolute left-1.5 text-[10px] font-bold select-none pointer-events-none ${channel.color}`}>
-                                        {channel.label}
-                                    </span>
-                                    <CustomInput
-                                        name={channel.key}
-                                        onChange={(e) => handleChange(e)}
-                                        type="number"
-                                        value={channel.val}
-                                        className="w-full pl-4 pr-1 py-1 text-right font-mono "
-                                    />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
-
-                    {/* Row 2: Name Input with Auto-gen Button + Save Checkmark */}
-                    <div className="flex items-center justify-start gap-1.5 ">
-                        <div className="flex-1 " >
-                            <div className="flex-1">
-                                <div className="relative flex items-center w-full">
-                                    <CustomInput
-                                        type="text"
-                                        name="name"
-                                        onChange={handleChange}
-
-                                        value={colorUpdateEntity.name}
-                                        className="w-full pr-8"
-                                        placeholder="Color Name"
-                                    />
-                                    <div className="absolute right-1.5 flex items-center">
-                                        <Tooltip>
-                                            <TooltipTrigger>
-                                                <button
-                                                    type="button"
-                                                    onClick={handleRefreshName}
-                                                    className="p-1  text-muted-foreground hover:text-foreground rounded-sm hover:bg-muted-foreground/20 transition-colors cursor-pointer flex items-center justify-center"
-                                                >
-                                                    <RefreshCw className="size-3" />
-                                                </button>
-                                            </TooltipTrigger>
-                                            <TooltipContent>
-                                                Generate name
-                                            </TooltipContent>
-                                        </Tooltip>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <IconButton onClick={handleEdit}>
-                            <Check />
-                        </IconButton>
-                    </div>
-                    <button className={`absolute right-0 top-0 
-                            flex items-center justify-center
-                            hover:bg-red-200
-                            dark:bg-foreground/10
-                            dark:hover:bg-destructive/50
-                            rounded-full 
-                            p-0.5
-                            cursor-pointer   `}
-                        onClick={() => setEditBlock(null)} >
-                        <X size={13} />
-                    </button>
+                <div className="flex items-center justify-end gap-1 ">
+                    <ColorNameInput/>
+                    <ColorInputChannel channel="b" />
+                    <Button onClick={handleEdit}  size='icon-xs' className='bg-green-900'>
+                        <Check />
+                    </Button>
                 </div>
             </div>
-        </div>
-    </div>);
+        </div>);
 }
 
 export default ColorBlockEdit;

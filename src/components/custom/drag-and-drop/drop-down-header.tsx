@@ -108,7 +108,7 @@ const DropDownHeader = () => {
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="min-w-40">
+      <DropdownMenuContent className="w-auto">
         <DropdownMenuGroup>
           {Object.entries(ICON_MAP).map(([path, { icon, label }]) => (
             <DropdownMenuItem
