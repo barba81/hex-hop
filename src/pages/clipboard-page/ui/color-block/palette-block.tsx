@@ -93,7 +93,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
           </div>
 
           <div className="flex-1 flex flex-col justify-between overflow-hidden bg-background">
-            <div className="w-full h-6  flex gap-0.5   bg-checkerboard">
+            <div className="w-full h-6  flex  bg-checkerboard">
               {
                 colorBlocksId.map((id) => (<PaletteTopBar blockId={id} key={id} />))
               }
