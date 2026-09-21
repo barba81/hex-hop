@@ -1,40 +1,38 @@
 import { Moon, Sun, SunMoon } from "lucide-react"
-
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { useTheme } from "@/components/theme/theme-provider"
 import { Button } from "../ui/button"
 
-export function ModeToggle() {
-  const { setTheme } = useTheme()
+
+export const ThemeToggleButton = () => {
+  const { theme, setTheme } = useTheme();
+
+  const themes: ("light" | "dark" | "system")[] = ["light", "dark", "system"];
+
+  const cycleTheme = () => {
+    const currentIndex = themes.indexOf(theme);
+    const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % themes.length;
+    setTheme(themes[nextIndex]);
+  };
 
   return (
-    <DropdownMenu>
-      <DropdownMenuTrigger>
-        <Button >
-          <Sun className="h-[1.2rem] w-[1.2rem] scale-100 rotate-0 transition-all dark:scale-0 dark:-rotate-90" />
-          <Moon className="absolute h-[1.2rem] w-[1.2rem] scale-0 rotate-90 transition-all dark:scale-100 dark:rotate-0" />
-          <span className="sr-only">Toggle theme</span>
-        </Button>
-      </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setTheme("light")}>
-          <Sun className="h-[1.2rem] w-[1.2rem] " />
-           Light
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("dark")}>
-          <Moon className="h-[1.2rem] w-[1.2rem] " />
-          Dark
-        </DropdownMenuItem>
-        <DropdownMenuItem onClick={() => setTheme("system")}>
-          <SunMoon  className="h-[1.2rem] w-[1.2rem] " />
-          System
-        </DropdownMenuItem>
-      </DropdownMenuContent>
-    </DropdownMenu>
-  )
-}
+    <Button 
+      variant="outline" 
+      size="icon-xs" 
+      onClick={cycleTheme}
+      className="relative overflow-hidden"
+    >
+      <Sun className={`h-[1.2rem] w-[1.2rem] transition-all duration-300 ${
+        theme === "light" ? "scale-100 rotate-0" : "scale-0 -rotate-90"
+      }`} />
+
+      <Moon className={`absolute h-[1.2rem] w-[1.2rem] transition-all duration-300 ${
+        theme === "dark" ? "scale-100 rotate-0" : "scale-0 rotate-90"
+      }`} />
+
+      <SunMoon className={`absolute h-[1.2rem] w-[1.2rem] transition-all duration-300 ${
+        theme === "system" ? "scale-100 rotate-0" : "scale-0 rotate-90"
+      }`} />
+
+    </Button>
+  );
+};

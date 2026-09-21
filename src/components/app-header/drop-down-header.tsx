@@ -3,6 +3,7 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 
@@ -17,6 +18,7 @@ import { useLocation, useNavigate } from "react-router";
 
 import GradientIcon from "@/components/icons/gradient-icon";
 import { Button } from "@/components/ui/button";
+import { ThemeToggleButton } from "../theme/mode-toggle";
 
 const size = 15;
 
@@ -123,6 +125,7 @@ const DropDownHeader = () => {
               </span>
             </DropdownMenuItem>
           ))}
+          <DropdownMenuSeparator />
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>
