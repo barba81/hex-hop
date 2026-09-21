@@ -2,7 +2,7 @@ import { platform as getPlatform } from "@tauri-apps/plugin-os";
 import MacHeaderButton from "./mac-header-button";
 import WindowsHeaderButton from "./windows-header-button";
 import DropDownHeader from "@/components/app-header/drop-down-header";
-import { ThemeToggleButton } from "../theme/mode-toggle";
+import { ThemeToggleButton } from "../theme/theme-toggle";
 
 const platform =  getPlatform();
 

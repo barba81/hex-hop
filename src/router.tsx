@@ -1,4 +1,4 @@
-import { createBrowserRouter, Navigate } from "react-router";
+import { createBrowserRouter, isRouteErrorResponse, Navigate, useRouteError } from "react-router";
 import App from "./App";
 import ImportExportPage from "./pages/import-export-page/import-export-page";
 import PaletteGenerator from "./pages/palette-generator-page/palette-generator-page";
@@ -14,6 +14,7 @@ import GradientGeneratorPage from "./pages/gradient-generator-page/ui/gradient-g
 export const router = createBrowserRouter([
   {
     path: "/",
+    ErrorBoundary: RootErrorBoundary,
     element: <App />,
     children: [
       {
@@ -61,3 +62,29 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
+
+
+function RootErrorBoundary() {
+  let error = useRouteError();
+  if (isRouteErrorResponse(error)) {
+    return (
+      <>
+        <h1>
+          {error.status} {error.statusText}
+        </h1>
+        <p>{error.data}</p>
+      </>
+    );
+  } else if (error instanceof Error) {
+    return (
+      <div>
+        <h1>Error</h1>
+        <p>{error.message}</p>
+        <p>The stack trace is:</p>
+        <pre>{error.stack}</pre>
+      </div>
+    );
+  } else {
+    return <h1>Unknown Error</h1>;
+  }
+}

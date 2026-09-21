@@ -18,7 +18,7 @@ import { useLocation, useNavigate } from "react-router";
 
 import GradientIcon from "@/components/icons/gradient-icon";
 import { Button } from "@/components/ui/button";
-import { ThemeToggleButton } from "../theme/mode-toggle";
+import { ThemeToggleButton } from "../theme/theme-toggle";
 
 const size = 15;
 
