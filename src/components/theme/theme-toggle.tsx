@@ -15,6 +15,41 @@ export const ThemeToggleButton = () => {
   };
 
   return (
+    <Button
+      variant="outline"
+      size="icon-xs"
+      onClick={cycleTheme}
+      className="relative overflow-hidden"
+    >
+      {theme === "light" &&
+        <Sun />}
+
+      {theme === "dark" &&
+        <Moon />
+      }
+
+      {theme === "system" &&
+        <SunMoon />
+      }
+
+    </Button>
+  );
+};
+
+
+
+export const ThemeToggleButton2 = () => {
+  const { theme, setTheme } = useTheme();
+
+  const themes: ("light" | "dark" | "system")[] = ["light", "dark", "system"];
+
+  const cycleTheme = () => {
+    const currentIndex = themes.indexOf(theme);
+    const nextIndex = currentIndex === -1 ? 0 : (currentIndex + 1) % themes.length;
+    setTheme(themes[nextIndex]);
+  };
+
+  return (
     <Button 
       variant="outline" 
       size="icon-xs" 
