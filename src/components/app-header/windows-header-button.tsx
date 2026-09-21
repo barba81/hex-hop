@@ -13,6 +13,7 @@ const WindowsHeaderButton = () => {
             getCurrentWindow().minimize();
           }}
         >
+           <span className="sr-only">Minimize app</span>
           <Minus />
         </Button>
         <Button
@@ -23,6 +24,7 @@ const WindowsHeaderButton = () => {
             getCurrentWindow().close();
           }}
         >
+           <span className="sr-only">Close app</span>
           <X size={18}/>
         </Button>
       </div>
