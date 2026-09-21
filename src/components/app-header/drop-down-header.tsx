@@ -124,7 +124,6 @@ const DropDownHeader = () => {
               </span>
             </DropdownMenuItem>
           ))}
-          <DropdownMenuSeparator />
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

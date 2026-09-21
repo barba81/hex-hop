@@ -2,7 +2,7 @@ import type { ColorCopyFormula} from "@/infrastructure/models/color-copy-list";
 import type { BlockEntity, ColorEntity, GradientEntity, GradientEntitySummary, PaletteEntity, PaletteEntitySummary } from "@/infrastructure/models/entity";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { Command } from "./command-manager-state";
+import type { Command } from "./command-manager-state";
 
 export const defaultInputColor = "#3b82f6";
 export const rootBlockId = -1;
@@ -114,7 +114,6 @@ export const useClipboardStore = create<ClipboardStore>()(immer((set) => ({
 
   updateBlockSummary: (updateBlock: PaletteEntitySummary | GradientEntitySummary) =>
     set((state) => {
-      debugger;
       const block = state.blocksById[updateBlock.blockId];
       if (block) {
         Object.assign(block, updateBlock);

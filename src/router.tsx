@@ -65,7 +65,7 @@ export const router = createBrowserRouter([
 
 
 function RootErrorBoundary() {
-  let error = useRouteError();
+  const error = useRouteError();
   if (isRouteErrorResponse(error)) {
     return (
       <>

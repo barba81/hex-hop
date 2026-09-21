@@ -1,5 +1,6 @@
-import { ClipboardStore, CommandScope, useClipboardStore } from "@/store/clipboard-store";
-import { Command } from "@/store/command-manager-state";
+import type { ClipboardStore, CommandScope} from "@/store/clipboard-store";
+import { useClipboardStore } from "@/store/clipboard-store";
+import type { Command } from "@/store/command-manager-state";
 
 const MAX_HISTORY = 50;
 

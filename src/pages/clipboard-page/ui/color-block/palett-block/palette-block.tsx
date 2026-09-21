@@ -109,8 +109,7 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
       <BaseOutlineBlock block={paletteEntity} >
         <PaletteBlockBase colorBlocksId={colorBlocksId} paletteEntity={paletteEntity} isOpen={isOpen} />
       </BaseOutlineBlock>
-      {isOpen &&
-        <PaletteDropDownCard colorBlocksId={colorBlocksId} paletteEntity={paletteEntity} />
+      {isOpen ? <PaletteDropDownCard colorBlocksId={colorBlocksId} paletteEntity={paletteEntity} /> : null
       }
 
     </ContextMenuTrigger>

@@ -1,8 +1,10 @@
 import { useDraggable, useDroppable } from "@dnd-kit/react";
-import { distanceDetector, DraggableData } from "../../features/darg-and-drop";
-import { ColorEntity, GradientEntity, PaletteEntity } from "@/infrastructure/models/entity";
+import type { DraggableData } from "../../features/darg-and-drop";
+import { distanceDetector } from "../../features/darg-and-drop";
+import type { ColorEntity, GradientEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { DragDots } from "@/components/custom/drag-and-drop/drag-dots";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
+import { GripVertical } from "lucide-react";
 
 type BaseOutlineBlockParams = {
     block: GradientEntity | ColorEntity | PaletteEntity,
@@ -36,15 +38,12 @@ export const BaseOutlineBlock = ({ block, children }: BaseOutlineBlockParams) =>
         dropRef(node);
     };
 
-    return <>
-
-        <div ref={setCombinedRef}
+    return <div ref={setCombinedRef}
             className={`${isDropTarget && 'outline-2 outline-accent'} h-10 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden`}
         >
-            <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer`}>
-                <DragDots />
+            <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer bg-background`}>
+                <DragDots/>
             </div>
             {children}
         </div>
-    </>
 }
