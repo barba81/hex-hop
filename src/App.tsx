@@ -1,4 +1,4 @@
-import HeaderBar from "./components/header/header-bar";
+import HeaderBar from "./components/app-header/app-header-bar";
 import "./globals.css";
 import { ThemeProvider } from "./components/theme/theme-provider";
 import { Toaster } from "react-hot-toast";

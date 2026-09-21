@@ -8,7 +8,7 @@ import { coloBackground } from "@/infrastructure/utils/color-format-changer";
 import { setEditBlock } from "../../../features/clipboard-store-actions";
 import { duplicateBlock } from "../../../features/duplicate-block";
 import { deleteColorBlock } from "../../../features/delete-block";
-import { BlenderIcon, CSSIcon, TailwindIcon } from "@/components/icons/css-icon";
+import { BlenderIcon, CSSIcon, TailwindIcon } from "@/components/icons/custom-icon";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity
