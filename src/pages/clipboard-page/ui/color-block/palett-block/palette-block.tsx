@@ -45,6 +45,61 @@ const PaletteTopBar = ({ blockId }: { blockId: number }) => {
 }
 
 
+type PaletteBlockBaseParams = {
+  paletteEntity: PaletteEntity,
+  colorBlocksId: number[],
+  isOpen: boolean
+};
+
+const PaletteBlockBase = ({ colorBlocksId, paletteEntity, isOpen }: PaletteBlockBaseParams) => {
+  return <div className="grid grid-rows-2 w-full h-full overflow-hidden bg-background">
+    <div className="bg-checkerboard flex w-full">
+      {
+        colorBlocksId.map((id) => (<PaletteTopBar blockId={id} key={id} />))
+      }
+    </div>
+
+    <div className="  flex flex-row justify-end items-center ">
+      <div className="text-sm">
+        {paletteEntity.name}
+      </div>
+      <Button
+        size='icon-sm'
+        variant='ghost'
+        onClick={() => togglePalette(paletteEntity.blockId)}
+        className=" hover:bg-secondary  flex items-center justify-center cursor-pointer"
+      >
+        <ChevronDown className="transition-transform duration-200" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+      </Button>
+    </div>
+
+  </div>
+}
+
+
+type PaletteDropDownCardParams = {
+  paletteEntity: PaletteEntity,
+  colorBlocksId: number[]
+};
+
+const PaletteDropDownCard = ({ paletteEntity, colorBlocksId }: PaletteDropDownCardParams) => {
+  return <div className="w-full dark:bg-neutral-900/70 rounded-b-md border-2 border-t-0 px-1">
+    <div className="flex flex-col  border-neutral-700 ">
+      <DroppableLine id={`drop:start:${paletteEntity.id}`} blockId={-1} key='drop:start' palette={paletteEntity.id} />
+      {
+
+        colorBlocksId.map((blockId) => (
+          <React.Fragment key={blockId}>
+            <InnerBlock blockId={blockId} />
+            <DroppableLine id={`drop:${blockId}`} blockId={blockId} palette={paletteEntity.id} />
+          </React.Fragment>
+        ))
+      }
+    </div>
+  </div>
+}
+
+
 const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
   const colorBlocksId = useClipboardStore(state => state.blockIds[paletteEntity.id]) ?? [];
   const isOpen = useClipboardStore((state) => !!state.openPalette[paletteEntity.blockId]);
@@ -52,46 +107,14 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
   return <ContextMenu>
     <ContextMenuTrigger>
       <BaseOutlineBlock block={paletteEntity} >
-
-        <div className="flex-1 flex flex-col justify-between overflow-hidden bg-background">
-          <div className="w-full h-6  flex  bg-checkerboard">
-            {
-              colorBlocksId.map((id) => (<PaletteTopBar blockId={id} key={id} />))
-            }
-          </div>
-
-          <div className="w-full h-7 flex flex-row justify-between items-center ">
-            <div className="flex gap-2 h-full items-center  text-md">
-              {paletteEntity.name}
-              <Button
-                variant='ghost'
-                onClick={() => togglePalette(paletteEntity.blockId)}
-                className="w-5 hover:bg-secondary h-full   flex items-center justify-center cursor-pointer"
-              >
-                <ChevronDown className="transition-transform duration-200" style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
-              </Button>
-            </div>
-          </div>
-        </div>
-
+        <PaletteBlockBase colorBlocksId={colorBlocksId} paletteEntity={paletteEntity} isOpen={isOpen} />
       </BaseOutlineBlock>
-      {isOpen && colorBlocksId.length ? <div className="w-full dark:bg-neutral-900/70 rounded-b-md border-2 border-t-0 px-1">
-        <div className="flex flex-col  border-neutral-700 ">
-          <DroppableLine id={`drop:start:${paletteEntity.id}`} blockId={-1} key='drop:start' palette={paletteEntity.id} />
-          {
-
-            colorBlocksId.map((blockId) => (
-              <React.Fragment key={blockId}>
-                <InnerBlock blockId={blockId} />
-                <DroppableLine id={`drop:${blockId}`} blockId={blockId} palette={paletteEntity.id} />
-              </React.Fragment>
-            ))
-          }
-        </div>
-      </div> : null}
+      {isOpen &&
+        <PaletteDropDownCard colorBlocksId={colorBlocksId} paletteEntity={paletteEntity} />
+      }
 
     </ContextMenuTrigger>
-    <ContextMenuContent className="w-20">
+    <ContextMenuContent className="w-auto">
       <ContextMenuItem className="gap-2" onClick={() => setEditBlock(paletteEntity.blockId)}>
         <Pen className="size-4" />
         Edit
