@@ -6,12 +6,12 @@ import type { ChangeEvent } from "react";
 import { useEffect, useState } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
 import { colorEntityToColor, colorEntityToRoundedEntity, hexaToRgbaNormalized, toHex8 } from "@/infrastructure/utils/color-format-changer";
-import { getSmartColorName } from "../../features/get-color-name";
-import { updateColorBlock } from "../../features/update-block";
-import { setEditBlock } from "../../features/clipboard-store-actions";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
 import { useClipboardStore } from "@/store/clipboard-store";
+import { setEditBlock } from "@/pages/clipboard-page/features/clipboard-store-actions";
+import { updateColorBlock } from "@/pages/clipboard-page/features/update-block";
+import { getSmartColorName } from "@/pages/clipboard-page/features/get-color-name";
 
 type ColorBlockEditParams = {
     colorEntity: ColorEntity

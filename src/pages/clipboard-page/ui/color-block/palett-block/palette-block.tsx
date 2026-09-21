@@ -1,18 +1,17 @@
 import { DragDots } from "@/components/custom/drag-and-drop/drag-dots";
 import type { PaletteEntity } from "@/infrastructure/models/entity";
-
 import { useClipboardStore } from "@/store/clipboard-store";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import { ChevronDown, Pen, Trash2 } from "lucide-react";
 import { coloBackground } from "@/infrastructure/utils/color-format-changer";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
-import InnerBlock from "./inner-block";
-import DroppableLine from "../../../../components/custom/drag-and-drop/drop-line";
 import React from "react";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
-import { distanceDetector, type DraggableData } from "../../features/darg-and-drop";
-import { setEditBlock, togglePalette } from "../../features/clipboard-store-actions";
 import { Button } from "@/components/ui/button";
+import { distanceDetector, DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
+import { setEditBlock, togglePalette } from "@/pages/clipboard-page/features/clipboard-store-actions";
+import DroppableLine from "@/components/custom/drag-and-drop/drop-line";
+import InnerBlock from "./inner-block";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity

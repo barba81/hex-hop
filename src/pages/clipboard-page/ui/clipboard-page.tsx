@@ -1,4 +1,4 @@
-import ColorList from "./color-list/color-list";
+import ColorList from "./color-block/color-list";
 import FooterColorPicker from "./footer-clipboard/footer-color-picker";
 import HeaderColorList from "./header-clipboard/clipboard-header";
 

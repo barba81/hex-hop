@@ -2,10 +2,10 @@ import { toPaletteSummary, type PaletteEntity } from "@/infrastructure/models/en
 import { Check, X } from "lucide-react";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
-import { setEditBlock } from "../../features/clipboard-store-actions";
-import { updatePaletteBlock } from "../../features/update-block";
 import { InputGroup, InputGroupInput } from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
+import { setEditBlock } from "@/pages/clipboard-page/features/clipboard-store-actions";
+import { updatePaletteBlock } from "@/pages/clipboard-page/features/update-block";
 
 type PaletteBlockEditParams = {
     paletteEntity: PaletteEntity

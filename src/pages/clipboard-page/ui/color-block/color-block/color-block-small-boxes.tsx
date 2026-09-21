@@ -3,11 +3,11 @@ import { DragDots } from "@/components/custom/drag-and-drop/drag-dots";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
-import { distanceDetector, type DraggableData } from "../../features/darg-and-drop";
+import { distanceDetector, type DraggableData } from "../../../features/darg-and-drop";
 import { coloBackground } from "@/infrastructure/utils/color-format-changer";
-import { setEditBlock } from "../../features/clipboard-store-actions";
-import { duplicateBlock } from "../../features/duplicate-block";
-import { deleteColorBlock } from "../../features/delete-block";
+import { setEditBlock } from "../../../features/clipboard-store-actions";
+import { duplicateBlock } from "../../../features/duplicate-block";
+import { deleteColorBlock } from "../../../features/delete-block";
 import { BlenderIcon, CSSIcon, TailwindIcon } from "@/components/icons/css-icon";
 
 type ColorBlockViewParams = {

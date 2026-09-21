@@ -2,6 +2,6 @@ import { GripVertical } from "lucide-react";
 
 export const DragDots = () => {
   return (
-    <GripVertical size={22}/>
+    <GripVertical size={20}/>
   );
 };

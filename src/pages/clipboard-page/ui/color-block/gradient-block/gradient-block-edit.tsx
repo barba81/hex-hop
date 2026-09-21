@@ -3,10 +3,10 @@ import { toGradientSummary, type GradientEntity } from "@/infrastructure/models/
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { Check, X } from "lucide-react";
-import { updateGradientBlock } from "../../features/update-block";
-import { setEditBlock } from "../../features/clipboard-store-actions";
 import { InputGroup, InputGroupInput } from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
+import { updateGradientBlock } from "@/pages/clipboard-page/features/update-block";
+import { setEditBlock } from "@/pages/clipboard-page/features/clipboard-store-actions";
 
 type GradientBlockEditParams = {
     gradientEntity: GradientEntity

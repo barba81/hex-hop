@@ -3,10 +3,10 @@ import type { GradientEntity } from "@/infrastructure/models/entity";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
-import { distanceDetector, type DraggableData } from "../../features/darg-and-drop";
+import { distanceDetector, DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
-import { setEditBlock } from "../../features/clipboard-store-actions";
-import { deleteGradientBlock } from "../../features/delete-block";
+import { setEditBlock } from "@/pages/clipboard-page/features/clipboard-store-actions";
+import { deleteGradientBlock } from "@/pages/clipboard-page/features/delete-block";
 
 type GradientBoxParams = {
     gradientEntity: GradientEntity
