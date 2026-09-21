@@ -3,10 +3,10 @@ import { toGradientSummary, type GradientEntity } from "@/infrastructure/models/
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { Check, X } from "lucide-react";
-import { InputGroup, InputGroupInput } from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
 import { updateGradientBlock } from "@/pages/clipboard-page/features/update-block";
 import { setEditBlock } from "@/pages/clipboard-page/features/clipboard-store-actions";
+import { Input } from "@/components/ui/input";
 
 type GradientBlockEditParams = {
     gradientEntity: GradientEntity
@@ -28,22 +28,21 @@ const GradientBlockEdit = ({ gradientEntity }: GradientBlockEditParams) => {
     };
 
     return (
-     <div className=' h-10 p-1 outline-1 gap-1 flex items-center justify-end bg-background rounded-md'>
-            <InputGroup className="h-8 w-auto ">
-                <InputGroupInput
-                    type="text"
-                    onChange={(e) => handleChange(e)}
-                    value={gradientUpdate.name}
-                    placeholder="Gradient name"
-                    className={`text-xs transition-colors `}
-                />
-            </InputGroup>
+        <div className=' h-10 p-1 outline-1 gap-1 flex items-center justify-end bg-background rounded-md'>
+            <Input
+                type="text"
+                onChange={(e) => handleChange(e)}
+                name="name"
+                value={gradientUpdate.name}
+                placeholder="Gradient name"
+                className={`text-xs transition-colors `}
+            />
 
             <Button onClick={() => handleEdit()} size='icon-sm' >
-                <Check  />
+                <Check />
             </Button>
             <Button onClick={() => setEditBlock(null)} size='icon-sm' variant='destructive'>
-                <X  />
+                <X />
             </Button>
         </div>);
 }

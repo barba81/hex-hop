@@ -114,6 +114,7 @@ export const useClipboardStore = create<ClipboardStore>()(immer((set) => ({
 
   updateBlockSummary: (updateBlock: PaletteEntitySummary | GradientEntitySummary) =>
     set((state) => {
+      debugger;
       const block = state.blocksById[updateBlock.blockId];
       if (block) {
         Object.assign(block, updateBlock);

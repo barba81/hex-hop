@@ -7,12 +7,12 @@ import { TooltipProvider } from "./components/ui/tooltip";
 import { cn } from "./lib/utils";
 import { platform as getPlatform } from "@tauri-apps/plugin-os";
 
-function HexHopApp() {
-  const platform = getPlatform();
+const platform = getPlatform();
 
+function HexHopApp() {
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme" >
-      <TooltipProvider>
+      <TooltipProvider >
         <Toaster position="top-center" />
         <div className={cn(
           "w-screen h-screen flex flex-col overflow-hidden  bg-stone-50/80 dark:bg-stone-800/80 ",

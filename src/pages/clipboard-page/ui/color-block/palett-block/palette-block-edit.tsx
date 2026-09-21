@@ -2,10 +2,10 @@ import { toPaletteSummary, type PaletteEntity } from "@/infrastructure/models/en
 import { Check, X } from "lucide-react";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
-import { InputGroup, InputGroupInput } from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
 import { setEditBlock } from "@/pages/clipboard-page/features/clipboard-store-actions";
 import { updatePaletteBlock } from "@/pages/clipboard-page/features/update-block";
+import { Input } from "@/components/ui/input";
 
 type PaletteBlockEditParams = {
     paletteEntity: PaletteEntity
@@ -15,6 +15,7 @@ const PaletteBlockEdit = ({ paletteEntity }: PaletteBlockEditParams) => {
     const handleEdit = async () => {
         updatePaletteBlock(paletteUpdateEntity, toPaletteSummary(paletteEntity));
         setEditBlock(null);
+
     };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -27,21 +28,19 @@ const PaletteBlockEdit = ({ paletteEntity }: PaletteBlockEditParams) => {
 
     return (
         <div className=' h-10 p-1 outline-1 gap-1 flex items-center justify-end bg-background rounded-md'>
-            <InputGroup className="h-8 w-auto ">
-                <InputGroupInput
-                    type="text"
-                    onChange={(e) => handleChange(e)}
-                    value={paletteUpdateEntity.name}
-                    placeholder="Palette name"
-                    className={`text-xs transition-colors `}
-                />
-            </InputGroup>
+            <Input className="h-8 w-auto "
+                type="text"
+                name="name"
+                onChange={(e) => handleChange(e)}
+                value={paletteUpdateEntity.name}
+                placeholder="Palette name"
+            />
 
             <Button onClick={() => handleEdit()} size='icon-sm' >
-                <Check  />
+                <Check />
             </Button>
             <Button onClick={() => setEditBlock(null)} size='icon-sm' variant='destructive'>
-                <X  />
+                <X />
             </Button>
         </div>);
 }

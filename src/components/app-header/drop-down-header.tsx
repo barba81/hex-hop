@@ -18,7 +18,6 @@ import { useLocation, useNavigate } from "react-router";
 
 import GradientIcon from "@/components/icons/gradient-icon";
 import { Button } from "@/components/ui/button";
-import { ThemeToggleButton } from "../theme/theme-toggle";
 
 const size = 15;
 
@@ -105,7 +104,7 @@ const DropDownHeader = () => {
     <DropdownMenu>
       <DropdownMenuTrigger>
         <Button className="text-xs gap-1 items-center" variant='outline' size='xs'>
-          {activePage?.icon || <Clipboard  />}
+          {activePage?.icon || <Clipboard />}
           {activePage?.shortLabel || "Color List"}
         </Button>
       </DropdownMenuTrigger>
