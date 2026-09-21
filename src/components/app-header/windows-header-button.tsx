@@ -7,7 +7,7 @@ const WindowsHeaderButton = () => {
     <div className="flex gap-1 items-center justify-center ">
         <Button
           variant='ghost'
-          size='icon-xs'
+          size='icon-sm'
           className="hover:bg-gray-400 dark:hover:bg-gray-800/50"
           onClick={() => {
             getCurrentWindow().minimize();
@@ -18,7 +18,7 @@ const WindowsHeaderButton = () => {
         </Button>
         <Button
            variant='ghost'
-          size='icon-xs'
+          size='icon-sm'
           className="hover:bg-red-700 dark:hover:bg-red-400/50"
           onClick={() => {
             getCurrentWindow().close();
