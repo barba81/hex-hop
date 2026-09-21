@@ -1,11 +1,11 @@
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import { distanceDetector, DraggableData } from "../../features/darg-and-drop";
-import { ColorEntity, GradientEntity } from "@/infrastructure/models/entity";
+import { ColorEntity, GradientEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { DragDots } from "@/components/custom/drag-and-drop/drag-dots";
 import { ReactNode } from "react";
 
 type BaseOutlineBlockParams = {
-    block: GradientEntity | ColorEntity,
+    block: GradientEntity | ColorEntity | PaletteEntity,
     children: ReactNode;
 };
 
@@ -16,8 +16,8 @@ export const BaseOutlineBlock = ({ block, children }: BaseOutlineBlockParams) =>
 
         data: {
             blockId: block.blockId,
-            kind: "block",
-            palette: block.parentPaletteId
+            kind: block.kind === 'palette' ? 'palette': "block", 
+            palette: block.kind === 'palette' ? block.id : block.parentPaletteId 
         }
     });
 
@@ -25,8 +25,8 @@ export const BaseOutlineBlock = ({ block, children }: BaseOutlineBlockParams) =>
         id: `drag:${block.blockId}`,
         data: {
             blockId: block.blockId,
-            kind: "block",
-            palette: block.parentPaletteId
+            kind: block.kind === 'palette' ? 'palette': "block", 
+            palette: block.kind === 'palette' ? block.id : block.parentPaletteId 
         }
     });
 
