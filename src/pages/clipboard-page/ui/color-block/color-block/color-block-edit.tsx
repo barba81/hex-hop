@@ -50,7 +50,7 @@ const ColorInputChannel = ({ channel = "r", ...props }) => {
     const label = channel.toUpperCase();
 
     return (
-        <InputGroup className="h-6 w-20 ">
+        <InputGroup className="h-6 w-20 shrink-0">
             <InputGroupInput
                 type="text"
                 placeholder={label}
@@ -141,7 +141,7 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
     };
 
     return (
-        <div className=' h-15 p-1 gap-1  rounded-md relative flex flex-row items-center  outline-1 overflow-hidden bg-background'>
+        <div className=' h-15 p-1 gap-2 shrink-0  rounded-md relative flex flex-row items-center  outline-1 overflow-hidden bg-background'>
             <ColorBoxPreview />
             <div className="flex flex-col gap-1">
                 {/* row 1*/}
@@ -153,10 +153,9 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                 </div>
 
                 {/* row 2  */}
-
                 <div className="flex items-center justify-end gap-1 ">
+                    <ColorInputChannel channel="a" />
                     <ColorNameInput/>
-                    <ColorInputChannel channel="b" />
                     <Button onClick={handleEdit}  size='icon-xs' className='bg-green-900'>
                         <Check />
                     </Button>
