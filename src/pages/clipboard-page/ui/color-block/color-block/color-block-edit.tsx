@@ -209,10 +209,8 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
             />
 
             <div className="flex flex-col gap-1">
-
                 <div className="flex-1 flex justify-between items-top gap-1">
                     <div className="flex gap-1">
-
                         <ColorInputChannel
                             channel="R"
                             textColor="text-red-400"
@@ -220,7 +218,6 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                             value={colorUpdateEntity.r}
                             onChange={handleChange}
                         />
-
                         <ColorInputChannel
                             channel="G"
                             textColor="text-green-400"
@@ -228,7 +225,6 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                             value={colorUpdateEntity.g}
                             onChange={handleChange}
                         />
-
                         <ColorInputChannel
                             channel="B"
                             textColor="text-blue-400"
@@ -236,7 +232,6 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                             value={colorUpdateEntity.b}
                             onChange={handleChange}
                         />
-
                     </div>
 
                     <Button
@@ -249,7 +244,6 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                 </div>
 
                 <div className="flex items-center justify-end gap-1">
-
                     <ColorInputChannel
                         channel="A"
                         name="a"
