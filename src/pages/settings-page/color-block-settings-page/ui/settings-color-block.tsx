@@ -1,13 +1,13 @@
-import { DragDots } from "@/components/custom/drag-dots"
+import { DragDots } from "@/components/custom/drag-and-drop/drag-dots"
 import { defaultInputColor, useClipboardStore } from "../../../../store/clipboard-store";
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import { useSortable } from '@dnd-kit/react/sortable';
 import { ChevronDown, ChevronUp, Eye, EyeClosed, Plus } from "lucide-react";
 import { ColorFormulaCreator } from "./color-formula-creator";
-import { IconButton } from "@/components/custom/icon-button";
 import { RestrictToVerticalAxis } from '@dnd-kit/abstract/modifiers';
 import { DynamicIconMapper } from "@/infrastructure/utils/icon-mapper";
 import { addNewColorCopyBlock, flipColorCopyBlockVisibility, setColorCopyFormulaActive } from "../feature/color-settings-store-actions";
+import { Button } from "@/components/ui/button";
 
 
 
@@ -82,13 +82,13 @@ export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFor
 
 const ColorFormatHeader = () => {
 
-    return <div className="p-1 flex w-full justify-between border-b-3 ">
+    return <div className="p-1 flex w-full justify-between items-center border-b-3 ">
         <div className="text-sm">
             Color format formulas
         </div>
-        <IconButton onClick={async () => addNewColorCopyBlock()}>
-            <Plus size={20} />
-        </IconButton>
+        <Button variant='outline' size='icon-sm'  onClick={async () => addNewColorCopyBlock()}>
+            <Plus  />
+        </Button>
 
 
     </div>

@@ -1,4 +1,4 @@
-import { DragDots } from "@/components/custom/drag-dots";
+import { DragDots } from "@/components/custom/drag-and-drop/drag-dots";
 import type { PaletteEntity } from "@/infrastructure/models/entity";
 
 import { useClipboardStore } from "@/store/clipboard-store";
