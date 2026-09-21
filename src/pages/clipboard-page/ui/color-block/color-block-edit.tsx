@@ -1,7 +1,5 @@
 import type { ColorEntity } from "@/infrastructure/models/entity";
 import { Check, RefreshCw, X } from "lucide-react";
-import { CustomInput } from "@/components/custom/custom-input";
-import { IconButton } from "@/components/custom/icon-button";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { HexAlphaColorPicker } from "react-colorful";
 import type { ChangeEvent } from "react";
@@ -14,7 +12,6 @@ import { setEditBlock } from "../../features/clipboard-store-actions";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
 import { useClipboardStore } from "@/store/clipboard-store";
-import { Checkbox } from "@/components/ui/checkbox";
 
 type ColorBlockEditParams = {
     colorEntity: ColorEntity

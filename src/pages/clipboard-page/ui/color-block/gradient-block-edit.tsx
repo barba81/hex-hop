@@ -3,10 +3,10 @@ import { toGradientSummary, type GradientEntity } from "@/infrastructure/models/
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { Check, X } from "lucide-react";
-import { CustomInput } from "@/components/custom/custom-input";
-import { IconButton } from "@/components/custom/icon-button";
 import { updateGradientBlock } from "../../features/update-block";
 import { setEditBlock } from "../../features/clipboard-store-actions";
+import { InputGroup, InputGroupInput } from "@/components/ui/input-group";
+import { Button } from "@/components/ui/button";
 
 type GradientBlockEditParams = {
     gradientEntity: GradientEntity
@@ -27,25 +27,25 @@ const GradientBlockEdit = ({ gradientEntity }: GradientBlockEditParams) => {
         }));
     };
 
-    return (<div className=' h-10  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden '>
-        <div className={`w-full flex flex-col justify-between overflow-hidden bg-background p-2 `}>
-
-            <div className="flex justify-end items-end gap-3">
-                <CustomInput type="text"
-                    name="name"
-                    onChange={handleChange}
+    return (
+     <div className=' h-10 p-1 outline-1 gap-1 flex items-center justify-end bg-background rounded-md'>
+            <InputGroup className="h-8 w-auto ">
+                <InputGroupInput
+                    type="text"
+                    onChange={(e) => handleChange(e)}
                     value={gradientUpdate.name}
-                    className="w-50 pr-8"
-                    placeholder="Palette name" />
-                <IconButton onClick={handleEdit} >
-                    <Check />
-                </IconButton>
-                <IconButton onClick={() => setEditBlock(null)} >
-                    <X />
-                </IconButton>
-            </div>
-        </div>
-    </div>);
+                    placeholder="Gradient name"
+                    className={`text-xs transition-colors `}
+                />
+            </InputGroup>
+
+            <Button onClick={() => handleEdit()} size='icon-sm' >
+                <Check  />
+            </Button>
+            <Button onClick={() => setEditBlock(null)} size='icon-sm' variant='destructive'>
+                <X  />
+            </Button>
+        </div>);
 }
 
 export default GradientBlockEdit;

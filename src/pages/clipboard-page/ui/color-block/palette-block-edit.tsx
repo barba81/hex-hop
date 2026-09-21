@@ -1,50 +1,49 @@
-import { CustomInput } from "@/components/custom/custom-input";
 import { toPaletteSummary, type PaletteEntity } from "@/infrastructure/models/entity";
 import { Check, X } from "lucide-react";
-import type { ChangeEvent} from "react";
+import type { ChangeEvent } from "react";
 import { useState } from "react";
-import { IconButton } from "@/components/custom/icon-button";
 import { setEditBlock } from "../../features/clipboard-store-actions";
 import { updatePaletteBlock } from "../../features/update-block";
+import { InputGroup, InputGroupInput } from "@/components/ui/input-group";
+import { Button } from "@/components/ui/button";
 
 type PaletteBlockEditParams = {
     paletteEntity: PaletteEntity
 };
 const PaletteBlockEdit = ({ paletteEntity }: PaletteBlockEditParams) => {
-    const [paletteUpdateEntity, setColorUpdateEntity] = useState(() => ( toPaletteSummary(paletteEntity)));
+    const [paletteUpdateEntity, setColorUpdateEntity] = useState(() => (toPaletteSummary(paletteEntity)));
     const handleEdit = async () => {
-        updatePaletteBlock(paletteUpdateEntity ,  toPaletteSummary(paletteEntity) );
+        updatePaletteBlock(paletteUpdateEntity, toPaletteSummary(paletteEntity));
         setEditBlock(null);
     };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
-               setColorUpdateEntity((prev) => ({
+        setColorUpdateEntity((prev) => ({
             ...prev,
             [name]: value,
         }));
     };
 
-    return (<div className=' h-10  rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden '>
-        <div className={`w-full flex flex-col justify-between overflow-hidden bg-background p-2 `}>
-
-            <div className="flex justify-end items-end gap-3">
-                <CustomInput type="text"
-                    name="name"
-                    onChange={handleChange}
-
+    return (
+        <div className=' h-10 p-1 outline-1 gap-1 flex items-center justify-end bg-background rounded-md'>
+            <InputGroup className="h-8 w-auto ">
+                <InputGroupInput
+                    type="text"
+                    onChange={(e) => handleChange(e)}
                     value={paletteUpdateEntity.name}
-                    className="w-50 pr-8"
-                    placeholder="Palette name" />
-                <IconButton onClick={handleEdit}>
-                    <Check className="size-3.5" />
-                </IconButton>
-                <IconButton onClick={() => setEditBlock(null)}>
-                    <X className="size-3.5" />
-                </IconButton>
-            </div>
-        </div>
-    </div>);
+                    placeholder="Palette name"
+                    className={`text-xs transition-colors `}
+                />
+            </InputGroup>
+
+            <Button onClick={() => handleEdit()} size='icon-sm' >
+                <Check  />
+            </Button>
+            <Button onClick={() => setEditBlock(null)} size='icon-sm' variant='destructive'>
+                <X  />
+            </Button>
+        </div>);
 }
 
 export default PaletteBlockEdit;
