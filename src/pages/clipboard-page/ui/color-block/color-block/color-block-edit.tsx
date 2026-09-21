@@ -27,7 +27,7 @@ const ColorNameInput = ({
     onRefresh,
 }: ColorNameInputProps) => {
     return (
-        <InputGroup className="h-6">
+        <InputGroup className="h-6 col-span-2">
             <InputGroupInput
                 type="text"
                 value={value}
@@ -61,7 +61,7 @@ const ColorNameInput = ({
 type ColorInputChannelProps = {
     channel: string;
     textColor?: string;
-    value:  number | null;
+    value: number | null;
     onChange: (e: ChangeEvent<HTMLInputElement>) => void;
     name: string;
 };
@@ -77,7 +77,7 @@ const ColorInputChannel = ({
     const label = channel.toUpperCase();
 
     return (
-        <InputGroup className="h-6 w-19 shrink-0">
+        <InputGroup className="h-6 ">
             <InputGroupAddon
                 align="inline-end"
                 className={textColor}
@@ -210,7 +210,7 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
 
             <div className="flex flex-col gap-1">
                 <div className="flex-1 flex justify-between items-top gap-1">
-                    <div className="flex gap-1">
+                    <div className="grid grid-cols-3 gap-1">
                         <ColorInputChannel
                             channel="R"
                             textColor="text-red-400"
@@ -244,23 +244,25 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
                 </div>
 
                 <div className="flex items-center justify-end gap-1">
-                    <ColorInputChannel
-                        channel="A"
-                        name="a"
-                        value={colorUpdateEntity.alpha ?? 1}
-                        onChange={handleChange}
-                    />
+                    <div className="grid grid-cols-3 gap-1">
+                        <ColorInputChannel
+                            channel="A"
+                            name="a"
+                            value={colorUpdateEntity.alpha ?? 1}
+                            onChange={handleChange}
+                        />
 
-                    <ColorNameInput
-                        value={colorUpdateEntity.name ?? "Color name"}
-                        onChange={(value) =>
-                            setColorUpdateEntity((prev) => ({
-                                ...prev,
-                                name: value,
-                            }))
-                        }
-                        onRefresh={handleRefreshName}
-                    />
+                        <ColorNameInput 
+                            value={colorUpdateEntity.name ?? "Color name"}
+                            onChange={(value) =>
+                                setColorUpdateEntity((prev) => ({
+                                    ...prev,
+                                    name: value,
+                                }))
+                            }
+                            onRefresh={handleRefreshName}
+                        />
+                    </div>
 
                     <Button
                         onClick={handleEdit}
