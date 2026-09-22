@@ -8,34 +8,29 @@ import { RestrictToVerticalAxis } from '@dnd-kit/abstract/modifiers';
 import { DynamicIconMapper } from "@/infrastructure/utils/icon-mapper";
 import { addNewColorCopyBlock, flipColorCopyBlockVisibility, setColorCopyFormulaActive } from "../feature/color-settings-store-actions";
 import { Button } from "@/components/ui/button";
-
-
+import { BaseOutlineDndBlock } from "@/components/custom/drag-and-drop/base-outline-dnd-block";
 
 const ColorBlockPreview = () => {
     const backgroundCss = defaultInputColor;
 
-    return <div className="px-1">
-        <div className={` h-10 rounded-md w-full  shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden `}>
-            <div className={`flex items-center justify-center shrink-0 cursor-pointer`}>
-                <DragDots />
+    return <BaseOutlineDndBlock>
+        <div className={`w-full  flex justify-between overflow-hidden bg-background  `}>
+            <div className={` w-9  bg-checkerboard`}>
+                <div className="w-full h-full" style={{
+                    backgroundColor: backgroundCss
+                }} />
             </div>
-            <div className={`w-full  flex justify-between overflow-hidden bg-background  `}>
-                <div className={` w-9  bg-checkerboard`}>
-                    <div className="w-full h-full" style={{
-                        backgroundColor: backgroundCss
-                    }} />
+            <div className="p-0.5 flex-1 flex flex-row justify-between pr-2">
+                <div className="flex">
+                    <>To be added</>
                 </div>
-                <div className="p-0.5 flex-1 flex flex-row justify-between pr-2">
-                    <div className="flex">
-                    </div>
-                    <div className="flex gap-2 h-full items-center  text-sm">
-                        Color Block Preview
-                    </div>
+                <div className="flex gap-2 h-full items-center  text-sm">
+                    Color Block Preview
                 </div>
+            </div>
 
-            </div>
         </div>
-    </div>
+    </BaseOutlineDndBlock>
 }
 
 export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFormula, index: number }) => {
@@ -86,8 +81,8 @@ const ColorFormatHeader = () => {
         <div className="text-sm">
             Color format formulas
         </div>
-        <Button variant='outline' size='icon-sm'  onClick={async () => addNewColorCopyBlock()}>
-            <Plus  />
+        <Button variant='outline' size='icon-sm' onClick={async () => addNewColorCopyBlock()}>
+            <Plus />
         </Button>
 
 

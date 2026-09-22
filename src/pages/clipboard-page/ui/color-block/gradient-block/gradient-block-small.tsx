@@ -4,7 +4,7 @@ import { Copy, Pen, Trash2 } from "lucide-react";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
 import { setEditBlock } from "@/pages/clipboard-page/features/clipboard-store-actions";
 import { deleteGradientBlock } from "@/pages/clipboard-page/features/delete-block";
-import { BaseDragableOutlineBlock } from "../base-outline-block";
+import { BaseDragableOutlineBlock } from "../../../../../components/custom/drag-and-drop/base-outline-dnd-block";
 
 type GradientBoxParams = {
     gradientEntity: GradientEntity 

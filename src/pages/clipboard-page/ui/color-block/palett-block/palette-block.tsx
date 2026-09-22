@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 import { setEditBlock, togglePalette } from "@/pages/clipboard-page/features/clipboard-store-actions";
 import DroppableLine from "@/components/custom/drag-and-drop/drop-line";
 import InnerBlock from "./inner-block";
-import { BaseDragableOutlineBlock } from "../base-outline-block";
+import { BaseOutlineDndBlock } from "../../../../../components/custom/drag-and-drop/base-outline-dnd-block";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity
@@ -106,9 +106,9 @@ const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
 
   return <ContextMenu>
     <ContextMenuTrigger>
-      <BaseDragableOutlineBlock block={paletteEntity} >
+      <BaseOutlineDndBlock block={paletteEntity} >
         <PaletteBlockBase colorBlocksId={colorBlocksId} paletteEntity={paletteEntity} isOpen={isOpen} />
-      </BaseDragableOutlineBlock>
+      </BaseOutlineDndBlock>
       {isOpen ? <PaletteDropDownCard colorBlocksId={colorBlocksId} paletteEntity={paletteEntity} /> : null
       }
 
