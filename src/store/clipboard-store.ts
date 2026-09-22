@@ -3,6 +3,7 @@ import type { BlockEntity, ColorEntity, GradientEntity, GradientEntitySummary, P
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import type { Command } from "./command-manager-state";
+import { DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
 
 export const defaultInputColor = "#3b82f6";
 export const rootBlockId = -1;
@@ -39,6 +40,9 @@ export interface ClipboardStore {
   colorBlockSettingsRedoStack: Command[];
 
   history: Record<CommandScope, CommandHistory>;
+  
+  
+  sourceDnd: DraggableData | null;
 }
 const initialScopeHistory: CommandHistory = {
   undoStack: [],
@@ -61,11 +65,16 @@ export const useClipboardStore = create<ClipboardStore>()(immer((set) => ({
   colorCopyFormulaActiveId: null,
   colorBlockSettingsUndoStack: [],
   colorBlockSettingsRedoStack: [],
-
+  sourceDnd: null,
   history: {
     clipboard: { ...initialScopeHistory },
     colorBlockSettings: { ...initialScopeHistory },
   },
+
+  setDnd: (  sourceDnd: DraggableData | null) =>
+    set((state) => {
+      state.sourceDnd = sourceDnd;
+    }),
 
   reorderBlocks: (reorderedBlocks) =>
     set(state => {
