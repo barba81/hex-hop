@@ -7,13 +7,13 @@ import { RestrictToVerticalAxis } from '@dnd-kit/abstract/modifiers';
 import { DynamicIconMapper } from "@/infrastructure/utils/icon-mapper";
 import { addNewColorCopyBlock, flipColorCopyBlockVisibility, setColorCopyFormulaActive } from "../feature/color-settings-store-actions";
 import { Button } from "@/components/ui/button";
-import { BaseOutlineDndBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
+import { BaseOutlineBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
 import { DragDots } from "@/components/drag-and-drop/drag-dots";
 
 const ColorBlockPreview = () => {
     const backgroundCss = defaultInputColor;
 
-    return <BaseOutlineDndBlock>
+    return <BaseOutlineBlock>
         <div className={`w-full  flex justify-between overflow-hidden bg-background  `}>
             <div className={` w-10  bg-checkerboard`}>
                 <div className="w-full h-full" style={{
@@ -30,7 +30,7 @@ const ColorBlockPreview = () => {
             </div>
 
         </div>
-    </BaseOutlineDndBlock>
+    </BaseOutlineBlock>
 }
 
 export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFormula, index: number }) => {

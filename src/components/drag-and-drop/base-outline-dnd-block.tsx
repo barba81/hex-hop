@@ -10,11 +10,13 @@ type BaseOutlineBlockParams = {
     block: GradientEntity | ColorEntity | PaletteEntity,
     children: ReactNode;
 };
-const disabledLogic = (block: GradientEntity | ColorEntity | PaletteEntity) => {
-    return block.kind === 'palette' ? false : block.parentPaletteId !== null;
-}
 
 export const BaseDraggableOutlineBlock = ({ block, children }: BaseOutlineBlockParams) => {
+    const disabledLogic = () => {
+        return block.kind === 'palette' ? false : block.parentPaletteId !== null;
+    }
+
+
     const { ref: dragRef, handleRef } = useDraggable<DraggableData>({
         id: `drag:${block.blockId}`,
         data: {
@@ -27,7 +29,7 @@ export const BaseDraggableOutlineBlock = ({ block, children }: BaseOutlineBlockP
     const { isDropTarget, ref: dropRef } = useDroppable<DraggableData>({
         id: `darg:${block.blockId}`,
         collisionDetector: distanceDetector,
-        disabled: disabledLogic(block),
+        disabled: disabledLogic(),
         data: {
             blockId: block.blockId,
             kind: block.kind === 'palette' ? 'palette' : "block",
@@ -38,7 +40,7 @@ export const BaseDraggableOutlineBlock = ({ block, children }: BaseOutlineBlockP
     const setCombinedRef = (node: HTMLDivElement | null) => { dragRef(node); dropRef(node); };
 
     return <div ref={setCombinedRef}
-        className={`${isDropTarget && 'outline-5 outline-blue-500'} h-10 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden`}
+        className={`${isDropTarget && 'outline-1 outline-blue-500'} h-10 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden`}
     >
         <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer bg-background`}>
             <DragDots />
