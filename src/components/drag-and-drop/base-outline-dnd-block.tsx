@@ -17,13 +17,12 @@ export const BaseDraggableOutlineBlock = ({ block, children }: BaseOutlineBlockP
    
     const disabledLogic = () => {
         if (block.blockId === sourceDnd?.blockId) {
-            return true;
+            return false;
         }
 
         if (block.kind != 'palette' && sourceDnd?.kind === 'palette') return true;
         return block.kind === 'palette' ? false : block.parentPaletteId !== null;
     }
-
 
     const { ref: dragRef, handleRef } = useDraggable<DraggableData>({
         id: `drag:${block.blockId}`,
@@ -48,7 +47,7 @@ export const BaseDraggableOutlineBlock = ({ block, children }: BaseOutlineBlockP
     const setCombinedRef = (node: HTMLDivElement | null) => { dragRef(node); dropRef(node); };
 
     return <div ref={setCombinedRef}
-        className={`${isDropTarget && 'outline-1 outline-blue-500'} h-10 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden`}
+        className={`${isDropTarget  && block.blockId !== sourceDnd?.blockId && 'outline-1 outline-blue-500'} h-10 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden`}
     >
         <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer bg-background`}>
             <DragDots />
