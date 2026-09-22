@@ -3,8 +3,6 @@ import { rootBlockId, useClipboardStore } from "../../../store/clipboard-store";
 import { invoke } from "@tauri-apps/api/core";
 import type { BlockEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { useColorListCommands } from "@/store/command-manager-provider";
-import type { CollisionDetector} from "@dnd-kit/abstract";
-import { CollisionPriority, CollisionType } from "@dnd-kit/abstract";
 
 export interface DraggableData {
   blockId: number;

@@ -22,7 +22,7 @@ const ColorInput = () => {
           handleOnChange(e.target.value);
         }}
       />
-      {isColorValid ? <InputGroupAddon align="inline-end" className="border-l px-2 text-sm ">{colorFormat}</InputGroupAddon> : null
+      {isColorValid ? <InputGroupAddon align="inline-end" className=" px-2 text-sm ">{colorFormat}</InputGroupAddon> : null
       }
     </InputGroup>
   );

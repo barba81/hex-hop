@@ -1,81 +1,63 @@
 import { useDraggable, useDroppable } from "@dnd-kit/react";
+import type { ColorEntity, GradientEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import type { ReactNode } from "react";
-
-import type {
-    ColorEntity,
-    GradientEntity,
-    PaletteEntity,
-} from "@/infrastructure/models/entity";
-import { distanceDetector } from "./distance-detector";
 import { DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
+import { distanceDetector } from "./distance-detector";
 import { DragDots } from "./drag-dots";
 
-type Block = GradientEntity | ColorEntity | PaletteEntity;
 
-type BaseOutlineBlockProps = {
-    block?: Block;
+type BaseOutlineBlockParams = {
+    block: GradientEntity | ColorEntity | PaletteEntity,
     children: ReactNode;
 };
+const disabledLogic = (block: GradientEntity | ColorEntity | PaletteEntity) => {
+    return block.kind === 'palette' ? false : block.parentPaletteId !== null;
+}
 
-const getDndData = (block: Block): DraggableData => ({
-    blockId: block.blockId,
-    kind: block.kind === "palette" ? "palette" : "block",
-    palette: block.kind === "palette"
-        ? block.id
-        : block.parentPaletteId,
-});
-
-const isDropDisabled = (block: Block) => {
-    return block.kind === "palette"
-        ? false
-        : block.parentPaletteId !== null;
-};
-
-export const BaseOutlineDndBlock = ({
-    block,
-    children,
-}: BaseOutlineBlockProps) => {
-    const enabled = block !== undefined;
-
-    const dndData = block ? getDndData(block) : undefined;
-
+export const BaseDraggableOutlineBlock = ({ block, children }: BaseOutlineBlockParams) => {
     const { ref: dragRef, handleRef } = useDraggable<DraggableData>({
-        id: block ? `drag:${block.blockId}` : "drag:empty",
-        disabled: !enabled,
-        data: dndData,
+        id: `drag:${block.blockId}`,
+        data: {
+            blockId: block.blockId,
+            kind: block.kind === 'palette' ? 'palette' : "block",
+            palette: block.kind === 'palette' ? block.id : block.parentPaletteId
+        }
     });
 
     const { isDropTarget, ref: dropRef } = useDroppable<DraggableData>({
-        id: block ? `drop:${block.blockId}` : "drop:empty",
+        id: `darg:${block.blockId}`,
         collisionDetector: distanceDetector,
-        disabled: !enabled || isDropDisabled(block),
-        data: dndData,
+        disabled: disabledLogic(block),
+        data: {
+            blockId: block.blockId,
+            kind: block.kind === 'palette' ? 'palette' : "block",
+            palette: block.kind === 'palette' ? block.id : block.parentPaletteId
+        }
     });
 
-    const setCombinedRef = (node: HTMLDivElement | null) => {
-        dragRef(node);
-        dropRef(node);
-    };
+    const setCombinedRef = (node: HTMLDivElement | null) => { dragRef(node); dropRef(node); };
 
-    return (
-        <div
-            ref={setCombinedRef}
-            className={[
-                "h-10 w-full shrink-0 relative flex flex-row items-stretch",
-                "rounded-md outline-1 overflow-hidden",
-                isDropTarget && "outline-5 outline-blue-500",
-            ]
-                .filter(Boolean)
-                .join(" ")}
-        >
-            <div
-                ref={enabled ? handleRef : undefined}
-                className="flex items-center justify-center shrink-0 cursor-pointer bg-background"
-            >
-                <DragDots />
-            </div>
-
-            {children}
+    return <div ref={setCombinedRef}
+        className={`${isDropTarget && 'outline-5 outline-blue-500'} h-10 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden`}
+    >
+        <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer bg-background`}>
+            <DragDots />
         </div>
-    );
+
+        {children}
+    </div>
+}
+
+type BaseOutlineBlockEmptyParams = {
+    children: ReactNode;
 };
+export const BaseOutlineBlock = ({ children }: BaseOutlineBlockEmptyParams) => {
+    return <div
+        className={`h-10 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden`}
+    >
+        <div className={`flex items-center justify-center shrink-0 cursor-pointer bg-background`}>
+            <DragDots />
+        </div>
+        {children}
+    </div>
+}
