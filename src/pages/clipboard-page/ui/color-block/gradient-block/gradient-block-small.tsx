@@ -4,7 +4,7 @@ import { Copy, Pen, Trash2 } from "lucide-react";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
 import { setEditBlock } from "@/pages/clipboard-page/features/clipboard-store-actions";
 import { deleteGradientBlock } from "@/pages/clipboard-page/features/delete-block";
-import { BaseOutlineBlock } from "../base-outline-block";
+import { BaseDragableOutlineBlock } from "../base-outline-block";
 
 type GradientBoxParams = {
     gradientEntity: GradientEntity 
@@ -17,7 +17,7 @@ export const GradientBlockSmall = ({ gradientEntity: gradientEntity }: GradientB
     return (
         <ContextMenu>
             <ContextMenuTrigger>
-                <BaseOutlineBlock block={gradientEntity}>
+                <BaseDragableOutlineBlock block={gradientEntity}>
                     <div className="w-full flex justify-between overflow-hidden bg-background">
                         <div className="w-9 bg-checkerboard">
                             <div
@@ -36,7 +36,7 @@ export const GradientBlockSmall = ({ gradientEntity: gradientEntity }: GradientB
                             </div>
                         </div>
                     </div>
-                </BaseOutlineBlock>
+                </BaseDragableOutlineBlock>
             </ContextMenuTrigger>
             <ContextMenuContent className="w-48">
                 <ContextMenuItem className="gap-2" onClick={() => setEditBlock(gradientEntity.blockId)}>

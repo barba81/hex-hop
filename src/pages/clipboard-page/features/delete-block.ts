@@ -3,11 +3,6 @@ import type { BlockEntity, ColorEntity } from "@/infrastructure/models/entity";
 import { useClipboardStore } from "@/store/clipboard-store";
 import { invoke } from "@tauri-apps/api/core";
 
-
-
-
-
-
 export const deleteColorBlock = async (blockId: number, colorId: number, paletteId: number | null) => {
     await invoke("soft_delete_block", { blockId: blockId });
     useClipboardStore.getState().deleteBlock(blockId, paletteId);

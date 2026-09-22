@@ -6,7 +6,7 @@ import { setEditBlock } from "../../../features/clipboard-store-actions";
 import { duplicateBlock } from "../../../features/duplicate-block";
 import { deleteColorBlock } from "../../../features/delete-block";
 import { BlenderIcon, CSSIcon, TailwindIcon } from "@/components/icons/custom-icon";
-import { BaseOutlineBlock } from "../base-outline-block";
+import { BaseDragableOutlineBlock } from "../base-outline-block";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity
@@ -18,7 +18,7 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
 
     return <ContextMenu>
         <ContextMenuTrigger>
-            <BaseOutlineBlock block={colorEntity}>
+            <BaseDragableOutlineBlock block={colorEntity}>
 
                 <div className={`w-full  flex justify-between overflow-hidden bg-background  `}>
                     <div className={` w-9  bg-checkerboard`}>
@@ -39,7 +39,7 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
 
                 </div>
 
-            </BaseOutlineBlock>
+            </BaseDragableOutlineBlock>
 
 
         </ContextMenuTrigger>
