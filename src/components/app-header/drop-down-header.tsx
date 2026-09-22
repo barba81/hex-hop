@@ -58,9 +58,6 @@ const ICON_MAP = {
     shortLabel: "Palette",
   },
 
-
-
-
   "/settings": {
     icon: (
       <Settings
@@ -113,12 +110,10 @@ const DropDownHeader = () => {
         <DropdownMenuGroup>
           {Object.entries(ICON_MAP).map(([path, { icon, label }]) => (
             <DropdownMenuItem
-              key={path}
-              onClick={() => navigate(path)}
-              className="flex items-center gap-2 px-2 py-1.5 text-sm cursor-pointer rounded-sm "
+            key={path}
+            onClick={() => navigate(path)}
             >
-              <span>{icon}</span>
-
+             {icon}
               <span className="text-xs font-medium">
                 {label}
               </span>

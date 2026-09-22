@@ -17,21 +17,24 @@ const HeaderDropdown = () => {
         </Button>
       </DropdownMenuTrigger>
 
-      <DropdownMenuContent className="min-w-40   border-stone-700">
+      <DropdownMenuContent className="w-auto">
         <DropdownMenuGroup>
           <DropdownMenuItem
-            className="  cursor-pointer "
             onClick={() => addNewPalette([])}
           >
-            <Palette /> Add new palette
+            <Palette  />
+            <span className="text-xs font-medium">
+              Add new palette
+            </span>
           </DropdownMenuItem>
-          <DropdownMenuSeparator />
           <DropdownMenuItem
             variant="destructive"
-            className="  cursor-pointer "
             onClick={() => deleteClipboard()}
           >
-            <Trash2 /> Clear All
+            <Trash2  />
+            <span className="text-xs font-medium">
+              Clear All
+            </span>
           </DropdownMenuItem>
 
         </DropdownMenuGroup>
@@ -74,7 +77,7 @@ const SearchBar = () => {
     <InputGroup className="h-6 text-xs">
       <InputGroupInput placeholder="Search..." className="h-full py-0 text-xs" />
       <InputGroupAddon className="w-6">
-        <Search  />
+        <Search />
       </InputGroupAddon>
       <InputGroupAddon align="inline-end" className="text-xs">
         12 results
