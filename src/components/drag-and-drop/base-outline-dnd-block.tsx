@@ -16,11 +16,15 @@ export const BaseDraggableOutlineBlock = ({ block, children }: BaseOutlineBlockP
     const sourceDnd = useClipboardStore(state => state.sourceDnd);
    
     const disabledLogic = () => {
-        if (block.blockId === sourceDnd?.blockId) {
-            return false;
-        }
+        // cannot drop on same blok
+        if (block.blockId === sourceDnd?.blockId) {return true;}
+        // cannot drop palette in block
+        if (block.kind != 'palette' && sourceDnd?.kind === 'palette') return true; 
+        // cannot drop palette in palette
+        if (block.kind === 'palette' && sourceDnd?.kind === 'palette') return true;
+        // cannot drop block in parent palette
+        if (block.kind === 'palette' && block.id === sourceDnd?.palette) return true; 
 
-        if (block.kind != 'palette' && sourceDnd?.kind === 'palette') return true;
         return block.kind === 'palette' ? false : block.parentPaletteId !== null;
     }
 
@@ -47,7 +51,7 @@ export const BaseDraggableOutlineBlock = ({ block, children }: BaseOutlineBlockP
     const setCombinedRef = (node: HTMLDivElement | null) => { dragRef(node); dropRef(node); };
 
     return <div ref={setCombinedRef}
-        className={`${isDropTarget  && block.blockId !== sourceDnd?.blockId && 'outline-1 outline-blue-500'} h-10 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden`}
+        className={`${isDropTarget   && 'outline-1 outline-blue-500'} h-10 rounded-md w-full shrink-0 relative flex flex-row items-stretch outline-1 overflow-hidden`}
     >
         <div ref={handleRef} className={`flex items-center justify-center shrink-0 cursor-pointer bg-background`}>
             <DragDots />
