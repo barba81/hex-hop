@@ -2,7 +2,6 @@ import { DragDropProvider } from "@dnd-kit/react";
 import { rootBlockId, useClipboardStore } from "@/store/clipboard-store";
 import EmptyClipboardPage from "../empty-clipboard-page";
 import React from "react";
-import DroppableLine from "../../../../components/custom/drag-and-drop/drop-line";
 import { handleDragEnd } from "../../features/darg-and-drop";
 import ColorBlockEdit from "./color-block/color-block-edit";
 import PaletteBlockEdit from "./palett-block/palette-block-edit";
@@ -10,6 +9,7 @@ import GradientBlockEdit from "./gradient-block/gradient-block-edit";
 import ColorBlockSmallBoxes from "./color-block/color-block-small-boxes";
 import PaletteBlock from "./palett-block/palette-block";
 import GradientBlockSmall from "./gradient-block/gradient-block-small";
+import DroppableLine from "@/components/drag-and-drop/drop-line";
 
 
 type ColorBoxParams = {

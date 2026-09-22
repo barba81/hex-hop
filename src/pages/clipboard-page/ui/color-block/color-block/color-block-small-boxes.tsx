@@ -6,7 +6,7 @@ import { setEditBlock } from "../../../features/clipboard-store-actions";
 import { duplicateBlock } from "../../../features/duplicate-block";
 import { deleteColorBlock } from "../../../features/delete-block";
 import { BlenderIcon, CSSIcon, TailwindIcon } from "@/components/icons/custom-icon";
-import { BaseOutlineDndBlock } from "../../../../../components/custom/drag-and-drop/base-outline-dnd-block";
+import { BaseOutlineDndBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity

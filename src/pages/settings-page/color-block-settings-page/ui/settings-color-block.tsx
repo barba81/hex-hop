@@ -1,4 +1,3 @@
-import { DragDots } from "@/components/custom/drag-and-drop/drag-dots"
 import { defaultInputColor, useClipboardStore } from "../../../../store/clipboard-store";
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import { useSortable } from '@dnd-kit/react/sortable';
@@ -8,14 +7,15 @@ import { RestrictToVerticalAxis } from '@dnd-kit/abstract/modifiers';
 import { DynamicIconMapper } from "@/infrastructure/utils/icon-mapper";
 import { addNewColorCopyBlock, flipColorCopyBlockVisibility, setColorCopyFormulaActive } from "../feature/color-settings-store-actions";
 import { Button } from "@/components/ui/button";
-import { BaseOutlineDndBlock } from "@/components/custom/drag-and-drop/base-outline-dnd-block";
+import { BaseOutlineDndBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
+import { DragDots } from "@/components/drag-and-drop/drag-dots";
 
 const ColorBlockPreview = () => {
     const backgroundCss = defaultInputColor;
 
     return <BaseOutlineDndBlock>
         <div className={`w-full  flex justify-between overflow-hidden bg-background  `}>
-            <div className={` w-9  bg-checkerboard`}>
+            <div className={` w-10  bg-checkerboard`}>
                 <div className="w-full h-full" style={{
                     backgroundColor: backgroundCss
                 }} />

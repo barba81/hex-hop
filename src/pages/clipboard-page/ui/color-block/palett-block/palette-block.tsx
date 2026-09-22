@@ -7,9 +7,9 @@ import React from "react";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Button } from "@/components/ui/button";
 import { setEditBlock, togglePalette } from "@/pages/clipboard-page/features/clipboard-store-actions";
-import DroppableLine from "@/components/custom/drag-and-drop/drop-line";
 import InnerBlock from "./inner-block";
-import { BaseOutlineDndBlock } from "../../../../../components/custom/drag-and-drop/base-outline-dnd-block";
+import DroppableLine from "@/components/drag-and-drop/drop-line";
+import { BaseOutlineDndBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity
