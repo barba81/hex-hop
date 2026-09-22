@@ -1,6 +1,7 @@
 import { useDroppable } from "@dnd-kit/react";
 import { distanceDetector } from "./distance-detector";
 import { DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
+import { useClipboardStore } from "@/store/clipboard-store";
 
 const DroppableLine = ({
   id,
@@ -11,9 +12,18 @@ const DroppableLine = ({
   id: string;
   palette: number | null;
 }) => {
+  const sourceDnd = useClipboardStore(state => state.sourceDnd);
+     const disabledLogic = () => {
+        // cannot drop pallet in droppable palette
+        if (palette != null && sourceDnd?.kind==='palette') return true;
+        return false; 
+    }
+ 
   const { isDropTarget, ref } = useDroppable<DraggableData>({
+
     id,
     collisionDetector: distanceDetector,
+    disabled: disabledLogic(),
     data: {
       blockId,
       kind: "droppable",
