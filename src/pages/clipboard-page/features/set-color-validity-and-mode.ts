@@ -1,5 +1,6 @@
 import { formatHex8, parse } from "culori";
 import { setFormat, setIsColorValid, setLastValidColor } from "./clipboard-store-actions";
+import { useClipboardStore } from "../store/clipboard-store";
 
 export const setColorValidityAndMode = (stringColor: string) => {
     const cleanColorName = stringColor.trim().toLowerCase();
@@ -9,7 +10,10 @@ export const setColorValidityAndMode = (stringColor: string) => {
         setIsColorValid(false);
         return ;
     }
-    setIsColorValid(true);
-    setFormat( color.mode );
-    setLastValidColor(formatHex8(color));
+    
+   useClipboardStore.setState((state) => {
+      state.isColorValid = true;
+      state.colorFormat = color.mode;
+      state.validColor = formatHex8(color);
+    });
 }

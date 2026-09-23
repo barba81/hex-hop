@@ -24,10 +24,7 @@ export const initData = async () => {
   ]);
 
   useHexHopStore.setState((state) => {
-    if (allCopyFormulas.length > 0) {
-      state.colorCopyFormulaActiveId = allCopyFormulas[0].id;
-    }
-    state.copyList = allCopyFormulas;
+    state.copyCopyFormulas = allCopyFormulas;
     state.blockIds[rootBlockId] = blocks.map((block) => block.blockId);
     state.blocksById = {};
 

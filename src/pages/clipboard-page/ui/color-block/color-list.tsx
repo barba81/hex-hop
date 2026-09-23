@@ -10,6 +10,7 @@ import ColorBlockSmallBoxes from "./color-block/color-block-small-boxes";
 import PaletteBlock from "./palette-block/palette-block";
 import GradientBlockSmall from "./gradient-block/gradient-block-small";
 import DroppableLine from "@/components/drag-and-drop/drop-line";
+import { useClipboardStore } from "../../store/clipboard-store";
 
 
 type ColorBoxParams = {
@@ -21,7 +22,7 @@ const Block = ({ blockId }: ColorBoxParams) => {
     state => state.blocksById[blockId]
   );
 
-  const isEditing = useHexHopStore(
+  const isEditing = useClipboardStore(
     state => state.editBlockId === blockId
   );
 
@@ -50,7 +51,7 @@ const Block = ({ blockId }: ColorBoxParams) => {
 
 const ColorList = () => {
   const colorBlocks = useHexHopStore(state => state.blockIds[rootBlockId]);
-  const setDnd = useHexHopStore(state => state.setDnd);
+  const setDnd = useClipboardStore(state => state.setDnd);
 
   return (
     <>

@@ -4,7 +4,6 @@ import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import type { Command } from "./command-manager-state";
 
-export const defaultInputColor = "#3b82f6";
 export const rootBlockId = -1;
 
 export type CommandScope = 'clipboard' | 'colorBlockSettings';
@@ -18,8 +17,7 @@ export interface HexHopStore {
   blockIds: Record<number, number[]>;
   blocksById: Record<number, BlockEntity>;
   history: Record<CommandScope, CommandHistory>;
-  copyList: ColorCopyFormula[],
-  colorCopyFormulaActiveId: string | null,
+  copyCopyFormulas: ColorCopyFormula[],
 }
 const initialScopeHistory: CommandHistory = {
   undoStack: [],
@@ -29,9 +27,9 @@ const initialScopeHistory: CommandHistory = {
 export const useHexHopStore = create<HexHopStore>()(immer((set) => ({
   blockIds: { [rootBlockId]: [] },
   blocksById: {},
-  copyList: [],
   
-  colorCopyFormulaActiveId: null,
+  copyCopyFormulas: [],
+
   history: {
     clipboard: { ...initialScopeHistory },
     colorBlockSettings: { ...initialScopeHistory },

@@ -62,7 +62,7 @@ const EmpytColorFormula = () => {
 }
 
 export const ColorFormulaCreator = () => {
-    const copyBlock = useHexHopStore((state) => state.copyList.find(x => x.id === state.colorCopyFormulaActiveId));
+    const copyBlock = useHexHopStore((state) => state.copyCopyFormulas.find(x => x.id === state.colorCopyFormulaActiveId));
 
     return (
         <>

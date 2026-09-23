@@ -31,7 +31,7 @@ interface ColorBlockCopyListProps {
 
 
 export const ColorBlockCopyList = (param: ColorBlockCopyListProps) => {
-    const copyList = useHexHopStore((state) => state.copyList);
+    const copyList = useHexHopStore((state) => state.copyCopyFormulas);
 
     return <div className="flex items-start flex-wrap  gap-1 w-30 px-1">
         {copyList.map((copyBlock) => {

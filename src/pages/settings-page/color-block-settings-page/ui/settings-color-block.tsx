@@ -1,4 +1,4 @@
-import { defaultInputColor, useHexHopStore } from "../../../../store/hex-hop-store";
+import { useHexHopStore } from "../../../../store/hex-hop-store";
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import { useSortable } from '@dnd-kit/react/sortable';
 import { ChevronDown, ChevronUp, Eye, EyeClosed, Plus } from "lucide-react";
@@ -9,6 +9,7 @@ import { addNewColorCopyBlock, flipColorCopyBlockVisibility, setColorCopyFormula
 import { Button } from "@/components/ui/button";
 import { BaseOutlineBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
 import { DragDots } from "@/components/drag-and-drop/drag-dots";
+import { defaultInputColor } from "@/infrastructure/data/const-data";
 
 const ColorBlockPreview = () => {
     const backgroundCss = defaultInputColor;
@@ -90,7 +91,7 @@ const ColorFormatHeader = () => {
 }
 
 export const ColorFormat = () => {
-    const copyList = useHexHopStore((state) => state.copyList);
+    const copyList = useHexHopStore((state) => state.copyCopyFormulas);
     return <div className=" px-1   bg-accent   rounded-md">
         <ColorFormatHeader />
         <div className="flex flex-col gap-1.5 pt-2 overflow-x-scroll h-40 px-1">

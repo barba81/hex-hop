@@ -3,11 +3,12 @@ import { useHexHopStore } from "@/store/hex-hop-store";
 import { setInputColor } from "../../features/clipboard-store-actions";
 import { setColorValidityAndMode } from "../../features/set-color-validity-and-mode";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
+import { useClipboardStore } from "../../store/clipboard-store";
 
 const ColorInput = () => {
-  const colorFormat = useHexHopStore((state) => state.colorFormat);
-  const isColorValid = useHexHopStore((state) => state.isColorValid);
-  const inputColor = useHexHopStore((state) => state.inputColor);
+  const colorFormat = useClipboardStore((state) => state.colorFormat);
+  const isColorValid = useClipboardStore((state) => state.isColorValid);
+  const inputColor = useClipboardStore((state) => state.inputColor);
 
   const handleOnChange = (color: string) => {
     setInputColor(color);

@@ -2,6 +2,7 @@ import type { ColorCopyFormula} from "@/infrastructure/models/color-copy-list";
 import { defaultColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import { useHexHopStore } from "@/store/hex-hop-store";
 import { invoke } from "@tauri-apps/api/core";
+import { useSettingStore } from "../../store/settings-store";
 
 export const addNewColorCopyBlock = async () => {
   const newCopyFormula = await invoke<ColorCopyFormula>("create_color_copy_formula", {
@@ -9,12 +10,12 @@ export const addNewColorCopyBlock = async () => {
   });
 
   useHexHopStore.setState((state) => {
-    state.copyList.push(newCopyFormula);
+    state.copyCopyFormulas.push(newCopyFormula);
   });
 };
 
 export const flipColorCopyBlockVisibility = async (copyBlockId: string) => {
-  const currentList = useHexHopStore.getState().copyList;
+  const currentList = useHexHopStore.getState().copyCopyFormulas;
   const oldBlock = currentList.find((x) => x.id === copyBlockId);
 
   if (!oldBlock) return;
@@ -24,9 +25,9 @@ export const flipColorCopyBlockVisibility = async (copyBlockId: string) => {
   });
 
   useHexHopStore.setState((state) => {
-    const index = state.copyList.findIndex((x) => x.id === copyBlockId);
+    const index = state.copyCopyFormulas.findIndex((x) => x.id === copyBlockId);
     if (index !== -1) {
-      state.copyList[index] = newCopyFormula;
+      state.copyCopyFormulas[index] = newCopyFormula;
     }
   });
 };
@@ -37,12 +38,12 @@ export const deleteColorCopyBlock = async (copyBlockId: string) => {
   });
 
   useHexHopStore.setState((state) => {
-    state.copyList = state.copyList.filter((x) => x.id !== copyBlockId);
+    state.copyCopyFormulas = state.copyCopyFormulas.filter((x) => x.id !== copyBlockId);
   });
 };
 
 export const setColorCopyFormulaActive = async (copyBlockId: string) => {
-  useHexHopStore.setState((state) => {
+  useSettingStore.setState((state) => {
      state.colorCopyFormulaActiveId = copyBlockId;
   });
 };

@@ -30,13 +30,11 @@ export const deleteBlockFromStore = (blockId: number, paletteId: number | null) 
   });
 };
 
-// --- Refactored Main Function ---
 
 export const addNewColorToClipboard = async (
   inputColor: string, 
   paletteId: number | null
 ) => {
-    debugger
   // 1. Process color inputs & invoke creation
   const colorData = colorStringToData(inputColor);
   const name = await getSmartColorName(colorData);
