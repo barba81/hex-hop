@@ -1,5 +1,5 @@
 import { DragDropProvider } from "@dnd-kit/react";
-import { rootBlockId, useHexHopStore } from "@/store/hexhop-store";
+import { rootBlockId, useHexHopStore } from "@/store/hex-hop-store";
 import EmptyClipboardPage from "../empty-clipboard-page";
 import React from "react";
 import { DraggableData, handleDragEnd } from "../../features/darg-and-drop";

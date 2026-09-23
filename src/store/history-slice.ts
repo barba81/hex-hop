@@ -1,4 +1,4 @@
-import { CommandHistory } from "./hexhop-store";
+import { CommandHistory } from "./hex-hop-store";
 
 export type CommandScope = 'clipboard' | 'colorBlockSettings';
 

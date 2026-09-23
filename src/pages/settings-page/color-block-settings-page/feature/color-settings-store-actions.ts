@@ -1,6 +1,6 @@
 import type { ColorCopyFormula} from "@/infrastructure/models/color-copy-list";
 import { defaultColorCopyFormula } from "@/infrastructure/models/color-copy-list";
-import { useHexHopStore } from "@/store/hexhop-store";
+import { useHexHopStore } from "@/store/hex-hop-store";
 import { invoke } from "@tauri-apps/api/core";
 
 export const addNewColorCopyBlock = async () => {

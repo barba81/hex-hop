@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
 import { distanceDetector } from "./distance-detector";
 import { DragDots } from "./drag-dots";
-import { useHexHopStore } from "@/store/hexhop-store";
+import { useHexHopStore } from "@/store/hex-hop-store";
 
 
 type BaseOutlineBlockParams = {

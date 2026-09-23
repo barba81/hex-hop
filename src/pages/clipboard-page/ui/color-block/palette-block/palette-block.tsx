@@ -1,5 +1,5 @@
 import type { PaletteEntity } from "@/infrastructure/models/entity";
-import { useHexHopStore } from "@/store/hexhop-store";
+import { useHexHopStore } from "@/store/hex-hop-store";
 import { ChevronDown, Pen, Trash2 } from "lucide-react";
 import { coloBackground } from "@/infrastructure/utils/color-format-changer";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";

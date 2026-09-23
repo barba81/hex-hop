@@ -1,6 +1,6 @@
 import { useColorListCommands } from "@/store/command-manager-provider";
 import type { BlockEntity, ColorEntity } from "@/infrastructure/models/entity";
-import { useHexHopStore } from "@/store/hexhop-store";
+import { useHexHopStore } from "@/store/hex-hop-store";
 import { invoke } from "@tauri-apps/api/core";
 
 export const deleteColorBlock = async (blockId: number, colorId: number, paletteId: number | null) => {

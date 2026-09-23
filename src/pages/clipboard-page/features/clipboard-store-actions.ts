@@ -1,4 +1,4 @@
-import { useHexHopStore } from "@/store/hexhop-store";
+import { useHexHopStore } from "@/store/hex-hop-store";
 
 export const setLastValidColor = (newColor: string) => {
   useHexHopStore.setState((state) => {

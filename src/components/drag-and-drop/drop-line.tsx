@@ -1,7 +1,7 @@
 import { useDroppable } from "@dnd-kit/react";
 import { distanceDetector } from "./distance-detector";
 import { DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
-import { useHexHopStore } from "@/store/hexhop-store";
+import { useHexHopStore } from "@/store/hex-hop-store";
 
 const DroppableLine = ({
   id,

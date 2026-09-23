@@ -1,7 +1,7 @@
 
 import type { ColorEntity, GradientEntitySummary, PaletteEntitySummary } from "@/infrastructure/models/entity"
 import { invoke } from "@tauri-apps/api/core";
-import { useHexHopStore } from "../../../store/hexhop-store";
+import { useHexHopStore } from "../../../store/hex-hop-store";
 import { useColorListCommands } from "@/store/command-manager-provider";
 
 export const updateColorBlock = async (newEntity: ColorEntity, oldEntity: ColorEntity) => {

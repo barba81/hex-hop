@@ -1,5 +1,5 @@
 import { addNewColorToClipboard } from "./add-block";
-import { useHexHopStore } from "@/store/hexhop-store";
+import { useHexHopStore } from "@/store/hex-hop-store";
 import { setColorValidityAndMode } from "./set-color-validity-and-mode";
 
 export const eyeDropperColorPicker = async () => {

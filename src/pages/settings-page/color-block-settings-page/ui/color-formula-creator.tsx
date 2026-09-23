@@ -1,5 +1,5 @@
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
-import { useHexHopStore } from "@/store/hexhop-store";
+import { useHexHopStore } from "@/store/hex-hop-store";
 import { Edit2, FormInput, Trash2 } from "lucide-react";
 import { deleteColorCopyBlock } from "../feature/color-settings-store-actions";
 

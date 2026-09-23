@@ -1,4 +1,4 @@
-import { defaultInputColor, useHexHopStore } from "../../../../store/hexhop-store";
+import { defaultInputColor, useHexHopStore } from "../../../../store/hex-hop-store";
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import { useSortable } from '@dnd-kit/react/sortable';
 import { ChevronDown, ChevronUp, Eye, EyeClosed, Plus } from "lucide-react";

@@ -1,5 +1,5 @@
 import { invoke } from "@tauri-apps/api/core";
-import { useHexHopStore, rootBlockId } from "@/store/hexhop-store";
+import { useHexHopStore, rootBlockId } from "@/store/hex-hop-store";
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import type { BlockEntity } from "@/infrastructure/models/entity";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
