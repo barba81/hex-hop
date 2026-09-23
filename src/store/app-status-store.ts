@@ -1,12 +1,5 @@
-import { create, StateCreator } from "zustand";
+import { create } from "zustand";
 
-
-type ImmerStateCreator<T> = StateCreator<
-  T,
-  [["zustand/immer", never], never],
-  [],
-  T
->;
 
 export interface AppStatusSlice {
   appInFocus: boolean;

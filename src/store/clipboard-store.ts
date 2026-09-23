@@ -21,7 +21,6 @@ export interface ClipboardStore {
   blocksById: Record<number, BlockEntity>;
 
   editBlockId: number | null;
-
   openPalette: Record<number, boolean>;
 
   validColor: string;
@@ -29,15 +28,9 @@ export interface ClipboardStore {
   isColorValid: boolean;
   colorFormat: string;
 
-  clipBoardUndoStack: Command[];
-  clipBoardRedoStack: Command[];
-
   copyList: ColorCopyFormula[],
   colorCopyFormulaActiveId: string | null,
   
-  colorBlockSettingsUndoStack: Command[];
-  colorBlockSettingsRedoStack: Command[];
-
   history: Record<CommandScope, CommandHistory>;
   
   // DND helper 
@@ -62,8 +55,6 @@ export const useClipboardStore = create<ClipboardStore>()(immer((set) => ({
   
   copyList: [],
   colorCopyFormulaActiveId: null,
-  colorBlockSettingsUndoStack: [],
-  colorBlockSettingsRedoStack: [],
   sourceDnd: null,
   history: {
     clipboard: { ...initialScopeHistory },
