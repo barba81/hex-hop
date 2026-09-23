@@ -14,7 +14,7 @@ const HeaderBar = () => {
       data-tauri-drag-region
       className=" flex w-full justify-between items-center gap-2 p-1 select-none bg-background dark:background "
     >
-      {platform === "macos" && <MacHeaderButton />}
+      {platform === "macos" && <MacHeaderButton disabledButtons={['maximize']}  />}
       <div className={cn(" flex justify-center gap-1",
         platform !== "macos" && "flex-row-reverse"
       )} >

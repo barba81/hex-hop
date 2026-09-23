@@ -2,45 +2,82 @@ import { cn } from "@/lib/utils";
 import { useHexHopStore } from "@/store/store-bundle";
 import { Button } from "@base-ui/react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
-import { Minus, X } from "lucide-react";
+import { Maximize2, Minus, X } from "lucide-react";
 
-const disabledBacgorund = "bg-[#e6e6e6] dark:bg-[#3d3d3d] ";
+const disabledBackground = "bg-[#e6e6e6] dark:bg-[#3d3d3d]";
+const commonButtonStyles = "cursor-pointer w-4 h-4 border-[0.5px] rounded-full flex items-center justify-center";
 
-const MacHeaderButton = () => {
+interface MacHeaderButtonProps {
+  /** Array of buttons to disable permanently (e.g., ["minimize", "maximize"]) */
+  disabledButtons?: ("close" | "minimize" | "maximize")[];
+}
+
+const MacHeaderButton = ({ disabledButtons = [] }: MacHeaderButtonProps) => {
   const appWindow = getCurrentWindow();
   const appInFocus = useHexHopStore((state) => state.appInFocus);
+
+  const isCloseDisabled = !appInFocus || disabledButtons.includes("close");
+  const isMinimizeDisabled = !appInFocus || disabledButtons.includes("minimize");
+  const isMaximizeDisabled = !appInFocus || disabledButtons.includes("maximize");
+
   return (
     <div className="flex gap-2 px-3 items-center group">
+      {/* Close Button */}
       <Button
         onClick={() => appWindow.close()}
-        disabled={!appInFocus}
+        disabled={isCloseDisabled}
         className={cn(
-          "cursor-pointer w-4 h-4  border-[0.5px] rounded-full flex items-center justify-center",
-          appInFocus
-            ? "bg-[#ff5f57] border-[#e0443e]"
-            : disabledBacgorund,
+          commonButtonStyles,
+          !isCloseDisabled ? "bg-[#ff5f57] border-[#e0443e]" : disabledBackground,
         )}
       >
-        <span className="hidden group-hover:block text-[8px] text-[#4c0000] font-bold">
-          <X size={9} strokeWidth={4} />
+        <span
+          className={cn(
+            "items-center justify-center text-[#4c0000]",
+            isCloseDisabled ? "hidden" : "hidden group-hover:flex",
+          )}
+        >
+          <X size={8} strokeWidth={4} />
         </span>
       </Button>
 
+      {/* Minimize Button */}
       <Button
         onClick={() => appWindow.minimize()}
+        disabled={isMinimizeDisabled}
         className={cn(
-          "cursor-pointer w-4 h-4 rounded-full flex items-center justify-center",
-          appInFocus
-            ? " bg-[#febc2e] border-[#d8a124]"
-            : disabledBacgorund,
+          commonButtonStyles,
+          !isMinimizeDisabled ? "bg-[#febc2e] border-[#d8a124]" : disabledBackground,
         )}
       >
-        <span className="hidden group-hover:block text-[10px] text-[#5c3c00] font-bold mb-0.5">
-          <Minus size={9} strokeWidth={4}  />
+        <span
+          className={cn(
+            "items-center justify-center text-[#5c3c00]",
+            isMinimizeDisabled ? "hidden" : "hidden group-hover:flex",
+          )}
+        >
+          <Minus size={8} strokeWidth={4} />
         </span>
       </Button>
 
-      <Button className="w-4 h-4 rounded-full border-[0.5px] border-[#d1d1d1] dark:border-[#2b2b2b] flex items-center justify-center cursor-default"></Button>
+      {/* Maximize / Expand Button */}
+      <Button
+        onClick={() => appWindow.toggleMaximize()}
+        disabled={isMaximizeDisabled}
+        className={cn(
+          commonButtonStyles,
+          !isMaximizeDisabled ? "bg-[#28c840] border-[#1aab29]" : disabledBackground,
+        )}
+      >
+        <span
+          className={cn(
+            "items-center justify-center text-[#006000]",
+            isMaximizeDisabled ? "hidden" : "hidden group-hover:flex",
+          )}
+        >
+          <Maximize2 size={7} strokeWidth={4} />
+        </span>
+      </Button>
     </div>
   );
 };
