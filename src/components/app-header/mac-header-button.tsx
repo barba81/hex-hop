@@ -1,5 +1,5 @@
 import { cn } from "@/lib/utils";
-import { useHexHopStore } from "@/store/store-bundle";
+import { useAppInfoStore } from "@/store/app-status-store";
 import { Button } from "@base-ui/react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { Maximize2, Minus, X } from "lucide-react";
@@ -13,7 +13,7 @@ interface MacHeaderButtonProps {
 
 const MacHeaderButton = ({ disabledButtons = [] }: MacHeaderButtonProps) => {
   const appWindow = getCurrentWindow();
-  const appInFocus = useHexHopStore((state) => state.appInFocus);
+  const appInFocus = useAppInfoStore((state) => state.appInFocus);
 
   const isCloseDisabled = !appInFocus || disabledButtons.includes("close");
   const isMinimizeDisabled = !appInFocus || disabledButtons.includes("minimize");

@@ -1,4 +1,4 @@
-import { StateCreator } from "zustand";
+import { create, StateCreator } from "zustand";
 
 
 type ImmerStateCreator<T> = StateCreator<
@@ -15,7 +15,8 @@ export interface AppStatusSlice {
   setleUnSavedApp: (saved: boolean) => void;
 }
 
-export const appStateSlice: ImmerStateCreator<AppStatusSlice> = (set) => ({
+
+export const useAppInfoStore =  create<AppStatusSlice>()((set) => ({
   appInFocus: false,
   unSavedState: false,
   setAppInFocus: (focus) =>
@@ -26,4 +27,4 @@ export const appStateSlice: ImmerStateCreator<AppStatusSlice> = (set) => ({
     set((state) => {
       return {...state, unSavedState: saved };
     }),
-});
+}));

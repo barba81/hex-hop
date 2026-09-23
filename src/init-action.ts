@@ -4,7 +4,7 @@ import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import type { BlockEntity } from "@/infrastructure/models/entity";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
-import { useHexHopStore } from "./store/store-bundle";
+import { useAppInfoStore } from "./store/app-status-store";
 
 let isInitialized = false;
 
@@ -46,6 +46,6 @@ export const initData = async () => {
 
 const initAppEvent = async () => {
   const appWindow = getCurrentWebviewWindow();
-  await appWindow.listen("tauri://focus", () => {useHexHopStore.getState().setAppInFocus(true);});
-  await appWindow.listen("tauri://blur", () => {useHexHopStore.getState().setAppInFocus(false);});
+  await appWindow.listen("tauri://focus", () => {useAppInfoStore.getState().setAppInFocus(true);});
+  await appWindow.listen("tauri://blur", () => {useAppInfoStore.getState().setAppInFocus(false);});
 };
