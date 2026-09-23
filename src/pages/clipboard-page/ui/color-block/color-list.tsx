@@ -1,5 +1,5 @@
 import { DragDropProvider } from "@dnd-kit/react";
-import { rootBlockId, useClipboardStore } from "@/store/clipboard-store";
+import { rootBlockId, useHexHopStore } from "@/store/hexhop-store";
 import EmptyClipboardPage from "../empty-clipboard-page";
 import React from "react";
 import { DraggableData, handleDragEnd } from "../../features/darg-and-drop";
@@ -17,11 +17,11 @@ type ColorBoxParams = {
 };
 
 const Block = ({ blockId }: ColorBoxParams) => {
-  const block = useClipboardStore(
+  const block = useHexHopStore(
     state => state.blocksById[blockId]
   );
 
-  const isEditing = useClipboardStore(
+  const isEditing = useHexHopStore(
     state => state.editBlockId === blockId
   );
 
@@ -49,8 +49,8 @@ const Block = ({ blockId }: ColorBoxParams) => {
 
 
 const ColorList = () => {
-  const colorBlocks = useClipboardStore(state => state.blockIds[rootBlockId]);
-  const setDnd = useClipboardStore(state => state.setDnd);
+  const colorBlocks = useHexHopStore(state => state.blockIds[rootBlockId]);
+  const setDnd = useHexHopStore(state => state.setDnd);
 
   return (
     <>

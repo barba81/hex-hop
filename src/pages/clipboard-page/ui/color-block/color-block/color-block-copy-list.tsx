@@ -1,6 +1,6 @@
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list"
 import type { ColorEntity } from "@/infrastructure/models/entity"
-import { useClipboardStore } from "@/store/clipboard-store"
+import { useHexHopStore } from "@/store/hexhop-store"
 
 
 interface ColorBlockCopyProps {
@@ -31,7 +31,7 @@ interface ColorBlockCopyListProps {
 
 
 export const ColorBlockCopyList = (param: ColorBlockCopyListProps) => {
-    const copyList = useClipboardStore((state) => state.copyList);
+    const copyList = useHexHopStore((state) => state.copyList);
 
     return <div className="flex items-start flex-wrap  gap-1 w-30 px-1">
         {copyList.map((copyBlock) => {

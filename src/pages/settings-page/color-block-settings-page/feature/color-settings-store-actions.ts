@@ -1,6 +1,6 @@
 import type { ColorCopyFormula} from "@/infrastructure/models/color-copy-list";
 import { defaultColorCopyFormula } from "@/infrastructure/models/color-copy-list";
-import { useClipboardStore } from "@/store/clipboard-store";
+import { useHexHopStore } from "@/store/hexhop-store";
 import { invoke } from "@tauri-apps/api/core";
 
 export const addNewColorCopyBlock = async () => {
@@ -8,13 +8,13 @@ export const addNewColorCopyBlock = async () => {
     colorCopyFormula: { ...defaultColorCopyFormula, id: crypto.randomUUID() },
   });
 
-  useClipboardStore.setState((state) => {
+  useHexHopStore.setState((state) => {
     state.copyList.push(newCopyFormula);
   });
 };
 
 export const flipColorCopyBlockVisibility = async (copyBlockId: string) => {
-  const currentList = useClipboardStore.getState().copyList;
+  const currentList = useHexHopStore.getState().copyList;
   const oldBlock = currentList.find((x) => x.id === copyBlockId);
 
   if (!oldBlock) return;
@@ -23,7 +23,7 @@ export const flipColorCopyBlockVisibility = async (copyBlockId: string) => {
     colorCopyFormula: { ...oldBlock, enabled: !oldBlock.enabled },
   });
 
-  useClipboardStore.setState((state) => {
+  useHexHopStore.setState((state) => {
     const index = state.copyList.findIndex((x) => x.id === copyBlockId);
     if (index !== -1) {
       state.copyList[index] = newCopyFormula;
@@ -36,13 +36,13 @@ export const deleteColorCopyBlock = async (copyBlockId: string) => {
     colorFormulaId: copyBlockId,
   });
 
-  useClipboardStore.setState((state) => {
+  useHexHopStore.setState((state) => {
     state.copyList = state.copyList.filter((x) => x.id !== copyBlockId);
   });
 };
 
 export const setColorCopyFormulaActive = async (copyBlockId: string) => {
-  useClipboardStore.setState((state) => {
+  useHexHopStore.setState((state) => {
      state.colorCopyFormulaActiveId = copyBlockId;
   });
 };

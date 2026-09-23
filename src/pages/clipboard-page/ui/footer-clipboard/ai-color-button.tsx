@@ -1,10 +1,10 @@
 import { Astroid } from "lucide-react";
-import { useClipboardStore } from "@/store/clipboard-store";
+import { useHexHopStore } from "@/store/hexhop-store";
 import { addNewColorToClipboard } from "../../features/add-block";
 import { Button } from "@/components/ui/button";
 
 const AiColorButton = () => {
-    const inputColor = useClipboardStore((state) => state.inputColor);
+    const inputColor = useHexHopStore((state) => state.inputColor);
 
     return (
         <Button size='icon-sm' variant='outline'

@@ -1,5 +1,5 @@
 import type { DragEndEvent } from "@dnd-kit/react";
-import { rootBlockId, useClipboardStore } from "../../../store/clipboard-store";
+import { rootBlockId, useHexHopStore } from "../../../store/hexhop-store";
 import { invoke } from "@tauri-apps/api/core";
 import type { BlockEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { useColorListCommands } from "@/store/command-manager-provider";
@@ -39,7 +39,7 @@ export const handleDragEnd = (event: DragEndEvent,) => {
 const blockInDroppable = async (sourceData: DraggableData, targetData: DraggableData) => {
   const draggedId = sourceData.blockId;
   const targetId = targetData.blockId;
-  const state = useClipboardStore.getState();
+  const state = useHexHopStore.getState();
   const draggedParent = sourceData.kind === 'palette' ? null : sourceData.palette;
 
   const targetParent = targetData.palette;
@@ -73,7 +73,7 @@ const blockInDroppable = async (sourceData: DraggableData, targetData: Draggable
     newTargetBlocks.splice(newTargetIndex + 1, 0, draggedId);
   }
 
-  const updatedState = useClipboardStore.getState();
+  const updatedState = useHexHopStore.getState();
 
 
   const { ids: id, oldIds: oldIds1 } = reorderHelper(newDraggedBlocks, updatedState.blocksById);
@@ -123,7 +123,7 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
   // you can create palette only in root 
   if (targetParentId !== null) return;
 
-  const state = useClipboardStore.getState();
+  const state = useHexHopStore.getState();
 
   const draggedColorBlocks = state.blockIds[draggedParentId ?? rootBlockId];
   const targetColorBlocks = state.blockIds[targetParentId ?? rootBlockId];
@@ -159,7 +159,7 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
   targetBlocks.splice(targetIx, 0, paletteEntity.blockId);
 
   // THIS IS SHIT
-  const updateState = useClipboardStore.getState();
+  const updateState = useHexHopStore.getState();
 
   const { ids: id1, oldIds: oldIds1 } = reorderHelper(sourceBlocks, updateState.blocksById);
   const { ids: id2, oldIds: oldIds2 } = reorderHelper(targetBlocks, updateState.blocksById);
@@ -186,7 +186,7 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
       await invoke("update_blocks_parent", { paletteId: targetParentId, blockIds: [targetBlockId] });
       await invoke("update_block_order", { reorderBlocks: oldReorderBlocks });
 
-      useClipboardStore.getState().deleteBlock(paletteEntity.blockId, null);
+      useHexHopStore.getState().deleteBlock(paletteEntity.blockId, null);
       state.reorderBlocks([
         { blockId: root, paletteId: null },
         { blockId: oldSourceBlocks, paletteId: draggedParentId },
@@ -220,7 +220,7 @@ const blockInPalette = async (sourceData: DraggableData, targetData: DraggableDa
 
   if (draggedPalette === targetPalette) return;
 
-  const state = useClipboardStore.getState();
+  const state = useHexHopStore.getState();
 
   const draggedColorBlocks = state.blockIds[draggedPalette ?? rootBlockId];
   const targetColorBlocks = state.blockIds[targetPalette ?? rootBlockId] ?? [];
@@ -236,7 +236,7 @@ const blockInPalette = async (sourceData: DraggableData, targetData: DraggableDa
 
   newTargetColorBlocks.push(draggedId);
 
-  const updatedState = useClipboardStore.getState();
+  const updatedState = useHexHopStore.getState();
 
   const { ids: id, oldIds: oldIds1 } = reorderHelper(newTargetColorBlocks, updatedState.blocksById);
   const { ids: id2, oldIds: oldIds2 } = reorderHelper(newDraggedBlocks, updatedState.blocksById);

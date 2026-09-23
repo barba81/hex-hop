@@ -5,12 +5,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import "@/globals.css";
-import { useClipboardStore } from "@/store/clipboard-store";
+import { useHexHopStore } from "@/store/hexhop-store";
 import { setInputColor } from "../../features/clipboard-store-actions";
 import { setColorValidityAndMode } from "../../features/set-color-validity-and-mode";
 
 const PreviewColorBox = () => {
-  const currentColor = useClipboardStore(x => x.validColor);
+  const currentColor = useHexHopStore(x => x.validColor);
 
   const handleOnChange = (color: string) => {
     setInputColor(color);

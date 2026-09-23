@@ -1,4 +1,4 @@
-import { useClipboardStore } from "@/store/clipboard-store";
+import { useHexHopStore } from "@/store/hexhop-store";
 import ColorBlockEdit from "../color-block/color-block-edit";
 import GradientBlockSmall from "../gradient-block/gradient-block-small";
 import ColorBlock from "../color-block/color-block-small-boxes";
@@ -8,11 +8,11 @@ type ColorBoxParams = {
 };
 
 const InnerBlock = ({ blockId }: ColorBoxParams) => {
-    const block = useClipboardStore(
+    const block = useHexHopStore(
         state => state.blocksById[blockId]
     );
 
-    const isEditing = useClipboardStore(
+    const isEditing = useHexHopStore(
         state => state.editBlockId === blockId
     );
 

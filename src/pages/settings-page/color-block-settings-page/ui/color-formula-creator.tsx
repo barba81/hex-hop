@@ -1,5 +1,5 @@
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
-import { useClipboardStore } from "@/store/clipboard-store";
+import { useHexHopStore } from "@/store/hexhop-store";
 import { Edit2, FormInput, Trash2 } from "lucide-react";
 import { deleteColorCopyBlock } from "../feature/color-settings-store-actions";
 
@@ -62,7 +62,7 @@ const EmpytColorFormula = () => {
 }
 
 export const ColorFormulaCreator = () => {
-    const copyBlock = useClipboardStore((state) => state.copyList.find(x => x.id === state.colorCopyFormulaActiveId));
+    const copyBlock = useHexHopStore((state) => state.copyList.find(x => x.id === state.colorCopyFormulaActiveId));
 
     return (
         <>

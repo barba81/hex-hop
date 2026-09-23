@@ -1,7 +1,7 @@
 
 import type { ColorEntity, GradientEntitySummary, PaletteEntitySummary } from "@/infrastructure/models/entity"
 import { invoke } from "@tauri-apps/api/core";
-import { useClipboardStore } from "../../../store/clipboard-store";
+import { useHexHopStore } from "../../../store/hexhop-store";
 import { useColorListCommands } from "@/store/command-manager-provider";
 
 export const updateColorBlock = async (newEntity: ColorEntity, oldEntity: ColorEntity) => {
@@ -10,16 +10,16 @@ export const updateColorBlock = async (newEntity: ColorEntity, oldEntity: ColorE
     await invoke("update_color", { color: { ...newEntity } });
     const colorEntity = await invoke<ColorEntity>("get_color", { colorId: newEntity.id });
 
-    useClipboardStore.getState().updateBlock(colorEntity);
+    useHexHopStore.getState().updateBlock(colorEntity);
 
     useColorListCommands.getState().push({
         async undo() {
             const colorEntity = await invoke<ColorEntity>("update_color", { color: { ...oldEntityCopy } });
-            useClipboardStore.getState().updateBlock(colorEntity);
+            useHexHopStore.getState().updateBlock(colorEntity);
         },
         async redo() {
             const colorEntity =  await invoke<ColorEntity>("update_color", { color: { ...newEntity } });
-            useClipboardStore.getState().updateBlock(colorEntity);
+            useHexHopStore.getState().updateBlock(colorEntity);
         },
     });
 }
@@ -28,16 +28,16 @@ export const updatePaletteBlock = async (newEntity: PaletteEntitySummary, oldEnt
     const oldEntityCopy = { ...oldEntity };
 
     const paletteEntity = await invoke<PaletteEntitySummary>("update_palette_summary", { paletteUpdate: { ...newEntity } });
-    useClipboardStore.getState().updateBlockSummary(paletteEntity);
+    useHexHopStore.getState().updateBlockSummary(paletteEntity);
 
     useColorListCommands.getState().push({
         async undo() {
             const paletteEntity = await invoke<PaletteEntitySummary>("update_palette_summary", { paletteUpdate: { ...oldEntityCopy } });
-            useClipboardStore.getState().updateBlockSummary(paletteEntity);
+            useHexHopStore.getState().updateBlockSummary(paletteEntity);
         },
         async redo() {
             const paletteEntity = await invoke<PaletteEntitySummary>("update_palette_summary", { paletteUpdate: { ...newEntity } });
-            useClipboardStore.getState().updateBlockSummary(paletteEntity);
+            useHexHopStore.getState().updateBlockSummary(paletteEntity);
         },
     });
 }
@@ -46,16 +46,16 @@ export const updateGradientBlock = async (newEntity: GradientEntitySummary, oldE
     const oldEntityCopy = { ...oldEntity };
 
     const gradientSummary = await invoke<GradientEntitySummary>("update_gradient_summary", { gradientRequest: { ...newEntity } });
-    useClipboardStore.getState().updateBlockSummary(gradientSummary);
+    useHexHopStore.getState().updateBlockSummary(gradientSummary);
 
     useColorListCommands.getState().push({
         async undo() {
             const gradientSummary = await invoke<GradientEntitySummary>("update_gradient_summary", { gradientRequest: { ...oldEntityCopy } });
-            useClipboardStore.getState().updateBlockSummary(gradientSummary);
+            useHexHopStore.getState().updateBlockSummary(gradientSummary);
         },
         async redo() {
             const gradientSummary = await invoke<GradientEntitySummary>("update_gradient_summary", { gradientRequest: { ...newEntity } });
-            useClipboardStore.getState().updateBlockSummary(gradientSummary);
+            useHexHopStore.getState().updateBlockSummary(gradientSummary);
         },
     });
 

@@ -1,11 +1,11 @@
 import { Check } from "lucide-react";
-import { useClipboardStore } from "@/store/clipboard-store";
+import { useHexHopStore } from "@/store/hexhop-store";
 import { addNewColorToClipboard } from "../../features/add-block";
 import { Button } from "@/components/ui/button";
 
 const AddColorButton = () => {
-  const isColorValid = useClipboardStore((state) => state.isColorValid);
-  const inputColor = useClipboardStore((state) => state.inputColor);
+  const isColorValid = useHexHopStore((state) => state.isColorValid);
+  const inputColor = useHexHopStore((state) => state.inputColor);
 
 
   return (

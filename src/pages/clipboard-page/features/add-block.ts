@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
 import type { ColorEntity, PaletteEntity } from "@/infrastructure/models/entity";
-import { rootBlockId, useClipboardStore } from "@/store/clipboard-store";
+import { rootBlockId, useHexHopStore } from "@/store/hexhop-store";
 import { getSmartColorName } from "./get-color-name";
 import { useColorListCommands } from "@/store/command-manager-provider";
 import { colorStringToData } from "@/infrastructure/utils/color-format-changer";
@@ -8,7 +8,7 @@ import { pushCommand } from "@/infrastructure/history/history";
 
 
 export const pushBlockToStore = (colorEntity: ColorEntity, targetId: number | null) => {
-  useClipboardStore.setState((state) => ({
+  useHexHopStore.setState((state) => ({
     blocksById: { ...state.blocksById, [colorEntity.blockId]: colorEntity },
     blockIds: {
       ...state.blockIds,
@@ -18,7 +18,7 @@ export const pushBlockToStore = (colorEntity: ColorEntity, targetId: number | nu
 };
 
 export const deleteBlockFromStore = (blockId: number, paletteId: number | null) => {
-  useClipboardStore.setState((state) => {
+  useHexHopStore.setState((state) => {
     const { [blockId]: _, ...remainingBlocks } = state.blocksById;
     return {
       blocksById: remainingBlocks,
@@ -88,18 +88,18 @@ export const addNewColorToClipboard = async (
 
 export const addNewPalette = async (blockIds: number[]) => {
     const paletteEntity = await invoke<PaletteEntity>("create_palette", { palette: { name: "New palette", blockIds } });
-    useClipboardStore.getState().pushPalette(paletteEntity, blockIds);
+    useHexHopStore.getState().pushPalette(paletteEntity, blockIds);
     const blockId = paletteEntity.blockId;
     const paletteId = paletteEntity.id;
 
       useColorListCommands.getState().push({
         async undo() {
             await invoke("soft_delete_block", { blockId });
-            useClipboardStore.getState().deleteBlock(blockId, null);
+            useHexHopStore.getState().deleteBlock(blockId, null);
         },
         async redo() {
             const entity = await invoke<PaletteEntity>("restore_palette", { paletteId:paletteId});
-            useClipboardStore.getState().pushPalette(entity, blockIds);
+            useHexHopStore.getState().pushPalette(entity, blockIds);
         },
     });
 }

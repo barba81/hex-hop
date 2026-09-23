@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import { DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
 import { distanceDetector } from "./distance-detector";
 import { DragDots } from "./drag-dots";
-import { useClipboardStore } from "@/store/clipboard-store";
+import { useHexHopStore } from "@/store/hexhop-store";
 
 
 type BaseOutlineBlockParams = {
@@ -13,7 +13,7 @@ type BaseOutlineBlockParams = {
 };
 
 export const BaseDraggableOutlineBlock = ({ block, children }: BaseOutlineBlockParams) => {
-    const sourceDnd = useClipboardStore(state => state.sourceDnd);
+    const sourceDnd = useHexHopStore(state => state.sourceDnd);
    
     const disabledLogic = () => {
         // cannot drop on same blok

@@ -1,4 +1,4 @@
-import { defaultInputColor, useClipboardStore } from "../../../../store/clipboard-store";
+import { defaultInputColor, useHexHopStore } from "../../../../store/hexhop-store";
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import { useSortable } from '@dnd-kit/react/sortable';
 import { ChevronDown, ChevronUp, Eye, EyeClosed, Plus } from "lucide-react";
@@ -35,7 +35,7 @@ const ColorBlockPreview = () => {
 
 export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFormula, index: number }) => {
     const { ref } = useSortable({ id: copyBlock.id, index: index, modifiers: [RestrictToVerticalAxis], });
-    const colorCopyFormulaActiveId = useClipboardStore((state) => state.colorCopyFormulaActiveId);
+    const colorCopyFormulaActiveId = useHexHopStore((state) => state.colorCopyFormulaActiveId);
 
     return <div onClick={() => setColorCopyFormulaActive(copyBlock.id)} ref={ref}
 
@@ -90,7 +90,7 @@ const ColorFormatHeader = () => {
 }
 
 export const ColorFormat = () => {
-    const copyList = useClipboardStore((state) => state.copyList);
+    const copyList = useHexHopStore((state) => state.copyList);
     return <div className=" px-1   bg-accent   rounded-md">
         <ColorFormatHeader />
         <div className="flex flex-col gap-1.5 pt-2 overflow-x-scroll h-40 px-1">

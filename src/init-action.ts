@@ -1,5 +1,5 @@
 import { invoke } from "@tauri-apps/api/core";
-import { useClipboardStore, rootBlockId } from "@/store/clipboard-store";
+import { useHexHopStore, rootBlockId } from "@/store/hexhop-store";
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import type { BlockEntity } from "@/infrastructure/models/entity";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
@@ -23,7 +23,7 @@ export const initData = async () => {
     invoke<ColorCopyFormula[]>("get_all_color_copy_formula"),
   ]);
 
-  useClipboardStore.setState((state) => {
+  useHexHopStore.setState((state) => {
     if (allCopyFormulas.length > 0) {
       state.colorCopyFormulaActiveId = allCopyFormulas[0].id;
     }
