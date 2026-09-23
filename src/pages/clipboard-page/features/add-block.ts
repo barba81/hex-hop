@@ -102,5 +102,8 @@ export const addNewPalette = async (blockIds: number[]) => {
             useClipboardStore.getState().pushPalette(entity, blockIds);
         },
     });
-
 }
+
+
+
+

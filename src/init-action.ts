@@ -3,6 +3,8 @@ import { useClipboardStore, rootBlockId } from "@/store/clipboard-store";
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import type { BlockEntity } from "@/infrastructure/models/entity";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
+import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
+import { useHexHopStore } from "./store/store-bundle";
 
 let isInitialized = false;
 
@@ -11,12 +13,11 @@ export const initializeApp = async () => {
   isInitialized = true;
 
   await moveWindow(Position.TopRight);
-  await initBlocks();
+  await initData();
+  await initAppEvent();
 };
 
-
-
-export const initBlocks = async () => {
+export const initData = async () => {
   const [blocks, allCopyFormulas] = await Promise.all([
     invoke<BlockEntity[]>("load_state"),
     invoke<ColorCopyFormula[]>("get_all_color_copy_formula"),
@@ -41,4 +42,10 @@ export const initBlocks = async () => {
       }
     }
   });
+};
+
+const initAppEvent = async () => {
+  const appWindow = getCurrentWebviewWindow();
+  await appWindow.listen("tauri://focus", () => {useHexHopStore.getState().setAppInFocus(true);});
+  await appWindow.listen("tauri://blur", () => {useHexHopStore.getState().setAppInFocus(false);});
 };

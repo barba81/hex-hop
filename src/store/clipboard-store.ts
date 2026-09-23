@@ -34,14 +34,13 @@ export interface ClipboardStore {
 
   copyList: ColorCopyFormula[],
   colorCopyFormulaActiveId: string | null,
-
   
   colorBlockSettingsUndoStack: Command[];
   colorBlockSettingsRedoStack: Command[];
 
   history: Record<CommandScope, CommandHistory>;
   
-  
+  // DND helper 
   sourceDnd: DraggableData | null;
 }
 const initialScopeHistory: CommandHistory = {

@@ -12,7 +12,6 @@ export interface DraggableData {
 
 export type ReorderBlock = { blockId: number, blockOrder: number };
 
-
 export const handleDragEnd = (event: DragEndEvent,) => {
   const { operation, canceled } = event;
 
