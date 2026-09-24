@@ -1,6 +1,5 @@
 import { EllipsisVertical, Palette, Redo, Trash2, Undo } from "lucide-react";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { useColorListCommands } from "@/store/command-manager-provider";
 import { Button } from "@/components/ui/button";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { Search } from "lucide-react"
@@ -47,29 +46,29 @@ const HeaderDropdown = () => {
 
 
 const DoUnDoArrows = () => {
-  const { undo, redo, canUndo, canRedo } = useColorListCommands();
+  // const { undo, redo, canUndo, canRedo } = useColorListCommands();
 
-  return (
-    <div className="flex gap-1 items-center justify-center">
-      <Button
-        size='icon-xs'
-        variant='outline'
-        disabled={!canUndo}
-        onClick={() => undo()}
-      >
-        <Undo />
-      </Button>
+  // return (
+  //   <div className="flex gap-1 items-center justify-center">
+  //     <Button
+  //       size='icon-xs'
+  //       variant='outline'
+  //       disabled={!canUndo}
+  //       onClick={() => undo()}
+  //     >
+  //       <Undo />
+  //     </Button>
 
-      <Button
-        size='icon-xs'
-        variant='outline'
-        disabled={!canRedo}
-        onClick={() => redo()}
-      >
-        <Redo />
-      </Button>
-    </div>
-  );
+  //     <Button
+  //       size='icon-xs'
+  //       variant='outline'
+  //       disabled={!canRedo}
+  //       onClick={() => redo()}
+  //     >
+  //       <Redo />
+  //     </Button>
+  //   </div>
+  // );
 };
 
 const SearchBar = () => {
@@ -89,7 +88,7 @@ const SearchBar = () => {
 const HeaderColorList = () => {
   return (
     <div className="w-full  flex gap-2  items-center justify-between bg-background p-1  ">
-      <DoUnDoArrows />
+      {/* <DoUnDoArrows /> */}
       <SearchBar />
       <HeaderDropdown />
     </div>

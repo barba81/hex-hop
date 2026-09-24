@@ -1,10 +1,10 @@
 import { invoke } from "@tauri-apps/api/core";
 import type { ColorEntity, PaletteEntity } from "@/infrastructure/models/entity";
-import { rootBlockId, useHexHopStore } from "@/store/hex-hop-store";
+import { useHexHopStore } from "@/store/hex-hop-store";
 import { getSmartColorName } from "./get-color-name";
-import { useColorListCommands } from "@/store/command-manager-provider";
 import { colorStringToData } from "@/infrastructure/utils/color-format-changer";
 import { pushCommand } from "@/infrastructure/history/history";
+import { rootBlockId } from "@/infrastructure/data/const-data";
 
 
 export const pushBlockToStore = (colorEntity: ColorEntity, targetId: number | null) => {
@@ -86,20 +86,20 @@ export const addNewColorToClipboard = async (
 
 export const addNewPalette = async (blockIds: number[]) => {
     const paletteEntity = await invoke<PaletteEntity>("create_palette", { palette: { name: "New palette", blockIds } });
-    useHexHopStore.getState().pushPalette(paletteEntity, blockIds);
+    // useHexHopStore.getState().pushPalette(paletteEntity, blockIds);
     const blockId = paletteEntity.blockId;
     const paletteId = paletteEntity.id;
 
-      useColorListCommands.getState().push({
-        async undo() {
-            await invoke("soft_delete_block", { blockId });
-            useHexHopStore.getState().deleteBlock(blockId, null);
-        },
-        async redo() {
-            const entity = await invoke<PaletteEntity>("restore_palette", { paletteId:paletteId});
-            useHexHopStore.getState().pushPalette(entity, blockIds);
-        },
-    });
+    //   useColorListCommands.getState().push({
+    //     async undo() {
+    //         await invoke("soft_delete_block", { blockId });
+    //         useHexHopStore.getState().deleteBlock(blockId, null);
+    //     },
+    //     async redo() {
+    //         const entity = await invoke<PaletteEntity>("restore_palette", { paletteId:paletteId});
+    //         useHexHopStore.getState().pushPalette(entity, blockIds);
+    //     },
+    // });
 }
 
 

@@ -1,92 +1,134 @@
-import type { ColorCopyFormula} from "@/infrastructure/models/color-copy-list";
+import { rootBlockId } from "@/infrastructure/data/const-data";
+import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import type { BlockEntity } from "@/infrastructure/models/entity";
+import { StateCreator } from "zustand";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import type { Command } from "./command-manager-state";
+import { defaultInputColor } from "@/infrastructure/data/const-data";
+import { DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
 
-export const rootBlockId = -1;
+export type ImmerStateCreator<T, U = T> = StateCreator<
+  T,                                   // full combined store (what set/get see)
+  [["zustand/immer", never], never],
+  [],
+  U                                    // slice this creator actually returns
+>;
 
-export type CommandScope = 'clipboard' | 'colorBlockSettings';
-
-export interface CommandHistory {
-  undoStack: Command[];
-  redoStack: Command[];
+export interface ClipboardSlice {
+  openPalette: Record<string, unknown>;
+  sourceDnd: DraggableData | null;
+  editBlockId: string | null;
+  isColorValid: boolean;
+  validColor: string;
+  inputColor: string;
+  colorFormat: "RGB" | "HSL" | "HEX";
 }
 
-export interface HexHopStore {
+export const createClipboardSlice: ImmerStateCreator< AppStore, ClipboardSlice> = () => ({
+  openPalette: {},
+  sourceDnd: null,
+  editBlockId: null,
+  isColorValid: true,
+  validColor: defaultInputColor,
+  inputColor: defaultInputColor,
+  colorFormat: "RGB",
+});
+
+
+export interface HexHopSlice {
   blockIds: Record<number, number[]>;
   blocksById: Record<number, BlockEntity>;
-  history: Record<CommandScope, CommandHistory>;
-  copyCopyFormulas: ColorCopyFormula[],
+  copyCopyFormulas: ColorCopyFormula[];
 }
-const initialScopeHistory: CommandHistory = {
-  undoStack: [],
-  redoStack: [],
-};
 
-export const useHexHopStore = create<HexHopStore>()(immer((set) => ({
+export const createHexHopSlice: ImmerStateCreator<AppStore, HexHopSlice> = () => ({
   blockIds: { [rootBlockId]: [] },
   blocksById: {},
-  
   copyCopyFormulas: [],
+});
 
-  history: {
-    clipboard: { ...initialScopeHistory },
-    colorBlockSettings: { ...initialScopeHistory },
-  },
-})));
-  // // ADD BLOCK TO END
-  // pushBlock: (block: ColorEntity | GradientEntity, paletteId: number | null) =>
-  //   set((state) => {
-  //     state.blockIds[paletteId ?? rootBlockId].unshift(block.blockId);
-  //     state.blocksById[block.blockId] = block;
-  //   }),
 
-  // pushPalette: (palette: PaletteEntity, blockIds: number[]) =>
-  //   set((state) => {
-  //     state.blockIds[rootBlockId].unshift(palette.blockId);
-  //     state.blocksById[palette.blockId] = palette;
+export type AppStore = ClipboardSlice & HexHopSlice;
 
-  //     for (const blocId of blockIds) {
-  //       if (!state.blockIds[palette.id]) state.blockIds[palette.id] = [];
-  //       state.blockIds[palette.id].push(blocId);
-  //     }
-  //   }),
+export const useAppStore = create<AppStore>()(
+  immer((...a) => ({
+    ...createClipboardSlice(...a),
+    ...createHexHopSlice(...a),
+  })),
+);
 
-  // insertPalette: (palette: PaletteEntity, blockIds: number[], ix: number) =>
-  //   set((state) => {
-  //     state.blockIds[rootBlockId].splice(ix, 0, palette.blockId);
-  //     state.blocksById[palette.blockId] = palette;
 
-  //     for (const blocId of blockIds) {
-  //       if (!state.blockIds[palette.id]) state.blockIds[palette.id] = [];
-  //       state.blockIds[palette.id].push(blocId);
-  //     }
-  //   }),
+export const setDnd = () => {
+  useAppStore.setState((state) => {
+    state.sourceDnd
+    return {...state};
+  })
+}
 
-  // updateBlockSummary: (updateBlock: PaletteEntitySummary | GradientEntitySummary) =>
-  //   set((state) => {
-  //     const block = state.blocksById[updateBlock.blockId];
-  //     if (block) {
-  //       Object.assign(block, updateBlock);
-  //     }
-  //   }),
+// export interface HexHopStore {
+//   blockIds: Record<number, number[]>;
+//   blocksById: Record<number, BlockEntity>;
+//   copyCopyFormulas: ColorCopyFormula[],
+// }
 
-  // updateBlock: (updateBlock: BlockEntity) =>
-  //   set((state) => {
-  //     state.blocksById[updateBlock.blockId] = updateBlock;
-  //   }),
+// export const useHexHopStore = create<HexHopStore>()(immer((set) => ({
+//   blockIds: { [rootBlockId]: [] },
+//   blocksById: {},
 
-  // deleteBlock: (blockId, paletteId) =>
-  //   set(state => {
-  //     state.blockIds[paletteId ?? rootBlockId] = state.blockIds[paletteId ?? rootBlockId].filter(id => id !== blockId);
-  //     delete state.blocksById[blockId];
-  //   }),
+//   copyCopyFormulas: [],
+// })));
+// // ADD BLOCK TO END
+// pushBlock: (block: ColorEntity | GradientEntity, paletteId: number | null) =>
+//   set((state) => {
+//     state.blockIds[paletteId ?? rootBlockId].unshift(block.blockId);
+//     state.blocksById[block.blockId] = block;
+//   }),
 
-  // deleteClipboard: () =>
-  //   set((state) => {
-  //     for (const list of Object.values(state.blockIds)) {
-  //       list.length = 0;
-  //     }
-  //     state.blocksById = {}
-  //   }),
+// pushPalette: (palette: PaletteEntity, blockIds: number[]) =>
+//   set((state) => {
+//     state.blockIds[rootBlockId].unshift(palette.blockId);
+//     state.blocksById[palette.blockId] = palette;
+
+//     for (const blocId of blockIds) {
+//       if (!state.blockIds[palette.id]) state.blockIds[palette.id] = [];
+//       state.blockIds[palette.id].push(blocId);
+//     }
+//   }),
+
+// insertPalette: (palette: PaletteEntity, blockIds: number[], ix: number) =>
+//   set((state) => {
+//     state.blockIds[rootBlockId].splice(ix, 0, palette.blockId);
+//     state.blocksById[palette.blockId] = palette;
+
+//     for (const blocId of blockIds) {
+//       if (!state.blockIds[palette.id]) state.blockIds[palette.id] = [];
+//       state.blockIds[palette.id].push(blocId);
+//     }
+//   }),
+
+// updateBlockSummary: (updateBlock: PaletteEntitySummary | GradientEntitySummary) =>
+//   set((state) => {
+//     const block = state.blocksById[updateBlock.blockId];
+//     if (block) {
+//       Object.assign(block, updateBlock);
+//     }
+//   }),
+
+// updateBlock: (updateBlock: BlockEntity) =>
+//   set((state) => {
+//     state.blocksById[updateBlock.blockId] = updateBlock;
+//   }),
+
+// deleteBlock: (blockId, paletteId) =>
+//   set(state => {
+//     state.blockIds[paletteId ?? rootBlockId] = state.blockIds[paletteId ?? rootBlockId].filter(id => id !== blockId);
+//     delete state.blocksById[blockId];
+//   }),
+
+// deleteClipboard: () =>
+//   set((state) => {
+//     for (const list of Object.values(state.blockIds)) {
+//       list.length = 0;
+//     }
+//     state.blocksById = {}
+//   }),

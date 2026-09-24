@@ -1,5 +1,4 @@
-import { useColorListCommands } from "@/store/command-manager-provider";
-import type { BlockEntity, ColorEntity } from "@/infrastructure/models/entity";
+import type { BlockEntity } from "@/infrastructure/models/entity";
 import { useHexHopStore } from "@/store/hex-hop-store";
 import { invoke } from "@tauri-apps/api/core";
 
@@ -7,34 +6,34 @@ export const deleteColorBlock = async (blockId: number, colorId: number, palette
     await invoke("soft_delete_block", { blockId: blockId });
     useHexHopStore.getState().deleteBlock(blockId, paletteId);
 
-    useColorListCommands.getState().push({
-        async undo() {
-            await invoke("restore_block", { blockId });
-            const entity = await invoke<ColorEntity>("get_color", { colorId: colorId });
-            useHexHopStore.getState().pushBlock(entity, null);
-        },
-        async redo() {
-            await invoke("soft_delete_block", { blockId: blockId });
-            useHexHopStore.getState().deleteBlock(blockId, paletteId);
-        },
-    });
+    // useColorListCommands.getState().push({
+    //     async undo() {
+    //         await invoke("restore_block", { blockId });
+    //         const entity = await invoke<ColorEntity>("get_color", { colorId: colorId });
+    //         useHexHopStore.getState().pushBlock(entity, null);
+    //     },
+    //     async redo() {
+    //         await invoke("soft_delete_block", { blockId: blockId });
+    //         useHexHopStore.getState().deleteBlock(blockId, paletteId);
+    //     },
+    // });
 }
 
 export const deleteGradientBlock = async (blockId: number, gradientId: number, paletteId: number | null) => {
     await invoke("soft_delete_block", { blockId: blockId });
     useHexHopStore.getState().deleteBlock(blockId, paletteId);
 
-    useColorListCommands.getState().push({
-        async undo() {
-            await invoke("restore_block", { blockId });
-            const entity = await invoke<ColorEntity>("get_gradient", { gradientId });
-            useHexHopStore.getState().pushBlock(entity, null);
-        },
-        async redo() {
-            await invoke("soft_delete_block", { blockId: blockId });
-            useHexHopStore.getState().deleteBlock(blockId, paletteId);
-        },
-    });
+    // useColorListCommands.getState().push({
+    //     async undo() {
+    //         await invoke("restore_block", { blockId });
+    //         const entity = await invoke<ColorEntity>("get_gradient", { gradientId });
+    //         useHexHopStore.getState().pushBlock(entity, null);
+    //     },
+    //     async redo() {
+    //         await invoke("soft_delete_block", { blockId: blockId });
+    //         useHexHopStore.getState().deleteBlock(blockId, paletteId);
+    //     },
+    // });
 }
 
 

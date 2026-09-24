@@ -4,28 +4,38 @@ import { setColorValidityAndMode } from "./set-color-validity-and-mode";
 
 export const eyeDropperColorPicker = async () => {
 
-    // mack implementation 
-    // const hexColor = await invoke<string | null>('pick_color');
+  // mack implementation 
+  // const hexColor = await invoke<string | null>('pick_color');
 
-    
-    if (!window.EyeDropper) {
-        return;
-    }
 
-    const eyeDropper = new window.EyeDropper();
+  if (!window.EyeDropper) {
+    return;
+  }
 
-    try {
-        const result = await eyeDropper.open();
-        const setInputColor = useHexHopStore.getState().setInputColor;
+  const eyeDropper = new window.EyeDropper();
 
-        setInputColor(result.sRGBHex);
-        setColorValidityAndMode(result.sRGBHex);
-        await addNewColorToClipboard(result.sRGBHex, null);
-
-      } catch (e) {
-        console.error(e);
-    }
+  try {
+    const result = await eyeDropper.open();
+  } catch (e) {
+    console.error(e);
+  }
 };
+const setInputColor = useHexHopStore.getState().setInputColor;
+
+useHexHopStore.setState((state) => {
+
+  return {
+    history: {
+
+    },
+  };
+});
+
+
+// setInputColor(result.sRGBHex);
+// setColorValidityAndMode(result.sRGBHex);
+// await addNewColorToClipboard(result.sRGBHex, null);
+
 
 
 declare global {
