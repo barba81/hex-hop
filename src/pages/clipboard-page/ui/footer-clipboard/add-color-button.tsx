@@ -1,5 +1,4 @@
 import { Check } from "lucide-react";
-import { useHexHopStore } from "@/store/hex-hop-store";
 import { addNewColorToClipboard } from "../../features/add-block";
 import { Button } from "@/components/ui/button";
 import { useClipboardStore } from "../../store/clipboard-store";

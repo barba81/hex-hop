@@ -1,5 +1,4 @@
 ;
-import { useHexHopStore } from "@/store/hex-hop-store";
 import { setInputColor } from "../../features/clipboard-store-actions";
 import { setColorValidityAndMode } from "../../features/set-color-validity-and-mode";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
