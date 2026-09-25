@@ -1,5 +1,5 @@
 import type { DragEndEvent } from "@dnd-kit/react";
-import {useHexHopStore } from "../../../store/hex-hop-store";
+import {useHexHopStore } from "../../../store/store";
 import { invoke } from "@tauri-apps/api/core";
 import type { BlockEntity, PaletteEntity } from "@/infrastructure/models/entity";
 

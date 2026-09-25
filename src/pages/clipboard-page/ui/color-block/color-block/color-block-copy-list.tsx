@@ -1,6 +1,6 @@
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list"
 import type { ColorEntity } from "@/infrastructure/models/entity"
-import { useHexHopStore } from "@/store/hex-hop-store"
+import { useHexHopStore } from "@/store/store"
 
 
 interface ColorBlockCopyProps {

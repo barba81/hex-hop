@@ -1,4 +1,4 @@
-import { useHexHopStore } from "@/store/hex-hop-store";
+import { useHexHopStore } from "@/store/store";
 import ColorBlockEdit from "../color-block/color-block-edit";
 import GradientBlockSmall from "../gradient-block/gradient-block-small";
 import ColorBlock from "../color-block/color-block-small-boxes";

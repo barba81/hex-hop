@@ -1,4 +1,4 @@
-import { useHexHopStore } from "../../../../store/hex-hop-store";
+import { useHexHopStore } from "../../../../store/store";
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import { useSortable } from '@dnd-kit/react/sortable';
 import { ChevronDown, ChevronUp, Eye, EyeClosed, Plus } from "lucide-react";

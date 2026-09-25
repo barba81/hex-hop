@@ -1,6 +1,5 @@
 import { create } from "zustand";
 
-
 export interface AppStatusSlice {
   appInFocus: boolean;
   unSavedStatus: boolean;

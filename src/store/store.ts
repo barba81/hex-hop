@@ -1,69 +1,25 @@
-import { rootBlockId } from "@/infrastructure/data/const-data";
-import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
-import type { BlockEntity } from "@/infrastructure/models/entity";
 import { StateCreator } from "zustand";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { defaultInputColor } from "@/infrastructure/data/const-data";
-import { DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
+import { ClipboardSlice, createClipboardSlice } from "@/pages/clipboard-page/store/clipboard-store";
+import { createHexHopSlice, GlobalSlice } from "./global-slice";
 
 export type ImmerStateCreator<T, U = T> = StateCreator<
-  T,                                   // full combined store (what set/get see)
+  T,                                  
   [["zustand/immer", never], never],
   [],
-  U                                    // slice this creator actually returns
+  U                                   
 >;
 
-export interface ClipboardSlice {
-  openPalette: Record<string, unknown>;
-  sourceDnd: DraggableData | null;
-  editBlockId: string | null;
-  isColorValid: boolean;
-  validColor: string;
-  inputColor: string;
-  colorFormat: "RGB" | "HSL" | "HEX";
-}
+export type AppStore = ClipboardSlice & GlobalSlice;
 
-export const createClipboardSlice: ImmerStateCreator< AppStore, ClipboardSlice> = () => ({
-  openPalette: {},
-  sourceDnd: null,
-  editBlockId: null,
-  isColorValid: true,
-  validColor: defaultInputColor,
-  inputColor: defaultInputColor,
-  colorFormat: "RGB",
-});
-
-
-export interface HexHopSlice {
-  blockIds: Record<number, number[]>;
-  blocksById: Record<number, BlockEntity>;
-  copyCopyFormulas: ColorCopyFormula[];
-}
-
-export const createHexHopSlice: ImmerStateCreator<AppStore, HexHopSlice> = () => ({
-  blockIds: { [rootBlockId]: [] },
-  blocksById: {},
-  copyCopyFormulas: [],
-});
-
-
-export type AppStore = ClipboardSlice & HexHopSlice;
-
-export const useAppStore = create<AppStore>()(
+export const useStore = create<AppStore>()(
   immer((...a) => ({
     ...createClipboardSlice(...a),
     ...createHexHopSlice(...a),
   })),
 );
 
-
-export const setDnd = () => {
-  useAppStore.setState((state) => {
-    state.sourceDnd
-    return {...state};
-  })
-}
 
 // export interface HexHopStore {
 //   blockIds: Record<number, number[]>;

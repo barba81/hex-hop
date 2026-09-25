@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
 import type { ColorEntity, PaletteEntity } from "@/infrastructure/models/entity";
-import { useHexHopStore } from "@/store/hex-hop-store";
+import { useHexHopStore } from "@/store/store";
 import { getSmartColorName } from "./get-color-name";
 import { colorStringToData } from "@/infrastructure/utils/color-format-changer";
 import { pushCommand } from "@/infrastructure/history/history";

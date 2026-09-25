@@ -1,5 +1,5 @@
-import type { HexHopStore, CommandScope} from "@/store/hex-hop-store";
-import { useHexHopStore } from "@/store/hex-hop-store";
+import type { HexHopStore, CommandScope} from "@/store/store";
+import { useHexHopStore } from "@/store/store";
 import type { Command } from "@/store/command-manager-state";
 
 const MAX_HISTORY = 50;

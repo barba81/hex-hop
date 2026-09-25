@@ -5,7 +5,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import "@/globals.css";
-import { useHexHopStore } from "@/store/hex-hop-store";
+import { useHexHopStore } from "@/store/store";
 import { setInputColor } from "../../features/clipboard-store-actions";
 import { setColorValidityAndMode } from "../../features/set-color-validity-and-mode";
 import { useClipboardStore } from "../../store/clipboard-store";
