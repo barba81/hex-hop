@@ -1,5 +1,5 @@
 import { addNewColorToClipboard } from "./add-block";
-import { useAppStore } from "@/store/store";
+import { useAppStore } from "@/store/app-store";
 import { setColorValidityAndMode } from "./set-color-validity-and-mode";
 
 export const eyeDropperColorPicker = async () => {

@@ -1,5 +1,5 @@
 import { defaultInputColor } from "@/infrastructure/data/const-data";
-import { AppStore, useAppStore } from "@/store/store";
+import { AppStore, useAppStore } from "@/store/app-store";
 import { DraggableData } from "../features/darg-and-drop";
 import { ImmerStateCreator } from "@/infrastructure/types";
 

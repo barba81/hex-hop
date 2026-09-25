@@ -1,11 +1,10 @@
 import { Astroid } from "lucide-react";
-import { useAppStore } from "@/store/store";
+import { useAppStore } from "@/store/app-store";
 import { addNewColorToClipboard } from "../../features/add-block";
 import { Button } from "@/components/ui/button";
-import { useClipboardStore } from "../../store/clipboard-store";
 
 const AiColorButton = () => {
-    const inputColor = useClipboardStore((state) => state.inputColor);
+    const inputColor = useAppStore((state) => state.inputColor);
 
     return (
         <Button size='icon-sm' variant='outline'

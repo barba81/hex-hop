@@ -1,5 +1,5 @@
 import type { PaletteEntity } from "@/infrastructure/models/entity";
-import { useAppStore } from "@/store/store";
+import { useAppStore } from "@/store/app-store";
 import { ChevronDown, Pen, Trash2 } from "lucide-react";
 import { coloBackground } from "@/infrastructure/utils/color-format-changer";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
@@ -10,7 +10,6 @@ import { setEditBlock, togglePalette } from "@/pages/clipboard-page/features/cli
 import InnerBlock from "./inner-block";
 import DroppableLine from "@/components/drag-and-drop/drop-line";
 import { BaseDraggableOutlineBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
-import { useClipboardStore } from "@/pages/clipboard-page/store/clipboard-store";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity
@@ -103,7 +102,7 @@ const PaletteDropDownCard = ({ paletteEntity, colorBlocksId }: PaletteDropDownCa
 
 const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
   const colorBlocksId = useAppStore(state => state.blockIds[paletteEntity.id]) ?? [];
-  const isOpen = useClipboardStore((state) => !!state.openPalette[paletteEntity.blockId]);
+  const isOpen = useAppStore((state) => !!state.openPalette[paletteEntity.blockId]);
 
   return <ContextMenu>
     <ContextMenuTrigger>

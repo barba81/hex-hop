@@ -1,11 +1,11 @@
 import { Check } from "lucide-react";
 import { addNewColorToClipboard } from "../../features/add-block";
 import { Button } from "@/components/ui/button";
-import { useClipboardStore } from "../../store/clipboard-store";
+import { useAppStore } from "@/store/app-store";
 
 const AddColorButton = () => {
-  const isColorValid = useClipboardStore((state) => state.isColorValid);
-  const inputColor = useClipboardStore((state) => state.inputColor);
+  const isColorValid = useAppStore((state) => state.isColorValid);
+  const inputColor = useAppStore((state) => state.inputColor);
 
   return (
     <Button size='icon-sm'

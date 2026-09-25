@@ -1,4 +1,4 @@
-import { useAppStore } from "@/store/store";
+import { useAppStore } from "@/store/app-store";
 
 export const setInputColor = (newColor: string) => {
   useAppStore.setState((state) => {

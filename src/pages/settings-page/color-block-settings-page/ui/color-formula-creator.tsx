@@ -1,5 +1,5 @@
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
-import { useAppStore } from "@/store/store";
+import { useAppStore } from "@/store/app-store";
 import { Edit2, FormInput, Trash2 } from "lucide-react";
 import { deleteColorCopyBlock } from "../feature/color-settings-store-actions";
 

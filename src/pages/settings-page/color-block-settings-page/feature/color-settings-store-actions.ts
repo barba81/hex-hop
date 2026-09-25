@@ -1,6 +1,6 @@
 import type { ColorCopyFormula} from "@/infrastructure/models/color-copy-list";
 import { defaultColorCopyFormula } from "@/infrastructure/models/color-copy-list";
-import { useAppStore } from "@/store/store";
+import { useAppStore } from "@/store/app-store";
 import { invoke } from "@tauri-apps/api/core";
 import { useSettingStore } from "../../store/settings-store";
 

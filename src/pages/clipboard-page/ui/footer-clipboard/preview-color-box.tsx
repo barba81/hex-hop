@@ -5,13 +5,12 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import "@/globals.css";
-import { useAppStore } from "@/store/store";
+import { useAppStore } from "@/store/app-store";
 import { setInputColor } from "../../features/clipboard-store-actions";
 import { setColorValidityAndMode } from "../../features/set-color-validity-and-mode";
-import { useClipboardStore } from "../../store/clipboard-store";
 
 const PreviewColorBox = () => {
-  const currentColor = useClipboardStore(x => x.validColor);
+  const currentColor = useAppStore(x => x.validColor);
 
   const handleOnChange = (color: string) => {
     setInputColor(color);

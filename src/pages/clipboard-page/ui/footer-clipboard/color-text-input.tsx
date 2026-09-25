@@ -1,13 +1,13 @@
 ;
+import { useAppStore } from "@/store/app-store";
 import { setInputColor } from "../../features/clipboard-store-actions";
 import { setColorValidityAndMode } from "../../features/set-color-validity-and-mode";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
-import { useClipboardStore } from "../../store/clipboard-store";
 
 const ColorInput = () => {
-  const colorFormat = useClipboardStore((state) => state.colorFormat);
-  const isColorValid = useClipboardStore((state) => state.isColorValid);
-  const inputColor = useClipboardStore((state) => state.inputColor);
+  const colorFormat = useAppStore((state) => state.colorFormat);
+  const isColorValid = useAppStore((state) => state.isColorValid);
+  const inputColor = useAppStore((state) => state.inputColor);
 
   const handleOnChange = (color: string) => {
     setInputColor(color);

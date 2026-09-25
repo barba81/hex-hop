@@ -1,7 +1,7 @@
 
 import type { ColorEntity, GradientEntitySummary, PaletteEntitySummary } from "@/infrastructure/models/entity"
 import { invoke } from "@tauri-apps/api/core";
-import { useAppStore } from "../../../store/store";
+import { useAppStore } from "../../../store/app-store";
 
 export const updateColorBlock = async (newEntity: ColorEntity, oldEntity: ColorEntity) => {
     const oldEntityCopy = { ...oldEntity };

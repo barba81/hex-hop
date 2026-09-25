@@ -4,7 +4,7 @@ import { getSmartColorName } from "./get-color-name";
 import { colorStringToData } from "@/infrastructure/utils/color-format-changer";
 import { pushCommand } from "@/infrastructure/history/history";
 import { rootBlockId } from "@/infrastructure/data/const-data";
-import { useAppStore } from "@/store/store";
+import { useAppStore } from "@/store/app-store";
 
 
 export const pushBlockToStore = (colorEntity: ColorEntity, targetId: number | null) => {
@@ -69,17 +69,17 @@ export const addNewColorToClipboard = async (
 
 //     const name = await getSmartColorName(colorData);
 //     const colorEntity = await invoke<ColorEntity>("create_color", { color: { ...colorData, name: name } });
-//     useClipboardStore.getState().pushBlock(colorEntity, null);
+//     useAppStore.getState().pushBlock(colorEntity, null);
 //     const blockId = colorEntity.blockId;
 
 //     useColorListCommands.getState().push({
 //         async undo() {
 //             await invoke("soft_delete_block", { blockId });
-//             useClipboardStore.getState().deleteBlock(blockId, paletteId);
+//             useAppStore.getState().deleteBlock(blockId, paletteId);
 //         },
 //         async redo() {
 //             const entity = await invoke<ColorEntity>("restore_color", { colorId:colorEntity.id });
-//             useClipboardStore.getState().pushBlock(entity, null);
+//             useAppStore.getState().pushBlock(entity, null);
 //         },
 //     });
 // }

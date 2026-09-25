@@ -1,5 +1,5 @@
-import type { HexHopStore, CommandScope, AppStore} from "@/store/store";
-import { useAppStore } from "@/store/store";
+import type { HexHopStore, CommandScope, AppStore} from "@/store/app-store";
+import { useAppStore } from "@/store/app-store";
 import type { Command } from "@/store/command-manager-state";
 
 const MAX_HISTORY = 50;

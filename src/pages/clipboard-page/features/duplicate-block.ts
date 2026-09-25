@@ -1,5 +1,5 @@
 import type { ColorEntity } from "@/infrastructure/models/entity";
-import { useAppStore } from "@/store/store";
+import { useAppStore } from "@/store/app-store";
 import { invoke } from "@tauri-apps/api/core";
 
 export const duplicateBlock = async (colorData: ColorEntity) => {
