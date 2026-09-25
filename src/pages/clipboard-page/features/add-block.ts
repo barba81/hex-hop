@@ -1,14 +1,14 @@
 import { invoke } from "@tauri-apps/api/core";
 import type { ColorEntity, PaletteEntity } from "@/infrastructure/models/entity";
-import { useHexHopStore } from "@/store/store";
 import { getSmartColorName } from "./get-color-name";
 import { colorStringToData } from "@/infrastructure/utils/color-format-changer";
 import { pushCommand } from "@/infrastructure/history/history";
 import { rootBlockId } from "@/infrastructure/data/const-data";
+import { useAppStore } from "@/store/store";
 
 
 export const pushBlockToStore = (colorEntity: ColorEntity, targetId: number | null) => {
-  useHexHopStore.setState((state) => ({
+  useAppStore.setState((state) => ({
     blocksById: { ...state.blocksById, [colorEntity.blockId]: colorEntity },
     blockIds: {
       ...state.blockIds,
@@ -18,7 +18,7 @@ export const pushBlockToStore = (colorEntity: ColorEntity, targetId: number | nu
 };
 
 export const deleteBlockFromStore = (blockId: number, paletteId: number | null) => {
-  useHexHopStore.setState((state) => {
+  useAppStore.setState((state) => {
     const { [blockId]: _, ...remainingBlocks } = state.blocksById;
     return {
       blocksById: remainingBlocks,
@@ -86,18 +86,18 @@ export const addNewColorToClipboard = async (
 
 export const addNewPalette = async (blockIds: number[]) => {
     const paletteEntity = await invoke<PaletteEntity>("create_palette", { palette: { name: "New palette", blockIds } });
-    // useHexHopStore.getState().pushPalette(paletteEntity, blockIds);
+    // useAppStore.getState().pushPalette(paletteEntity, blockIds);
     const blockId = paletteEntity.blockId;
     const paletteId = paletteEntity.id;
 
     //   useColorListCommands.getState().push({
     //     async undo() {
     //         await invoke("soft_delete_block", { blockId });
-    //         useHexHopStore.getState().deleteBlock(blockId, null);
+    //         useAppStore.getState().deleteBlock(blockId, null);
     //     },
     //     async redo() {
     //         const entity = await invoke<PaletteEntity>("restore_palette", { paletteId:paletteId});
-    //         useHexHopStore.getState().pushPalette(entity, blockIds);
+    //         useAppStore.getState().pushPalette(entity, blockIds);
     //     },
     // });
 }

@@ -1,37 +1,37 @@
 import type { BlockEntity } from "@/infrastructure/models/entity";
-import { useHexHopStore } from "@/store/store";
+import { useAppStore } from "@/store/store";
 import { invoke } from "@tauri-apps/api/core";
 
 export const deleteColorBlock = async (blockId: number, colorId: number, paletteId: number | null) => {
     await invoke("soft_delete_block", { blockId: blockId });
-    useHexHopStore.getState().deleteBlock(blockId, paletteId);
+    useAppStore.getState().deleteBlock(blockId, paletteId);
 
     // useColorListCommands.getState().push({
     //     async undo() {
     //         await invoke("restore_block", { blockId });
     //         const entity = await invoke<ColorEntity>("get_color", { colorId: colorId });
-    //         useHexHopStore.getState().pushBlock(entity, null);
+    //         useAppStore.getState().pushBlock(entity, null);
     //     },
     //     async redo() {
     //         await invoke("soft_delete_block", { blockId: blockId });
-    //         useHexHopStore.getState().deleteBlock(blockId, paletteId);
+    //         useAppStore.getState().deleteBlock(blockId, paletteId);
     //     },
     // });
 }
 
 export const deleteGradientBlock = async (blockId: number, gradientId: number, paletteId: number | null) => {
     await invoke("soft_delete_block", { blockId: blockId });
-    useHexHopStore.getState().deleteBlock(blockId, paletteId);
+    useAppStore.getState().deleteBlock(blockId, paletteId);
 
     // useColorListCommands.getState().push({
     //     async undo() {
     //         await invoke("restore_block", { blockId });
     //         const entity = await invoke<ColorEntity>("get_gradient", { gradientId });
-    //         useHexHopStore.getState().pushBlock(entity, null);
+    //         useAppStore.getState().pushBlock(entity, null);
     //     },
     //     async redo() {
     //         await invoke("soft_delete_block", { blockId: blockId });
-    //         useHexHopStore.getState().deleteBlock(blockId, paletteId);
+    //         useAppStore.getState().deleteBlock(blockId, paletteId);
     //     },
     // });
 }
@@ -40,17 +40,17 @@ export const deleteGradientBlock = async (blockId: number, gradientId: number, p
 
 export const deleteClipboard = async () => {
     const blockIds = await invoke("soft_delete_clipboard");
-    useHexHopStore.getState().deleteClipboard();
+    useAppStore.getState().deleteClipboard();
 
-    useColorListCommands.getState().push({
+    useAppStore.getState().push({
         async undo() {
             await invoke("restore_blocks", { blockIds });
             const blocks = await invoke<BlockEntity[]>("load_state");
-            await useHexHopStore.getState().initBlocks();
+            await useAppStore.getState().initBlocks();
         },
         async redo() {
             await invoke("soft_delete_clipboard");
-            useHexHopStore.getState().deleteClipboard();
+            useAppStore.getState().deleteClipboard();
         },
     });
 }

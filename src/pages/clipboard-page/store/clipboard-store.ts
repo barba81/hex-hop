@@ -1,6 +1,7 @@
 import { defaultInputColor } from "@/infrastructure/data/const-data";
-import { AppStore, ImmerStateCreator, useStore } from "@/store/store";
+import { AppStore, useAppStore } from "@/store/store";
 import { DraggableData } from "../features/darg-and-drop";
+import { ImmerStateCreator } from "@/infrastructure/types";
 
 export interface ClipboardSlice {
   openPalette: Record<string, unknown>;
@@ -23,7 +24,7 @@ export const createClipboardSlice: ImmerStateCreator< AppStore, ClipboardSlice> 
 });
 
 export const setDnd = () => {
-  useStore.setState((state) => {
+  useAppStore.setState((state) => {
     state.sourceDnd
     return {...state};
   })

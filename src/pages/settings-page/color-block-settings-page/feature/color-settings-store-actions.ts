@@ -1,6 +1,6 @@
 import type { ColorCopyFormula} from "@/infrastructure/models/color-copy-list";
 import { defaultColorCopyFormula } from "@/infrastructure/models/color-copy-list";
-import { useHexHopStore } from "@/store/store";
+import { useAppStore } from "@/store/store";
 import { invoke } from "@tauri-apps/api/core";
 import { useSettingStore } from "../../store/settings-store";
 
@@ -9,13 +9,13 @@ export const addNewColorCopyBlock = async () => {
     colorCopyFormula: { ...defaultColorCopyFormula, id: crypto.randomUUID() },
   });
 
-  useHexHopStore.setState((state) => {
+  useAppStore.setState((state) => {
     state.copyCopyFormulas.push(newCopyFormula);
   });
 };
 
 export const flipColorCopyBlockVisibility = async (copyBlockId: string) => {
-  const currentList = useHexHopStore.getState().copyCopyFormulas;
+  const currentList = useAppStore.getState().copyCopyFormulas;
   const oldBlock = currentList.find((x) => x.id === copyBlockId);
 
   if (!oldBlock) return;
@@ -24,7 +24,7 @@ export const flipColorCopyBlockVisibility = async (copyBlockId: string) => {
     colorCopyFormula: { ...oldBlock, enabled: !oldBlock.enabled },
   });
 
-  useHexHopStore.setState((state) => {
+  useAppStore.setState((state) => {
     const index = state.copyCopyFormulas.findIndex((x) => x.id === copyBlockId);
     if (index !== -1) {
       state.copyCopyFormulas[index] = newCopyFormula;
@@ -37,7 +37,7 @@ export const deleteColorCopyBlock = async (copyBlockId: string) => {
     colorFormulaId: copyBlockId,
   });
 
-  useHexHopStore.setState((state) => {
+  useAppStore.setState((state) => {
     state.copyCopyFormulas = state.copyCopyFormulas.filter((x) => x.id !== copyBlockId);
   });
 };

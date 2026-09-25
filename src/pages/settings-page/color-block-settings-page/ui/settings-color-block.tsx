@@ -1,4 +1,4 @@
-import { useHexHopStore } from "../../../../store/store";
+import { useAppStore } from "../../../../store/store";
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import { useSortable } from '@dnd-kit/react/sortable';
 import { ChevronDown, ChevronUp, Eye, EyeClosed, Plus } from "lucide-react";
@@ -36,7 +36,7 @@ const ColorBlockPreview = () => {
 
 export const ColorFormatBlock = ({ copyBlock, index }: { copyBlock: ColorCopyFormula, index: number }) => {
     const { ref } = useSortable({ id: copyBlock.id, index: index, modifiers: [RestrictToVerticalAxis], });
-    const colorCopyFormulaActiveId = useHexHopStore((state) => state.colorCopyFormulaActiveId);
+    const colorCopyFormulaActiveId = useAppStore((state) => state.colorCopyFormulaActiveId);
 
     return <div onClick={() => setColorCopyFormulaActive(copyBlock.id)} ref={ref}
 
@@ -91,7 +91,7 @@ const ColorFormatHeader = () => {
 }
 
 export const ColorFormat = () => {
-    const copyList = useHexHopStore((state) => state.copyCopyFormulas);
+    const copyList = useAppStore((state) => state.copyCopyFormulas);
     return <div className=" px-1   bg-accent   rounded-md">
         <ColorFormatHeader />
         <div className="flex flex-col gap-1.5 pt-2 overflow-x-scroll h-40 px-1">

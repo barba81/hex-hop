@@ -1,5 +1,5 @@
 import type { PaletteEntity } from "@/infrastructure/models/entity";
-import { useHexHopStore } from "@/store/store";
+import { useAppStore } from "@/store/store";
 import { ChevronDown, Pen, Trash2 } from "lucide-react";
 import { coloBackground } from "@/infrastructure/utils/color-format-changer";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
@@ -17,7 +17,7 @@ type PaletteBoxParams = {
 };
 
 const PaletteTopBar = ({ blockId }: { blockId: number }) => {
-  const block = useHexHopStore(
+  const block = useAppStore(
     state => state.blocksById[blockId]
   );
 
@@ -102,7 +102,7 @@ const PaletteDropDownCard = ({ paletteEntity, colorBlocksId }: PaletteDropDownCa
 
 
 const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
-  const colorBlocksId = useHexHopStore(state => state.blockIds[paletteEntity.id]) ?? [];
+  const colorBlocksId = useAppStore(state => state.blockIds[paletteEntity.id]) ?? [];
   const isOpen = useClipboardStore((state) => !!state.openPalette[paletteEntity.blockId]);
 
   return <ContextMenu>

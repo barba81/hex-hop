@@ -1,19 +1,11 @@
-import { StateCreator } from "zustand";
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import { ClipboardSlice, createClipboardSlice } from "@/pages/clipboard-page/store/clipboard-store";
 import { createHexHopSlice, GlobalSlice } from "./global-slice";
 
-export type ImmerStateCreator<T, U = T> = StateCreator<
-  T,                                  
-  [["zustand/immer", never], never],
-  [],
-  U                                   
->;
-
 export type AppStore = ClipboardSlice & GlobalSlice;
 
-export const useStore = create<AppStore>()(
+export const useAppStore = create<AppStore>()(
   immer((...a) => ({
     ...createClipboardSlice(...a),
     ...createHexHopSlice(...a),
@@ -27,7 +19,7 @@ export const useStore = create<AppStore>()(
 //   copyCopyFormulas: ColorCopyFormula[],
 // }
 
-// export const useHexHopStore = create<HexHopStore>()(immer((set) => ({
+// export const useAppStore = create<HexHopStore>()(immer((set) => ({
 //   blockIds: { [rootBlockId]: [] },
 //   blocksById: {},
 

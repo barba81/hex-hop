@@ -1,11 +1,11 @@
 import { invoke } from "@tauri-apps/api/core";
-import { useHexHopStore } from "@/store/store";
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import type { BlockEntity } from "@/infrastructure/models/entity";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { useAppInfoStore } from "./store/app-status-store";
 import { rootBlockId } from "./infrastructure/data/const-data";
+import { useAppStore } from "./store/store";
 
 let isInitialized = false;
 
@@ -24,7 +24,7 @@ export const initData = async () => {
     invoke<ColorCopyFormula[]>("get_all_color_copy_formula"),
   ]);
 
-  useHexHopStore.setState((state) => {
+  useAppStore.setState((state) => {
     state.copyCopyFormulas = allCopyFormulas;
     state.blockIds[rootBlockId] = blocks.map((block) => block.blockId);
     state.blocksById = {};

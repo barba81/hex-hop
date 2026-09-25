@@ -1,10 +1,10 @@
-import type { HexHopStore, CommandScope} from "@/store/store";
-import { useHexHopStore } from "@/store/store";
+import type { HexHopStore, CommandScope, AppStore} from "@/store/store";
+import { useAppStore } from "@/store/store";
 import type { Command } from "@/store/command-manager-state";
 
 const MAX_HISTORY = 50;
 
-export const selectCanUndo = (state: HexHopStore, scope: CommandScope): boolean => {
+export const selectCanUndo = (state: AppStore, scope: CommandScope): boolean => {
   return state.history[scope]?.undoStack.length > 0;
 };
 
@@ -13,7 +13,7 @@ export const selectCanRedo = (state: HexHopStore, scope: CommandScope): boolean 
 };
 
 export const pushCommand = async (scope: CommandScope, command: Command): Promise<void> => {
-  useHexHopStore.setState((state) => {
+  useAppStore.setState((state) => {
     const scopeHistory = state.history[scope];
     const nextUndo = [...scopeHistory.undoStack, command];
 
@@ -34,7 +34,7 @@ export const pushCommand = async (scope: CommandScope, command: Command): Promis
 };
 
 export const undoCommand = async (scope: CommandScope): Promise<void> => {
-  const state = useHexHopStore.getState();
+  const state = useAppStore.getState();
   const scopeHistory = state.history[scope];
 
   if (scopeHistory.undoStack.length === 0) return;
@@ -42,7 +42,7 @@ export const undoCommand = async (scope: CommandScope): Promise<void> => {
   const command = scopeHistory.undoStack[scopeHistory.undoStack.length - 1];
   await command.undo();
 
-  useHexHopStore.setState((state) => {
+  useAppStore.setState((state) => {
     const currentScope = state.history[scope];
     const nextUndo = currentScope.undoStack.slice(0, -1);
     const nextRedo = [...currentScope.redoStack, command];
@@ -60,7 +60,7 @@ export const undoCommand = async (scope: CommandScope): Promise<void> => {
 };
 
 export const redoCommand = async (scope: CommandScope): Promise<void> => {
-  const state = useHexHopStore.getState();
+  const state = useAppStore.getState();
   const scopeHistory = state.history[scope];
 
   if (scopeHistory.redoStack.length === 0) return;
@@ -68,7 +68,7 @@ export const redoCommand = async (scope: CommandScope): Promise<void> => {
   const command = scopeHistory.redoStack[scopeHistory.redoStack.length - 1];
   await command.redo();
 
-  useHexHopStore.setState((state) => {
+  useAppStore.setState((state) => {
     const currentScope = state.history[scope];
     const nextRedo = currentScope.redoStack.slice(0, -1);
     const nextUndo = [...currentScope.undoStack, command];

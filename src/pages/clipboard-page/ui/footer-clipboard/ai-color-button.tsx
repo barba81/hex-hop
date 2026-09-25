@@ -1,5 +1,5 @@
 import { Astroid } from "lucide-react";
-import { useHexHopStore } from "@/store/store";
+import { useAppStore } from "@/store/store";
 import { addNewColorToClipboard } from "../../features/add-block";
 import { Button } from "@/components/ui/button";
 import { useClipboardStore } from "../../store/clipboard-store";

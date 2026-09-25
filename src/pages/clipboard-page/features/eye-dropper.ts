@@ -1,5 +1,5 @@
 import { addNewColorToClipboard } from "./add-block";
-import { useHexHopStore } from "@/store/store";
+import { useAppStore } from "@/store/store";
 import { setColorValidityAndMode } from "./set-color-validity-and-mode";
 
 export const eyeDropperColorPicker = async () => {
@@ -20,9 +20,9 @@ export const eyeDropperColorPicker = async () => {
     console.error(e);
   }
 };
-const setInputColor = useHexHopStore.getState().setInputColor;
+const setInputColor = useAppStore.getState().setInputColor;
 
-useHexHopStore.setState((state) => {
+useAppStore.setState((state) => {
 
   return {
     history: {

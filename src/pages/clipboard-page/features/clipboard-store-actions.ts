@@ -1,19 +1,19 @@
-import { useClipboardStore } from "../store/clipboard-store";
+import { useAppStore } from "@/store/store";
 
 export const setInputColor = (newColor: string) => {
-  useClipboardStore.setState((state) => {
+  useAppStore.setState((state) => {
     state.inputColor = newColor;
   });
 };
 
 export const togglePalette = (paletteId: number) => {
-  useClipboardStore.setState((state) => {
+  useAppStore.setState((state) => {
     state.openPalette[paletteId] = !state.openPalette[paletteId];
   });
 };
 
-export const setEditBlock = (blockId: number | null) => {
-  useClipboardStore.setState((state) => {
+export const setEditBlock = (blockId: string | null) => {
+  useAppStore.setState((state) => {
     state.editBlockId = blockId;
   });
 };

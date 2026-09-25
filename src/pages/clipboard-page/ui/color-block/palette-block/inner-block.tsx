@@ -1,4 +1,4 @@
-import { useHexHopStore } from "@/store/store";
+import { useAppStore } from "@/store/store";
 import ColorBlockEdit from "../color-block/color-block-edit";
 import GradientBlockSmall from "../gradient-block/gradient-block-small";
 import ColorBlock from "../color-block/color-block-small-boxes";
@@ -8,11 +8,11 @@ type ColorBoxParams = {
 };
 
 const InnerBlock = ({ blockId }: ColorBoxParams) => {
-    const block = useHexHopStore(
+    const block = useAppStore(
         state => state.blocksById[blockId]
     );
 
-    const isEditing = useHexHopStore(
+    const isEditing = useAppStore(
         state => state.editBlockId === blockId
     );
 

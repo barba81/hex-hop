@@ -1,5 +1,5 @@
 import type { ColorEntity } from "@/infrastructure/models/entity";
-import { useHexHopStore } from "@/store/store";
+import { useAppStore } from "@/store/store";
 import { invoke } from "@tauri-apps/api/core";
 
 export const duplicateBlock = async (colorData: ColorEntity) => {
@@ -7,19 +7,18 @@ export const duplicateBlock = async (colorData: ColorEntity) => {
     const blockId = colorEntity.blockId;
     const paletteId = colorEntity.parentPaletteId;
 
-        
 
-    useHexHopStore.getState().pushBlock(colorEntity, paletteId);
+    useAppStore.getState().pushBlock(colorEntity, paletteId);
 
     // useColorListCommands.getState().push({
     //     async undo() {
     //         await invoke("soft_delete_block", { blockId });
-    //         useHexHopStore.getState().deleteBlock(blockId, paletteId);
+    //         useAppStore.getState().deleteBlock(blockId, paletteId);
     //     },
     //     async redo() {
     //         await invoke("restore_block", { blockId });
     //         const entity = await invoke<ColorEntity>("get_color", {  colorId:colorEntity.id  });
-    //         useHexHopStore.getState().pushBlock(entity, paletteId);
+    //         useAppStore.getState().pushBlock(entity, paletteId);
     //     },
     // });
 }
