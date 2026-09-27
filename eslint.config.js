@@ -4,6 +4,7 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import tseslint from 'typescript-eslint';
 import react from 'eslint-plugin-react';
+import unusedImports from 'eslint-plugin-unused-imports'; // Added plugin
 
 export default tseslint.config(
   { ignores: ['dist', 'src-tauri'] },
@@ -20,11 +21,12 @@ export default tseslint.config(
       globals: globals.browser,
     },
     settings: {
-      react: { version:  '19.0.0' },
+      react: { version: '19.0.0' },
     },
     plugins: {
       'react-hooks': reactHooks,
       'react-refresh': reactRefresh,
+      'unused-imports': unusedImports, // Registered plugin here
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
@@ -39,7 +41,19 @@ export default tseslint.config(
       'react/no-unstable-nested-components': 'error', // avoid remount-on-every-render perf hits
       'react/jsx-no-leaked-render': 'warn', // avoid stray `0`/`NaN` renders
 
-      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }],
+      // --- Unused Imports & Variables Setup ---
+      '@typescript-eslint/no-unused-vars': 'off', // Turn off base rule to avoid conflicts
+      'unused-imports/no-unused-imports': 'error', // Flags and auto-removes unused imports
+      'unused-imports/no-unused-vars': [
+        'warn',
+        { 
+          vars: 'all', 
+          varsIgnorePattern: '^_', 
+          args: 'after-used', 
+          argsIgnorePattern: '^_' 
+        },
+      ],
+
       '@typescript-eslint/consistent-type-imports': 'warn', // type-only imports get elided from the bundle
 
       'no-console': ['warn', { allow: ['warn', 'error', 'info'] }],
