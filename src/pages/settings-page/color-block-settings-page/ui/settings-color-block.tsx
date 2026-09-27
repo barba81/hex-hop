@@ -23,7 +23,7 @@ const ColorBlockPreview = () => {
             </div>
             <div className="p-0.5 flex-1 flex flex-row justify-between pr-2">
                 <div className="flex">
-                    <>To be added</>
+                    To be added
                 </div>
                 <div className="flex gap-2 h-full items-center  text-sm">
                     Color Block Preview

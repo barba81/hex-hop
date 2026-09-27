@@ -1,7 +1,8 @@
 import { defaultInputColor } from "@/infrastructure/data/const-data";
-import { AppStore, useAppStore } from "@/store/app-store";
-import { DraggableData } from "../features/darg-and-drop";
-import { ImmerStateCreator } from "@/infrastructure/types";
+import type { AppStore} from "@/store/app-store";
+import { useAppStore } from "@/store/app-store";
+import type { DraggableData } from "../features/darg-and-drop";
+import type { ImmerStateCreator } from "@/infrastructure/types";
 
 export interface ClipboardSlice {
   openPalette: Record<string, unknown>;

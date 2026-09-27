@@ -1,7 +1,9 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import { ClipboardSlice, createClipboardSlice } from "@/pages/clipboard-page/store/clipboard-store";
-import { createHexHopSlice, GlobalSlice } from "./global-slice";
+import type { ClipboardSlice} from "@/pages/clipboard-page/store/clipboard-store";
+import { createClipboardSlice } from "@/pages/clipboard-page/store/clipboard-store";
+import type { GlobalSlice } from "./global-slice";
+import { createHexHopSlice } from "./global-slice";
 
 export type AppStore = ClipboardSlice & GlobalSlice;
 

@@ -1,4 +1,5 @@
-import { CollisionDetector, CollisionPriority, CollisionType } from "@dnd-kit/abstract";
+import type { CollisionDetector} from "@dnd-kit/abstract";
+import { CollisionPriority, CollisionType } from "@dnd-kit/abstract";
 
 export const distanceDetector: CollisionDetector = ({dragOperation, droppable}) => {
   const dragShape = dragOperation.shape?.current;
