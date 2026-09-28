@@ -3,6 +3,7 @@ import type { AppStore} from "@/store/app-store";
 import { useAppStore } from "@/store/app-store";
 import type { DraggableData } from "../features/darg-and-drop";
 import type { ImmerStateCreator } from "@/infrastructure/types";
+import { CommandHistory, initialScopeHistory } from "@/store/history-slice";
 
 export interface ClipboardSlice {
   openPalette: Record<string, unknown>;
@@ -12,6 +13,7 @@ export interface ClipboardSlice {
   validColor: string;
   inputColor: string;
   colorFormat: "RGB" | "HSL" | "HEX";
+  clipboardHistory: CommandHistory;
 }
 
 export const createClipboardSlice: ImmerStateCreator< AppStore, ClipboardSlice> = () => ({
@@ -22,6 +24,7 @@ export const createClipboardSlice: ImmerStateCreator< AppStore, ClipboardSlice> 
   validColor: defaultInputColor,
   inputColor: defaultInputColor,
   colorFormat: "RGB",
+  clipboardHistory: initialScopeHistory,
 });
 
 export const setDnd = () => {

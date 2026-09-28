@@ -10,7 +10,7 @@ export interface ClipboardStore {
   history: Record<CommandScope, CommandHistory>;
 }
 
-const initialScopeHistory: CommandHistory = {
+export const initialScopeHistory: CommandHistory = {
   undoStack: [],
   redoStack: [],
 };
