@@ -3,8 +3,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { Button } from "@/components/ui/button";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { Search } from "lucide-react"
-import { addNewPalette } from "../../features/add-block";
 import { deleteClipboard } from "../../features/delete-block";
+import { addNewPalette } from "../../features/add-block";
 
 const HeaderDropdown = () => {
 

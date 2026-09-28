@@ -2,9 +2,9 @@ import { invoke } from "@tauri-apps/api/core";
 import type { ColorEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { getSmartColorName } from "./get-color-name";
 import { colorStringToData } from "@/infrastructure/utils/color-format-changer";
-import { pushCommand } from "@/infrastructure/history/history";
 import { rootBlockId } from "@/infrastructure/data/const-data";
 import { useAppStore } from "@/store/app-store";
+import { historyPush } from "@/infrastructure/history/history";
 
 
 export const pushBlockToStore = (colorEntity: ColorEntity, targetId: number | null) => {
@@ -42,28 +42,29 @@ export const addNewColorToClipboard = async (
     color: { ...colorData, name }
   });
 
-  useAppStore.setState((state) => ({
-    blocksById: { ...state.blocksById, [colorEntity.blockId]: colorEntity },
-    blockIds: {
-      ...state.blockIds,
-      [paletteId ?? rootBlockId]: [, colorEntity.blockId, ...(state.blockIds[paletteId ?? rootBlockId] || [])],
-    },
-    // history.push()
-  }));
-  // await pushCommand('clipboard', {
-  //   async undo() {
-  //     await invoke('soft_delete_block', { blockId });
-  //     deleteBlockFromStore(blockId, paletteId);
-  //   },
-  //   async redo() {
-  //     const entity = await invoke<ColorEntity>('restore_color', { 
-  //       colorId: colorEntity.id 
-  //     });
-  //     pushBlockToStore(entity, null);
-  //   },
-  // });
-};
+  const blockId = colorEntity.blockId;
 
+  console.time();
+  useAppStore.setState((state) => {
+    state.blocksById[colorEntity.blockId] = colorEntity;
+    state.blockIds[rootBlockId] = [colorEntity.blockId, ...(state.blockIds[paletteId ?? rootBlockId] || [])];
+    historyPush( { async undo() { },  async redo() { }, }, state.clipboardHistory);
+  });
+  console.timeEnd();
+}
+
+// await pushCommand('clipboard', {
+//   async undo() {
+//     await invoke('soft_delete_block', { blockId });
+//     deleteBlockFromStore(blockId, paletteId);
+//   },
+//   async redo() {
+//     const entity = await invoke<ColorEntity>('restore_color', { 
+//       colorId: colorEntity.id 
+//     });
+//     pushBlockToStore(entity, null);
+//   },
+// });
 
 // export const addNewColorToClipboard = async (inputColor: string, paletteId: number | null) => {
 
@@ -103,7 +104,4 @@ export const addNewPalette = async (blockIds: number[]) => {
   //     },
   // });
 }
-
-
-
 

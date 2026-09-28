@@ -1,5 +1,7 @@
+import { create } from 'zustand';
 
 export type CommandScope = 'clipboard' | 'colorBlockSettings';
+
 export interface CommandHistory {
   undoStack: Command[];
   redoStack: Command[];
@@ -16,7 +18,6 @@ export const initialScopeHistory: CommandHistory = {
 };
 
 
-import { create } from 'zustand';
 
 export interface Command {
   undo(): Promise<void>;
