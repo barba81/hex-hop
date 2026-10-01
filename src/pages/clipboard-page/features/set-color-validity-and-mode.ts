@@ -11,7 +11,8 @@ export const setColorValidityAndMode = (stringColor: string) => {
         });
         return;
     }
-
+ 
+    
     useAppStore.setState((state) => {
         state.isColorValid = true;
         state.colorFormat = color.mode;

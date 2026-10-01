@@ -44,13 +44,15 @@ export const addNewColorToClipboard = async (
 
   const blockId = colorEntity.blockId;
 
-  console.time();
   useAppStore.setState((state) => {
     state.blocksById[colorEntity.blockId] = colorEntity;
     state.blockIds[rootBlockId] = [colorEntity.blockId, ...(state.blockIds[paletteId ?? rootBlockId] || [])];
-    historyPush( { async undo() { },  async redo() { }, }, state.clipboardHistory);
+    historyPush( { async undo() { 
+
+    },  async redo() {
+      
+     }, }, state.clipboardHistory);
   });
-  console.timeEnd();
 }
 
 // await pushCommand('clipboard', {
