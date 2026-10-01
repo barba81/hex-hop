@@ -6,7 +6,7 @@ import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-stri
 import React from "react";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Button } from "@/components/ui/button";
-import { setEditBlock, togglePalette } from "@/pages/clipboard-page/features/clipboard-store-actions";
+import { setEditBlock, togglePalette } from "@/pages/clipboard-page/features/block-actions";
 import InnerBlock from "./inner-block";
 import DroppableLine from "@/components/drag-and-drop/drop-line";
 import { BaseDraggableOutlineBlock } from "@/components/drag-and-drop/base-outline-dnd-block";

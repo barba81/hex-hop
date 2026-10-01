@@ -5,7 +5,7 @@ import { useState } from "react";
 import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { updateGradientBlock } from "@/pages/clipboard-page/features/update-block";
-import { setEditBlock } from "@/pages/clipboard-page/features/clipboard-store-actions";
+import { setEditBlock } from "@/pages/clipboard-page/features/block-actions";
 import { Input } from "@/components/ui/input";
 
 type GradientBlockEditParams = {

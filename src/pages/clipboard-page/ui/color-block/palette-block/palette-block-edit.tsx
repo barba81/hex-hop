@@ -3,7 +3,7 @@ import { Check, X } from "lucide-react";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { setEditBlock } from "@/pages/clipboard-page/features/clipboard-store-actions";
+import { setEditBlock } from "@/pages/clipboard-page/features/block-actions";
 import { updatePaletteBlock } from "@/pages/clipboard-page/features/update-block";
 import { Input } from "@/components/ui/input";
 

@@ -2,7 +2,7 @@ import type { GradientEntity } from "@/infrastructure/models/entity";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
-import { setEditBlock } from "@/pages/clipboard-page/features/clipboard-store-actions";
+import { setEditBlock } from "@/pages/clipboard-page/features/block-actions";
 import { deleteGradientBlock } from "@/pages/clipboard-page/features/delete-block";
 import { BaseDraggableOutlineBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
 

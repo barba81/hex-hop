@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState, useMemo } from "react"
 
-type Theme = "dark" | "light" | "system"
+type Theme = "dark" | "light";
 
 type ThemeProviderProps = {
   children: React.ReactNode
@@ -14,7 +14,7 @@ type ThemeProviderState = {
 }
 
 const initialState: ThemeProviderState = {
-  theme: "system",
+  theme: "dark",
   setTheme: () => null,
 }
 
@@ -22,7 +22,7 @@ const ThemeProviderContext = createContext<ThemeProviderState>(initialState)
 
 export function ThemeProvider({
   children,
-  defaultTheme = "system",
+  defaultTheme = "dark",
   storageKey = "vite-ui-theme",
   ...props
 }: ThemeProviderProps) {
@@ -34,23 +34,23 @@ export function ThemeProvider({
 
     root.classList.remove("light", "dark")
 
-    if (theme === "system") {
-      const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
+    // if (theme === "system") {
+    //   const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)")
 
-      const handleSystemThemeChange = () => {
-        const systemTheme = mediaQuery.matches ? "dark" : "light"
-        root.classList.remove("light", "dark")
-        root.classList.add(systemTheme)
-      }
+    //   const handleSystemThemeChange = () => {
+    //     const systemTheme = mediaQuery.matches ? "dark" : "light"
+    //     root.classList.remove("light", "dark")
+    //     root.classList.add(systemTheme)
+    //   }
 
-      handleSystemThemeChange()
+    //   handleSystemThemeChange()
 
-      mediaQuery.addEventListener("change", handleSystemThemeChange)
+    //   mediaQuery.addEventListener("change", handleSystemThemeChange)
 
-      return () => {
-        mediaQuery.removeEventListener("change", handleSystemThemeChange)
-      }
-    }
+    //   return () => {
+    //     mediaQuery.removeEventListener("change", handleSystemThemeChange)
+    //   }
+    // }
 
     root.classList.add(theme)
   }, [theme])

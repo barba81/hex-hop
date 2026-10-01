@@ -6,7 +6,7 @@ import { Button } from "../ui/button"
 export const ThemeToggleButton = () => {
   const { theme, setTheme } = useTheme();
 
-  const themes: ("light" | "dark" | "system")[] = ["light", "dark", "system"];
+  const themes: ("light" | "dark")[] = ["light", "dark"];
 
   const cycleTheme = () => {
     const currentIndex = themes.indexOf(theme);
@@ -28,10 +28,6 @@ export const ThemeToggleButton = () => {
         <Moon />
       }
 
-      {theme === "system" &&
-        <SunMoon />
-      }
-
     </Button>
   );
 };
@@ -41,7 +37,7 @@ export const ThemeToggleButton = () => {
 export const ThemeToggleButton2 = () => {
   const { theme, setTheme } = useTheme();
 
-  const themes: ("light" | "dark" | "system")[] = ["light", "dark", "system"];
+  const themes: ("light" | "dark" )[] = ["light", "dark"];
 
   const cycleTheme = () => {
     const currentIndex = themes.indexOf(theme);
@@ -64,9 +60,9 @@ export const ThemeToggleButton2 = () => {
         theme === "dark" ? "scale-100 rotate-0" : "scale-0 rotate-90"
       }`} />
 
-      <SunMoon className={`absolute h-[1.2rem] w-[1.2rem] transition-all duration-300 ${
+      {/* <SunMoon className={`absolute h-[1.2rem] w-[1.2rem] transition-all duration-300 ${
         theme === "system" ? "scale-100 rotate-0" : "scale-0 rotate-90"
-      }`} />
+      }`} /> */}
 
     </Button>
   );

@@ -6,54 +6,45 @@ import { rootBlockId } from "@/infrastructure/data/const-data";
 import { useAppStore } from "@/store/app-store";
 import { historyPush } from "@/infrastructure/history/history";
 
-
-export const pushBlockToStore = (colorEntity: ColorEntity, targetId: number | null) => {
-  useAppStore.setState((state) => ({
-    blocksById: { ...state.blocksById, [colorEntity.blockId]: colorEntity },
-    blockIds: {
-      ...state.blockIds,
-      [rootBlockId]: [...(state.blockIds[rootBlockId] || []), colorEntity.blockId],
-    },
-  }));
-};
-
-export const deleteBlockFromStore = (blockId: number, paletteId: number | null) => {
-  useAppStore.setState((state) => {
-    const { [blockId]: _, ...remainingBlocks } = state.blocksById;
-    return {
-      blocksById: remainingBlocks,
-      blockIds: {
-        ...state.blockIds,
-        [rootBlockId]: state.blockIds[rootBlockId]?.filter((id) => id !== blockId) || [],
-      },
-    };
-  });
-};
-
-
 export const addNewColorToClipboard = async (
   inputColor: string,
   paletteId: number | null
 ) => {
-  // 1. Process color inputs & invoke creation
   const colorData = colorStringToData(inputColor);
   const name = await getSmartColorName(colorData);
   const colorEntity = await invoke<ColorEntity>('create_color', {
     color: { ...colorData, name }
   });
 
-  const blockId = colorEntity.blockId;
-
   useAppStore.setState((state) => {
     state.blocksById[colorEntity.blockId] = colorEntity;
     state.blockIds[rootBlockId] = [colorEntity.blockId, ...(state.blockIds[paletteId ?? rootBlockId] || [])];
-    historyPush( { async undo() { 
-
-    },  async redo() {
-      
-     }, }, state.clipboardHistory);
+    historyPush({ async undo() { }, async redo() { }, }, state.clipboardHistory);
   });
 }
+
+export const addNewPalette = async (blockIds: number[]) => {
+  const paletteEntity = await invoke<PaletteEntity>("create_palette", { palette: { name: "New palette", blockIds } });
+  useAppStore.setState((state) => {
+    state.blocksById[paletteEntity.blockId] = paletteEntity;
+    state.blockIds[rootBlockId] = [paletteEntity.blockId, ...(state.blockIds[rootBlockId] || [])];
+    historyPush({ async undo() { }, async redo() { }, }, state.clipboardHistory);
+  });
+
+  //   useColorListCommands.getState().push({
+  //     async undo() {
+  //         await invoke("soft_delete_block", { blockId });
+  //         useAppStore.getState().deleteBlock(blockId, null);
+  //     },
+  //     async redo() {
+  //         const entity = await invoke<PaletteEntity>("restore_palette", { paletteId:paletteId});
+  //         useAppStore.getState().pushPalette(entity, blockIds);
+  //     },
+  // });
+}
+
+
+
 
 // await pushCommand('clipboard', {
 //   async undo() {
@@ -61,8 +52,8 @@ export const addNewColorToClipboard = async (
 //     deleteBlockFromStore(blockId, paletteId);
 //   },
 //   async redo() {
-//     const entity = await invoke<ColorEntity>('restore_color', { 
-//       colorId: colorEntity.id 
+//     const entity = await invoke<ColorEntity>('restore_color', {
+//       colorId: colorEntity.id
 //     });
 //     pushBlockToStore(entity, null);
 //   },
@@ -89,21 +80,25 @@ export const addNewColorToClipboard = async (
 //     });
 // }
 
-export const addNewPalette = async (blockIds: number[]) => {
-  const paletteEntity = await invoke<PaletteEntity>("create_palette", { palette: { name: "New palette", blockIds } });
-  // useAppStore.getState().pushPalette(paletteEntity, blockIds);
-  const blockId = paletteEntity.blockId;
-  const paletteId = paletteEntity.id;
+// export const pushBlockToStore = (colorEntity: ColorEntity, targetId: number | null) => {
+//   useAppStore.setState((state) => ({
+//     blocksById: { ...state.blocksById, [colorEntity.blockId]: colorEntity },
+//     blockIds: {
+//       ...state.blockIds,
+//       [rootBlockId]: [...(state.blockIds[rootBlockId] || []), colorEntity.blockId],
+//     },
+//   }));
+// };
 
-  //   useColorListCommands.getState().push({
-  //     async undo() {
-  //         await invoke("soft_delete_block", { blockId });
-  //         useAppStore.getState().deleteBlock(blockId, null);
-  //     },
-  //     async redo() {
-  //         const entity = await invoke<PaletteEntity>("restore_palette", { paletteId:paletteId});
-  //         useAppStore.getState().pushPalette(entity, blockIds);
-  //     },
-  // });
-}
-
+// export const deleteBlockFromStore = (blockId: number, paletteId: number | null) => {
+//   useAppStore.setState((state) => {
+//     const { [blockId]: _, ...remainingBlocks } = state.blocksById;
+//     return {
+//       blocksById: remainingBlocks,
+//       blockIds: {
+//         ...state.blockIds,
+//         [rootBlockId]: state.blockIds[rootBlockId]?.filter((id) => id !== blockId) || [],
+//       },
+//     };
+//   });
+// };

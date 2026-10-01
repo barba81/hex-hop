@@ -2,7 +2,7 @@ import type { ColorEntity } from "@/infrastructure/models/entity";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { coloBackground } from "@/infrastructure/utils/color-format-changer";
-import { setEditBlock } from "../../../features/clipboard-store-actions";
+import { setEditBlock } from "../../../features/block-actions";
 import { duplicateBlock } from "../../../features/duplicate-block";
 import { deleteColorBlock } from "../../../features/delete-block";
 import { BlenderIcon, CSSIcon, TailwindIcon } from "@/components/icons/custom-icon";
