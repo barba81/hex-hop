@@ -61,7 +61,13 @@ export function colorEntityToColor(colorEntity: ColorData) {
 
 // from string gets color mode or return null if it cannot be color
 export const getColorMode = (stringColor: string) => {
-    const cleanColorName = stringColor.split(' ').join('').trim().toLowerCase();
+    const cleanColorName = stringColor.split(' ').join('').trim().toLowerCase(); 
+    
     const color = parse(cleanColorName);
     return color ? color.mode : null;
+}
+
+export const validateColor = (stringColor: string) => {
+  const color = parse(stringColor);
+  return color != null;
 }

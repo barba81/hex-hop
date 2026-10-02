@@ -1,12 +1,16 @@
 import { Pipette } from "lucide-react";
-import { eyeDropperColorPicker } from "../../features/eye-dropper";
 import { Button } from "@/components/ui/button";
+import { handleEyeDropperColorPicker } from "../../features/color-actions";
 
 const EyeDropButton = () => {
 
+  const handleOnClick = () => {
+    handleEyeDropperColorPicker();
+  };
+  
   return (
-    <Button size='icon-sm' variant='outline'  onClick={() => eyeDropperColorPicker() } >
-        <Pipette strokeWidth={2} size={14} />
+    <Button size='icon-sm' variant='outline' onClick={() => handleOnClick()} >
+      <Pipette strokeWidth={2} size={14} />
     </Button>
   );
 };

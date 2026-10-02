@@ -7,9 +7,10 @@ import {
 import "@/globals.css";
 import { useAppStore } from "@/store/app-store";
 import { handleColorChange } from "../../features/color-actions";
+import { formatHex8 } from "culori";
 
 const PreviewColorBox = () => {
-  const currentColor = useAppStore(x => x.validColor);
+  const currentColor = formatHex8(useAppStore(x => x.validColor));
 
   const handleOnChange = (color: string) => {
     handleColorChange(color);

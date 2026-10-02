@@ -1,7 +1,7 @@
 import { invoke } from "@tauri-apps/api/core";
 import type { ColorEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { getSmartColorName } from "./get-color-name";
-import { colorStringToData } from "@/infrastructure/utils/color-format-changer";
+import { colorStringToData, getColorMode, validateColor } from "@/infrastructure/utils/color-format-changer";
 import { rootBlockId } from "@/infrastructure/data/const-data";
 import { useAppStore } from "@/store/app-store";
 import { historyPush } from "@/infrastructure/history/history";
@@ -10,7 +10,10 @@ export const addNewColorToClipboard = async (
   inputColor: string,
   paletteId: number | null
 ) => {
+  // if (!validateColor(inputColor)) return;
+
   const colorData = colorStringToData(inputColor);
+  
   const name = await getSmartColorName(colorData);
   const colorEntity = await invoke<ColorEntity>('create_color', {
     color: { ...colorData, name }
@@ -42,6 +45,11 @@ export const addNewPalette = async (blockIds: number[]) => {
   //     },
   // });
 }
+
+
+// setInputColor(result.sRGBHex);
+// setColorValidityAndMode(result.sRGBHex);
+// await addNewColorToClipboard(result.sRGBHex, null);
 
 
 
