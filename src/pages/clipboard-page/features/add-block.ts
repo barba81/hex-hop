@@ -1,18 +1,10 @@
-import { invoke } from "@tauri-apps/api/core";
-import type { PaletteEntity } from "@/infrastructure/models/entity";
-import { rootBlockId } from "@/infrastructure/data/const-data";
-import { useAppStore } from "@/store/app-store";
-import { historyPush } from "@/infrastructure/history/history";
-
-
-
-export const addNewPalette = async (blockIds: number[]) => {
-  const paletteEntity = await invoke<PaletteEntity>("create_palette", { palette: { name: "New palette", blockIds } });
-  useAppStore.setState((state) => {
-    state.blocksById[paletteEntity.blockId] = paletteEntity;
-    state.blockIds[rootBlockId] = [paletteEntity.blockId, ...(state.blockIds[rootBlockId] || [])];
-    historyPush({ async undo() { }, async redo() { }, }, state.clipboardHistory);
-  });
+// export const addNewPalette = async (blockIds: number[]) => {
+//   const paletteEntity = await invoke<PaletteEntity>("create_palette", { palette: { name: "New palette", blockIds } });
+//   useAppStore.setState((state) => {
+//     state.blocksById[paletteEntity.blockId] = paletteEntity;
+//     state.blockIds[rootBlockId] = [paletteEntity.blockId, ...(state.blockIds[rootBlockId] || [])];
+//     historyPush({ async undo() { }, async redo() { }, }, state.clipboardHistory);
+//   });
 
   //   useColorListCommands.getState().push({
   //     async undo() {
@@ -24,7 +16,7 @@ export const addNewPalette = async (blockIds: number[]) => {
   //         useAppStore.getState().pushPalette(entity, blockIds);
   //     },
   // });
-}
+// }
 
 
 // setInputColor(result.sRGBHex);

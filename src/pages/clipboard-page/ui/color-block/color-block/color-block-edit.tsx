@@ -8,9 +8,9 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { colorEntityToColor, hexaToRgbaNormalized, toHex8 } from "@/infrastructure/utils/color-format-changer";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
-import { setEditBlock } from "@/pages/clipboard-page/features/block-actions";
 import { updateColorBlock } from "@/pages/clipboard-page/features/update-block";
 import { getSmartColorName } from "@/lib/get-color-name";
+import { useAppStore } from "@/store/app-store";
 
 type ColorBlockEditParams = {
     colorEntity: ColorEntity
@@ -136,6 +136,7 @@ const ColorBoxPreview = ({
 
 
 const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
+    const setEditBlock = useAppStore((store) => store.setEditBlock);
     const [colorUpdateEntity, setColorUpdateEntity] = useState(
         () => ({ ...colorEntity })
     );

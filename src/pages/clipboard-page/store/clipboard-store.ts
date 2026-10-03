@@ -21,6 +21,8 @@ export interface ClipboardSlice {
   colorMode: Color["mode"];
   clipboardHistory: CommandHistory;
 
+  setEditBlock: (blockId: string | null) => void;
+  togglePalette: (paletteId: number) => void;
   handleColorChange: (color: string) => void;
   addNewColorToClipboard: (color: string, paletteId: number | null) => Promise<void>;
   addNewPaletteToClipboard: (blockIds: number[]) => Promise<void>;
@@ -36,6 +38,17 @@ export const createClipboardSlice: ImmerStateCreator<AppStore, ClipboardSlice> =
   colorMode: "rgb",
   clipboardHistory: initialScopeHistory,
 
+  setEditBlock: (blockId) => {
+    set((state) => {
+       state.editBlockId = blockId;
+    });
+  },
+
+  togglePalette: (paletteId) => {
+    set((state) => {
+      state.openPalette[paletteId] = !state.openPalette[paletteId];
+    });
+  },
   handleColorChange: (color) => {
     const colorMode = getColorMode(color);
 
