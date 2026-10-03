@@ -4,10 +4,10 @@ import { Button } from "@/components/ui/button";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { Search } from "lucide-react"
 import { deleteClipboard } from "../../features/delete-block";
-import { addNewPalette } from "../../features/add-block";
+import { useAppStore } from "@/store/app-store";
 
 const HeaderDropdown = () => {
-
+  const addNewPaletteToClipboard = useAppStore((store) => store.addNewPaletteToClipboard);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger>
@@ -19,7 +19,10 @@ const HeaderDropdown = () => {
       <DropdownMenuContent className="w-auto">
         <DropdownMenuGroup>
           <DropdownMenuItem
-            onClick={() => addNewPalette([])}
+            onClick={() => {
+              addNewPaletteToClipboard([]);
+            }
+            }
           >
             <Palette  />
             <span className="text-xs font-medium">

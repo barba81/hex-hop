@@ -1,15 +1,15 @@
 import { defaultInputColor, rootBlockId } from "@/infrastructure/data/const-data";
 import type { AppStore } from "@/store/app-store";
 import { useAppStore } from "@/store/app-store";
-import type { DraggableData } from "../features/darg-and-drop";
 import type { ImmerStateCreator } from "@/infrastructure/types";
 import { CommandHistory, initialScopeHistory } from "@/store/history-slice";
 import { Color } from "culori";
 import { colorStringToData, getColorMode } from "@/infrastructure/utils/color-format-changer";
 import { getSmartColorName } from "@/lib/get-color-name";
 import { invoke } from "@tauri-apps/api/core";
-import { ColorEntity } from "@/infrastructure/models/entity";
+import { ColorEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { historyPush } from "@/infrastructure/history/history";
+import { DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
 
 export interface ClipboardSlice {
   openPalette: Record<string, unknown>;
@@ -22,10 +22,8 @@ export interface ClipboardSlice {
   clipboardHistory: CommandHistory;
 
   handleColorChange: (color: string) => void;
-  addNewColorToClipboard: (
-    color: string,
-    paletteId: number | null
-  ) => Promise<void>;
+  addNewColorToClipboard: (color: string, paletteId: number | null) => Promise<void>;
+  addNewPaletteToClipboard: (blockIds: number[]) => Promise<void>;
 }
 
 export const createClipboardSlice: ImmerStateCreator<AppStore, ClipboardSlice> = (set) => ({
@@ -37,7 +35,7 @@ export const createClipboardSlice: ImmerStateCreator<AppStore, ClipboardSlice> =
   inputColor: defaultInputColor,
   colorMode: "rgb",
   clipboardHistory: initialScopeHistory,
-  
+
   handleColorChange: (color) => {
     const colorMode = getColorMode(color);
 
@@ -93,7 +91,18 @@ export const createClipboardSlice: ImmerStateCreator<AppStore, ClipboardSlice> =
       );
     });
   },
+  addNewPaletteToClipboard: async (blockIds) => {
+    console.time();
 
+    const paletteEntity = await invoke<PaletteEntity>("create_palette", { palette: { name: "New palette", blockIds } });
+    set((state) => {
+      state.blocksById[paletteEntity.blockId] = paletteEntity;
+      state.blockIds[rootBlockId] = [paletteEntity.blockId, ...(state.blockIds[rootBlockId] || [])];
+      historyPush({ async undo() { }, async redo() { }, }, state.clipboardHistory);
+      console.timeEnd();
+
+    });
+  }
 });
 
 export const setDnd = () => {
