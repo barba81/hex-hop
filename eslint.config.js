@@ -7,8 +7,8 @@ import react from 'eslint-plugin-react';
 import unusedImports from 'eslint-plugin-unused-imports'; 
 import unicorn from 'eslint-plugin-unicorn'; // Added for filename casing rules
  
-export default tseslint.config( 
-  { ignores: ['dist', 'src-tauri'] }, 
+export default ( 
+  { ignores: ['dist', 'src-tauri', 'assets'] }, 
   { 
     extends: [ 
       js.configs.recommended, 

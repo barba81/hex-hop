@@ -1,11 +1,13 @@
-import { getColorMode } from "@/infrastructure/utils/color-format-changer";
+import { ColorEntity } from "@/infrastructure/models/entity";
+import { colorStringToData, getColorMode } from "@/infrastructure/utils/color-format-changer";
+import { getSmartColorName } from "@/lib/get-color-name";
 import { useAppStore } from "@/store/app-store";
-import { addNewColorToClipboard } from "./add-block";
+import { invoke } from "@tauri-apps/api/core";
 
 export const handleColorChange = (color: string) => {
-  const colorMode = getColorMode(color);
-
+  
   useAppStore.setState((state) => {
+    const colorMode = getColorMode(color);
     state.inputColor = color;
     if (colorMode) {
       state.isColorValid = true;
@@ -20,8 +22,6 @@ export const handleColorChange = (color: string) => {
 export const handleEyeDropperColorPicker = async () => {
   // mack implementation 
   // const hexColor = await invoke<string | null>('pick_color');
-
-
   if (!window.EyeDropper) {
     return;
   }
@@ -44,4 +44,30 @@ declare global {
   }
 }
 
+
+export const addNewColorToClipboard = async (
+  color: string,
+  paletteId: number | null
+) => {
+  const colorData = colorStringToData(color);
+  const name = await getSmartColorName(colorData);
+  const colorEntity = await invoke<ColorEntity>('create_color', {
+    color: { ...colorData, name }
+  });
+
+  useAppStore.setState((state) => {
+    const colorMode = getColorMode(color);
+    state.inputColor = color;
+    if (colorMode) {
+      state.isColorValid = true;
+      state.colorMode = colorMode;
+      state.validColor = color;
+    } else {
+      state.isColorValid = false;
+    }
+    state.blocksById[colorEntity.blockId] = colorEntity;
+    state.blockIds[rootBlockId] = [colorEntity.blockId, ...(state.blockIds[paletteId ?? rootBlockId] || [])];
+    historyPush({ async undo() { }, async redo() { }, }, state.clipboardHistory);
+  });
+}
 

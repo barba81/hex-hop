@@ -1,11 +1,15 @@
 import { Check } from "lucide-react";
-import { addNewColorToClipboard } from "../../features/add-block";
 import { Button } from "@/components/ui/button";
 import { useAppStore } from "@/store/app-store";
+import { addNewColorToClipboard } from "@/pages/clipboard-page/features/color-actions";
 
 const AddColorButton = () => {
   const isColorValid = useAppStore((state) => state.isColorValid);
   const inputColor = useAppStore((state) => state.inputColor);
+
+  const handleOnClick = () => {
+    addNewColorToClipboard(inputColor, null);
+  }
 
   return (
     <Button size='icon-sm'
@@ -14,9 +18,7 @@ const AddColorButton = () => {
       className={`
             ${isColorValid && "bg-green-400  dark:bg-green-900  hover:bg-green-400/50"} 
           `}
-      onClick={async () => {
-        addNewColorToClipboard(inputColor, null);
-      }}
+      onClick={() => handleOnClick()}
     >
       <Check strokeWidth={3.5} size={16} />
     </Button>

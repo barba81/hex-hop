@@ -1,27 +1,12 @@
 import { invoke } from "@tauri-apps/api/core";
 import type { ColorEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { getSmartColorName } from "../../../lib/get-color-name";
-import { colorStringToData, getColorMode, validateColor } from "@/infrastructure/utils/color-format-changer";
+import { colorStringToData, getColorMode } from "@/infrastructure/utils/color-format-changer";
 import { rootBlockId } from "@/infrastructure/data/const-data";
 import { useAppStore } from "@/store/app-store";
 import { historyPush } from "@/infrastructure/history/history";
 
-export const addNewColorToClipboard = async (
-  inputColor: string,
-  paletteId: number | null
-) => {
-  const colorData = colorStringToData(inputColor);
-  const name = await getSmartColorName(colorData);
-  const colorEntity = await invoke<ColorEntity>('create_color', {
-    color: { ...colorData, name }
-  });
 
-  useAppStore.setState((state) => {
-    state.blocksById[colorEntity.blockId] = colorEntity;
-    state.blockIds[rootBlockId] = [colorEntity.blockId, ...(state.blockIds[paletteId ?? rootBlockId] || [])];
-    historyPush({ async undo() { }, async redo() { }, }, state.clipboardHistory);
-  });
-}
 
 export const addNewPalette = async (blockIds: number[]) => {
   const paletteEntity = await invoke<PaletteEntity>("create_palette", { palette: { name: "New palette", blockIds } });
