@@ -1,12 +1,12 @@
 ;
 import { useAppStore } from "@/store/app-store";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
-import { handleColorChange } from "../../features/color-actions";
 
 const ColorInput = () => {
   const colorFormat = useAppStore((state) => state.colorMode);
   const isColorValid = useAppStore((state) => state.isColorValid);
   const inputColor = useAppStore((state) => state.inputColor);
+  const handleColorChange = useAppStore((state) => state.handleColorChange);
 
   const handleOnChange = (color: string) => { 
     handleColorChange(color);

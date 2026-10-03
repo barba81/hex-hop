@@ -6,11 +6,11 @@ import {
 } from "@/components/ui/popover";
 import "@/globals.css";
 import { useAppStore } from "@/store/app-store";
-import { handleColorChange } from "../../features/color-actions";
 import { formatHex8 } from "culori";
 
 const PreviewColorBox = () => {
   const currentColor = formatHex8(useAppStore(x => x.validColor));
+  const handleColorChange = useAppStore(state => state.handleColorChange);
 
   const handleOnChange = (color: string) => {
     handleColorChange(color);

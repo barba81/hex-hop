@@ -1,7 +1,5 @@
 import { invoke } from "@tauri-apps/api/core";
-import type { ColorEntity, PaletteEntity } from "@/infrastructure/models/entity";
-import { getSmartColorName } from "../../../lib/get-color-name";
-import { colorStringToData, getColorMode } from "@/infrastructure/utils/color-format-changer";
+import type { PaletteEntity } from "@/infrastructure/models/entity";
 import { rootBlockId } from "@/infrastructure/data/const-data";
 import { useAppStore } from "@/store/app-store";
 import { historyPush } from "@/infrastructure/history/history";
