@@ -10,7 +10,7 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/in
 import { Button } from "@/components/ui/button";
 import { setEditBlock } from "@/pages/clipboard-page/features/block-actions";
 import { updateColorBlock } from "@/pages/clipboard-page/features/update-block";
-import { getSmartColorName } from "@/pages/clipboard-page/features/get-color-name";
+import { getSmartColorName } from "@/lib/get-color-name";
 
 type ColorBlockEditParams = {
     colorEntity: ColorEntity

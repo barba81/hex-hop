@@ -17,6 +17,6 @@ export const BlenderIcon = ({ size = 24 }: { size?: number }) => {
 
 export const TailwindIcon = ({ size = 24 }: { size?: number }) => {
   return (
-    <img src={Tailwind} alt="Tailwind" />
+    <img src={Tailwind} alt="Tailwind"/>
   );
 }
