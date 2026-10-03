@@ -68,6 +68,17 @@ export default tseslint.config(
  
       'no-console': ['warn', { allow: ['warn', 'error', 'info'] }], 
       'react-hooks/exhaustive-deps': 'error', 
+      'no-restricted-imports': [
+      'error',
+      {
+        patterns: [
+          {
+            group: ['../**'],
+            message: 'Use absolute imports (e.g., @/components/...) instead of relative parent paths.',
+          },
+        ],
+      },
+    ],
     }, 
   }, 
   // Node-context files (Vite config etc.) shouldn't use browser globals 
