@@ -4,18 +4,17 @@ import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { Check, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { updateGradientBlock } from "@/pages/clipboard-page/features/update-block";
-import { setEditBlock } from "@/pages/clipboard-page/features/block-actions";
 import { Input } from "@/components/ui/input";
+import { useAppStore } from "@/store/app-store";
 
 type GradientBlockEditParams = {
     gradientEntity: GradientEntity
 };
 
 const GradientBlockEdit = ({ gradientEntity }: GradientBlockEditParams) => {
+    const setEditBlock = useAppStore((state) => state.setEditBlock);
     const [gradientUpdate, setColorUpdateEntity] = useState<GradientEntitySummary>(() => (toGradientSummary(gradientEntity)));
     const handleEdit = async () => {
-        updateGradientBlock(gradientUpdate, toGradientSummary(gradientEntity));
         setEditBlock(null);
     };
 

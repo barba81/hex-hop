@@ -6,7 +6,6 @@ import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-stri
 import React from "react";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Button } from "@/components/ui/button";
-import { setEditBlock } from "@/pages/clipboard-page/features/block-actions";
 import InnerBlock from "./inner-block";
 import DroppableLine from "@/components/drag-and-drop/drop-line";
 import { BaseDraggableOutlineBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
@@ -105,6 +104,7 @@ const PaletteDropDownCard = ({ paletteEntity, colorBlocksId }: PaletteDropDownCa
 const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
   const colorBlocksId = useAppStore(state => state.blockIds[paletteEntity.id]) ?? [];
   const isOpen = useAppStore((state) => !!state.openPalette[paletteEntity.blockId]);
+    const setEditBlock = useAppStore((state) => state.setEditBlock);
 
   return <ContextMenu>
     <ContextMenuTrigger>

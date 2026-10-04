@@ -2,15 +2,15 @@ import type { GradientEntity } from "@/infrastructure/models/entity";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
-import { setEditBlock } from "@/pages/clipboard-page/features/block-actions";
-import { deleteGradientBlock } from "@/pages/clipboard-page/features/delete-block";
 import { BaseDraggableOutlineBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
+import { useAppStore } from "@/store/app-store";
 
 type GradientBoxParams = {
     gradientEntity: GradientEntity 
 };
 
 export const GradientBlockSmall = ({ gradientEntity: gradientEntity }: GradientBoxParams) => {
+    const setEditBlock = useAppStore((state) => state.setEditBlock);
 
     const gradientBackground = gradientToCssString(gradientEntity);
 
@@ -39,7 +39,7 @@ export const GradientBlockSmall = ({ gradientEntity: gradientEntity }: GradientB
                 </BaseDraggableOutlineBlock>
             </ContextMenuTrigger>
             <ContextMenuContent className="w-48">
-                <ContextMenuItem className="gap-2" onClick={() => setEditBlock(gradientEntity.blockId)}>
+                <ContextMenuItem className="gap-2">
                     <Pen className="size-4" />
                     Edit
                 </ContextMenuItem>
@@ -54,7 +54,7 @@ export const GradientBlockSmall = ({ gradientEntity: gradientEntity }: GradientB
                 <ContextMenuItem
                     variant="destructive"
                     className="gap-2"
-                    onClick={() => deleteGradientBlock(gradientEntity.blockId, gradientEntity.id, gradientEntity.parentPaletteId)}
+                   
                 >
                     <Trash2 className="size-4" />
                     Delete

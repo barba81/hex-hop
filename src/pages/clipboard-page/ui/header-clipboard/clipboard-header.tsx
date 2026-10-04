@@ -3,7 +3,6 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { Button } from "@/components/ui/button";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { Search } from "lucide-react"
-import { deleteClipboard } from "../../features/delete-block";
 import { useAppStore } from "@/store/app-store";
 
 const HeaderDropdown = () => {
@@ -24,16 +23,15 @@ const HeaderDropdown = () => {
             }
             }
           >
-            <Palette  />
+            <Palette />
             <span className="text-xs font-medium">
               Add new palette
             </span>
           </DropdownMenuItem>
           <DropdownMenuItem
             variant="destructive"
-            onClick={() => deleteClipboard()}
           >
-            <Trash2  />
+            <Trash2 />
             <span className="text-xs font-medium">
               Clear All
             </span>

@@ -3,17 +3,16 @@ import { Check, X } from "lucide-react";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { setEditBlock } from "@/pages/clipboard-page/features/block-actions";
-import { updatePaletteBlock } from "@/pages/clipboard-page/features/update-block";
 import { Input } from "@/components/ui/input";
+import { useAppStore } from "@/store/app-store";
 
 type PaletteBlockEditParams = {
     paletteEntity: PaletteEntity
 };
 const PaletteBlockEdit = ({ paletteEntity }: PaletteBlockEditParams) => {
+    const setEditBlock = useAppStore((store) => store.setEditBlock);
     const [paletteUpdateEntity, setColorUpdateEntity] = useState(() => (toPaletteSummary(paletteEntity)));
     const handleEdit = async () => {
-        updatePaletteBlock(paletteUpdateEntity, toPaletteSummary(paletteEntity));
         setEditBlock(null);
 
     };

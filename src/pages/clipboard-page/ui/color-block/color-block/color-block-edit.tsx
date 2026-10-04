@@ -8,7 +8,6 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { colorEntityToColor, hexaToRgbaNormalized, toHex8 } from "@/infrastructure/utils/color-format-changer";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
-import { updateColorBlock } from "@/pages/clipboard-page/features/update-block";
 import { getSmartColorName } from "@/lib/get-color-name";
 import { useAppStore } from "@/store/app-store";
 
@@ -190,13 +189,13 @@ const ColorBlockEdit = ({ colorEntity }: ColorBlockEditParams) => {
     };
 
     const handleEdit = async () => {
-        await updateColorBlock(
-            {
-                ...colorEntity,
-                ...colorUpdateEntity,
-            },
-            colorEntity
-        );
+        // await updateColorBlock(
+        //     {
+        //         ...colorEntity,
+        //         ...colorUpdateEntity,
+        //     },
+        //     colorEntity
+        // );
 
         setEditBlock(null);
     };

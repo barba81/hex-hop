@@ -10,9 +10,10 @@ import { invoke } from "@tauri-apps/api/core";
 import { ColorEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { historyPush } from "@/infrastructure/history/history";
 import { DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
+import { createClipboardActions } from "@/pages/clipboard-page/store/clipboard-actions";
 
 export interface ClipboardSlice {
-  openPalette: Record<string, unknown>;
+  openPalette: Record<string, boolean>;
   sourceDnd: DraggableData | null;
   editBlockId: string | null;
   isColorValid: boolean;
@@ -26,6 +27,7 @@ export interface ClipboardSlice {
   handleColorChange: (color: string) => void;
   addNewColorToClipboard: (color: string, paletteId: number | null) => Promise<void>;
   addNewPaletteToClipboard: (blockIds: number[]) => Promise<void>;
+  deleteColorBlock:  (blockId: number, colorId: number, paletteId: number | null) => Promise<void>;
 }
 
 export const createClipboardSlice: ImmerStateCreator<AppStore, ClipboardSlice> = (set) => ({
@@ -39,22 +41,17 @@ export const createClipboardSlice: ImmerStateCreator<AppStore, ClipboardSlice> =
   clipboardHistory: initialScopeHistory,
 
   setEditBlock: (blockId) => {
-    set((state) => {
-       state.editBlockId = blockId;
-    });
+    set((state) => { state.editBlockId = blockId; });
   },
-
+  
   togglePalette: (paletteId) => {
-    set((state) => {
-      state.openPalette[paletteId] = !state.openPalette[paletteId];
-    });
+    set((state) => { state.openPalette[paletteId] = !state.openPalette[paletteId]; });
   },
+  
   handleColorChange: (color) => {
     const colorMode = getColorMode(color);
-
     set((state) => {
       state.inputColor = color;
-
       if (colorMode) {
         state.isColorValid = true;
         state.colorMode = colorMode;
@@ -64,58 +61,7 @@ export const createClipboardSlice: ImmerStateCreator<AppStore, ClipboardSlice> =
       }
     });
   },
-  addNewColorToClipboard: async (color, paletteId) => {
-    const colorData = colorStringToData(color);
-    const name = await getSmartColorName(colorData);
-
-    const colorEntity = await invoke<ColorEntity>("create_color", {
-      color: {
-        ...colorData,
-        name,
-      },
-    });
-
-    const colorMode = getColorMode(color);
-
-    set((state) => {
-      state.inputColor = color;
-
-      if (colorMode) {
-        state.isColorValid = true;
-        state.colorMode = colorMode;
-        state.validColor = color;
-      } else {
-        state.isColorValid = false;
-      }
-
-      state.blocksById[colorEntity.blockId] = colorEntity;
-
-      state.blockIds[rootBlockId] = [
-        colorEntity.blockId,
-        ...(state.blockIds[paletteId ?? rootBlockId] || []),
-      ];
-
-      historyPush(
-        {
-          async undo() { },
-          async redo() { },
-        },
-        state.clipboardHistory
-      );
-    });
-  },
-  addNewPaletteToClipboard: async (blockIds) => {
-    console.time();
-
-    const paletteEntity = await invoke<PaletteEntity>("create_palette", { palette: { name: "New palette", blockIds } });
-    set((state) => {
-      state.blocksById[paletteEntity.blockId] = paletteEntity;
-      state.blockIds[rootBlockId] = [paletteEntity.blockId, ...(state.blockIds[rootBlockId] || [])];
-      historyPush({ async undo() { }, async redo() { }, }, state.clipboardHistory);
-      console.timeEnd();
-
-    });
-  }
+  ...createClipboardActions(set)
 });
 
 export const setDnd = () => {

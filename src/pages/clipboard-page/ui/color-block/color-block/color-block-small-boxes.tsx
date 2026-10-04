@@ -2,18 +2,17 @@ import type { ColorEntity } from "@/infrastructure/models/entity";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { coloBackground } from "@/infrastructure/utils/color-format-changer";
-import { setEditBlock } from "../../../features/block-actions";
-import { duplicateBlock } from "../../../features/duplicate-block";
-import { deleteColorBlock } from "../../../features/delete-block";
 import { BlenderIcon, CSSIcon, TailwindIcon } from "@/components/icons/custom-icon";
 import { BaseDraggableOutlineBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
+import { useAppStore } from "@/store/app-store";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity
 };
 
 const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
-
+    const setEditBlock = useAppStore((state) => state.setEditBlock);
+    const deleteColorBlock = useAppStore((state) => state.deleteColorBlock);
     const backgroundCss = coloBackground(colorEntity);
 
     return <ContextMenu>
@@ -49,7 +48,7 @@ const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
             </ContextMenuItem>
 
             <ContextMenuItem className="gap-2"
-                onClick={() => duplicateBlock(colorEntity)}>
+                onClick={() =>{}}>
                 <Copy className="size-4" />
                 Copy
             </ContextMenuItem>
