@@ -4,11 +4,11 @@ pub async fn create_gradient<'a, E>(
     gradient: &gradient_service_request::GradientRequest,
     block_id: i64,
     executor: E,
-) -> Result<i64, sqlx::Error>
+) -> Result<String, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-    let id = sqlx::query_scalar!(
+    let id: String = sqlx::query_scalar!(
         r#"
         INSERT INTO gradient (name,block_id)
         VALUES ($1,$2)
@@ -83,7 +83,7 @@ where
 
     qb.push_values(layers, |mut b, layer| {
         b.push_bind(layer.gradient_order)
-            .push_bind(layer.gradient_id)
+            .push_bind(layer.gradient_id.clone())
             .push_bind(layer.gradient_type.clone())
             .push_bind(layer.rotation_degree)
             .push_bind(layer.pattern_repeat_number)

@@ -34,6 +34,6 @@ pub struct GradientStopRequest {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GradientUpdateRequest {
-    pub id: i64,
+    pub id: String,
     pub name: String,
 }

@@ -30,13 +30,13 @@ pub async fn get_layer(
 #[tauri::command]
 pub async fn get_gradient(
     state: tauri::State<'_, DbState>,
-    gradient_id: i64,
+    gradient_id: String,
 ) -> Result<gradient_service_response::GradientResponse, TauriError> {
-    let gradient = gradient_get_repo::get_gradient_by_id(gradient_id, &state.pool).await?;
+    let gradient = gradient_get_repo::get_gradient_by_id(&gradient_id, &state.pool).await?;
     let layers =
-        gradient_get_repo::get_gradient_layers_by_gradient_id(gradient_id, &state.pool).await?;
+        gradient_get_repo::get_gradient_layers_by_gradient_id(&gradient_id, &state.pool).await?;
     let stops =
-        gradient_get_repo::get_gradient_stops_by_gradient_id(gradient_id, &state.pool).await?;
+        gradient_get_repo::get_gradient_stops_by_gradient_id(&gradient_id, &state.pool).await?;
     Ok(gradient_data_mapper::build_gradient_response(
         &gradient, &layers, &stops,
     ))
@@ -46,7 +46,7 @@ pub async fn get_gradient(
 pub async fn create_gradient(
     state: tauri::State<'_, DbState>,
     gradient: gradient_service_request::GradientRequest,
-) -> Result<i64, TauriError> {
+) -> Result<String, TauriError> {
     let mut tx = state.pool.begin().await?;
 
     let block_id = create_block(gradient.parent_palette_id, &mut *tx).await?;
@@ -55,7 +55,7 @@ pub async fn create_gradient(
     let layers: Vec<gradient_create_model::GradientLayerCreateModel> = gradient
         .layers
         .iter()
-        .map(|layer| gradient_data_mapper::build_layer_model(&layer, gradient_id))
+        .map(|layer| gradient_data_mapper::build_layer_model(&layer, &gradient_id))
         .collect();
 
     let layer_ids = gradient_create_repo::create_layers(&layers, &mut *tx).await?;
@@ -119,10 +119,11 @@ pub async fn update_gradient(
     let mut tx = state.pool.begin().await?;
     gradient_update_repo::update_gradient_async(&gradient, &mut *tx).await?;
 
-    let gradient = gradient_get_repo::get_gradient_by_id(gradient.id, &mut *tx).await?;
+    let gradient = gradient_get_repo::get_gradient_by_id(&gradient.id, &mut *tx).await?;
     let layers =
-        gradient_get_repo::get_gradient_layers_by_gradient_id(gradient.id, &mut *tx).await?;
-    let stops = gradient_get_repo::get_gradient_stops_by_gradient_id(gradient.id, &mut *tx).await?;
+        gradient_get_repo::get_gradient_layers_by_gradient_id(&gradient.id, &mut *tx).await?;
+    let stops =
+        gradient_get_repo::get_gradient_stops_by_gradient_id(&gradient.id, &mut *tx).await?;
 
     tx.commit().await?;
 
@@ -150,14 +151,14 @@ pub async fn update_stop(
 #[tauri::command]
 pub async fn delete_gradient(
     state: tauri::State<'_, DbState>,
-    gradient_id: i64,
+    gradient_id: String,
 ) -> Result<(), TauriError> {
     let mut tx = state.pool.begin().await?;
 
-    let gradient = gradient_get_repo::get_gradient_by_id(gradient_id, &state.pool).await?;
+    let gradient = gradient_get_repo::get_gradient_by_id(&gradient_id, &state.pool).await?;
     soft_delete_block(gradient.block_id, true, &mut *tx).await?;
-    gradient_delete_repo::soft_delete_gradient_layer_by_gradient_id(gradient_id, &mut *tx).await?;
-    gradient_delete_repo::soft_delete_stop_by_gradient_id(gradient_id, &mut *tx).await?;
+    gradient_delete_repo::soft_delete_gradient_layer_by_gradient_id(&gradient_id, &mut *tx).await?;
+    gradient_delete_repo::soft_delete_stop_by_gradient_id(&gradient_id, &mut *tx).await?;
 
     tx.commit().await?;
 
@@ -193,7 +194,7 @@ pub async fn update_gradient_summary(
     let mut tx = state.pool.begin().await?;
 
     gradient_update_repo::update_gradient_async(&gradient_request, &mut *tx).await?;
-    let gradient = gradient_get_repo::get_gradient_by_id(gradient_request.id, &mut *tx).await?;
+    let gradient = gradient_get_repo::get_gradient_by_id(&gradient_request.id, &mut *tx).await?;
 
     tx.commit().await?;
 

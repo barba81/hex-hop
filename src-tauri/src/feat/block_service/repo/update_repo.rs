@@ -27,7 +27,7 @@ where
 }
 
 pub async fn set_up_blocks_to_palette<'a, E>(
-    palette_id: i64,
+    palette_id: &str,
     block_ids: &[i64],
     executor: E,
 ) -> Result<(), sqlx::Error>

@@ -1,7 +1,7 @@
 use super::super::model::*;
 
 pub async fn get_gradient_by_id<'a, E>(
-    id: i64,
+    id: &str,
     executor: E,
 ) -> Result<gradient_data_model::GradientDataModel, sqlx::Error>
 where
@@ -15,8 +15,7 @@ where
                 g.name as \"name!\",
                 g.block_id as \"block_id\",
                 b.block_order as \"block_order\",
-                b.parent_palette_id as \"parent_palette_id\",
-                \"gradient\" as kind
+                b.parent_palette_id as \"parent_palette_id\"
             FROM gradient g 
             INNER JOIN  block b ON b.id = g.block_id
             WHERE g.id = ?1
@@ -31,7 +30,7 @@ where
 }
 
 pub async fn get_gradient_layers_by_gradient_id<'a, E>(
-    gradient_id: i64,
+    gradient_id: &str,
     executor: E,
 ) -> Result<Vec<gradient_data_model::GradientLayerDataModel>, sqlx::Error>
 where
@@ -94,7 +93,7 @@ where
 }
 
 pub async fn get_gradient_stops_by_gradient_id<'a, E>(
-    gradient_id: i64,
+    gradient_id: &String,
     executor: E,
 ) -> Result<Vec<gradient_data_model::GradientStopDataModel>, sqlx::Error>
 where

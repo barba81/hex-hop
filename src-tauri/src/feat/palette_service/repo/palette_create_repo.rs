@@ -6,7 +6,7 @@ pub async fn create_palette<'a, E>(
     palette: &palette_create_model::PaletteCreateModel,
     block_id: i64,
     executor: E,
-) -> Result<i64, sqlx::Error>
+) -> Result<String, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
@@ -47,7 +47,7 @@ where
     Ok(())
 }
 
-pub async fn restore_palette_async<'a, E>(palette_id: i64, executor: E) -> Result<(), sqlx::Error>
+pub async fn restore_palette_async<'a, E>(palette_id: &str, executor: E) -> Result<(), sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {

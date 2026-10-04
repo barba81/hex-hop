@@ -30,7 +30,7 @@ where
     Ok(())
 }
 
-pub async fn restore_color<'a, E>(color_id: i64, executor: E) -> Result<(), sqlx::Error>
+pub async fn restore_color<'a, E>(color_id: &String, executor: E) -> Result<(), sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {

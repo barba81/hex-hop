@@ -3,12 +3,11 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GradientDataModel {
-    pub id: i64,
+    pub id: String,
     pub name: String,
     pub block_order: i64,
     pub block_id: i64,
-    pub kind: String,
-    pub parent_palette_id: Option<i64>,
+    pub parent_palette_id: Option<String>,
 }
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -16,7 +15,7 @@ pub struct GradientDataModel {
 pub struct GradientLayerDataModel {
     pub id: i64,
     pub gradient_order: i64,
-    pub gradient_id: i64,
+    pub gradient_id: String,
     pub gradient_type: String,
     pub rotation_degree: f64,
     pub pattern_repeat_number: i64,

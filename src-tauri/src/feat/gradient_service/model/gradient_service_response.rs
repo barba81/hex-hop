@@ -3,9 +3,9 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct GradientResponse {
-    pub id: i64,
+    pub id: String,
     pub name: String,
-    pub parent_palette_id: Option<i64>,
+    pub parent_palette_id: Option<String>,
     pub block_order: i64,
     pub block_id: i64,
     pub layers: Vec<GradientLayerResponse>,

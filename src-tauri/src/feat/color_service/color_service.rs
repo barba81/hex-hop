@@ -16,7 +16,7 @@ pub async fn create_color(
 
     let block_id = create_block(parent_palette_id, &mut *tx).await?;
     let color_id = color_create_repo::create_color(&color, block_id, &mut *tx).await?;
-    let color = color_get_repo::get_color_by_id(color_id, &mut *tx).await?;
+    let color = color_get_repo::get_color_by_id(&color_id, &mut *tx).await?;
 
     tx.commit().await?;
 
@@ -26,9 +26,9 @@ pub async fn create_color(
 #[tauri::command]
 pub async fn get_color(
     state: tauri::State<'_, DbState>,
-    color_id: i64,
+    color_id: String,
 ) -> Result<color_data_model::ColorDataModel, TauriError> {
-    let color = color_get_repo::get_color_by_id(color_id, &state.pool).await?;
+    let color = color_get_repo::get_color_by_id(&color_id, &state.pool).await?;
 
     Ok(color)
 }
@@ -51,7 +51,7 @@ pub async fn update_color(
 
     tx.commit().await?;
 
-    let color = color_get_repo::get_color_by_id(color.id, &state.pool).await?;
+    let color = color_get_repo::get_color_by_id(&color.id, &state.pool).await?;
 
     Ok(color)
 }
@@ -59,12 +59,12 @@ pub async fn update_color(
 #[tauri::command]
 pub async fn restore_color(
     state: tauri::State<'_, DbState>,
-    color_id: i64,
+    color_id: String,
 ) -> Result<color_data_model::ColorDataModel, TauriError> {
     let mut tx = state.pool.begin().await?;
 
-    color_update_repo::restore_color(color_id, &mut *tx).await?;
-    let color = color_get_repo::get_color_by_id(color_id, &mut *tx).await?;
+    color_update_repo::restore_color(&color_id, &mut *tx).await?;
+    let color = color_get_repo::get_color_by_id(&color_id, &mut *tx).await?;
 
     tx.commit().await?;
 

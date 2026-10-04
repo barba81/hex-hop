@@ -4,14 +4,16 @@ import { ColorEntity, PaletteEntity } from '@/infrastructure/models/entity';
 import { colorStringToData, getColorMode } from '@/infrastructure/utils/color-format-changer';
 import { getSmartColorName } from '@/lib/get-color-name';
 import { invoke } from '@tauri-apps/api/core';
+import { nanoid } from 'nanoid'
 
 export const createClipboardActions = (set: any) => ({
   addNewColorToClipboard: async (color: string, paletteId: number | null) => {
     const colorData = colorStringToData(color);
     const name = await getSmartColorName(colorData);
     const colorEntity = await invoke<ColorEntity>("create_color", {
-      color: { ...colorData, name },
+      color: { ...colorData, id: nanoid() ,name },
     });
+    debugger
     const colorMode = getColorMode(color);
 
     set((state: any) => {

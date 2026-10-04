@@ -10,7 +10,7 @@ pub struct GradientCreateModel {
 #[serde(rename_all = "camelCase")]
 pub struct GradientLayerCreateModel {
     pub gradient_order: i64,
-    pub gradient_id: i64,
+    pub gradient_id: String,
     pub gradient_type: String,
     pub rotation_degree: f64,
     pub pattern_repeat_number: i64,

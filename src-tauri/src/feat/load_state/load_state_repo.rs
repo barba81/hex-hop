@@ -22,8 +22,7 @@ where
         c.name              AS "name!",
         c.block_id          AS "block_id!",
         b.block_order       AS "block_order!",
-        b.parent_palette_id AS "parent_palette_id", 
-        "color"             AS "kind!"   
+        b.parent_palette_id AS "parent_palette_id"
     FROM color c 
     INNER JOIN block b ON b.id = c.block_id
     WHERE b.deleted = 0
@@ -46,8 +45,7 @@ where
             p.id                AS "id!",
             p.name              AS "name!",
             p.block_id          AS "block_id!",
-            b.block_order       AS "block_order!",
-            "palette"           AS "kind!"              
+            b.block_order       AS "block_order!"
         FROM palette p 
         INNER JOIN block b ON b.id = p.block_id
         WHERE b.deleted = 0
@@ -71,8 +69,7 @@ where
             g.name as "name!",
             g.block_id as "block_id",
             b.block_order as "block_order",
-            b.parent_palette_id as "parent_palette_id",
-            "gradient" as  "kind!" 
+            b.parent_palette_id as "parent_palette_id"
         FROM gradient g 
         INNER JOIN  block b ON b.id = g.block_id
         AND b.deleted = 0

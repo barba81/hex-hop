@@ -48,13 +48,13 @@ pub fn build_gradient_response(
         .collect();
 
     GradientResponse {
-        id: gradient.id,
+        id: gradient.id.clone(),
         name: gradient.name.clone(),
         block_order: gradient.block_order,
         layers: layers_response,
         block_id: gradient.block_id,
-        parent_palette_id: gradient.parent_palette_id,
-        kind: gradient.kind.clone(),
+        parent_palette_id: gradient.parent_palette_id.clone(),
+        kind: "gradient".to_string(),
     }
 }
 
@@ -75,10 +75,10 @@ pub fn build_creation_stop_model(
 
 pub fn build_layer_model(
     layer_request: &GradientLayerRequest,
-    gradient_id: i64,
+    gradient_id: &str,
 ) -> GradientLayerCreateModel {
     GradientLayerCreateModel {
-        gradient_id: gradient_id,
+        gradient_id: gradient_id.to_string(),
         gradient_order: layer_request.gradient_order,
         gradient_type: layer_request.gradient_type.clone(),
         rotation_degree: layer_request.rotation_degree,

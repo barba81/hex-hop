@@ -16,10 +16,10 @@ pub fn build_all_gradients_response_fast(
         stops_by_layer.entry(stop.layer_id).or_default().push(stop);
     }
 
-    let mut layers_by_gradient: HashMap<i64, Vec<&GradientLayerDataModel>> = HashMap::new();
+    let mut layers_by_gradient: HashMap<String, Vec<&GradientLayerDataModel>> = HashMap::new();
     for layer in layers {
         layers_by_gradient
-            .entry(layer.gradient_id)
+            .entry(layer.gradient_id.clone())
             .or_default()
             .push(layer);
     }
@@ -52,13 +52,13 @@ pub fn build_all_gradients_response_fast(
                 .collect();
 
             GradientResponse {
-                id: gradient.id,
+                id: gradient.id.clone(),
                 name: gradient.name.clone(),
                 layers: layer_responses,
                 block_order: gradient.block_order,
                 block_id: gradient.block_id,
-                parent_palette_id: gradient.parent_palette_id,
-                kind: gradient.kind.clone(),
+                parent_palette_id: gradient.parent_palette_id.clone(),
+                kind: "gradient".to_string(),
             }
         })
         .collect()

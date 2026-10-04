@@ -5,8 +5,8 @@ import { rootBlockId } from "@/infrastructure/data/const-data";
 import type { ImmerStateCreator } from "@/infrastructure/types";
 
 export interface GlobalSlice {
-  blockIds: Record<number, number[]>;
-  blocksById: Record<number, BlockEntity>;
+  blockIds: Record<string, number[]>;
+  blocksById: Record<string, BlockEntity>;
   copyCopyFormulas: ColorCopyFormula[];
 }
 

@@ -59,7 +59,7 @@ pub async fn get_color_formula_repo<'a, E>(
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-    let formulas: ColorCopyFormulaModel = sqlx::query_as!(
+    let formulas = sqlx::query_as!(
         ColorCopyFormulaModel,
         r#"
         SELECT 

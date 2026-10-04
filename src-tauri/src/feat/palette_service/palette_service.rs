@@ -30,17 +30,17 @@ pub async fn create_palette(
     let palette_id =
         palette_create_repo::create_palette(&palette_create_model, block_id, &mut *tx).await?;
 
-    set_up_blocks_to_palette(palette_id, &palette.block_ids, &mut *tx).await?;
+    set_up_blocks_to_palette(&palette_id, &palette.block_ids, &mut *tx).await?;
 
     // get
-    let palette = palette_get_repo::get_palette_by_id(palette_id, &mut *tx).await?;
+    let palette = palette_get_repo::get_palette_by_id(&palette_id, &mut *tx).await?;
 
-    let colors_data = palette_get_repo::get_colors_by_palette_id(palette.id, &mut *tx).await?;
-    let gradients_data = palette_get_repo::get_gradients_palette_id(palette.id, &mut *tx).await?;
-    let layers = palette_get_repo::get_gradient_layers_palette_id(palette.id, &mut *tx).await?;
+    let colors_data = palette_get_repo::get_colors_by_palette_id(&palette.id, &mut *tx).await?;
+    let gradients_data = palette_get_repo::get_gradients_palette_id(&palette.id, &mut *tx).await?;
+    let layers = palette_get_repo::get_gradient_layers_palette_id(&palette.id, &mut *tx).await?;
     let stops: Vec<
         crate::feat::gradient_service::model::gradient_data_model::GradientStopDataModel,
-    > = palette_get_repo::get_gradient_stops_palette_id(palette.id, &mut *tx).await?;
+    > = palette_get_repo::get_gradient_stops_palette_id(&palette.id, &mut *tx).await?;
 
     tx.commit().await?;
     let gradients = build_all_gradients_response_fast(&gradients_data, &layers, &stops);
@@ -50,7 +50,7 @@ pub async fn create_palette(
         name: palette.name,
         block_order: palette.block_order,
         block_id: palette.block_id,
-        kind: palette.kind,
+        kind: "palette".to_string(),
         blocks: None,
     };
 
@@ -75,17 +75,17 @@ pub async fn create_palette(
 #[tauri::command]
 pub async fn get_palette(
     state: tauri::State<'_, DbState>,
-    palette_id: i64,
+    palette_id: String,
 ) -> Result<PaletteResponseModel, TauriError> {
     let mut tx = state.pool.begin().await?;
 
-    let palette = palette_get_repo::get_palette_by_id(palette_id, &mut *tx).await?;
+    let palette = palette_get_repo::get_palette_by_id(&palette_id, &mut *tx).await?;
 
-    let colors_data = palette_get_repo::get_colors_by_palette_id(palette.id, &mut *tx).await?;
-    let gradients_data = palette_get_repo::get_gradients_palette_id(palette.id, &mut *tx).await?;
-    let layers = palette_get_repo::get_gradient_layers_palette_id(palette.id, &mut *tx).await?;
+    let colors_data = palette_get_repo::get_colors_by_palette_id(&palette.id, &mut *tx).await?;
+    let gradients_data = palette_get_repo::get_gradients_palette_id(&palette.id, &mut *tx).await?;
+    let layers = palette_get_repo::get_gradient_layers_palette_id(&palette.id, &mut *tx).await?;
 
-    let stops = palette_get_repo::get_gradient_stops_palette_id(palette.id, &mut *tx).await?;
+    let stops = palette_get_repo::get_gradient_stops_palette_id(&palette.id, &mut *tx).await?;
 
     tx.commit().await?;
     let gradients = build_all_gradients_response_fast(&gradients_data, &layers, &stops);
@@ -95,7 +95,7 @@ pub async fn get_palette(
         name: palette.name,
         block_order: palette.block_order,
         block_id: palette.block_id,
-        kind: palette.kind,
+        kind: "palette".to_string(),
         blocks: None,
     };
 
@@ -120,16 +120,16 @@ pub async fn get_palette(
 #[tauri::command]
 pub async fn get_palette_summery(
     state: tauri::State<'_, DbState>,
-    palette_id: i64,
+    palette_id: String,
 ) -> Result<PaletteResponseModel, TauriError> {
-    let palette = palette_get_repo::get_palette_by_id(palette_id, &state.pool).await?;
+    let palette = palette_get_repo::get_palette_by_id(&palette_id, &state.pool).await?;
 
     let palette_response = PaletteResponseModel {
         id: palette.id,
         name: palette.name,
         block_order: palette.block_order,
         block_id: palette.block_id,
-        kind: palette.kind,
+        kind: "palette".to_string(),
         blocks: None,
     };
 
@@ -166,7 +166,7 @@ pub async fn update_palette_summary(
     let mut tx = state.pool.begin().await?;
 
     update_palette_repo(&palette_update, &mut *tx).await?;
-    let palette = palette_get_repo::get_palette_by_id(palette_update.id, &mut *tx).await?;
+    let palette = palette_get_repo::get_palette_by_id(&palette_update.id, &mut *tx).await?;
 
     tx.commit().await?;
 
@@ -175,7 +175,7 @@ pub async fn update_palette_summary(
         name: palette.name,
         block_order: palette.block_order,
         block_id: palette.block_id,
-        kind: palette.kind,
+        kind: "palette".to_string(),
     };
 
     Ok(palette_response)
@@ -184,20 +184,20 @@ pub async fn update_palette_summary(
 #[tauri::command]
 pub async fn restore_palette(
     state: tauri::State<'_, DbState>,
-    palette_id: i64,
+    palette_id: String,
 ) -> Result<PaletteResponseModel, TauriError> {
     let mut tx = state.pool.begin().await?;
 
-    restore_palette_async(palette_id, &mut *tx).await?;
+    restore_palette_async(&palette_id, &mut *tx).await?;
 
-    let palette = palette_get_repo::get_palette_by_id(palette_id, &mut *tx).await?;
+    let palette = palette_get_repo::get_palette_by_id(&palette_id, &mut *tx).await?;
 
-    let colors_data = palette_get_repo::get_colors_by_palette_id(palette.id, &mut *tx).await?;
-    let gradients_data = palette_get_repo::get_gradients_palette_id(palette.id, &mut *tx).await?;
-    let layers = palette_get_repo::get_gradient_layers_palette_id(palette.id, &mut *tx).await?;
+    let colors_data = palette_get_repo::get_colors_by_palette_id(&palette.id, &mut *tx).await?;
+    let gradients_data = palette_get_repo::get_gradients_palette_id(&palette.id, &mut *tx).await?;
+    let layers = palette_get_repo::get_gradient_layers_palette_id(&palette.id, &mut *tx).await?;
     let stops: Vec<
         crate::feat::gradient_service::model::gradient_data_model::GradientStopDataModel,
-    > = palette_get_repo::get_gradient_stops_palette_id(palette.id, &mut *tx).await?;
+    > = palette_get_repo::get_gradient_stops_palette_id(&palette.id, &mut *tx).await?;
 
     tx.commit().await?;
 
@@ -208,7 +208,7 @@ pub async fn restore_palette(
         name: palette.name,
         block_order: palette.block_order,
         block_id: palette.block_id,
-        kind: palette.kind,
+        kind: "Palette".to_string(),
         blocks: None,
     };
 

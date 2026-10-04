@@ -1,5 +1,5 @@
 pub async fn soft_delete_gradient_layer_by_gradient_id<'e, E>(
-    gradient_id: i64,
+    gradient_id: &String,
     executor: E,
 ) -> Result<bool, sqlx::Error>
 where
@@ -16,7 +16,7 @@ where
 }
 
 pub async fn soft_delete_stop_by_gradient_id<'e, E>(
-    gradient_id: i64,
+    gradient_id: &String,
     executor: E,
 ) -> Result<bool, sqlx::Error>
 where

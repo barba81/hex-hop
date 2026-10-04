@@ -8,7 +8,7 @@ use crate::feat::{
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PaletteResponseModel {
-    pub id: i64,
+    pub id: String,
     pub name: String,
     pub block_order: i64,
     pub block_id: i64,
@@ -27,7 +27,7 @@ pub enum BlockChildResponse {
 #[derive(Debug, Clone, Serialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PaletteSummaryResponseModel {
-    pub id: i64,
+    pub id: String,
     pub name: String,
     pub block_order: i64,
     pub block_id: i64,

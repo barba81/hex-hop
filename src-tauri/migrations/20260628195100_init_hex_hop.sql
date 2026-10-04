@@ -1,7 +1,7 @@
 -- Add migration script here
 CREATE TABLE block (
     id                INTEGER PRIMARY KEY AUTOINCREMENT,
-    parent_palette_id INTEGER, 
+    parent_palette_id TEXT, 
     block_order       INTEGER NOT NULL, 
     deleted           INTEGER DEFAULT 0 CHECK(deleted BETWEEN 0 AND 1),
     
@@ -9,7 +9,7 @@ CREATE TABLE block (
 );
 
 CREATE TABLE color (
-    id       INTEGER PRIMARY KEY AUTOINCREMENT,
+    id       TEXT PRIMARY KEY,
     block_id INTEGER UNIQUE NOT NULL,
     r               REAL  DEFAULT 1 CHECK(r BETWEEN 0 AND 1) NOT NULL,
     g               REAL  DEFAULT 1 CHECK(g BETWEEN 0 AND 1) NOT NULL,
@@ -21,7 +21,7 @@ CREATE TABLE color (
 );
 
 CREATE TABLE palette (
-    id       INTEGER PRIMARY KEY AUTOINCREMENT,
+    id       TEXT PRIMARY KEY,
     block_id INTEGER UNIQUE NOT NULL,
     name     TEXT NOT NULL,
     
@@ -29,7 +29,7 @@ CREATE TABLE palette (
 );
 
 CREATE TABLE gradient (
-    id       INTEGER PRIMARY KEY AUTOINCREMENT,
+    id       TEXT PRIMARY KEY,
     block_id INTEGER UNIQUE NOT NULL,
     name     TEXT NOT NULL,
     
@@ -39,7 +39,7 @@ CREATE TABLE gradient (
 CREATE TABLE gradient_layer (
     id                  INTEGER PRIMARY KEY AUTOINCREMENT,
     gradient_order          INTEGER NOT NULL, 
-    gradient_id          INTEGER NOT NULL,
+    gradient_id          TEXT NOT NULL,
     gradient_type         TEXT  NOT NULL,  
     rotation_degree      REAL NOT NULL,
     pattern_repeat_number INTEGER NOT NULL,

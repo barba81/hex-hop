@@ -15,7 +15,7 @@ pub struct PaletteCreateRequest {
 #[derive(Debug, Clone, Serialize, Deserialize)]
 #[serde(rename_all = "camelCase")]
 pub struct PaletteUpdateRequest {
-    pub id: i64,
+    pub id: String,
     pub name: String,
     pub block_id: i64,
     pub block_order: i64,

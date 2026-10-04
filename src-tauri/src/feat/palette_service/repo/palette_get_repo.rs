@@ -8,21 +8,20 @@ use crate::feat::{
 use super::super::model::*;
 
 pub async fn get_palette_by_id<'a, E>(
-    id: i64,
+    id: &str,
     executor: E,
 ) -> Result<palette_data_model::PaletteDataModel, sqlx::Error>
 where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
-    let color: palette_data_model::PaletteDataModel = sqlx::query_as!(
+    let color = sqlx::query_as!(
         palette_data_model::PaletteDataModel,
         r#"
             SELECT 
-                    p.id as "id",
-                    p.name as "name",
-                    p.block_id as "block_id",
-                    b.block_order as "block_order",
-                    "palette" as kind
+                    p.id as "id!",
+                    p.name as "name!",
+                    p.block_id as "block_id!",
+                    b.block_order as "block_order!"
                 FROM palette p 
                 INNER JOIN  block b ON b.id = p.block_id
                 WHERE p.id = ?1
@@ -37,7 +36,7 @@ where
 }
 
 pub async fn get_colors_by_palette_id<'a, E>(
-    palette_id: i64,
+    palette_id: &str,
     executor: E,
 ) -> Result<Vec<ColorDataModel>, sqlx::Error>
 where
@@ -55,8 +54,7 @@ where
             c.name              AS "name!",
             c.block_id          AS "block_id!",
             b.block_order       AS "block_order!",
-            b.parent_palette_id AS "parent_palette_id", 
-            "color"             AS "kind!"   
+            b.parent_palette_id AS "parent_palette_id"
         FROM color c 
         INNER JOIN block b ON b.id = c.block_id 
         WHERE b.deleted = 0 and b.parent_palette_id = ?
@@ -69,7 +67,7 @@ where
 }
 
 pub async fn get_gradients_palette_id<'a, E>(
-    palette_id: i64,
+    palette_id: &str,
     executor: E,
 ) -> Result<Vec<GradientDataModel>, sqlx::Error>
 where
@@ -83,8 +81,7 @@ where
                 g.name as "name!",
                 g.block_id as "block_id",
                 b.block_order as "block_order",
-                b.parent_palette_id as "parent_palette_id",
-                "gradient" as  "kind!" 
+                b.parent_palette_id as "parent_palette_id"
             FROM gradient g 
             INNER JOIN  block b ON b.id = g.block_id
             AND b.deleted = 0  and b.parent_palette_id = ?
@@ -101,7 +98,7 @@ where
 // WHERE b.deleted = 0 and b.parent_palette_id = ?
 
 pub async fn get_gradient_layers_palette_id<'a, E>(
-    palette_id: i64,
+    palette_id: &str,
     executor: E,
 ) -> Result<Vec<GradientLayerDataModel>, sqlx::Error>
 where
@@ -136,7 +133,7 @@ where
 }
 
 pub async fn get_gradient_stops_palette_id<'a, E>(
-    palette_id: i64,
+    palette_id: &str,
     executor: E,
 ) -> Result<Vec<GradientStopDataModel>, sqlx::Error>
 where

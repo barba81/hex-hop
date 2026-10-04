@@ -30,26 +30,26 @@ pub async fn load_state(
 
     let gradients = build_all_gradients_response_fast(&gradients_data, &layers, &stops);
 
-    let mut palette_map: HashMap<i64, PaletteResponseModel> = HashMap::new();
+    let mut palette_map: HashMap<String, PaletteResponseModel> = HashMap::new();
     let mut root: Vec<BlockResponse> = Vec::new();
 
     for palette in palettes_data {
         palette_map.insert(
-            palette.id,
+            palette.id.clone(),
             PaletteResponseModel {
                 id: palette.id,
                 name: palette.name,
                 block_order: palette.block_order,
                 block_id: palette.block_id,
-                kind: palette.kind,
+                kind: "palette".to_string(),
                 blocks: None,
             },
         );
     }
 
     for color in colors_data {
-        if let Some(parent_palette_id) = color.parent_palette_id {
-            if let Some(palette) = palette_map.get_mut(&parent_palette_id) {
+        if let Some(ref parent_palette_id) = color.parent_palette_id {
+            if let Some(palette) = palette_map.get_mut(parent_palette_id) {
                 palette
                     .blocks
                     .get_or_insert_with(Vec::new)
@@ -62,8 +62,8 @@ pub async fn load_state(
     }
 
     for gradient in gradients {
-        if let Some(parent_palette_id) = gradient.parent_palette_id {
-            if let Some(palette) = palette_map.get_mut(&parent_palette_id) {
+        if let Some(ref parent_palette_id) = gradient.parent_palette_id {
+            if let Some(palette) = palette_map.get_mut(parent_palette_id) {
                 palette
                     .blocks
                     .get_or_insert_with(Vec::new)
