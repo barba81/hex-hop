@@ -54,7 +54,8 @@ where
             c.name              AS "name!",
             c.block_id          AS "block_id!",
             b.block_order       AS "block_order!",
-            b.parent_palette_id AS "parent_palette_id"
+            b.parent_palette_id AS "parent_palette_id",
+            'color' AS "kind!"
         FROM color c 
         INNER JOIN block b ON b.id = c.block_id 
         WHERE b.deleted = 0 and b.parent_palette_id = ?

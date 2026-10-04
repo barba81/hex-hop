@@ -1,3 +1,5 @@
+use crate::feat::color_service::model::color_data_model::ColorDataModel;
+
 use super::super::model::*;
 
 pub async fn get_color_by_id<'a, E>(
@@ -8,23 +10,23 @@ where
     E: sqlx::Executor<'a, Database = sqlx::Sqlite>,
 {
     let color = sqlx::query_as!(
-        color_data_model::ColorDataModel,
-        "
-        SELECT
-            c.id as \"id!\",
-            c.r as \"r!\",
-            c.g as \"g!\",
-            c.b as \"b!\",
-            c.alpha as \"alpha\",
-            c.name as \"name!\",
-            c.block_id as \"block_id!\",
-            b.block_order as \"block_order!\",
-            b.parent_palette_id as \"parent_palette_id\"
-        FROM color c
-        INNER JOIN block b ON c.block_id = b.id
-        WHERE c.id = ?1
-          AND b.deleted = 0
-    ",
+        ColorDataModel,
+        r#"
+    SELECT 
+        c.id                AS "id!",
+        c.r                 AS "r!",
+        c.g                 AS "g!",
+        c.b                 AS "b!",
+        c.alpha             AS "alpha",       
+        c.name              AS "name!",
+        c.block_id          AS "block_id!",
+        b.block_order       AS "block_order!",
+        b.parent_palette_id AS "parent_palette_id",
+        'color'             AS "kind!: String"
+    FROM color c 
+    INNER JOIN block b ON b.id = c.block_id
+    WHERE b.deleted = 0 AND c.id = ?1
+    "#,
         id
     )
     .fetch_one(executor)

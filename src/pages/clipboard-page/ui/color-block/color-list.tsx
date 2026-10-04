@@ -24,9 +24,7 @@ const Block = ({ blockId }: ColorBoxParams) => {
     state => state.blocksById[blockId]
   );
 
-  const isEditing = useAppStore(
-    state => state.editBlockId === blockId
-  );
+  const isEditing = false
 
   switch (block.kind) {
     case "color":
@@ -59,11 +57,9 @@ const ColorList = () => {
       {colorBlocks.length === 0 ? <EmptyClipboardPage /> :
         <DragDropProvider onDragEnd={(e) => {
           handleDragEnd(e);
-          setDnd(null);
         }}
           onDragStart={(event) => {
             if (event.operation.source){
-              setDnd(event.operation.source.data as DraggableData);
             }
           }}
         >
