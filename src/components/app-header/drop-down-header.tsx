@@ -98,21 +98,21 @@ const DropDownHeader = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger render={
         <Button className="text-xs gap-1 items-center" variant='outline' size='xs'>
           {activePage?.icon || <Clipboard />}
           {activePage?.shortLabel || "Color List"}
         </Button>
-      </DropdownMenuTrigger>
+      } />
 
       <DropdownMenuContent className="w-auto">
         <DropdownMenuGroup>
           {Object.entries(ICON_MAP).map(([path, { icon, label }]) => (
             <DropdownMenuItem
-            key={path}
-            onClick={() => navigate(path)}
+              key={path}
+              onClick={() => navigate(path)}
             >
-             {icon}
+              {icon}
               <span className="text-xs font-medium">
                 {label}
               </span>

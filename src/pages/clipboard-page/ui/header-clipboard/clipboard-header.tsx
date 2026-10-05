@@ -9,11 +9,11 @@ const HeaderDropdown = () => {
   const addNewPaletteToClipboard = useAppStore((store) => store.addNewPaletteToClipboard);
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger>
+      <DropdownMenuTrigger render={
         <Button size='icon-xs' variant='outline'>
           <EllipsisVertical size={15} />
         </Button>
-      </DropdownMenuTrigger>
+        }/>
 
       <DropdownMenuContent className="w-auto">
         <DropdownMenuGroup>
