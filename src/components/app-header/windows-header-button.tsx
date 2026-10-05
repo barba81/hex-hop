@@ -1,6 +1,6 @@
+import { Button } from "@/shared/ui/button";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { Minus, X } from "lucide-react";
-import { Button } from "../ui/button";
 
 const WindowsHeaderButton = () => {
   return (

@@ -6,10 +6,10 @@ import { ColorFormulaCreator } from "./color-formula-creator";
 import { RestrictToVerticalAxis } from '@dnd-kit/abstract/modifiers';
 import { DynamicIconMapper } from "@/shared/utils/icon-mapper";
 import { addNewColorCopyBlock, flipColorCopyBlockVisibility, setColorCopyFormulaActive } from "../feature/color-settings-store-actions";
-import { Button } from "@/components/ui/button";
 import { BaseOutlineBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
 import { DragDots } from "@/components/drag-and-drop/drag-dots";
 import { defaultInputColor } from "@/shared/data/const-data";
+import { Button } from "@/shared/ui/button";
 
 const ColorBlockPreview = () => {
     const backgroundCss = defaultInputColor;

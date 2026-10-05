@@ -1,6 +1,6 @@
 ;
 import { useAppStore } from "@/shared/store/app-store";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/shared/ui/input-group";
 
 const ColorInput = () => {
   const colorFormat = useAppStore((state) => state.colorMode);

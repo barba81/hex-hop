@@ -4,7 +4,7 @@ import {
   DropdownMenuGroup,
   DropdownMenuItem,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
+} from "@/shared/ui/dropdown-menu";
 
 import {
   Clipboard,
@@ -16,7 +16,7 @@ import {
 import { useLocation, useNavigate } from "react-router";
 
 import GradientIcon from "@/components/icons/gradient-icon";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 
 const size = 15;
 

@@ -3,8 +3,8 @@ import { toGradientSummary, type GradientEntity } from "@/shared/models/entity";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { Check, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
+import { Button } from "@/shared/ui/button";
+import { Input } from "@/shared/ui/input";
 import { useAppStore } from "@/shared/store/app-store";
 
 type GradientBlockEditParams = {

@@ -1,5 +1,5 @@
 import { Pipette } from "lucide-react";
-import { Button } from "@/components/ui/button";
+import { Button } from "@/shared/ui/button";
 import { useAppStore } from "@/shared/store/app-store";
 
 const EyeDropButton = () => {

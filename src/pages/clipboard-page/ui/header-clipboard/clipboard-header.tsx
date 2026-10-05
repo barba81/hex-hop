@@ -1,9 +1,9 @@
 import { EllipsisVertical, Palette, Trash2 } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { Button } from "@/components/ui/button";
-import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "@/shared/ui/dropdown-menu";
 import { Search } from "lucide-react"
 import { useAppStore } from "@/shared/store/app-store";
+import { Button } from "@/shared/ui/button";
+import { InputGroup, InputGroupAddon, InputGroupInput } from "@/shared/ui/input-group";
 
 const HeaderDropdown = () => {
   const addNewPaletteToClipboard = useAppStore((store) => store.addNewPaletteToClipboard);

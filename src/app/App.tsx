@@ -3,9 +3,9 @@ import "./globals.css";
 import { ThemeProvider } from "../shared/theme/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { Outlet } from "react-router";
-import { TooltipProvider } from "../components/ui/tooltip";
 import { cn } from "../shared/utils/utils";
 import { platform as getPlatform } from "@tauri-apps/plugin-os";
+import { TooltipProvider } from "@/shared/ui/tooltip";
 
 const platform = getPlatform();
 
