@@ -2,7 +2,7 @@ import { rootBlockId } from '@/infrastructure/data/const-data';
 import { historyPush } from '@/infrastructure/history/history';
 import { ColorEntity, PaletteEntity } from '@/infrastructure/models/entity';
 import { colorStringToData, getColorMode } from '@/infrastructure/utils/color-format-changer';
-import { getSmartColorName } from '@/lib/get-color-name';
+import { getSmartColorName } from '@/shared/utils/get-color-name';
 import { invoke } from '@tauri-apps/api/core';
 import { nanoid } from 'nanoid'
 

@@ -1,4 +1,4 @@
-import { cn } from "@/lib/utils";
+import { cn } from "@/shared/utils/utils";
 import { useAppInfoStore } from "@/shared/store/app-status-store";
 import { Button } from "@base-ui/react";
 import { getCurrentWindow } from "@tauri-apps/api/window";

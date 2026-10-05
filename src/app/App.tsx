@@ -4,7 +4,7 @@ import { ThemeProvider } from "../components/theme/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { Outlet } from "react-router";
 import { TooltipProvider } from "../components/ui/tooltip";
-import { cn } from "../lib/utils";
+import { cn } from "../shared/utils/utils";
 import { platform as getPlatform } from "@tauri-apps/plugin-os";
 
 const platform = getPlatform();

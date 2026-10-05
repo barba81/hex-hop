@@ -5,7 +5,7 @@ import type { ImmerStateCreator } from "@/infrastructure/types";
 import { CommandHistory, initialScopeHistory } from "@/shared/store/history-slice";
 import { Color } from "culori";
 import { colorStringToData, getColorMode } from "@/infrastructure/utils/color-format-changer";
-import { getSmartColorName } from "@/lib/get-color-name";
+import { getSmartColorName } from "@/shared/utils/get-color-name";
 import { invoke } from "@tauri-apps/api/core";
 import { ColorEntity, PaletteEntity } from "@/infrastructure/models/entity";
 import { historyPush } from "@/infrastructure/history/history";
