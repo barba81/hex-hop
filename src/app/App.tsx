@@ -1,6 +1,6 @@
 import HeaderBar from "../components/app-header/app-header-bar";
 import "./globals.css";
-import { ThemeProvider } from "../components/theme/theme-provider";
+import { ThemeProvider } from "../shared/theme/theme-provider";
 import { Toaster } from "react-hot-toast";
 import { Outlet } from "react-router";
 import { TooltipProvider } from "../components/ui/tooltip";
