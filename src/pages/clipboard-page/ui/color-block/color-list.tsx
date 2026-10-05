@@ -2,7 +2,6 @@ import { DragDropProvider } from "@dnd-kit/react";
 import { useAppStore } from "@/shared/store/app-store";
 import EmptyClipboardPage from "../empty-clipboard-page";
 import React from "react";
-import type { DraggableData} from "../../features/darg-and-drop";
 import { handleDragEnd } from "../../features/darg-and-drop";
 import ColorBlockEdit from "./color-block/color-block-edit";
 import PaletteBlockEdit from "./palette-block/palette-block-edit";
@@ -11,7 +10,6 @@ import ColorBlockSmallBoxes from "./color-block/color-block-small-boxes";
 import PaletteBlock from "./palette-block/palette-block";
 import GradientBlockSmall from "./gradient-block/gradient-block-small";
 import DroppableLine from "@/components/drag-and-drop/drop-line";
-import { setDnd } from "../../store/clipboard-store";
 import { rootBlockId } from "@/shared/data/const-data";
 
 

@@ -1,6 +1,6 @@
 import { rootBlockId } from '@/shared/data/const-data';
 import { historyPush } from '@/shared/history/history';
-import { ColorEntity, PaletteEntity } from '@/shared/models/entity';
+import type { ColorEntity, PaletteEntity } from '@/shared/models/entity';
 import { colorStringToData, getColorMode } from '@/shared/utils/color-format-changer';
 import { getSmartColorName } from '@/shared/utils/get-color-name';
 import { invoke } from '@tauri-apps/api/core';
