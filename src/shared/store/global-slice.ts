@@ -1,8 +1,8 @@
-import type { BlockEntity } from "@/infrastructure/models/entity";
+import type { BlockEntity } from "@/shared/models/entity";
 import type { AppStore } from "./app-store";
-import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
-import { rootBlockId } from "@/infrastructure/data/const-data";
-import type { ImmerStateCreator } from "@/infrastructure/types";
+import type { ColorCopyFormula } from "@/shared/models/color-copy-list";
+import { rootBlockId } from "@/shared/data/const-data";
+import type { ImmerStateCreator } from "@/shared/types";
 
 export interface GlobalSlice {
   blockIds: Record<string, number[]>;

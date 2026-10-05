@@ -1,7 +1,7 @@
-import type { ColorEntity } from "@/infrastructure/models/entity";
+import type { ColorEntity } from "@/shared/models/entity";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/components/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
-import { coloBackground } from "@/infrastructure/utils/color-format-changer";
+import { coloBackground } from "@/shared/utils/color-format-changer";
 import { BlenderIcon, CSSIcon, TailwindIcon } from "@/components/icons/custom-icon";
 import { BaseDraggableOutlineBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
 import { useAppStore } from "@/shared/store/app-store";

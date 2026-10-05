@@ -12,7 +12,7 @@ import PaletteBlock from "./palette-block/palette-block";
 import GradientBlockSmall from "./gradient-block/gradient-block-small";
 import DroppableLine from "@/components/drag-and-drop/drop-line";
 import { setDnd } from "../../store/clipboard-store";
-import { rootBlockId } from "@/infrastructure/data/const-data";
+import { rootBlockId } from "@/shared/data/const-data";
 
 
 type ColorBoxParams = {

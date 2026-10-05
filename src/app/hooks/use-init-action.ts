@@ -1,10 +1,10 @@
 import { invoke } from "@tauri-apps/api/core";
-import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
-import type { BlockEntity } from "@/infrastructure/models/entity";
+import type { ColorCopyFormula } from "@/shared/models/color-copy-list";
+import type { BlockEntity } from "@/shared/models/entity";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { useAppInfoStore } from "../../shared/store/app-status-store";
-import { rootBlockId } from "../../infrastructure/data/const-data";
+import { rootBlockId } from "../../shared/data/const-data";
 import { useAppStore } from "../../shared/store/app-store";
 
 let isInitialized = false;

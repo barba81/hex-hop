@@ -1,15 +1,15 @@
 import { useAppStore } from "../../../../shared/store/app-store";
-import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
+import type { ColorCopyFormula } from "@/shared/models/color-copy-list";
 import { useSortable } from '@dnd-kit/react/sortable';
 import { ChevronDown, ChevronUp, Eye, EyeClosed, Plus } from "lucide-react";
 import { ColorFormulaCreator } from "./color-formula-creator";
 import { RestrictToVerticalAxis } from '@dnd-kit/abstract/modifiers';
-import { DynamicIconMapper } from "@/infrastructure/utils/icon-mapper";
+import { DynamicIconMapper } from "@/shared/utils/icon-mapper";
 import { addNewColorCopyBlock, flipColorCopyBlockVisibility, setColorCopyFormulaActive } from "../feature/color-settings-store-actions";
 import { Button } from "@/components/ui/button";
 import { BaseOutlineBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
 import { DragDots } from "@/components/drag-and-drop/drag-dots";
-import { defaultInputColor } from "@/infrastructure/data/const-data";
+import { defaultInputColor } from "@/shared/data/const-data";
 
 const ColorBlockPreview = () => {
     const backgroundCss = defaultInputColor;

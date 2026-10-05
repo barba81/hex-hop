@@ -1,8 +1,8 @@
 import type { DragEndEvent } from "@dnd-kit/react";
 import { invoke } from "@tauri-apps/api/core";
-import type { BlockEntity, PaletteEntity } from "@/infrastructure/models/entity";
+import type { BlockEntity, PaletteEntity } from "@/shared/models/entity";
 import { useAppStore } from "@/shared/store/app-store";
-import { rootBlockId } from "@/infrastructure/data/const-data";
+import { rootBlockId } from "@/shared/data/const-data";
 
 export interface DraggableData {
   blockId: number;

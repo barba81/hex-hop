@@ -1,5 +1,5 @@
-import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list"
-import type { ColorEntity } from "@/infrastructure/models/entity"
+import type { ColorCopyFormula } from "@/shared/models/color-copy-list"
+import type { ColorEntity } from "@/shared/models/entity"
 import { useAppStore } from "@/shared/store/app-store"
 
 

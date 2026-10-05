@@ -1,11 +1,11 @@
-import type { ColorEntity } from "@/infrastructure/models/entity";
+import type { ColorEntity } from "@/shared/models/entity";
 import { Check, RefreshCw, X } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover";
 import { HexAlphaColorPicker } from "react-colorful";
 import type { ChangeEvent } from "react";
 import { useEffect, useState } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
-import { colorEntityToColor, hexaToRgbaNormalized, toHex8 } from "@/infrastructure/utils/color-format-changer";
+import { colorEntityToColor, hexaToRgbaNormalized, toHex8 } from "@/shared/utils/color-format-changer";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
 import { getSmartColorName } from "@/shared/utils/get-color-name";

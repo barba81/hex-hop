@@ -1,14 +1,14 @@
-import { defaultInputColor, rootBlockId } from "@/infrastructure/data/const-data";
+import { defaultInputColor, rootBlockId } from "@/shared/data/const-data";
 import type { AppStore } from "@/shared/store/app-store";
 import { useAppStore } from "@/shared/store/app-store";
-import type { ImmerStateCreator } from "@/infrastructure/types";
+import type { ImmerStateCreator } from "@/shared/types";
 import { CommandHistory, initialScopeHistory } from "@/shared/store/history-slice";
 import { Color } from "culori";
-import { colorStringToData, getColorMode } from "@/infrastructure/utils/color-format-changer";
+import { colorStringToData, getColorMode } from "@/shared/utils/color-format-changer";
 import { getSmartColorName } from "@/shared/utils/get-color-name";
 import { invoke } from "@tauri-apps/api/core";
-import { ColorEntity, PaletteEntity } from "@/infrastructure/models/entity";
-import { historyPush } from "@/infrastructure/history/history";
+import { ColorEntity, PaletteEntity } from "@/shared/models/entity";
+import { historyPush } from "@/shared/history/history";
 import { DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
 import { createClipboardActions } from "@/pages/clipboard-page/store/clipboard-actions";
 
