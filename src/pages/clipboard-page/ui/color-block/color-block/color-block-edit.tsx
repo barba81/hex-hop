@@ -8,8 +8,8 @@ import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip
 import { colorEntityToColor, hexaToRgbaNormalized, toHex8 } from "@/shared/utils/color-format-changer";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
-import { getSmartColorName } from "@/shared/utils/get-color-name";
 import { useAppStore } from "@/shared/store/app-store";
+import { getSmartColorName } from "@/shared/utils/get-color-name";
 
 type ColorBlockEditParams = {
     colorEntity: ColorEntity

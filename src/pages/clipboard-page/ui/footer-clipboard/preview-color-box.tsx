@@ -4,7 +4,7 @@ import {
   PopoverContent,
   PopoverTrigger,
 } from "@/components/ui/popover";
-import "@/globals.css";
+import "@/app/globals.css";
 import { useAppStore } from "@/shared/store/app-store";
 import { formatHex8 } from "culori";
 

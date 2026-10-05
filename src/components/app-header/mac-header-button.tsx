@@ -1,5 +1,5 @@
-import { cn } from "@/shared/utils/utils";
 import { useAppInfoStore } from "@/shared/store/app-status-store";
+import { cn } from "@/shared/utils/utils";
 import { Button } from "@base-ui/react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { Maximize2, Minus, X } from "lucide-react";

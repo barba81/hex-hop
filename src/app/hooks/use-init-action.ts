@@ -3,9 +3,10 @@ import type { ColorCopyFormula } from "@/shared/models/color-copy-list";
 import type { BlockEntity } from "@/shared/models/entity";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
-import { useAppInfoStore } from "../../shared/store/app-status-store";
-import { rootBlockId } from "../../shared/data/const-data";
-import { useAppStore } from "../../shared/store/app-store";
+import { useAppStore } from "@/shared/store/app-store";
+import { rootBlockId } from "@/shared/data/const-data";
+import { useAppInfoStore } from "@/shared/store/app-status-store";
+
 
 let isInitialized = false;
 
