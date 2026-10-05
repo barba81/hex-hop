@@ -1,5 +1,5 @@
 import { createBrowserRouter, isRouteErrorResponse, Navigate, useRouteError } from "react-router";
-import App from "./App";
+import App from "./app/App";
 import ImportExportPage from "./pages/import-export-page/import-export-page";
 import PaletteGenerator from "./pages/palette-generator-page/palette-generator-page";
 import ColorListPage from "./pages/clipboard-page/ui/clipboard-page";

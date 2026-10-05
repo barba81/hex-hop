@@ -4,7 +4,7 @@ import { Copy, Pen, Trash2 } from "lucide-react";
 import { coloBackground } from "@/infrastructure/utils/color-format-changer";
 import { BlenderIcon, CSSIcon, TailwindIcon } from "@/components/icons/custom-icon";
 import { BaseDraggableOutlineBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
-import { useAppStore } from "@/store/app-store";
+import { useAppStore } from "@/shared/store/app-store";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity

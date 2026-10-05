@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useAppStore } from "@/store/app-store";
+import { useAppStore } from "@/shared/store/app-store";
 
 const AddColorButton = () => {
   const isColorValid = useAppStore((state) => state.isColorValid);

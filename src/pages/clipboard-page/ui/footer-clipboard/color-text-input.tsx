@@ -1,5 +1,5 @@
 ;
-import { useAppStore } from "@/store/app-store";
+import { useAppStore } from "@/shared/store/app-store";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 
 const ColorInput = () => {

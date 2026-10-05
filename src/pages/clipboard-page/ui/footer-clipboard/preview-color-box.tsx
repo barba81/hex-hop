@@ -5,7 +5,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import "@/globals.css";
-import { useAppStore } from "@/store/app-store";
+import { useAppStore } from "@/shared/store/app-store";
 import { formatHex8 } from "culori";
 
 const PreviewColorBox = () => {

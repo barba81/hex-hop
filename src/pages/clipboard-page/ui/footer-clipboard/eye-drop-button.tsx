@@ -1,6 +1,6 @@
 import { Pipette } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useAppStore } from "@/store/app-store";
+import { useAppStore } from "@/shared/store/app-store";
 
 const EyeDropButton = () => {
   const addNewColorToClipboard = useAppStore(state => state.addNewColorToClipboard);

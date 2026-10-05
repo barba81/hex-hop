@@ -1,6 +1,6 @@
 import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list"
 import type { ColorEntity } from "@/infrastructure/models/entity"
-import { useAppStore } from "@/store/app-store"
+import { useAppStore } from "@/shared/store/app-store"
 
 
 interface ColorBlockCopyProps {

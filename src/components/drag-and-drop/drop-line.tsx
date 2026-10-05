@@ -1,7 +1,7 @@
 import { useDroppable } from "@dnd-kit/react";
 import { distanceDetector } from "./distance-detector";
 import type { DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
-import { useAppStore } from "@/store/app-store";
+import { useAppStore } from "@/shared/store/app-store";
 
 const DroppableLine = ({
   id,

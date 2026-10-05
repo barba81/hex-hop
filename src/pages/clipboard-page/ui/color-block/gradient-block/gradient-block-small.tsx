@@ -3,7 +3,7 @@ import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator,
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { gradientToCssString } from "@/infrastructure/utils/gradient-to-css-string";
 import { BaseDraggableOutlineBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
-import { useAppStore } from "@/store/app-store";
+import { useAppStore } from "@/shared/store/app-store";
 
 type GradientBoxParams = {
     gradientEntity: GradientEntity 

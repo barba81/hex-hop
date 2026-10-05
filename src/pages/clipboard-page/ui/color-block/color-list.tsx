@@ -1,5 +1,5 @@
 import { DragDropProvider } from "@dnd-kit/react";
-import { useAppStore } from "@/store/app-store";
+import { useAppStore } from "@/shared/store/app-store";
 import EmptyClipboardPage from "../empty-clipboard-page";
 import React from "react";
 import type { DraggableData} from "../../features/darg-and-drop";

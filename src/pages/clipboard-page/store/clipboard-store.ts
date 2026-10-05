@@ -1,8 +1,8 @@
 import { defaultInputColor, rootBlockId } from "@/infrastructure/data/const-data";
-import type { AppStore } from "@/store/app-store";
-import { useAppStore } from "@/store/app-store";
+import type { AppStore } from "@/shared/store/app-store";
+import { useAppStore } from "@/shared/store/app-store";
 import type { ImmerStateCreator } from "@/infrastructure/types";
-import { CommandHistory, initialScopeHistory } from "@/store/history-slice";
+import { CommandHistory, initialScopeHistory } from "@/shared/store/history-slice";
 import { Color } from "culori";
 import { colorStringToData, getColorMode } from "@/infrastructure/utils/color-format-changer";
 import { getSmartColorName } from "@/lib/get-color-name";

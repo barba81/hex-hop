@@ -4,7 +4,7 @@ import type { ReactNode } from "react";
 import type { DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
 import { distanceDetector } from "./distance-detector";
 import { DragDots } from "./drag-dots";
-import { useAppStore } from "@/store/app-store";
+import { useAppStore } from "@/shared/store/app-store";
 
 
 type BaseOutlineBlockParams = {

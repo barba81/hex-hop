@@ -9,7 +9,7 @@ import { colorEntityToColor, hexaToRgbaNormalized, toHex8 } from "@/infrastructu
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/components/ui/input-group";
 import { Button } from "@/components/ui/button";
 import { getSmartColorName } from "@/lib/get-color-name";
-import { useAppStore } from "@/store/app-store";
+import { useAppStore } from "@/shared/store/app-store";
 
 type ColorBlockEditParams = {
     colorEntity: ColorEntity

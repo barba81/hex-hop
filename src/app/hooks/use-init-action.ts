@@ -3,13 +3,13 @@ import type { ColorCopyFormula } from "@/infrastructure/models/color-copy-list";
 import type { BlockEntity } from "@/infrastructure/models/entity";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
-import { useAppInfoStore } from "./store/app-status-store";
-import { rootBlockId } from "./infrastructure/data/const-data";
-import { useAppStore } from "./store/app-store";
+import { useAppInfoStore } from "../../shared/store/app-status-store";
+import { rootBlockId } from "../../infrastructure/data/const-data";
+import { useAppStore } from "../../shared/store/app-store";
 
 let isInitialized = false;
 
-export const initializeApp = async () => {
+export const useInitializeApp = async () => {
   if (isInitialized) return;
   isInitialized = true;
 
