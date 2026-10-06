@@ -1,7 +1,7 @@
 import { useAppInfoStore } from "@/shared/store/app-status-store";
-import { cn } from "@/shared/utils/utils";
 import { Button } from "@base-ui/react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
+import { cn } from "cn";
 import { Maximize2, Minus, X } from "lucide-react";
 
 const disabledBackground = "bg-[#e6e6e6] dark:bg-[#3d3d3d]";

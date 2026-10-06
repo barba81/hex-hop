@@ -3,7 +3,7 @@ import MacHeaderButton from "./mac-header-button";
 import WindowsHeaderButton from "./windows-header-button";
 import DropDownHeader from "@/components/app-header/drop-down-header";
 import { ThemeToggleButton } from "../../shared/theme/theme-toggle";
-import { cn } from "@/shared/utils/utils";
+import { cn } from "cn";
 
 const platform = getPlatform();
 
