@@ -6,8 +6,8 @@ import type { CommandHistory} from "@/shared/store/history-slice";
 import { initialScopeHistory } from "@/shared/store/history-slice";
 import type { Color } from "culori";
 import { getColorMode } from "@/shared/utils/color-format-changer";
-import type { DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
-import { createClipboardActions } from "@/pages/clipboard-page/store/clipboard-actions";
+import type { DraggableData } from "@/features/clipboard-page/features/darg-and-drop";
+import { createClipboardActions } from "@/features/clipboard-page/store/clipboard-actions";
 
 export interface ClipboardSlice {
   openPalette: Record<string, boolean>;

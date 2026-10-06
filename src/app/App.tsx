@@ -1,4 +1,3 @@
-import HeaderBar from "../components/app-header/app-header-bar";
 import "./globals.css";
 import { ThemeProvider } from "../shared/theme/theme-provider";
 import { Toaster } from "react-hot-toast";
@@ -6,6 +5,7 @@ import { Outlet } from "react-router";
 import { platform as getPlatform } from "@tauri-apps/plugin-os";
 import { TooltipProvider } from "@/shared/ui/tooltip";
 import { cn } from "cn";
+import HeaderBar from "@/shared/components/app-header/app-header-bar";
 
 const platform = getPlatform();
 

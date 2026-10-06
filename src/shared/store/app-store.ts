@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import type { ClipboardSlice} from "@/pages/clipboard-page/store/clipboard-store";
-import { createClipboardSlice } from "@/pages/clipboard-page/store/clipboard-store";
+import type { ClipboardSlice} from "@/features/clipboard-page/store/clipboard-store";
+import { createClipboardSlice } from "@/features/clipboard-page/store/clipboard-store";
 import type { GlobalSlice } from "./global-slice";
 import { createHexHopSlice } from "./global-slice";
 
