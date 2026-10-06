@@ -1,4 +1,4 @@
-import type { ColorSpaceType, EasingFunctionType, GradientTypes } from "./enum";
+import type { ColorSpaceType, EasingFunctionType, GradientTypes } from "../models/enum";
 
 
 export type BlockEntity = (PaletteEntity | ColorEntity | GradientEntity);

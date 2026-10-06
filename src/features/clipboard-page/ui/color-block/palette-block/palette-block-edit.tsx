@@ -1,4 +1,4 @@
-import { toPaletteSummary, type PaletteEntity } from "@/shared/models/entity";
+import { toPaletteSummary, type PaletteEntity } from "@/shared/types/entity";
 import { Check, X } from "lucide-react";
 import type { ChangeEvent } from "react";
 import { useState } from "react";

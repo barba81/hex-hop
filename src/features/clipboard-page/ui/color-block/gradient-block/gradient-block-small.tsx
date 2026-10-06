@@ -1,4 +1,4 @@
-import type { GradientEntity } from "@/shared/models/entity";
+import type { GradientEntity } from "@/shared/types/entity";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/shared/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { gradientToCssString } from "@/shared/utils/gradient-to-css-string";

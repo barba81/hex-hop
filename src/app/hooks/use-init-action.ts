@@ -1,6 +1,6 @@
 import { invoke } from "@tauri-apps/api/core";
-import type { ColorCopyFormula } from "@/shared/models/color-copy-list";
-import type { BlockEntity } from "@/shared/models/entity";
+import type { ColorCopyFormula } from "@/shared/types/color-copy-list";
+import type { BlockEntity } from "@/shared/types/entity";
 import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { useAppStore } from "@/shared/store/app-store";

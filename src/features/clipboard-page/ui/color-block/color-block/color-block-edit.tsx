@@ -1,4 +1,4 @@
-import type { ColorEntity } from "@/shared/models/entity";
+import type { ColorEntity } from "@/shared/types/entity";
 import { Check, RefreshCw, X } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { HexAlphaColorPicker } from "react-colorful";

@@ -1,5 +1,5 @@
 import { useDraggable, useDroppable } from "@dnd-kit/react";
-import type { ColorEntity, GradientEntity, PaletteEntity } from "@/shared/models/entity";
+import type { ColorEntity, GradientEntity, PaletteEntity } from "@/shared/types/entity";
 import type { ReactNode } from "react";
 import type { DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
 import { distanceDetector } from "./distance-detector";

@@ -1,4 +1,4 @@
-import type { PaletteEntity } from "@/shared/models/entity";
+import type { PaletteEntity } from "@/shared/types/entity";
 import { useAppStore } from "@/shared/store/app-store";
 import { ChevronDown, Pen, Trash2 } from "lucide-react";
 import { coloBackground } from "@/shared/utils/color-format-changer";

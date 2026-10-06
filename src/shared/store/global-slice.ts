@@ -1,6 +1,6 @@
-import type { BlockEntity } from "@/shared/models/entity";
+import type { BlockEntity } from "@/shared/types/entity";
 import type { AppStore } from "./app-store";
-import type { ColorCopyFormula } from "@/shared/models/color-copy-list";
+import type { ColorCopyFormula } from "@/shared/types/color-copy-list";
 import { rootBlockId } from "@/shared/data/const-data";
 import type { ImmerStateCreator } from "@/shared/types";
 

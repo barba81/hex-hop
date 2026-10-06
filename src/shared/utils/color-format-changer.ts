@@ -1,7 +1,7 @@
-import type { ColorData } from "@/shared/models/types";
+import type { ColorData } from "@/shared/types/types";
 import type { Color } from "culori";
 import { formatCss, formatHex, formatHex8, parse, rgb } from "culori";
-import type { ColorEntity } from "../models/entity";
+import type { ColorEntity } from "../types/entity";
 
 export const randomColor = () => {
   const randomHex = formatHex({

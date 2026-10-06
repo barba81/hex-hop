@@ -1,4 +1,4 @@
-import type { GradientEntity } from "@/shared/models/entity";
+import type { GradientEntity } from "@/shared/types/entity";
 
 export const gradientToCssString = (gradient: GradientEntity) => {
   const sol = gradient.layers
