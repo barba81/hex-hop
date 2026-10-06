@@ -2,8 +2,8 @@ import type { ColorEntity } from "@/shared/models/entity";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/shared/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { coloBackground } from "@/shared/utils/color-format-changer";
-import { BlenderIcon, CSSIcon, TailwindIcon } from "@/components/icons/custom-icon";
-import { BaseDraggableOutlineBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
+import { BlenderIcon, CSSIcon, TailwindIcon } from "@/shared/components/icons/custom-icon";
+import { BaseDraggableOutlineBlock } from "@/shared/components/drag-and-drop/base-outline-dnd-block";
 import { useAppStore } from "@/shared/store/app-store";
 
 type ColorBlockViewParams = {

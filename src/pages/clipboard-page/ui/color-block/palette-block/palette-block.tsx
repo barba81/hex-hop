@@ -7,8 +7,8 @@ import React from "react";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/shared/ui/context-menu";
 import { Button } from "@/shared/ui/button";
 import InnerBlock from "./inner-block";
-import DroppableLine from "@/components/drag-and-drop/drop-line";
-import { BaseDraggableOutlineBlock } from "@/components/drag-and-drop/base-outline-dnd-block";
+import DroppableLine from "@/shared/components/drag-and-drop/drop-line";
+import { BaseDraggableOutlineBlock } from "@/shared/components/drag-and-drop/base-outline-dnd-block";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity

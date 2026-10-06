@@ -15,7 +15,7 @@ import {
 
 import { useLocation, useNavigate } from "react-router";
 
-import GradientIcon from "@/components/icons/gradient-icon";
+import GradientIcon from "@/shared/components/icons/gradient-icon";
 import { Button } from "@/shared/ui/button";
 
 const size = 15;

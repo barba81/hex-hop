@@ -1,4 +1,4 @@
-import { CSSIcon, TailwindIcon } from "@/components/icons/custom-icon";
+import { CSSIcon, TailwindIcon } from "@/shared/components/icons/custom-icon";
 import type React from 'react';
 
 const ICON_COMPONENT_MAP: Record<number, React.ReactElement> = {

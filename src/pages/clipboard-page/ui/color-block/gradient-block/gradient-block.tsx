@@ -4,7 +4,7 @@ import { Copy, Pen, Trash2 } from "lucide-react";
 import { useDraggable, useDroppable } from "@dnd-kit/react";
 import { gradientToCssString } from "@/shared/utils/gradient-to-css-string";
 import type { DraggableData } from "@/pages/clipboard-page/features/darg-and-drop";
-import { DragDots } from "@/components/drag-and-drop/drag-dots";
+import { DragDots } from "@/shared/components/drag-and-drop/drag-dots";
 import { deleteGradientBlock } from "@/pages/clipboard-page/features/delete-block";
 
 type GradientBoxParams = {
