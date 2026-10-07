@@ -1,5 +1,6 @@
 import { defaultInputColor } from "@/shared/data/const-data";
-import { SetCallback } from "@/shared/store/app-store";
+import { AppStore, SetCallback } from "@/shared/store/app-store";
+import { ImmerStateCreator } from "@/shared/types";
 import { Color } from "culori";
 
 export interface IColorBlockInitialState {
@@ -16,21 +17,9 @@ export const initialState: IColorBlockInitialState = {
     colorMode: "rgb",
 }
 
-const actions = (set: SetCallback<IColorBlockInitialState>) => ({
 
+export const createHexHopSlice: ImmerStateCreator<AppStore, IColorBlockInitialState > = () => ({
+    ...initialState, 
 });
 
-
-const slice = (set: SetCallback<IColorBlockInitialState>) => ({
-  ...initialState,
-  ...actions(set),
-});
-
-export type TColorBlockActions = ReturnType<typeof actions>;
-
-const colorBlockSliceStore = {
-  slice,
-  initialState,
-};
-
-export default colorBlockSliceStore;
+export default createHexHopSlice;

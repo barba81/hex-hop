@@ -5,7 +5,7 @@ import type { ImmerStateCreator } from "@/shared/types";
 import type { CommandHistory} from "@/shared/history/history-slice";
 import { initialScopeHistory } from "@/shared/history/history-slice";
 import type { Color } from "culori";
-import { getColorMode } from "@/shared/utils/color-format-changer";
+import { getColorMode } from "@/features/color-block/utils/color-format-changer";
 import type { DraggableData } from "@/features/clipboard-page/features/darg-and-drop";
 import { createClipboardActions } from "@/features/clipboard-page/store/clipboard-actions";
 
