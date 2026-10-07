@@ -1,14 +1,14 @@
 import App from "@/app/App";
-import ColorListPage from "@/features/clipboard-page/ui/clipboard-page";
-import GradientGeneratorPage from "@/features/gradient-generator-page/ui/gradient-generator-page";
-import ImportExportPage from "@/features/import-export-page/import-export-page";
-import PaletteGenerator from "@/features/palette-generator-page/palette-generator-page";
+import GradientGeneratorPage from "@/app/routes/gradient-generator-page";
+import ImportExportPage from "@/app/routes/import-export-page";
+import PaletteGenerator from "@/app/routes/palette-generator-page";
 import { SettingsColorBlock } from "@/features/settings-page/color-block-settings-page/ui/settings-color-block";
-import { SettingsDanger } from "@/features/settings-page/dangrous-settings-page/settings-danger";
-import { SettingsGradientBlock } from "@/features/settings-page/gradient-block-settings-page/settings-gradient-block";
-import { SettingsPaletteBlock } from "@/features/settings-page/palette-settings-page/settings-palette-block";
+import { SettingsDanger } from "@/app/routes/settings/settings-danger";
+import { SettingsGradientBlock } from "@/app/routes/settings/settings-gradient-block";
+import { SettingsPaletteBlock } from "@/app/routes/settings/settings-palette-block";
 import SettingsPage from "@/features/settings-page/ui/settings-page";
 import { createBrowserRouter, isRouteErrorResponse, Navigate, useRouteError } from "react-router";
+import ColorListPage from "@/app/routes/clipboard-page";
 
 
 
