@@ -2,7 +2,7 @@
 // import { useAppStore } from "@/store/app-store";
 // import type { Command } from "@/store/command-manager-state";
 
-import type { Command, CommandHistory } from "@/shared/store/history-slice";
+import type { Command, CommandHistory } from "@/shared/history/history-slice";
 import { maxHistory } from "../data/const-data";
 
 // const MAX_HISTORY = 50;

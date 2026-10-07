@@ -5,7 +5,7 @@ import { moveWindow, Position } from "@tauri-apps/plugin-positioner";
 import { getCurrentWebviewWindow } from "@tauri-apps/api/webviewWindow";
 import { useAppStore } from "@/shared/store/app-store";
 import { rootBlockId } from "@/shared/data/const-data";
-import { useAppInfoStore } from "@/shared/store/app-status-store";
+import { useAppInfoStore } from "@/shared/theme/app-status-store";
 
 
 let isInitialized = false;
