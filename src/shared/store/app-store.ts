@@ -4,15 +4,38 @@ import type { ClipboardSlice} from "@/features/clipboard-page/store/clipboard-st
 import { createClipboardSlice } from "@/features/clipboard-page/store/clipboard-store";
 import type { GlobalSlice } from "./global-slice";
 import { createHexHopSlice } from "./global-slice";
+import colorBlockSliceStore, { IColorBlockInitialState } from "@/features/color-block/store/color-block-slice";
+
+
+export type SetCallback<T> = (set: (state: T) => void) => void;
+
 
 export type AppStore = ClipboardSlice & GlobalSlice;
 
-export const useAppStore = create<AppStore>()(
-  immer((...a) => ({
-    ...createClipboardSlice(...a),
-    ...createHexHopSlice(...a),
-  })),
+// export const useAppStore = create<AppStore>()(
+//   immer((...a) => ({
+//     ...createClipboardSlice(...a),
+//     ...createHexHopSlice(...a),
+//   })),
+// );
+
+/// nwe 
+
+export type Store = ReturnType<(typeof slices)["colorBlockSliceStore"]>;
+
+export const slices = {
+  colorBlockSliceStore: colorBlockSliceStore.slice,
+};
+
+export const useAppStore = create(
+  immer<Store>((set) => ({
+    ...colorBlockSliceStore.slice(set as SetCallback<IColorBlockInitialState>),
+    // add other slices here.
+    // ...homeSliceStore.slice(set as SetCallback<IHomeInitialState>),
+  }))
 );
+
+
 
 
 // export interface HexHopStore {
