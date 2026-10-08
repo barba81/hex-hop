@@ -1,4 +1,4 @@
-import { ColorData, ColorEntity } from "@/features/color-block/types/entity";
+import { ColorData, ColorEntity } from "@/shared/types/entity";
 import type { Color } from "culori";
 import { formatCss, formatHex, formatHex8, parse, rgb } from "culori";
 

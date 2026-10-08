@@ -1,8 +1,8 @@
 import { rootBlockId } from '@/shared/data/const-data';
 import { historyPush } from '@/shared/history/history';
 import type { ColorEntity, PaletteEntity } from '@/features/palette-generator-page/types/entity';
-import { colorStringToColor, getColorMode } from '@/features/color-block/utils/color-format-changer';
-import { getSmartColorName } from '@/features/color-block/utils/create-color-name';
+import { colorStringToColor, getColorMode } from '@/features/create-color-block/utils/color-format-changer';
+import { getSmartColorName } from '@/features/create-color-block/utils/create-color-name';
 import { invoke } from '@tauri-apps/api/core';
 import { nanoid } from 'nanoid'
 

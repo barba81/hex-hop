@@ -1,7 +1,7 @@
 import type { PaletteEntity } from "@/features/palette-generator-page/types/entity";
 import { useAppStore } from "@/shared/store/app-store";
 import { ChevronDown, Pen, Trash2 } from "lucide-react";
-import { coloBackground } from "@/features/color-block/utils/color-format-changer";
+import { coloBackground } from "@/features/create-color-block/utils/color-format-changer";
 import { gradientToCssString } from "@/features/gradient-generator/utils/gradient-to-css-string";
 import React from "react";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/shared/ui/context-menu";

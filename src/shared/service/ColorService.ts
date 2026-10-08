@@ -1,7 +1,7 @@
 import { IColorRepository } from "@/features/color-block/service/ColorRepository";
-import { ColorRequest, ColorEntity } from "@/features/color-block/types/entity";
-import { colorStringToColor, toHex8, validateColor } from "@/features/color-block/utils/color-format-changer";
-import { getSmartColorName, toRgb } from "@/features/color-block/utils/create-color-name";
+import { ColorRequest, ColorEntity } from "@/shared/types/entity";
+import { colorStringToColor, toHex8, validateColor } from "@/features/create-color-block/utils/color-format-changer";
+import { getSmartColorName, toRgb } from "@/features/create-color-block/utils/create-color-name";
 import { converter } from "culori";
 import { nanoid } from "nanoid";
 

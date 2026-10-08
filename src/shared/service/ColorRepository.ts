@@ -1,4 +1,4 @@
-import { ColorRequest, ColorEntity } from "@/features/color-block/types/entity";
+import { ColorRequest, ColorEntity } from "@/shared/types/entity";
 import { invoke } from "@tauri-apps/api/core";
 
 export interface IColorRepository {

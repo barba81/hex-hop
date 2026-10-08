@@ -6,10 +6,14 @@ import { platform as getPlatform } from "@tauri-apps/plugin-os";
 import { TooltipProvider } from "@/shared/ui/tooltip";
 import { cn } from "cn";
 import HeaderBar from "@/app/components/app-header/app-header-bar";
+import { useInitializeApp } from "@/app/hooks/use-init-action";
 
 const platform = getPlatform();
 
 function HexHopApp() {
+useInitializeApp();
+
+
   return (
     <ThemeProvider defaultTheme="system" storageKey="vite-ui-theme" >
       <TooltipProvider >

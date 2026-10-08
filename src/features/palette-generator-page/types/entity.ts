@@ -1,4 +1,4 @@
-import { ColorEntity } from "@/features/color-block/types/entity";
+import { ColorEntity } from "@/shared/types/entity";
 import { GradientEntity } from "@/features/gradient-generator/types/type";
 
 

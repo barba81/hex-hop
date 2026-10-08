@@ -5,11 +5,11 @@ import { HexAlphaColorPicker } from "react-colorful";
 import type { ChangeEvent } from "react";
 import { useEffect, useState } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
-import { colorEntityToColor, hexaToRgbaNormalized, toHex8 } from "@/features/color-block/utils/color-format-changer";
+import { colorEntityToColor, hexaToRgbaNormalized, toHex8 } from "@/features/create-color-block/utils/color-format-changer";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/shared/ui/input-group";
 import { Button } from "@/shared/ui/button";
 import { useAppStore } from "@/shared/store/app-store";
-import { getSmartColorName } from "@/features/color-block/utils/create-color-name";
+import { getSmartColorName } from "@/features/create-color-block/utils/create-color-name";
 
 type ColorBlockEditParams = {
     colorEntity: ColorEntity
