@@ -3,7 +3,8 @@ import type {
     Color} from 'culori';
 import {
     nearest,
-    differenceCiede2000
+    differenceCiede2000,
+    converter
 } from 'culori/fn';
 
 let nearestNameGetter: ((color: Color | string, n?: number, τ?: number) => string[]) | null = null;
@@ -37,3 +38,5 @@ export const getSmartColorName = async (color: Color) => {
     nearestNameGetter(color, 1)[0]
     : "New color";
 }
+
+export const  toRgb = converter('rgb')

@@ -1,7 +1,8 @@
 import { IColorRepository } from "@/features/color-block/service/ColorRepository";
-import { ColorEntity } from "@/features/color-block/types/entity";
-import { colorStringToColor, validateColor } from "@/features/color-block/utils/color-format-changer";
-import { getSmartColorName } from "@/features/color-block/utils/create-color-name";
+import { ColorRequest, ColorEntity } from "@/features/color-block/types/entity";
+import { colorStringToColor, toHex8, validateColor } from "@/features/color-block/utils/color-format-changer";
+import { getSmartColorName, toRgb } from "@/features/color-block/utils/create-color-name";
+import { converter } from "culori";
 import { nanoid } from "nanoid";
 
 
@@ -18,13 +19,18 @@ export class ColorService implements IColorService {
         this.repository = _repository;
     }
 
-    public async addColor(stringColor: string, paletteId: number | null) {
+    public async addColor(stringColor: string, parentPaletteId: number | null) {
         if (!validateColor(stringColor)) return null;
-        
-        const colorData = colorStringToColor(stringColor);
-        const name = await getSmartColorName(colorData);
-        const entity = await this.repository.addColor({...colorData, name, id: nanoid() } as ColorEntity);
-        
+
+        const color = colorStringToColor(stringColor);
+        const name = await getSmartColorName(color);
+        const { mode, ...rgb } = toRgb(color);
+        const entity = await this.repository.addColor({
+            ...rgb,
+            id: nanoid(),
+            name,
+            parentPaletteId,
+        } as ColorRequest);
         return entity;
     }
 

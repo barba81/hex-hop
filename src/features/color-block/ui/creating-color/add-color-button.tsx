@@ -5,7 +5,7 @@ import { useAppStore } from "@/shared/store/app-store";
 const AddColorButton = () => {
   const isColorValid = useAppStore((state) => state.isColorValid);
   const inputColor = useAppStore((state) => state.inputColor);
-  const addNewColorToClipboard = useAppStore((state) => state.addNewColorToClipboard);
+  const addNewColorToClipboard = useAppStore((state) => state.addNewColor);
 
   const handleOnClick = () => {
     addNewColorToClipboard(inputColor, null);
