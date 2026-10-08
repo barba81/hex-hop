@@ -1,39 +1,4 @@
-import type { ColorSpaceType, EasingFunctionType, GradientTypes } from "../models/enum";
-
-
-export type BlockEntity = (PaletteEntity | ColorEntity | GradientEntity);
-
-
-export type PaletteEntitySummary = {
-    kind: "palette",
-    id: number;
-    blockId:number;
-    blockOrder: number;
-    name: string;
-}
-
-export type PaletteEntity =  {
-    blocks: (ColorEntity | GradientEntity)[] | null;
-} & PaletteEntitySummary;
-
-export const  toPaletteSummary = (entity: PaletteEntity): PaletteEntitySummary => {
-  const { blocks, ...summary } = entity;
-  return summary;
-}
-
-
-export type ColorEntity =  {
-    kind: "color",
-    id: number;
-    blockId:number;
-    blockOrder: number;
-    name: string;
-    r: number;
-    g: number;
-    b: number;
-    alpha?: number;
-    parentPaletteId: number | null;
-}
+import { ColorSpaceType, EasingFunctionType, GradientTypes } from "@/features/gradient-generator/types/enum";
 
 export type GradientEntitySummary = {
     kind: "gradient",

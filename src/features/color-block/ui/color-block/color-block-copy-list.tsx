@@ -1,5 +1,5 @@
-import type { ColorCopyFormula } from "@/shared/types/color-copy-list"
-import type { ColorEntity } from "@/shared/types/entity"
+import type { ColorCopyFormula } from "@/features/color-copy-list/color-copy-list"
+import type { ColorEntity } from "@/features/palette-generator-page/types/entity"
 import { useAppStore } from "@/shared/store/app-store"
 
 

@@ -1,7 +1,7 @@
-import type { GradientEntity } from "@/shared/types/entity";
+import type { GradientEntity } from "@/features/palette-generator-page/types/entity";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/shared/ui/context-menu";
 import { Copy, Pen, Trash2 } from "lucide-react";
-import { gradientToCssString } from "@/shared/utils/gradient-to-css-string";
+import { gradientToCssString } from "@/features/gradient-generator/utils/gradient-to-css-string";
 import { BaseDraggableOutlineBlock } from "@/shared/components/drag-and-drop/base-outline-dnd-block";
 import { useAppStore } from "@/shared/store/app-store";
 

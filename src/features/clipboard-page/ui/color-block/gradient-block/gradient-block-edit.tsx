@@ -1,5 +1,5 @@
-import type { GradientEntitySummary } from "@/shared/types/entity";
-import { toGradientSummary, type GradientEntity } from "@/shared/types/entity";
+import type { GradientEntitySummary } from "@/features/palette-generator-page/types/entity";
+import { toGradientSummary, type GradientEntity } from "@/features/palette-generator-page/types/entity";
 import type { ChangeEvent } from "react";
 import { useState } from "react";
 import { Check, X } from "lucide-react";

@@ -1,13 +1,19 @@
-import { create } from "zustand";
+import { create, StateCreator } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import type { ClipboardSlice} from "@/features/clipboard-page/store/clipboard-store";
 import { createClipboardSlice } from "@/features/clipboard-page/store/clipboard-store";
 import type { GlobalSlice } from "./global-slice";
 import { createHexHopSlice } from "./global-slice";
-import colorBlockSliceStore, { IColorBlockInitialState } from "@/features/color-block/store/color-block-slice";
 
 
-export type SetCallback<T> = (set: (state: T) => void) => void;
+
+export type ImmerStateCreator<T, U = T> = StateCreator<
+  T,                                  
+  [["zustand/immer", never], never],
+  [],
+  U                                   
+>;
+
 
 
 export type AppStore = ClipboardSlice & GlobalSlice;

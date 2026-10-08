@@ -1,3 +1,4 @@
+import { ColorData } from "@/features/color-block/types/types";
 import { invoke } from "@tauri-apps/api/core";
 
 export interface IColorRepository {
@@ -7,9 +8,9 @@ export interface IColorRepository {
 }
 
 export class ColorRepository implements IColorRepository {
-    public addColor() {
-        const colorEntity = await invoke<ColorEntity>("create_color", {
-            color: { ...colorData, id: nanoid(), },
+    public addColor(colorData: ColorData) {
+           const colorEntity = await invoke<ColorEntity>("create_color", {
+            color: { ...colorData, id: nanoid(), name },
         });
     }
     public updateColor() {
