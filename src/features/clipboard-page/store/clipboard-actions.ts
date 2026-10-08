@@ -1,14 +1,14 @@
 import { rootBlockId } from '@/shared/data/const-data';
 import { historyPush } from '@/shared/history/history';
 import type { ColorEntity, PaletteEntity } from '@/features/palette-generator-page/types/entity';
-import { colorStringToData, getColorMode } from '@/features/color-block/utils/color-format-changer';
+import { colorStringToColor, getColorMode } from '@/features/color-block/utils/color-format-changer';
 import { getSmartColorName } from '@/features/color-block/utils/create-color-name';
 import { invoke } from '@tauri-apps/api/core';
 import { nanoid } from 'nanoid'
 
 export const createClipboardActions = (set: any) => ({
   addNewColorToClipboard: async (color: string, paletteId: number | null) => {
-    const colorData = colorStringToData(color);
+    const colorData = colorStringToColor(color);
     const name = await getSmartColorName(colorData);
     const colorEntity = await invoke<ColorEntity>("create_color", {
       color: { ...colorData, id: nanoid() ,name },

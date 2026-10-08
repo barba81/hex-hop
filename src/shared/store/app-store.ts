@@ -1,9 +1,8 @@
 import { create, StateCreator } from "zustand";
 import { immer } from "zustand/middleware/immer";
-import type { ClipboardSlice} from "@/features/clipboard-page/store/clipboard-store";
-import { createClipboardSlice } from "@/features/clipboard-page/store/clipboard-store";
 import type { GlobalSlice } from "./global-slice";
 import { createHexHopSlice } from "./global-slice";
+import colorBlockSlice, { ColorBlockSlice } from "@/features/color-block/store/color-block-slice";
 
 
 
@@ -16,11 +15,12 @@ export type ImmerStateCreator<T, U = T> = StateCreator<
 
 
 
-export type AppStore = ClipboardSlice & GlobalSlice;
+export type AppStore = ColorBlockSlice & GlobalSlice;
 
 export const useAppStore = create<AppStore>()(
   immer((...a) => ({
-    ...createClipboardSlice(...a),
+    // ...createClipboardSlice(...a),
+    ...colorBlockSlice(...a),
     ...createHexHopSlice(...a),
   })),
 );

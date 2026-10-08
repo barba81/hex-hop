@@ -1,7 +1,6 @@
-import type { ColorData } from "@/features/color-block/types/types";
+import { ColorData, ColorEntity } from "@/features/color-block/types/entity";
 import type { Color } from "culori";
 import { formatCss, formatHex, formatHex8, parse, rgb } from "culori";
-import type { ColorEntity } from "../../palette-generator-page/types/entity";
 
 export const randomColor = () => {
   const randomHex = formatHex({
@@ -10,11 +9,11 @@ export const randomColor = () => {
     g: Math.random(),
     b: Math.random()
   });
-  return colorStringToData(randomHex);
+  return colorStringToColor(randomHex);
 }
 
-export function colorStringToData(colorString: string) {
-  const color = parse(colorString);
+export function colorStringToColor(stringColor: string) {
+  const color = parse(stringColor);
   if (!color) {
     throw new Error("Invalid color string");
   }

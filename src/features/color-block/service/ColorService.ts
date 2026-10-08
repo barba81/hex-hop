@@ -1,7 +1,8 @@
 import { IColorRepository } from "@/features/color-block/service/ColorRepository";
-import { colorStringToData } from "@/features/color-block/utils/color-format-changer";
+import { ColorEntity } from "@/features/color-block/types/entity";
+import { colorStringToColor, validateColor } from "@/features/color-block/utils/color-format-changer";
 import { getSmartColorName } from "@/features/color-block/utils/create-color-name";
-import { invoke } from "@tauri-apps/api/core";
+import { nanoid } from "nanoid";
 
 
 export interface IColorService {
@@ -17,11 +18,13 @@ export class ColorService implements IColorService {
         this.repository = _repository;
     }
 
-    public async addColor(color: string, paletteId: number | null) {
-        const colorData = colorStringToData(color);
+    public async addColor(stringColor: string, paletteId: number | null) {
+        if (!validateColor(stringColor)) return null;
+        
+        const colorData = colorStringToColor(stringColor);
         const name = await getSmartColorName(colorData);
-
-        const entity = await this.repository.addColor({...colorData, name, id: });
+        const entity = await this.repository.addColor({...colorData, name, id: nanoid() } as ColorEntity);
+        
         return entity;
     }
 

@@ -9,7 +9,7 @@ import { useAppStore } from "@/shared/store/app-store";
 import { formatHex8 } from "culori";
 
 const PreviewColorBox = () => {
-  const currentColor = formatHex8(useAppStore(x => x.validColor));
+  const currentColor = formatHex8(useAppStore(x => x.lastValidColor));
   const handleColorChange = useAppStore(state => state.handleColorChange);
 
   const handleOnChange = (color: string) => {
