@@ -19,7 +19,8 @@ const initialState: IColorBlockInitialState = {
 }
 
 interface IColorBlockActions {
-    addNewColor: (color: string, paletteId: number | null) => void;
+    addNewColor: (stringColor: string, paletteId: number | null) => void;
+    handleColorChange: (stringColor: string) => void;
 }
 
 export type ColorBlockSlice = IColorBlockInitialState & IColorBlockActions;
@@ -29,9 +30,9 @@ export const colorBlockSlice: ImmerStateCreator<AppStore, ColorBlockSlice> = (se
     addNewColor: async (stringColor: string, paletteId: number | null) => {
         const colorEntity = await colorService.addColor(stringColor, paletteId);
         if (!colorEntity) {
-            set((state) => {state.isColorValid = false;});
+            set((state) => { state.isColorValid = false; });
             return;
-        } 
+        }
 
         set((state) => {
             state.isColorValid = true;
@@ -46,6 +47,24 @@ export const colorBlockSlice: ImmerStateCreator<AppStore, ColorBlockSlice> = (se
             // historyPush({ async undo() { }, async redo() { } }, state.clipboardHistory);
         });
     },
+
+    handleColorChange: (color) => {
+        const colorMode = getColorMode(color);
+        set((state) => {
+            state.inputColor = color;
+
+            if (!colorMode) {
+                state.isColorValid = false;
+                return;
+            }
+
+            state.isColorValid = true;
+            state.colorMode = colorMode;
+            state.lastValidColor = color;
+        });
+    },
+
+    
 });
 
 export default colorBlockSlice;

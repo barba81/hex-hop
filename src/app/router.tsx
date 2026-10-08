@@ -8,7 +8,7 @@ import { SettingsGradientBlock } from "@/app/routes/settings/settings-gradient-b
 import { SettingsPaletteBlock } from "@/app/routes/settings/settings-palette-block";
 import SettingsPage from "@/features/settings-page/ui/settings-page";
 import { createBrowserRouter, isRouteErrorResponse, Navigate, useRouteError } from "react-router";
-import ColorListPage from "@/app/routes/clipboard-page";
+import ColorListPage from "@/app/routes/clipboard/clipboard-page";
 
 
 
