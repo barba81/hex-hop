@@ -1,6 +1,6 @@
-import ColorList from "@/features/clipboard-page/ui/color-block/color-list";
+import ColorList from "@/features/block/ui/block-list";
 import FooterColorPicker from "@/app/routes/clipboard/footer-color-picker";
-import HeaderColorList from "@/features/clipboard-page/ui/header-clipboard/clipboard-header";
+import HeaderColorList from "@/features/block/ui/header-clipboard/clipboard-header";
 
 const ColorListPage = () => {
 

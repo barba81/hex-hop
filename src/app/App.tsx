@@ -5,7 +5,7 @@ import { Outlet } from "react-router";
 import { platform as getPlatform } from "@tauri-apps/plugin-os";
 import { TooltipProvider } from "@/shared/ui/tooltip";
 import { cn } from "cn";
-import HeaderBar from "@/shared/components/app-header/app-header-bar";
+import HeaderBar from "@/app/components/app-header/app-header-bar";
 
 const platform = getPlatform();
 

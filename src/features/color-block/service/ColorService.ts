@@ -7,9 +7,10 @@ import { nanoid } from "nanoid";
 
 
 export interface IColorService {
-    addColor: (color: string, paletteId: number | null) => void;
-    updateColor: () => void;
-    deleteColor: () => void;
+    addColor: (color: string, paletteId: number | null) => Promise<ColorEntity | null>;
+    updateColor: () =>  Promise<void>;
+    deleteColor: () =>  Promise<void>;
+    restoreColor: () => Promise<void>;
 }
 
 export class ColorService implements IColorService {
@@ -39,6 +40,10 @@ export class ColorService implements IColorService {
     }
 
     deleteColor() {
+
+    }
+
+    restoreColor(){
 
     }
 }
