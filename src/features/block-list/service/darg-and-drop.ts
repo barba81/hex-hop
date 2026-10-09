@@ -33,6 +33,7 @@ export const handleDragEnd = (event: DragEndEvent,) => {
   } else if (sourceData.kind === 'block' && targetData.kind === 'palette') {
     blockInPalette(sourceData, targetData);
   }
+  
 };
 
 // chekc palette 
