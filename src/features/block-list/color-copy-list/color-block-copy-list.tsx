@@ -1,5 +1,5 @@
 import type { ColorCopyFormula } from "@/features/block-list/color-copy-list/color-copy-list"
-import type { ColorEntity } from "@/features/block-list/types/entity"
+import type { ColorEntity } from "@/features/block-list/block-list/types/entity"
 import { useAppStore } from "@/shared/store/app-store"
 
 
