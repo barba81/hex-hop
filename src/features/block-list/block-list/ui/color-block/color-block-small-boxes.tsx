@@ -3,8 +3,8 @@ import { Copy, Pen, Trash2 } from "lucide-react";
 import { BlenderIcon, CSSIcon, TailwindIcon } from "@/shared/components/icons/custom-icon";
 import { BaseDraggableOutlineBlock } from "@/shared/components/drag-and-drop/base-outline-dnd-block";
 import { useAppStore } from "@/shared/store/app-store";
-import { coloBackground } from "@/features/create-color/utils/color-format-changer";
 import { ColorEntity } from "@/shared/types/entity";
+import { coloBackground } from "@/features/block-list/create-color/utils/color-format-changer";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity

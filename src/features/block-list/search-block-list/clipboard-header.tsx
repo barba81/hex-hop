@@ -6,7 +6,7 @@ import { Button } from "@/shared/ui/button";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/shared/ui/input-group";
 
 const HeaderDropdown = () => {
-  // const addNewPaletteToClipboard = useAppStore((store) => store.addNewPaletteToClipboard);
+  const addNewPaletteToClipboard = useAppStore((store) => store.addNewPaletteToClipboard);
   return (
     <DropdownMenu>
       <DropdownMenuTrigger render={

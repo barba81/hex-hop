@@ -7,10 +7,10 @@ import ColorBlockEdit from "./color-block/color-block-edit";
 import PaletteBlockEdit from "./palette-block-edit";
 import GradientBlockEdit from "./gradient-block/gradient-block-edit";
 import ColorBlockSmallBoxes from "./color-block/color-block-small-boxes";
-import PaletteBlock from "../palette-block";
 import GradientBlockSmall from "./gradient-block/gradient-block-small";
 import DroppableLine from "@/shared/components/drag-and-drop/drop-line";
 import { rootBlockId } from "@/shared/data/const-data";
+import PaletteBlock from "@/features/block-list/block-list/ui/palette-block";
 
 
 type ColorBoxParams = {

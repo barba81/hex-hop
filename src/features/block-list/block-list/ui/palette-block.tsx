@@ -8,7 +8,7 @@ import { Button } from "@/shared/ui/button";
 import InnerBlock from "./inner-block";
 import DroppableLine from "@/shared/components/drag-and-drop/drop-line";
 import { BaseDraggableOutlineBlock } from "@/shared/components/drag-and-drop/base-outline-dnd-block";
-import { coloBackground } from "@/features/create-color/utils/color-format-changer";
+import { coloBackground } from "@/features/block-list/create-color/utils/color-format-changer";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity
