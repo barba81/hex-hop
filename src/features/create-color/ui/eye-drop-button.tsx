@@ -1,6 +1,6 @@
 import { Pipette } from "lucide-react";
 import { Button } from "@/shared/ui/button";
-import { useAppStore } from "@/shared/store/app-store";
+import { useAddColorToClipboard } from "@/features/create-color/hooks/useAddColorToClipboard";
 
 declare global {
   interface Window {
@@ -11,7 +11,8 @@ declare global {
 }
 
 const EyeDropButton = () => {
-  const addNewColorToClipboard = useAppStore(state => state.addNewColor);
+    const { addNewColorToClipboard } = useAddColorToClipboard();
+  
 
   const handleOnClick = async () => {
     if (!window.EyeDropper) {

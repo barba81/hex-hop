@@ -3,9 +3,9 @@ import { invoke } from "@tauri-apps/api/core";
 
 
 export const colorApi = {
-    async addColor(colorData: ColorRequest) {
+    async addColor(colorRequest: ColorRequest) {
         return await invoke<ColorEntity>("create_color", {
-            color: colorData,
+            color: colorRequest,
         });
     }
 

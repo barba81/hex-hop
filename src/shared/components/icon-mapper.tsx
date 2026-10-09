@@ -11,6 +11,5 @@ interface DynamicIconProps {
 }
 
 export const DynamicIconMapper: React.FC<DynamicIconProps> = ({ iconId }) => {
-  const iconElement = ICON_COMPONENT_MAP[iconId];
-  return iconElement; 
+  return ICON_COMPONENT_MAP[iconId];
 };

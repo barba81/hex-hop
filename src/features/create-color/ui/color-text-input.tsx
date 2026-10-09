@@ -1,14 +1,12 @@
 ;
-import { useAppStore } from "@/shared/store/app-store";
+import { useAddColorToClipboard } from "@/features/create-color/hooks/useAddColorToClipboard";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/shared/ui/input-group";
 
 const ColorInput = () => {
-  const colorFormat = useAppStore((state) => state.colorMode);
-  const isColorValid = useAppStore((state) => state.isColorValid);
-  const inputColor = useAppStore((state) => state.inputColor);
-  const handleColorChange = useAppStore((state) => state.handleColorChange);
+  const { isColorValid, inputColor, colorMode, handleColorChange } = useAddColorToClipboard();
 
-  const handleOnChange = (color: string) => { 
+
+  const handleOnChange = (color: string) => {
     handleColorChange(color);
   };
 
@@ -20,7 +18,7 @@ const ColorInput = () => {
           handleOnChange(e.target.value);
         }}
       />
-      {isColorValid ? <InputGroupAddon align="inline-end" className=" px-2 text-sm ">{colorFormat}</InputGroupAddon> : null
+      {isColorValid ? <InputGroupAddon align="inline-end" className=" px-2 text-sm ">{colorMode}</InputGroupAddon> : null
       }
     </InputGroup>
   );

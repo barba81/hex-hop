@@ -1,11 +1,9 @@
 import { Check } from "lucide-react";
 import { Button } from "@/shared/ui/button";
-import { useAppStore } from "@/shared/store/app-store";
+import { useAddColorToClipboard } from "@/features/create-color/hooks/useAddColorToClipboard";
 
 const AddColorButton = () => {
-  const isColorValid = useAppStore((state) => state.isColorValid);
-  const inputColor = useAppStore((state) => state.inputColor);
-  const addNewColorToClipboard = useAppStore((state) => state.addNewColor);
+  const {isColorValid, inputColor, addNewColorToClipboard} = useAddColorToClipboard();
 
   const handleOnClick = () => {
     addNewColorToClipboard(inputColor, null);

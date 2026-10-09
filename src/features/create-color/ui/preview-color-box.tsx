@@ -5,12 +5,12 @@ import {
   PopoverTrigger,
 } from "@/shared/ui/popover";
 import "@/app/globals.css";
-import { useAppStore } from "@/shared/store/app-store";
 import { formatHex8 } from "culori";
+import { useAddColorToClipboard } from "@/features/create-color/hooks/useAddColorToClipboard";
 
 const ColorBoxPicker = () => {
-  const currentColor = formatHex8(useAppStore(x => x.lastValidColor));
-  const handleColorChange = useAppStore(state => state.handleColorChange);
+  const { lastValidColor, handleColorChange } = useAddColorToClipboard();
+  const currentColor = formatHex8(lastValidColor);
 
   const handleOnChange = (color: string) => {
     handleColorChange(color);
