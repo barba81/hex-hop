@@ -1,5 +1,5 @@
 import { useAppStore } from "../../../../shared/store/app-store";
-import type { ColorCopyFormula } from "@/features/color-copy-list/color-copy-list";
+import type { ColorCopyFormula } from "@/features/block-list/color-copy-list/color-copy-list";
 import { useSortable } from '@dnd-kit/react/sortable';
 import { ChevronDown, ChevronUp, Eye, EyeClosed, Plus } from "lucide-react";
 import { ColorFormulaCreator } from "./color-formula-creator";

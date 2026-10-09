@@ -1,5 +1,5 @@
 import type { AppStore, ImmerStateCreator } from "./app-store";
-import type { ColorCopyFormula } from "@/features/color-copy-list/color-copy-list";
+import type { ColorCopyFormula } from "@/features/block-list/color-copy-list/color-copy-list";
 
 export interface GlobalSlice {
   copyCopyFormulas: ColorCopyFormula[];
