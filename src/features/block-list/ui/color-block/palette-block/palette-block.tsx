@@ -1,4 +1,4 @@
-import type { PaletteEntity } from "@/features/palette-generator-page/types/entity";
+import type { PaletteEntity } from "@/features/block-list/types/entity";
 import { useAppStore } from "@/shared/store/app-store";
 import { ChevronDown, Pen, Trash2 } from "lucide-react";
 import { gradientToCssString } from "@/features/gradient-generator/utils/gradient-to-css-string";

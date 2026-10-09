@@ -4,7 +4,7 @@ import { useSortable } from '@dnd-kit/react/sortable';
 import { ChevronDown, ChevronUp, Eye, EyeClosed, Plus } from "lucide-react";
 import { ColorFormulaCreator } from "./color-formula-creator";
 import { RestrictToVerticalAxis } from '@dnd-kit/abstract/modifiers';
-import { DynamicIconMapper } from "@/shared/utils/icon-mapper";
+import { DynamicIconMapper } from "@/shared/components/icon-mapper";
 import { addNewColorCopyBlock, flipColorCopyBlockVisibility, setColorCopyFormulaActive } from "../feature/color-settings-store-actions";
 import { BaseOutlineBlock } from "@/shared/components/drag-and-drop/base-outline-dnd-block";
 import { DragDots } from "@/shared/components/drag-and-drop/drag-dots";

@@ -1,4 +1,4 @@
-import type { GradientEntity } from "@/features/palette-generator-page/types/entity";
+import type { GradientEntity } from "@/features/block-list/types/entity";
 
 export const gradientToCssString = (gradient: GradientEntity) => {
   const sol = gradient.layers
