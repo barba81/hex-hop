@@ -1,9 +1,12 @@
 
-import { getColorMode } from "@/features/create-color/utils/color-format-changer";
+import { colorStringToColor, getColorMode } from "@/features/create-color/utils/color-format-changer";
+import { getSmartColorName, toRgb } from "@/features/create-color/utils/create-color-name";
+import { colorApi } from "@/shared/api/color-api";
 import { defaultInputColor, rootBlockId } from "@/shared/data/const-data";
-import { colorService } from "@/shared/service";
 import { AppStore, ImmerStateCreator } from "@/shared/store/app-store";
+import { ColorRequest } from "@/shared/types/entity";
 import { Color } from "culori";
+import { nanoid } from "nanoid";
 
 interface IColorBlockInitialState {
     isColorValid: boolean;
@@ -28,22 +31,35 @@ export type ColorBlockSlice = IColorBlockInitialState & IColorBlockActions;
 
 export const colorBlockSlice: ImmerStateCreator<AppStore, ColorBlockSlice> = (set) => ({
     ...initialState,
-    addNewColor: async (stringColor: string, paletteId: number | null) => {
-        const colorEntity = await colorService.addColor(stringColor, paletteId);
-        if (!colorEntity) {
+    addNewColor: async (stringColor: string, parentPaletteId: number | null) => {
+        const stringColorMode = getColorMode(stringColor);
+
+        if (!stringColorMode) {
             set((state) => { state.isColorValid = false; });
             return;
         }
+
+        const color = colorStringToColor(stringColor);
+        const name = await getSmartColorName(color);
+        const { mode, ...rgb } = toRgb(color);
+
+        const colorEntity = await colorApi.addColor({
+            ...rgb,
+            id: nanoid(),
+            name,
+            parentPaletteId,
+        } as ColorRequest);
+
 
         set((state) => {
             state.isColorValid = true;
             state.inputColor = stringColor;
             state.lastValidColor = stringColor;
-            state.colorMode = getColorMode(stringColor) ?? "rgb";
+            state.colorMode = stringColorMode;
             state.blocksById[colorEntity.blockId] = colorEntity;
             state.blockIds[rootBlockId] = [
                 colorEntity.blockId,
-                ...(state.blockIds[paletteId ?? rootBlockId] || []),
+                ...(state.blockIds[parentPaletteId ?? rootBlockId] || []),
             ];
             // historyPush({ async undo() { }, async redo() { } }, state.clipboardHistory);
         });
@@ -65,7 +81,7 @@ export const colorBlockSlice: ImmerStateCreator<AppStore, ColorBlockSlice> = (se
         });
     },
 
-    
+
 });
 
 export default colorBlockSlice;
