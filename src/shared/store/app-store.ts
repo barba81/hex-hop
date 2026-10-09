@@ -2,7 +2,7 @@ import { create, StateCreator } from "zustand";
 import { immer } from "zustand/middleware/immer";
 import type { GlobalSlice } from "./global-slice";
 import { createHexHopSlice } from "./global-slice";
-import colorBlockSlice, { ColorBlockSlice } from "@/features/color-block/store/color-block-slice";
+import colorBlockSlice, { ColorBlockSlice } from "@/features/create-color-block/store/color-block-slice";
 
 
 

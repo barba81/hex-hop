@@ -3,12 +3,12 @@ import GradientGeneratorPage from "@/app/routes/gradient-generator-page";
 import ImportExportPage from "@/app/routes/import-export-page";
 import PaletteGenerator from "@/app/routes/palette-generator-page";
 import { SettingsColorBlock } from "@/features/settings-page/color-block-settings-page/ui/settings-color-block";
-import { SettingsDanger } from "@/app/routes/settings/settings-danger";
-import { SettingsGradientBlock } from "@/app/routes/settings/settings-gradient-block";
-import { SettingsPaletteBlock } from "@/app/routes/settings/settings-palette-block";
+import { SettingsDanger } from "@/app/routes/settings-page/settings-danger";
+import { SettingsGradientBlock } from "@/app/routes/settings-page/settings-gradient-block";
+import { SettingsPaletteBlock } from "@/app/routes/settings-page/settings-palette-block";
 import SettingsPage from "@/features/settings-page/ui/settings-page";
 import { createBrowserRouter, isRouteErrorResponse, Navigate, useRouteError } from "react-router";
-import ColorListPage from "@/app/routes/clipboard/clipboard-page";
+import ColorListPage from "@/app/routes/clipboard-page/clipboard-page";
 
 
 
