@@ -1,6 +1,7 @@
-import { colorService } from "@/features/color-block/service";
-import { getColorMode, validateColor } from "@/features/create-color-block/utils/color-format-changer";
+
+import { getColorMode } from "@/features/create-color/utils/color-format-changer";
 import { defaultInputColor, rootBlockId } from "@/shared/data/const-data";
+import { colorService } from "@/shared/service";
 import { AppStore, ImmerStateCreator } from "@/shared/store/app-store";
 import { Color } from "culori";
 

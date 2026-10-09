@@ -1,7 +1,6 @@
 import type { PaletteEntity } from "@/features/palette-generator-page/types/entity";
 import { useAppStore } from "@/shared/store/app-store";
 import { ChevronDown, Pen, Trash2 } from "lucide-react";
-import { coloBackground } from "@/features/create-color-block/utils/color-format-changer";
 import { gradientToCssString } from "@/features/gradient-generator/utils/gradient-to-css-string";
 import React from "react";
 import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator, ContextMenuTrigger } from "@/shared/ui/context-menu";
@@ -9,6 +8,7 @@ import { Button } from "@/shared/ui/button";
 import InnerBlock from "./inner-block";
 import DroppableLine from "@/shared/components/drag-and-drop/drop-line";
 import { BaseDraggableOutlineBlock } from "@/shared/components/drag-and-drop/base-outline-dnd-block";
+import { coloBackground } from "@/features/create-color/utils/color-format-changer";
 
 type PaletteBoxParams = {
   paletteEntity: PaletteEntity

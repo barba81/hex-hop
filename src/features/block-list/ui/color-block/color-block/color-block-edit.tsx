@@ -1,15 +1,15 @@
-import type { ColorEntity } from "@/features/palette-generator-page/types/entity";
 import { Check, RefreshCw, X } from "lucide-react";
 import { Popover, PopoverContent, PopoverTrigger } from "@/shared/ui/popover";
 import { HexAlphaColorPicker } from "react-colorful";
 import type { ChangeEvent } from "react";
 import { useEffect, useState } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@/shared/ui/tooltip";
-import { colorEntityToColor, hexaToRgbaNormalized, toHex8 } from "@/features/create-color-block/utils/color-format-changer";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/shared/ui/input-group";
 import { Button } from "@/shared/ui/button";
 import { useAppStore } from "@/shared/store/app-store";
-import { getSmartColorName } from "@/features/create-color-block/utils/create-color-name";
+import { ColorEntity } from "@/shared/types/entity";
+import { getSmartColorName } from "@/features/create-color/utils/create-color-name";
+import { colorEntityToColor, toHex8 } from "@/features/create-color/utils/color-format-changer";
 
 type ColorBlockEditParams = {
     colorEntity: ColorEntity
