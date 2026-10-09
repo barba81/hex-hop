@@ -1,8 +1,8 @@
-import AddColorButton from "@/features/create-color/ui/add-color-button";
-import AiColorButton from "@/features/create-color/ui/ai-color-button";
-import ColorInput from "@/features/create-color/ui/color-text-input";
-import EyeDropButton from "@/features/create-color/ui/eye-drop-button";
-import ColorBoxPicker from "@/features/create-color/ui/preview-color-box";
+import AddColorButton from "@/features/block-list/create-color/ui/add-color-button";
+import AiColorButton from "@/features/block-list/create-color/ui/ai-color-button";
+import ColorInput from "@/features/block-list/create-color/ui/color-text-input";
+import EyeDropButton from "@/features/block-list/create-color/ui/eye-drop-button";
+import ColorBoxPicker from "@/features/block-list/create-color/ui/preview-color-box";
 
 const FooterColorPicker = () => {
   return (

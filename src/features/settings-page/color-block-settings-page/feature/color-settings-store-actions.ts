@@ -2,7 +2,6 @@ import type { ColorCopyFormula} from "@/features/block-list/color-copy-list/colo
 import { defaultColorCopyFormula } from "@/features/block-list/color-copy-list/color-copy-list";
 import { useAppStore } from "@/shared/store/app-store";
 import { invoke } from "@tauri-apps/api/core";
-import { useSettingStore } from "../../store/settings-store";
 
 export const addNewColorCopyBlock = async () => {
   const newCopyFormula = await invoke<ColorCopyFormula>("create_color_copy_formula", {
@@ -43,7 +42,7 @@ export const deleteColorCopyBlock = async (copyBlockId: string) => {
 };
 
 export const setColorCopyFormulaActive = async (copyBlockId: string) => {
-  useSettingStore.setState((state) => {
-     state.colorCopyFormulaActiveId = copyBlockId;
-  });
+  // useSettingStore.setState((state) => {
+  //    state.colorCopyFormulaActiveId = copyBlockId;
+  // });
 };

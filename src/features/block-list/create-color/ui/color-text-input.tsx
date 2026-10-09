@@ -1,5 +1,5 @@
 ;
-import { useAddColorToClipboard } from "@/features/create-color/hooks/useAddColorToClipboard";
+import { useAddColorToClipboard } from "@/features/block-list/create-color/hooks/useAddColorToClipboard";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/shared/ui/input-group";
 
 const ColorInput = () => {

@@ -1,6 +1,6 @@
 import { Check } from "lucide-react";
 import { Button } from "@/shared/ui/button";
-import { useAddColorToClipboard } from "@/features/create-color/hooks/useAddColorToClipboard";
+import { useAddColorToClipboard } from "@/features/block-list/create-color/hooks/useAddColorToClipboard";
 
 const AddColorButton = () => {
   const {isColorValid, inputColor, addNewColorToClipboard} = useAddColorToClipboard();

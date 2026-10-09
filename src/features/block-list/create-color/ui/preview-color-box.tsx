@@ -6,7 +6,7 @@ import {
 } from "@/shared/ui/popover";
 import "@/app/globals.css";
 import { formatHex8 } from "culori";
-import { useAddColorToClipboard } from "@/features/create-color/hooks/useAddColorToClipboard";
+import { useAddColorToClipboard } from "@/features/block-list/create-color/hooks/useAddColorToClipboard";
 
 const ColorBoxPicker = () => {
   const { lastValidColor, handleColorChange } = useAddColorToClipboard();

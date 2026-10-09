@@ -1,6 +1,7 @@
-import { colorStringToColor, getColorMode } from "@/features/create-color/utils/color-format-changer";
-import { getSmartColorName, toRgb } from "@/features/create-color/utils/create-color-name";
+
 import { BlockEntity } from "@/features/block-list/block-list/types/entity";
+import { colorStringToColor, getColorMode } from "@/features/block-list/create-color/utils/color-format-changer";
+import { getSmartColorName, toRgb } from "@/features/block-list/create-color/utils/create-color-name";
 import { colorApi } from "@/shared/api/color-api";
 import { rootBlockId } from "@/shared/data/const-data";
 import { AppStore, ImmerStateCreator } from "@/shared/store/app-store";

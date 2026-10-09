@@ -8,7 +8,7 @@ import { SettingsGradientBlock } from "@/app/routes/settings-page/settings-gradi
 import { SettingsPaletteBlock } from "@/app/routes/settings-page/settings-palette-block";
 import SettingsPage from "@/features/settings-page/ui/settings-page";
 import { createBrowserRouter, isRouteErrorResponse, Navigate, useRouteError } from "react-router";
-import ColorListPage from "@/app/routes/clipboard-page/clipboard-page";
+import ClipboardPage from "@/features/block-list/clipboard-page";
 
 
 
@@ -20,7 +20,7 @@ export const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <ColorListPage />,
+        element: <ClipboardPage />,
       },
       {
         path: "gradient",
