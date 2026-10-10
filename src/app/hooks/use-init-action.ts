@@ -27,14 +27,14 @@ export const initData = async () => {
 
   useAppStore.setState((state) => {
     state.copyCopyFormulas = allCopyFormulas;
-    state.blockIds[rootBlockId] = blocks.map((block) => block.blockId);
+    state.blockPaletteList[rootBlockId] = blocks.map((block) => block.blockId);
     state.blocksById = {};
 
     for (const block of blocks) {
       state.blocksById[block.blockId] = block;
 
       if (block.kind === "palette" && block.blocks) {
-        state.blockIds[block.id] = block.blocks.map((x) => x.blockId);
+        state.blockPaletteList[block.id] = block.blocks.map((x) => x.blockId);
         for (const innerBlock of block.blocks) {
           state.blocksById[innerBlock.blockId] = innerBlock;
         }

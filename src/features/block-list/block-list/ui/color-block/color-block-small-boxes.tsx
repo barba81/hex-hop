@@ -2,17 +2,16 @@ import { ContextMenu, ContextMenuContent, ContextMenuItem, ContextMenuSeparator,
 import { Copy, Pen, Trash2 } from "lucide-react";
 import { BlenderIcon, CSSIcon, TailwindIcon } from "@/shared/components/icons/custom-icon";
 import { BaseDraggableOutlineBlock } from "@/shared/components/drag-and-drop/base-outline-dnd-block";
-import { useAppStore } from "@/shared/store/app-store";
 import { ColorEntity } from "@/shared/types/entity";
 import { coloBackground } from "@/features/block-list/utils/color-format-changer";
+import { useColorBlock } from "@/features/block-list/block-list/ui/color-block/hooks/use-color-block";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity
 };
 
 const ColorBlock = ({ colorEntity }: ColorBlockViewParams) => {
-    const setEditBlock = useAppStore((state) => state.setEditBlock);
-    const deleteColorBlock = useAppStore((state) => state.deleteColorBlock);
+    const {setEditBlock, deleteColorBlock} = useColorBlock();
     const backgroundCss = coloBackground(colorEntity);
 
     return <ContextMenu>

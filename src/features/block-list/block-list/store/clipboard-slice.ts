@@ -9,59 +9,28 @@ import { ColorRequest } from "@/shared/types/entity";
 import { nanoid } from "nanoid";
 
 interface IClipBoardState {
-    blockIds: Record<string, number[]>;
-    blocksById: Record<string, BlockEntity>;
+    blockPaletteList: Record<number, number[]>;
+    blocksById: Record<number, BlockEntity>;
+    editedBlockId: number| null,
 }
 
 const initialState: IClipBoardState = {
-    blockIds: { [rootBlockId]: [] },
+    blockPaletteList: { [rootBlockId]: [] },
     blocksById: {},
+    editedBlockId: null
 }
 
 interface IClipBoardActions {
-
+    setEditBlock: (blockId: number | null) => void;
 }
 
 export type ClipboardSlice = IClipBoardState & IClipBoardActions;
 
 export const clipboardSlice: ImmerStateCreator<AppStore, ClipboardSlice> = (set) => ({
     ...initialState,
-    addNewColor: async (stringColor: string, parentPaletteId: number | null) => {
-        const stringColorMode = getColorMode(stringColor);
-
-        if (!stringColorMode) {
-            set((state) => { state.isColorValid = false; });
-            return;
-        }
-
-        const color = colorStringToColor(stringColor);
-        const name = await getSmartColorName(color);
-        const { mode, ...rgb } = toRgb(color);
-
-        const colorEntity = await colorApi.addColor({
-            ...rgb,
-            id: nanoid(),
-            name,
-            parentPaletteId,
-        } as ColorRequest);
-
-
-        set((state) => {
-            state.isColorValid = true;
-            state.inputColor = stringColor;
-            state.lastValidColor = stringColor;
-            state.colorMode = stringColorMode;
-            state.blocksById[colorEntity.blockId] = colorEntity;
-            state.blockIds[rootBlockId] = [
-                colorEntity.blockId,
-                ...(state.blockIds[parentPaletteId ?? rootBlockId] || []),
-            ];
-            // historyPush({ async undo() { }, async redo() { } }, state.clipboardHistory);
-        });
-    },
-
-
-
+    setEditBlock: (blockId) => {
+        set((state) => {state.editedBlockId = blockId})
+    }
 });
 
 export default clipboardSlice;

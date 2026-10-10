@@ -9,7 +9,7 @@ import { Button } from "@/shared/ui/button";
 import { useAppStore } from "@/shared/store/app-store";
 import { ColorEntity } from "@/shared/types/entity";
 import { getSmartColorName } from "@/features/block-list/utils/create-color-name";
-import { colorEntityToColor, hexaToRgbaNormalized } from "@/features/block-list/utils/color-format-changer";
+import { colorEntityToColor, hexaToRgbaNormalized, toHex8 } from "@/features/block-list/utils/color-format-changer";
 
 
 type ColorBlockEditParams = {

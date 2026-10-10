@@ -44,8 +44,8 @@ const blockInDroppable = async (sourceData: DraggableData, targetData: Draggable
   const draggedParent = sourceData.kind === 'palette' ? null : sourceData.palette;
 
   const targetParent = targetData.palette;
-  const draggedColorBlocks = state.blockIds[draggedParent ?? rootBlockId];
-  const targetColorBlocks = state.blockIds[targetParent ?? rootBlockId];
+  const draggedColorBlocks = state.blockPaletteList[draggedParent ?? rootBlockId];
+  const targetColorBlocks = state.blockPaletteList[targetParent ?? rootBlockId];
 
   const oldDroppableOrder = [...draggedColorBlocks];
   const oldTargetOrder = [...targetColorBlocks];
@@ -126,9 +126,9 @@ const blockInBlock = async (sourceData: DraggableData, targetData: DraggableData
 
   const state = useAppStore.getState();
 
-  const draggedColorBlocks = state.blockIds[draggedParentId ?? rootBlockId];
-  const targetColorBlocks = state.blockIds[targetParentId ?? rootBlockId];
-  const root = [...state.blockIds[rootBlockId]];
+  const draggedColorBlocks = state.blockPaletteList[draggedParentId ?? rootBlockId];
+  const targetColorBlocks = state.blockPaletteList[targetParentId ?? rootBlockId];
+  const root = [...state.blockPaletteList[rootBlockId]];
 
   const sourceBlocks = [...draggedColorBlocks];
   const oldSourceBlocks = [...draggedColorBlocks];
@@ -223,8 +223,8 @@ const blockInPalette = async (sourceData: DraggableData, targetData: DraggableDa
 
   const state = useAppStore.getState();
 
-  const draggedColorBlocks = state.blockIds[draggedPalette ?? rootBlockId];
-  const targetColorBlocks = state.blockIds[targetPalette ?? rootBlockId] ?? [];
+  const draggedColorBlocks = state.blockPaletteList[draggedPalette ?? rootBlockId];
+  const targetColorBlocks = state.blockPaletteList[targetPalette ?? rootBlockId] ?? [];
 
   const oldDraggedBlocks = [...draggedColorBlocks];
   const oldTargetColorBlocks = [...targetColorBlocks];

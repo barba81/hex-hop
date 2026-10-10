@@ -57,9 +57,9 @@ export const colorBlockSlice: ImmerStateCreator<AppStore, ColorBlockSlice> = (se
             state.lastValidColor = stringColor;
             state.colorMode = stringColorMode;
             state.blocksById[colorEntity.blockId] = colorEntity;
-            state.blockIds[rootBlockId] = [
+            state.blockPaletteList[rootBlockId] = [
                 colorEntity.blockId,
-                ...(state.blockIds[parentPaletteId ?? rootBlockId] || []),
+                ...(state.blockPaletteList[parentPaletteId ?? rootBlockId] || []),
             ];
             // historyPush({ async undo() { }, async redo() { } }, state.clipboardHistory);
         });

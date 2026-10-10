@@ -102,7 +102,7 @@ const PaletteDropDownCard = ({ paletteEntity, colorBlocksId }: PaletteDropDownCa
 
 
 const PaletteBlock = ({ paletteEntity }: PaletteBoxParams) => {
-  const colorBlocksId = useAppStore(state => state.blockIds[paletteEntity.id]) ?? [];
+  const colorBlocksId = useAppStore(state => state.blockPaletteList[paletteEntity.id]) ?? [];
   const isOpen = useAppStore((state) => !!state.openPalette[paletteEntity.blockId]);
     const setEditBlock = useAppStore((state) => state.setEditBlock);
 

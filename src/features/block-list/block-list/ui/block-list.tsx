@@ -14,15 +14,16 @@ import PaletteBlock from "@/features/block-list/block-list/ui/palette-block/pale
 
 
 type ColorBoxParams = {
-  blockId: number
+  blockId: string
 };
 
 const Block = ({ blockId }: ColorBoxParams) => {
   const block = useAppStore(
     state => state.blocksById[blockId]
   );
+    const editedBlockId = useAppStore((state) => state.editedBlockId);
 
-  const isEditing = false
+  const isEditing = editedBlockId  === blockId;
 
   switch (block.kind) {
     case "color":
@@ -48,7 +49,7 @@ const Block = ({ blockId }: ColorBoxParams) => {
 
 
 const ColorList = () => {
-  const colorBlocks = useAppStore(state => state.blockIds[rootBlockId]);
+  const colorBlocks = useAppStore(state => state.blockPaletteList[rootBlockId]);
 
   return (
     <>
