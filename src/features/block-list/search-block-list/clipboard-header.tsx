@@ -1,78 +1,7 @@
-import { EllipsisVertical, Palette, Trash2 } from "lucide-react";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "@/shared/ui/dropdown-menu";
 import { Search } from "lucide-react"
-import { useAppStore } from "@/shared/store/app-store";
-import { Button } from "@/shared/ui/button";
 import { InputGroup, InputGroupAddon, InputGroupInput } from "@/shared/ui/input-group";
 
-const HeaderDropdown = () => {
-  const addNewPaletteToClipboard = useAppStore((store) => store.addNewPaletteToClipboard);
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger render={
-        <Button size='icon-xs' variant='outline'>
-          <EllipsisVertical size={15} />
-        </Button>
-        }/>
-
-      <DropdownMenuContent className="w-auto">
-        <DropdownMenuGroup>
-          <DropdownMenuItem
-            onClick={() => {
-              addNewPaletteToClipboard([]);
-            }
-            }
-          >
-            <Palette />
-            <span className="text-xs font-medium">
-              Add new palette
-            </span>
-          </DropdownMenuItem>
-          <DropdownMenuItem
-            variant="destructive"
-          >
-            <Trash2 />
-            <span className="text-xs font-medium">
-              Clear All
-            </span>
-          </DropdownMenuItem>
-
-        </DropdownMenuGroup>
-
-      </DropdownMenuContent>
-    </DropdownMenu>
-  );
-};
-
-
-
-const DoUnDoArrows = () => {
-  // const { undo, redo, canUndo, canRedo } = useColorListCommands();
-
-  // return (
-  //   <div className="flex gap-1 items-center justify-center">
-  //     <Button
-  //       size='icon-xs'
-  //       variant='outline'
-  //       disabled={!canUndo}
-  //       onClick={() => undo()}
-  //     >
-  //       <Undo />
-  //     </Button>
-
-  //     <Button
-  //       size='icon-xs'
-  //       variant='outline'
-  //       disabled={!canRedo}
-  //       onClick={() => redo()}
-  //     >
-  //       <Redo />
-  //     </Button>
-  //   </div>
-  // );
-};
-
-const SearchBar = () => {
+export const SearchBar = () => {
   return (
     <InputGroup className="h-6 text-xs">
       <InputGroupInput placeholder="Search..." className="h-full py-0 text-xs" />
@@ -86,14 +15,4 @@ const SearchBar = () => {
   );
 };
 
-const HeaderColorList = () => {
-  return (
-    <div className="w-full  flex gap-2  items-center justify-between bg-background p-1  ">
-      {/* <DoUnDoArrows /> */}
-      <SearchBar />
-      <HeaderDropdown />
-    </div>
-  );
-};
 
-export default HeaderColorList;

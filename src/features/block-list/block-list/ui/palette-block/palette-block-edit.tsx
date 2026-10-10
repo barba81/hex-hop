@@ -14,7 +14,6 @@ const PaletteBlockEdit = ({ paletteEntity }: PaletteBlockEditParams) => {
     const [paletteUpdateEntity, setColorUpdateEntity] = useState(() => (toPaletteSummary(paletteEntity)));
     const handleEdit = async () => {
         setEditBlock(null);
-
     };
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {

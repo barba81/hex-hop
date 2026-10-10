@@ -4,7 +4,7 @@ import { BlenderIcon, CSSIcon, TailwindIcon } from "@/shared/components/icons/cu
 import { BaseDraggableOutlineBlock } from "@/shared/components/drag-and-drop/base-outline-dnd-block";
 import { useAppStore } from "@/shared/store/app-store";
 import { ColorEntity } from "@/shared/types/entity";
-import { coloBackground } from "@/features/block-list/create-color/utils/color-format-changer";
+import { coloBackground } from "@/features/block-list/utils/color-format-changer";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity

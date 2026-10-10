@@ -4,13 +4,13 @@ import EmptyClipboardPage from "./empty-clipboard-page";
 import React from "react";
 import { handleDragEnd } from "../service/darg-and-drop";
 import ColorBlockEdit from "./color-block/color-block-edit";
-import PaletteBlockEdit from "./palette-block-edit";
+import PaletteBlockEdit from "./palette-block/palette-block-edit";
 import GradientBlockEdit from "./gradient-block/gradient-block-edit";
 import ColorBlockSmallBoxes from "./color-block/color-block-small-boxes";
 import GradientBlockSmall from "./gradient-block/gradient-block-small";
 import DroppableLine from "@/shared/components/drag-and-drop/drop-line";
 import { rootBlockId } from "@/shared/data/const-data";
-import PaletteBlock from "@/features/block-list/block-list/ui/palette-block";
+import PaletteBlock from "@/features/block-list/block-list/ui/palette-block/palette-block";
 
 
 type ColorBoxParams = {

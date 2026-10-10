@@ -8,8 +8,8 @@ import { InputGroup, InputGroupAddon, InputGroupInput } from "@/shared/ui/input-
 import { Button } from "@/shared/ui/button";
 import { useAppStore } from "@/shared/store/app-store";
 import { ColorEntity } from "@/shared/types/entity";
-import { getSmartColorName } from "@/features/block-list/create-color/utils/create-color-name";
-import { colorEntityToColor, hexaToRgbaNormalized } from "@/features/block-list/create-color/utils/color-format-changer";
+import { getSmartColorName } from "@/features/block-list/utils/create-color-name";
+import { colorEntityToColor, hexaToRgbaNormalized } from "@/features/block-list/utils/color-format-changer";
 
 
 type ColorBlockEditParams = {

@@ -16,6 +16,7 @@ const InnerBlock = ({ blockId }: ColorBoxParams) => {
         state => state.editBlockId === blockId
     );
 
+    
     switch (block.kind) {
         case "color":
             return (
