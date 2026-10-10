@@ -10,7 +10,7 @@ import ColorBlockSmallBoxes from "./color-block/color-block-small-boxes";
 import GradientBlockSmall from "./gradient-block/gradient-block-small";
 import DroppableLine from "@/shared/components/drag-and-drop/drop-line";
 import { rootBlockId } from "@/shared/data/const-data";
-import PaletteBlock from "@/features/block-list/block-list/ui/palette-block/palette-block";
+import PaletteBlock from "@/features/block-list/block-list/palette-block/palette-block";
 
 
 type ColorBoxParams = {

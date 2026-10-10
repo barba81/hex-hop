@@ -1,6 +1,5 @@
-import ColorBlockEdit from "@/features/block-list/block-list/ui/color-block/color-block-edit";
-import ColorBlock from "@/features/block-list/block-list/ui/color-block/color-block-small-boxes";
-import GradientBlockSmall from "@/features/block-list/block-list/ui/gradient-block/gradient-block-small";
+import ColorBlockEdit from "@/features/block-list/block-list/color-block/color-block-edit";
+import GradientBlockSmall from "@/features/block-list/block-list/gradient-block/gradient-block-small";
 import { useAppStore } from "@/shared/store/app-store";
 
 type ColorBoxParams = {

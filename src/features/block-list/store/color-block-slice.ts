@@ -1,5 +1,5 @@
 
-import { BlockEntity } from "@/features/block-list/block-list/types/entity";
+import { BlockEntity } from "@/features/block-list/types/entity";
 import { colorStringToColor, getColorMode } from "@/features/block-list/utils/color-format-changer";
 import { getSmartColorName, toRgb } from "@/features/block-list/utils/create-color-name";
 import { colorApi } from "@/shared/api/color-api";
@@ -90,7 +90,7 @@ export const clipboardSlice: ImmerStateCreator<AppStore, ColorBlockSlice> = (set
             state.lastValidColor = color;
         });
     },
-    
+
     setEditBlock: (blockId) => {
         set((state) => { state.editedBlockId = blockId })
     }

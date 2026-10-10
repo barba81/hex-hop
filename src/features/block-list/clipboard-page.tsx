@@ -1,5 +1,5 @@
-import { ActionButton } from "@/features/block-list/action-button/ui/action-button";
-import ColorList from "@/features/block-list/block-list/ui/block-list";
+import { ActionButton } from "@/features/block-list/action-button/action-button";
+import ColorList from "@/features/block-list/block-list/block-list";
 import AddColorButton from "@/features/block-list/create-color/ui/add-color-button";
 import AiColorButton from "@/features/block-list/create-color/ui/ai-color-button";
 import ColorInput from "@/features/block-list/create-color/ui/color-text-input";

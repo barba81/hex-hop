@@ -4,7 +4,7 @@ import { BlenderIcon, CSSIcon, TailwindIcon } from "@/shared/components/icons/cu
 import { BaseDraggableOutlineBlock } from "@/shared/components/drag-and-drop/base-outline-dnd-block";
 import { ColorEntity } from "@/shared/types/entity";
 import { coloBackground } from "@/features/block-list/utils/color-format-changer";
-import { useColorBlock } from "@/features/block-list/block-list/ui/color-block/hooks/use-color-block";
+import { useColorBlock } from "@/features/block-list/block-list/color-block/hooks/use-color-block";
 
 type ColorBlockViewParams = {
     colorEntity: ColorEntity

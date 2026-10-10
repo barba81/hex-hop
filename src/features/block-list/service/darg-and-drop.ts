@@ -1,6 +1,6 @@
 import type { DragEndEvent } from "@dnd-kit/react";
 import { invoke } from "@tauri-apps/api/core";
-import type { BlockEntity, PaletteEntity } from "@/features/block-list/block-list/types/entity";
+import type { BlockEntity, PaletteEntity } from "@/features/block-list/types/entity";
 import { useAppStore } from "@/shared/store/app-store";
 import { rootBlockId } from "@/shared/data/const-data";
 
