@@ -1,6 +1,6 @@
 import { useAppStore } from "@/shared/store/app-store";
+import { Button } from "@/shared/ui/button";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuTrigger } from "@/shared/ui/dropdown-menu";
-import { Button } from "@base-ui/react";
 import { EllipsisVertical, Palette, Trash2 } from "lucide-react";
 
 export const ActionButton = () => {
